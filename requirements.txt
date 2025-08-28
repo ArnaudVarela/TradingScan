@@ -1,7 +1,7 @@
-yfinance
-pandas
-numpy
-pandas_ta
-tradingview-ta
+numpy==1.26.4
+pandas==2.2.2
+pandas_ta==0.3.14b0
+yfinance>=0.2.40
+tradingview-ta>=3.3.0
 requests
 lxml
