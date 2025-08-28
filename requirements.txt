@@ -1,0 +1,7 @@
+yfinance
+pandas
+numpy
+pandas_ta
+tradingview-ta
+requests
+lxml
