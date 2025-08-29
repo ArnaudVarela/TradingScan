@@ -166,13 +166,12 @@ def map_exchange_for_tv(yf_info_exch: str, ticker: str):
         return "AMEX"
     return "NASDAQ"
 
-
 def compute_local_technical_bucket(hist: pd.DataFrame, symbol: str = None):
     """
-    Renvoie (bucket, score, details) en étant tolérant aux NaN :
-    - Exige: prix, SMA20, SMA50, RSI
-    - Optionnels: SMA200, MACD, Stoch
-    Loggue de façon compacte les raisons d’échec si DEBUG_TA = True.
+    Renvoie (bucket, score, details) en étant tolérant:
+    - Essaie d'abord pandas_ta (API fonctionnelle)
+    - Si ça échoue, fallback en pur pandas/numpy
+    Exige: Close + SMA20 + SMA50 + RSI (SMA200/MACD/Stoch optionnels)
     """
     global TA_FAIL_STATS, TA_PROBE_LEFT
 
@@ -184,18 +183,13 @@ def compute_local_technical_bucket(hist: pd.DataFrame, symbol: str = None):
             if symbol:
                 msg += f" sym={symbol}"
             if extra:
-                kv = []
-                for k in ["len", "last_close", "s20", "s50", "s200", "rsi"]:
-                    if k in extra and extra[k] is not None:
-                        kv.append(f"{k}={extra[k]}")
-                if kv:
-                    msg += " | " + ", ".join(kv)
+                # on affiche tout le dict extra (inclut 'err' si présent)
+                msg += " | " + ", ".join(f"{k}={v}" for k, v in extra.items())
             print(msg)
         return None, None, {}
 
     if hist is None or hist.empty:
         return fail("hist_empty")
-
     if len(hist) < 60:
         return fail("hist_too_short", {"len": len(hist)})
 
@@ -203,67 +197,91 @@ def compute_local_technical_bucket(hist: pd.DataFrame, symbol: str = None):
         if col not in hist.columns:
             return fail("missing_col", {"col": col})
 
-    close = hist["Close"]; high = hist["High"]; low = hist["Low"]
+    close = hist["Close"].astype(float)
+    high  = hist["High"].astype(float)
+    low   = hist["Low"].astype(float)
 
-    # utilitaires: dernière valeur valide (Series ou DataFrame)
-    def last_valid(x):
-        if x is None:
-            return None
-        if isinstance(x, pd.DataFrame):
-            xx = x.dropna()
-            return None if xx.empty else xx.iloc[-1]
-        else:
-            xx = x.dropna()
-            return None if xx.empty else xx.iloc[-1]
+    # utilitaires
+    def last_valid(s):
+        if s is None: return None
+        s2 = s.dropna()
+        return None if s2.empty else s2.iloc[-1]
 
-    # indicateurs
+    # ---------- 1) Tentative avec pandas_ta (API fonctionnelle) ----------
     try:
-        s20 = close.ta.sma(20)
-        s50 = close.ta.sma(50)
-        s200 = close.ta.sma(200)
-        rsi  = close.ta.rsi(14)
-        macd = close.ta.macd(12, 26, 9)
-        stoch = ta.stoch(high, low, close)
+        s20  = ta.sma(close, length=20)
+        s50  = ta.sma(close, length=50)
+        s200 = ta.sma(close, length=200)
+        rsi  = ta.rsi(close, length=14)
+        macd_df = ta.macd(close, fast=12, slow=26, signal=9)  # colonnes: MACD_12_26_9, MACDs_..., MACDh_...
+        stoch_df = ta.stoch(high, low, close, k=14, d=3, smooth_k=3)  # STOCHk_14_3_3, STOCHd_14_3_3
+
+        s20_last   = last_valid(s20)
+        s50_last   = last_valid(s50)
+        s200_last  = last_valid(s200)
+        rsi_last   = last_valid(rsi)
+        macd_row   = last_valid(macd_df)
+        stoch_row  = last_valid(stoch_df)
+
+        if any(v is None for v in (last_valid(close), s20_last, s50_last, rsi_last)):
+            raise RuntimeError("pta_missing_core")
+
+        macd_val = macd_sig = None
+        if isinstance(macd_row, pd.Series):
+            macd_val = next((float(macd_row[k]) for k in macd_row.index if "MACD_" in k and not "s_" in k and not "h_" in k), None)
+            macd_sig = next((float(macd_row[k]) for k in macd_row.index if "MACDs_" in k), None)
+
+        stoch_k = stoch_d = None
+        if isinstance(stoch_row, pd.Series):
+            stoch_k = next((float(stoch_row[k]) for k in stoch_row.index if k.startswith("STOCHk")), None)
+            stoch_d = next((float(stoch_row[k]) for k in stoch_row.index if k.startswith("STOCHd")), None)
+
     except Exception as e:
-        return fail("ta_exception", {"err": type(e).__name__})
+        # ---------- 2) Fallback sans pandas_ta ----------
+        try:
+            # SMA simples
+            s20  = close.rolling(20).mean()
+            s50  = close.rolling(50).mean()
+            s200 = close.rolling(200).mean()
 
-    price_last = last_valid(close)
-    s20_last   = last_valid(s20)
-    s50_last   = last_valid(s50)
-    s200_last  = last_valid(s200)
-    rsi_last   = last_valid(rsi)
-    macd_row   = last_valid(macd)
-    stoch_row  = last_valid(stoch)
+            # RSI 14 classique
+            delta = close.diff()
+            gain = delta.clip(lower=0)
+            loss = -delta.clip(upper=0)
+            roll_up = gain.rolling(14).mean()
+            roll_down = loss.rolling(14).mean()
+            rs = roll_up / roll_down
+            rsi = 100 - (100 / (1 + rs))
 
-    # minimum vital
-    if price_last is None:
-        return fail("no_price_last")
-    if s20_last is None or s50_last is None:
-        last_close = float(close.dropna().iloc[-1]) if not close.dropna().empty else None
-        return fail("no_sma20_or_sma50", {"last_close": last_close})
-    if rsi_last is None:
-        return fail("no_rsi", {"len": len(rsi) if rsi is not None else 0})
+            # MACD (EMA 12/26 + signal 9)
+            def ema(series, span):
+                return series.ewm(span=span, adjust=False).mean()
+            macd_line = ema(close, 12) - ema(close, 26)
+            macd_signal = ema(macd_line, 9)
 
-    # extractions MACD/STOCH si dispo
-    macd_val = macd_sig = None
-    if isinstance(macd_row, pd.Series):
-        for k in ["MACD_12_26_9", "MACD_12_26_9.0", "MACD_12_26_9_MACD"]:
-            if k in macd_row:
-                macd_val = float(macd_row[k]); break
-        for k in ["MACDs_12_26_9", "MACDs_12_26_9.0", "MACD_12_26_9_SIGNAL", "MACDs_12_26_9_Signal"]:
-            if k in macd_row:
-                macd_sig = float(macd_row[k]); break
+            # Stoch 14,3,3
+            lowest_low = low.rolling(14).min()
+            highest_high = high.rolling(14).max()
+            stoch_k_series = 100 * (close - lowest_low) / (highest_high - lowest_low)
+            stoch_k_series = stoch_k_series.rolling(3).mean()
+            stoch_d_series = stoch_k_series.rolling(3).mean()
 
-    stoch_k = stoch_d = None
-    if isinstance(stoch_row, pd.Series):
-        for k in ["STOCHk_14_3_3", "%K", "STOCHk"]:
-            if k in stoch_row:
-                stoch_k = float(stoch_row[k]); break
-        for k in ["STOCHd_14_3_3", "%D", "STOCHd"]:
-            if k in stoch_row:
-                stoch_d = float(stoch_row[k]); break
+            s20_last   = last_valid(s20)
+            s50_last   = last_valid(s50)
+            s200_last  = last_valid(s200)
+            rsi_last   = last_valid(rsi)
+            macd_val   = float(last_valid(macd_line))   if last_valid(macd_line)   is not None else None
+            macd_sig   = float(last_valid(macd_signal)) if last_valid(macd_signal) is not None else None
+            stoch_k    = float(last_valid(stoch_k_series)) if last_valid(stoch_k_series) is not None else None
+            stoch_d    = float(last_valid(stoch_d_series)) if last_valid(stoch_d_series) is not None else None
 
-    # votes
+            if any(v is None for v in (last_valid(close), s20_last, s50_last, rsi_last)):
+                return fail("fallback_missing_core", {"err": type(e).__name__})
+        except Exception as e2:
+            return fail("fallback_exception", {"err": type(e).__name__, "err_fb": type(e2).__name__})
+
+    # ---------- Votes ----------
+    price_last = float(last_valid(close))
     votes = 0
     try:
         votes += 1 if float(price_last) > float(s20_last) else -1
@@ -278,18 +296,13 @@ def compute_local_technical_bucket(hist: pd.DataFrame, symbol: str = None):
         if macd_val is not None and macd_sig is not None:
             votes += 1 if macd_val > macd_sig else -1
 
-        if stoch_k is not None and stoch_d is not None:
-            votes += 1 if stoch_k > stoch_d else -1
-    except Exception:
-        return fail("vote_exception", {
-            "last_close": float(price_last) if price_last is not None else None,
-            "s20": float(s20_last) if s20_last is not None else None,
-            "s50": float(s50_last) if s50_last is not None else None,
-            "s200": float(s200_last) if s200_last is not None and not (isinstance(s200_last, float) and np.isnan(s200_last)) else None,
-            "rsi": float(rsi_last) if rsi_last is not None else None
-        })
+        if 'stoch_k' in locals() and 'stoch_d' in locals():
+            if (stoch_k is not None) and (stoch_d is not None):
+                votes += 1 if stoch_k > stoch_d else -1
+    except Exception as ev:
+        return fail("vote_exception", {"err": type(ev).__name__})
 
-    # bucket
+    # Bucket
     if votes >= 4: bucket = "Strong Buy"
     elif votes >= 2: bucket = "Buy"
     elif votes <= -4: bucket = "Strong Sell"
@@ -297,18 +310,17 @@ def compute_local_technical_bucket(hist: pd.DataFrame, symbol: str = None):
     else: bucket = "Neutral"
 
     details = dict(
-        price=float(price_last),
+        price=price_last,
         sma20=float(s20_last),
         sma50=float(s50_last),
         sma200=float(s200_last) if s200_last is not None and not (isinstance(s200_last, float) and np.isnan(s200_last)) else float("nan"),
         rsi=float(rsi_last),
         macd=macd_val if macd_val is not None else float("nan"),
         macds=macd_sig if macd_sig is not None else float("nan"),
-        stoch_k=stoch_k if stoch_k is not None else float("nan"),
-        stoch_d=stoch_d if stoch_d is not None else float("nan"),
+        stoch_k=stoch_k if 'stoch_k' in locals() and stoch_k is not None else float("nan"),
+        stoch_d=stoch_d if 'stoch_d' in locals() and stoch_d is not None else float("nan"),
     )
     return bucket, int(votes), details
-
 
 def analyst_bucket_from_mean(x):
     if x is None or (isinstance(x, float) and np.isnan(x)):
