@@ -4,4 +4,4 @@ pandas_ta==0.3.14b0
 yfinance>=0.2.40
 tradingview-ta>=3.3.0
 requests
-lxml
+lxml==5.3.0
