@@ -1,7 +1,6 @@
-# mix_ab_screen_indices.py
 # Screener US (Russell 1000 + 2000)
-# Filtres: US only, Technology/Healthcare/Industrials (+robotics keywords), MarketCap < 50B
-# Sortie: tv_strongbuy_and_analysts_good_under50B.csv
+# Filtres: US only, MarketCap < 200B, double Strong Buy (TradingView + analystes Yahoo)
+# Sortie: tv_STRONGBUY__analyst_STRONGBUY__under200B.csv
 import warnings, time, re, os
 import requests
 import pandas as pd
@@ -30,15 +29,10 @@ INTERVAL = "1d"
 TV_INTERVAL = Interval.INTERVAL_1_DAY
 
 # Filtres secteurs & cap
-SECTOR_WHITELIST = {"Technology", "Information Technology", "Healthcare", "Industrials"}
-MAX_MARKET_CAP = 50_000_000_000  # < 50B$
-ROBOTICS_KEYWORDS = (
-    "robot", "automation", "autonomous",
-    "industrial automation", "mechatronic", "cobot", "cobotics"
-)
+MAX_MARKET_CAP = 200_000_000_000  # < 200B$
 
 # Fichier de sortie
-OUTPUT_CSV = "tv_strongbuy_and_analysts_good_under50B.csv"
+OUTPUT_CSV = "tv_STRONGBUY__analyst_STRONGBUY__under200B.csv"
 
 # Respect TradingView (lib non-officielle) : ne pas spammer
 DELAY_BETWEEN_TV_CALLS_SEC = 0.05
@@ -281,15 +275,11 @@ def main():
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
             tv_exchange = map_exchange_for_tv(exch, tv_symbol)
 
-            # Filtres pays
-            if country and country.upper() not in {"USA", "UNITED STATES"}:
-                continue
+            # Filtres pays (on reste sur actions US)
+            if country:
+            if country.upper() not in {"USA", "US", "UNITED STATES", "UNITED STATES OF AMERICA"}:
+            continue
 
-            # Filtres secteur / robotics
-            if sector not in SECTOR_WHITELIST:
-                il = industry.lower()
-                if not any(k in il for k in ROBOTICS_KEYWORDS):
-                    continue
 
             # Filtres MarketCap
             if not isinstance(mcap, (int, float)) or mcap is None or mcap >= MAX_MARKET_CAP:
@@ -351,20 +341,21 @@ def main():
         print("Aucun titre après filtrages et collecte.")
         return
 
-    # Filtres finaux: TradingView STRONG_BUY + Analystes Strong Buy/Buy
+    # Filtres finaux: TradingView STRONG_BUY + Analystes Strong Buy
     mask_tv_strong = df["tv_reco"].isin({"STRONG_BUY"})
-    mask_analyst_good = df["analyst_bucket"].isin({"Strong Buy", "Buy"})
-    final_df = df[mask_tv_strong & mask_analyst_good].copy()
+    mask_analyst_strong = df["analyst_bucket"].isin({"Strong Buy"})
+    final_df = df[mask_tv_strong & mask_analyst_strong].copy()
 
     # Tri: score technique desc, analyst_votes desc, market_cap asc
     final_df.sort_values(["tech_score", "analyst_votes", "market_cap"],
-                         ascending=[False, False, True], inplace=True)
+                     ascending=[False, False, True], inplace=True)
 
     # Sauvegarde CSV
     final_df.to_csv(OUTPUT_CSV, index=False)
 
+
     # Aperçu console
-    print("\n=== TV STRONG_BUY ∩ Analystes (Strong/Buy) — US — <50B — Top 50 ===")
+    print("\n=== TV STRONG_BUY ∩ Analystes (Strong Buy) — US — <200B — Top 50 ===")
     cols_show = ["ticker_tv","ticker_yf","price","sector","industry","market_cap",
                  "technical_local","tech_score","tv_reco","analyst_bucket","analyst_mean","analyst_votes"]
     print(final_df[cols_show].head(50).to_string(index=False))
