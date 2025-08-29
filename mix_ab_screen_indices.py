@@ -158,37 +158,90 @@ def map_exchange_for_tv(yf_info_exch: str, ticker: str):
 
 
 def compute_local_technical_bucket(hist: pd.DataFrame):
-    """Renvoie (bucket, score, details). SMA200 devient optionnelle."""
+    """
+    Renvoie (bucket, score, details) en étant tolérant aux NaN :
+    - Exige: prix, SMA20, SMA50, RSI
+    - Optionnels: SMA200, MACD, Stoch (comptent s'ils sont dispos)
+    """
     if hist.empty or len(hist) < 60:
         return None, None, {}
 
     close = hist["Close"]; high = hist["High"]; low = hist["Low"]
-    s20 = close.ta.sma(20); s50 = close.ta.sma(50); s200 = close.ta.sma(200)
-    rsi = close.ta.rsi(14)
-    macd = close.ta.macd(12, 26, 9)
-    stoch = ta.stoch(high, low, close)
 
-    # Colonnes indispensables (SMA20/SMA50/RSI/MACD/Stoch)
-    need_cols = [s20, s50, rsi, macd, stoch]
-    if any(x is None or x.dropna().empty for x in need_cols):
+    # utilitaires: dernière valeur valide
+    def last_valid(x):
+        if x is None:
+            return None
+        if isinstance(x, pd.DataFrame):
+            xx = x.dropna()
+            if xx.empty:
+                return None
+            return xx.iloc[-1]
+        else:
+            xx = x.dropna()
+            if xx.empty:
+                return None
+            return xx.iloc[-1]
+
+    # indicateurs
+    s20 = close.ta.sma(20)
+    s50 = close.ta.sma(50)
+    s200 = close.ta.sma(200)
+    rsi  = close.ta.rsi(14)
+    macd = close.ta.macd(12, 26, 9)          # DataFrame (MACD, signal)
+    stoch = ta.stoch(high, low, close)       # DataFrame (K, D)
+
+    # dernières valeurs valides
+    price_last = last_valid(close)
+    s20_last   = last_valid(s20)
+    s50_last   = last_valid(s50)
+    s200_last  = last_valid(s200)
+    rsi_last   = last_valid(rsi)
+    macd_row   = last_valid(macd)
+    stoch_row  = last_valid(stoch)
+
+    # minimum vital
+    if any(v is None for v in (price_last, s20_last, s50_last, rsi_last)):
         return None, None, {}
 
-    price = close.iloc[-1]
-    rsi_last = rsi.iloc[-1]
-    macd_last = macd.iloc[-1]
-    stoch_last = stoch.iloc[-1]
-    has200 = s200 is not None and not s200.dropna().empty
+    # extractions MACD/STOCH si dispo (clé peut varier selon versions; on gère les 2)
+    macd_val = macd_sig = None
+    if isinstance(macd_row, pd.Series):
+        # essais de noms usuels
+        for k in ["MACD_12_26_9", "MACD_12_26_9.0", "MACD_12_26_9_MACD"]:
+            if k in macd_row:
+                macd_val = float(macd_row[k]); break
+        for k in ["MACDs_12_26_9", "MACDs_12_26_9.0", "MACD_12_26_9_SIGNAL", "MACDs_12_26_9_Signal"]:
+            if k in macd_row:
+                macd_sig = float(macd_row[k]); break
 
+    stoch_k = stoch_d = None
+    if isinstance(stoch_row, pd.Series):
+        for k in ["STOCHk_14_3_3", "%K", "STOCHk"]:
+            if k in stoch_row:
+                stoch_k = float(stoch_row[k]); break
+        for k in ["STOCHd_14_3_3", "%D", "STOCHd"]:
+            if k in stoch_row:
+                stoch_d = float(stoch_row[k]); break
+
+    # votes
     votes = 0
-    votes += 1 if price > s20.iloc[-1] else -1
-    votes += 1 if s20.iloc[-1] > s50.iloc[-1] else -1
-    if has200:
-        votes += 1 if s50.iloc[-1] > s200.iloc[-1] else -1
-    if rsi_last >= 55: votes += 1
-    elif rsi_last <= 45: votes -= 1
-    votes += 1 if macd_last["MACD_12_26_9"] > macd_last["MACDs_12_26_9"] else -1
-    votes += 1 if stoch_last["STOCHk_14_3_3"] > stoch_last["STOCHd_14_3_3"] else -1
+    votes += 1 if float(price_last) > float(s20_last) else -1
+    votes += 1 if float(s20_last) > float(s50_last) else -1
+    if s200_last is not None and not (isinstance(s200_last, float) and np.isnan(s200_last)):
+        votes += 1 if float(s50_last) > float(s200_last) else -1
 
+    r = float(rsi_last)
+    if r >= 55: votes += 1
+    elif r <= 45: votes -= 1
+
+    if macd_val is not None and macd_sig is not None:
+        votes += 1 if macd_val > macd_sig else -1
+
+    if stoch_k is not None and stoch_d is not None:
+        votes += 1 if stoch_k > stoch_d else -1
+
+    # bucket
     if votes >= 4: bucket = "Strong Buy"
     elif votes >= 2: bucket = "Buy"
     elif votes <= -4: bucket = "Strong Sell"
@@ -196,14 +249,15 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
     else: bucket = "Neutral"
 
     details = dict(
-        price=float(price),
-        sma20=float(s20.iloc[-1]), sma50=float(s50.iloc[-1]),
-        sma200=float(s200.iloc[-1]) if has200 else float("nan"),
+        price=float(price_last),
+        sma20=float(s20_last),
+        sma50=float(s50_last),
+        sma200=float(s200_last) if s200_last is not None and not (isinstance(s200_last, float) and np.isnan(s200_last)) else float("nan"),
         rsi=float(rsi_last),
-        macd=float(macd_last["MACD_12_26_9"]),
-        macds=float(macd_last["MACDs_12_26_9"]),
-        stoch_k=float(stoch_last["STOCHk_14_3_3"]),
-        stoch_d=float(stoch_last["STOCHd_14_3_3"]),
+        macd=macd_val if macd_val is not None else float("nan"),
+        macds=macd_sig if macd_sig is not None else float("nan"),
+        stoch_k=stoch_k if stoch_k is not None else float("nan"),
+        stoch_d=stoch_d if stoch_d is not None else float("nan"),
     )
     return bucket, int(votes), details
 
@@ -305,7 +359,7 @@ def main():
 
             # Petit délai pour éviter rate-limit Yahoo (avant history)
             time.sleep(0.05)
-            hist = tk.history(period=PERIOD, interval=INTERVAL, auto_adjust=False, actions=False)
+            hist = tk.history(period=PERIOD, interval=INTERVAL, auto_adjust=True, actions=False)
             if hist.empty or len(hist) < 60:
                 continue
             c_hist += 1
