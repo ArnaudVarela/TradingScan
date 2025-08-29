@@ -23,7 +23,7 @@ R1K_FALLBACK_CSV = "russell1000.csv"   # entête attendu: Ticker
 R2K_FALLBACK_CSV = "russell2000.csv"   # entête attendu: Ticker
 
 # Indicateurs locaux (période/interval Yahoo)
-PERIOD = "1y"      # <= important pour avoir SMA200
+PERIOD = "2y"   # était "1y"
 INTERVAL = "1d"
 TV_INTERVAL = Interval.INTERVAL_1_DAY
 
@@ -256,9 +256,14 @@ def main():
     print(f"Tickers dans l'univers: {len(tickers_df)}")
 
     rows = []
+
+    # Compteurs de diagnostic
+    c_total = c_us = c_mcap = c_hist = c_ta = 0
+
     for i, row in enumerate(tickers_df.itertuples(index=False), 1):
         tv_symbol = row.tv_symbol
         yf_symbol = row.yf_symbol
+        c_total += 1
 
         try:
             tk = yf.Ticker(yf_symbol)
@@ -269,37 +274,49 @@ def main():
             except Exception:
                 info = {}
 
-            # Info rapide (fiable)
+            # Info rapide (fiable) + market cap robuste
             fi = getattr(tk, "fast_info", None)
             mcap = None
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
             if fi:
                 mcap = getattr(fi, "market_cap", None) or mcap
                 exch = getattr(fi, "exchange", exch) or exch
+            if mcap is None:
+                mcap = info.get("marketCap")  # fallback si fast_info vide
 
             sector = (info.get("sector") or "").strip()
             industry = (info.get("industry") or "").strip()
             country = (info.get("country") or info.get("countryOfCompany") or "").strip()
 
-            # Détection US tolérante
+            # Détection US tolérante : si country vide mais exchange US, on garde
             is_us_exchange = str(exch).upper() in {"NASDAQ", "NYSE", "AMEX", "BATS", "NYSEARCA", "NYSEMKT"}
             if country:
                 if country.upper() not in {"USA", "US", "UNITED STATES", "UNITED STATES OF AMERICA"} and not is_us_exchange:
                     continue
+            # Si country vide, on laisse passer; contrôle via exchange ci-dessus
+            c_us += 1
 
-            # Filtre MarketCap
-            if not isinstance(mcap, (int, float)) or mcap is None or mcap >= MAX_MARKET_CAP:
+            # Filtre MarketCap — n'exclut que si on connaît la cap ET qu'elle dépasse le seuil
+            if isinstance(mcap, (int, float)) and mcap >= MAX_MARKET_CAP:
                 continue
+            c_mcap += 1
 
             tv_exchange = map_exchange_for_tv(exch, tv_symbol)
 
-            # Données prix pour calcul TA local
+            # Petit délai pour éviter rate-limit Yahoo (avant history)
+            time.sleep(0.05)
             hist = tk.history(period=PERIOD, interval=INTERVAL, auto_adjust=False, actions=False)
+            if hist.empty or len(hist) < 60:
+                continue
+            c_hist += 1
+
+            # TA locale (SMA200 optionnelle)
             local_bucket, local_score, local_details = compute_local_technical_bucket(hist)
             if local_bucket is None:
                 continue
+            c_ta += 1
 
-            # TradingView recommendation
+            # TradingView recommendation (avec fallback d'exchange)
             tv = get_tv_summary(tv_symbol, tv_exchange)
             time.sleep(DELAY_BETWEEN_TV_CALLS_SEC)
 
@@ -343,7 +360,14 @@ def main():
         if i % 50 == 0:
             print(f"{i}/{len(tickers_df)} traités…")
 
+    # ===== fin de boucle =====
     df = pd.DataFrame(rows)
+
+    print(f"[STEP] total tickers vus       : {c_total}")
+    print(f"[STEP] après filtre pays (US)  : {c_us}")
+    print(f"[STEP] après filtre MCAP       : {c_mcap}")
+    print(f"[STEP] historiques OK (>=60)   : {c_hist}")
+    print(f"[STEP] TA locale OK            : {c_ta}")
 
     # --- Diagnostics / Debug même si vide ---
     if df.empty:
@@ -390,7 +414,6 @@ def main():
 
     if intersection.empty:
         print("⚠️ Intersection vide : ouvre les fichiers 'debug_tv_STRONGBUY.csv' et 'debug_analyst_STRONGBUY.csv' pour voir où ça coince.")
-
 
 if __name__ == "__main__":
     main()
