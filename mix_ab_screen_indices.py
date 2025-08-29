@@ -23,7 +23,7 @@ R1K_FALLBACK_CSV = "russell1000.csv"   # entête attendu: Ticker
 R2K_FALLBACK_CSV = "russell2000.csv"   # entête attendu: Ticker
 
 # Indicateurs locaux (période/interval Yahoo)
-PERIOD = "6mo"
+PERIOD = "1y"      # <= important pour avoir SMA200
 INTERVAL = "1d"
 TV_INTERVAL = Interval.INTERVAL_1_DAY
 
@@ -158,6 +158,7 @@ def map_exchange_for_tv(yf_info_exch: str, ticker: str):
 
 
 def compute_local_technical_bucket(hist: pd.DataFrame):
+    """Renvoie (bucket, score, details). SMA200 devient optionnelle."""
     if hist.empty or len(hist) < 60:
         return None, None, {}
 
@@ -167,18 +168,22 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
     macd = close.ta.macd(12, 26, 9)
     stoch = ta.stoch(high, low, close)
 
-    if any(x is None or x.dropna().empty for x in (s20, s50, s200, rsi)) or macd is None or stoch is None:
+    # Colonnes indispensables (SMA20/SMA50/RSI/MACD/Stoch)
+    need_cols = [s20, s50, rsi, macd, stoch]
+    if any(x is None or x.dropna().empty for x in need_cols):
         return None, None, {}
 
     price = close.iloc[-1]
     rsi_last = rsi.iloc[-1]
     macd_last = macd.iloc[-1]
     stoch_last = stoch.iloc[-1]
+    has200 = s200 is not None and not s200.dropna().empty
 
     votes = 0
     votes += 1 if price > s20.iloc[-1] else -1
     votes += 1 if s20.iloc[-1] > s50.iloc[-1] else -1
-    votes += 1 if s50.iloc[-1] > s200.iloc[-1] else -1
+    if has200:
+        votes += 1 if s50.iloc[-1] > s200.iloc[-1] else -1
     if rsi_last >= 55: votes += 1
     elif rsi_last <= 45: votes -= 1
     votes += 1 if macd_last["MACD_12_26_9"] > macd_last["MACDs_12_26_9"] else -1
@@ -192,7 +197,8 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
 
     details = dict(
         price=float(price),
-        sma20=float(s20.iloc[-1]), sma50=float(s50.iloc[-1]), sma200=float(s200.iloc[-1]),
+        sma20=float(s20.iloc[-1]), sma50=float(s50.iloc[-1]),
+        sma200=float(s200.iloc[-1]) if has200 else float("nan"),
         rsi=float(rsi_last),
         macd=float(macd_last["MACD_12_26_9"]),
         macds=float(macd_last["MACDs_12_26_9"]),
@@ -256,26 +262,36 @@ def main():
 
         try:
             tk = yf.Ticker(yf_symbol)
+
+            # Info lente (parfois vide)
             try:
                 info = tk.get_info() or {}
             except Exception:
                 info = {}
 
+            # Info rapide (fiable)
+            fi = getattr(tk, "fast_info", None)
+            mcap = None
+            exch = info.get("exchange") or info.get("fullExchangeName") or ""
+            if fi:
+                mcap = getattr(fi, "market_cap", None) or mcap
+                exch = getattr(fi, "exchange", exch) or exch
+
             sector = (info.get("sector") or "").strip()
             industry = (info.get("industry") or "").strip()
             country = (info.get("country") or info.get("countryOfCompany") or "").strip()
-            mcap = info.get("marketCap")
-            exch = info.get("exchange") or info.get("fullExchangeName") or ""
-            tv_exchange = map_exchange_for_tv(exch, tv_symbol)
 
-            # Filtres pays
+            # Détection US tolérante
+            is_us_exchange = str(exch).upper() in {"NASDAQ", "NYSE", "AMEX", "BATS", "NYSEARCA", "NYSEMKT"}
             if country:
-                if country.upper() not in {"USA", "US", "UNITED STATES", "UNITED STATES OF AMERICA"}:
+                if country.upper() not in {"USA", "US", "UNITED STATES", "UNITED STATES OF AMERICA"} and not is_us_exchange:
                     continue
 
-            # Filtres MarketCap
+            # Filtre MarketCap
             if not isinstance(mcap, (int, float)) or mcap is None or mcap >= MAX_MARKET_CAP:
                 continue
+
+            tv_exchange = map_exchange_for_tv(exch, tv_symbol)
 
             # Données prix pour calcul TA local
             hist = tk.history(period=PERIOD, interval=INTERVAL, auto_adjust=False, actions=False)
@@ -328,11 +344,17 @@ def main():
             print(f"{i}/{len(tickers_df)} traités…")
 
     df = pd.DataFrame(rows)
+
+    # --- Diagnostics / Debug même si vide ---
     if df.empty:
-        print("Aucun titre après filtrages et collecte.")
+        print("Aucun titre après filtrages et collecte (df vide). Écriture de CSV vides pour debug.")
+        empty_cols = ["ticker_tv","ticker_yf","price","sector","industry","market_cap",
+                      "technical_local","tech_score","tv_reco","analyst_bucket","analyst_mean","analyst_votes"]
+        pd.DataFrame(columns=empty_cols).to_csv("debug_tv_STRONGBUY.csv", index=False)
+        pd.DataFrame(columns=empty_cols).to_csv("debug_analyst_STRONGBUY.csv", index=False)
+        pd.DataFrame(columns=empty_cols).to_csv(OUTPUT_CSV, index=False)
         return
 
-    # --- Diagnostics / Debug ---
     # 0) combien de lignes ont des données analystes ?
     have_analyst = df["analyst_bucket"].notna().sum()
     print(f"[DEBUG] Titres avec note analystes dispo: {have_analyst}/{len(df)}")
