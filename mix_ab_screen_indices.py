@@ -15,7 +15,6 @@ warnings.filterwarnings("ignore")
 # =========================
 #  CONFIG
 # =========================
-# Univers: Russell 1000 + Russell 2000
 INCLUDE_RUSSELL_1000 = True
 INCLUDE_RUSSELL_2000 = True
 
@@ -35,7 +34,7 @@ MAX_MARKET_CAP = 200_000_000_000  # < 200B$
 OUTPUT_CSV = "tv_STRONGBUY__analyst_STRONGBUY__under200B.csv"
 
 # Respect TradingView (lib non-officielle) : ne pas spammer
-DELAY_BETWEEN_TV_CALLS_SEC = 0.05
+DELAY_BETWEEN_TV_CALLS_SEC = 0.2
 
 
 # =========================
@@ -214,22 +213,32 @@ def analyst_bucket_from_mean(x):
 
 
 def get_tv_summary(symbol: str, exchange: str):
-    try:
-        h = TA_Handler(
-            symbol=symbol,
-            screener="america",
-            exchange=exchange,
-            interval=TV_INTERVAL
-        )
-        s = h.get_analysis().summary
-        return {
-            "tv_reco": s.get("RECOMMENDATION"),
-            "tv_buy": s.get("BUY"),
-            "tv_sell": s.get("SELL"),
-            "tv_neutral": s.get("NEUTRAL"),
-        }
-    except Exception:
-        return {"tv_reco": None, "tv_buy": None, "tv_sell": None, "tv_neutral": None}
+    def try_once(sym, ex):
+        try:
+            h = TA_Handler(symbol=sym, screener="america", exchange=ex, interval=TV_INTERVAL)
+            s = h.get_analysis().summary
+            return {
+                "tv_reco": s.get("RECOMMENDATION"),
+                "tv_buy": s.get("BUY"),
+                "tv_sell": s.get("SELL"),
+                "tv_neutral": s.get("NEUTRAL"),
+            }
+        except Exception:
+            return None
+
+    # 1er essai sur l’exchange déduit
+    first = try_once(symbol, exchange)
+    if first and first.get("tv_reco"):
+        return first
+
+    # Fallback: tente d’autres bourses US courantes
+    for ex in ("NASDAQ", "NYSE", "AMEX"):
+        alt = try_once(symbol, ex)
+        if alt and alt.get("tv_reco"):
+            return alt
+
+    # Rien trouvé
+    return {"tv_reco": None, "tv_buy": None, "tv_sell": None, "tv_neutral": None}
 
 
 # =========================
@@ -323,20 +332,42 @@ def main():
         print("Aucun titre après filtrages et collecte.")
         return
 
-    # Filtres finaux: TradingView STRONG_BUY + Analystes Strong Buy
+    # --- Diagnostics / Debug ---
+    # 0) combien de lignes ont des données analystes ?
+    have_analyst = df["analyst_bucket"].notna().sum()
+    print(f"[DEBUG] Titres avec note analystes dispo: {have_analyst}/{len(df)}")
+
+    # 1) Comptes par étape
     mask_tv_strong = df["tv_reco"].isin({"STRONG_BUY"})
     mask_analyst_strong = df["analyst_bucket"].isin({"Strong Buy"})
-    final_df = df[mask_tv_strong & mask_analyst_strong].copy()
 
-    final_df.sort_values(["tech_score", "analyst_votes", "market_cap"],
-                         ascending=[False, False, True], inplace=True)
+    tv_only = df[mask_tv_strong].copy()
+    analyst_only = df[mask_analyst_strong].copy()
+    intersection = df[mask_tv_strong & mask_analyst_strong].copy()
 
-    final_df.to_csv(OUTPUT_CSV, index=False)
+    print(f"[DEBUG] TV=STRONG_BUY : {len(tv_only)}")
+    print(f"[DEBUG] Analystes=Strong Buy : {len(analyst_only)}")
+    print(f"[DEBUG] Intersection (double Strong Buy) : {len(intersection)}")
 
-    print("\n=== TV STRONG_BUY ∩ Analystes (Strong Buy) — US — <200B — Top 50 ===")
+    # 2) Sauvegardes debug
+    tv_only.sort_values(["tech_score","analyst_votes","market_cap"], ascending=[False, False, True], inplace=True)
+    analyst_only.sort_values(["analyst_votes","market_cap"], ascending=[False, True], inplace=True)
+    intersection.sort_values(["tech_score","analyst_votes","market_cap"], ascending=[False, False, True], inplace=True)
+
+    tv_only.to_csv("debug_tv_STRONGBUY.csv", index=False)
+    analyst_only.to_csv("debug_analyst_STRONGBUY.csv", index=False)
+
+    # 3) Export final (intersection)
+    intersection.to_csv(OUTPUT_CSV, index=False)
+
+    # 4) Aperçu console
+    print("\n=== INTERSECTION — TV STRONG_BUY ∩ Analystes Strong Buy — US — <200B — Top 50 ===")
     cols_show = ["ticker_tv","ticker_yf","price","sector","industry","market_cap",
                  "technical_local","tech_score","tv_reco","analyst_bucket","analyst_mean","analyst_votes"]
-    print(final_df[cols_show].head(50).to_string(index=False))
+    print(intersection[cols_show].head(50).to_string(index=False))
+
+    if intersection.empty:
+        print("⚠️ Intersection vide : ouvre les fichiers 'debug_tv_STRONGBUY.csv' et 'debug_analyst_STRONGBUY.csv' pour voir où ça coince.")
 
 
 if __name__ == "__main__":
