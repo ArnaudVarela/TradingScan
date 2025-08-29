@@ -19,6 +19,11 @@ warnings.filterwarnings("ignore")
 INCLUDE_RUSSELL_1000 = True
 INCLUDE_RUSSELL_2000 = True
 
+# Fallback CSV (optionnel) si Wikipedia change trop souvent.
+# Si présents à la racine du repo, ils seront utilisés en secours.
+R1K_FALLBACK_CSV = "russell1000.csv"   # entête attendu: Ticker
+R2K_FALLBACK_CSV = "russell2000.csv"   # entête attendu: Ticker
+
 # Indicateurs locaux (période/interval Yahoo)
 PERIOD = "6mo"
 INTERVAL = "1d"
@@ -52,46 +57,108 @@ def tv_norm(sym: str) -> str:
     return sym.replace("-", ".")
 
 
-def fetch_wikipedia_table(url: str, match_col_regex: str):
-    """Télécharge une page Wikipedia avec User-Agent et renvoie le premier tableau contenant match_col_regex."""
+def fetch_wikipedia_tickers(url: str):
+    """
+    Télécharge une page Wikipedia et tente d’extraire une colonne 'Ticker' OU 'Symbol'
+    depuis n’importe quel tableau (en gérant MultiIndex d'entêtes).
+    Renvoie la liste de tickers trouvés (strings).
+    """
     ua = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
                         "(KHTML, like Gecko) Chrome/125.0 Safari/537.36"}
     resp = requests.get(url, headers=ua, timeout=45)
     resp.raise_for_status()
     tables = pd.read_html(resp.text)
+
+    def flatten_cols(cols):
+        # Gère les MultiIndex d'entêtes
+        out = []
+        for c in cols:
+            if isinstance(c, tuple):
+                name = " ".join([str(x) for x in c if pd.notna(x)]).strip()
+            else:
+                name = str(c).strip()
+            out.append(name)
+        return out
+
+    candidates = ("ticker", "symbol")  # wikipedia alterne entre Ticker / Symbol
     for t in tables:
-        cols = [str(c).lower() for c in t.columns]
-        if any(re.search(match_col_regex, c, re.I) for c in cols):
-            return t
-    raise RuntimeError(f"Table with column /{match_col_regex}/ not found on {url}")
+        cols = flatten_cols(t.columns)
+        lower = [c.lower() for c in cols]
+        # Cherche une colonne qui matche 'ticker' OU 'symbol'
+        col_idx = None
+        for i, name in enumerate(lower):
+            if any(key in name for key in candidates):
+                col_idx = i
+                break
+        if col_idx is None:
+            continue
+        col_name = t.columns[col_idx]
+        # Nettoie les valeurs
+        ser = (
+            t[col_name]
+            .astype(str)
+            .str.strip()
+            .str.replace(r"\s+", "", regex=True)   # supprime espaces internes (rare)
+            .str.replace("\u200b", "", regex=False)  # zero-width space
+        )
+        # Filtre les lignes bizarres
+        ser = ser[ser.str.match(r"^[A-Za-z.\-]+$")].dropna().tolist()
+        if len(ser) > 0:
+            return ser
+
+    raise RuntimeError(f"Aucune colonne 'Ticker' ou 'Symbol' trouvée sur {url}")
 
 
 def load_universe():
-    """Charge Russell 1000 et/ou 2000 (tickers) et renvoie DataFrame tv_symbol / yf_symbol."""
+    """
+    Charge Russell 1000 + Russell 2000 depuis Wikipedia (robuste sur 'Ticker'/'Symbol').
+    Si échec, essaie les CSV locaux fallback (russell1000.csv / russell2000.csv).
+    Renvoie DataFrame avec tv_symbol / yf_symbol.
+    """
     tickers = []
 
+    def add_from_url(url, label):
+        try:
+            lst = fetch_wikipedia_tickers(url)
+            # Normalisation double (TV / YF)
+            tickers.extend(lst)
+        except Exception as e:
+            print(f"[WARN] {label}: {e}")
+
     if INCLUDE_RUSSELL_1000:
-        r1k_url = "https://en.wikipedia.org/wiki/Russell_1000_Index"
-        t = fetch_wikipedia_table(r1k_url, r"ticker")
-        col = [c for c in t.columns if re.search("ticker", str(c), re.I)][0]
-        tickers += (
-            t[col].astype(str).str.strip()
-            .tolist()
-        )
+        add_from_url("https://en.wikipedia.org/wiki/Russell_1000_Index", "Russell 1000")
 
     if INCLUDE_RUSSELL_2000:
-        r2k_url = "https://en.wikipedia.org/wiki/Russell_2000_Index"
-        t = fetch_wikipedia_table(r2k_url, r"ticker")
-        col = [c for c in t.columns if re.search("ticker", str(c), re.I)][0]
-        tickers += (
-            t[col].astype(str).str.strip()
-            .tolist()
-        )
+        add_from_url("https://en.wikipedia.org/wiki/Russell_2000_Index", "Russell 2000")
 
-    # Normalisation double (TV / YF)
-    # TV préfère le point (BRK.B) ; YF préfère le tiret (BRK-B)
-    tv_syms = [tv_norm(s) for s in tickers]
-    yf_syms = [yf_norm(s) for s in tickers]
+    # Fallback CSV si nécessaire
+    def add_from_csv(path, label):
+        try:
+            if os.path.exists(path):
+                df = pd.read_csv(path)
+                if "Ticker" in df.columns:
+                    vals = (
+                        df["Ticker"].astype(str).str.strip()
+                        .str.replace(r"\s+", "", regex=True)
+                        .tolist()
+                    )
+                    if vals:
+                        tickers.extend(vals)
+                        print(f"[INFO] Fallback {label}: {len(vals)} tickers ajoutés depuis {path}")
+        except Exception as e:
+            print(f"[WARN] Fallback {label} CSV: {e}")
+
+    if not tickers and INCLUDE_RUSSELL_1000:
+        add_from_csv(R1K_FALLBACK_CSV, "R1K")
+    if not tickers and INCLUDE_RUSSELL_2000:
+        add_from_csv(R2K_FALLBACK_CSV, "R2K")
+
+    if not tickers:
+        raise RuntimeError("Impossible de charger l’univers (Wikipedia et CSV fallback indisponibles).")
+
+    # Normalisation finale
+    tv_syms = [tv_norm(s) for s in tickers]          # BRK.B pour TradingView
+    yf_syms = [yf_norm(s) for s in tickers]          # BRK-B pour yfinance
     df = pd.DataFrame({"tv_symbol": tv_syms, "yf_symbol": yf_syms}).drop_duplicates().reset_index(drop=True)
     return df
 
