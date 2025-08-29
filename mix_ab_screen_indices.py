@@ -1,3 +1,4 @@
+# mix_ab_screen_indices.py
 # Screener US (Russell 1000 + 2000)
 # Filtres: US only, MarketCap < 200B, double Strong Buy (TradingView + analystes Yahoo)
 # Sortie: tv_STRONGBUY__analyst_STRONGBUY__under200B.csv
@@ -19,7 +20,6 @@ INCLUDE_RUSSELL_1000 = True
 INCLUDE_RUSSELL_2000 = True
 
 # Fallback CSV (optionnel) si Wikipedia change trop souvent.
-# Si présents à la racine du repo, ils seront utilisés en secours.
 R1K_FALLBACK_CSV = "russell1000.csv"   # entête attendu: Ticker
 R2K_FALLBACK_CSV = "russell2000.csv"   # entête attendu: Ticker
 
@@ -28,7 +28,7 @@ PERIOD = "6mo"
 INTERVAL = "1d"
 TV_INTERVAL = Interval.INTERVAL_1_DAY
 
-# Filtres secteurs & cap
+# Filtre Market Cap
 MAX_MARKET_CAP = 200_000_000_000  # < 200B$
 
 # Fichier de sortie
@@ -64,7 +64,6 @@ def fetch_wikipedia_tickers(url: str):
     tables = pd.read_html(resp.text)
 
     def flatten_cols(cols):
-        # Gère les MultiIndex d'entêtes
         out = []
         for c in cols:
             if isinstance(c, tuple):
@@ -74,11 +73,10 @@ def fetch_wikipedia_tickers(url: str):
             out.append(name)
         return out
 
-    candidates = ("ticker", "symbol")  # wikipedia alterne entre Ticker / Symbol
+    candidates = ("ticker", "symbol")
     for t in tables:
         cols = flatten_cols(t.columns)
         lower = [c.lower() for c in cols]
-        # Cherche une colonne qui matche 'ticker' OU 'symbol'
         col_idx = None
         for i, name in enumerate(lower):
             if any(key in name for key in candidates):
@@ -87,15 +85,13 @@ def fetch_wikipedia_tickers(url: str):
         if col_idx is None:
             continue
         col_name = t.columns[col_idx]
-        # Nettoie les valeurs
         ser = (
             t[col_name]
             .astype(str)
             .str.strip()
-            .str.replace(r"\s+", "", regex=True)   # supprime espaces internes (rare)
-            .str.replace("\u200b", "", regex=False)  # zero-width space
+            .str.replace(r"\s+", "", regex=True)
+            .str.replace("\u200b", "", regex=False)
         )
-        # Filtre les lignes bizarres
         ser = ser[ser.str.match(r"^[A-Za-z.\-]+$")].dropna().tolist()
         if len(ser) > 0:
             return ser
@@ -104,17 +100,11 @@ def fetch_wikipedia_tickers(url: str):
 
 
 def load_universe():
-    """
-    Charge Russell 1000 + Russell 2000 depuis Wikipedia (robuste sur 'Ticker'/'Symbol').
-    Si échec, essaie les CSV locaux fallback (russell1000.csv / russell2000.csv).
-    Renvoie DataFrame avec tv_symbol / yf_symbol.
-    """
     tickers = []
 
     def add_from_url(url, label):
         try:
             lst = fetch_wikipedia_tickers(url)
-            # Normalisation double (TV / YF)
             tickers.extend(lst)
         except Exception as e:
             print(f"[WARN] {label}: {e}")
@@ -125,7 +115,6 @@ def load_universe():
     if INCLUDE_RUSSELL_2000:
         add_from_url("https://en.wikipedia.org/wiki/Russell_2000_Index", "Russell 2000")
 
-    # Fallback CSV si nécessaire
     def add_from_csv(path, label):
         try:
             if os.path.exists(path):
@@ -150,15 +139,13 @@ def load_universe():
     if not tickers:
         raise RuntimeError("Impossible de charger l’univers (Wikipedia et CSV fallback indisponibles).")
 
-    # Normalisation finale
-    tv_syms = [tv_norm(s) for s in tickers]          # BRK.B pour TradingView
-    yf_syms = [yf_norm(s) for s in tickers]          # BRK-B pour yfinance
+    tv_syms = [tv_norm(s) for s in tickers]
+    yf_syms = [yf_norm(s) for s in tickers]
     df = pd.DataFrame({"tv_symbol": tv_syms, "yf_symbol": yf_syms}).drop_duplicates().reset_index(drop=True)
     return df
 
 
 def map_exchange_for_tv(yf_info_exch: str, ticker: str):
-    """Map grossier pour TradingView_ta."""
     if not yf_info_exch:
         return "NASDAQ"
     e = yf_info_exch.upper()
@@ -172,7 +159,6 @@ def map_exchange_for_tv(yf_info_exch: str, ticker: str):
 
 
 def compute_local_technical_bucket(hist: pd.DataFrame):
-    """Retourne (bucket, score, details) basé sur SMA20/50/200, RSI, MACD, Stoch."""
     if hist.empty or len(hist) < 60:
         return None, None, {}
 
@@ -218,7 +204,6 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
 
 
 def analyst_bucket_from_mean(x):
-    # Yahoo: 1.0 Strong Buy ... 5.0 Sell
     if x is None or (isinstance(x, float) and np.isnan(x)):
         return None
     if x < 1.6: return "Strong Buy"
@@ -267,7 +252,6 @@ def main():
             except Exception:
                 info = {}
 
-            # Métadonnées nécessaires pour filtres
             sector = (info.get("sector") or "").strip()
             industry = (info.get("industry") or "").strip()
             country = (info.get("country") or info.get("countryOfCompany") or "").strip()
@@ -275,11 +259,10 @@ def main():
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
             tv_exchange = map_exchange_for_tv(exch, tv_symbol)
 
-            # Filtres pays (on reste sur actions US)
+            # Filtres pays
             if country:
-            if country.upper() not in {"USA", "US", "UNITED STATES", "UNITED STATES OF AMERICA"}:
-            continue
-
+                if country.upper() not in {"USA", "US", "UNITED STATES", "UNITED STATES OF AMERICA"}:
+                    continue
 
             # Filtres MarketCap
             if not isinstance(mcap, (int, float)) or mcap is None or mcap >= MAX_MARKET_CAP:
@@ -330,7 +313,6 @@ def main():
             })
 
         except Exception:
-            # robustesse: on skip en silence
             continue
 
         if i % 50 == 0:
@@ -346,15 +328,11 @@ def main():
     mask_analyst_strong = df["analyst_bucket"].isin({"Strong Buy"})
     final_df = df[mask_tv_strong & mask_analyst_strong].copy()
 
-    # Tri: score technique desc, analyst_votes desc, market_cap asc
     final_df.sort_values(["tech_score", "analyst_votes", "market_cap"],
-                     ascending=[False, False, True], inplace=True)
+                         ascending=[False, False, True], inplace=True)
 
-    # Sauvegarde CSV
     final_df.to_csv(OUTPUT_CSV, index=False)
 
-
-    # Aperçu console
     print("\n=== TV STRONG_BUY ∩ Analystes (Strong Buy) — US — <200B — Top 50 ===")
     cols_show = ["ticker_tv","ticker_yf","price","sector","industry","market_cap",
                  "technical_local","tech_score","tv_reco","analyst_bucket","analyst_mean","analyst_votes"]
