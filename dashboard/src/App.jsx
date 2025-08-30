@@ -4,6 +4,7 @@ import TopBar from "./components/TopBar.jsx";
 import MetricCard from "./components/MetricCard.jsx";
 import DataTable from "./components/DataTable.jsx";
 import { fetchCSV, rawUrl } from "./lib/csv.js";
+import SectorHeatmap from "./components/SectorHeatmap.jsx";
 
 // --- Coordonnées du repo (utilisés quand on n'est pas sur Vercel) ---
 const OWNER  = "ArnaudVarela";
@@ -87,6 +88,22 @@ export default function App() {
         <MetricCard label="Pre-signals" value={totals.pre} />
         <MetricCard label="Event-driven" value={totals.events} />
         <MetricCard label="Universe" value={totals.universe} />
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <MetricCard label="Confirmed" value={totals.confirmed} />
+        <MetricCard label="Pre-signals" value={totals.pre} />
+        <MetricCard label="Event-driven" value={totals.events} />
+        <MetricCard label="Universe" value={totals.universe} />
+      </div>
+
+      {/* NEW: Sector heatmap */}
+      <div className="mb-6">
+        <SectorHeatmap
+          confirmed={data.confirmed}
+          pre={data.pre}
+          events={data.events}
+        />
       </div>
 
       {/* États */}
