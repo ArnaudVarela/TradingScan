@@ -1,4 +1,4 @@
-# gen_r2000_merge.py
+# gen_r2000_from_ishares.py
 import io, re, sys, requests
 import pandas as pd
 from requests.adapters import HTTPAdapter, Retry
@@ -16,22 +16,20 @@ EXCH_SUFFIX = re.compile(r"(\s+|\.)(US|UN|UW|UQ|UR|N|OQ|K|LN|GY|FP|NA|IM|SM|HK|J
 RIC_LONG = re.compile(r"\.[A-Z]{2,4}$")
 CLASS_DOT = re.compile(r"^[A-Z][A-Z0-9]{0,5}\.[A-Z]$")
 TICK_RX = re.compile(r"^[A-Z][A-Z0-9]{0,7}(\.[A-Z])?$")
-
 BAD_VALUES = {"", "ISIN", "USD", "CASH", "FX", "SWAP", "OPTION", "FUT", "FUTURES", "N/A", "NA", "NONE", "-", "—"}
 
 def mk_sess():
     s = requests.Session()
-    r = Retry(total=3, backoff_factor=0.6, status_forcelist=[429,500,502,503,504])
+    r = Retry(total=3, backoff_factor=0.6, status_forcelist=[429, 500, 502, 503, 504])
     s.mount("https://", HTTPAdapter(max_retries=r))
+    s.mount("http://", HTTPAdapter(max_retries=r))
     return s
 
-def normalize_candidate(x: str) -> str|None:
-    if not isinstance(x, str):
-        return None
+def normalize_candidate(x: str) -> str | None:
+    if not isinstance(x, str): return None
     v = x.strip().upper()
-    if not v or v in BAD_VALUES:
-        return None
-    v = v.replace("/", ".").replace(" EQUITY","")
+    if not v or v in BAD_VALUES: return None
+    v = v.replace("/", ".").replace(" EQUITY", "")
     v = EXCH_SUFFIX.sub("", v).strip()
     if RIC_LONG.search(v): v = RIC_LONG.sub("", v)
     v = re.sub(r"\s+", "", v)
@@ -39,12 +37,12 @@ def normalize_candidate(x: str) -> str|None:
         return v
     return None
 
-def parse_spdr():
+def parse_spdr() -> set[str]:
     sess = mk_sess()
     r = sess.get(URL_SPDR, timeout=60)
     r.raise_for_status()
     xls = pd.ExcelFile(io.BytesIO(r.content), engine="openpyxl")
-    ticks = set()
+    ticks: set[str] = set()
     for sheet in xls.sheet_names:
         df = pd.read_excel(xls, sheet_name=sheet)
         for col in df.columns:
@@ -55,12 +53,12 @@ def parse_spdr():
     print(f"[SPDR] {len(ticks)} tickers")
     return ticks
 
-def parse_scha():
+def parse_scha() -> set[str]:
     sess = mk_sess()
     r = sess.get(URL_SCHA, headers=UA, timeout=60)
-    r.raise_for_status()
+    r.raise_for_status()  # peut lever 403
     tables = pd.read_html(r.text)
-    ticks = set()
+    ticks: set[str] = set()
     for t in tables:
         for col in t.columns:
             ser = t[col].dropna().astype(str)
@@ -71,17 +69,32 @@ def parse_scha():
     return ticks
 
 def main():
-    spdr = parse_spdr()
-try:
-    scha = parse_scha()
-except Exception as e:
-    print(f"[WARN] SCHA fetch failed: {e}")
-    scha = []
+    # Toujours définir spdr/scha, même en cas d’échec
+    spdr: set[str] = set()
+    scha: set[str] = set()
+
+    # SPDR d’abord (source principale)
+    try:
+        spdr = parse_spdr()
+    except Exception as e:
+        print(f"[ERROR] SPDR fetch failed: {e}")
+        # si SPDR échoue aussi, on ne peut rien faire
+        if not spdr:
+            sys.exit(2)
+
+    # SCHA optionnel (peut souvent renvoyer 403)
+    try:
+        scha = parse_scha()
+    except Exception as e:
+        print(f"[WARN] SCHA fetch failed: {e}")
+        scha = set()
+
     union = sorted(spdr.union(scha))
     print(f"[MERGED] total unique tickers: {len(union)}")
 
-    if len(union) < 1000:
-        print("❌ Extraction trop faible — structure modifiée")
+    # On écrit même si c’est “que” SPDR (ex: 1200–1800 tickers)
+    if len(union) < 500:
+        print("❌ Extraction trop faible — vérifie les sources.")
         sys.exit(2)
 
     pd.DataFrame({"Ticker": union}).to_csv(OUTPUT, index=False)
