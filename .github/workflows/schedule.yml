@@ -38,6 +38,10 @@ jobs:
         run: |
           python gen_r2000_from_ishares.py
 
+      - name: Build sector catalog (R1K + SPSM)
+        run: |
+           python build_sector_catalog.py || true
+
       - name: Run screener
         env:
           PYTHONUNBUFFERED: "1"
