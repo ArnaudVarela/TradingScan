@@ -128,7 +128,7 @@ def fetch_spdr_zprr(session: requests.Session) -> list[str]:
         return []
     # XLSX -> DataFrame
     try:
-        df = pd.read_excel(io.BytesIO(r.content))
+        df = pd.read_excel(io.BytesIO(r.content), engine="openpyxl")
     except Exception as e:
         print(f"  -> read_excel fail: {e}")
         return []
