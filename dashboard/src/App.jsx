@@ -5,6 +5,7 @@ import MetricCard from "./components/MetricCard.jsx";
 import DataTable from "./components/DataTable.jsx";
 import SectorHeatmap from "./components/SectorHeatmap.jsx";
 import { fetchCSV, rawUrl } from "./lib/csv.js";
+import SectorTimeline from "./components/SectorTimeline.jsx";
 
 // Repo (fallback quand pas sur Vercel)
 const OWNER  = "ArnaudVarela";
@@ -20,6 +21,7 @@ const FILES = {
   pre: "anticipative_pre_signals.csv",
   events: "event_driven_signals.csv",
   all: "candidates_all_ranked.csv",
+  history: "sector_history.csv", 
 };
 
 function urlFor(file) {
@@ -29,7 +31,7 @@ function urlFor(file) {
 }
 
 export default function App() {
-  const [data, setData] = useState({ confirmed: [], pre: [], events: [], all: [] });
+  const [data, setData] = useState({ confirmed: [], pre: [], events: [], all: [], history: [] });
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -44,12 +46,14 @@ export default function App() {
         fetchCSV(urlFor(FILES.pre)).catch(() => []),
         fetchCSV(urlFor(FILES.events)).catch(() => []),
         fetchCSV(urlFor(FILES.all)).catch(() => []),
+        fetchCSV(urlFor(FILES.history)).catch(() => []),
       ]);
       setData({
         confirmed: Array.isArray(confirmed) ? confirmed : [],
         pre: Array.isArray(pre) ? pre : [],
         events: Array.isArray(events) ? events : [],
         all: Array.isArray(all) ? all : [],
+        history: Array.isArray(history) ? history : [],
       });
       setLast(new Date().toLocaleString());
     } catch (e) {
@@ -139,6 +143,13 @@ export default function App() {
           </button>
         </div>
       )}
+
+        <div className="mb-6">
+          <SectorTimeline
+             historyRows={data.history}
+            selectedSectors={selectedSectors}  // <- ta sélection depuis la heatmap
+            />
+        </div>
 
       {/* États */}
       {loading && <div className="mb-4 text-sm text-slate-600">Chargement…</div>}
