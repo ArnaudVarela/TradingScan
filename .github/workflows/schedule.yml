@@ -50,17 +50,28 @@ jobs:
 
       - name: Commit CSVs if changed
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Stage uniquement les CSV à la racine ; élargis si besoin (ex: data/**/*.csv)
-          git add *.csv sector_history.csv || true 
+          # Stage : CSV racine + copies Vercel
+          git add \
+            *.csv \
+            dashboard/public/*.csv || true
 
-          # Crée le commit s'il y a des changements, sans échouer si vide
-          git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')" || true
+          # Rien à committer ? on sort proprement
+          if git diff --cached --quiet; then
+            echo "No CSV changes to commit."
+          else
+            git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          fi
 
-          # Se mettre à jour proprement même s'il reste des modifs non committées (autostash)
+          # Récupérer les éventuels commits distants avant de pousser
           git -c rebase.autoStash=true pull --rebase origin main || true
 
-          # Push (ne plante pas si rien à pousser)
+          # Push si quelque chose a vraiment changé
           git push origin HEAD:main || true
+
+          # Debug utile
+          echo "--- git status ---"
+          git status --short
