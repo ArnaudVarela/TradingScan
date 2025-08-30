@@ -4,10 +4,10 @@ on:
   schedule:
     # Toutes les heures à hh:07 UTC (GitHub Actions est en UTC)
     - cron: "7 * * * *"
-  workflow_dispatch: {}  # pour lancer à la main si besoin
+  workflow_dispatch: {}
 
 permissions:
-  contents: write  # pour pouvoir commit dans le repo
+  contents: write
 
 jobs:
   run:
@@ -15,6 +15,14 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # nécessaire pour rebase/pull propre
+
+      - name: Ensure clean working tree (sync to origin/main)
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          git clean -fd
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -32,7 +40,6 @@ jobs:
 
       - name: Run screener
         env:
-          # (optionnel) variable pour réduire la cadence si tu veux (ton script a déjà un petit sleep)
           PYTHONUNBUFFERED: "1"
         run: |
           python mix_ab_screen_indices.py
@@ -41,12 +48,15 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git rebase origin/main || git rebase --abort
+
+          # Stage uniquement les CSV à la racine ; élargis si besoin (ex: data/**/*.csv)
           git add *.csv || true
-          if ! git diff --cached --quiet; then
-            git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            git push origin HEAD:main
-          else
-            echo "No CSV changes."
-          fi
+
+          # Crée le commit s'il y a des changements, sans échouer si vide
+          git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')" || true
+
+          # Se mettre à jour proprement même s'il reste des modifs non committées (autostash)
+          git -c rebase.autoStash=true pull --rebase origin main || true
+
+          # Push (ne plante pas si rien à pousser)
+          git push origin HEAD:main || true
