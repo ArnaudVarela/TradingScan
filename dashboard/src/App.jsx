@@ -21,11 +21,11 @@ const FILES = {
   pre: "anticipative_pre_signals.csv",
   events: "event_driven_signals.csv",
   all: "candidates_all_ranked.csv",
-  history: "sector_history.csv", 
+  history: "sector_history.csv",
 };
 
 function urlFor(file) {
-  const bucketMs = 60_000;
+  const bucketMs = 60_000; // 1 min de cache-busting
   const bust = `?t=${Math.floor(Date.now() / bucketMs)}`;
   return USE_LOCAL ? `/${file}${bust}` : rawUrl(OWNER, REPO, BRANCH, file) + bust;
 }
@@ -35,19 +35,21 @@ export default function App() {
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [selectedSectors, setSelectedSectors] = useState([]); // NEW
+  const [selectedSectors, setSelectedSectors] = useState([]); // array de strings
 
   async function loadAll() {
     setLoading(true);
     setError("");
     try {
-      const [confirmed, pre, events, all] = await Promise.all([
+      // ✅ récupère bien les 5 résultats (dont history)
+      const [confirmed, pre, events, all, history] = await Promise.all([
         fetchCSV(urlFor(FILES.confirmed)).catch(() => []),
         fetchCSV(urlFor(FILES.pre)).catch(() => []),
         fetchCSV(urlFor(FILES.events)).catch(() => []),
         fetchCSV(urlFor(FILES.all)).catch(() => []),
         fetchCSV(urlFor(FILES.history)).catch(() => []),
       ]);
+
       setData({
         confirmed: Array.isArray(confirmed) ? confirmed : [],
         pre: Array.isArray(pre) ? pre : [],
@@ -78,7 +80,7 @@ export default function App() {
   const filterBySectors = (rows) => {
     if (!sectorFilterActive) return rows;
     const set = new Set(selectedSectors.map(s => s.toLowerCase()));
-    return rows.filter(r => (r?.sector || "Unknown").toLowerCase() && set.has((r?.sector || "Unknown").toLowerCase()));
+    return rows.filter(r => set.has((r?.sector || "Unknown").toLowerCase())); // ✅ simple et net
   };
 
   const rowsConfirmed = useMemo(() => filterBySectors(data.confirmed), [data, selectedSectors]);
@@ -88,14 +90,11 @@ export default function App() {
   const handleToggleSector = (sector, additive) => {
     if (!sector) return;
     setSelectedSectors((prev) => {
-      // reset si pas additive et on clique un nouveau
       if (!additive) {
         return prev.length === 1 && prev[0] === sector ? [] : [sector];
       }
-      // additive
       const has = prev.includes(sector);
-      if (has) return prev.filter((s) => s !== sector);
-      return [...prev, sector];
+      return has ? prev.filter((s) => s !== sector) : [...prev, sector];
     });
   };
 
@@ -144,12 +143,13 @@ export default function App() {
         </div>
       )}
 
-        <div className="mb-6">
-          <SectorTimeline
-             historyRows={data.history}
-            selectedSectors={selectedSectors}  // <- ta sélection depuis la heatmap
-            />
-        </div>
+      {/* Timeline (pense bien au bon nom de prop) */}
+      <div className="mb-6">
+        <SectorTimeline
+          history={data.history}               // ✅ prop attendue par le composant
+          selectedSectors={new Set(selectedSectors)} // optionnel si tu filtres par secteurs dans le composant
+        />
+      </div>
 
       {/* États */}
       {loading && <div className="mb-4 text-sm text-slate-600">Chargement…</div>}
