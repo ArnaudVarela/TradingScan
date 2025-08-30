@@ -24,15 +24,29 @@ jobs:
       run:
         working-directory: dashboard
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
           cache-dependency-path: dashboard/package.json
-      - run: npm ci
-      - run: npm run build
+
+      - name: Install dependencies (ci if lockfile, else install)
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "package-lock.json found -> npm ci"
+            npm ci
+          else
+            echo "No package-lock.json -> npm install"
+            npm install
+          fi
+
+      - name: Build
+        run: npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
