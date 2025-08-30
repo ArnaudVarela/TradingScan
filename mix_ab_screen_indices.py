@@ -32,6 +32,26 @@ DELAY_BETWEEN_TV_CALLS_SEC = 0.2
 
 SECTOR_CATALOG_PATH = "sector_catalog.csv"  # <- nouveau (optionnel)
 
+# --- Sorties : racine + copie dans dashboard/public/ pour le front
+PUBLIC_DIR = os.path.join("dashboard", "public")
+
+def _ensure_dir(p: str):
+    d = os.path.dirname(p)
+    if d and not os.path.exists(d):
+        os.makedirs(d, exist_ok=True)
+
+def save_csv(df: pd.DataFrame, fname: str, also_public: bool = True):
+    """Écrit fname à la racine + copie dans dashboard/public/fname."""
+    # racine
+    _ensure_dir(fname)
+    df.to_csv(fname, index=False)
+    # public (pour Vercel)
+    if also_public:
+        dst = os.path.join(PUBLIC_DIR, fname)
+        _ensure_dir(dst)
+        df.to_csv(dst, index=False)
+
+
 # ============= HELPERS =============
 def yf_norm(s:str)->str: return s.replace(".", "-")
 def tv_norm(s:str)->str: return s.replace("-", ".")
@@ -294,14 +314,14 @@ def main():
         pd.DataFrame(columns=[
             "ticker_tv","ticker_yf","price","market_cap","sector","industry",
             "technical_local","tv_reco","analyst_bucket"
-        ]).to_csv("debug_all_candidates.csv", index=False)
+        ]).to_csv("debug_all_candidates.csv")
         return
 
     # Diagnostic global (avant filtres finaux)
     dbg = df.copy()
     dbg["rank_score"] = dbg.apply(rank_score_row, axis=1)
     dbg.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    dbg.to_csv("debug_all_candidates.csv", index=False)
+    dbg.to_csv("debug_all_candidates.csv")
 
     # ====== 1) Confirmed (assoupli) ======
     mask_tv = df["tv_reco"].eq("STRONG_BUY")
@@ -314,20 +334,20 @@ def main():
         "technical_local","tech_score","tv_reco",
         "analyst_bucket","analyst_mean","analyst_votes","rank_score"
     ]
-    confirmed[confirmed_cols].to_csv("confirmed_STRONGBUY.csv", index=False)
+    confirmed[confirmed_cols].to_csv("confirmed_STRONGBUY.csv")
 
     # ====== 2) Pré-signaux (forcés) ======
     mask_pre = df["technical_local"].isin({"Buy","Strong Buy"}) | df["tv_reco"].eq("STRONG_BUY")
     pre = df[mask_pre].copy()
     pre["rank_score"] = pre.apply(rank_score_row, axis=1)
     pre.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    pre[confirmed_cols].to_csv("anticipative_pre_signals.csv", index=False)
+    pre[confirmed_cols].to_csv("anticipative_pre_signals.csv")
 
     # ====== 3) Event-driven (proxy : analystes connus) ======
     evt = df[df["analyst_bucket"].notna()].copy()
     evt["rank_score"] = evt.apply(rank_score_row, axis=1)
     evt.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    evt[confirmed_cols].to_csv("event_driven_signals.csv", index=False)
+    evt[confirmed_cols].to_csv("event_driven_signals.csv")
 
     # ====== 4) Mix comparatif ======
     all_out = pd.concat([
@@ -337,7 +357,7 @@ def main():
     ], ignore_index=True)
     all_out.sort_values(["rank_score","candidate_type","market_cap"], ascending=[False, True, True], inplace=True)
     all_cols = ["candidate_type"] + confirmed_cols
-    all_out[all_cols].to_csv("candidates_all_ranked.csv", index=False)
+    all_out[all_cols].to_csv("candidates_all_ranked.csv")
 
     # === Append sector history (weekly snapshot) ===============================
     # On prend la "semaine ISO" (lundi-dimanche) pour stabiliser les points
@@ -396,7 +416,7 @@ def main():
     # option: limite à 156 semaines (3 ans)
     new_df["__key"] = new_df["date"].astype(str) + "|" + new_df["bucket"].astype(str) + "|" + new_df["sector"].astype(str)
     new_df = new_df.drop_duplicates(subset="__key").drop(columns="__key")
-    new_df.to_csv(HISTORY_CSV, index=False)
+    new_df.to_csv(HISTORY_CSV)
 
     print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)}")
 
