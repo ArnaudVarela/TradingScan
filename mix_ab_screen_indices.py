@@ -30,6 +30,8 @@ TV_INTERVAL = Interval.INTERVAL_1_DAY
 MAX_MARKET_CAP = 200_000_000_000     # < 200B
 DELAY_BETWEEN_TV_CALLS_SEC = 0.2
 
+SECTOR_CATALOG_PATH = "sector_catalog.csv"  # <- nouveau (optionnel)
+
 # ============= HELPERS =============
 def yf_norm(s:str)->str: return s.replace(".", "-")
 def tv_norm(s:str)->str: return s.replace("-", ".")
@@ -67,12 +69,14 @@ def fetch_wikipedia_tickers(url: str):
 def load_universe()->pd.DataFrame:
     ticks=[]
     if INCLUDE_RUSSELL_1000:
-        try: ticks += fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_1000_Index")
+        try:
+            ticks += fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_1000_Index")
         except:
             if os.path.exists(R1K_FALLBACK_CSV):
                 ticks += pd.read_csv(R1K_FALLBACK_CSV)["Ticker"].astype(str).tolist()
     if INCLUDE_RUSSELL_2000:
-        try: ticks += fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
+        try:
+            ticks += fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
         except:
             if os.path.exists(R2K_FALLBACK_CSV):
                 ticks += pd.read_csv(R2K_FALLBACK_CSV)["Ticker"].astype(str).tolist()
@@ -105,8 +109,8 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
         s50  = ta.sma(close, length=50)
         s200 = ta.sma(close, length=200)
         rsi  = ta.rsi(close, length=14)
-        macd = ta.macd(close, fast=12, slow=26, signal=9)      # cols: MACD_12_26_9, MACDs_12_26_9, MACDh_12_26_9
-        stoch= ta.stoch(high, low, close, k=14, d=3, smooth_k=3) # cols: STOCHk_14_3_3, STOCHd_14_3_3
+        macd = ta.macd(close, fast=12, slow=26, signal=9)      # MACD_12_26_9, MACDs_12_26_9
+        stoch= ta.stoch(high, low, close, k=14, d=3, smooth_k=3) # STOCHk_14_3_3, STOCHd_14_3_3
     except Exception:
         return None, None, {}
 
@@ -201,11 +205,32 @@ def rank_score_row(s: pd.Series) -> float:
 # ============= MAIN =============
 def main():
     print("Chargement des tickers Russell 1000 + 2000…")
-    universe = load_universe()
-    print(f"Tickers dans l'univers: {len(universe)}")
+    tickers_df = load_universe()
+    print(f"Tickers dans l'univers: {len(tickers_df)}")
+
+    # ---------- [NOUVEAU] catalogue secteurs ----------
+    sector_map = {}
+    if os.path.exists(SECTOR_CATALOG_PATH):
+        try:
+            cat = pd.read_csv(SECTOR_CATALOG_PATH)
+            cat["ticker"] = cat["ticker"].astype(str).str.upper().str.strip()
+            # map: 'BRK.B' -> (sector, industry)
+            sector_map = {t: (s if isinstance(s,str) else "", i if isinstance(i,str) else "")
+                          for t,s,i in cat[["ticker","sector","industry"]].itertuples(index=False, name=None)}
+            print(f"[INFO] Sector catalog chargé: {len(sector_map)} tickers")
+        except Exception as e:
+            print(f"[WARN] Sector catalog illisible: {e}")
+
+    def sector_from_catalog(sym_tv: str, sym_yf: str):
+        # essai direct TV (BRK.B)
+        key_tv = (sym_tv or "").upper()
+        if key_tv in sector_map: return sector_map[key_tv]
+        # essai conversion YF -> TV (BRK-B -> BRK.B)
+        key_yf_tv = (sym_yf or "").upper().replace("-", ".")
+        return sector_map.get(key_yf_tv, ("", ""))
 
     rows=[]
-    for i, rec in enumerate(universe.itertuples(index=False), 1):
+    for i, rec in enumerate(tickers_df.itertuples(index=False), 1):
         tv_sym, yf_sym = rec.tv_symbol, rec.yf_symbol
         try:
             tk = yf.Ticker(yf_sym)
@@ -241,9 +266,16 @@ def main():
             analyst_votes = info.get("numberOfAnalystOpinions")
             analyst_bucket = analyst_bucket_from_mean(analyst_mean)
 
+            # ---------- secteurs/industries : priorité au catalogue ----------
+            sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
+            # fallback Yahoo si vide, sinon Unknown
+            sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
+            industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
+
             rows.append({
                 "ticker_tv": tv_sym, "ticker_yf": yf_sym,
                 "exchange": exch, "market_cap": mcap, "price": det.get("price"),
+                "sector": sector_val, "industry": industry_val,
                 "technical_local": bucket, "tech_score": votes,
                 "tv_reco": tv["tv_reco"],
                 "analyst_bucket": analyst_bucket,
@@ -253,13 +285,16 @@ def main():
             continue
 
         if i % 50 == 0:
-            print(f"{i}/{len(universe)} traités…")
+            print(f"{i}/{len(tickers_df)} traités…")
 
     df = pd.DataFrame(rows)
     if df.empty:
         print("⚠️ Aucun titre collecté après filtres US + MCAP + TA local.")
-        # on écrit tout de même un CSV diagnostic vide
-        pd.DataFrame(columns=["ticker_tv","ticker_yf","price","market_cap","technical_local","tv_reco","analyst_bucket"]).to_csv("debug_all_candidates.csv", index=False)
+        # CSV diagnostic vide
+        pd.DataFrame(columns=[
+            "ticker_tv","ticker_yf","price","market_cap","sector","industry",
+            "technical_local","tv_reco","analyst_bucket"
+        ]).to_csv("debug_all_candidates.csv", index=False)
         return
 
     # Diagnostic global (avant filtres finaux)
@@ -274,8 +309,11 @@ def main():
     confirmed = df[mask_tv & mask_an].copy()
     confirmed["rank_score"] = confirmed.apply(rank_score_row, axis=1)
     confirmed.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    confirmed_cols = ["ticker_tv","ticker_yf","price","market_cap","technical_local","tech_score",
-                      "tv_reco","analyst_bucket","analyst_mean","analyst_votes","rank_score"]
+    confirmed_cols = [
+        "ticker_tv","ticker_yf","price","market_cap","sector","industry",
+        "technical_local","tech_score","tv_reco",
+        "analyst_bucket","analyst_mean","analyst_votes","rank_score"
+    ]
     confirmed[confirmed_cols].to_csv("confirmed_STRONGBUY.csv", index=False)
 
     # ====== 2) Pré-signaux (forcés) ======
