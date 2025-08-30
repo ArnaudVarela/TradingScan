@@ -1,86 +1,96 @@
+// dashboard/src/components/SectorTimeline.jsx
 import React, { useMemo } from "react";
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+  LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid,
 } from "recharts";
 
 /**
- * history: array d'objets { date: "2025-W35", bucket: "confirmed"|"pre"|"events", sector: "...", count: <string|number> }
- * selectedSectors: Set<string> OU Array<string> (optionnel)
+ * Props:
+ * - history OR historyRows: [{ date: 'YYYY-Www', bucket: 'confirmed'|'pre'|'events', sector: '...', count: number }]
+ * - selectedSectors: [] | Set<string>
  */
-export default function SectorTimeline({ history = [], selectedSectors }) {
-  // normalise la sélection en Set lowercase
+export default function SectorTimeline(props) {
+  const rawRows = props.history ?? props.historyRows ?? [];
+  const selected = props.selectedSectors ?? [];
+
   const selectedSet = useMemo(() => {
-    if (!selectedSectors) return new Set();
-    if (selectedSectors instanceof Set) {
-      return new Set([...selectedSectors].map((s) => String(s).toLowerCase()));
-    }
-    if (Array.isArray(selectedSectors)) {
-      return new Set(selectedSectors.map((s) => String(s).toLowerCase()));
-    }
-    return new Set();
-  }, [selectedSectors]);
+    if (selected instanceof Set) return selected;
+    return new Set(Array.isArray(selected) ? selected : []);
+  }, [selected]);
 
   const data = useMemo(() => {
-    if (!Array.isArray(history) || history.length === 0) return [];
+    if (!Array.isArray(rawRows) || rawRows.length === 0) return [];
 
-    // Agrégation par semaine et par bucket (confirmed / pre / events)
-    const byWeek = new Map(); // week -> {confirmed, pre, events}
+    // Normalize and filter
+    const rows = rawRows
+      .map((r) => ({
+        date: String(r.date || "").trim(),
+        bucket: String(r.bucket || "").toLowerCase().trim(),
+        sector: String(r.sector || "Unknown").trim(),
+        count: Number(r.count ?? r.Count ?? r.COUNT ?? 0),
+      }))
+      .filter((r) => r.date && r.bucket && !Number.isNaN(r.count));
 
-    for (const row of history) {
-      if (!row) continue;
-      const week = String(row.date || "").trim(); // ex: 2025-W35
-      if (!week) continue;
+    // If sectors are selected, keep only those
+    const filtered = selectedSet.size
+      ? rows.filter((r) => selectedSet.has(r.sector))
+      : rows;
 
-      const bucket = String(row.bucket || "").toLowerCase(); // "confirmed" | "pre" | "events"
-      if (!["confirmed", "pre", "events"].includes(bucket)) continue;
-
-      const sector = String(row.sector || "Unknown");
-      const count = Number(row.count ?? row.Count ?? row.COUNT ?? 0) || 0;
-
-      // filtre par secteurs si sélection active
-      if (selectedSet.size > 0 && !selectedSet.has(sector.toLowerCase())) continue;
-
-      if (!byWeek.has(week)) byWeek.set(week, { week, confirmed: 0, pre: 0, events: 0 });
-      byWeek.get(week)[bucket] += count;
+    // Aggregate by (date, bucket) summing counts across sectors
+    const key = (d, b) => `${d}__${b}`;
+    const agg = new Map();
+    for (const r of filtered) {
+      const k = key(r.date, r.bucket);
+      agg.set(k, (agg.get(k) || 0) + r.count);
     }
 
-    // Tri chronologique simple (les chaînes "YYYY-Www" se trient correctement)
-    const out = Array.from(byWeek.values()).sort((a, b) => (a.week < b.week ? -1 : a.week > b.week ? 1 : 0));
+    // Build a wide table per date with columns confirmed/pre/events
+    const byDate = new Map();
+    for (const [k, v] of agg) {
+      const [d, b] = k.split("__");
+      if (!byDate.has(d)) byDate.set(d, { date: d, confirmed: 0, pre: 0, events: 0 });
+      if (b === "confirmed") byDate.get(d).confirmed = v;
+      else if (b === "pre") byDate.get(d).pre = v;
+      else if (b === "events") byDate.get(d).events = v;
+    }
+
+    // Sort by date label (string), so weeks appear in order of label
+    // If you want chrono ordering across years, you can later parse and sort properly.
+    const out = Array.from(byDate.values()).sort((a, b) =>
+      String(a.date).localeCompare(String(b.date))
+    );
+
     return out;
-  }, [history, selectedSet]);
+  }, [rawRows, selectedSet]);
 
   if (!data.length) {
     return (
-      <div className="p-4 rounded border border-slate-200 dark:border-slate-700 text-sm opacity-80">
+      <div className="text-sm text-slate-500 dark:text-slate-400">
         Aucune donnée historique exploitable pour le moment.
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded shadow p-4">
-      <div className="flex items-center justify-between mb-3 text-xs opacity-70">
-        <span>Sector signals timeline (weekly)</span>
-        <span>Somme des secteurs {selectedSet.size ? "(filtrés)" : "(tous)"} par bucket</span>
+    <div className="bg-white dark:bg-slate-800 shadow rounded p-4 mb-6">
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="font-semibold">Sector signals timeline (weekly)</h3>
+        <div className="text-xs text-slate-500">Somme des secteurs (tous) par bucket</div>
       </div>
-
-      <div style={{ width: "100%", height: 320 }}>
-        <ResponsiveContainer>
-          <LineChart data={data} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="week" />
-            <YAxis allowDecimals={false} />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="confirmed" name="confirmed" stroke="#16a34a" strokeWidth={2} dot={false} />
-            <Line type="monotone" dataKey="pre"        name="pre"        stroke="#f59e0b" strokeWidth={2} dot={false} />
-            <Line type="monotone" dataKey="events"     name="events"     stroke="#2563eb" strokeWidth={2} dot={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div className="mt-2 text-xs opacity-70">
-        Conseil: clique des secteurs dans la heatmap du dessus pour voir leur évolution seule (multi-sélection Ctrl/Cmd).
+      <ResponsiveContainer width="100%" height={320}>
+        <LineChart data={data} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis allowDecimals={false} />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="confirmed" stroke="#16a34a" dot={false} name="confirmed" />
+          <Line type="monotone" dataKey="pre" stroke="#f59e0b" dot={false} name="pre" />
+          <Line type="monotone" dataKey="events" stroke="#2563eb" dot={false} name="events" />
+        </LineChart>
+      </ResponsiveContainer>
+      <div className="mt-2 text-xs text-slate-500">
+        Conseil: clique des secteurs dans la heatmap du dessus pour voir leur évolution (multi-sélection Ctrl/Cmd).
       </div>
     </div>
   );
