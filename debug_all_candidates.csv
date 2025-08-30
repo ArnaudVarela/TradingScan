@@ -640,6 +640,7 @@ PB,PB,NYQ,6567377391.073608,69.12999725341797,Financials,Regional Banks,Neutral,
 MKSI,MKSI,NMS,6940210814.0563965,103.33999633789062,Information Technology,Semiconductor Materials & Equipment,Buy,3,,,,13.0,1.65
 PNW,PNW,NYQ,10671996792.892456,89.36000061035156,Utilities,Multi-Utilities,Neutral,0,,Buy,2.26667,13.0,1.65
 UNM,UNM,NYQ,11898065725.0708,69.86000061035156,Financials,Life & Health Insurance,Neutral,0,,Buy,1.84615,13.0,1.65
+IEX,IEX,NYQ,12384760192.0,164.5,Industrials,Industrial Machinery & Supplies & Components,Sell,-2,,Buy,2.07143,13.0,1.65
 BALL,BALL,NYQ,14325922772.773438,52.63999938964844,Materials,"Metal, Glass & Plastic Containers",Sell,-2,,Buy,2.21429,13.0,1.65
 EWBC,EWBC,NMS,14545277795.562744,105.13999938964844,Financials,Regional Banks,Buy,2,,,,13.0,1.65
 J,J,NYQ,17561052646.91162,146.22999572753906,Industrials,Construction & Engineering,Neutral,-1,,Buy,1.9375,13.0,1.65
@@ -817,7 +818,6 @@ AGCO,AGCO,NYQ,8073159620.178223,108.19000244140625,Industrials,Agricultural & Fa
 CFR,CFR,NYQ,8299893380.477905,129.02999877929688,Financials,Regional Banks,Neutral,1,,,,13.0,0.65
 HSIC,HSIC,NMS,8437827662.04834,69.58000183105469,Health Care,Health Care Distributors,Neutral,1,,Hold,2.66667,13.0,0.65
 CACI,CACI,NYQ,10550673874.847412,479.7200012207031,Industrials,Diversified Support Services,Neutral,-1,,,,13.0,0.65
-IEX,IEX,NYQ,12384760192.0,164.5,Industrials,Industrial Machinery & Supplies & Components,Sell,-2,,,,13.0,0.65
 WEC,WEC,NYQ,34281946643.41992,106.51000213623047,Utilities,Electric Utilities,Sell,-2,,Hold,2.73333,13.0,0.65
 OTIS,OTIS,NYQ,34479785223.66333,86.37999725341797,Industrials,Industrial Machinery & Supplies & Components,Strong Sell,-4,,Hold,2.6,13.0,0.65
 GWW,GWW,NYQ,48524353000.0,1013.5,Industrials,Industrial Machinery & Supplies & Components,Neutral,1,,Hold,2.84211,13.0,0.65
