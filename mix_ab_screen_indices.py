@@ -339,6 +339,65 @@ def main():
     all_cols = ["candidate_type"] + confirmed_cols
     all_out[all_cols].to_csv("candidates_all_ranked.csv", index=False)
 
+    # === Append sector history (weekly snapshot) ===============================
+    # On prend la "semaine ISO" (lundi-dimanche) pour stabiliser les points
+    from datetime import datetime, timezone
+    import csv
+
+    HISTORY_CSV = "sector_history.csv"
+
+    def _norm_sector(x):
+        x = (x or "").strip() or "Unknown"
+        return x
+
+    def _count_by_sector(rows):
+        # rows est un DataFrame
+        out = {}
+        for _, r in rows.iterrows():
+            sec = _norm_sector(r.get("sector"))
+            out[sec] = out.get(sec, 0) + 1
+        return out
+
+    # date clé = année-semaine (ex: 2025-W35)
+    now = datetime.now(timezone.utc)
+    iso_year, iso_week, _ = now.isocalendar()
+    week_key = f"{iso_year}-W{iso_week:02d}"
+
+    # 3 buckets
+    counts_confirmed = _count_by_sector(confirmed)
+    counts_pre       = _count_by_sector(pre)
+    counts_events    = _count_by_sector(evt)
+
+    # Build lignes "long format": date, bucket, sector, count
+    lines = []
+    for sec, n in counts_confirmed.items():
+        lines.append((week_key, "confirmed", sec, int(n)))
+    for sec, n in counts_pre.items():
+        lines.append((week_key, "pre", sec, int(n)))
+    for sec, n in counts_events.items():
+        lines.append((week_key, "events", sec, int(n)))
+
+    # Append (en évitant les doublons pour la même semaine)
+    # Stratégie simple: on relit l'existant, on filtre toute la semaine courante, on ré-écrit + on append nos lignes.
+    existing = []
+    if os.path.exists(HISTORY_CSV):
+        try:
+            existing = pd.read_csv(HISTORY_CSV).astype({"count":"int"})
+        except Exception:
+            existing = pd.DataFrame(columns=["date","bucket","sector","count"])
+    else:
+        existing = pd.DataFrame(columns=["date","bucket","sector","count"])
+
+    # retire la semaine courante
+    existing = existing[existing["date"] != week_key]
+    # concat
+    new_df = pd.concat([existing, pd.DataFrame(lines, columns=["date","bucket","sector","count"])],
+                       ignore_index=True)
+    # option: limite à 156 semaines (3 ans)
+    new_df["__key"] = new_df["date"].astype(str) + "|" + new_df["bucket"].astype(str) + "|" + new_df["sector"].astype(str)
+    new_df = new_df.drop_duplicates(subset="__key").drop(columns="__key")
+    new_df.to_csv(HISTORY_CSV, index=False)
+
     print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)}")
 
 if __name__ == "__main__":
