@@ -26,7 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run script
+      - name: Generate Russell2000 from iShares
+        run: |
+          python gen_r2000_from_ishares.py
+
+      - name: Run screener
         env:
           # (optionnel) variable pour réduire la cadence si tu veux (ton script a déjà un petit sleep)
           PYTHONUNBUFFERED: "1"
