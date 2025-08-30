@@ -41,10 +41,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git rebase origin/main || git rebase --abort
           git add *.csv || true
           if ! git diff --cached --quiet; then
             git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            git push
+            git push origin HEAD:main
           else
             echo "No CSV changes."
           fi
