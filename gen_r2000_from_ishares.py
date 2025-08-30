@@ -72,7 +72,11 @@ def parse_scha():
 
 def main():
     spdr = parse_spdr()
+    try:
     scha = parse_scha()
+except Exception as e:
+    print(f"[WARN] SCHA fetch failed: {e}")
+    scha = []
     union = sorted(spdr.union(scha))
     print(f"[MERGED] total unique tickers: {len(union)}")
 
