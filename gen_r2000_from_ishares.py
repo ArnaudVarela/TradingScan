@@ -2,7 +2,12 @@
 # -*- coding: utf-8 -*-
 """
 Génère russell2000.csv à partir des holdings iShares IWM (Russell 2000).
-Sortie: fichier CSV avec une colonne "Ticker" (compatible avec ton pipeline).
+Stratégies en cascade:
+  1) CSV AJAX (IWM_holdings)
+  2) CSV AJAX (holdings)
+  3) Parse HTML holdings (table)
+  4) Parse JSON embarqué dans la page
+Sortie: fichier CSV "russell2000.csv" avec 1 colonne "Ticker".
 """
 
 import io
@@ -13,145 +18,236 @@ import json
 import gzip
 import pandas as pd
 import requests
+from requests.adapters import HTTPAdapter, Retry
 
-CANDIDATE_URLS = [
-    # Endpoints connus chez iShares (peuvent changer, on en teste plusieurs)
-    # 1) Ajax CSV “historique”
-    "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf/1467271812596.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund",
-    # 2) Endpoint JSON holdings
-    "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf/holdings",
-    # 3) Autre pattern "downloadFile"
-    "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf/1467271812596.ajax?fileType=csv&fileName=holdings",
+PRODUCT_URL = "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf"
+HOLDINGS_URL = PRODUCT_URL + "/holdings"
+
+CSV_URLS = [
+    PRODUCT_URL + "/1467271812596.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund",
+    PRODUCT_URL + "/1467271812596.ajax?fileType=csv&fileName=holdings&dataType=fund",
 ]
 
-UA = {
-    "User-Agent":
+UA_HEADERS = {
+    "User-Agent": (
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/123.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/json,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Referer": HOLDINGS_URL,
+    "DNT": "1",
+    "Connection": "keep-alive",
 }
 
-def fetch_csv_bytes(url: str) -> bytes | None:
-    r = requests.get(url, headers=UA, timeout=60)
-    if r.status_code != 200:
-        return None
-    ctype = (r.headers.get("Content-Type") or "").lower()
-    # direct CSV
-    if "text/csv" in ctype or r.text.strip().startswith(("Ticker,", "\"Ticker\",")):
-        return r.content
+XHR_HEADERS = dict(UA_HEADERS, **{
+    "X-Requested-With": "XMLHttpRequest",
+    "Accept": "text/csv,application/json;q=0.9,*/*;q=0.8",
+})
 
-    # parfois JSON -> on essaie d’en extraire un CSV
-    if "application/json" in ctype or r.text.strip().startswith("{"):
-        try:
-            data = r.json()
-            # certains endpoints renvoient un objet complexe; on tente de trouver la table des positions
-            # iShares a souvent "holdings" ou "positions" dans le JSON
-            for key in ("holdings", "positions", "basket", "data"):
-                if key in data and isinstance(data[key], list) and data[key]:
-                    df = pd.json_normalize(data[key])
-                    return df.to_csv(index=False).encode("utf-8")
-        except Exception:
-            return None
+def session_with_retries() -> requests.Session:
+    s = requests.Session()
+    retries = Retry(
+        total=4,
+        backoff_factor=0.6,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=frozenset(["GET"]),
+        raise_on_status=False,
+    )
+    s.mount("https://", HTTPAdapter(max_retries=retries))
+    s.mount("http://", HTTPAdapter(max_retries=retries))
+    return s
 
-    # parfois GZIP (rare)
-    if r.headers.get("Content-Encoding", "").lower() == "gzip":
-        try:
-            return gzip.decompress(r.content)
-        except Exception:
-            pass
-
-    # fallback: peut-être que c’est du CSV malgré un content-type exotique
-    if b"," in r.content[:2048]:
-        return r.content
-
-    return None
-
-
-def parse_tickers_from_csv_bytes(b: bytes) -> list[str]:
-    # Essaye encodages usuels
-    for enc in ("utf-8", "latin-1"):
-        try:
-            df = pd.read_csv(io.BytesIO(b), encoding=enc)
+def parse_tickers_from_df(df: pd.DataFrame) -> list[str]:
+    # essaie différentes colonnes possibles
+    cands = ["Ticker", "Ticker Symbol", "TickerSymbol", "Symbol", "Code", "Local Ticker", "LocalTicker"]
+    col = None
+    lower = {c.lower(): c for c in df.columns}
+    for name in cands:
+        if name.lower() in lower:
+            col = lower[name.lower()]
             break
-        except Exception:
-            df = None
-    if df is None or df.empty:
-        return []
-
-    # Harmonise les noms de colonnes (Ticker, Ticker Symbol, TickerSymbol…)
-    def find_col(cands):
-        cols_lower = {c.lower(): c for c in df.columns}
-        for c in cands:
-            if c.lower() in cols_lower:
-                return cols_lower[c.lower()]
-        return None
-
-    ticker_col = find_col(["Ticker", "Ticker Symbol", "TickerSymbol", "Symbol"])
-    if not ticker_col:
-        # parfois la colonne s’appelle "Code" ou "Local Ticker"
-        ticker_col = find_col(["Code", "Local Ticker", "LocalTicker"])
-    if not ticker_col:
-        # Dernière chance: colonne qui ressemble à 'ticker'
+    if not col:
+        # heuristique: une colonne qui ressemble à ticker/symbol
         for c in df.columns:
-            if "ticker" in c.lower() or c.lower() in {"symbol", "code"}:
-                ticker_col = c
+            lc = c.lower()
+            if "ticker" in lc or lc in {"symbol", "code"}:
+                col = c
                 break
-
-    if not ticker_col:
-        # rien à faire
+    if not col:
         return []
 
     s = (
-        df[ticker_col]
-        .astype(str)
+        df[col].astype(str)
         .str.strip()
         .replace({"nan": None, "None": None})
         .dropna()
+        .str.replace("\u200b", "", regex=False)
+        .str.replace(r"\s+", "", regex=True)
     )
-
-    # vire cash/derivés, lignes vides, unicodes chelous
-    s = (
-        s.str.replace("\u200b", "", regex=False)  # zero-width space
-         .str.replace(r"\s+", "", regex=True)
-    )
-
-    # filtre symboles équitables plausibles (ex: ABC, ABCD, ABCD.A, BRK.B, etc.)
-    s = s[s.str.match(r"^[A-Za-z][A-Za-z0-9\.\-]{0,9}$")]
-
-    # certains CSV mettent des lignes “CASH”/“USD” → on les jarte
+    # filtre symboles plausibles (BRK.B, ABC, ABCD, ABCD-A, etc.)
+    s = s[s.str.match(r"^[A-Za-z][A-Za-z0-9.\-]{0,9}$")]
+    # enlève cash/FX/deriv
     bad = {"CASH", "USD", "FX", "FUT", "SWAP", "OPTION"}
     s = s[~s.str.upper().isin(bad)]
+    return sorted(set(s.tolist()))
 
-    tickers = sorted(set(s.tolist()))
-    return tickers
-
-
-def main():
-    ticks: list[str] = []
-    for i, url in enumerate(CANDIDATE_URLS, 1):
+def try_csv_endpoints(sess: requests.Session) -> list[str]:
+    for i, url in enumerate(CSV_URLS, 1):
         try:
-            print(f"[try {i}] GET {url}")
-            b = fetch_csv_bytes(url)
-            if not b:
-                print("  -> no csv here")
+            print(f"[csv {i}] GET {url}")
+            r = sess.get(url, headers=XHR_HEADERS, timeout=60)
+            if r.status_code != 200:
+                print(f"  -> status {r.status_code}")
                 continue
-            ts = parse_tickers_from_csv_bytes(b)
-            print(f"  -> parsed {len(ts)} tickers")
-            if ts:
-                ticks = ts
-                break
+
+            content = r.content
+            # Gzip ?
+            if r.headers.get("Content-Encoding", "").lower() == "gzip":
+                try:
+                    content = gzip.decompress(content)
+                except Exception:
+                    pass
+
+            # Essaye CSV via pandas
+            # Certaines réponses ont du BOM/encodage exotique → on essaie plusieurs encodings
+            for enc in ("utf-8-sig", "utf-8", "latin-1"):
+                try:
+                    df = pd.read_csv(io.BytesIO(content), encoding=enc)
+                    if not df.empty:
+                        tickers = parse_tickers_from_df(df)
+                        print(f"  -> parsed {len(tickers)} tickers")
+                        if tickers:
+                            return tickers
+                except Exception:
+                    continue
+
+            # Parfois c'est du JSON au lieu de CSV
+            try:
+                data = r.json()
+                if isinstance(data, dict):
+                    for key in ("holdings", "positions", "basket", "data"):
+                        if key in data and isinstance(data[key], list) and data[key]:
+                            df = pd.json_normalize(data[key])
+                            tickers = parse_tickers_from_df(df)
+                            print(f"  -> parsed {len(tickers)} tickers (json)")
+                            if tickers:
+                                return tickers
+            except Exception:
+                pass
+
         except Exception as e:
             print(f"  -> fail: {type(e).__name__}: {e}")
-        time.sleep(0.8)
+        time.sleep(0.7)
+    return []
 
-    if not ticks:
-        print("❌ Impossible de récupérer la liste IWM (iShares).")
+def try_html_table(sess: requests.Session) -> list[str]:
+    print(f"[html] GET {HOLDINGS_URL}")
+    r = sess.get(HOLDINGS_URL, headers=UA_HEADERS, timeout=60)
+    if r.status_code != 200:
+        print(f"  -> status {r.status_code}")
+        return []
+    # pandas.read_html peut trouver 0..N tableaux; on les teste
+    tables = []
+    try:
+        tables = pd.read_html(r.text, extract_links="body")
+    except Exception:
+        # deuxième tentative sans extract_links
+        try:
+            tables = pd.read_html(r.text)
+        except Exception:
+            tables = []
+    for idx, t in enumerate(tables):
+        if isinstance(t, tuple) and len(t) == 2:
+            t = t[0]  # si extract_links="body", pandas renvoie (val, link)
+        if not isinstance(t, pd.DataFrame) or t.empty:
+            continue
+        tickers = parse_tickers_from_df(t)
+        if tickers:
+            print(f"  -> table {idx}: {len(tickers)} tickers")
+            return tickers
+    print("  -> no usable table")
+    return []
+
+def try_embedded_json(sess: requests.Session) -> list[str]:
+    print(f"[json] GET {HOLDINGS_URL} (embedded)")
+    r = sess.get(HOLDINGS_URL, headers=UA_HEADERS, timeout=60)
+    if r.status_code != 200:
+        print(f"  -> status {r.status_code}")
+        return []
+    html = r.text
+
+    # Cherche des JSON embarqués contenant 'holdings'/'positions'
+    patterns = [
+        r"var\s+.*?=\s*(\{.*?\"holdings\".*?\});",
+        r"window\.__APP__\s*=\s*(\{.*?\});",
+        r"\"holdings\"\s*:\s*(\[[^\]]+\])",
+        r"\"positions\"\s*:\s*(\[[^\]]+\])",
+    ]
+    for pat in patterns:
+        m = re.search(pat, html, flags=re.DOTALL)
+        if not m:
+            continue
+        blob = m.group(1)
+        # nettoyage de JSON “relâché”
+        blob = re.sub(r"(?s)//.*?$", "", blob)  # enlève commentaires
+        blob = re.sub(r",\s*}", "}", blob)
+        blob = re.sub(r",\s*]", "]", blob)
+        try:
+            data = json.loads(blob)
+        except Exception:
+            # Parfois on matche directement la liste [...]
+            try:
+                data = json.loads(f'{{"holdings": {blob}}}')
+            except Exception:
+                continue
+
+        # normalise
+        if isinstance(data, dict):
+            for key in ("holdings", "positions", "data"):
+                if key in data and isinstance(data[key], list) and data[key]:
+                    df = pd.json_normalize(data[key])
+                    tickers = parse_tickers_from_df(df)
+                    if tickers:
+                        print(f"  -> embedded {key}: {len(tickers)} tickers")
+                        return tickers
+        elif isinstance(data, list):
+            df = pd.json_normalize(data)
+            tickers = parse_tickers_from_df(df)
+            if tickers:
+                print(f"  -> embedded list: {len(tickers)} tickers")
+                return tickers
+
+    print("  -> no embedded JSON found")
+    return []
+
+def main():
+    sess = session_with_retries()
+
+    # Prime le cookie en visitant la page produit (parfois nécessaire)
+    try:
+        sess.get(PRODUCT_URL, headers=UA_HEADERS, timeout=30)
+        time.sleep(0.5)
+        sess.get(HOLDINGS_URL, headers=UA_HEADERS, timeout=30)
+    except Exception:
+        pass
+
+    # Stratégie 1 & 2 : CSV AJAX
+    tickers = try_csv_endpoints(sess)
+    if not tickers:
+        # Stratégie 3 : tableau HTML
+        tickers = try_html_table(sess)
+    if not tickers:
+        # Stratégie 4 : JSON embarqué
+        tickers = try_embedded_json(sess)
+
+    if not tickers:
+        print("❌ Impossible de récupérer la liste IWM (iShares) après 4 stratégies.")
         sys.exit(2)
 
-    # Sauvegarde au format attendu par ton screener
-    out = pd.DataFrame({"Ticker": ticks})
+    out = pd.DataFrame({"Ticker": tickers})
     out.to_csv("russell2000.csv", index=False)
     print(f"✅ Écrit russell2000.csv avec {len(out)} tickers.")
-
 
 if __name__ == "__main__":
     main()
