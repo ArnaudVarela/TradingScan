@@ -109,22 +109,33 @@ export default function DataTable({ rows }) {
         />
       </div>
 
-      <div className="overflow-auto rounded">
-        <table className="min-w-full text-sm">
-          <thead className="sticky top-0 z-10 bg-gray-100 dark:bg-slate-700">
-            <tr>
-              {columns.map((c) => (
-                <th
-                  key={c.label}
-                  onClick={() => onSort(c.label)}
-                  className="p-2 text-left font-semibold cursor-pointer select-none"
-                >
-                  {c.label}
-                  {sort.label === c.label ? (sort.dir === "asc" ? " ▲" : " ▼") : ""}
-                </th>
-              ))}
-            </tr>
-          </thead>
+<div className="overflow-auto rounded">
+  <table className="min-w-full table-fixed text-sm">
+    <thead className="sticky top-0 z-10 bg-gray-100 dark:bg-slate-700">
+      <tr>
+        {columns.map((c, idx) => (
+          <th
+            key={c.label}
+            onClick={() => onSort(c.label)}
+            className={`
+              p-2 text-left font-semibold cursor-pointer select-none
+              ${idx === 0 ? "w-[8%]"  : ""}
+              ${idx === 1 ? "w-[10%]" : ""}
+              ${idx === 2 ? "w-[10%]" : ""}
+              ${idx === 3 ? "w-[10%]" : ""}
+              ${idx === 4 ? "w-[10%]" : ""}
+              ${idx === 5 ? "w-[10%]" : ""}
+              ${idx === 6 ? "w-[10%]" : ""}
+              ${idx === 7 ? "w-[16%]" : ""}
+              ${idx === 8 ? "w-[16%]" : ""}
+            `}
+          >
+            {c.label}
+            {sort.label === c.label ? (sort.dir === "asc" ? " ▲" : " ▼") : ""}
+          </th>
+        ))}
+      </tr>
+    </thead>
           <tbody>
             {sorted.map((r, i) => {
               const ticker = pick(r, "ticker_tv", ["ticker_yf", "ticker", "symbol"]);
