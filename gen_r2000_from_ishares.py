@@ -72,7 +72,7 @@ def parse_scha():
 
 def main():
     spdr = parse_spdr()
-    try:
+try:
     scha = parse_scha()
 except Exception as e:
     print(f"[WARN] SCHA fetch failed: {e}")
