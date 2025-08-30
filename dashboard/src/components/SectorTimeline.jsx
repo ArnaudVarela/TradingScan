@@ -1,92 +1,111 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import {
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid,
 } from "recharts";
 
-// couleurs cohérentes avec le heatmap
-const COLORS = {
-  confirmed: "#16a34a",
-  pre:       "#f59e0b",
-  events:    "#3b82f6",
-};
-
-function toSeries(rows, focusSectors) {
-  // rows: [{date,bucket,sector,count}]
-  // On agrège par date/bucket, en filtrant eventuellement sur focusSectors (set ou null)
-  const map = new Map(); // key=date -> {date, confirmed, pre, events}
-  const useFilter = focusSectors && focusSectors.size > 0;
-
-  rows.forEach(r => {
-    const date = r.date;
-    const bucket = (r.bucket || "").toLowerCase();
-    const sector = r.sector || "Unknown";
-    const n = Number(r.count || 0);
-    if (useFilter && !focusSectors.has(sector)) return;
-
-    if (!map.has(date)) map.set(date, { date, confirmed: 0, pre: 0, events: 0 });
-    const o = map.get(date);
-    if (bucket === "confirmed") o.confirmed += n;
-    else if (bucket === "pre") o.pre += n;
-    else if (bucket === "events") o.events += n;
-  });
-
-  // tri chronologique sur date ISO "YYYY-Www" — on peut convertir en clé triable
-  const toKey = (d) => {
-    const [y, w] = d.split("-W");
-    return Number(y) * 100 + Number(w);
-  };
-
-  return Array.from(map.values()).sort((a, b) => toKey(a.date) - toKey(b.date));
+// Try multiple possible header names (case-insensitive)
+function pickKey(row, variants) {
+  const keys = Object.keys(row);
+  const map = {};
+  for (const k of keys) map[k.toLowerCase()] = k;
+  for (const v of variants) {
+    const found = map[v.toLowerCase()];
+    if (found) return found;
+  }
+  return null;
 }
 
-function Tip({ active, payload, label }) {
-  if (!active || !payload || !payload.length) return null;
-  const vals = payload.reduce((acc, p) => ({ ...acc, [p.dataKey]: p.value }), {});
-  const total = (vals.confirmed || 0) + (vals.pre || 0) + (vals.events || 0);
-  return (
-    <div className="rounded border bg-white text-slate-900 p-2 text-xs shadow
-                    dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700">
-      <div className="font-semibold mb-1">{label}</div>
-      <div style={{ color: COLORS.confirmed }}>Confirmed: {vals.confirmed || 0}</div>
-      <div style={{ color: COLORS.pre       }}>Pre-signals: {vals.pre || 0}</div>
-      <div style={{ color: COLORS.events    }}>Event-driven: {vals.events || 0}</div>
-      <div className="mt-1 opacity-80">Total: {total}</div>
-    </div>
-  );
+function coerceNum(v) {
+  if (v === null || v === undefined || v === "") return 0;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
 }
 
-export default function SectorTimeline({ historyRows = [], selectedSectors = [] }) {
-  const focusSet = useMemo(
-    () => new Set((selectedSectors || []).map(s => (s || "").trim())),
-    [selectedSectors]
-  );
+/**
+ * Props:
+ *  - history: array of rows from sector_history.csv
+ * Optional:
+ *  - selectedSectors: Set<string> to filter (you can pass it later from the heatmap)
+ */
+export default function SectorTimeline({ history = [], selectedSectors }) {
+  // Normalize headers + aggregate per week across selected sectors
+  const data = useMemo(() => {
+    if (!history || history.length === 0) return [];
 
-  const data = useMemo(() => toSeries(historyRows, focusSet), [historyRows, focusSet]);
+    // Resolve header names once
+    const sample = history[0] || {};
+    const weekKey  = pickKey(sample, ["week", "date", "period"]);
+    const sectKey  = pickKey(sample, ["sector", "gics_sector", "industry"]);
+    const confKey  = pickKey(sample, ["confirmed", "confirm", "confirmed_count"]);
+    const preKey   = pickKey(sample, ["pre", "pre_signals", "anticipative"]);
+    const evtKey   = pickKey(sample, ["events", "event", "event_driven"]);
+
+    if (!weekKey || !sectKey || !confKey || !preKey || !evtKey) {
+      // Headers not recognized — return empty so we show the “no data” box
+      return [];
+    }
+
+    // Aggregate: week -> { confirmed, pre, events }
+    const agg = new Map(); // weekStr -> totals
+    for (const row of history) {
+      const week = String(row[weekKey] ?? "").trim();
+      if (!week) continue;
+
+      const sector = String(row[sectKey] ?? "Unknown").trim();
+      if (selectedSectors && selectedSectors.size > 0 && !selectedSectors.has(sector)) {
+        continue;
+      }
+
+      const c = coerceNum(row[confKey]);
+      const p = coerceNum(row[preKey]);
+      const e = coerceNum(row[evtKey]);
+
+      const cur = agg.get(week) || { week, confirmed: 0, pre: 0, events: 0 };
+      cur.confirmed += c;
+      cur.pre       += p;
+      cur.events    += e;
+      agg.set(week, cur);
+    }
+
+    // Sort by week ascending if possible (YYYY-Www or YYYY-MM-DD both sort well lexicographically)
+    return Array.from(agg.values()).sort((a, b) => String(a.week).localeCompare(String(b.week)));
+  }, [history, selectedSectors]);
+
+  if (!data.length) {
+    return (
+      <div className="bg-white dark:bg-slate-900 shadow rounded p-4">
+        <div className="text-sm text-slate-500">Aucune donnée historique exploitable pour le moment.</div>
+      </div>
+    );
+  }
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded shadow border dark:border-slate-700 p-4">
-      <div className="flex items-center justify-between mb-3 gap-3">
-        <h2 className="text-lg font-bold">Sector signals timeline (weekly)</h2>
-        <span className="text-xs opacity-70">Somme des secteurs {focusSet.size ? "(filtrés)" : "(tous)"} par bucket</span>
+    <div className="bg-white dark:bg-slate-900 shadow rounded p-4">
+      <div className="flex items-baseline justify-between mb-2">
+        <h3 className="text-base font-semibold">Sector signals timeline (weekly)</h3>
+        <div className="text-xs text-slate-500">
+          Somme des secteurs {selectedSectors && selectedSectors.size > 0 ? "(filtrés)" : "(tous)"} par bucket
+        </div>
       </div>
 
-      <div style={{ width: "100%", height: 340 }}>
+      <div className="w-full h-64">
         <ResponsiveContainer>
-          <AreaChart data={data} margin={{ top: 10, right: 16, left: 0, bottom: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.25} />
-            <XAxis dataKey="date" />
-            <YAxis allowDecimals={false} />
-            <Tooltip content={<Tip />} />
+          <LineChart data={data} margin={{ top: 6, right: 24, bottom: 6, left: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="week" />
+            <YAxis />
+            <Tooltip />
             <Legend />
-            <Area type="monotone" dataKey="confirmed" stackId="1" stroke={COLORS.confirmed} fill={COLORS.confirmed} fillOpacity={0.25} />
-            <Area type="monotone" dataKey="pre"       stackId="1" stroke={COLORS.pre}       fill={COLORS.pre}       fillOpacity={0.25} />
-            <Area type="monotone" dataKey="events"    stackId="1" stroke={COLORS.events}    fill={COLORS.events}    fillOpacity={0.25} />
-          </AreaChart>
+            {/* Colors are left to defaults so your theme can style them; change if you want fixed colors */}
+            <Line type="monotone" dataKey="confirmed" name="confirmed" dot={false} strokeWidth={2} />
+            <Line type="monotone" dataKey="pre"        name="pre"        dot={false} strokeWidth={2} />
+            <Line type="monotone" dataKey="events"     name="events"     dot={false} strokeWidth={2} />
+          </LineChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="mt-2 text-xs opacity-70">
-        Conseil: clique des secteurs dans la heatmap du dessus pour voir leur évolution seule (multi-sélection Ctrl/Cmd).
+      <div className="mt-2 text-xs text-slate-500">
+        Conseil: clique des secteurs dans la heatmap au-dessus pour voir leur évolution seule (multi-sélection Ctrl/Cmd).
       </div>
     </div>
   );
