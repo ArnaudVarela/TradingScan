@@ -54,7 +54,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Stage uniquement les CSV à la racine ; élargis si besoin (ex: data/**/*.csv)
-          git add *.csv || true
+          git add *.csv sector_history.csv || true 
 
           # Crée le commit s'il y a des changements, sans échouer si vide
           git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')" || true
