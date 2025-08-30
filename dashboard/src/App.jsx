@@ -4,9 +4,9 @@ import MetricCard from "./components/MetricCard.jsx";
 import DataTable from "./components/DataTable.jsx";
 import { fetchCSV, rawUrl } from "./lib/csv.js";
 
-const OWNER  = "<TON_USER_GITHUB>";     // ← remplace
-const REPO   = "<TON_REPO>";            // ← remplace
-const BRANCH = "main";                  // ou "master"
+const OWNER  = "ArnaudVarela";   
+const REPO   = "TradingScan";          
+const BRANCH = "main";                 
 
 const FILES = {
   confirmed: "confirmed_STRONGBUY.csv",
