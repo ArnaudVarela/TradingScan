@@ -73,7 +73,7 @@ export default function App() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-6 text-slate-900 dark:text-slate-100">
       <TopBar lastRefreshed={last} onRefresh={loadAll} />
 
       {/* Bandeau d'info sur la source des CSV */}
