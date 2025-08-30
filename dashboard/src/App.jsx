@@ -6,6 +6,7 @@ import DataTable from "./components/DataTable.jsx";
 import SectorHeatmap from "./components/SectorHeatmap.jsx";
 import { fetchCSV, rawUrl } from "./lib/csv.js";
 import SectorTimeline from "./components/SectorTimeline.jsx";
+import { ChevronDown, ChevronUp } from "lucide-react"; // icons pliable/dépliable
 
 // Repo (fallback quand pas sur Vercel)
 const OWNER  = "ArnaudVarela";
@@ -36,6 +37,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedSectors, setSelectedSectors] = useState([]); // array de strings
+  const [showHeatmap, setShowHeatmap] = useState(true);
 
   async function loadAll() {
     setLoading(true);
@@ -104,6 +106,7 @@ export default function App() {
     <div className="max-w-7xl mx-auto p-6 text-slate-900 dark:text-slate-100">
       <TopBar lastRefreshed={last} onRefresh={loadAll} />
 
+      {/* Bandeau d'info */}
       <div className="mb-4 text-xs text-slate-500">
         Source CSV : {USE_LOCAL ? "fichiers statiques (public/) sur Vercel" : "raw.githubusercontent.com (repo GitHub)"}
       </div>
@@ -116,16 +119,27 @@ export default function App() {
         <MetricCard label="Universe" value={totals.universe} />
       </div>
 
-      {/* Heatmap + filtre */}
-      <div className="mb-3">
-        <SectorHeatmap
-          confirmed={data.confirmed}
-          pre={data.pre}
-          events={data.events}
-          selectedSectors={selectedSectors}
-          onToggleSector={handleToggleSector}
-        />
-      </div>
+      {/* Section Heatmap pliable */}
+      <div className="mb-4 bg-white dark:bg-slate-900 rounded shadow p-4">
+        <button
+          onClick={() => setShowHeatmap(!showHeatmap)}
+          className="flex items-center justify-between w-full text-left font-semibold"
+        >
+          <span>Sector signals (heatmap)</span>
+          {showHeatmap ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </button>
+        {showHeatmap && (
+          <div className="mt-4">
+            <SectorHeatmap
+              confirmed={data.confirmed}
+              pre={data.pre}
+              events={data.events}
+              selectedSectors={selectedSectors}
+              onToggleSector={handleToggleSector}
+            />
+          </div>
+        )}
+   </div>
 
       {sectorFilterActive && (
         <div className="mb-4 flex items-center gap-2 flex-wrap">
