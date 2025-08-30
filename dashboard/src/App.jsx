@@ -14,16 +14,19 @@ const BRANCH = "main";
 const isBrowser = typeof window !== "undefined";
 const USE_LOCAL = isBrowser && window.location.hostname.endsWith(".vercel.app");
 
+// Fichiers CSV produits par le workflow
 const FILES = {
   confirmed: "confirmed_STRONGBUY.csv",
   pre: "anticipative_pre_signals.csv",
   events: "event_driven_signals.csv",
-  all: "candidates_all_ranked.csv"
+  all: "candidates_all_ranked.csv",
 };
 
-// Construit l'URL finale pour un fichier CSV
+// Construit l'URL finale pour un fichier CSV, avec cache-buster (1 min)
 function urlFor(file) {
-  return USE_LOCAL ? `/${file}` : rawUrl(OWNER, REPO, BRANCH, file);
+  const bucketMs = 60_000; // change à 300_000 pour 5 minutes si tu veux
+  const bust = `?t=${Math.floor(Date.now() / bucketMs)}`;
+  return USE_LOCAL ? `/${file}${bust}` : rawUrl(OWNER, REPO, BRANCH, file) + bust;
 }
 
 export default function App() {
@@ -40,9 +43,14 @@ export default function App() {
         fetchCSV(urlFor(FILES.confirmed)).catch(() => []),
         fetchCSV(urlFor(FILES.pre)).catch(() => []),
         fetchCSV(urlFor(FILES.events)).catch(() => []),
-        fetchCSV(urlFor(FILES.all)).catch(() => [])
+        fetchCSV(urlFor(FILES.all)).catch(() => []),
       ]);
-      setData({ confirmed, pre, events, all });
+      setData({
+        confirmed: Array.isArray(confirmed) ? confirmed : [],
+        pre: Array.isArray(pre) ? pre : [],
+        events: Array.isArray(events) ? events : [],
+        all: Array.isArray(all) ? all : [],
+      });
       setLast(new Date().toLocaleString());
     } catch (e) {
       console.error(e);
@@ -54,12 +62,15 @@ export default function App() {
 
   useEffect(() => { loadAll(); }, []);
 
-  const totals = useMemo(() => ({
-    confirmed: data.confirmed.length,
-    pre: data.pre.length,
-    events: data.events.length,
-    universe: data.all.length
-  }), [data]);
+  const totals = useMemo(
+    () => ({
+      confirmed: data.confirmed.length,
+      pre: data.pre.length,
+      events: data.events.length,
+      universe: data.all.length,
+    }),
+    [data]
+  );
 
   return (
     <div className="max-w-7xl mx-auto p-6">
