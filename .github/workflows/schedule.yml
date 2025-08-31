@@ -2,8 +2,8 @@ name: Run screener and publish CSV
 
 on:
   schedule:
-    # Toutes les heures à hh:07 UTC (GitHub Actions est en UTC)
-    - cron: "7 * * * *"
+    # Toutes les 4 heures à HH:00 UTC
+    - cron: "0 */4 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -12,11 +12,12 @@ permissions:
 jobs:
   run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # nécessaire pour rebase/pull propre
+          fetch-depth: 0
 
       - name: Ensure clean working tree (sync to origin/main)
         run: |
@@ -27,7 +28,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -35,46 +36,46 @@ jobs:
           pip install -r requirements.txt
 
       - name: Generate Russell2000 from iShares
-        run: |
-          python gen_r2000_from_ishares.py
+        run: python gen_r2000_from_ishares.py
 
       - name: Build sector catalog (R1K + SPSM)
-        run: |
-           python build_sector_catalog.py || true
+        run: python build_sector_catalog.py || true
 
       - name: Run screener
         env:
           PYTHONUNBUFFERED: "1"
-        run: |
-          python mix_ab_screen_indices.py
-          
+        run: python mix_ab_screen_indices.py
+
       - name: Run backtest
-        run: |
-          python backtest_signals.py
+        run: python backtest_signals.py
 
       - name: Fetch Fear & Greed (CNN)
-        run: |
-          python fetch_fear_greed.py
-       
+        run: python fetch_fear_greed.py
+
       - name: Commit CSVs if changed
         run: |
           set -e
+
+          # Configure git (avant tout commit)
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 1) Récupère la dernière main SANS rebase et en privilégiant nos fichiers en cas de conflit
+          # Ajouter tout (y compris nouveaux fichiers)
+          git add -A
+
+          # Si rien à committer -> on quitte proprement
+          if git diff --cached --quiet; then
+            echo "No changes, skip commit."
+            exit 0
+          fi
+
+          # Se resynchroniser et garder nos fichiers en cas de conflit
           git fetch origin main
-          git merge -s recursive -X ours origin/main || true
+          git merge -s recursive -X ours --no-edit origin/main || true
 
-          # 2) Ajoute tout ce qui nous intéresse (racine + dashboard/public)
-          git add *.csv dashboard/public/*.csv || true
+          # Commit unique + push
+          git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          git push origin HEAD:main
 
-          # 3) Commit si besoin
-          git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')" || true
-
-          # 4) Push
-          git push origin HEAD:main || true
-
-          # 5) (optionnel) statut pour debug
           echo "--- git status ---"
           git status --porcelain
