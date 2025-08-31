@@ -1,25 +1,25 @@
 ticker_tv,ticker_yf,exchange,market_cap,price,sector,industry,technical_local,tech_score,tv_reco,analyst_bucket,analyst_mean,analyst_votes
-MMM,MMM,NYQ,82839945738.29688,155.52999877929688,Industrials,Industrial Conglomerates,Buy,3,,Buy,2.11111,17.0
-AOS,AOS,NYQ,9989867828.292847,71.29000091552734,Industrials,Building Products,Neutral,-1,,Hold,2.6,12.0
-AAON,AAON,NMS,6762971647.988037,82.94999694824219,Industrials,Building Products,Neutral,1,,,,4.0
-ACHC,ACHC,NMS,2120277851.4541626,22.959999084472656,Health Care,Health Care Facilities,Buy,2,,,,14.0
-AYI,AYI,NYQ,10095333906.747437,326.4700012207031,Industrials,Electrical Components & Equipment,Strong Buy,4,,,,8.0
-ADBE,ADBE,NMS,151312145178.22266,356.70001220703125,Information Technology,Application Software,Neutral,-1,,Buy,1.97436,34.0
-ADT,ADT,NYQ,7142905750.323608,8.710000038146973,Consumer Discretionary,Security & Protection Services,Neutral,1,,Buy,2.2,5.0
-WMS,WMS,NYQ,11309117714.768555,143.97000122070312,Industrials,Building Products & Equipment,Strong Buy,4,,Strong Buy,1.4,10.0
-ACM,ACM,NYQ,16541180859.161377,124.88999938964844,Industrials,Construction & Engineering,Strong Buy,4,,Strong Buy,1.53846,11.0
-AES,AES,NYQ,9641156756.197449,13.539999961853027,Utilities,Independent Power Producers & Energy Traders,Strong Buy,4,,Buy,2.35714,12.0
-AMG,AMG,NYQ,6461461902.502441,224.82000732421875,Financials,Asset Management & Custody Banks,Strong Buy,4,,Buy,1.71429,7.0
-AFRM,AFRM,NMS,28806997286.498535,88.45999908447266,Information Technology,Software - Infrastructure,Strong Buy,4,,Buy,1.78261,19.0
-AFL,AFL,NYQ,57152041841.31494,106.86000061035156,Financials,Life & Health Insurance,Buy,2,,Hold,2.92308,13.0
-AGCO,AGCO,NYQ,8073159620.178223,108.19000244140625,Industrials,Agricultural & Farm Machinery,Sell,-2,,Hold,2.6,13.0
-A,A,NYQ,35695607934.99707,125.66000366210938,Health Care,Health Care Equipment,Strong Buy,4,,Buy,2.22222,15.0
-ADC,ADC,NYQ,8075158122.848511,72.73999786376953,Real Estate,REIT - Retail,Neutral,-1,,Buy,1.71429,19.0
-AGNC,AGNC,NMS,10198516883.005493,9.760000228881836,Financials,REIT - Mortgage,Strong Buy,6,,Buy,2.06667,12.0
-AL,AL,NYQ,6729370547.676086,60.209999084472656,Industrials,Rental & Leasing Services,Strong Buy,4,,,,6.0
-APD,APD,NYQ,65455353679.93164,294.1099853515625,Materials,Industrial Gases,Neutral,1,,Buy,2.04167,22.0
-ABNB,ABNB,NMS,79872221007.2832,130.52999877929688,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,,Hold,2.64444,35.0
-AKAM,AKAM,NMS,11346133786.178589,79.12999725341797,Information Technology,Internet Services & Infrastructure,Buy,2,,Buy,2.375,22.0
+MMM,MMM,NYQ,82839945738.29688,155.52999877929688,Industrials,Industrial Conglomerates,Buy,3,BUY,Buy,2.11111,17.0
+AOS,AOS,NYQ,9989867828.292847,71.29000091552734,Industrials,Building Products,Neutral,-1,NEUTRAL,Hold,2.6,12.0
+AAON,AAON,NMS,6762971647.988037,82.94999694824219,Industrials,Building Products,Neutral,1,NEUTRAL,,,4.0
+ACHC,ACHC,NMS,2120277851.4541626,22.959999084472656,Health Care,Health Care Facilities,Buy,2,BUY,,,14.0
+AYI,AYI,NYQ,10095333906.747437,326.4700012207031,Industrials,Electrical Components & Equipment,Strong Buy,4,STRONG_BUY,,,8.0
+ADBE,ADBE,NMS,151312145178.22266,356.70001220703125,Information Technology,Application Software,Neutral,-1,SELL,Buy,1.97436,34.0
+ADT,ADT,NYQ,7142905750.323608,8.710000038146973,Consumer Discretionary,Security & Protection Services,Neutral,1,BUY,Buy,2.2,5.0
+WMS,WMS,NYQ,11309117714.768555,143.97000122070312,Industrials,Building Products & Equipment,Strong Buy,4,BUY,Strong Buy,1.4,10.0
+ACM,ACM,NYQ,16541180859.161377,124.88999938964844,Industrials,Construction & Engineering,Strong Buy,4,BUY,Strong Buy,1.53846,11.0
+AES,AES,NYQ,9641156756.197449,13.539999961853027,Utilities,Independent Power Producers & Energy Traders,Strong Buy,4,BUY,Buy,2.35714,12.0
+AMG,AMG,NYQ,6461461902.502441,224.82000732421875,Financials,Asset Management & Custody Banks,Strong Buy,4,BUY,Buy,1.71429,7.0
+AFRM,AFRM,NMS,28806997286.498535,88.45999908447266,Information Technology,Software - Infrastructure,Strong Buy,4,STRONG_BUY,Buy,1.78261,19.0
+AFL,AFL,NYQ,57152041841.31494,106.86000061035156,Financials,Life & Health Insurance,Buy,2,STRONG_BUY,Hold,2.92308,13.0
+AGCO,AGCO,NYQ,8073159620.178223,108.19000244140625,Industrials,Agricultural & Farm Machinery,Sell,-2,SELL,Hold,2.6,13.0
+A,A,NYQ,35695607934.99707,125.66000366210938,Health Care,Health Care Equipment,Strong Buy,4,STRONG_BUY,Buy,2.22222,15.0
+ADC,ADC,NYQ,8075158122.848511,72.73999786376953,Real Estate,REIT - Retail,Neutral,-1,SELL,Buy,1.71429,19.0
+AGNC,AGNC,NMS,10198516883.005493,9.760000228881836,Financials,REIT - Mortgage,Strong Buy,6,BUY,Buy,2.06667,12.0
+AL,AL,NYQ,6729370547.676086,60.209999084472656,Industrials,Rental & Leasing Services,Strong Buy,4,BUY,,,6.0
+APD,APD,NYQ,65455353679.93164,294.1099853515625,Materials,Industrial Gases,Neutral,1,BUY,Buy,2.04167,22.0
+ABNB,ABNB,NMS,79872221007.2832,130.52999877929688,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,NEUTRAL,Hold,2.64444,35.0
+AKAM,AKAM,NMS,11346133786.178589,79.12999725341797,Information Technology,Internet Services & Infrastructure,Buy,2,BUY,Buy,2.375,22.0
 ALK,ALK,NYQ,7285304958.343506,62.779998779296875,Industrials,Passenger Airlines,Strong Buy,4,,Strong Buy,1.42857,14.0
 ALB,ALB,NYQ,9993640144.515991,84.91999816894531,Materials,Specialty Chemicals,Strong Buy,4,,Hold,2.64,22.0
 ACI,ACI,NYQ,10894602958.805664,19.459999084472656,Consumer Staples,Food Retail,Neutral,1,,Buy,2.04762,17.0
