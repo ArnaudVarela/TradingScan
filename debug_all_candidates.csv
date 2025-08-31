@@ -502,7 +502,7 @@ EQIX,EQIX,NMS,76939698398.92578,786.1900024414062,Real Estate,Data Center REITs,
 COIN,COIN,NMS,78247900715.51514,304.5400085449219,Financials,Financial Data & Stock Exchanges,Sell,-2,,Buy,2.30303,29.0,2.0
 ECL,ECL,NYQ,79137032520.87402,277.0400085449219,Materials,Specialty Chemicals,Neutral,-1,,Buy,2.15385,20.0,2.0
 MDLZ,MDLZ,NMS,79500283273.91016,61.439998626708984,Consumer Staples,Packaged Foods & Meats,Sell,-2,,Buy,1.76923,24.0,2.0
-ABNB,ABNB,NMS,79872221007.2832,130.52999877929688,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,NEUTRAL,Hold,2.64444,35.0,2.0
+ABNB,ABNB,NMS,79872221007.2832,130.52999877929688,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,,Hold,2.64444,35.0,2.0
 DELL,DELL,NYQ,82620064286.47705,122.1500015258789,Information Technology,"Technology Hardware, Storage & Peripherals",Sell,-2,,Buy,1.6087,21.0,2.0
 RBLX,RBLX,NYQ,86371638201.09375,124.58999633789062,Communication Services,Electronic Gaming & Multimedia,Neutral,1,,Buy,2.0,31.0,2.0
 WM,WM,NYQ,91196687076.37207,226.38999938964844,Industrials,Environmental & Facilities Services,Neutral,1,,Buy,2.04348,20.0,2.0
