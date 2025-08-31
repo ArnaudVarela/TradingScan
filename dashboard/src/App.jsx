@@ -5,18 +5,12 @@ import MetricCard from "./components/MetricCard.jsx";
 import DataTable from "./components/DataTable.jsx";
 import SectorHeatmap from "./components/SectorHeatmap.jsx";
 import SectorTimeline from "./components/SectorTimeline.jsx";
-import { fetchCSV, rawUrl, fetchJSON } from "./lib/csv.js";
+import { fetchCSV, fetchJSON } from "./lib/csv.js";   // ⬅️ rawUrl retiré
 import { ChevronDown, ChevronUp } from "lucide-react";
 import EquityCurve from "./components/EquityCurve.jsx";
 import BacktestSummary from "./components/BacktestSummary.jsx";
 
-// ---------- Coordonnées repo (fallback hors Vercel)
-const OWNER  = "ArnaudVarela";
-const REPO   = "TradingScan";
-const BRANCH = "main";
-
-// Détection Vercel : on sert /public à la racine du site
-const isBrowser = typeof window !== "undefined";
+// Lecture 100% locale (Vercel /public)
 const USE_LOCAL = true;
 
 // ---------- Fichiers CSV / JSON
@@ -37,8 +31,7 @@ const FILES = {
 function urlFor(file) {
   const bucketMs = 60_000;
   const bust = `?t=${Math.floor(Date.now() / bucketMs)}`;
-  // fichiers statiques servis par Vercel depuis /public
-  return `/${file}${bust}`;
+  return `/${file}${bust}`; // fichiers statiques servis par Vercel depuis /public
 }
 
 export default function App() {
@@ -197,7 +190,7 @@ export default function App() {
 
       {/* Info source */}
       <div className="mb-2 text-xs text-slate-500">
-      Source CSV : fichiers statiques (public/) sur Vercel
+        Source CSV : fichiers statiques (public/) sur Vercel
       </div>
 
       {/* Bandeau avertissements (certains fichiers KO) */}
@@ -282,18 +275,30 @@ export default function App() {
       </div>
 
       {/* Equity curve (10-day hold) + SPY */}
-      <div className="mb-6">
-        <EquityCurve
-          data={data.equity10}
-          bench={data.bench10}
-          title="Equity curve — 10 trading days hold vs SPY"
-        />
-      </div>
+      {Array.isArray(data.equity10) && data.equity10.length > 0 ? (
+        <div className="mb-6">
+          <EquityCurve
+            data={data.equity10}
+            bench={Array.isArray(data.bench10) ? data.bench10 : []}
+            title="Equity curve — 10 trading days hold vs SPY"
+          />
+        </div>
+      ) : (
+        <div className="mb-6 text-sm text-slate-500">
+          Pas encore de points d’equity à afficher.
+        </div>
+      )}
 
       {/* Résumés de backtest */}
-      <div className="mb-6">
-        <BacktestSummary rows={data.backtestSummary} />
-      </div>
+      {Array.isArray(data.backtestSummary) && data.backtestSummary.length > 0 ? (
+        <div className="mb-6">
+          <BacktestSummary rows={data.backtestSummary} />
+        </div>
+      ) : (
+        <div className="mb-6 text-sm text-slate-500">
+          Aucun résumé de backtest disponible (fichier <code>backtest_summary.csv</code> manquant ou vide).
+        </div>
+      )}
 
       {/* États */}
       {loading && <div className="mb-4 text-sm text-slate-600">Chargement…</div>}
