@@ -1,186 +1,175 @@
-// SectorHeatmap.jsx
 import React, { useMemo, useState } from "react";
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, Brush,
+  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer,
+  CartesianGrid, ComposedChart, Line
 } from "recharts";
 
-// util: compte par secteur
-function countBySector(rows) {
-  const out = {};
-  for (const r of rows || []) {
-    const s = (r?.sector || "Unknown").trim() || "Unknown";
-    out[s] = (out[s] || 0) + 1;
-  }
-  return out;
-}
-
-// util: transforme {sec: n} en [{sector, value}]
-function dictToSeries(dict, keyName) {
-  return Object.entries(dict)
-    .map(([sector, value]) => ({ sector, [keyName]: value }));
-}
-
+/**
+ * props :
+ * - confirmed: []  (lignes avec { sector, ... })
+ * - pre: []        (idem)
+ * - events: []     (idem)
+ * - breadth: []    (lignes sector_breadth.csv avec { sector, universe, ... })
+ * - selectedSectors: string[]
+ * - onToggleSector: (sector: string, additive: boolean) => void
+ */
 export default function SectorHeatmap({
   confirmed = [],
   pre = [],
   events = [],
-  breadth = [],                 // <-- NEW (sector_breadth.csv)
+  breadth = [],
   selectedSectors = [],
-  onToggleSector,
+  onToggleSector = () => {},
 }) {
-  // états d’affichage
-  const [mode, setMode] = useState("abs");   // "abs" | "pct"
+  const [stackMode, setStackMode] = useState("abs"); // "abs" | "pct"
   const [showBreadth, setShowBreadth] = useState(true);
 
-  // map breadth: secteur -> taille univers (nb tickers)
-  const breadthMap = useMemo(() => {
-    // sector_breadth.csv attendus: sector,total (ou columns sector, count)
-    const out = {};
-    for (const r of breadth || []) {
-      const s = (r?.sector || "Unknown").trim() || "Unknown";
-      const n = Number(r?.total ?? r?.count ?? r?.value ?? 0);
-      out[s] = (out[s] || 0) + (Number.isFinite(n) ? n : 0);
-    }
-    return out;
+  // --- petits helpers
+  const norm = (s) => (s || "Unknown").trim();
+
+  const countBySector = (rows) => {
+    const m = new Map();
+    rows.forEach(r => {
+      const k = norm(r.sector);
+      m.set(k, (m.get(k) || 0) + 1);
+    });
+    return m;
+  };
+
+  // Comptages
+  const mConfirmed = useMemo(() => countBySector(confirmed), [confirmed]);
+  const mPre       = useMemo(() => countBySector(pre), [pre]);
+  const mEvents    = useMemo(() => countBySector(events), [events]);
+
+  // Breadth overlay : universe par secteur (si dispo), sinon 0
+  const mUniverse  = useMemo(() => {
+    const m = new Map();
+    breadth.forEach(r => {
+      // sector_breadth.csv => { sector, universe, ... }
+      m.set(norm(r.sector), Number(r.universe || 0));
+    });
+    return m;
   }, [breadth]);
 
-  // Comptages par secteur
-  const c = useMemo(() => countBySector(confirmed), [confirmed]);
-  const p = useMemo(() => countBySector(pre), [pre]);
-  const e = useMemo(() => countBySector(events), [events]);
-
-  // union des secteurs
+  // Liste ordonnée des secteurs (par total desc)
   const sectors = useMemo(() => {
-    const s = new Set([...Object.keys(c), ...Object.keys(p), ...Object.keys(e), ...Object.keys(breadthMap)]);
-    return [...s];
-  }, [c, p, e, breadthMap]);
+    const set = new Set([
+      ...mConfirmed.keys(), ...mPre.keys(), ...mEvents.keys(), ...mUniverse.keys(),
+    ]);
+    const arr = Array.from(set);
+    return arr.sort((a, b) => {
+      const ta = (mConfirmed.get(a) || 0) + (mPre.get(a) || 0) + (mEvents.get(a) || 0);
+      const tb = (mConfirmed.get(b) || 0) + (mPre.get(b) || 0) + (mEvents.get(b) || 0);
+      return tb - ta;
+    });
+  }, [mConfirmed, mPre, mEvents, mUniverse]);
 
-  // dataset
+  // Dataset pour le chart
   const data = useMemo(() => {
-    const rows = sectors.map((sec) => {
-      const cc = c[sec] || 0;
-      const pp = p[sec] || 0;
-      const ee = e[sec] || 0;
-      const tot = cc + pp + ee;
+    return sectors.map(sec => {
+      const c  = mConfirmed.get(sec) || 0;
+      const p  = mPre.get(sec) || 0;
+      const ev = mEvents.get(sec) || 0;
+      const uni = mUniverse.get(sec) || 0;
+      const total = c + p + ev;
 
-      if (mode === "pct") {
-        const d = tot || 1;
+      if (stackMode === "pct" && total > 0) {
         return {
           sector: sec,
-          confirmed: (cc * 100) / d,
-          pre: (pp * 100) / d,
-          events: (ee * 100) / d,
-          breadth: breadthMap[sec] || 0,
-          __abs_total: tot,
+          confirmed: (c / total) * 100,
+          pre: (p / total) * 100,
+          events: (ev / total) * 100,
+          universe: uni, // overlay reste en absolu (axe droit)
+          __total: total,
         };
       }
-      // mode absolu
-      return {
-        sector: sec,
-        confirmed: cc,
-        pre: pp,
-        events: ee,
-        breadth: breadthMap[sec] || 0,
-        __abs_total: tot,
-      };
+      return { sector: sec, confirmed: c, pre: p, events: ev, universe: uni, __total: total };
     });
+  }, [sectors, mConfirmed, mPre, mEvents, mUniverse, stackMode]);
 
-    // tri par total (abs)
-    rows.sort((a, b) => (b.__abs_total - a.__abs_total));
-    return rows;
-  }, [sectors, c, p, e, mode, breadthMap]);
-
-  const maxBreadth = useMemo(
-    () => Math.max(1, ...data.map(d => d.breadth || 0)),
-    [data]
-  );
-
-  // tooltip custom
-  const tooltip = ({ active, payload, label }) => {
-    if (!active || !payload || payload.length === 0) return null;
-    const row = payload.reduce((acc, p) => ({ ...acc, [p.dataKey]: p.value }), { sector: label });
-    const totalAbs = data.find(d => d.sector === label)?.__abs_total ?? 0;
-    return (
-      <div className="rounded border bg-white/90 dark:bg-slate-900/90 px-3 py-2 text-xs shadow">
-        <div className="font-semibold mb-1">{label}</div>
-        <div>Confirmed: <b>{row.confirmed?.toFixed?.(mode === "pct" ? 0 : 0)}</b>{mode === "pct" ? "%" : ""}</div>
-        <div>Pre-signals: <b>{row.pre?.toFixed?.(mode === "pct" ? 0 : 0)}</b>{mode === "pct" ? "%" : ""}</div>
-        <div>Event-driven: <b>{row.events?.toFixed?.(mode === "pct" ? 0 : 0)}</b>{mode === "pct" ? "%" : ""}</div>
-        <div className="mt-1 opacity-70">Total (abs): {totalAbs}</div>
-        {showBreadth && <div className="opacity-70">Universe size: {row.breadth}</div>}
-      </div>
-    );
+  // Gestion click secteur pour filtrer les tables
+  const handleClick = (entry, e) => {
+    if (!entry || !entry.activePayload || !entry.activeLabel) return;
+    const sector = entry.activeLabel;
+    const additive = e && (e.ctrlKey || e.metaKey);
+    onToggleSector(sector, additive);
   };
 
-  // clic pour filtrer les tables
-  const onBarClick = (e) => {
-    if (!onToggleSector || !e?.activeLabel) return;
-    const additive = (e?.event?.ctrlKey || e?.event?.metaKey) ?? false;
-    onToggleSector(e.activeLabel, additive);
-  };
+  const yLabel = stackMode === "pct" ? "Pourcentage (%)" : "Comptes";
 
   return (
-    <div>
-      {/* contrôles */}
-      <div className="flex items-center justify-end gap-2 text-xs mb-2">
-        <button
-          className={`px-2 py-1 rounded border ${mode === "abs" ? "bg-slate-200 dark:bg-slate-700" : ""}`}
-          onClick={() => setMode("abs")}
-        >
-          Absolu
-        </button>
-        <button
-          className={`px-2 py-1 rounded border ${mode === "pct" ? "bg-slate-200 dark:bg-slate-700" : ""}`}
-          onClick={() => setMode("pct")}
-        >
-          % stacked
-        </button>
-        <label className="ml-3 flex items-center gap-1 cursor-pointer">
-          <input type="checkbox" checked={showBreadth} onChange={(e) => setShowBreadth(e.target.checked)} />
-          <span>Overlay breadth</span>
-        </label>
+    <div className="rounded border border-slate-200 dark:border-slate-700">
+      <div className="flex items-center justify-between p-3">
+        <div className="font-semibold">Sector signals (heatmap)</div>
+        <div className="flex items-center gap-2 text-xs">
+          <button
+            onClick={() => setStackMode("abs")}
+            className={`px-2 py-1 rounded border ${stackMode === "abs" ? "bg-slate-200 dark:bg-slate-800" : ""}`}
+          >Absolu</button>
+          <button
+            onClick={() => setStackMode("pct")}
+            className={`px-2 py-1 rounded border ${stackMode === "pct" ? "bg-slate-200 dark:bg-slate-800" : ""}`}
+          >% stacked</button>
+
+          <label className="inline-flex items-center gap-1 ml-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showBreadth}
+              onChange={e => setShowBreadth(e.target.checked)}
+            />
+            <span>Overlay breadth</span>
+          </label>
+        </div>
       </div>
 
-      <div style={{ width: "100%", height: 360 }}>
-        <ResponsiveContainer>
-          <BarChart
+      <div className="px-2 pb-3">
+        <ResponsiveContainer width="100%" height={320}>
+          <ComposedChart
             data={data}
-            onClick={onBarClick}
-            margin={{ top: 10, right: 10, left: 0, bottom: 40 }}
+            onClick={handleClick}
+            margin={{ top: 10, right: 20, left: 0, bottom: 30 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="sector" angle={-25} textAnchor="end" interval={0} height={60} />
-            <YAxis yAxisId="left" tickFormatter={(v) => (mode === "pct" ? `${v}%` : v)} />
-            {showBreadth && (
-              <YAxis yAxisId="right" orientation="right" hide domain={[0, maxBreadth]} />
-            )}
-            <Tooltip content={tooltip} />
-            <Legend verticalAlign="top" height={24} />
+            <XAxis
+              dataKey="sector"
+              interval={0}
+              angle={-25}
+              textAnchor="end"
+              height={60}
+            />
+            <YAxis yAxisId="left" label={{ value: yLabel, angle: -90, position: "insideLeft" }} />
+            <YAxis yAxisId="right" orientation="right" hide={!showBreadth} />
+            <Tooltip formatter={(val, name) => {
+              if (name === "confirmed" || name === "pre" || name === "events") {
+                return stackMode === "pct" ? [`${val.toFixed(1)}%`, name] : [val, name];
+              }
+              if (name === "universe") return [val, "Universe"];
+              return [val, name];
+            }} />
+            <Legend />
 
-            {/* Overlay breadth (gris clair, derrière) */}
+            {/* Barres (empilées) */}
+            <Bar yAxisId="left" dataKey="confirmed" stackId="a" name="confirmed" />
+            <Bar yAxisId="left" dataKey="pre"       stackId="a" name="pre" />
+            <Bar yAxisId="left" dataKey="events"    stackId="a" name="events" />
+
+            {/* Overlay breadth = universe (axe droit) */}
             {showBreadth && (
-              <Bar
+              <Line
                 yAxisId="right"
-                dataKey="breadth"
+                type="monotone"
+                dataKey="universe"
                 name="Universe"
-                fill="#cbd5e1"
-                opacity={0.45}
-                barSize={14}
+                dot={false}
+                strokeDasharray="4 4"
               />
             )}
-
-            {/* signaux */}
-            <Bar yAxisId="left" dataKey="confirmed" name="confirmed" stackId={mode === "pct" ? "s" : undefined} fill="#10b981" />
-            <Bar yAxisId="left" dataKey="pre"       name="pre"       stackId={mode === "pct" ? "s" : undefined} fill="#f59e0b" />
-            <Bar yAxisId="left" dataKey="events"    name="events"    stackId={mode === "pct" ? "s" : undefined} fill="#3b82f6" />
-
-            <Brush height={18} y={320} />
-          </BarChart>
+          </ComposedChart>
         </ResponsiveContainer>
-      </div>
 
-      <div className="text-[11px] mt-2 opacity-70">
-        Astuce : clique un secteur pour filtrer les tables (Ctrl/Cmd = multi-sélection).
+        <div className="text-xs text-slate-500 mt-2">
+          Astuce : clique un secteur pour filtrer les tables (Ctrl/Cmd = multi-sélection).
+        </div>
       </div>
     </div>
   );
