@@ -12,7 +12,7 @@ HORIZONS = [1, 3, 5, 10, 20]
 
 # Si tu veux restreindre aux signaux d’un bucket donné, mets une string (ex: "confirmed")
 # ou None pour tout backtester.
-FILTER_BUCKET = None  # ex: "confirmed"
+FILTER_BUCKET = "confirmed"  # ex: "confirmed"
 
 # Dossier public pour Vercel
 PUBLIC_DIR = os.path.join("dashboard", "public")
