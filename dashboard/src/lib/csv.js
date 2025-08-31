@@ -17,3 +17,9 @@ export async function fetchCSV(url) {
 export function rawUrl(owner, repo, branch, file) {
   return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${encodeURIComponent(file)}`;
 }
+
+export async function fetchJSON(url) {
+  const r = await fetch(url, { cache: "no-store" });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
