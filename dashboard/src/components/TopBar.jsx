@@ -8,7 +8,6 @@ export default function TopBar({ lastRefreshed, onRefresh, fear }) {
     const saved = localStorage.getItem("darkMode");
     if (saved === "1") return true;
     if (saved === "0") return false;
-    // défaut: suit le système
     return window.matchMedia?.("(prefers-color-scheme: dark)")?.matches ?? false;
   });
 
@@ -23,13 +22,25 @@ export default function TopBar({ lastRefreshed, onRefresh, fear }) {
 
   return (
     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
-      <div className="min-w-0">
-        <h1 className="text-2xl font-bold truncate">Signal Intelligence Dashboard</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          Confirmed / Anticipative / Event-driven signals — powered by cross-analysis
-        </p>
+      {/* Logo + titre */}
+      <div className="flex items-center gap-3 min-w-0">
+        <img
+          src="/sid_radar.svg"
+          alt="SID logo"
+          className="w-10 h-10 flex-shrink-0"
+        />
+        <div className="min-w-0">
+          <h1 className="text-2xl font-bold truncate">
+            Signal Intelligence Dashboard
+          </h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            Confirmed / Anticipative / Event-driven signals — powered by
+            cross-analysis
+          </p>
+        </div>
       </div>
 
+      {/* Fear & Greed Gauge */}
       <div className="flex items-center gap-4">
         {fear && (
           <FearGreedGauge
@@ -41,6 +52,7 @@ export default function TopBar({ lastRefreshed, onRefresh, fear }) {
         )}
       </div>
 
+      {/* Boutons à droite */}
       <div className="flex gap-2 items-center">
         <span className="text-xs text-slate-500 dark:text-slate-400">
           Last refresh: {lastRefreshed}
@@ -55,7 +67,7 @@ export default function TopBar({ lastRefreshed, onRefresh, fear }) {
         </button>
         <button
           type="button"
-          onClick={() => setDarkMode(v => !v)}
+          onClick={() => setDarkMode((v) => !v)}
           className="p-2 rounded bg-slate-200 dark:bg-slate-700"
           aria-label={darkMode ? "Activer le thème clair" : "Activer le thème sombre"}
           title={darkMode ? "Light mode" : "Dark mode"}
