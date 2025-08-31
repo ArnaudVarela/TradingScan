@@ -47,7 +47,11 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: |
           python mix_ab_screen_indices.py
-
+          
+      - name: Run backtest
+        run: |
+          python backtest_signals.py
+       
       - name: Commit CSVs if changed
         run: |
           set -e
