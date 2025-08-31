@@ -8,6 +8,7 @@ import SectorTimeline from "./components/SectorTimeline.jsx";
 import { fetchCSV, rawUrl } from "./lib/csv.js";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import EquityCurve from "./components/EquityCurve.jsx";
+import BacktestSummary from "./components/BacktestSummary.jsx";
 
 // ---------- Coordonnées repo (fallback hors Vercel)
 const OWNER  = "ArnaudVarela";
@@ -27,6 +28,7 @@ const FILES = {
   history:   "sector_history.csv",
   breadth:   "sector_breadth.csv",
   equity10: "backtest_equity_10d.csv",
+  backtestSummary: "backtest_summary.csv", 
 };
 
 // URL finale + cache-buster court (1 min)
@@ -44,7 +46,8 @@ export default function App() {
     all:       [],
     history:   [],
     breadth:   [],
-    equity10:  [], 
+    equity10:  [],
+    backtestSummary: [], 
   });
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
@@ -88,6 +91,7 @@ export default function App() {
       ["history",   FILES.history],
       ["breadth",   FILES.breadth],
       ["equity10",  FILES.equity10],
+      ["backtestSummary", FILES.backtestSummary], 
     ];
 
     try {
@@ -261,6 +265,11 @@ export default function App() {
       {/* Equity curve (10-day hold) */}
       <div className="mb-6">
         <EquityCurve data={data.equity10} title="Equity curve — 10 trading days hold" />
+      </div>
+
+      {/* Résumés de backtest */}
+      <div className="mb-6">
+        <BacktestSummary rows={data.backtestSummary} />
       </div>
 
       {/* États */}
