@@ -347,7 +347,7 @@ def main():
 
     def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
     # nb d’actions vues par secteur dans l’univers filtré (US, cap, etc.)
-    return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
+        return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
 
     def _sector_counts(df_part: pd.DataFrame) -> pd.Series:
         return df_part.groupby(df_part["sector"].fillna("Unknown"))["ticker_yf"].nunique()
