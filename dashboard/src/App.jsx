@@ -23,6 +23,7 @@ const FILES = {
   events: "event_driven_signals.csv",
   all: "candidates_all_ranked.csv",
   history: "sector_history.csv",
+  breadth: "sector_breadth.csv",
 };
 
 function urlFor(file) {
@@ -32,7 +33,7 @@ function urlFor(file) {
 }
 
 export default function App() {
-  const [data, setData] = useState({ confirmed: [], pre: [], events: [], all: [], history: [] });
+  const [data, setData] = useState({ confirmed: [], pre: [], events: [], all: [], history: [], breadth: [] });
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -50,6 +51,7 @@ export default function App() {
         fetchCSV(urlFor(FILES.events)).catch(() => []),
         fetchCSV(urlFor(FILES.all)).catch(() => []),
         fetchCSV(urlFor(FILES.history)).catch(() => []),
+        fetchCSV(urlFor(FILES.breadth)).catch(() => []),
       ]);
 
       setData({
@@ -58,6 +60,7 @@ export default function App() {
         events: Array.isArray(events) ? events : [],
         all: Array.isArray(all) ? all : [],
         history: Array.isArray(history) ? history : [],
+        breadth: Array.isArray(breadth) ? breadth : [],
       });
       setLast(new Date().toLocaleString());
     } catch (e) {
