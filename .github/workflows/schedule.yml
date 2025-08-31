@@ -55,27 +55,22 @@ jobs:
       - name: Commit CSVs if changed
         run: |
           set -e
-          git config user.name "github-actions[bot]"
+          git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Stage : CSV racine + copies Vercel
-          git add \
-            *.csv \
-            dashboard/public/*.csv || true
+          # 1) Récupère la dernière main SANS rebase et en privilégiant nos fichiers en cas de conflit
+          git fetch origin main
+          git merge -s recursive -X ours origin/main || true
 
-          # Rien à committer ? on sort proprement
-          if git diff --cached --quiet; then
-            echo "No CSV changes to commit."
-          else
-            git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          fi
+          # 2) Ajoute tout ce qui nous intéresse (racine + dashboard/public)
+          git add *.csv dashboard/public/*.csv || true
 
-          # Récupérer les éventuels commits distants avant de pousser
-          git -c rebase.autoStash=true pull --rebase origin main || true
+          # 3) Commit si besoin
+          git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')" || true
 
-          # Push si quelque chose a vraiment changé
+          # 4) Push
           git push origin HEAD:main || true
 
-          # Debug utile
+          # 5) (optionnel) statut pour debug
           echo "--- git status ---"
-          git status --short
+          git status --porcelain
