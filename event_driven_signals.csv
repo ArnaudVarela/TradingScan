@@ -202,7 +202,7 @@ CMA,CMA,70.58000183105469,9071294735.336304,Financials,Diversified Banks,Strong 
 W,W,74.5999984741211,9672710402.153015,Consumer Discretionary,Internet Retail,Buy,2,,Buy,2.09375,29.0,3.0
 ALB,ALB,84.91999816894531,9993640144.515991,Materials,Specialty Chemicals,Strong Buy,4,,Hold,2.64,22.0,3.0
 BMRN,BMRN,58.27000045776367,11188714604.057495,Health Care,Biotechnology,Neutral,-1,,Strong Buy,1.59259,26.0,3.0
-AKAM,AKAM,79.12999725341797,11346133786.178589,Information Technology,Internet Services & Infrastructure,Buy,2,BUY,Buy,2.375,22.0,3.0
+AKAM,AKAM,79.12999725341797,11346133786.178589,Information Technology,Internet Services & Infrastructure,Buy,2,,Buy,2.375,22.0,3.0
 CPT,CPT,111.9800033569336,11965399298.698425,Real Estate,Multi-Family Residential REITs,Buy,2,,Buy,2.29167,22.0,3.0
 GLPI,GLPI,48.0099983215332,13587213604.980469,Real Estate,REIT - Specialty,Buy,2,,Buy,2.08696,22.0,3.0
 UDR,UDR,39.56999969482422,14716557726.501465,Real Estate,Multi-Family Residential REITs,Buy,2,,Buy,2.38095,21.0,3.0
@@ -296,7 +296,6 @@ USFD,USFD,77.5999984741211,17473346856.414795,Consumer Staples,Food Distribution
 HPQ,HPQ,28.540000915527344,26676396392.385254,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,4,,Hold,2.8125,15.0,2.75
 SYY,SYY,80.47000122070312,38481720223.75488,Consumer Staples,Food Distributors,Buy,3,,Buy,1.94118,15.0,2.75
 ZTS,ZTS,156.39999389648438,69313819746.22559,Health Care,Pharmaceuticals,Buy,2,,Buy,1.83333,15.0,2.75
-ACHC,ACHC,22.959999084472656,2120277851.4541626,Health Care,Health Care Facilities,Buy,2,BUY,Buy,1.71429,14.0,2.7
 PVH,PVH,84.31999969482422,4053523777.329254,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Buy,2,,Buy,2.0,14.0,2.7
 SEE,SEE,32.470001220703125,4776175089.319336,Materials,Paper & Plastic Packaging Products & Materials,Buy,2,,Buy,1.8125,14.0,2.7
 BRBR,BRBR,41.04999923706055,5171437853.885651,Consumer Staples,Packaged Foods & Meats,Neutral,0,,Strong Buy,1.46667,14.0,2.7

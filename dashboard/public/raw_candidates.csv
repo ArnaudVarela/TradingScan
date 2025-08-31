@@ -2,7 +2,7 @@ ticker_tv,ticker_yf,exchange,market_cap,price,sector,industry,technical_local,te
 MMM,MMM,NYQ,82839945738.29688,155.52999877929688,Industrials,Industrial Conglomerates,Buy,3,BUY,Buy,2.11111,17.0
 AOS,AOS,NYQ,9989867828.292847,71.29000091552734,Industrials,Building Products,Neutral,-1,NEUTRAL,Hold,2.6,12.0
 AAON,AAON,NMS,6762971647.988037,82.94999694824219,Industrials,Building Products,Neutral,1,NEUTRAL,,,4.0
-ACHC,ACHC,NMS,2120277851.4541626,22.959999084472656,Health Care,Health Care Facilities,Buy,2,BUY,Buy,1.71429,14.0
+ACHC,ACHC,NMS,2120277851.4541626,22.959999084472656,Health Care,Health Care Facilities,Buy,2,BUY,,,14.0
 AYI,AYI,NYQ,10095333906.747437,326.4700012207031,Industrials,Electrical Components & Equipment,Strong Buy,4,STRONG_BUY,,,8.0
 ADBE,ADBE,NMS,151312145178.22266,356.70001220703125,Information Technology,Application Software,Neutral,-1,SELL,Buy,1.97436,34.0
 ADT,ADT,NYQ,7142905750.323608,8.710000038146973,Consumer Discretionary,Security & Protection Services,Neutral,1,BUY,Buy,2.2,5.0
@@ -19,7 +19,7 @@ AGNC,AGNC,NMS,10198516883.005493,9.760000228881836,Financials,REIT - Mortgage,St
 AL,AL,NYQ,6729370547.676086,60.209999084472656,Industrials,Rental & Leasing Services,Strong Buy,4,BUY,,,6.0
 APD,APD,NYQ,65455353679.93164,294.1099853515625,Materials,Industrial Gases,Neutral,1,BUY,Buy,2.04167,22.0
 ABNB,ABNB,NMS,79872221007.2832,130.52999877929688,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,NEUTRAL,Hold,2.64444,35.0
-AKAM,AKAM,NMS,11346133786.178589,79.12999725341797,Information Technology,Internet Services & Infrastructure,Buy,2,BUY,Buy,2.375,22.0
+AKAM,AKAM,NMS,11346133786.178589,79.12999725341797,Information Technology,Internet Services & Infrastructure,Buy,2,,Buy,2.375,22.0
 ALK,ALK,NYQ,7285304958.343506,62.779998779296875,Industrials,Passenger Airlines,Strong Buy,4,,Strong Buy,1.42857,14.0
 ALB,ALB,NYQ,9993640144.515991,84.91999816894531,Materials,Specialty Chemicals,Strong Buy,4,,Hold,2.64,22.0
 ACI,ACI,NYQ,10894602958.805664,19.459999084472656,Consumer Staples,Food Retail,Neutral,1,,Buy,2.04762,17.0

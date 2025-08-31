@@ -21,7 +21,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,pre,TJX,TJX,Consumer Discretionary,Apparel Retail,136.61000061035156
 2025-08-31,pre,WYNN,WYNN,Consumer Discretionary,Casinos & Gaming,126.75
 2025-08-31,pre,MTZ,MTZ,Industrials,Construction & Engineering,181.69000244140625
-2025-08-31,pre,TKO,TKO,Communication Services,Movies & Entertainment,189.55999755859372
+2025-08-31,pre,TKO,TKO,Communication Services,Movies & Entertainment,189.5599975585937
 2025-08-31,pre,PEN,PEN,Health Care,Health Care Equipment,272.6400146484375
 2025-08-31,pre,BROS,BROS,Consumer Discretionary,Restaurants,71.83000183105469
 2025-08-31,pre,VNOM,VNOM,Energy,Oil & Gas Storage & Transportation,39.845001220703125
@@ -78,18 +78,18 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,pre,TRV,TRV,Financials,Property & Casualty Insurance,271.510009765625
 2025-08-31,pre,HLT,HLT,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",276.0599975585937
 2025-08-31,pre,ADSK,ADSK,Information Technology,Application Software,314.70001220703125
-2025-08-31,pre,SPG,SPG,Real Estate,Retail REITs,180.66000366210935
+2025-08-31,pre,SPG,SPG,Real Estate,Retail REITs,180.66000366210932
 2025-08-31,pre,AZO,AZO,Consumer Discretionary,Automotive Retail,4198.52978515625
 2025-08-31,pre,NET,NET,Information Technology,Software - Infrastructure,208.7100067138672
 2025-08-31,pre,USB,USB,Financials,Diversified Banks,48.83000183105469
-2025-08-31,pre,SNOW,SNOW,Information Technology,Software - Application,238.66000366210935
+2025-08-31,pre,SNOW,SNOW,Information Technology,Software - Application,238.66000366210932
 2025-08-31,pre,CVS,CVS,Health Care,Health Care Services,73.1500015258789
 2025-08-31,pre,HCA,HCA,Health Care,Health Care Facilities,403.9599914550781
 2025-08-31,pre,PH,PH,Industrials,Industrial Machinery & Supplies & Components,759.3499755859375
 2025-08-31,pre,RCL,RCL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",363.2200012207031
 2025-08-31,pre,PLD,PLD,Real Estate,Industrial REITs,113.77999877929688
 2025-08-31,pre,CVNA,CVNA,Consumer Discretionary,Automotive Retail,371.9200134277344
-2025-08-31,pre,ADI,ADI,Information Technology,Semiconductors,251.30999755859372
+2025-08-31,pre,ADI,ADI,Information Technology,Semiconductors,251.3099975585937
 2025-08-31,pre,PANW,PANW,Information Technology,Systems Software,190.5200042724609
 2025-08-31,pre,MU,MU,Information Technology,Semiconductors,119.01000213623048
 2025-08-31,pre,COF,COF,Financials,Consumer Finance,227.22000122070312
@@ -245,7 +245,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,pre,GTM,GTM,Communication Services,Software - Application,10.899999618530272
 2025-08-31,pre,H,H,Consumer Discretionary,Lodging,144.27999877929688
 2025-08-31,pre,CFG,CFG,Financials,Regional Banks,52.27999877929688
-2025-08-31,pre,IQV,IQV,Health Care,Life Sciences Tools & Services,190.80999755859372
+2025-08-31,pre,IQV,IQV,Health Care,Life Sciences Tools & Services,190.8099975585937
 2025-08-31,pre,KHC,KHC,Consumer Staples,Packaged Foods & Meats,27.96999931335449
 2025-08-31,pre,FICO,FICO,Information Technology,Application Software,1521.6400146484375
 2025-08-31,pre,FERG,FERG,Industrials,Industrial Machinery & Supplies & Components,231.1499938964844
@@ -358,7 +358,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,pre,MSI,MSI,Information Technology,Communications Equipment,472.4599914550781
 2025-08-31,pre,MSM,MSM,Industrials,Trading Companies & Distributors,90.2300033569336
 2025-08-31,pre,KBR,KBR,Industrials,Diversified Support Services,50.459999084472656
-2025-08-31,pre,PAG,PAG,Consumer Discretionary,Auto & Truck Dealerships,184.41000366210935
+2025-08-31,pre,PAG,PAG,Consumer Discretionary,Auto & Truck Dealerships,184.41000366210932
 2025-08-31,pre,SHC,SHC,Health Care,Diagnostics & Research,16.3700008392334
 2025-08-31,pre,MTG,MTG,Financials,Reinsurance,27.82999992370605
 2025-08-31,pre,AL,AL,Industrials,Rental & Leasing Services,60.209999084472656
@@ -401,7 +401,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,pre,EL,EL,Consumer Staples,Personal Care Products,91.7300033569336
 2025-08-31,pre,ABNB,ABNB,Consumer Discretionary,"Hotels, Resorts & Cruise lines",130.52999877929688
 2025-08-31,pre,TXN,TXN,Information Technology,Semiconductors,202.47999572753903
-2025-08-31,pre,MTB,MTB,Financials,Regional Banks,201.66000366210935
+2025-08-31,pre,MTB,MTB,Financials,Regional Banks,201.66000366210932
 2025-08-31,pre,CF,CF,Materials,Fertilizers & Agricultural Chemicals,86.62999725341797
 2025-08-31,pre,HIG,HIG,Financials,Property & Casualty Insurance,132.30999755859375
 2025-08-31,pre,ELV,ELV,Health Care,Managed Health Care,318.6499938964844
@@ -446,7 +446,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,pre,AMKR,AMKR,Information Technology,Semiconductors,24.190000534057617
 2025-08-31,pre,UWMC,UWMC,Financials,Mortgage Finance,5.699999809265137
 2025-08-31,pre,LECO,LECO,Industrials,Industrial Machinery & Supplies & Components,242.6300048828125
-2025-08-31,pre,STE,STE,Health Care,Health Care Equipment,245.05999755859372
+2025-08-31,pre,STE,STE,Health Care,Health Care Equipment,245.0599975585937
 2025-08-31,pre,MPW,MPW,Real Estate,Health Care REITs,4.5
 2025-08-31,pre,HAYW,HAYW,Industrials,Electrical Equipment & Parts,16.079999923706055
 2025-08-31,pre,PRI,PRI,Financials,Life & Health Insurance,269.3399963378906
@@ -481,7 +481,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,events,TJX,TJX,Consumer Discretionary,Apparel Retail,136.61000061035156
 2025-08-31,events,WYNN,WYNN,Consumer Discretionary,Casinos & Gaming,126.75
 2025-08-31,events,MTZ,MTZ,Industrials,Construction & Engineering,181.69000244140625
-2025-08-31,events,TKO,TKO,Communication Services,Movies & Entertainment,189.55999755859372
+2025-08-31,events,TKO,TKO,Communication Services,Movies & Entertainment,189.5599975585937
 2025-08-31,events,PEN,PEN,Health Care,Health Care Equipment,272.6400146484375
 2025-08-31,events,BROS,BROS,Consumer Discretionary,Restaurants,71.83000183105469
 2025-08-31,events,VNOM,VNOM,Energy,Oil & Gas Storage & Transportation,39.845001220703125
@@ -538,18 +538,18 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,events,TRV,TRV,Financials,Property & Casualty Insurance,271.510009765625
 2025-08-31,events,HLT,HLT,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",276.0599975585937
 2025-08-31,events,ADSK,ADSK,Information Technology,Application Software,314.70001220703125
-2025-08-31,events,SPG,SPG,Real Estate,Retail REITs,180.66000366210935
+2025-08-31,events,SPG,SPG,Real Estate,Retail REITs,180.66000366210932
 2025-08-31,events,AZO,AZO,Consumer Discretionary,Automotive Retail,4198.52978515625
 2025-08-31,events,NET,NET,Information Technology,Software - Infrastructure,208.7100067138672
 2025-08-31,events,USB,USB,Financials,Diversified Banks,48.83000183105469
-2025-08-31,events,SNOW,SNOW,Information Technology,Software - Application,238.66000366210935
+2025-08-31,events,SNOW,SNOW,Information Technology,Software - Application,238.66000366210932
 2025-08-31,events,CVS,CVS,Health Care,Health Care Services,73.1500015258789
 2025-08-31,events,HCA,HCA,Health Care,Health Care Facilities,403.9599914550781
 2025-08-31,events,PH,PH,Industrials,Industrial Machinery & Supplies & Components,759.3499755859375
 2025-08-31,events,RCL,RCL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",363.2200012207031
 2025-08-31,events,PLD,PLD,Real Estate,Industrial REITs,113.77999877929688
 2025-08-31,events,CVNA,CVNA,Consumer Discretionary,Automotive Retail,371.9200134277344
-2025-08-31,events,ADI,ADI,Information Technology,Semiconductors,251.30999755859372
+2025-08-31,events,ADI,ADI,Information Technology,Semiconductors,251.3099975585937
 2025-08-31,events,PANW,PANW,Information Technology,Systems Software,190.5200042724609
 2025-08-31,events,MU,MU,Information Technology,Semiconductors,119.01000213623048
 2025-08-31,events,COF,COF,Financials,Consumer Finance,227.22000122070312
@@ -716,7 +716,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,events,MTCH,MTCH,Communication Services,Interactive Media & Services,37.34000015258789
 2025-08-31,events,MOS,MOS,Materials,Fertilizers & Agricultural Chemicals,33.400001525878906
 2025-08-31,events,H,H,Consumer Discretionary,Lodging,144.27999877929688
-2025-08-31,events,IQV,IQV,Health Care,Life Sciences Tools & Services,190.80999755859372
+2025-08-31,events,IQV,IQV,Health Care,Life Sciences Tools & Services,190.8099975585937
 2025-08-31,events,KHC,KHC,Consumer Staples,Packaged Foods & Meats,27.96999931335449
 2025-08-31,events,FICO,FICO,Information Technology,Application Software,1521.6400146484375
 2025-08-31,events,FERG,FERG,Industrials,Industrial Machinery & Supplies & Components,231.1499938964844
@@ -948,7 +948,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,events,ALL,ALL,Financials,Property & Casualty Insurance,203.4499969482422
 2025-08-31,events,NSC,NSC,Industrials,Rail Transportation,279.9800109863281
 2025-08-31,events,AMT,AMT,Real Estate,Telecom Tower REITs,203.8500061035156
-2025-08-31,events,PGR,PGR,Financials,Property & Casualty Insurance,247.05999755859372
+2025-08-31,events,PGR,PGR,Financials,Property & Casualty Insurance,247.0599975585937
 2025-08-31,events,APLS,APLS,Health Care,Biotechnology,27.56999969482422
 2025-08-31,events,DUOL,DUOL,Consumer Discretionary,Education Services,297.8599853515625
 2025-08-31,events,CF,CF,Materials,Fertilizers & Agricultural Chemicals,86.62999725341797
@@ -1120,7 +1120,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,events,TGT,TGT,Consumer Staples,Consumer Staples Merchandise Retail,95.9800033569336
 2025-08-31,events,FTNT,FTNT,Information Technology,Systems Software,78.7699966430664
 2025-08-31,events,BMY,BMY,Health Care,Health Care Distributors,47.18000030517578
-2025-08-31,events,MMC,MMC,Financials,Insurance Brokers,205.80999755859372
+2025-08-31,events,MMC,MMC,Financials,Insurance Brokers,205.8099975585937
 2025-08-31,events,CAG,CAG,Consumer Staples,Packaged Foods & Meats,19.1299991607666
 2025-08-31,events,LINE,LINE,Real Estate,Industrial REITs,41.90999984741211
 2025-08-31,events,BF-B,BF.B,Consumer Staples,Distillers & Vintners,29.940000534057617
@@ -1180,4 +1180,4 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,events,OGN,OGN,Health Care,Pharmaceuticals,9.420000076293944
 2025-08-31,events,CBSH,CBSH,Financials,Regional Banks,61.93999862670898
 2025-08-31,events,UHAL,UHAL,Industrials,Rental & Leasing Services,57.54999923706055
-2025-08-31,events,HEI-A,HEI.A,Industrials,Aerospace & Defense,245.00999450683597
+2025-08-31,events,HEI-A,HEI.A,Industrials,Aerospace & Defense,245.009994506836
