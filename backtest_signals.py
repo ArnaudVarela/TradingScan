@@ -18,7 +18,7 @@ MAX_TICKERS = 100
 PUBLIC_DIR = os.path.join("dashboard", "public")
 
 # Petite pause entre appels (si tu veux ménager l’API yfinance)
-SLEEP_BETWEEN_TICKERS = 0.0
+SLEEP_BETWEEN_TICKERS = 0.2
 # ===============================================================================
 
 
