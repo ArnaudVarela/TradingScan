@@ -327,14 +327,14 @@ export default function App() {
         <ErrorBoundary fallback="La table Pre-signals n'a pas pu s'afficher.">
           <section>
             <h2 className="h1 mb-3">Anticipative pre-signals</h2>
-            <DataTable rows={rowsPre} />
+            <DataTable rows={Array.isArray(rowsPre) ? rowsPre : []} />
           </section>
         </ErrorBoundary>
 
         <ErrorBoundary fallback="La table Event-driven n'a pas pu s'afficher.">
           <section>
             <h2 className="h1 mb-3">Event-driven signals</h2>
-            <DataTable rows={rowsEvents} />
+            <DataTable rows={Array.isArray(rowsEvents) ? rowsEvents : []} />
           </section>
         </ErrorBoundary>
       </div>
