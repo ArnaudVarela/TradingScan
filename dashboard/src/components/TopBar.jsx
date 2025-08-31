@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
+import FearGreedGauge from "./FearGreedGauge.jsx";
 
-export default function TopBar({ lastRefreshed, onRefresh }) {
+export default function TopBar({ lastRefreshed, onRefresh, fear }) {
   const [darkMode, setDarkMode] = useState(false);
 
   // applique la classe dark sur <html>
@@ -21,6 +22,15 @@ export default function TopBar({ lastRefreshed, onRefresh }) {
           Confirmed / Anticipative / Event-driven signals – powered by cross-analysis
         </p>
       </div>
+       <div className="flex items-center gap-4">
+        {fear && ( <FearGreedGauge
+            score={fear.score}
+            label={fear.label}
+            streak={fear.streak_days}
+            asof={fear.asof}
+          />
+        )}
+     </div>
       <div className="flex gap-2 items-center">
         <span className="text-xs text-slate-500 dark:text-slate-400">
           Last refresh: {lastRefreshed}
