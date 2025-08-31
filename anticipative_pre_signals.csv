@@ -10,7 +10,7 @@ PODD,PODD,339.8800048828125,23925001884.19336,Health Care,Medical Devices,Strong
 UAL,UAL,105.0,33991860000.0,Industrials,Passenger Airlines,Strong Buy,4,,Strong Buy,1.45455,20.0,5.0
 VICI,VICI,33.779998779296875,36021976757.79883,Real Estate,Hotel & Resort REITs,Strong Buy,6,,Strong Buy,1.52174,22.0,5.0
 LYV,LYV,166.49000549316406,38617356774.139404,Communication Services,Movies & Entertainment,Strong Buy,4,,Strong Buy,1.47619,20.0,5.0
-DAL,DAL,61.779998779296875,40339124665.984375,Industrials,Passenger Airlines,Strong Buy,6,,Strong Buy,1.45455,21.0,5.0
+DAL,DAL,61.779998779296875,40339124665.984375,Industrials,Passenger Airlines,Strong Buy,6,,Strong Buy,1.45455,20.0,5.0
 FANG,FANG,148.75999450683594,43063938149.96582,Energy,Oil & Gas Exploration & Production,Strong Buy,4,,Strong Buy,1.46667,30.0,5.0
 FLUT,FLUT,307.1700134277344,53987277592.6582,Consumer Discretionary,Casinos & Gaming,Strong Buy,6,,Strong Buy,1.42308,26.0,5.0
 COP,COP,98.97000122070312,123607596491.625,Energy,Oil & Gas Exploration & Production,Strong Buy,4,,Strong Buy,1.57692,26.0,5.0
@@ -152,7 +152,7 @@ CLF,CLF,10.75,5317971336.0,Materials,Steel,Strong Buy,6,,Buy,2.41667,11.0,3.55
 GTES,GTES,25.559999465942383,6583846902.435303,Industrials,Specialty Industrial Machinery,Strong Buy,4,,Buy,1.63636,11.0,3.55
 VOYA,VOYA,75.08999633789062,7240012248.907471,Financials,Multi-Sector Holdings,Strong Buy,4,,Buy,2.41667,11.0,3.55
 LW,LW,57.529998779296875,8017093440.128906,Consumer Staples,Packaged Foods & Meats,Strong Buy,4,,Buy,2.36364,11.0,3.55
-AA,AA,32.189998626708984,8334473751.954346,Materials,Aluminum,Strong Buy,4,BUY,Buy,2.08333,11.0,3.55
+AA,AA,32.189998626708984,8334473751.954346,Materials,Aluminum,Strong Buy,4,,Buy,2.08333,11.0,3.55
 WCC,WCC,219.83999633789062,10973928969.195557,Industrials,Industrial Distribution,Strong Buy,4,,Buy,1.75,11.0,3.55
 GL,GL,139.9499969482422,11336440137.596924,Financials,Life & Health Insurance,Strong Buy,4,,Buy,1.72727,11.0,3.55
 NLY,NLY,21.190000534057617,13605591460.985596,Financials,REIT - Mortgage,Strong Buy,4,,Buy,2.0,11.0,3.55
