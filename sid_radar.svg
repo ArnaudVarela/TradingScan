@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FF55" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00FF55" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="circleClip">
+      <circle cx="100" cy="100" r="90" />
+    </clipPath>
+  </defs>
+
+  <!-- Radar glow background -->
+  <circle cx="100" cy="100" r="90" fill="url(#radarGlow)" />
+
+  <!-- Sweep wedge -->
+  <path d="M 100 100 L 181.568 61.964 A 90 90 0 0 1 181.568 138.036 Z" fill="#00FF55" fill-opacity="0.22" />
+
+  <!-- Concentric circles -->
+  <circle cx="100" cy="100" r="20" fill="none" stroke="#00FF88" stroke-width="0.8" /><circle cx="100" cy="100" r="40" fill="none" stroke="#00FF88" stroke-width="0.8" /><circle cx="100" cy="100" r="60" fill="none" stroke="#00FF88" stroke-width="0.8" /><circle cx="100" cy="100" r="80" fill="none" stroke="#00FF88" stroke-width="0.8" /><circle cx="100" cy="100" r="90" fill="none" stroke="#00FF88" stroke-width="0.8" />
+
+  <!-- Radial grid lines -->
+  <line x1="100" y1="100" x2="190.00" y2="100.00" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="177.94" y2="145.00" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="145.00" y2="177.94" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="100.00" y2="190.00" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="55.00" y2="177.94" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="22.06" y2="145.00" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="10.00" y2="100.00" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="22.06" y2="55.00" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="55.00" y2="22.06" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="100.00" y2="10.00" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="145.00" y2="22.06" stroke="#00FF88" stroke-width="0.6" /><line x1="100" y1="100" x2="177.94" y2="55.00" stroke="#00FF88" stroke-width="0.6" />
+
+  <!-- Green blips -->
+  <circle cx="124.29" cy="111.67" r="2.5" fill="#00FF55" /><circle cx="117.37" cy="154.28" r="2.5" fill="#00FF55" /><circle cx="121.98" cy="66.19" r="2.5" fill="#00FF55" /><circle cx="88.06" cy="74.62" r="2.5" fill="#00FF55" /><circle cx="144.44" cy="133.26" r="2.5" fill="#00FF55" /><circle cx="93.09" cy="156.99" r="2.5" fill="#00FF55" /><circle cx="75.22" cy="86.23" r="2.5" fill="#00FF55" /><circle cx="134.29" cy="81.80" r="2.5" fill="#00FF55" /><circle cx="66.76" cy="171.44" r="2.5" fill="#00FF55" /><circle cx="139.54" cy="140.80" r="2.5" fill="#00FF55" />
+
+  <!-- Red blip -->
+  <circle cx="132.50" cy="156.29" r="4.5" fill="#FF1A1A" />
+
+  <!-- Center dot -->
+  <circle cx="100" cy="100" r="2" fill="#00FF88" />
+</svg>
