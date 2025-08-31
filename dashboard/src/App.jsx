@@ -17,7 +17,7 @@ const BRANCH = "main";
 
 // Détection Vercel : on sert /public à la racine du site
 const isBrowser = typeof window !== "undefined";
-const USE_LOCAL = false;
+const USE_LOCAL = true;
 
 // ---------- Fichiers CSV / JSON
 const FILES = {
@@ -33,11 +33,12 @@ const FILES = {
   fear:             "fear_greed.json",
 };
 
-// URL finale + cache-buster court (1 min)
+// URL locale + cache-buster court (1 min)
 function urlFor(file) {
   const bucketMs = 60_000;
   const bust = `?t=${Math.floor(Date.now() / bucketMs)}`;
-  return USE_LOCAL ? `/${file}${bust}` : rawUrl(OWNER, REPO, BRANCH, file) + bust;
+  // fichiers statiques servis par Vercel depuis /public
+  return `/${file}${bust}`;
 }
 
 export default function App() {
@@ -196,7 +197,7 @@ export default function App() {
 
       {/* Info source */}
       <div className="mb-2 text-xs text-slate-500">
-        Source CSV : {USE_LOCAL ? "fichiers statiques (public/) sur Vercel" : "raw.githubusercontent.com (repo GitHub)"}
+      Source CSV : fichiers statiques (public/) sur Vercel
       </div>
 
       {/* Bandeau avertissements (certains fichiers KO) */}
