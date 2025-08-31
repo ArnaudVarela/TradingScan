@@ -60,6 +60,36 @@ def placeholder_outputs_when_empty():
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_{h}d.csv")
     save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv")
 
+# ---------- SPY ----------
+def compute_spy_benchmark(start_dt, end_dt):
+    """
+    Télécharge SPY en daily, normalise base 100 au premier point >= start_dt,
+    et renvoie un DataFrame: date, equity (float).
+    """
+    # marge de sécurité
+    start_pad = (pd.to_datetime(start_dt) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
+    end_pad   = (pd.to_datetime(end_dt)   + pd.Timedelta(days=7)).strftime("%Y-%m-%d")
+
+    hist = yf.Ticker("SPY").history(
+        start=start_pad, end=end_pad, interval="1d",
+        auto_adjust=True, actions=False
+    )
+    if hist is None or hist.empty:
+        return pd.DataFrame(columns=["date", "equity"])
+
+    px = hist[["Close"]].rename(columns={"Close": "close"})
+    px.index = pd.to_datetime(px.index.date)
+
+    # garde la fenêtre demandée
+    mask = (px.index >= pd.to_datetime(start_dt)) & (px.index <= pd.to_datetime(end_dt))
+    px = px.loc[mask].copy()
+    if px.empty:
+        return pd.DataFrame(columns=["date", "equity"])
+
+    base = float(px["close"].iloc[0])
+    px["equity"] = (px["close"] / base) * 100.0
+    out = px.reset_index()[["Date", "equity"]].rename(columns={"Date": "date"})
+    return out
 
 # ---------- Téléchargement des prix ----------
 def get_daily_prices(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
@@ -86,7 +116,6 @@ def get_daily_prices(symbol: str, start_date: str, end_date: str) -> pd.DataFram
     out.index = pd.to_datetime(out.index.date)  # dates normalisées (00:00:00)
     return out
 
-
 # ---------- Construction equity ----------
 def equity_from_daily_returns(daily_ret_pct: pd.Series) -> pd.DataFrame:
     """Transforme une série de retours (%) par date en courbe base 100."""
@@ -98,7 +127,6 @@ def equity_from_daily_returns(daily_ret_pct: pd.Series) -> pd.DataFrame:
         "date": pd.to_datetime(equity.index),
         "equity": equity.values
     })
-
 
 # ---------- Main ----------
 def main():
@@ -231,6 +259,16 @@ def main():
         )
         eq = equity_from_daily_returns(daily_ret)
         save_csv(eq, f"backtest_equity_{h}d.csv")
+        # === SPY benchmark aligné sur la même fenêtre de dates que la courbe 'eq'
+        spy = compute_spy_benchmark(eq["date"].min(), eq["date"].max())
+        save_csv(spy, f"backtest_benchmark_spy_{h}d.csv")
+
+        # (optionnel) combo “wide” pour overlay côté front sans 2 fetch:
+        combo = (
+         eq.rename(columns={"equity": "model"})
+          .merge(spy.rename(columns={"equity": "spy"}), on="date", how="inner")
+        )
+        save_csv(combo, f"backtest_equity_{h}d_combo.csv")
 
     # Pour le front actuel qui lit spécifiquement 10j :
     # S'il existe, on le laisse tel quel; sinon, on copie le plus long horizon dispo.
