@@ -7,6 +7,7 @@ import SectorHeatmap from "./components/SectorHeatmap.jsx";
 import SectorTimeline from "./components/SectorTimeline.jsx";
 import { fetchCSV, rawUrl } from "./lib/csv.js";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import EquityCurve from "./components/EquityCurve.jsx";
 
 // ---------- Coordonnées repo (fallback hors Vercel)
 const OWNER  = "ArnaudVarela";
@@ -25,6 +26,7 @@ const FILES = {
   all:       "candidates_all_ranked.csv",
   history:   "sector_history.csv",
   breadth:   "sector_breadth.csv",
+  equity10: "backtest_equity_10d.csv",
 };
 
 // URL finale + cache-buster court (1 min)
@@ -42,6 +44,7 @@ export default function App() {
     all:       [],
     history:   [],
     breadth:   [],
+    equity10:  [], 
   });
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
@@ -76,7 +79,7 @@ export default function App() {
     setLoading(true);
     setError("");
     setWarningFiles([]);
-
+        
     const tasks = [
       ["confirmed", FILES.confirmed],
       ["pre",       FILES.pre],
@@ -84,6 +87,7 @@ export default function App() {
       ["all",       FILES.all],
       ["history",   FILES.history],
       ["breadth",   FILES.breadth],
+      ["equity10",  FILES.equity10],
     ];
 
     try {
@@ -91,7 +95,7 @@ export default function App() {
         tasks.map(([_, file]) => fetchCSV(urlFor(file)))
       );
 
-      const next = { confirmed: [], pre: [], events: [], all: [], history: [], breadth: [] };
+      const next = { confirmed: [], pre: [], events: [], all: [], history: [], breadth: [], equity10: [] };
       const failed = [];
 
       results.forEach((res, idx) => {
@@ -117,6 +121,7 @@ export default function App() {
         next.all.length === 0 &&
         next.history.length === 0 &&
         next.breadth.length === 0;
+        next.equity10.length === 0;
 
       if (allEmpty) {
         setError("Impossible de charger les données. Réessaie plus tard.");
@@ -251,6 +256,11 @@ export default function App() {
             />
           </div>
         )}
+      </div>
+
+      {/* Equity curve (10-day hold) */}
+      <div className="mb-6">
+        <EquityCurve data={data.equity10} title="Equity curve — 10 trading days hold" />
       </div>
 
       {/* États */}
