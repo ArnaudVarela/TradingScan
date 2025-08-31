@@ -16,9 +16,9 @@ export default function TopBar({ lastRefreshed, onRefresh }) {
   return (
     <div className="flex justify-between items-center mb-6">
       <div>
-        <h1 className="text-2xl font-bold">Signals Dashboard</h1>
+        <h1 className="text-2xl font-bold">Signal Intelligence Dashboard</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Confirmed / Anticipative / Event-driven
+          Confirmed / Anticipative / Event-driven signals – powered by cross-analysis
         </p>
       </div>
       <div className="flex gap-2 items-center">
