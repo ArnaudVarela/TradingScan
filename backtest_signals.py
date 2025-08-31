@@ -20,8 +20,8 @@ import yfinance as yf
 HORIZONS = [1, 3, 5, 10, 20]   # jours de bourse tenus
 PUBLIC_DIR = os.path.join("dashboard", "public")
 ENTRY_COL = "close"            # on entre au close du jour du signal (ou prochain jour ouvré)
-MAX_TICKERS = None             # None = no limit ; ex: 300 pour debug
-SLEEP_BETWEEN_CALLS = 0.0      # petit sleep si besoin
+MAX_TICKERS = 150            # None = no limit ; ex: 300 pour debug
+SLEEP_BETWEEN_CALLS = 0.2      # petit sleep si besoin
 
 # ------------------------
 
