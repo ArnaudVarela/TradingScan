@@ -16,14 +16,14 @@ date,bucket,sector,count
 2025-W35,pre,Consumer Cyclical,2
 2025-W35,pre,Technology,2
 2025-W35,pre,Financial Services,1
-2025-W35,events,Information Technology,100
+2025-W35,events,Information Technology,99
 2025-W35,events,Health Care,77
 2025-W35,events,Energy,34
 2025-W35,events,Consumer Discretionary,87
-2025-W35,events,Industrials,123
+2025-W35,events,Industrials,122
 2025-W35,events,Real Estate,59
 2025-W35,events,Communication Services,24
-2025-W35,events,Financials,92
+2025-W35,events,Financials,91
 2025-W35,events,Consumer Staples,47
 2025-W35,events,Utilities,37
 2025-W35,events,Materials,36

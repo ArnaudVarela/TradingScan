@@ -46,7 +46,7 @@ REG,REG,NMS,13189128080.0,72.5,Real Estate,Retail REITs,Strong Buy,4,,Buy,1.7619
 ROKU,ROKU,NMS,14226281772.785156,96.55999755859375,Communication Services,Entertainment,Strong Buy,6,,Buy,2.03333,26.0,4.0
 CHRW,CHRW,NMS,15198311339.614868,128.6999969482422,Industrials,Air Freight & Logistics,Strong Buy,4,,Buy,2.07692,25.0,4.0
 KIM,KIM,NYQ,15230227845.00122,22.489999771118164,Real Estate,Retail REITs,Strong Buy,4,,Buy,2.375,21.0,4.0
-CELH,CELH,NCM,16219644755.516052,62.880001068115234,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,6,,Buy,1.85714,20.0,4.0
+CELH,CELH,NCM,16219644755.516052,62.880001068115234,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,6,,Buy,1.9,20.0,4.0
 CHWY,CHWY,NYQ,16908902349.736572,40.959999084472656,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,,Buy,2.03448,21.0,4.0
 U,U,NYQ,16972546363.725586,39.40999984741211,Information Technology,Software - Application,Strong Buy,4,,Buy,2.18519,22.0,4.0
 RBRK,RBRK,NYQ,17298273780.046875,89.4000015258789,Information Technology,Software - Infrastructure,Buy,3,,Strong Buy,1.33333,20.0,4.0
@@ -70,7 +70,7 @@ XYZ,XYZ,NYQ,48547269387.93945,79.63999938964844,Financials,Transaction & Payment
 DDOG,DDOG,NMS,49159144058.84766,136.67999267578125,Information Technology,Application Software,Buy,3,,Strong Buy,1.54545,40.0,4.0
 CTVA,CTVA,NYQ,50382433032.03906,74.19000244140625,Materials,Fertilizers & Agricultural Chemicals,Buy,2,,Strong Buy,1.56522,21.0,4.0
 LNG,LNG,NYQ,53144299369.62891,241.82000732421875,Energy,Oil & Gas Midstream,Strong Buy,4,,Buy,1.6087,21.0,4.0
-SLB,SLB,NYQ,54953123617.05078,36.84000015258789,Energy,Oil & Gas Equipment & Services,Buy,2,,Strong Buy,1.44828,28.0,4.0
+SLB,SLB,NYQ,54953123617.05078,36.84000015258789,Energy,Oil & Gas Equipment & Services,Buy,2,,Strong Buy,1.48276,28.0,4.0
 GM,GM,NYQ,55782251102.715576,58.59000015258789,Consumer Discretionary,Automobile Manufacturers,Strong Buy,4,,Buy,2.25,25.0,4.0
 TFC,TFC,NYQ,60371580406.49414,46.81999969482422,Financials,Regional Banks,Strong Buy,4,,Buy,2.18182,21.0,4.0
 TRV,TRV,NYQ,61126134538.57422,271.510009765625,Financials,Property & Casualty Insurance,Strong Buy,4,,Buy,2.43478,20.0,4.0
@@ -431,7 +431,6 @@ LFUS,LFUS,NMS,6544311888.796997,259.8299865722656,Information Technology,Electro
 LOAR,LOAR,NYQ,6615365910.21582,70.66000366210938,Industrials,Aerospace & Defense,Strong Sell,-4,,Strong Buy,1.5,4.0,2.2
 DNB,DNB,NYQ,4082629276.8,9.149999618530273,Industrials,Financial Data & Stock Exchanges,Strong Buy,4,,Sell,3.5,3.0,2.15
 ECG,ECG,NYQ,4096340871.496582,78.44000244140625,Industrials,Construction & Engineering,Strong Buy,6,,,,3.0,2.15
-DLB,DLB,NYQ,6930108445.504761,71.68000030517578,Information Technology,Specialty Business Services,Strong Sell,-6,,Strong Buy,1.5,3.0,2.15
 DDS,DDS,NYQ,8312928076.171875,532.8800048828125,Consumer Discretionary,Broadline Retail,Strong Buy,4,,,,3.0,2.15
 VRSN,VRSN,NMS,25535108525.90332,273.3699951171875,Information Technology,Internet Services & Infrastructure,Buy,3,,Buy,2.0,3.0,2.15
 ORI,ORI,NYQ,9931346203.308105,39.970001220703125,Financials,Property & Casualty Insurance,Strong Buy,6,,,,2.0,2.1
@@ -652,7 +651,7 @@ ARES,ARES,NYQ,58545894836.569336,179.1999969482422,Financials,Asset Management,N
 DUK,DUK,NYQ,95251162098.81592,122.48999786376953,Utilities,Electric Utilities,Neutral,-1,,Buy,2.16667,13.0,1.65
 M,M,NYQ,3592474075.6988525,13.229999542236328,Consumer Discretionary,Department Stores,Buy,2,,Hold,2.84615,12.0,1.6
 CROX,CROX,NMS,4762637113.320923,87.19999694824219,Consumer Discretionary,Footwear,Neutral,1,,Buy,2.42857,12.0,1.6
-COLB,COLB,NMS,5629757652.108154,26.770000457763672,Financials,Regional Banks,Buy,2,,Hold,2.66667,12.0,1.6
+COLB,COLB,NMS,5629757652.108154,26.770000457763672,Financials,Regional Banks,Buy,2,,,,12.0,1.6
 MKTX,MKTX,NMS,6868960855.169678,183.83999633789062,Financials,Financial Exchanges & Data,Strong Sell,-4,,Buy,2.26667,12.0,1.6
 PEGA,PEGA,NMS,9274300419.690674,54.209999084472656,Information Technology,Software - Application,Buy,3,,,,12.0,1.6
 IVZ,IVZ,NYQ,9762151687.805176,21.889999389648438,Financials,Asset Management & Custody Banks,Buy,2,,,,12.0,1.6
@@ -854,7 +853,7 @@ TDC,TDC,NYQ,1982609956.741333,20.979999542236328,Information Technology,IT Consu
 BHF,BHF,NMS,2701022328.071594,47.2599983215332,Financials,Life & Health Insurance,Neutral,-1,,Hold,3.0,9.0,0.45
 RHI,RHI,NYQ,3796899448.951721,37.31999969482422,Industrials,Human Resource & Employment Services,Neutral,1,,Hold,3.18182,9.0,0.45
 SAIC,SAIC,NMS,5516928416.955566,117.69999694824219,Industrials,Diversified Support Services,Neutral,1,,,,9.0,0.45
-AMTM,AMTM,NYQ,6071058536.045288,24.950000762939453,Industrials,Diversified Support Services,Neutral,-1,,Hold,2.55556,9.0,0.45
+AMTM,AMTM,NYQ,6071058536.045288,24.950000762939453,Industrials,Diversified Support Services,Neutral,-1,,,,9.0,0.45
 OLED,OLED,NMS,6587764603.924561,138.58999633789062,Information Technology,Semiconductors,Sell,-2,,,,9.0,0.45
 BFAM,BFAM,NYQ,6713159128.06778,118.04000091552734,Consumer Discretionary,Personal Services,Sell,-3,,,,9.0,0.45
 EXP,EXP,NYQ,7492543171.94519,230.89999389648438,Materials,Construction Materials,Neutral,-1,,Hold,2.6,9.0,0.45
@@ -909,6 +908,7 @@ AAON,AAON,NMS,6762971647.988037,82.94999694824219,Industrials,Building Products,
 CORT,CORT,NCM,7346535968.62793,69.72000122070312,Health Care,Pharmaceuticals,Neutral,1,,,,4.0,0.2
 HLNE,HLNE,NMS,8518410247.879028,154.33999633789062,Financials,Asset Management,Neutral,-1,,,,4.0,0.2
 RLI,RLI,NYQ,6219612614.185547,67.7300033569336,Financials,Insurance - Property & Casualty,Neutral,1,,,,3.0,0.15000000000000002
+DLB,DLB,NYQ,6930108445.504761,71.68000030517578,Information Technology,Specialty Business Services,Strong Sell,-6,,,,3.0,0.15000000000000002
 UGI,UGI,NYQ,7444967228.820801,34.63999938964844,Utilities,Gas Utilities,Strong Sell,-4,,,,3.0,0.15000000000000002
 MORN,MORN,NMS,11068272600.350952,262.4200134277344,Financials,Financial Data & Stock Exchanges,Neutral,0,,,,3.0,0.15000000000000002
 FCN,FCN,NYQ,5456886828.250122,168.63999938964844,Industrials,Research & Consulting Services,Neutral,1,,,,2.0,0.1

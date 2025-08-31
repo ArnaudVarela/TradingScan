@@ -86,7 +86,7 @@ anticipative,REG,REG,72.5,13189128080.0,Real Estate,Retail REITs,Strong Buy,4,,B
 anticipative,ROKU,ROKU,96.55999755859375,14226281772.785156,Communication Services,Entertainment,Strong Buy,6,,Buy,2.03333,26.0,4.0
 anticipative,CHRW,CHRW,128.6999969482422,15198311339.614868,Industrials,Air Freight & Logistics,Strong Buy,4,,Buy,2.07692,25.0,4.0
 anticipative,KIM,KIM,22.489999771118164,15230227845.00122,Real Estate,Retail REITs,Strong Buy,4,,Buy,2.375,21.0,4.0
-anticipative,CELH,CELH,62.880001068115234,16219644755.516052,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,6,,Buy,1.85714,20.0,4.0
+anticipative,CELH,CELH,62.880001068115234,16219644755.516052,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,6,,Buy,1.9,20.0,4.0
 anticipative,CHWY,CHWY,40.959999084472656,16908902349.736572,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,,Buy,2.03448,21.0,4.0
 anticipative,U,U,39.40999984741211,16972546363.725586,Information Technology,Software - Application,Strong Buy,4,,Buy,2.18519,22.0,4.0
 anticipative,RBRK,RBRK,89.4000015258789,17298273780.046875,Information Technology,Software - Infrastructure,Buy,3,,Strong Buy,1.33333,20.0,4.0
@@ -110,7 +110,7 @@ anticipative,XYZ,XYZ,79.63999938964844,48547269387.93945,Financials,Transaction 
 anticipative,DDOG,DDOG,136.67999267578125,49159144058.84766,Information Technology,Application Software,Buy,3,,Strong Buy,1.54545,40.0,4.0
 anticipative,CTVA,CTVA,74.19000244140625,50382433032.03906,Materials,Fertilizers & Agricultural Chemicals,Buy,2,,Strong Buy,1.56522,21.0,4.0
 anticipative,LNG,LNG,241.82000732421875,53144299369.62891,Energy,Oil & Gas Midstream,Strong Buy,4,,Buy,1.6087,21.0,4.0
-anticipative,SLB,SLB,36.84000015258789,54953123617.05078,Energy,Oil & Gas Equipment & Services,Buy,2,,Strong Buy,1.44828,28.0,4.0
+anticipative,SLB,SLB,36.84000015258789,54953123617.05078,Energy,Oil & Gas Equipment & Services,Buy,2,,Strong Buy,1.48276,28.0,4.0
 anticipative,GM,GM,58.59000015258789,55782251102.715576,Consumer Discretionary,Automobile Manufacturers,Strong Buy,4,,Buy,2.25,25.0,4.0
 anticipative,TFC,TFC,46.81999969482422,60371580406.49414,Financials,Regional Banks,Strong Buy,4,,Buy,2.18182,21.0,4.0
 anticipative,TRV,TRV,271.510009765625,61126134538.57422,Financials,Property & Casualty Insurance,Strong Buy,4,,Buy,2.43478,20.0,4.0
@@ -143,7 +143,7 @@ event,REG,REG,72.5,13189128080.0,Real Estate,Retail REITs,Strong Buy,4,,Buy,1.76
 event,ROKU,ROKU,96.55999755859375,14226281772.785156,Communication Services,Entertainment,Strong Buy,6,,Buy,2.03333,26.0,4.0
 event,CHRW,CHRW,128.6999969482422,15198311339.614868,Industrials,Air Freight & Logistics,Strong Buy,4,,Buy,2.07692,25.0,4.0
 event,KIM,KIM,22.489999771118164,15230227845.00122,Real Estate,Retail REITs,Strong Buy,4,,Buy,2.375,21.0,4.0
-event,CELH,CELH,62.880001068115234,16219644755.516052,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,6,,Buy,1.85714,20.0,4.0
+event,CELH,CELH,62.880001068115234,16219644755.516052,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,6,,Buy,1.9,20.0,4.0
 event,CHWY,CHWY,40.959999084472656,16908902349.736572,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,,Buy,2.03448,21.0,4.0
 event,U,U,39.40999984741211,16972546363.725586,Information Technology,Software - Application,Strong Buy,4,,Buy,2.18519,22.0,4.0
 event,RBRK,RBRK,89.4000015258789,17298273780.046875,Information Technology,Software - Infrastructure,Buy,3,,Strong Buy,1.33333,20.0,4.0
@@ -167,7 +167,7 @@ event,XYZ,XYZ,79.63999938964844,48547269387.93945,Financials,Transaction & Payme
 event,DDOG,DDOG,136.67999267578125,49159144058.84766,Information Technology,Application Software,Buy,3,,Strong Buy,1.54545,40.0,4.0
 event,CTVA,CTVA,74.19000244140625,50382433032.03906,Materials,Fertilizers & Agricultural Chemicals,Buy,2,,Strong Buy,1.56522,21.0,4.0
 event,LNG,LNG,241.82000732421875,53144299369.62891,Energy,Oil & Gas Midstream,Strong Buy,4,,Buy,1.6087,21.0,4.0
-event,SLB,SLB,36.84000015258789,54953123617.05078,Energy,Oil & Gas Equipment & Services,Buy,2,,Strong Buy,1.44828,28.0,4.0
+event,SLB,SLB,36.84000015258789,54953123617.05078,Energy,Oil & Gas Equipment & Services,Buy,2,,Strong Buy,1.48276,28.0,4.0
 event,GM,GM,58.59000015258789,55782251102.715576,Consumer Discretionary,Automobile Manufacturers,Strong Buy,4,,Buy,2.25,25.0,4.0
 event,TFC,TFC,46.81999969482422,60371580406.49414,Financials,Regional Banks,Strong Buy,4,,Buy,2.18182,21.0,4.0
 event,TRV,TRV,271.510009765625,61126134538.57422,Financials,Property & Casualty Insurance,Strong Buy,4,,Buy,2.43478,20.0,4.0
@@ -763,7 +763,6 @@ anticipative,ECG,ECG,78.44000244140625,4096340871.496582,Industrials,Constructio
 anticipative,DDS,DDS,532.8800048828125,8312928076.171875,Consumer Discretionary,Broadline Retail,Strong Buy,4,,,,3.0,2.15
 anticipative,VRSN,VRSN,273.3699951171875,25535108525.90332,Information Technology,Internet Services & Infrastructure,Buy,3,,Buy,2.0,3.0,2.15
 event,DNB,DNB,9.149999618530273,4082629276.8,Industrials,Financial Data & Stock Exchanges,Strong Buy,4,,Sell,3.5,3.0,2.15
-event,DLB,DLB,71.68000030517578,6930108445.504761,Information Technology,Specialty Business Services,Strong Sell,-6,,Strong Buy,1.5,3.0,2.15
 event,VRSN,VRSN,273.3699951171875,25535108525.90332,Information Technology,Internet Services & Infrastructure,Buy,3,,Buy,2.0,3.0,2.15
 anticipative,ORI,ORI,39.970001220703125,9931346203.308105,Financials,Property & Casualty Insurance,Strong Buy,6,,,,2.0,2.1
 anticipative,MLI,MLI,95.94000244140625,10620654210.266113,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,,,,2.0,2.1
@@ -995,14 +994,13 @@ event,CAH,CAH,148.77999877929688,35701991216.833984,Health Care,Health Care Dist
 event,ARES,ARES,179.1999969482422,58545894836.569336,Financials,Asset Management,Neutral,0,,Buy,2.13333,13.0,1.65
 event,DUK,DUK,122.48999786376953,95251162098.81592,Utilities,Electric Utilities,Neutral,-1,,Buy,2.16667,13.0,1.65
 anticipative,M,M,13.229999542236328,3592474075.6988525,Consumer Discretionary,Department Stores,Buy,2,,Hold,2.84615,12.0,1.6
-anticipative,COLB,COLB,26.770000457763672,5629757652.108154,Financials,Regional Banks,Buy,2,,Hold,2.66667,12.0,1.6
+anticipative,COLB,COLB,26.770000457763672,5629757652.108154,Financials,Regional Banks,Buy,2,,,,12.0,1.6
 anticipative,PEGA,PEGA,54.209999084472656,9274300419.690674,Information Technology,Software - Application,Buy,3,,,,12.0,1.6
 anticipative,IVZ,IVZ,21.889999389648438,9762151687.805176,Financials,Asset Management & Custody Banks,Buy,2,,,,12.0,1.6
 anticipative,MO,MO,67.20999908447266,112905408588.09473,Consumer Staples,Tobacco,Buy,2,,Hold,2.66667,12.0,1.6
 anticipative,ADP,ADP,304.04998779296875,123153321638.02734,Industrials,Human Resource & Employment Services,Buy,3,,Hold,2.8,12.0,1.6
 event,M,M,13.229999542236328,3592474075.6988525,Consumer Discretionary,Department Stores,Buy,2,,Hold,2.84615,12.0,1.6
 event,CROX,CROX,87.19999694824219,4762637113.320923,Consumer Discretionary,Footwear,Neutral,1,,Buy,2.42857,12.0,1.6
-event,COLB,COLB,26.770000457763672,5629757652.108154,Financials,Regional Banks,Buy,2,,Hold,2.66667,12.0,1.6
 event,MKTX,MKTX,183.83999633789062,6868960855.169678,Financials,Financial Exchanges & Data,Strong Sell,-4,,Buy,2.26667,12.0,1.6
 event,AVY,AVY,171.64999389648438,13385541164.038086,Materials,Paper & Plastic Packaging Products & Materials,Strong Sell,-6,,Buy,2.15385,12.0,1.6
 event,UTHR,UTHR,304.760009765625,13783167629.663086,Health Care,Biotechnology,Sell,-3,,Buy,1.85714,12.0,1.6
@@ -1169,7 +1167,6 @@ event,AWK,AWK,143.50999450683594,27998657566.36914,Utilities,Water Utilities,Neu
 event,TDC,TDC,20.979999542236328,1982609956.741333,Information Technology,IT Consulting & Other Services,Neutral,1,,Hold,2.7,9.0,0.45
 event,BHF,BHF,47.2599983215332,2701022328.071594,Financials,Life & Health Insurance,Neutral,-1,,Hold,3.0,9.0,0.45
 event,RHI,RHI,37.31999969482422,3796899448.951721,Industrials,Human Resource & Employment Services,Neutral,1,,Hold,3.18182,9.0,0.45
-event,AMTM,AMTM,24.950000762939453,6071058536.045288,Industrials,Diversified Support Services,Neutral,-1,,Hold,2.55556,9.0,0.45
 event,EXP,EXP,230.89999389648438,7492543171.94519,Materials,Construction Materials,Neutral,-1,,Hold,2.6,9.0,0.45
 event,HRL,HRL,25.440000534057617,13991949820.77063,Consumer Staples,Packaged Foods & Meats,Strong Sell,-6,,Hold,2.54545,9.0,0.45
 event,SNA,SNA,325.239990234375,16965623706.591797,Industrials,Industrial Machinery & Supplies & Components,Neutral,1,,Hold,2.7,8.0,0.4

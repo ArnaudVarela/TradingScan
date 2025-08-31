@@ -46,7 +46,7 @@ REG,REG,72.5,13189128080.0,Real Estate,Retail REITs,Strong Buy,4,,Buy,1.7619,20.
 ROKU,ROKU,96.55999755859375,14226281772.785156,Communication Services,Entertainment,Strong Buy,6,,Buy,2.03333,26.0,4.0
 CHRW,CHRW,128.6999969482422,15198311339.614868,Industrials,Air Freight & Logistics,Strong Buy,4,,Buy,2.07692,25.0,4.0
 KIM,KIM,22.489999771118164,15230227845.00122,Real Estate,Retail REITs,Strong Buy,4,,Buy,2.375,21.0,4.0
-CELH,CELH,62.880001068115234,16219644755.516052,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,6,,Buy,1.85714,20.0,4.0
+CELH,CELH,62.880001068115234,16219644755.516052,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,6,,Buy,1.9,20.0,4.0
 CHWY,CHWY,40.959999084472656,16908902349.736572,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,,Buy,2.03448,21.0,4.0
 U,U,39.40999984741211,16972546363.725586,Information Technology,Software - Application,Strong Buy,4,,Buy,2.18519,22.0,4.0
 RBRK,RBRK,89.4000015258789,17298273780.046875,Information Technology,Software - Infrastructure,Buy,3,,Strong Buy,1.33333,20.0,4.0
@@ -70,7 +70,7 @@ XYZ,XYZ,79.63999938964844,48547269387.93945,Financials,Transaction & Payment Pro
 DDOG,DDOG,136.67999267578125,49159144058.84766,Information Technology,Application Software,Buy,3,,Strong Buy,1.54545,40.0,4.0
 CTVA,CTVA,74.19000244140625,50382433032.03906,Materials,Fertilizers & Agricultural Chemicals,Buy,2,,Strong Buy,1.56522,21.0,4.0
 LNG,LNG,241.82000732421875,53144299369.62891,Energy,Oil & Gas Midstream,Strong Buy,4,,Buy,1.6087,21.0,4.0
-SLB,SLB,36.84000015258789,54953123617.05078,Energy,Oil & Gas Equipment & Services,Buy,2,,Strong Buy,1.44828,28.0,4.0
+SLB,SLB,36.84000015258789,54953123617.05078,Energy,Oil & Gas Equipment & Services,Buy,2,,Strong Buy,1.48276,28.0,4.0
 GM,GM,58.59000015258789,55782251102.715576,Consumer Discretionary,Automobile Manufacturers,Strong Buy,4,,Buy,2.25,25.0,4.0
 TFC,TFC,46.81999969482422,60371580406.49414,Financials,Regional Banks,Strong Buy,4,,Buy,2.18182,21.0,4.0
 TRV,TRV,271.510009765625,61126134538.57422,Financials,Property & Casualty Insurance,Strong Buy,4,,Buy,2.43478,20.0,4.0
@@ -417,7 +417,7 @@ EWBC,EWBC,105.13999938964844,14545277795.562744,Financials,Regional Banks,Buy,2,
 LDOS,LDOS,180.9199981689453,23211493005.081177,Industrials,Diversified Support Services,Buy,2,,,,13.0,1.65
 MPWR,MPWR,835.760009765625,41113375008.39844,Information Technology,Semiconductors,Buy,2,,,,13.0,1.65
 M,M,13.229999542236328,3592474075.6988525,Consumer Discretionary,Department Stores,Buy,2,,Hold,2.84615,12.0,1.6
-COLB,COLB,26.770000457763672,5629757652.108154,Financials,Regional Banks,Buy,2,,Hold,2.66667,12.0,1.6
+COLB,COLB,26.770000457763672,5629757652.108154,Financials,Regional Banks,Buy,2,,,,12.0,1.6
 PEGA,PEGA,54.209999084472656,9274300419.690674,Information Technology,Software - Application,Buy,3,,,,12.0,1.6
 IVZ,IVZ,21.889999389648438,9762151687.805176,Financials,Asset Management & Custody Banks,Buy,2,,,,12.0,1.6
 MO,MO,67.20999908447266,112905408588.09473,Consumer Staples,Tobacco,Buy,2,,Hold,2.66667,12.0,1.6
