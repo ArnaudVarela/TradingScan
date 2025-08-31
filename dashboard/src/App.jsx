@@ -17,7 +17,7 @@ const BRANCH = "main";
 
 // Détection Vercel : on sert /public à la racine du site
 const isBrowser = typeof window !== "undefined";
-const USE_LOCAL = isBrowser && window.location.hostname.endsWith(".vercel.app");
+const USE_LOCAL = false;
 
 // ---------- Fichiers CSV / JSON
 const FILES = {
