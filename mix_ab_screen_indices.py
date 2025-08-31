@@ -315,8 +315,7 @@ def main():
         "ticker_tv","ticker_yf","price","market_cap","sector","industry",
         "technical_local","tv_reco","analyst_bucket"
     ]), "debug_all_candidates.csv")
-
-        return
+    return
 
     # Diagnostic global (avant filtres finaux)
     dbg = df.copy()
