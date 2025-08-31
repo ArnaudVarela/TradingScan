@@ -29,6 +29,7 @@ const FILES = {
   breadth:   "sector_breadth.csv",
   equity10: "backtest_equity_10d.csv",
   backtestSummary: "backtest_summary.csv", 
+  bench10:  "backtest_equity_10d_combo.csv"
 };
 
 // URL finale + cache-buster court (1 min)
@@ -48,6 +49,7 @@ export default function App() {
     breadth:   [],
     equity10:  [],
     backtestSummary: [], 
+    equity10: [], bench10: [],
   });
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
@@ -91,7 +93,8 @@ export default function App() {
       ["history",   FILES.history],
       ["breadth",   FILES.breadth],
       ["equity10",  FILES.equity10],
-      ["backtestSummary", FILES.backtestSummary], 
+      ["backtestSummary", FILES.backtestSummary],
+      ["bench10",   FILES.bench10],
     ];
 
     try {
@@ -262,9 +265,13 @@ export default function App() {
         )}
       </div>
 
-      {/* Equity curve (10-day hold) */}
+      {/* Equity curve (10-day hold vs SPY) */}
       <div className="mb-6">
-        <EquityCurve data={data.equity10} title="Equity curve — 10 trading days hold" />
+        <EquityCurve
+        data={data.equity10}
+        bench={data.bench10}   // <— NEW
+        title="Equity curve — 10 trading days hold vs SPY"
+        />
       </div>
 
       {/* Résumés de backtest */}
