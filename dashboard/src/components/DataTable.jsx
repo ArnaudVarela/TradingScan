@@ -1,9 +1,18 @@
 import React, { useMemo, useState } from "react";
 
-const formatPrice = (val) => (val || val === 0 ? `$${Number(val).toFixed(2)}` : "—");
+const toNum = (v) => {
+  const n = Number(String(v).replaceAll(",", "").trim());
+  return Number.isFinite(n) ? n : null;
+};
+
+const formatPrice = (val) => {
+  const n = toNum(val);
+  return n === null ? "—" : `$${n.toFixed(2)}`;
+};
+
 const formatMCap = (val) => {
-  const n = Number(val);
-  if (!Number.isFinite(n)) return "—";
+  const n = toNum(val);
+  if (n === null) return "—";
   if (n >= 1e12) return `${(n / 1e12).toFixed(1)}T$`;
   if (n >= 1e9)  return `${(n / 1e9).toFixed(1)}B$`;
   if (n >= 1e6)  return `${(n / 1e6).toFixed(1)}M$`;
@@ -11,7 +20,7 @@ const formatMCap = (val) => {
 };
 
 const badge = (label) => {
-  const v = (label || "").toUpperCase();
+  const v = String(label ?? "").toUpperCase();
   if (v === "STRONG BUY" || v === "STRONG_BUY")  return "bg-green-600 text-white";
   if (v === "BUY")                                return "bg-green-300 text-black dark:bg-green-500/60 dark:text-white";
   if (v === "HOLD")                               return "bg-gray-300 text-black dark:bg-gray-600/60 dark:text-white";
@@ -34,25 +43,27 @@ const columns = [
 
 function pick(row, key, alts = []) {
   if (!row) return undefined;
-  if (row[key] != null) return row[key];
-  for (const k of alts) if (row[k] != null) return row[k];
+  if (row[key] !== undefined && row[key] !== null) return row[key];
+  for (const k of alts) {
+    if (row[k] !== undefined && row[k] !== null) return row[k];
+  }
   return undefined;
 }
 
 const votesClass = (v) => {
-  const n = Number(v);
-  if (!Number.isFinite(n)) return "";
+  const n = toNum(v);
+  if (n === null) return "";
   if (n >= 15) return "text-green-600 dark:text-green-400";
   if (n >= 5)  return "text-amber-600 dark:text-amber-400";
   return "text-red-600 dark:text-red-400";
 };
 
 const mcapPill = (v) => {
-  const n = Number(v);
-  if (!Number.isFinite(n)) return "bg-gray-200 dark:bg-gray-700";
-  if (n < 3e9)  return "bg-emerald-200 dark:bg-emerald-700"; // small
-  if (n < 20e9) return "bg-sky-200 dark:bg-sky-700";         // mid
-  return "bg-purple-200 dark:bg-purple-700";                 // large
+  const n = toNum(v);
+  if (n === null) return "bg-gray-200 dark:bg-gray-700";
+  if (n < 3e9)  return "bg-emerald-200 dark:bg-emerald-700";
+  if (n < 20e9) return "bg-sky-200 dark:bg-sky-700";
+  return "bg-purple-200 dark:bg-purple-700";
 };
 
 export default function DataTable({ rows }) {
@@ -64,17 +75,19 @@ export default function DataTable({ rows }) {
     if (!query) return safeRows;
     const q = query.toLowerCase();
     return safeRows.filter((r) => {
-      const fields = [
-        pick(r,"ticker_tv",["ticker_yf","ticker","symbol"]) ?? "",
-        r.sector ?? "",
-        r.industry ?? "",
-        r.technical_local ?? "",
-        r.tv_reco ?? "",
-        r.analyst_bucket ?? "",
-      ]
-        .join(" ")
-        .toLowerCase();
-      return fields.includes(q);
+      try {
+        const fields = [
+          pick(r,"ticker_tv",["ticker_yf","ticker","symbol"]) ?? "",
+          r.sector ?? "",
+          r.industry ?? "",
+          r.technical_local ?? "",
+          r.tv_reco ?? "",
+          r.analyst_bucket ?? "",
+        ].join(" ").toLowerCase();
+        return fields.includes(q);
+      } catch {
+        return false;
+      }
     });
   }, [safeRows, query]);
 
@@ -83,12 +96,15 @@ export default function DataTable({ rows }) {
     const col = columns.find((c) => c.label === sort.label);
     const getVal = (r) => (col ? pick(r, col.key, col.alts) : undefined);
     return [...filtered].sort((a, b) => {
-      const A = getVal(a), B = getVal(b);
-      const nA = Number(A), nB = Number(B);
-      const numeric = Number.isFinite(nA) && Number.isFinite(nB);
-      if (numeric) return sort.dir === "asc" ? nA - nB : nB - nA;
-      const sA = (A ?? "").toString(), sB = (B ?? "").toString();
-      return sort.dir === "asc" ? sA.localeCompare(sB) : sB.localeCompare(sA);
+      try {
+        const A = getVal(a), B = getVal(b);
+        const nA = toNum(A), nB = toNum(B);
+        if (nA !== null && nB !== null) return sort.dir === "asc" ? nA - nB : nB - nA;
+        const sA = (A ?? "").toString(), sB = (B ?? "").toString();
+        return sort.dir === "asc" ? sA.localeCompare(sB) : sB.localeCompare(sA);
+      } catch {
+        return 0;
+      }
     });
   }, [filtered, sort]);
 
@@ -109,86 +125,81 @@ export default function DataTable({ rows }) {
         />
       </div>
 
-<div className="overflow-auto rounded">
-  <table className="min-w-full table-fixed text-sm">
-    <thead className="sticky top-0 z-10 bg-gray-100 dark:bg-slate-700">
-      <tr>
-        {columns.map((c, idx) => (
-          <th
-            key={c.label}
-            onClick={() => onSort(c.label)}
-            className={`
-              p-2 text-left font-semibold cursor-pointer select-none
-              ${idx === 0 ? "w-[8%]"  : ""}
-              ${idx === 1 ? "w-[10%]" : ""}
-              ${idx === 2 ? "w-[10%]" : ""}
-              ${idx === 3 ? "w-[10%]" : ""}
-              ${idx === 4 ? "w-[10%]" : ""}
-              ${idx === 5 ? "w-[10%]" : ""}
-              ${idx === 6 ? "w-[10%]" : ""}
-              ${idx === 7 ? "w-[16%]" : ""}
-              ${idx === 8 ? "w-[16%]" : ""}
-            `}
-          >
-            {c.label}
-            {sort.label === c.label ? (sort.dir === "asc" ? " ▲" : " ▼") : ""}
-          </th>
-        ))}
-      </tr>
-    </thead>
+      <div className="overflow-auto rounded">
+        <table className="min-w-full table-fixed text-sm">
+          <thead className="sticky top-0 z-10 bg-gray-100 dark:bg-slate-700">
+            <tr>
+              {columns.map((c, idx) => (
+                <th
+                  key={c.label}
+                  onClick={() => onSort(c.label)}
+                  className={`
+                    p-2 text-left font-semibold cursor-pointer select-none
+                    ${idx === 0 ? "w-[8%]"  : ""}
+                    ${idx === 1 ? "w-[10%]" : ""}
+                    ${idx === 2 ? "w-[10%]" : ""}
+                    ${idx === 3 ? "w-[10%]" : ""}
+                    ${idx === 4 ? "w-[10%]" : ""}
+                    ${idx === 5 ? "w-[10%]" : ""}
+                    ${idx === 6 ? "w-[10%]" : ""}
+                    ${idx === 7 ? "w-[16%]" : ""}
+                    ${idx === 8 ? "w-[16%]" : ""}
+                  `}
+                >
+                  {c.label}
+                  {sort.label === c.label ? (sort.dir === "asc" ? " ▲" : " ▼") : ""}
+                </th>
+              ))}
+            </tr>
+          </thead>
+
           <tbody>
             {sorted.map((r, i) => {
-              const ticker = pick(r, "ticker_tv", ["ticker_yf", "ticker", "symbol"]);
-              const price = r.price;
-              const mcap = pick(r, "market_cap", ["mcap","MarketCap"]);
-              const tech  = r.technical_local;
-              const tv    = r.tv_reco;
-              const ab    = r.analyst_bucket;
-              const votes = r.analyst_votes;
-              const sector = r.sector || "Unknown";
-              const industry = r.industry || "Unknown";
+              try {
+                const ticker = pick(r, "ticker_tv", ["ticker_yf", "ticker", "symbol"]);
+                const price  = r.price;
+                const mcap   = pick(r, "market_cap", ["mcap","MarketCap"]);
+                const tech   = r.technical_local;
+                const tv     = r.tv_reco;
+                const ab     = r.analyst_bucket;
+                const votes  = r.analyst_votes;
+                const sector = r.sector ?? "Unknown";
+                const industry = r.industry ?? "Unknown";
 
-              const tvUrl = ticker ? `https://www.tradingview.com/symbols/${String(ticker).toUpperCase()}/` : undefined;
-              const yfUrl = ticker ? `https://finance.yahoo.com/quote/${String(ticker).toUpperCase().replace(".","-")}` : undefined;
+                const tvUrl = ticker ? `https://www.tradingview.com/symbols/${String(ticker).toUpperCase()}/` : undefined;
+                const yfUrl = ticker ? `https://finance.yahoo.com/quote/${String(ticker).toUpperCase().replace(".","-")}` : undefined;
 
-              return (
-                <tr key={i} className="border-t border-slate-200 dark:border-slate-700">
-                  <td className="p-2 font-mono">
-                    {ticker ? (
-                      <>
-                        <a className="underline mr-2" href={tvUrl} target="_blank" rel="noreferrer">
-                          {ticker}
-                        </a>
-                        <a className="text-slate-500 underline" href={yfUrl} target="_blank" rel="noreferrer">
-                          YF
-                        </a>
-                      </>
-                    ) : "—"}
-                  </td>
-                  <td className="p-2">{formatPrice(price)}</td>
-                  <td className="p-2">
-                    <span className={`px-2 py-0.5 rounded ${mcapPill(mcap)}`}>{formatMCap(mcap)}</span>
-                  </td>
-                  <td className="p-2">
-                    <span className={`px-2 py-0.5 rounded ${badge(tech)}`}>{tech || "—"}</span>
-                  </td>
-                  <td className="p-2">
-                    <span className={`px-2 py-0.5 rounded ${badge(tv)}`}>{tv || "—"}</span>
-                  </td>
-                  <td className="p-2">
-                    <span className={`px-2 py-0.5 rounded ${badge(ab)}`}>{ab || "—"}</span>
-                  </td>
-                  <td className={`p-2 ${votesClass(votes)}`}>{Number.isFinite(Number(votes)) ? `${votes} votes` : "—"}</td>
-                  <td className="p-2">{sector}</td>
-                  <td className="p-2">{industry}</td>
-                </tr>
-              );
+                return (
+                  <tr key={i} className="border-t border-slate-200 dark:border-slate-700">
+                    <td className="p-2 font-mono">
+                      {ticker ? (
+                        <>
+                          <a className="underline mr-2" href={tvUrl} target="_blank" rel="noreferrer">{ticker}</a>
+                          <a className="text-slate-500 underline" href={yfUrl} target="_blank" rel="noreferrer">YF</a>
+                        </>
+                      ) : "—"}
+                    </td>
+                    <td className="p-2">{formatPrice(price)}</td>
+                    <td className="p-2">
+                      <span className={`px-2 py-0.5 rounded ${mcapPill(mcap)}`}>{formatMCap(mcap)}</span>
+                    </td>
+                    <td className="p-2"><span className={`px-2 py-0.5 rounded ${badge(tech)}`}>{tech || "—"}</span></td>
+                    <td className="p-2"><span className={`px-2 py-0.5 rounded ${badge(tv)}`}>{tv || "—"}</span></td>
+                    <td className="p-2"><span className={`px-2 py-0.5 rounded ${badge(ab)}`}>{ab || "—"}</span></td>
+                    <td className={`p-2 ${votesClass(votes)}`}>{toNum(votes) !== null ? `${toNum(votes)} votes` : "—"}</td>
+                    <td className="p-2">{sector}</td>
+                    <td className="p-2">{industry}</td>
+                  </tr>
+                );
+              } catch {
+                // si une ligne est corrompue, on la saute sans planter
+                return null;
+              }
             })}
+
             {sorted.length === 0 && (
               <tr>
-                <td colSpan={columns.length} className="p-4 text-slate-500">
-                  No rows.
-                </td>
+                <td colSpan={columns.length} className="p-4 text-slate-500">No rows.</td>
               </tr>
             )}
           </tbody>
