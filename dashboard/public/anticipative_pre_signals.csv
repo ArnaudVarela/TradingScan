@@ -27,7 +27,7 @@ BURL,BURL,290.67999267578125,18323013338.31787,Consumer Discretionary,Apparel Re
 INSM,INSM,136.10000610351562,28768139878.930664,Health Care,Biotechnology,Strong Buy,6,,Strong Buy,1.22222,16.0,4.8
 ALAB,ALAB,182.1999969482422,30285102750.339844,Information Technology,Semiconductors,Strong Buy,4,,Strong Buy,1.5625,16.0,4.8
 WAL,WAL,89.55000305175781,9883544286.819458,Financials,Banks - Regional,Strong Buy,6,,Strong Buy,1.46667,15.0,4.75
-ALK,ALK,62.779998779296875,7285304958.343506,Industrials,Passenger Airlines,Strong Buy,4,BUY,Strong Buy,1.42857,14.0,4.7
+ALK,ALK,62.779998779296875,7285304958.343506,Industrials,Passenger Airlines,Strong Buy,4,,Strong Buy,1.42857,14.0,4.7
 ELF,ELF,125.0,7091862500.0,Consumer Staples,Personal Care Products,Strong Buy,4,,Strong Buy,1.4,13.0,4.65
 TLN,TLN,378.9200134277344,17735957500.50659,Utilities,Independent Power Producers & Energy Traders,Strong Buy,4,,Strong Buy,1.38462,13.0,4.65
 AFL,AFL,106.86000061035156,57152041841.31494,Financials,Life & Health Insurance,Buy,2,STRONG_BUY,Hold,2.92308,13.0,4.65
@@ -134,7 +134,6 @@ OMF,OMF,61.86000061035156,7353298272.55249,Financials,Credit Services,Strong Buy
 DINO,DINO,50.880001068115234,9518681072.784058,Energy,Oil & Gas Refining & Marketing,Strong Buy,6,,Buy,2.2,14.0,3.7
 WLK,WLK,87.81999969482422,11262563680.862427,Materials,Specialty Chemicals,Strong Buy,4,,Buy,2.0,14.0,3.7
 OHI,OHI,42.56999969482422,12907648926.347656,Real Estate,REIT - Healthcare Facilities,Strong Buy,6,,Buy,2.25,14.0,3.7
-STT,STT,114.97000122070312,32616415416.067383,Financials,Asset Management & Custody Banks,Strong Buy,4,,Buy,2.13333,14.0,3.7
 BYD,BYD,85.86000061035156,6964799772.070557,Consumer Discretionary,Casinos & Gaming,Strong Buy,4,,Buy,2.125,13.0,3.65
 DTM,DTM,104.18000030517578,10583958771.003723,Energy,Oil & Gas Midstream,Strong Buy,4,,Buy,2.35714,13.0,3.65
 PHM,PHM,132.02000427246094,26047282802.947998,Consumer Discretionary,Homebuilding,Strong Buy,4,,Buy,2.0,13.0,3.65
@@ -177,7 +176,6 @@ BPOP,BPOP,125.63999938964844,8491102950.750732,Financials,Banks - Regional,Stron
 CPRT,CPRT,48.810001373291016,47196147487.88452,Industrials,Diversified Support Services,Strong Buy,4,,Buy,2.36364,8.0,3.4
 THG,THG,173.47999572753906,6205448839.172363,Financials,Property & Casualty Insurance,Strong Buy,6,,Buy,2.0,7.0,3.35
 AMG,AMG,224.82000732421875,6461461902.502441,Financials,Asset Management & Custody Banks,Strong Buy,4,BUY,Buy,1.71429,7.0,3.35
-STWD,STWD,20.270000457763672,7636499864.617432,Financials,REIT - Mortgage,Strong Buy,4,,Buy,2.125,7.0,3.35
 RGLD,RGLD,179.5800018310547,11821949058.540344,Materials,Precious Metals & Minerals,Strong Buy,6,,Buy,1.71429,7.0,3.35
 FLEX,FLEX,53.619998931884766,20477853361.039307,Information Technology,Electronic Manufacturing Services,Strong Buy,4,,Buy,1.66667,7.0,3.35
 CNXC,CNXC,52.7599983215332,3325204170.2144623,Information Technology,Data Processing & Outsourced Services,Strong Buy,4,,Buy,2.0,6.0,3.3
@@ -198,8 +196,8 @@ QRVO,QRVO,90.69999694824219,8403745090.041504,Information Technology,Semiconduct
 ZION,ZION,58.0099983215332,8563667992.218018,Financials,Regional Banks,Strong Buy,4,,Hold,2.73913,21.0,3.0
 CMA,CMA,70.58000183105469,9071294735.336304,Financials,Diversified Banks,Strong Buy,6,,Hold,3.18182,20.0,3.0
 W,W,74.5999984741211,9672710402.153015,Consumer Discretionary,Internet Retail,Buy,2,,Buy,2.09375,29.0,3.0
-ALB,ALB,84.91999816894531,9993640144.515991,Materials,Specialty Chemicals,Strong Buy,4,BUY,Hold,2.64,22.0,3.0
-AKAM,AKAM,79.12999725341797,11346133786.178589,Information Technology,Internet Services & Infrastructure,Buy,2,BUY,Buy,2.375,22.0,3.0
+ALB,ALB,84.91999816894531,9993640144.515991,Materials,Specialty Chemicals,Strong Buy,4,,Hold,2.64,22.0,3.0
+AKAM,AKAM,79.12999725341797,11346133786.178589,Information Technology,Internet Services & Infrastructure,Buy,2,,Buy,2.375,22.0,3.0
 CPT,CPT,111.9800033569336,11965399298.698425,Real Estate,Multi-Family Residential REITs,Buy,2,,Buy,2.29167,22.0,3.0
 GLPI,GLPI,48.0099983215332,13587213604.980469,Real Estate,REIT - Specialty,Buy,2,,Buy,2.08696,22.0,3.0
 NBIX,NBIX,139.60000610351562,13845738563.75586,Health Care,Biotechnology,Strong Buy,6,,,,26.0,3.0
@@ -387,6 +385,7 @@ LLYVA,LLYVA,94.62000274658203,8883663893.870544,Communication Services,Entertain
 CNA,CNA,49.54999923706055,13411450147.098999,Financials,Insurance - Property & Casualty,Strong Buy,4,,,,1.0,2.05
 SEB,SEB,3969.199951171875,3807228808.7644043,Consumer Staples,Conglomerates,Strong Buy,6,,,,,2.0
 VFC,VFC,15.130000114440918,5910035133.662567,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Buy,2,,Hold,2.65217,20.0,2.0
+STWD,STWD,20.270000457763672,7636499864.617432,Financials,Unknown,Strong Buy,4,,,,,2.0
 NEU,NEU,826.9600219726562,7770629081.668701,Materials,Specialty Chemicals,Strong Buy,6,,,,,2.0
 LUV,LUV,32.900001525878906,17278686001.37329,Industrials,Passenger Airlines,Buy,2,,Hold,2.95455,20.0,2.0
 DECK,DECK,119.62999725341797,17746273639.60376,Consumer Discretionary,Footwear,Buy,2,,,,21.0,2.0
@@ -395,8 +394,9 @@ L,L,96.80000305175781,20078837433.013916,Financials,Multi-line Insurance,Strong 
 ZBH,ZBH,106.0999984741211,21017985297.729492,Health Care,Health Care Equipment,Buy,2,,Hold,2.5,24.0,2.0
 DRI,DRI,206.94000244140625,24128169584.65576,Consumer Discretionary,Restaurants,Buy,3,,,,27.0,2.0
 FOX,FOX,54.54999923706055,25385279417.76001,Communication Services,Movies & Entertainment,Strong Buy,6,,,,,2.0
+STT,STT,114.97000122070312,32616415416.067383,Financials,Asset Management & Custody Banks,Strong Buy,4,,,,,2.0
 EL,EL,91.7300033569336,33012618444.283447,Consumer Staples,Personal Care Products,Buy,3,,Hold,2.57692,23.0,2.0
-ABNB,ABNB,130.52999877929688,79872221007.2832,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,NEUTRAL,Hold,2.64444,35.0,2.0
+ABNB,ABNB,130.52999877929688,79872221007.2832,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,,Hold,2.64444,35.0,2.0
 TXN,TXN,202.47999572753906,184082060735.26758,Information Technology,Semiconductors,Buy,2,,,,33.0,2.0
 MTB,MTB,201.66000366210938,31513205498.99414,Financials,Regional Banks,Buy,2,,,,19.0,1.9500000000000002
 CF,CF,86.62999725341797,14141827271.636963,Materials,Fertilizers & Agricultural Chemicals,Buy,3,,Hold,2.7,18.0,1.9
