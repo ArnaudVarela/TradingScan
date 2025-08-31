@@ -1,37 +1,35 @@
 # backtest_signals.py
-# ---------------------------------------------------------
-# Backtest simple des signaux stockés dans signals_history.csv
-# - Entrée: signals_history.csv  (date, ticker_yf, sector, bucket, ...)
-# - Sorties:
-#     backtest_trades.csv
-#     backtest_summary.csv
-#     backtest_equity_[1|3|5|10|20]d.csv
-#   (chaque fichier est écrit à la racine ET dans dashboard/public/)
-# ---------------------------------------------------------
-
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
 import yfinance as yf
 
-# -------- CONFIG --------
-HORIZONS = [1, 3, 5, 10, 20]   # jours de bourse tenus
+# ====== CONFIG =================================================================
+# Horizons en JOURS DE BOURSE (on ajoute h barres à partir du jour d'entrée)
+HORIZONS = [1, 3, 5, 10, 20]
+
+# Si tu veux restreindre aux signaux d’un bucket donné, mets une string (ex: "confirmed")
+# ou None pour tout backtester.
+FILTER_BUCKET = None  # ex: "confirmed"
+
+# Dossier public pour Vercel
 PUBLIC_DIR = os.path.join("dashboard", "public")
-ENTRY_COL = "close"            # on entre au close du jour du signal (ou prochain jour ouvré)
-MAX_TICKERS = 150            # None = no limit ; ex: 300 pour debug
-SLEEP_BETWEEN_CALLS = 0.2      # petit sleep si besoin
 
-# ------------------------
+# Petite pause entre appels (si tu veux ménager l’API yfinance)
+SLEEP_BETWEEN_TICKERS = 0.0
+# ===============================================================================
 
+
+# ---------- Helpers I/O ----------
 def _ensure_dir(p: str):
     d = os.path.dirname(p)
     if d and not os.path.exists(d):
         os.makedirs(d, exist_ok=True)
 
 def save_csv(df: pd.DataFrame, fname: str, also_public: bool = True):
-    """Écrit le CSV à la racine + copie dans dashboard/public/."""
+    """Sauvegarde à la racine + copie dans dashboard/public/."""
     _ensure_dir(fname)
     df.to_csv(fname, index=False)
     if also_public:
@@ -40,7 +38,7 @@ def save_csv(df: pd.DataFrame, fname: str, also_public: bool = True):
         df.to_csv(dst, index=False)
 
 def read_csv_first_available(paths):
-    """Essaie plusieurs chemins et renvoie (DataFrame, path_utilisé) ou (df_vide, None)."""
+    """Tente de lire le 1er CSV dispo parmi paths; renvoie (df, path_utilisé)."""
     for p in paths:
         if os.path.exists(p):
             try:
@@ -49,58 +47,74 @@ def read_csv_first_available(paths):
                 pass
     return pd.DataFrame(), None
 
+def placeholder_outputs_when_empty():
+    """Crée des fichiers vides/minimaux pour éviter de casser le front."""
+    trades_cols  = ["date_signal","ticker","sector","bucket","horizon_days","entry","exit","date_exit","ret_pct"]
+    summary_cols = ["horizon_days","bucket","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret"]
+    equity_cols  = ["date","equity"]
+
+    save_csv(pd.DataFrame(columns=trades_cols),  "backtest_trades.csv")
+    save_csv(pd.DataFrame(columns=summary_cols), "backtest_summary.csv")
+    # On écrit toutes les courbes horizons + la 10j utilisée par le front
+    for h in HORIZONS:
+        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_{h}d.csv")
+    save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv")
+
+
+# ---------- Téléchargement des prix ----------
 def get_daily_prices(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
     """
-    Télécharge le daily entre start_date-7j et end_date+40j (marges),
-    ajuste l’index en dates-normalisées et renomme Close -> close.
+    Télécharge le daily entre (start_date - 7j) et (end_date + 40j) pour marge.
+    Renvoie DataFrame avec colonne 'close' et index (datetime normalisé, date seulement).
     """
-    start_pad = (pd.to_datetime(start_date) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
-    end_pad   = (pd.to_datetime(end_date) + pd.Timedelta(days=40)).strftime("%Y-%m-%d")
     try:
+        start_pad = (pd.to_datetime(start_date) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
+        end_pad   = (pd.to_datetime(end_date)   + pd.Timedelta(days=40)).strftime("%Y-%m-%d")
         hist = yf.Ticker(symbol).history(
-            start=start_pad,
-            end=end_pad,
-            interval="1d",
-            auto_adjust=True,
-            actions=False,
+            start=start_pad, end=end_pad,
+            interval="1d", auto_adjust=True, actions=False
         )
     except Exception as e:
         print(f"[WARN] download fail {symbol}: {e}")
         return pd.DataFrame()
 
     if hist is None or hist.empty:
+        print(f"[WARN] {symbol}: pas d’historique téléchargé.")
         return pd.DataFrame()
 
     out = hist[["Close"]].rename(columns={"Close": "close"}).copy()
-    # index -> date (sans heure)
-    out.index = pd.to_datetime(out.index.date)
+    out.index = pd.to_datetime(out.index.date)  # dates normalisées (00:00:00)
     return out
 
-def placeholder_outputs_when_empty():
-    """Crée des CSV vides (avec entêtes) pour ne pas casser le front lorsque 0 trade simulé."""
-    save_csv(pd.DataFrame(columns=[
-        "date_signal","ticker","sector","bucket","horizon_days","entry","exit","date_exit","ret_pct"
-    ]), "backtest_trades.csv")
 
-    save_csv(pd.DataFrame(columns=[
-        "horizon_days","bucket","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret"
-    ]), "backtest_summary.csv")
+# ---------- Construction equity ----------
+def equity_from_daily_returns(daily_ret_pct: pd.Series) -> pd.DataFrame:
+    """Transforme une série de retours (%) par date en courbe base 100."""
+    if daily_ret_pct is None or daily_ret_pct.empty:
+        return pd.DataFrame(columns=["date","equity"])
+    daily_ret = daily_ret_pct.sort_index() / 100.0
+    equity = (1.0 + daily_ret).cumprod() * 100.0
+    return pd.DataFrame({
+        "date": pd.to_datetime(equity.index),
+        "equity": equity.values
+    })
 
-    # equity 10j (attendue par le front) + les autres horizons pour être cohérent
-    for h in HORIZONS:
-        save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_{h}d.csv")
 
+# ---------- Main ----------
 def main():
     # 1) Charger les signaux (racine ou public)
-    sig, used = read_csv_first_available(["signals_history.csv",
-                                          os.path.join(PUBLIC_DIR, "signals_history.csv")])
+    sig, used = read_csv_first_available([
+        "signals_history.csv",
+        os.path.join(PUBLIC_DIR, "signals_history.csv")
+    ])
     if sig.empty:
         print("❌ signals_history.csv introuvable ou vide. Lance d’abord le screener.")
         placeholder_outputs_when_empty()
         return
 
     print(f"[INFO] signals_history chargé depuis: {used}")
-    # Normalisation colonnes minimales attendues
+
+    # Colonnes minimales
     required = {"date", "ticker_yf"}
     missing = [c for c in required if c not in sig.columns]
     if missing:
@@ -108,64 +122,63 @@ def main():
         placeholder_outputs_when_empty()
         return
 
-    # Typage/clean
+    # 2) Normalisation
     sig = sig.copy()
     sig["date"] = pd.to_datetime(sig["date"]).dt.normalize()
     sig["ticker_yf"] = sig["ticker_yf"].astype(str)
-    if "sector" not in sig.columns: sig["sector"] = "Unknown"
-    if "bucket" not in sig.columns: sig["bucket"] = ""
 
-    # 2) Fenêtre de téléchargement: du min(date) au max(date)+max(HORIZONS)+5j
-    if sig["date"].empty:
-        print("❌ Aucune date dans signals_history.csv.")
+    if "sector" not in sig.columns:
+        sig["sector"] = "Unknown"
+    if "bucket" not in sig.columns:
+        sig["bucket"] = ""
+
+    # 3) Filtre éventuel par bucket (optionnel)
+    if FILTER_BUCKET:
+        sig = sig[sig["bucket"].astype(str).str.lower() == str(FILTER_BUCKET).lower()]
+        print(f"[INFO] Filtre bucket = {FILTER_BUCKET} → {len(sig)} signaux")
+
+    if sig.empty:
+        print("⚠️ Aucun signal après filtre. Création de placeholders.")
         placeholder_outputs_when_empty()
         return
 
+    # 4) Déterminer la fenêtre de prix à télécharger
     dmin = sig["date"].min()
     dmax = sig["date"].max() + pd.Timedelta(days=max(HORIZONS) + 5)
 
-    # 3) Backtest par ticker (pour minimiser les téléchargements)
-    trades = []
-    groups = sig.groupby("ticker_yf")
-    done = 0
-
-    for ticker, g in groups:
-        if MAX_TICKERS and done >= MAX_TICKERS:
-            break
-
-        px = get_daily_prices(ticker, dmin.strftime("%Y-%m-%d"), dmax.strftime("%Y-%m-%d"))
-        if px.empty:
-            # exemple: delisté → on skip
-            print(f"[WARN] {ticker}: pas d’historique téléchargé.")
+    # 5) Construire les trades
+    trades = []  # une ligne par (signal, horizon)
+    for ticker, g in sig.groupby("ticker_yf"):
+        prices = get_daily_prices(ticker, dmin.strftime("%Y-%m-%d"), dmax.strftime("%Y-%m-%d"))
+        if prices.empty:
+            # déjà loggé dans get_daily_prices
             continue
 
-        idx_all = px.index
-
+        # pour chaque signal de ce ticker
         for _, row in g.iterrows():
-            d0 = pd.to_datetime(row["date"]).normalize()
-            # si le jour du signal n’est pas un jour de bourse → prendre le prochain disponible
-            if d0 not in idx_all:
-                pos = idx_all.searchsorted(d0)
-                if pos >= len(idx_all):
-                    continue
-                d0 = idx_all[pos]
-
-            entry = float(px.loc[d0, "close"]) if d0 in px.index else np.nan
-            if np.isnan(entry):
+            d0 = pd.to_datetime(row["date"])
+            # si la date du signal n'est pas une date de bourse, prendre la prochaine dispo
+            idx = prices.index.searchsorted(d0)
+            if idx >= len(prices.index):
+                continue  # pas de données après
+            d_entry = prices.index[idx]
+            entry = float(prices.iloc[idx]["close"])
+            if not np.isfinite(entry):
                 continue
 
             for h in HORIZONS:
-                pos = idx_all.searchsorted(d0)
-                exit_pos = pos + h
-                if exit_pos >= len(idx_all):
-                    # pas assez d’obs futures
+                exit_idx = idx + h
+                if exit_idx >= len(prices.index):
+                    # pas assez de barres futures
                     continue
-                d_exit = idx_all[exit_pos]
-                exit_price = float(px.iloc[exit_pos]["close"])
-                ret = (exit_price / entry) - 1.0
+                d_exit = prices.index[exit_idx]
+                exit_price = float(prices.iloc[exit_idx]["close"])
+                if not np.isfinite(exit_price):
+                    continue
+                ret_pct = (exit_price / entry - 1.0) * 100.0
 
                 trades.append({
-                    "date_signal": d0.strftime("%Y-%m-%d"),
+                    "date_signal": d_entry.strftime("%Y-%m-%d"),
                     "ticker": ticker,
                     "sector": row.get("sector", "Unknown"),
                     "bucket": row.get("bucket", ""),
@@ -173,64 +186,62 @@ def main():
                     "entry": entry,
                     "exit": exit_price,
                     "date_exit": d_exit.strftime("%Y-%m-%d"),
-                    "ret_pct": ret * 100.0,
+                    "ret_pct": ret_pct
                 })
 
-        done += 1
-        if SLEEP_BETWEEN_CALLS:
-            time.sleep(SLEEP_BETWEEN_CALLS)
+        if SLEEP_BETWEEN_TICKERS:
+            time.sleep(SLEEP_BETWEEN_TICKERS)
 
-    # 4) Sorties
     if not trades:
-        print("⚠️ Aucune transaction simulée (pas assez d'historique futur).")
+        print("⚠️ Aucune transaction simulée (pas assez d’historique futur).")
         placeholder_outputs_when_empty()
         return
 
     trades_df = pd.DataFrame(trades)
     save_csv(trades_df, "backtest_trades.csv")
 
-    # Résumé par horizon & bucket
-    def _p(series, q):
-        try:
-            return float(series.quantile(q))
-        except Exception:
-            return np.nan
-
+    # 6) Résumés par horizon/bucket
     summary = (
         trades_df
-        .groupby(["horizon_days", "bucket"], dropna=False)
+        .groupby(["horizon_days","bucket"], dropna=False)
         .agg(
             n_trades   = ("ret_pct", "count"),
             winrate    = ("ret_pct", lambda s: float((s > 0).mean() * 100.0)),
             avg_ret    = ("ret_pct", "mean"),
             median_ret = ("ret_pct", "median"),
-            p95_ret    = ("ret_pct", lambda s: _p(s, 0.95)),
-            p05_ret    = ("ret_pct", lambda s: _p(s, 0.05)),
+            p95_ret    = ("ret_pct", lambda s: float(s.quantile(0.95))),
+            p05_ret    = ("ret_pct", lambda s: float(s.quantile(0.05))),
         )
         .reset_index()
-        .sort_values(["horizon_days", "bucket"])
+        .sort_values(["horizon_days","bucket"])
     )
     save_csv(summary, "backtest_summary.csv")
 
-    # Equity curves (equal-weight des trades sortis chaque jour)
+    # 7) Equity curves par horizon
     for h in HORIZONS:
-        sub = trades_df[trades_df["horizon_days"] == h].copy()
+        sub = trades_df[trades_df["horizon_days"] == h]
         if sub.empty:
-            # créer quand même un fichier vide pour le front
             save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_{h}d.csv")
             continue
-
+        # Retours moyens par date_exit (equal-weight des sorties du jour)
         daily_ret = (
             sub.groupby("date_exit")["ret_pct"]
                .mean()
                .sort_index()
-               .rename("daily_ret_pct")
         )
-        equity = (1.0 + (daily_ret / 100.0)).cumprod() * 100.0
-        eq = pd.DataFrame({"date": pd.to_datetime(daily_ret.index), "equity": equity.values})
+        eq = equity_from_daily_returns(daily_ret)
         save_csv(eq, f"backtest_equity_{h}d.csv")
 
-    print("[OK] Backtest écrit : backtest_trades.csv, backtest_summary.csv, backtest_equity_[1|3|5|10|20]d.csv")
+    # Pour le front actuel qui lit spécifiquement 10j :
+    # S'il existe, on le laisse tel quel; sinon, on copie le plus long horizon dispo.
+    prefer = 10
+    fallback = max(HORIZONS)
+    src = f"backtest_equity_{prefer}d.csv" if prefer in HORIZONS else f"backtest_equity_{fallback}d.csv"
+    eq10, _ = read_csv_first_available([src, os.path.join(PUBLIC_DIR, src)])
+    save_csv(eq10, "backtest_equity_10d.csv")
+
+    print("[OK] Backtest écrit : backtest_trades.csv, backtest_summary.csv, backtest_equity_[…]d.csv")
+
 
 if __name__ == "__main__":
     main()
