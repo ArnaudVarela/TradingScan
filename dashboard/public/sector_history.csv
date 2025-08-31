@@ -1,13 +1,11 @@
 date,bucket,sector,count
-2025-W35,confirmed,Information Technology,1
-2025-W35,confirmed,Health Care,1
-2025-W35,pre,Information Technology,70
-2025-W35,pre,Health Care,40
-2025-W35,pre,Industrials,66
 2025-W35,pre,Energy,27
+2025-W35,pre,Health Care,40
 2025-W35,pre,Consumer Discretionary,60
+2025-W35,pre,Industrials,66
 2025-W35,pre,Real Estate,46
 2025-W35,pre,Communication Services,21
+2025-W35,pre,Information Technology,70
 2025-W35,pre,Financials,73
 2025-W35,pre,Consumer Staples,16
 2025-W35,pre,Utilities,9
@@ -16,13 +14,13 @@ date,bucket,sector,count
 2025-W35,pre,Consumer Cyclical,2
 2025-W35,pre,Technology,2
 2025-W35,pre,Financial Services,1
-2025-W35,events,Information Technology,99
-2025-W35,events,Health Care,76
 2025-W35,events,Energy,34
+2025-W35,events,Health Care,76
 2025-W35,events,Consumer Discretionary,87
 2025-W35,events,Industrials,122
 2025-W35,events,Real Estate,59
 2025-W35,events,Communication Services,24
+2025-W35,events,Information Technology,99
 2025-W35,events,Financials,91
 2025-W35,events,Consumer Staples,47
 2025-W35,events,Utilities,37
