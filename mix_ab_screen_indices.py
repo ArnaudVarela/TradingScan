@@ -450,6 +450,46 @@ def main():
     new_df = new_df.drop_duplicates(subset="__key").drop(columns="__key")
     save_csv(new_df, HISTORY_CSV)
 
+        # === Journalisation des signaux (historique par ticker) ======================
+    from datetime import datetime, timezone
+
+    SIGNALS_CSV = "signals_history.csv"
+
+    def _append_signals(bucket_name: str, df_bucket: pd.DataFrame):
+        """Append (date, bucket, ticker_yf, ticker_tv, sector, industry, price)"""
+        if df_bucket is None or df_bucket.empty:
+            return pd.DataFrame(columns=["date","bucket","ticker_yf","ticker_tv","sector","industry","price"])
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        out = df_bucket[["ticker_yf","ticker_tv","sector","industry","price"]].copy()
+        out.insert(0, "bucket", bucket_name)
+        out.insert(0, "date", now)
+        return out
+
+    hist_blocks = []
+    hist_blocks.append(_append_signals("confirmed", confirmed))
+    hist_blocks.append(_append_signals("pre",       pre))
+    hist_blocks.append(_append_signals("events",    evt))
+    hist_all = pd.concat(hist_blocks, ignore_index=True)
+
+    # Dédupe (même date + même ticker_yf + bucket)
+    if os.path.exists(SIGNALS_CSV):
+        try:
+            prev = pd.read_csv(SIGNALS_CSV)
+            prev["__k"] = prev["date"].astype(str)+"|"+prev["bucket"].astype(str)+"|"+prev["ticker_yf"].astype(str)
+        except Exception:
+            prev = pd.DataFrame(columns=["date","bucket","ticker_yf","ticker_tv","sector","industry","price"])
+            prev["__k"] = ""
+
+    else:
+        prev = pd.DataFrame(columns=["date","bucket","ticker_yf","ticker_tv","sector","industry","price","__k"])
+
+    hist_all["__k"] = hist_all["date"].astype(str)+"|"+hist_all["bucket"].astype(str)+"|"+hist_all["ticker_yf"].astype(str)
+    merged = pd.concat([prev, hist_all], ignore_index=True)
+    merged = merged.drop_duplicates(subset="__k").drop(columns="__k")
+
+    # Sauvegarde racine + copie dans dashboard/public/
+    save_csv(merged, SIGNALS_CSV)
+
     print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)}")
 
 if __name__ == "__main__":
