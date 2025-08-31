@@ -144,7 +144,7 @@ TNL,TNL,63.209999084472656,4109117694.4839478,Consumer Discretionary,"Hotels, Re
 LEA,LEA,110.0,5852671000.0,Consumer Discretionary,Automotive Parts & Equipment,Strong Buy,4,,Buy,2.4,12.0,3.6
 CCCS,CCCS,9.899999618530273,6447424013.965942,Information Technology,Software - Application,Strong Buy,4,,Buy,1.76923,12.0,3.6
 AES,AES,13.539999961853027,9641156756.197449,Utilities,Independent Power Producers & Energy Traders,Strong Buy,4,BUY,Buy,2.35714,12.0,3.6
-AGNC,AGNC,9.760000228881836,10198516883.005493,Financials,REIT - Mortgage,Strong Buy,6,BUY,Buy,2.06667,12.0,3.6
+AGNC,AGNC,9.760000228881836,10198516883.005493,Financials,REIT - Mortgage,Strong Buy,6,,Buy,2.06667,12.0,3.6
 DAY,DAY,69.7699966430664,11009774682.112549,Industrials,Human Resource & Employment Services,Strong Buy,4,,Buy,2.46667,12.0,3.6
 ARE,ARE,82.44000244140625,14074238997.279297,Real Estate,Office REITs,Strong Buy,4,,Buy,2.41667,12.0,3.6
 SRE,SRE,82.55999755859375,53868086727.05078,Utilities,Multi-Utilities,Strong Buy,4,,Buy,2.13333,12.0,3.6
@@ -358,7 +358,7 @@ KBR,KBR,50.459999084472656,6501367202.041626,Industrials,Diversified Support Ser
 PAG,PAG,184.41000366210938,12179248045.861816,Consumer Discretionary,Auto & Truck Dealerships,Strong Buy,4,,,,7.0,2.35
 SHC,SHC,16.3700008392334,4649849759.341736,Health Care,Diagnostics & Research,Strong Buy,4,,,,6.0,2.3
 MTG,MTG,27.829999923706055,6489622022.2091675,Financials,Reinsurance,Strong Buy,4,,,,6.0,2.3
-AL,AL,60.209999084472656,6729370547.676086,Industrials,Rental & Leasing Services,Strong Buy,4,BUY,,,6.0,2.3
+AL,AL,60.209999084472656,6729370547.676086,Industrials,Rental & Leasing Services,Strong Buy,4,,,,6.0,2.3
 BIO,BIO,297.8800048828125,7857895800.805664,Health Care,Life Sciences Tools & Services,Buy,2,,Buy,2.16667,6.0,2.3
 SF,SF,115.29000091552734,11779525263.542175,Financials,Investment Banking & Brokerage,Buy,2,,Buy,2.16667,6.0,2.3
 EME,EME,620.0,27753804000.0,Industrials,Construction & Engineering,Strong Buy,4,,,,6.0,2.3
