@@ -149,9 +149,9 @@ export default function SectorHeatmap({
             <Legend />
 
             {/* Barres (empilées) */}
-            <Bar yAxisId="left" dataKey="confirmed" stackId="a" name="confirmed" />
-            <Bar yAxisId="left" dataKey="pre"       stackId="a" name="pre" />
-            <Bar yAxisId="left" dataKey="events"    stackId="a" name="events" />
+            <Bar yAxisId="left" dataKey="confirmed" stackId="a" name="confirmed" fill="#22c55e" />   {/* vert */}
+            <Bar yAxisId="left" dataKey="pre"       stackId="a" name="pre"       fill="#f59e0b" />   {/* orange */}
+            <Bar yAxisId="left" dataKey="events"    stackId="a" name="events"    fill="#3b82f6" />   {/* bleu */}
 
             {/* Overlay breadth = universe (axe droit) */}
             {showBreadth && (
