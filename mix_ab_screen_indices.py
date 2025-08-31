@@ -311,17 +311,18 @@ def main():
     if df.empty:
         print("⚠️ Aucun titre collecté après filtres US + MCAP + TA local.")
         # CSV diagnostic vide
-        pd.DataFrame(columns=[
-            "ticker_tv","ticker_yf","price","market_cap","sector","industry",
-            "technical_local","tv_reco","analyst_bucket"
-        ]).to_csv("debug_all_candidates.csv")
+    save_csv(pd.DataFrame(columns=[
+        "ticker_tv","ticker_yf","price","market_cap","sector","industry",
+        "technical_local","tv_reco","analyst_bucket"
+    ]), "debug_all_candidates.csv")
+
         return
 
     # Diagnostic global (avant filtres finaux)
     dbg = df.copy()
     dbg["rank_score"] = dbg.apply(rank_score_row, axis=1)
     dbg.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    dbg.to_csv("debug_all_candidates.csv")
+    save_csv(dbg, "debug_all_candidates.csv")
 
     # ====== 1) Confirmed (assoupli) ======
     mask_tv = df["tv_reco"].eq("STRONG_BUY")
@@ -334,20 +335,20 @@ def main():
         "technical_local","tech_score","tv_reco",
         "analyst_bucket","analyst_mean","analyst_votes","rank_score"
     ]
-    confirmed[confirmed_cols].to_csv("confirmed_STRONGBUY.csv")
+    save_csv(confirmed[confirmed_cols], "confirmed_STRONGBUY.csv")
 
     # ====== 2) Pré-signaux (forcés) ======
     mask_pre = df["technical_local"].isin({"Buy","Strong Buy"}) | df["tv_reco"].eq("STRONG_BUY")
     pre = df[mask_pre].copy()
     pre["rank_score"] = pre.apply(rank_score_row, axis=1)
     pre.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    pre[confirmed_cols].to_csv("anticipative_pre_signals.csv")
+    save_csv(pre[confirmed_cols], "anticipative_pre_signals.csv")
 
     # ====== 3) Event-driven (proxy : analystes connus) ======
     evt = df[df["analyst_bucket"].notna()].copy()
     evt["rank_score"] = evt.apply(rank_score_row, axis=1)
     evt.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    evt[confirmed_cols].to_csv("event_driven_signals.csv")
+    save_csv(evt[confirmed_cols], "event_driven_signals.csv")
 
     # ====== 4) Mix comparatif ======
     all_out = pd.concat([
@@ -357,7 +358,7 @@ def main():
     ], ignore_index=True)
     all_out.sort_values(["rank_score","candidate_type","market_cap"], ascending=[False, True, True], inplace=True)
     all_cols = ["candidate_type"] + confirmed_cols
-    all_out[all_cols].to_csv("candidates_all_ranked.csv")
+    save_csv(all_out[all_cols], "candidates_all_ranked.csv")
 
     # === Append sector history (weekly snapshot) ===============================
     # On prend la "semaine ISO" (lundi-dimanche) pour stabiliser les points
@@ -416,7 +417,7 @@ def main():
     # option: limite à 156 semaines (3 ans)
     new_df["__key"] = new_df["date"].astype(str) + "|" + new_df["bucket"].astype(str) + "|" + new_df["sector"].astype(str)
     new_df = new_df.drop_duplicates(subset="__key").drop(columns="__key")
-    new_df.to_csv(HISTORY_CSV)
+    save_csv(new_df, HISTORY_CSV)
 
     print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)}")
 
