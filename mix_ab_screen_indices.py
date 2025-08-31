@@ -345,6 +345,65 @@ def main():
     all_cols = ["candidate_type"] + confirmed_cols
     save_csv(all_out[all_cols], "candidates_all_ranked.csv")
 
+    def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
+    # nb d’actions vues par secteur dans l’univers filtré (US, cap, etc.)
+    return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
+
+    def _sector_counts(df_part: pd.DataFrame) -> pd.Series:
+        return df_part.groupby(df_part["sector"].fillna("Unknown"))["ticker_yf"].nunique()
+
+    # Univers par secteur (après filtres)
+    univ = _sector_universe(df)
+
+    # Comptes bruts par secteur
+    c_conf = _sector_counts(confirmed).reindex(univ.index, fill_value=0)
+    c_pre  = _sector_counts(pre).reindex(univ.index, fill_value=0)
+    c_evt  = _sector_counts(evt).reindex(univ.index, fill_value=0)
+
+    # Ratios (% du secteur en signal)
+    pct_conf = (c_conf / univ.replace(0, np.nan) * 100).fillna(0)
+    pct_pre  = (c_pre  / univ.replace(0, np.nan) * 100).fillna(0)
+    pct_evt  = (c_evt  / univ.replace(0, np.nan) * 100).fillna(0)
+
+    # Breadth score (simple et lisible)
+    breadth = (2*pct_conf + 1*pct_pre - 1*pct_evt)
+
+    # Momentum WoW depuis sector_history.csv (Si pas dispo -> 0)
+    hist_path = "sector_history.csv"
+    wow_conf = pd.Series(0.0, index=univ.index)
+    if os.path.exists(hist_path):
+        hist = pd.read_csv(hist_path)
+        # dernier point semaine courante
+        last_week = hist["date"].max()
+        prev = hist[hist["date"] != last_week]
+        if not prev.empty:
+            prev_week = prev["date"].max()
+            # reconstruire %confirmed de la semaine précédente
+            prev_conf = prev[(prev["date"]==prev_week) & (prev["bucket"]=="confirmed")] \
+                          .set_index("sector")["count"]
+            prev_univ = prev.groupby("sector")["count"].sum()  # approx si tu n’as pas l’univers par secteur en historique
+            prev_pct_conf = (prev_conf / prev_univ.replace(0,np.nan) * 100).fillna(0)
+            wow_conf = (pct_conf - prev_pct_conf.reindex(univ.index).fillna(0))
+
+    # Z-score du breadth (vs secteurs du jour)
+    z_breadth = (breadth - breadth.mean()) / (breadth.std(ddof=1) or 1)
+
+    sector_breadth = pd.DataFrame({
+        "sector": univ.index,
+        "universe": univ.values,
+        "confirmed": c_conf.values,
+        "pre": c_pre.values,
+        "events": c_evt.values,
+        "pct_confirmed": pct_conf.values,
+        "pct_pre": pct_pre.values,
+        "pct_events": pct_evt.values,
+        "breadth": breadth.values,
+        "z_breadth": z_breadth.values,
+        "wow_pct_confirmed": wow_conf.values,
+    }).sort_values(["z_breadth","breadth"], ascending=[False, False])
+
+    save_csv(sector_breadth, "sector_breadth.csv")
+
     # === 5) Sector history (weekly snapshot) ===============================
     from datetime import datetime, timezone
     HISTORY_CSV = "sector_history.csv"
