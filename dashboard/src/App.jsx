@@ -48,7 +48,28 @@ export default function App() {
   const [error, setError] = useState("");
   const [warningFiles, setWarningFiles] = useState([]); // fichiers qui ont échoué
   const [selectedSectors, setSelectedSectors] = useState([]); // filtre heatmap -> tables
-  const [showHeatmap, setShowHeatmap] = useState(true);
+
+  // états pliables (mémorisés)
+  const [showHeatmap, setShowHeatmap] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return localStorage.getItem("showHeatmap") !== "0";
+  });
+  const [showTimeline, setShowTimeline] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return localStorage.getItem("showTimeline") !== "0";
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("showHeatmap", showHeatmap ? "1" : "0");
+    }
+  }, [showHeatmap]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("showTimeline", showTimeline ? "1" : "0");
+    }
+  }, [showTimeline]);
 
   // ---------- Chargement robuste de tous les CSV
   async function loadAll() {
@@ -56,7 +77,6 @@ export default function App() {
     setError("");
     setWarningFiles([]);
 
-    // table (clé logique, nom de fichier)
     const tasks = [
       ["confirmed", FILES.confirmed],
       ["pre",       FILES.pre],
@@ -155,11 +175,9 @@ export default function App() {
       {/* Bandeau avertissements (certains fichiers KO) */}
       {warningFiles.length > 0 && (
         <div className="mb-4 text-sm text-yellow-800 bg-yellow-50 border border-yellow-200 rounded p-2">
-          Certains fichiers n’ont pas pu être chargés :
-          {" "}
+          Certains fichiers n’ont pas pu être chargés :{" "}
           <span className="font-mono">{warningFiles.join(", ")}</span>
-          {" "}
-          (détails dans la console du navigateur).
+          {" "} (détails dans la console du navigateur).
         </div>
       )}
 
@@ -176,6 +194,7 @@ export default function App() {
         <button
           onClick={() => setShowHeatmap(!showHeatmap)}
           className="flex items-center justify-between w-full text-left font-semibold"
+          aria-expanded={showHeatmap}
         >
           <span>Sector signals (heatmap)</span>
           {showHeatmap ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -187,7 +206,7 @@ export default function App() {
               confirmed={data.confirmed}
               pre={data.pre}
               events={data.events}
-              breadth={data.breadth} 
+              breadth={data.breadth}
               selectedSectors={selectedSectors}
               onToggleSector={handleToggleSector}
             />
@@ -213,12 +232,25 @@ export default function App() {
         </div>
       )}
 
-      {/* Timeline (weekly history) */}
-      <div className="mb-6">
-        <SectorTimeline
-          history={data.history}
-          selectedSectors={new Set(selectedSectors)}
-        />
+      {/* Timeline (weekly history) pliable */}
+      <div className="mb-6 bg-white dark:bg-slate-900 rounded shadow p-4">
+        <button
+          onClick={() => setShowTimeline(!showTimeline)}
+          className="flex items-center justify-between w-full text-left font-semibold"
+          aria-expanded={showTimeline}
+        >
+          <span>Sector signals timeline (weekly)</span>
+          {showTimeline ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </button>
+
+        {showTimeline && (
+          <div className="mt-4">
+            <SectorTimeline
+              history={data.history}
+              selectedSectors={new Set(selectedSectors)}
+            />
+          </div>
+        )}
       </div>
 
       {/* États */}
