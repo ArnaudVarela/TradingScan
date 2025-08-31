@@ -27,7 +27,7 @@ export default function TopBar({ lastRefreshed, onRefresh, fear }) {
     <img
       src={darkMode ? "/sid_radar_topbar_dark.svg" : "/sid_radar_topbar_light.svg"}
       alt="SID logo"
-      className="w-8 h-8 flex-shrink-0"
+      className="w-10 h-10 flex-shrink-0"
     />
     <div className="min-w-0">
       <h1 className="text-2xl font-bold truncate">Signal Intelligence Dashboard</h1>
