@@ -187,6 +187,7 @@ export default function App() {
               confirmed={data.confirmed}
               pre={data.pre}
               events={data.events}
+              breadth={data.breadth} 
               selectedSectors={selectedSectors}
               onToggleSector={handleToggleSector}
             />
