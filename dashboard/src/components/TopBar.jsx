@@ -23,22 +23,19 @@ export default function TopBar({ lastRefreshed, onRefresh, fear }) {
   return (
     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
       {/* Logo + titre */}
-      <div className="flex items-center gap-3 min-w-0">
-        <img
-          src="/sid_radar.svg"
-          alt="SID logo"
-          className="w-10 h-10 flex-shrink-0"
-        />
-        <div className="min-w-0">
-          <h1 className="text-2xl font-bold truncate">
-            Signal Intelligence Dashboard
-          </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Confirmed / Anticipative / Event-driven signals — powered by
-            cross-analysis
-          </p>
-        </div>
-      </div>
+    <div className="flex items-center gap-3 min-w-0">
+    <img
+      src={darkMode ? "/sid_radar_topbar_dark.svg" : "/sid_radar_topbar_light.svg"}
+      alt="SID logo"
+      className="w-8 h-8 flex-shrink-0"
+    />
+    <div className="min-w-0">
+      <h1 className="text-2xl font-bold truncate">Signal Intelligence Dashboard</h1>
+      <p className="text-sm text-slate-500 dark:text-slate-400">
+      Confirmed / Anticipative / Event-driven signals — powered by cross-analysis
+    </p>
+  </div>
+</div>
 
       {/* Fear & Greed Gauge */}
       <div className="flex items-center gap-4">
