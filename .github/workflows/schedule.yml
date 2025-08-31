@@ -2,8 +2,8 @@ name: Run screener and publish CSV
 
 on:
   schedule:
-    # Toutes les 4 heures à HH:00 UTC
-    - cron: "0 */4 * * *"
+    # Toutes les 15 minutes, lundi->vendredi (en UTC)
+    - cron: "*/15 * * * 1-5"
   workflow_dispatch: {}
 
 permissions:
@@ -12,70 +12,89 @@ permissions:
 jobs:
   run:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # --- GATE: ne continuer que si l'heure NY est 09:30, 12:30, 15:50
+      - name: Decide whether to run now (America/New_York)
+        id: gate
+        run: |
+          TZ="America/New_York"
+          NOW=$(TZ=$TZ date +%H:%M)
+          DOW=$(TZ=$TZ date +%u)   # 1=Mon ... 5=Fri
+          TARGETS=("09:30" "12:30" "15:50")
+          RUN=0
+          for t in "${TARGETS[@]}"; do
+            if [ "$NOW" = "$t" ]; then RUN=1; fi
+          done
+          echo "NY time: $NOW (DOW=$DOW)"
+          echo "RUN=$RUN" >> $GITHUB_ENV
+          if [ "$RUN" -ne 1 ]; then
+            echo "Not a target time, skipping heavy steps."
+          fi
+
       - name: Ensure clean working tree (sync to origin/main)
+        if: env.RUN == '1'
         run: |
           git fetch origin main
           git reset --hard origin/main
           git clean -fd
 
       - name: Setup Python
+        if: env.RUN == '1'
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install dependencies
+        if: env.RUN == '1'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Generate Russell2000 from iShares
-        run: python gen_r2000_from_ishares.py
+        if: env.RUN == '1'
+        run: python gen_r2000_from_ishares.py || true
 
       - name: Build sector catalog (R1K + SPSM)
+        if: env.RUN == '1'
         run: python build_sector_catalog.py || true
 
       - name: Run screener
+        if: env.RUN == '1'
         env:
           PYTHONUNBUFFERED: "1"
         run: python mix_ab_screen_indices.py
 
       - name: Run backtest
+        if: env.RUN == '1'
         run: python backtest_signals.py
 
       - name: Fetch Fear & Greed (CNN)
+        if: env.RUN == '1'
         run: python fetch_fear_greed.py
 
       - name: Commit CSVs if changed
+        if: env.RUN == '1'
         run: |
           set -e
-
-          # Configure git (avant tout commit)
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # Ajouter tout (y compris nouveaux fichiers)
-          git add -A
-
-          # Si rien à committer -> on quitte proprement
-          if git diff --cached --quiet; then
-            echo "No changes, skip commit."
+          if git diff --quiet; then
+            echo "No changes, skip commit"
             exit 0
           fi
 
-          # Se resynchroniser et garder nos fichiers en cas de conflit
-          git fetch origin main
-          git merge -s recursive -X ours --no-edit origin/main || true
+          git add *.csv dashboard/public/*.csv || true
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')" || true
 
-          # Commit unique + push
-          git commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          git push origin HEAD:main
+          # Merge défensif et push
+          git fetch origin main
+          git merge -s recursive -X ours origin/main || true
+          git push origin HEAD:main || true
 
           echo "--- git status ---"
           git status --porcelain
