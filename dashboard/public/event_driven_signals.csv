@@ -26,7 +26,7 @@ BURL,BURL,290.67999267578125,18323013338.31787,Consumer Discretionary,Apparel Re
 INSM,INSM,136.10000610351562,28768139878.930664,Health Care,Biotechnology,Strong Buy,6,,Strong Buy,1.22222,16.0,4.8
 ALAB,ALAB,182.1999969482422,30285102750.339844,Information Technology,Semiconductors,Strong Buy,4,,Strong Buy,1.5625,16.0,4.8
 WAL,WAL,89.55000305175781,9883544286.819458,Financials,Banks - Regional,Strong Buy,6,,Strong Buy,1.46667,15.0,4.75
-ALK,ALK,62.779998779296875,7285304958.343506,Industrials,Passenger Airlines,Strong Buy,4,,Strong Buy,1.42857,14.0,4.7
+ALK,ALK,62.779998779296875,7285304958.343506,Industrials,Passenger Airlines,Strong Buy,4,BUY,Strong Buy,1.42857,14.0,4.7
 ELF,ELF,125.0,7091862500.0,Consumer Staples,Personal Care Products,Strong Buy,4,,Strong Buy,1.4,13.0,4.65
 TLN,TLN,378.9200134277344,17735957500.50659,Utilities,Independent Power Producers & Energy Traders,Strong Buy,4,,Strong Buy,1.38462,13.0,4.65
 AFL,AFL,106.86000061035156,57152041841.31494,Financials,Life & Health Insurance,Buy,2,STRONG_BUY,Hold,2.92308,13.0,4.65
@@ -133,6 +133,7 @@ OMF,OMF,61.86000061035156,7353298272.55249,Financials,Credit Services,Strong Buy
 DINO,DINO,50.880001068115234,9518681072.784058,Energy,Oil & Gas Refining & Marketing,Strong Buy,6,,Buy,2.2,14.0,3.7
 WLK,WLK,87.81999969482422,11262563680.862427,Materials,Specialty Chemicals,Strong Buy,4,,Buy,2.0,14.0,3.7
 OHI,OHI,42.56999969482422,12907648926.347656,Real Estate,REIT - Healthcare Facilities,Strong Buy,6,,Buy,2.25,14.0,3.7
+STT,STT,114.97000122070312,32616415416.067383,Financials,Asset Management & Custody Banks,Strong Buy,4,,Buy,2.13333,14.0,3.7
 BYD,BYD,85.86000061035156,6964799772.070557,Consumer Discretionary,Casinos & Gaming,Strong Buy,4,,Buy,2.125,13.0,3.65
 DTM,DTM,104.18000030517578,10583958771.003723,Energy,Oil & Gas Midstream,Strong Buy,4,,Buy,2.35714,13.0,3.65
 PHM,PHM,132.02000427246094,26047282802.947998,Consumer Discretionary,Homebuilding,Strong Buy,4,,Buy,2.0,13.0,3.65
@@ -144,13 +145,13 @@ CCCS,CCCS,9.899999618530273,6447424013.965942,Information Technology,Software - 
 AES,AES,13.539999961853027,9641156756.197449,Utilities,Independent Power Producers & Energy Traders,Strong Buy,4,BUY,Buy,2.35714,12.0,3.6
 AGNC,AGNC,9.760000228881836,10198516883.005493,Financials,REIT - Mortgage,Strong Buy,6,BUY,Buy,2.06667,12.0,3.6
 DAY,DAY,69.7699966430664,11009774682.112549,Industrials,Human Resource & Employment Services,Strong Buy,4,,Buy,2.46667,12.0,3.6
-ARE,ARE,82.44000244140625,14074238997.279297,Real Estate,Office REITs,Strong Buy,4,,Buy,2.41667,12.0,3.6
+ARE,ARE,82.44000244140625,14074238997.279297,Real Estate,Office REITs,Strong Buy,4,BUY,Buy,2.41667,12.0,3.6
 SRE,SRE,82.55999755859375,53868086727.05078,Utilities,Multi-Utilities,Strong Buy,4,,Buy,2.13333,12.0,3.6
 CLF,CLF,10.75,5317971336.0,Materials,Steel,Strong Buy,6,,Buy,2.41667,11.0,3.55
 GTES,GTES,25.559999465942383,6583846902.435303,Industrials,Specialty Industrial Machinery,Strong Buy,4,,Buy,1.63636,11.0,3.55
 VOYA,VOYA,75.08999633789062,7240012248.907471,Financials,Multi-Sector Holdings,Strong Buy,4,,Buy,2.41667,11.0,3.55
 LW,LW,57.529998779296875,8017093440.128906,Consumer Staples,Packaged Foods & Meats,Strong Buy,4,,Buy,2.36364,11.0,3.55
-AA,AA,32.189998626708984,8334473751.954346,Materials,Aluminum,Strong Buy,4,,Buy,2.08333,11.0,3.55
+AA,AA,32.189998626708984,8334473751.954346,Materials,Aluminum,Strong Buy,4,BUY,Buy,2.08333,11.0,3.55
 WCC,WCC,219.83999633789062,10973928969.195557,Industrials,Industrial Distribution,Strong Buy,4,,Buy,1.75,11.0,3.55
 GL,GL,139.9499969482422,11336440137.596924,Financials,Life & Health Insurance,Strong Buy,4,,Buy,1.72727,11.0,3.55
 NLY,NLY,21.190000534057617,13605591460.985596,Financials,REIT - Mortgage,Strong Buy,4,,Buy,2.0,11.0,3.55
@@ -175,6 +176,7 @@ BPOP,BPOP,125.63999938964844,8491102950.750732,Financials,Banks - Regional,Stron
 CPRT,CPRT,48.810001373291016,47196147487.88452,Industrials,Diversified Support Services,Strong Buy,4,,Buy,2.36364,8.0,3.4
 THG,THG,173.47999572753906,6205448839.172363,Financials,Property & Casualty Insurance,Strong Buy,6,,Buy,2.0,7.0,3.35
 AMG,AMG,224.82000732421875,6461461902.502441,Financials,Asset Management & Custody Banks,Strong Buy,4,BUY,Buy,1.71429,7.0,3.35
+STWD,STWD,20.270000457763672,7636499864.617432,Financials,REIT - Mortgage,Strong Buy,4,,Buy,2.125,7.0,3.35
 RGLD,RGLD,179.5800018310547,11821949058.540344,Materials,Precious Metals & Minerals,Strong Buy,6,,Buy,1.71429,7.0,3.35
 FLEX,FLEX,53.619998931884766,20477853361.039307,Information Technology,Electronic Manufacturing Services,Strong Buy,4,,Buy,1.66667,7.0,3.35
 CNXC,CNXC,52.7599983215332,3325204170.2144623,Information Technology,Data Processing & Outsourced Services,Strong Buy,4,,Buy,2.0,6.0,3.3
@@ -198,9 +200,9 @@ ZION,ZION,58.0099983215332,8563667992.218018,Financials,Regional Banks,Strong Bu
 EXAS,EXAS,47.41999816894531,8977507012.706543,Health Care,Diagnostics & Research,Neutral,1,,Strong Buy,1.375,23.0,3.0
 CMA,CMA,70.58000183105469,9071294735.336304,Financials,Diversified Banks,Strong Buy,6,,Hold,3.18182,20.0,3.0
 W,W,74.5999984741211,9672710402.153015,Consumer Discretionary,Internet Retail,Buy,2,,Buy,2.09375,29.0,3.0
-ALB,ALB,84.91999816894531,9993640144.515991,Materials,Specialty Chemicals,Strong Buy,4,,Hold,2.64,22.0,3.0
+ALB,ALB,84.91999816894531,9993640144.515991,Materials,Specialty Chemicals,Strong Buy,4,BUY,Hold,2.64,22.0,3.0
 BMRN,BMRN,58.27000045776367,11188714604.057495,Health Care,Biotechnology,Neutral,-1,,Strong Buy,1.59259,26.0,3.0
-AKAM,AKAM,79.12999725341797,11346133786.178589,Information Technology,Internet Services & Infrastructure,Buy,2,,Buy,2.375,22.0,3.0
+AKAM,AKAM,79.12999725341797,11346133786.178589,Information Technology,Internet Services & Infrastructure,Buy,2,BUY,Buy,2.375,22.0,3.0
 CPT,CPT,111.9800033569336,11965399298.698425,Real Estate,Multi-Family Residential REITs,Buy,2,,Buy,2.29167,22.0,3.0
 GLPI,GLPI,48.0099983215332,13587213604.980469,Real Estate,REIT - Specialty,Buy,2,,Buy,2.08696,22.0,3.0
 UDR,UDR,39.56999969482422,14716557726.501465,Real Estate,Multi-Family Residential REITs,Buy,2,,Buy,2.38095,21.0,3.0
@@ -427,7 +429,7 @@ CSX,CSX,32.5099983215332,60607741751.50781,Industrials,Rail Transportation,Neutr
 MNST,MNST,62.40999984741211,60938873328.12891,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Neutral,-1,,Buy,2.16,23.0,2.0
 REGN,REGN,580.7000122070312,61546652193.78662,Health Care,Biotechnology,Neutral,1,,Buy,1.8,23.0,2.0
 WDAY,WDAY,230.82000732421875,61628941955.56641,Information Technology,Application Software,Neutral,1,,Buy,1.775,35.0,2.0
-APD,APD,294.1099853515625,65455353679.93164,Materials,Industrial Gases,Neutral,1,,Buy,2.04167,22.0,2.0
+APD,APD,294.1099853515625,65455353679.93164,Materials,Industrial Gases,Neutral,1,BUY,Buy,2.04167,22.0,2.0
 PYPL,PYPL,70.19000244140625,67057983029.42578,Financials,Transaction & Payment Processing Services,Neutral,1,,Buy,2.33333,32.0,2.0
 EOG,EOG,124.81999969482422,68150849089.05615,Energy,Oil & Gas Exploration & Production,Neutral,0,,Buy,2.125,29.0,2.0
 RSG,RSG,233.97000122070312,73049177901.12305,Industrials,Environmental & Facilities Services,Neutral,1,,Buy,1.95455,20.0,2.0
@@ -437,7 +439,7 @@ EQIX,EQIX,786.1900024414062,76939698398.92578,Real Estate,Data Center REITs,Neut
 COIN,COIN,304.5400085449219,78247900715.51514,Financials,Financial Data & Stock Exchanges,Sell,-2,,Buy,2.30303,29.0,2.0
 ECL,ECL,277.0400085449219,79137032520.87402,Materials,Specialty Chemicals,Neutral,-1,,Buy,2.15385,20.0,2.0
 MDLZ,MDLZ,61.439998626708984,79500283273.91016,Consumer Staples,Packaged Foods & Meats,Sell,-2,,Buy,1.76923,24.0,2.0
-ABNB,ABNB,130.52999877929688,79872221007.2832,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,,Hold,2.64444,35.0,2.0
+ABNB,ABNB,130.52999877929688,79872221007.2832,Consumer Discretionary,"Hotels, Resorts & Cruise lines",Buy,3,NEUTRAL,Hold,2.64444,35.0,2.0
 DELL,DELL,122.1500015258789,82620064286.47705,Information Technology,"Technology Hardware, Storage & Peripherals",Sell,-2,,Buy,1.6087,21.0,2.0
 RBLX,RBLX,124.58999633789062,86371638201.09375,Communication Services,Electronic Gaming & Multimedia,Neutral,1,,Buy,2.0,31.0,2.0
 WM,WM,226.38999938964844,91196687076.37207,Industrials,Environmental & Facilities Services,Neutral,1,,Buy,2.04348,20.0,2.0
@@ -499,7 +501,7 @@ TREX,TREX,61.630001068115234,6608831534.538269,Industrials,Building Products,Sel
 EMN,EMN,70.33999633789062,8077282459.472656,Materials,Diversified Chemicals,Neutral,1,,Buy,1.76471,17.0,1.85
 GAP,GAP,22.010000228881836,8211182393.228027,Consumer Discretionary,Apparel Retail,Neutral,0,,Buy,2.38889,17.0,1.85
 AVTR,AVTR,13.470000267028809,9183024619.803955,Health Care,Medical Instruments & Supplies,Neutral,0,,Buy,2.3,17.0,1.85
-ACI,ACI,19.459999084472656,10894602958.805664,Consumer Staples,Food Retail,Neutral,1,,Buy,2.04762,17.0,1.85
+ACI,ACI,19.459999084472656,10894602958.805664,Consumer Staples,Food Retail,Neutral,1,SELL,Buy,2.04762,17.0,1.85
 SJM,SJM,110.51000213623047,11789759577.903748,Consumer Staples,Packaged Foods & Meats,Neutral,1,,Buy,2.36842,17.0,1.85
 ELS,ELS,60.290000915527344,12306274406.87561,Real Estate,REIT - Residential,Neutral,-1,,Buy,1.76471,17.0,1.85
 DOCU,DOCU,76.66000366210938,15490150933.256836,Information Technology,Application Software,Buy,2,,Hold,2.54545,17.0,1.85
