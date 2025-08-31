@@ -5,7 +5,7 @@ import MetricCard from "./components/MetricCard.jsx";
 import DataTable from "./components/DataTable.jsx";
 import SectorHeatmap from "./components/SectorHeatmap.jsx";
 import SectorTimeline from "./components/SectorTimeline.jsx";
-import { fetchCSV, rawUrl } from "./lib/csv.js";
+import { fetchCSV, rawUrl, fetchJSON } from "./lib/csv.js";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import EquityCurve from "./components/EquityCurve.jsx";
 import BacktestSummary from "./components/BacktestSummary.jsx";
@@ -19,17 +19,18 @@ const BRANCH = "main";
 const isBrowser = typeof window !== "undefined";
 const USE_LOCAL = isBrowser && window.location.hostname.endsWith(".vercel.app");
 
-// ---------- Fichiers CSV
+// ---------- Fichiers CSV / JSON
 const FILES = {
-  confirmed: "confirmed_STRONGBUY.csv",
-  pre:       "anticipative_pre_signals.csv",
-  events:    "event_driven_signals.csv",
-  all:       "candidates_all_ranked.csv",
-  history:   "sector_history.csv",
-  breadth:   "sector_breadth.csv",
-  equity10: "backtest_equity_10d.csv",
-  backtestSummary: "backtest_summary.csv", 
-  bench10:  "backtest_equity_10d_combo.csv"
+  confirmed:        "confirmed_STRONGBUY.csv",
+  pre:              "anticipative_pre_signals.csv",
+  events:           "event_driven_signals.csv",
+  all:              "candidates_all_ranked.csv",
+  history:          "sector_history.csv",
+  breadth:          "sector_breadth.csv",
+  equity10:         "backtest_equity_10d.csv",
+  backtestSummary:  "backtest_summary.csv",
+  bench10:          "backtest_equity_10d_combo.csv",
+  fear:             "fear_greed.json",
 };
 
 // URL finale + cache-buster court (1 min)
@@ -42,14 +43,15 @@ function urlFor(file) {
 export default function App() {
   const [data, setData] = useState({
     confirmed: [],
-    pre:       [],
-    events:    [],
-    all:       [],
-    history:   [],
-    breadth:   [],
-    equity10:  [],
-    backtestSummary: [], 
-    equity10: [], bench10: [],
+    pre: [],
+    events: [],
+    all: [],
+    history: [],
+    breadth: [],
+    equity10: [],
+    backtestSummary: [],
+    bench10: [],
+    fear: null,
   });
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
@@ -84,32 +86,43 @@ export default function App() {
     setLoading(true);
     setError("");
     setWarningFiles([]);
-        
+
     const tasks = [
-      ["confirmed", FILES.confirmed],
-      ["pre",       FILES.pre],
-      ["events",    FILES.events],
-      ["all",       FILES.all],
-      ["history",   FILES.history],
-      ["breadth",   FILES.breadth],
-      ["equity10",  FILES.equity10],
-      ["backtestSummary", FILES.backtestSummary],
-      ["bench10",   FILES.bench10],
+      ["confirmed",        FILES.confirmed],
+      ["pre",              FILES.pre],
+      ["events",           FILES.events],
+      ["all",              FILES.all],
+      ["history",          FILES.history],
+      ["breadth",          FILES.breadth],
+      ["equity10",         FILES.equity10],
+      ["backtestSummary",  FILES.backtestSummary],
+      ["bench10",          FILES.bench10],
     ];
 
     try {
-      const results = await Promise.allSettled(
-        tasks.map(([_, file]) => fetchCSV(urlFor(file)))
-      );
+      const [results, fear] = await Promise.all([
+        Promise.allSettled(tasks.map(([_, f]) => fetchCSV(urlFor(f)))),
+        fetchJSON(urlFor(FILES.fear)).catch(() => null),
+      ]);
 
-      const next = { confirmed: [], pre: [], events: [], all: [], history: [], breadth: [], equity10: [] };
+      const next = {
+        confirmed: [],
+        pre: [],
+        events: [],
+        all: [],
+        history: [],
+        breadth: [],
+        equity10: [],
+        backtestSummary: [],
+        bench10: [],
+        fear: fear && typeof fear === "object" ? fear : null,
+      };
       const failed = [];
 
       results.forEach((res, idx) => {
         const [key, file] = tasks[idx];
         if (res.status === "fulfilled") {
-          const rows = Array.isArray(res.value) ? res.value : [];
-          next[key] = rows;
+          next[key] = Array.isArray(res.value) ? res.value : [];
         } else {
           console.warn(`[CSV] Échec de chargement: ${file}`, res.reason);
           failed.push(file);
@@ -127,8 +140,10 @@ export default function App() {
         next.events.length === 0 &&
         next.all.length === 0 &&
         next.history.length === 0 &&
-        next.breadth.length === 0;
-        next.equity10.length === 0;
+        next.breadth.length === 0 &&
+        next.equity10.length === 0 &&
+        next.backtestSummary.length === 0 &&
+        next.bench10.length === 0;
 
       if (allEmpty) {
         setError("Impossible de charger les données. Réessaie plus tard.");
@@ -177,7 +192,7 @@ export default function App() {
 
   return (
     <div className="max-w-7xl mx-auto p-6 text-slate-900 dark:text-slate-100">
-      <TopBar lastRefreshed={last} onRefresh={loadAll} />
+      <TopBar lastRefreshed={last} onRefresh={loadAll} fear={data.fear} />
 
       {/* Info source */}
       <div className="mb-2 text-xs text-slate-500">
@@ -265,12 +280,12 @@ export default function App() {
         )}
       </div>
 
-      {/* Equity curve (10-day hold vs SPY) */}
+      {/* Equity curve (10-day hold) + SPY */}
       <div className="mb-6">
         <EquityCurve
-        data={data.equity10}
-        bench={data.bench10}   // <— NEW
-        title="Equity curve — 10 trading days hold vs SPY"
+          data={data.equity10}
+          bench={data.bench10}
+          title="Equity curve — 10 trading days hold vs SPY"
         />
       </div>
 
