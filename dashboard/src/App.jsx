@@ -45,7 +45,7 @@ export default function App() {
     setError("");
     try {
       // ✅ récupère bien les 5 résultats (dont history)
-      const [confirmed, pre, events, all, history] = await Promise.all([
+      const [confirmed, pre, events, all, history] = await Promise.allSettled([
         fetchCSV(urlFor(FILES.confirmed)).catch(() => []),
         fetchCSV(urlFor(FILES.pre)).catch(() => []),
         fetchCSV(urlFor(FILES.events)).catch(() => []),
