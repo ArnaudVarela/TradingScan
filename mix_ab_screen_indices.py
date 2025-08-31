@@ -1,13 +1,15 @@
 # mix_ab_screen_indices.py
 # Screener US (Russell 1000 + 2000)
 # Sorties :
-#   - confirmed_STRONGBUY.csv         (TV=STRONG_BUY ∩ Analystes∈{Strong Buy, Buy})
-#   - anticipative_pre_signals.csv    (pré-signaux : TA∈{Buy,Strong Buy} ou TV=STRONG_BUY)
-#   - event_driven_signals.csv        (proxy événements : analystes connus)
-#   - candidates_all_ranked.csv       (tous les candidats triés)
-#   - debug_all_candidates.csv        (diagnostic avant filtres finaux)
+#   - confirmed_STRONGBUY.csv
+#   - anticipative_pre_signals.csv
+#   - event_driven_signals.csv
+#   - candidates_all_ranked.csv
+#   - debug_all_candidates.csv
+#   - sector_history.csv
+#   - raw_candidates.csv (diag brut)
 
-import warnings, time, re, os, math
+import warnings, time, os, math
 import requests
 import pandas as pd
 import numpy as np
@@ -30,7 +32,7 @@ TV_INTERVAL = Interval.INTERVAL_1_DAY
 MAX_MARKET_CAP = 200_000_000_000     # < 200B
 DELAY_BETWEEN_TV_CALLS_SEC = 0.2
 
-SECTOR_CATALOG_PATH = "sector_catalog.csv"  # <- nouveau (optionnel)
+SECTOR_CATALOG_PATH = "sector_catalog.csv"  # optionnel
 
 # --- Sorties : racine + copie dans dashboard/public/ pour le front
 PUBLIC_DIR = os.path.join("dashboard", "public")
@@ -42,15 +44,12 @@ def _ensure_dir(p: str):
 
 def save_csv(df: pd.DataFrame, fname: str, also_public: bool = True):
     """Écrit fname à la racine + copie dans dashboard/public/fname."""
-    # racine
     _ensure_dir(fname)
     df.to_csv(fname, index=False)
-    # public (pour Vercel)
     if also_public:
         dst = os.path.join(PUBLIC_DIR, fname)
         _ensure_dir(dst)
         df.to_csv(dst, index=False)
-
 
 # ============= HELPERS =============
 def yf_norm(s:str)->str: return s.replace(".", "-")
@@ -114,12 +113,8 @@ def map_exchange_for_tv(exch: str)->str:
     if "ARCA"   in e: return "AMEX"
     return "NASDAQ"
 
-# === Indicateurs via API fonctionnelle pandas_ta ===
 def compute_local_technical_bucket(hist: pd.DataFrame):
-    """
-    Renvoie (bucket, votes, details{price, sma20, sma50, sma200, rsi, macd, macds, stoch_k, stoch_d})
-    Tolérante si SMA200 absente. Nécessite min 60 barres.
-    """
+    """Renvoie (bucket, votes, details) — tolérante aux NaN, nécessite >=60 barres."""
     if hist is None or hist.empty or len(hist) < 60:
         return None, None, {}
 
@@ -129,12 +124,11 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
         s50  = ta.sma(close, length=50)
         s200 = ta.sma(close, length=200)
         rsi  = ta.rsi(close, length=14)
-        macd = ta.macd(close, fast=12, slow=26, signal=9)      # MACD_12_26_9, MACDs_12_26_9
-        stoch= ta.stoch(high, low, close, k=14, d=3, smooth_k=3) # STOCHk_14_3_3, STOCHd_14_3_3
+        macd = ta.macd(close, fast=12, slow=26, signal=9)
+        stoch= ta.stoch(high, low, close, k=14, d=3, smooth_k=3)
     except Exception:
         return None, None, {}
 
-    # valeurs finales
     try:
         price     = float(close.iloc[-1])
         s20_last  = float(s20.dropna().iloc[-1]); s50_last  = float(s50.dropna().iloc[-1])
@@ -142,30 +136,25 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
         rsi_last  = float(rsi.dropna().iloc[-1])
 
         macd_last = macds_last = np.nan
-        if macd is not None and not macd.dropna().empty and \
-           {"MACD_12_26_9","MACDs_12_26_9"}.issubset(macd.columns):
+        if macd is not None and not macd.dropna().empty and {"MACD_12_26_9","MACDs_12_26_9"}.issubset(macd.columns):
             macd_last  = float(macd["MACD_12_26_9"].dropna().iloc[-1])
             macds_last = float(macd["MACDs_12_26_9"].dropna().iloc[-1])
 
         stoch_k = stoch_d = np.nan
-        if stoch is not None and not stoch.dropna().empty and \
-           {"STOCHk_14_3_3","STOCHd_14_3_3"}.issubset(stoch.columns):
+        if stoch is not None and not stoch.dropna().empty and {"STOCHk_14_3_3","STOCHd_14_3_3"}.issubset(stoch.columns):
             stoch_k = float(stoch["STOCHk_14_3_3"].dropna().iloc[-1])
             stoch_d = float(stoch["STOCHd_14_3_3"].dropna().iloc[-1])
     except Exception:
         return None, None, {}
 
-    # votes
     votes = 0
     votes += 1 if price > s20_last else -1
     votes += 1 if s20_last > s50_last else -1
     if not np.isnan(s200_last): votes += 1 if s50_last > s200_last else -1
     if rsi_last >= 55: votes += 1
     elif rsi_last <= 45: votes -= 1
-    if not np.isnan(macd_last) and not np.isnan(macds_last):
-        votes += 1 if macd_last > macds_last else -1
-    if not np.isnan(stoch_k) and not np.isnan(stoch_d):
-        votes += 1 if stoch_k > stoch_d else -1
+    if not np.isnan(macd_last) and not np.isnan(macds_last): votes += 1 if macd_last > macds_last else -1
+    if not np.isnan(stoch_k) and not np.isnan(stoch_d):     votes += 1 if stoch_k > stoch_d else -1
 
     if votes >= 4: bucket = "Strong Buy"
     elif votes >= 2: bucket = "Buy"
@@ -201,22 +190,16 @@ def get_tv_summary(symbol: str, exchange: str):
     return {"tv_reco": None}
 
 def rank_score_row(s: pd.Series) -> float:
-    """Score pour trier les candidats (plus haut = mieux)."""
     score = 0.0
-    # TV
     if s.get("tv_reco") == "STRONG_BUY": score += 3.0
-    # TA local
     tb = s.get("technical_local")
     if tb == "Strong Buy": score += 2.0
-    elif tb == "Buy": score += 1.0
-    # Analystes
+    elif tb == "Buy":     score += 1.0
     ab = s.get("analyst_bucket")
     if ab == "Strong Buy": score += 2.0
-    elif ab == "Buy": score += 1.0
-    # Votes analystes
+    elif ab == "Buy":      score += 1.0
     av = s.get("analyst_votes")
     if isinstance(av,(int,float)) and av>0: score += min(av, 20)*0.05
-    # Plus petite cap favorisée
     mc = s.get("market_cap")
     if isinstance(mc,(int,float)) and mc>0:
         score += max(0.0, 5.0 - math.log10(mc))
@@ -228,13 +211,12 @@ def main():
     tickers_df = load_universe()
     print(f"Tickers dans l'univers: {len(tickers_df)}")
 
-    # ---------- [NOUVEAU] catalogue secteurs ----------
+    # ---- catalogue secteurs (optionnel) ----
     sector_map = {}
     if os.path.exists(SECTOR_CATALOG_PATH):
         try:
             cat = pd.read_csv(SECTOR_CATALOG_PATH)
             cat["ticker"] = cat["ticker"].astype(str).str.upper().str.strip()
-            # map: 'BRK.B' -> (sector, industry)
             sector_map = {t: (s if isinstance(s,str) else "", i if isinstance(i,str) else "")
                           for t,s,i in cat[["ticker","sector","industry"]].itertuples(index=False, name=None)}
             print(f"[INFO] Sector catalog chargé: {len(sector_map)} tickers")
@@ -242,10 +224,8 @@ def main():
             print(f"[WARN] Sector catalog illisible: {e}")
 
     def sector_from_catalog(sym_tv: str, sym_yf: str):
-        # essai direct TV (BRK.B)
         key_tv = (sym_tv or "").upper()
         if key_tv in sector_map: return sector_map[key_tv]
-        # essai conversion YF -> TV (BRK-B -> BRK.B)
         key_yf_tv = (sym_yf or "").upper().replace("-", ".")
         return sector_map.get(key_yf_tv, ("", ""))
 
@@ -254,8 +234,6 @@ def main():
         tv_sym, yf_sym = rec.tv_symbol, rec.yf_symbol
         try:
             tk = yf.Ticker(yf_sym)
-
-            # infos émetteur (robuste)
             try: info = tk.get_info() or {}
             except: info = {}
             fi = getattr(tk, "fast_info", None)
@@ -265,30 +243,24 @@ def main():
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
             tv_exchange = map_exchange_for_tv(exch)
 
-            # US + cap
             is_us_exchange = str(exch).upper() in {"NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"}
             if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
                 continue
             if isinstance(mcap,(int,float)) and mcap >= MAX_MARKET_CAP:
                 continue
 
-            # historique
             hist = tk.history(period=PERIOD, interval=INTERVAL, auto_adjust=True, actions=False)
             bucket, votes, det = compute_local_technical_bucket(hist)
             if not bucket: continue
 
-            # TV
             tv = get_tv_summary(tv_sym, tv_exchange)
             time.sleep(DELAY_BETWEEN_TV_CALLS_SEC)
 
-            # Analystes
             analyst_mean  = info.get("recommendationMean")
             analyst_votes = info.get("numberOfAnalystOpinions")
             analyst_bucket = analyst_bucket_from_mean(analyst_mean)
 
-            # ---------- secteurs/industries : priorité au catalogue ----------
             sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
-            # fallback Yahoo si vide, sinon Unknown
             sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
             industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
 
@@ -308,14 +280,28 @@ def main():
             print(f"{i}/{len(tickers_df)} traités…")
 
     df = pd.DataFrame(rows)
+
+    # dump brut pour diag, toujours
+    save_csv(df, "raw_candidates.csv")
+    print(f"[DIAG] rows collectées: {len(df)}")
+
     if df.empty:
         print("⚠️ Aucun titre collecté après filtres US + MCAP + TA local.")
-        # CSV diagnostic vide
-    save_csv(pd.DataFrame(columns=[
-        "ticker_tv","ticker_yf","price","market_cap","sector","industry",
-        "technical_local","tv_reco","analyst_bucket"
-    ]), "debug_all_candidates.csv")
-    return
+        save_csv(pd.DataFrame(columns=[
+            "ticker_tv","ticker_yf","price","market_cap","sector","industry",
+            "technical_local","tv_reco","analyst_bucket"
+        ]), "debug_all_candidates.csv")
+        # produire quand même des fichiers vides pour le front
+        empty_cols = ["ticker_tv","ticker_yf","price","market_cap","sector","industry",
+                      "technical_local","tech_score","tv_reco","analyst_bucket",
+                      "analyst_mean","analyst_votes","rank_score"]
+        empty = pd.DataFrame(columns=empty_cols)
+        save_csv(empty, "confirmed_STRONGBUY.csv")
+        save_csv(empty, "anticipative_pre_signals.csv")
+        save_csv(empty, "event_driven_signals.csv")
+        save_csv(pd.DataFrame(columns=["candidate_type"]+empty_cols), "candidates_all_ranked.csv")
+        # pas de timeline sans données
+        return
 
     # Diagnostic global (avant filtres finaux)
     dbg = df.copy()
@@ -359,36 +345,29 @@ def main():
     all_cols = ["candidate_type"] + confirmed_cols
     save_csv(all_out[all_cols], "candidates_all_ranked.csv")
 
-    # === Append sector history (weekly snapshot) ===============================
-    # On prend la "semaine ISO" (lundi-dimanche) pour stabiliser les points
+    # === 5) Sector history (weekly snapshot) ===============================
     from datetime import datetime, timezone
-    import csv
-
     HISTORY_CSV = "sector_history.csv"
 
     def _norm_sector(x):
         x = (x or "").strip() or "Unknown"
         return x
 
-    def _count_by_sector(rows):
-        # rows est un DataFrame
+    def _count_by_sector(rows_df):
         out = {}
-        for _, r in rows.iterrows():
+        for _, r in rows_df.iterrows():
             sec = _norm_sector(r.get("sector"))
             out[sec] = out.get(sec, 0) + 1
         return out
 
-    # date clé = année-semaine (ex: 2025-W35)
     now = datetime.now(timezone.utc)
     iso_year, iso_week, _ = now.isocalendar()
     week_key = f"{iso_year}-W{iso_week:02d}"
 
-    # 3 buckets
     counts_confirmed = _count_by_sector(confirmed)
     counts_pre       = _count_by_sector(pre)
     counts_events    = _count_by_sector(evt)
 
-    # Build lignes "long format": date, bucket, sector, count
     lines = []
     for sec, n in counts_confirmed.items():
         lines.append((week_key, "confirmed", sec, int(n)))
@@ -397,23 +376,17 @@ def main():
     for sec, n in counts_events.items():
         lines.append((week_key, "events", sec, int(n)))
 
-    # Append (en évitant les doublons pour la même semaine)
-    # Stratégie simple: on relit l'existant, on filtre toute la semaine courante, on ré-écrit + on append nos lignes.
-    existing = []
     if os.path.exists(HISTORY_CSV):
         try:
-            existing = pd.read_csv(HISTORY_CSV).astype({"count":"int"})
+            existing = pd.read_csv(HISTORY_CSV)
         except Exception:
             existing = pd.DataFrame(columns=["date","bucket","sector","count"])
     else:
         existing = pd.DataFrame(columns=["date","bucket","sector","count"])
 
-    # retire la semaine courante
     existing = existing[existing["date"] != week_key]
-    # concat
     new_df = pd.concat([existing, pd.DataFrame(lines, columns=["date","bucket","sector","count"])],
                        ignore_index=True)
-    # option: limite à 156 semaines (3 ans)
     new_df["__key"] = new_df["date"].astype(str) + "|" + new_df["bucket"].astype(str) + "|" + new_df["sector"].astype(str)
     new_df = new_df.drop_duplicates(subset="__key").drop(columns="__key")
     save_csv(new_df, HISTORY_CSV)
