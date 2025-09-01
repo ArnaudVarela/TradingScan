@@ -1,62 +1,78 @@
-// dashboard/src/components/EquityCurve.jsx
-import { useMemo } from "react";
+import React from "react";
 import {
-  LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid,
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
 } from "recharts";
 
-export default function EquityCurve({ data = [], bench = [], title = "Equity curve" }) {
-  // Normalisation dates + merge
-  const merged = useMemo(() => {
-    const parse = (rows, key) =>
-      (Array.isArray(rows) ? rows : [])
-        .filter(r => r?.date && r?.equity != null)
-        .map(r => ({
-          date: String(r.date).slice(0, 10),
-          [key]: Number(r.equity),
-        }));
-
-    const a = parse(data, "model");
-    const b = parse(bench, "spy");
-
-    // index par date
-    const map = new Map();
-    for (const r of a) {
-      map.set(r.date, { date: r.date, model: r.model });
+// Affiche une courbe d’equity principale (data),
+// + SPY (bench), + cohortes P3 / P2 si fournies.
+export default function EquityCurve({
+  data = [],
+  bench = [],   // SPY: [{date, equity}]
+  p3 = [],      // P3  : [{date, equity}]
+  p2 = [],      // P2  : [{date, equity}]
+  title = "Equity curve",
+}) {
+  const key = (d) => {
+    try {
+      return new Date(d.date).toISOString().slice(0, 10);
+    } catch {
+      return String(d.date).slice(0, 10);
     }
-    for (const r of b) {
-      const cur = map.get(r.date) || { date: r.date };
-      cur.spy = r.spy;
-      map.set(r.date, cur);
-    }
+  };
 
-    return Array.from(map.values()).sort((x, y) => x.date.localeCompare(y.date));
-  }, [data, bench]);
+  // merge on ISO date
+  const idx = new Map();
+  (data || []).forEach(d => idx.set(key(d), { date: key(d), model: d.equity }));
+  (bench || []).forEach(d => {
+    const k = key(d);
+    idx.set(k, { ...(idx.get(k) || { date: k }), spy: d.equity });
+  });
+  (p3 || []).forEach(d => {
+    const k = key(d);
+    idx.set(k, { ...(idx.get(k) || { date: k }), p3: d.equity });
+  });
+  (p2 || []).forEach(d => {
+    const k = key(d);
+    idx.set(k, { ...(idx.get(k) || { date: k }), p2: d.equity });
+  });
 
-  if (!merged.length) {
-    return (
-      <div className="bg-white dark:bg-slate-900 rounded shadow p-4">
-        <div className="text-sm opacity-70">{title}</div>
-        <div className="text-xs mt-2">Pas encore de points d’equity à afficher.</div>
-      </div>
-    );
-  }
+  const series = Array.from(idx.values()).sort((a, b) =>
+    a.date.localeCompare(b.date)
+  );
+
+  const hasModel = series.some(s => Number.isFinite(s.model));
+  const hasSpy   = series.some(s => Number.isFinite(s.spy));
+  const hasP3    = series.some(s => Number.isFinite(s.p3));
+  const hasP2    = series.some(s => Number.isFinite(s.p2));
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded shadow p-4">
-      <div className="text-sm opacity-70 mb-2">{title}</div>
-      <ResponsiveContainer width="100%" height={280}>
-        <LineChart data={merged}>
-          <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-          <XAxis dataKey="date" tick={{ fontSize: 12 }} minTickGap={24} />
-          <YAxis tick={{ fontSize: 12 }} domain={["dataMin", "dataMax"]} />
-          <Tooltip />
-          <Legend />
-          {/* Stratégie */}
-          <Line type="monotone" dataKey="model" dot={false} strokeWidth={2} name="Model (10d)" />
-          {/* SPY si dispo */}
-          <Line type="monotone" dataKey="spy" dot={false} strokeWidth={2} strokeOpacity={0.8} name="SPY (Buy & Hold)" />
-        </LineChart>
-      </ResponsiveContainer>
+    <div className="w-full bg-white dark:bg-slate-900 rounded shadow p-4">
+      <div className="font-semibold mb-2">{title}</div>
+      <div className="h-72">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={series} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" tick={{ fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} domain={["dataMin", "dataMax"]} />
+            <Tooltip />
+            <Legend />
+            {/* Si P3/P2 existent, on les montre; sinon on garde la courbe 'model' */}
+            {hasP3    && <Line type="monotone" dataKey="p3"    name="P3 (3/3 pillars)" dot={false} strokeWidth={2} />}
+            {hasP2    && <Line type="monotone" dataKey="p2"    name="P2 (2/3 + votes≥15)" dot={false} strokeWidth={2} />}
+            {!hasP3 && !hasP2 && hasModel &&
+              <Line type="monotone" dataKey="model" name="Model" dot={false} strokeWidth={2} />
+            }
+            {hasSpy   && <Line type="monotone" dataKey="spy"   name="SPY (buy & hold)" dot={false} strokeWidth={2} />}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
