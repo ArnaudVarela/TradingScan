@@ -11,9 +11,12 @@ import yfinance as yf
 HORIZONS = [1, 3, 5, 10, 20]
 
 # Si tu veux restreindre aux signaux d’un bucket donné, mets une string (ex: "confirmed")
-# ou None pour tout backtester.
-FILTER_BUCKET = "confirmed"  # ex: "confirmed"
-MAX_TICKERS = 100
+# ou None pour tout backtester. Laisse None si tu veux comparer les cohortes globalement.
+FILTER_BUCKET = None     # ex: "confirmed" ou None
+
+# Limiter le nombre de tickers téléchargés (debug/quota). None = illimité.
+MAX_TICKERS = None              # ex: 100
+
 # Dossier public pour Vercel
 PUBLIC_DIR = os.path.join("dashboard", "public")
 
@@ -49,8 +52,8 @@ def read_csv_first_available(paths):
 
 def placeholder_outputs_when_empty():
     """Crée des fichiers vides/minimaux pour éviter de casser le front."""
-    trades_cols  = ["date_signal","ticker","sector","bucket","horizon_days","entry","exit","date_exit","ret_pct"]
-    summary_cols = ["horizon_days","bucket","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret"]
+    trades_cols  = ["date_signal","ticker","sector","bucket","cohort","votes","horizon_days","entry","exit","date_exit","ret_pct"]
+    summary_cols = ["horizon_days","bucket","cohort","votes_bin","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret"]
     equity_cols  = ["date","equity"]
 
     save_csv(pd.DataFrame(columns=trades_cols),  "backtest_trades.csv")
@@ -58,6 +61,8 @@ def placeholder_outputs_when_empty():
     # On écrit toutes les courbes horizons + la 10j utilisée par le front
     for h in HORIZONS:
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_{h}d.csv")
+        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_benchmark_spy_{h}d.csv")
+        save_csv(pd.DataFrame(columns=["date","model","spy"]), f"backtest_equity_{h}d_combo.csv")
     save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv")
 
 # ---------- SPY ----------
@@ -66,29 +71,30 @@ def compute_spy_benchmark(start_dt, end_dt):
     Télécharge SPY en daily, normalise base 100 au premier point >= start_dt,
     et renvoie un DataFrame: date, equity (float).
     """
-    # marge de sécurité
     start_pad = (pd.to_datetime(start_dt) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
     end_pad   = (pd.to_datetime(end_dt)   + pd.Timedelta(days=7)).strftime("%Y-%m-%d")
 
-    hist = yf.Ticker("SPY").history(
-        start=start_pad, end=end_pad, interval="1d",
-        auto_adjust=True, actions=False
-    )
+    try:
+        hist = yf.Ticker("SPY").history(
+            start=start_pad, end=end_pad, interval="1d",
+            auto_adjust=True, actions=False
+        )
+    except Exception:
+        return pd.DataFrame(columns=["date","equity"])
+
     if hist is None or hist.empty:
-        return pd.DataFrame(columns=["date", "equity"])
+        return pd.DataFrame(columns=["date","equity"])
 
     px = hist[["Close"]].rename(columns={"Close": "close"})
     px.index = pd.to_datetime(px.index.date)
-
-    # garde la fenêtre demandée
     mask = (px.index >= pd.to_datetime(start_dt)) & (px.index <= pd.to_datetime(end_dt))
     px = px.loc[mask].copy()
     if px.empty:
-        return pd.DataFrame(columns=["date", "equity"])
+        return pd.DataFrame(columns=["date","equity"])
 
     base = float(px["close"].iloc[0])
     px["equity"] = (px["close"] / base) * 100.0
-    out = px.reset_index()[["Date", "equity"]].rename(columns={"Date": "date"})
+    out = px.reset_index()[["Date","equity"]].rename(columns={"Date":"date"})
     return out
 
 # ---------- Téléchargement des prix ----------
@@ -123,10 +129,58 @@ def equity_from_daily_returns(daily_ret_pct: pd.Series) -> pd.DataFrame:
         return pd.DataFrame(columns=["date","equity"])
     daily_ret = daily_ret_pct.sort_index() / 100.0
     equity = (1.0 + daily_ret).cumprod() * 100.0
-    return pd.DataFrame({
-        "date": pd.to_datetime(equity.index),
-        "equity": equity.values
-    })
+    return pd.DataFrame({"date": pd.to_datetime(equity.index), "equity": equity.values})
+
+# ---------- Dérivation des piliers / cohortes ----------
+def _is_strong(s):
+    if not isinstance(s, str):
+        return False
+    v = s.strip().upper()
+    return v in {"STRONG BUY", "STRONGBUY", "STRONG_BUY"}
+
+def add_pillars_and_cohorts(sig: pd.DataFrame) -> pd.DataFrame:
+    s = sig.copy()
+
+    # colonnes qui peuvent exister selon tes CSV
+    tech_col = "technical_local"  # ex: "Strong Buy"
+    tv_col   = "tv_reco"          # ex: "STRONG_BUY"
+    an_col   = "analyst_bucket"   # ex: "Buy"
+    votes_col = None
+    for cand in ["votes", "analyst_votes", "rank_votes"]:
+        if cand in s.columns:
+            votes_col = cand
+            break
+
+    # booléens 3 piliers
+    s["p_tech"] = s.get(tech_col, "").apply(_is_strong)
+    s["p_tv"]   = s.get(tv_col, "").apply(_is_strong)
+    s["p_an"]   = s.get(an_col, "").astype(str).str.strip().str.upper().eq("BUY")
+
+    # compte de piliers
+    s["pillars_met"] = (s[["p_tech","p_tv","p_an"]].fillna(False)).sum(axis=1)
+
+    # votes normalisés
+    if votes_col is None:
+        s["votes"] = 0
+    else:
+        s["votes"] = pd.to_numeric(s[votes_col], errors="coerce").fillna(0).astype(int)
+
+    # bins votes
+    s["votes_bin"] = pd.cut(
+        s["votes"], bins=[-1,9,14,19,999], labels=["≤9","10–14","15–19","20+"]
+    )
+
+    # cohorte
+    s["cohort"] = np.select(
+        [
+            s["pillars_met"] >= 3,
+            (s["pillars_met"] == 2) & (s["votes"] >= 15),
+            (s["pillars_met"] == 1) & (s["votes"] >= 20),
+        ],
+        ["P3_confirmed", "P2_highconv", "P1_explore"],
+        default="P0_other"
+    )
+    return s
 
 # ---------- Main ----------
 def main():
@@ -154,16 +208,17 @@ def main():
     sig = sig.copy()
     sig["date"] = pd.to_datetime(sig["date"]).dt.normalize()
     sig["ticker_yf"] = sig["ticker_yf"].astype(str)
+    if "sector" not in sig.columns: sig["sector"] = "Unknown"
+    if "bucket" not in sig.columns: sig["bucket"] = ""
 
-    if "sector" not in sig.columns:
-        sig["sector"] = "Unknown"
-    if "bucket" not in sig.columns:
-        sig["bucket"] = ""
+    # 2b) Dériver piliers/cohortes
+    sig = add_pillars_and_cohorts(sig)
 
     # 3) Filtre éventuel par bucket (optionnel)
     if FILTER_BUCKET:
+        before = len(sig)
         sig = sig[sig["bucket"].astype(str).str.lower() == str(FILTER_BUCKET).lower()]
-        print(f"[INFO] Filtre bucket = {FILTER_BUCKET} → {len(sig)} signaux")
+        print(f"[INFO] Filtre bucket = {FILTER_BUCKET} → {len(sig)} signaux (avant={before})")
 
     if sig.empty:
         print("⚠️ Aucun signal après filtre. Création de placeholders.")
@@ -176,19 +231,20 @@ def main():
 
     # 5) Construire les trades
     trades = []  # une ligne par (signal, horizon)
+    done = 0
     for ticker, g in sig.groupby("ticker_yf"):
+        if MAX_TICKERS is not None and done >= MAX_TICKERS:
+            break
+
         prices = get_daily_prices(ticker, dmin.strftime("%Y-%m-%d"), dmax.strftime("%Y-%m-%d"))
         if prices.empty:
-            # déjà loggé dans get_daily_prices
             continue
 
-        # pour chaque signal de ce ticker
         for _, row in g.iterrows():
             d0 = pd.to_datetime(row["date"])
-            # si la date du signal n'est pas une date de bourse, prendre la prochaine dispo
             idx = prices.index.searchsorted(d0)
             if idx >= len(prices.index):
-                continue  # pas de données après
+                continue
             d_entry = prices.index[idx]
             entry = float(prices.iloc[idx]["close"])
             if not np.isfinite(entry):
@@ -197,7 +253,6 @@ def main():
             for h in HORIZONS:
                 exit_idx = idx + h
                 if exit_idx >= len(prices.index):
-                    # pas assez de barres futures
                     continue
                 d_exit = prices.index[exit_idx]
                 exit_price = float(prices.iloc[exit_idx]["close"])
@@ -210,6 +265,8 @@ def main():
                     "ticker": ticker,
                     "sector": row.get("sector", "Unknown"),
                     "bucket": row.get("bucket", ""),
+                    "cohort": row.get("cohort", "P0_other"),
+                    "votes": int(row.get("votes", 0)),
                     "horizon_days": h,
                     "entry": entry,
                     "exit": exit_price,
@@ -217,6 +274,7 @@ def main():
                     "ret_pct": ret_pct
                 })
 
+        done += 1
         if SLEEP_BETWEEN_TICKERS:
             time.sleep(SLEEP_BETWEEN_TICKERS)
 
@@ -228,10 +286,16 @@ def main():
     trades_df = pd.DataFrame(trades)
     save_csv(trades_df, "backtest_trades.csv")
 
-    # 6) Résumés par horizon/bucket
+    # 6) Résumés par horizon / bucket / cohort / votes_bin
+    # On rattache votes_bin via un merge rapide depuis les signaux (clé = date_signal + ticker)
+    sig_key = sig.copy()
+    sig_key["date_signal"] = sig_key["date"].dt.strftime("%Y-%m-%d")
+    sig_key = sig_key[["date_signal","ticker_yf","votes_bin"]].rename(columns={"ticker_yf":"ticker"})
+    trades_df = trades_df.merge(sig_key, on=["date_signal","ticker"], how="left")
+
     summary = (
         trades_df
-        .groupby(["horizon_days","bucket"], dropna=False)
+        .groupby(["horizon_days","bucket","cohort","votes_bin"], dropna=False)
         .agg(
             n_trades   = ("ret_pct", "count"),
             winrate    = ("ret_pct", lambda s: float((s > 0).mean() * 100.0)),
@@ -241,45 +305,52 @@ def main():
             p05_ret    = ("ret_pct", lambda s: float(s.quantile(0.05))),
         )
         .reset_index()
-        .sort_values(["horizon_days","bucket"])
+        .sort_values(["horizon_days","cohort","bucket","votes_bin"])
     )
     save_csv(summary, "backtest_summary.csv")
 
-    # 7) Equity curves par horizon
+    # 7) Equity curves par horizon (global sur le sous-ensemble filtré)
     for h in HORIZONS:
         sub = trades_df[trades_df["horizon_days"] == h]
         if sub.empty:
             save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_{h}d.csv")
+            save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_benchmark_spy_{h}d.csv")
+            save_csv(pd.DataFrame(columns=["date","model","spy"]), f"backtest_equity_{h}d_combo.csv")
             continue
-        # Retours moyens par date_exit (equal-weight des sorties du jour)
-        daily_ret = (
-            sub.groupby("date_exit")["ret_pct"]
-               .mean()
-               .sort_index()
-        )
+
+        daily_ret = sub.groupby("date_exit")["ret_pct"].mean().sort_index()
         eq = equity_from_daily_returns(daily_ret)
         save_csv(eq, f"backtest_equity_{h}d.csv")
-        # === SPY benchmark aligné sur la même fenêtre de dates que la courbe 'eq'
+
         spy = compute_spy_benchmark(eq["date"].min(), eq["date"].max())
         save_csv(spy, f"backtest_benchmark_spy_{h}d.csv")
 
-        # (optionnel) combo “wide” pour overlay côté front sans 2 fetch:
         combo = (
-         eq.rename(columns={"equity": "model"})
-          .merge(spy.rename(columns={"equity": "spy"}), on="date", how="inner")
+            eq.rename(columns={"equity": "model"})
+              .merge(spy.rename(columns={"equity": "spy"}), on="date", how="inner")
         )
         save_csv(combo, f"backtest_equity_{h}d_combo.csv")
 
-    # Pour le front actuel qui lit spécifiquement 10j :
-    # S'il existe, on le laisse tel quel; sinon, on copie le plus long horizon dispo.
+    # 8) Equity par COHORTE (utile pour comparer P3 vs P2 au front)
+    #   On le fait au moins pour l’horizon 10 jours.
+    if 10 in HORIZONS:
+        for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
+            subc = trades_df[(trades_df["horizon_days"] == 10) & (trades_df["cohort"] == cohort)]
+            if subc.empty:
+                save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_10d_{cohort}.csv")
+                continue
+            daily_ret = subc.groupby("date_exit")["ret_pct"].mean().sort_index()
+            eqc = equity_from_daily_returns(daily_ret)
+            save_csv(eqc, f"backtest_equity_10d_{cohort}.csv")
+
+    # 9) Pour le front qui lit spécifiquement 10j : copie de sûreté
     prefer = 10
     fallback = max(HORIZONS)
     src = f"backtest_equity_{prefer}d.csv" if prefer in HORIZONS else f"backtest_equity_{fallback}d.csv"
     eq10, _ = read_csv_first_available([src, os.path.join(PUBLIC_DIR, src)])
     save_csv(eq10, "backtest_equity_10d.csv")
 
-    print("[OK] Backtest écrit : backtest_trades.csv, backtest_summary.csv, backtest_equity_[…]d.csv")
-
+    print("[OK] Backtest écrit : trades, summary, equity (global + cohortes) et SPY combo.")
 
 if __name__ == "__main__":
     main()
