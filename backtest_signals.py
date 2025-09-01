@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
 import yfinance as yf
+from random import uniform
 
 # ====== CONFIG =================================================================
 # Horizons en JOURS DE BOURSE (on ajoute h barres à partir du jour d'entrée)
@@ -20,8 +21,15 @@ MAX_TICKERS = None              # ex: 100
 # Dossier public pour Vercel
 PUBLIC_DIR = os.path.join("dashboard", "public")
 
-# Petite pause entre appels (si tu veux ménager l’API yfinance)
-SLEEP_BETWEEN_TICKERS = 0.2
+# Ancien throttle par ticker (plus utilisé, on garde la variable pour compat)
+SLEEP_BETWEEN_TICKERS = 0.0
+
+# Nouveau: paramètres de téléchargement en lot (beaucoup plus safe côté Yahoo)
+BATCH_SIZE = 80              # nb de tickers par chunk pour yf.download
+CHUNK_SLEEP_RANGE = (2.0, 4.0)  # pause [min,max] secondes entre chunks
+MAX_RETRIES = 3              # tentatives par chunk
+RETRY_BACKOFF_BASE = 3.0     # base du backoff (secondes) avant retry
+RETRY_JITTER_MAX = 5.0       # jitter aléatoire ajouté au backoff
 # ===============================================================================
 
 
@@ -64,6 +72,9 @@ def placeholder_outputs_when_empty():
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_benchmark_spy_{h}d.csv")
         save_csv(pd.DataFrame(columns=["date","model","spy"]), f"backtest_equity_{h}d_combo.csv")
     save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv")
+    # Equity par cohortes (10d)
+    for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
+        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_10d_{cohort}.csv")
 
 # ---------- SPY ----------
 def compute_spy_benchmark(start_dt, end_dt):
@@ -97,30 +108,82 @@ def compute_spy_benchmark(start_dt, end_dt):
     out = px.reset_index()[["Date","equity"]].rename(columns={"Date":"date"})
     return out
 
-# ---------- Téléchargement des prix ----------
-def get_daily_prices(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
+# ---------- Téléchargement des prix en lot ----------
+def prefetch_prices(tickers, start_date, end_date, batch_size=BATCH_SIZE):
     """
-    Télécharge le daily entre (start_date - 7j) et (end_date + 40j) pour marge.
-    Renvoie DataFrame avec colonne 'close' et index (datetime normalisé, date seulement).
+    Télécharge les prix daily pour une liste de tickers en CHUNKS via yf.download.
+    Retourne un dict {ticker: DataFrame(close)} avec index = dates normalisées.
+    Gestion retries + jitter + pause entre chunks pour éviter le throttling Yahoo.
     """
-    try:
-        start_pad = (pd.to_datetime(start_date) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
-        end_pad   = (pd.to_datetime(end_date)   + pd.Timedelta(days=40)).strftime("%Y-%m-%d")
-        hist = yf.Ticker(symbol).history(
-            start=start_pad, end=end_pad,
-            interval="1d", auto_adjust=True, actions=False
-        )
-    except Exception as e:
-        print(f"[WARN] download fail {symbol}: {e}")
-        return pd.DataFrame()
+    all_px = {}
+    # unique tout en gardant l'ordre
+    symbols = list(dict.fromkeys([str(t) for t in tickers if pd.notna(t) and str(t).strip() != ""]))
+    if MAX_TICKERS is not None:
+        symbols = symbols[:MAX_TICKERS]
 
-    if hist is None or hist.empty:
-        print(f"[WARN] {symbol}: pas d’historique téléchargé.")
-        return pd.DataFrame()
+    if not symbols:
+        return all_px
 
-    out = hist[["Close"]].rename(columns={"Close": "close"}).copy()
-    out.index = pd.to_datetime(out.index.date)  # dates normalisées (00:00:00)
-    return out
+    start_pad = (pd.to_datetime(start_date) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
+    end_pad   = (pd.to_datetime(end_date)   + pd.Timedelta(days=40)).strftime("%Y-%m-%d")
+
+    for i in range(0, len(symbols), batch_size):
+        chunk = symbols[i:i+batch_size]
+        df = None
+
+        for attempt in range(1, MAX_RETRIES + 1):
+            try:
+                df = yf.download(
+                    tickers=chunk,
+                    start=start_pad,
+                    end=end_pad,
+                    interval="1d",
+                    auto_adjust=True,
+                    progress=False,
+                    group_by="ticker",
+                    threads=True,
+                )
+                # Certaines versions renvoient un DataFrame vide en cas de throttling silencieux
+                if df is not None and not df.empty:
+                    break
+            except Exception as e:
+                print(f"[WARN] batch {i//batch_size+1}: exception {e}")
+
+            # Backoff + jitter avant retry
+            sleep_s = RETRY_BACKOFF_BASE * attempt + uniform(0.0, RETRY_JITTER_MAX)
+            print(f"[INFO] retry chunk {i//batch_size+1}/{(len(symbols)+batch_size-1)//batch_size} dans {sleep_s:.1f}s…")
+            time.sleep(sleep_s)
+
+        if df is None or df.empty:
+            print(f"[WARN] chunk vide/échec pour {len(chunk)} tickers.")
+        else:
+            # Normalisation: si multiindex -> chaque ticker dans df[ticker]["Close"]
+            if isinstance(df.columns, pd.MultiIndex):
+                for t in chunk:
+                    try:
+                        sub = df[t][["Close"]].rename(columns={"Close": "close"}).dropna()
+                        sub.index = pd.to_datetime(sub.index.date)
+                        if not sub.empty:
+                            all_px[t] = sub
+                    except Exception:
+                        # si ticker absent dans le batch (delisted, etc.)
+                        pass
+            else:
+                # Un seul ticker dans le chunk: colonnes simples
+                try:
+                    sub = df[["Close"]].rename(columns={"Close": "close"}).dropna()
+                    sub.index = pd.to_datetime(sub.index.date)
+                    if not sub.empty and len(chunk) == 1:
+                        all_px[chunk[0]] = sub
+                except Exception:
+                    pass
+
+        # Petite pause “courtoisie” entre chunks pour éviter un 429 global
+        sleep_chunk = uniform(*CHUNK_SLEEP_RANGE)
+        time.sleep(sleep_chunk)
+
+    print(f"[INFO] Prefetch terminé: {len(all_px)}/{len(symbols)} tickers avec historique.")
+    return all_px
 
 # ---------- Construction equity ----------
 def equity_from_daily_returns(daily_ret_pct: pd.Series) -> pd.DataFrame:
@@ -229,15 +292,15 @@ def main():
     dmin = sig["date"].min()
     dmax = sig["date"].max() + pd.Timedelta(days=max(HORIZONS) + 5)
 
+    # 4b) Prefetch des prix en lots
+    tickers_unique = sig["ticker_yf"].astype(str).unique().tolist()
+    px_map = prefetch_prices(tickers_unique, dmin.strftime("%Y-%m-%d"), dmax.strftime("%Y-%m-%d"), batch_size=BATCH_SIZE)
+
     # 5) Construire les trades
     trades = []  # une ligne par (signal, horizon)
-    done = 0
     for ticker, g in sig.groupby("ticker_yf"):
-        if MAX_TICKERS is not None and done >= MAX_TICKERS:
-            break
-
-        prices = get_daily_prices(ticker, dmin.strftime("%Y-%m-%d"), dmax.strftime("%Y-%m-%d"))
-        if prices.empty:
+        prices = px_map.get(ticker)
+        if prices is None or prices.empty:
             continue
 
         for _, row in g.iterrows():
@@ -273,10 +336,6 @@ def main():
                     "date_exit": d_exit.strftime("%Y-%m-%d"),
                     "ret_pct": ret_pct
                 })
-
-        done += 1
-        if SLEEP_BETWEEN_TICKERS:
-            time.sleep(SLEEP_BETWEEN_TICKERS)
 
     if not trades:
         print("⚠️ Aucune transaction simulée (pas assez d’historique futur).")
@@ -332,7 +391,6 @@ def main():
         save_csv(combo, f"backtest_equity_{h}d_combo.csv")
 
     # 8) Equity par COHORTE (utile pour comparer P3 vs P2 au front)
-    #   On le fait au moins pour l’horizon 10 jours.
     if 10 in HORIZONS:
         for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
             subc = trades_df[(trades_df["horizon_days"] == 10) & (trades_df["cohort"] == cohort)]
