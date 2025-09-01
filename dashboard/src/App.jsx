@@ -1,21 +1,21 @@
-// dashboard/src/App.jsx
 import { useEffect, useMemo, useState } from "react";
 import TopBar from "./components/TopBar.jsx";
 import MetricCard from "./components/MetricCard.jsx";
 import DataTable from "./components/DataTable.jsx";
 import SectorHeatmap from "./components/SectorHeatmap.jsx";
 import SectorTimeline from "./components/SectorTimeline.jsx";
+import { fetchCSV, fetchJSON } from "./lib/csv.js";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import EquityCurve from "./components/EquityCurve.jsx";
 import BacktestSummary from "./components/BacktestSummary.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
-import { fetchCSV, fetchJSON } from "./lib/csv.js";
-import { ChevronDown, ChevronUp } from "lucide-react";
+// ---------- Déploiement : on consomme les fichiers du /public du site
+const isBrowser = typeof window !== "undefined";
+// Force local (public/) tant que le repo est privé
+const USE_LOCAL = true;
 
-// -------------------- MODE FICHIERS LOCAUX (/public) --------------------
-const USE_LOCAL = true; // option 3 : tout lire depuis /public
-
-// -------------------- FICHIERS --------------------
+// ---------- Fichiers statiques attendus dans /public
 const FILES = {
   confirmed:        "confirmed_STRONGBUY.csv",
   pre:              "anticipative_pre_signals.csv",
@@ -23,20 +23,28 @@ const FILES = {
   all:              "candidates_all_ranked.csv",
   history:          "sector_history.csv",
   breadth:          "sector_breadth.csv",
+
+  // Backtest
   equity10:         "backtest_equity_10d.csv",
   backtestSummary:  "backtest_summary.csv",
-  bench10:          "backtest_equity_10d_combo.csv",
+  // Benchmark SPY (généré par backtest_signals.py)
+  bench10:          "backtest_benchmark_spy_10d.csv",
+  // Cohortes
+  p3_10:            "backtest_equity_10d_P3_confirmed.csv",
+  p2_10:            "backtest_equity_10d_P2_highconv.csv",
+
+  // Sentiment
   fear:             "fear_greed.json",
 };
 
-// URL builder (local) + petit cache-buster
+// URL locale + cache-buster court (1 min)
 function urlFor(file) {
-  const bust = `?t=${Math.floor(Date.now() / 60000)}`;
-  return USE_LOCAL ? `/${file}${bust}` : `/${file}${bust}`; // on force local
+  const bucketMs = 60_000;
+  const bust = `?t=${Math.floor(Date.now() / bucketMs)}`;
+  return USE_LOCAL ? `/${file}${bust}` : `/${file}${bust}`;
 }
 
 export default function App() {
-  // -------------------- STATE --------------------
   const [data, setData] = useState({
     confirmed: [],
     pre: [],
@@ -47,15 +55,17 @@ export default function App() {
     equity10: [],
     backtestSummary: [],
     bench10: [],
+    p3_10: [],
+    p2_10: [],
     fear: null,
   });
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [warningFiles, setWarningFiles] = useState([]); // fichiers KO
-  const [selectedSectors, setSelectedSectors] = useState([]);
+  const [selectedSectors, setSelectedSectors] = useState([]); // filtre heatmap -> tables
 
-  // états pliables mémorisés
+  // états pliables (mémorisés)
   const [showHeatmap, setShowHeatmap] = useState(() => {
     if (typeof window === "undefined") return true;
     return localStorage.getItem("showHeatmap") !== "0";
@@ -77,7 +87,7 @@ export default function App() {
     }
   }, [showTimeline]);
 
-  // -------------------- CHARGEMENT --------------------
+  // ---------- Chargement robuste de tous les CSV / JSON
   async function loadAll() {
     setLoading(true);
     setError("");
@@ -93,10 +103,12 @@ export default function App() {
       ["equity10",         FILES.equity10],
       ["backtestSummary",  FILES.backtestSummary],
       ["bench10",          FILES.bench10],
+      ["p3_10",            FILES.p3_10],
+      ["p2_10",            FILES.p2_10],
     ];
 
     try {
-      const [csvResults, fearObj] = await Promise.all([
+      const [results, fear] = await Promise.all([
         Promise.allSettled(tasks.map(([_, f]) => fetchCSV(urlFor(f)))),
         fetchJSON(urlFor(FILES.fear)).catch(() => null),
       ]);
@@ -111,11 +123,13 @@ export default function App() {
         equity10: [],
         backtestSummary: [],
         bench10: [],
-        fear: fearObj && typeof fearObj === "object" ? fearObj : null,
+        p3_10: [],
+        p2_10: [],
+        fear: fear && typeof fear === "object" ? fear : null,
       };
-
       const failed = [];
-      csvResults.forEach((res, idx) => {
+
+      results.forEach((res, idx) => {
         const [key, file] = tasks[idx];
         if (res.status === "fulfilled") {
           next[key] = Array.isArray(res.value) ? res.value : [];
@@ -138,8 +152,7 @@ export default function App() {
         next.history.length === 0 &&
         next.breadth.length === 0 &&
         next.equity10.length === 0 &&
-        next.backtestSummary.length === 0 &&
-        next.bench10.length === 0;
+        next.backtestSummary.length === 0;
 
       if (allEmpty) {
         setError("Impossible de charger les données. Réessaie plus tard.");
@@ -154,7 +167,7 @@ export default function App() {
 
   useEffect(() => { loadAll(); }, []);
 
-  // -------------------- KPIs --------------------
+  // ---------- KPIs
   const totals = useMemo(() => ({
     confirmed: data.confirmed.length,
     pre:       data.pre.length,
@@ -162,7 +175,7 @@ export default function App() {
     universe:  data.all.length,
   }), [data]);
 
-  // -------------------- FILTRE SECTEURS --------------------
+  // ---------- Filtre sectoriel (sélection depuis heatmap)
   const sectorFilterActive = selectedSectors.length > 0;
   const filterBySectors = (rows) => {
     if (!sectorFilterActive) return rows;
@@ -186,7 +199,6 @@ export default function App() {
 
   const clearSectorFilter = () => setSelectedSectors([]);
 
-  // -------------------- RENDER --------------------
   return (
     <div className="max-w-7xl mx-auto p-6 text-slate-900 dark:text-slate-100">
       <TopBar lastRefreshed={last} onRefresh={loadAll} fear={data.fear} />
@@ -196,7 +208,7 @@ export default function App() {
         Source CSV : fichiers statiques (public/) sur Vercel
       </div>
 
-      {/* Avertissements */}
+      {/* Bandeau avertissements (certains fichiers KO) */}
       {warningFiles.length > 0 && (
         <div className="mb-4 text-sm text-yellow-800 bg-yellow-50 border border-yellow-200 rounded p-2">
           Certains fichiers n’ont pas pu être chargés :{" "}
@@ -214,31 +226,29 @@ export default function App() {
       </div>
 
       {/* Heatmap pliable */}
-      <ErrorBoundary fallback="La heatmap n'a pas pu s'afficher.">
-        <div className="mb-4 bg-white dark:bg-slate-900 rounded shadow p-4">
-          <button
-            onClick={() => setShowHeatmap(!showHeatmap)}
-            className="flex items-center justify-between w-full text-left font-semibold"
-            aria-expanded={showHeatmap}
-          >
-            <span>Sector signals (heatmap)</span>
-            {showHeatmap ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          </button>
+      <div className="mb-4 bg-white dark:bg-slate-900 rounded shadow p-4">
+        <button
+          onClick={() => setShowHeatmap(!showHeatmap)}
+          className="flex items-center justify-between w-full text-left font-semibold"
+          aria-expanded={showHeatmap}
+        >
+          <span>Sector signals (heatmap)</span>
+          {showHeatmap ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </button>
 
-          {showHeatmap && (
-            <div className="mt-4">
-              <SectorHeatmap
-                confirmed={Array.isArray(data.confirmed) ? data.confirmed : []}
-                pre={Array.isArray(data.pre) ? data.pre : []}
-                events={Array.isArray(data.events) ? data.events : []}
-                breadth={Array.isArray(data.breadth) ? data.breadth : []}
-                selectedSectors={selectedSectors}
-                onToggleSector={handleToggleSector}
-              />
-            </div>
-          )}
-        </div>
-      </ErrorBoundary>
+        {showHeatmap && (
+          <div className="mt-4">
+            <SectorHeatmap
+              confirmed={data.confirmed}
+              pre={data.pre}
+              events={data.events}
+              breadth={data.breadth}
+              selectedSectors={selectedSectors}
+              onToggleSector={handleToggleSector}
+            />
+          </div>
+        )}
+      </div>
 
       {/* Affichage du filtre actif */}
       {sectorFilterActive && (
@@ -258,60 +268,44 @@ export default function App() {
         </div>
       )}
 
-      {/* Timeline pliable */}
-      <ErrorBoundary fallback="La timeline hebdo n'a pas pu s'afficher.">
-        <div className="mb-6 bg-white dark:bg-slate-900 rounded shadow p-4">
-          <button
-            onClick={() => setShowTimeline(!showTimeline)}
-            className="flex items-center justify-between w-full text-left font-semibold"
-            aria-expanded={showTimeline}
-          >
-            <span>Sector signals timeline (weekly)</span>
-            {showTimeline ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          </button>
+      {/* Timeline (weekly history) pliable */}
+      <div className="mb-6 bg-white dark:bg-slate-900 rounded shadow p-4">
+        <button
+          onClick={() => setShowTimeline(!showTimeline)}
+          className="flex items-center justify-between w-full text-left font-semibold"
+          aria-expanded={showTimeline}
+        >
+          <span>Sector signals timeline (weekly)</span>
+          {showTimeline ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </button>
 
-          {showTimeline && (
-            <div className="mt-4">
-              <SectorTimeline
-                history={Array.isArray(data.history) ? data.history : []}
-                selectedSectors={new Set(selectedSectors)}
-              />
-            </div>
-          )}
-        </div>
-      </ErrorBoundary>
-
-      {/* Equity curve */}
-      <ErrorBoundary fallback="La courbe d’equity n'a pas pu s'afficher.">
-        {Array.isArray(data.equity10) && data.equity10.length > 0 ? (
-          <div className="mb-6">
-            <EquityCurve
-              data={data.equity10}
-              bench={Array.isArray(data.bench10) ? data.bench10 : []}
-              title="Equity curve — 10 trading days hold vs SPY"
+        {showTimeline && (
+          <div className="mt-4">
+            <SectorTimeline
+              history={data.history}
+              selectedSectors={new Set(selectedSectors)}
             />
           </div>
-        ) : (
-          <div className="mb-6 text-sm text-slate-500">
-            Pas encore de points d’equity à afficher.
-          </div>
         )}
-      </ErrorBoundary>
+      </div>
 
-      {/* Résumé backtest */}
-      <ErrorBoundary fallback="Le résumé de backtest n'a pas pu s'afficher.">
-        {Array.isArray(data.backtestSummary) && data.backtestSummary.length > 0 ? (
-          <div className="mb-6">
-            <BacktestSummary rows={data.backtestSummary} />
-          </div>
-        ) : (
-          <div className="mb-6 text-sm text-slate-500">
-            Aucun résumé de backtest disponible (backtest_summary.csv manquant ou vide).
-          </div>
-        )}
-      </ErrorBoundary>
+      {/* Equity curve (10-day hold): P3 vs P2 vs SPY */}
+      <div className="mb-6">
+        <EquityCurve
+          data={data.equity10}
+          bench={data.bench10}  // SPY
+          p3={data.p3_10}
+          p2={data.p2_10}
+          title="Equity curve — 10 trading days: P3 vs P2 vs SPY"
+        />
+      </div>
 
-      {/* États globaux */}
+      {/* Résumés de backtest */}
+      <div className="mb-6">
+        <BacktestSummary rows={data.backtestSummary} />
+      </div>
+
+      {/* États */}
       {loading && <div className="mb-4 text-sm text-slate-600">Chargement…</div>}
       {!!error && <div className="mb-4 text-sm text-red-600">{error}</div>}
 
@@ -327,14 +321,14 @@ export default function App() {
         <ErrorBoundary fallback="La table Pre-signals n'a pas pu s'afficher.">
           <section>
             <h2 className="h1 mb-3">Anticipative pre-signals</h2>
-            <DataTable rows={Array.isArray(rowsPre) ? rowsPre : []} />
+            <DataTable rows={rowsPre} />
           </section>
         </ErrorBoundary>
 
         <ErrorBoundary fallback="La table Event-driven n'a pas pu s'afficher.">
           <section>
             <h2 className="h1 mb-3">Event-driven signals</h2>
-            <DataTable rows={Array.isArray(rowsEvents) ? rowsEvents : []} />
+            <DataTable rows={rowsEvents} />
           </section>
         </ErrorBoundary>
       </div>
