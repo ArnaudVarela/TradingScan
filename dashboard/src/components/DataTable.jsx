@@ -1,207 +1,158 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-const toNum = (v) => {
-  const n = Number(String(v).replaceAll(",", "").trim());
-  return Number.isFinite(n) ? n : null;
-};
+// Affiche une table simple avec recherche et tri.
+// Ajoute une colonne "Pillars" (+ badge x/3 près du ticker).
+export default function DataTable({ rows = [] }) {
+  // ---------- helpers: 3 pillars ----------
+  const isStrong = (v) => {
+    if (!v) return false;
+    const s = String(v).trim().toUpperCase();
+    return s === "STRONG BUY" || s === "STRONGBUY" || s === "STRONG_BUY";
+  };
+  const countPillars = (r) => {
+    const pTech = isStrong(r?.technical_local);
+    const pTv   = isStrong(r?.tv_reco);
+    const pAn   = String(r?.analyst_bucket || "").trim().toUpperCase() === "BUY";
+    return (pTech ? 1 : 0) + (pTv ? 1 : 0) + (pAn ? 1 : 0);
+  };
+  const PillarsBadge = ({ n = 0 }) => {
+    const map = {
+      3: "bg-emerald-600 text-white",
+      2: "bg-amber-500 text-black",
+      1: "bg-slate-500 text-white",
+      0: "bg-slate-700 text-white",
+    };
+    return (
+      <span
+        className={`ml-2 px-1.5 py-0.5 rounded text-[10px] ${map[n] || map[0]}`}
+        title="Piliers Tech / TV / Analyst atteints"
+      >
+        {n}/3
+      </span>
+    );
+  };
 
-const formatPrice = (val) => {
-  const n = toNum(val);
-  return n === null ? "—" : `$${n.toFixed(2)}`;
-};
+  // ---------- local UI state ----------
+  const [query, setQuery]   = useState("");
+  const [sortKey, setSortKey] = useState("_pillars");
+  const [sortDir, setSortDir] = useState("desc"); // "asc" | "desc"
 
-const formatMCap = (val) => {
-  const n = toNum(val);
-  if (n === null) return "—";
-  if (n >= 1e12) return `${(n / 1e12).toFixed(1)}T$`;
-  if (n >= 1e9)  return `${(n / 1e9).toFixed(1)}B$`;
-  if (n >= 1e6)  return `${(n / 1e6).toFixed(1)}M$`;
-  return n.toLocaleString();
-};
-
-const badge = (label) => {
-  const v = String(label ?? "").toUpperCase();
-  if (v === "STRONG BUY" || v === "STRONG_BUY")  return "bg-green-600 text-white";
-  if (v === "BUY")                                return "bg-green-300 text-black dark:bg-green-500/60 dark:text-white";
-  if (v === "HOLD")                               return "bg-gray-300 text-black dark:bg-gray-600/60 dark:text-white";
-  if (v === "SELL")                               return "bg-orange-400 text-black dark:bg-orange-500/70 dark:text-white";
-  if (v === "STRONG SELL" || v === "STRONG_SELL") return "bg-red-600 text-white";
-  return "bg-gray-200 text-black dark:bg-gray-700/60 dark:text-white";
-};
-
-const columns = [
-  { label: "Ticker",   key: "ticker_tv", alts: ["ticker_yf","ticker","symbol","Symbol","Ticker"] },
-  { label: "Price",    key: "price" },
-  { label: "MCap",     key: "market_cap", alts: ["mcap","MarketCap"] },
-  { label: "Tech",     key: "technical_local" },
-  { label: "TV",       key: "tv_reco" },
-  { label: "Analyst",  key: "analyst_bucket" },
-  { label: "Votes",    key: "analyst_votes" },
-  { label: "Sector",   key: "sector" },
-  { label: "Industry", key: "industry" },
-];
-
-function pick(row, key, alts = []) {
-  if (!row) return undefined;
-  if (row[key] !== undefined && row[key] !== null) return row[key];
-  for (const k of alts) {
-    if (row[k] !== undefined && row[k] !== null) return row[k];
-  }
-  return undefined;
-}
-
-const votesClass = (v) => {
-  const n = toNum(v);
-  if (n === null) return "";
-  if (n >= 15) return "text-green-600 dark:text-green-400";
-  if (n >= 5)  return "text-amber-600 dark:text-amber-400";
-  return "text-red-600 dark:text-red-400";
-};
-
-const mcapPill = (v) => {
-  const n = toNum(v);
-  if (n === null) return "bg-gray-200 dark:bg-gray-700";
-  if (n < 3e9)  return "bg-emerald-200 dark:bg-emerald-700";
-  if (n < 20e9) return "bg-sky-200 dark:bg-sky-700";
-  return "bg-purple-200 dark:bg-purple-700";
-};
-
-export default function DataTable({ rows }) {
-  const safeRows = Array.isArray(rows) ? rows : [];
-  const [query, setQuery] = useState("");
-  const [sort, setSort] = useState({ label: null, dir: "asc" });
+  // ---------- derived rows (enrichis + filtrés + triés) ----------
+  const enriched = useMemo(() => {
+    const arr = Array.isArray(rows) ? rows : [];
+    return arr.map(r => ({
+      ...r,
+      _pillars: countPillars(r),
+      _ticker:  r?.ticker_tv || r?.ticker || "",
+      _sector:  r?.sector || "",
+      _industry:r?.industry || "",
+    }));
+  }, [rows]);
 
   const filtered = useMemo(() => {
-    if (!query) return safeRows;
-    const q = query.toLowerCase();
-    return safeRows.filter((r) => {
-      try {
-        const fields = [
-          pick(r,"ticker_tv",["ticker_yf","ticker","symbol"]) ?? "",
-          r.sector ?? "",
-          r.industry ?? "",
-          r.technical_local ?? "",
-          r.tv_reco ?? "",
-          r.analyst_bucket ?? "",
-        ].join(" ").toLowerCase();
-        return fields.includes(q);
-      } catch {
-        return false;
-      }
-    });
-  }, [safeRows, query]);
+    const q = query.trim().toLowerCase();
+    if (!q) return enriched;
+    return enriched.filter(r =>
+      String(r._ticker).toLowerCase().includes(q) ||
+      String(r._sector).toLowerCase().includes(q) ||
+      String(r._industry).toLowerCase().includes(q)
+    );
+  }, [enriched, query]);
 
   const sorted = useMemo(() => {
-    if (!sort.label) return filtered;
-    const col = columns.find((c) => c.label === sort.label);
-    const getVal = (r) => (col ? pick(r, col.key, col.alts) : undefined);
-    return [...filtered].sort((a, b) => {
-      try {
-        const A = getVal(a), B = getVal(b);
-        const nA = toNum(A), nB = toNum(B);
-        if (nA !== null && nB !== null) return sort.dir === "asc" ? nA - nB : nB - nA;
-        const sA = (A ?? "").toString(), sB = (B ?? "").toString();
-        return sort.dir === "asc" ? sA.localeCompare(sB) : sB.localeCompare(sA);
-      } catch {
-        return 0;
-      }
-    });
-  }, [filtered, sort]);
+    const arr = [...filtered];
+    const dir = sortDir === "asc" ? 1 : -1;
+    arr.sort((a,b) => {
+      const va = a?.[sortKey];
+      const vb = b?.[sortKey];
+      if (va == null && vb == null) return 0;
+      if (va == null) return 1;
+      if (vb == null) return -1;
 
-  const onSort = (label) =>
-    setSort((prev) =>
-      prev.label === label ? { label, dir: prev.dir === "asc" ? "desc" : "asc" } : { label, dir: "asc" }
-    );
+      // numérique vs texte
+      const na = typeof va === "number" ? va : Number(va);
+      const nb = typeof vb === "number" ? vb : Number(vb);
+      if (!Number.isNaN(na) && !Number.isNaN(nb)) return (na - nb) * dir;
+
+      return String(va).localeCompare(String(vb)) * dir;
+    });
+    return arr;
+  }, [filtered, sortKey, sortDir]);
+
+  const onSort = (key) => {
+    if (sortKey === key) {
+      setSortDir(prev => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir("desc");
+    }
+  };
+
+  const SortHeader = ({ label, k }) => (
+    <button
+      onClick={() => onSort(k)}
+      className="px-3 py-2 text-left w-full select-none hover:underline"
+      title="Cliquer pour trier"
+    >
+      {label}
+      {sortKey === k ? (sortDir === "asc" ? " ▲" : " ▼") : ""}
+    </button>
+  );
 
   return (
-    <div className="bg-white dark:bg-slate-800 shadow rounded p-4 mb-6">
-      {/* Search */}
-      <div className="mb-3">
+    <div className="w-full">
+      <div className="mb-2">
         <input
+          className="w-full md:w-96 px-3 py-2 text-sm rounded border dark:border-slate-700 bg-white dark:bg-slate-900"
+          placeholder="Search ticker / sector / industry…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search ticker / sector / industry…"
-          className="w-full md:w-80 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-3 py-2 text-sm"
         />
       </div>
 
-      <div className="overflow-auto rounded">
-        <table className="min-w-full table-fixed text-sm">
-          <thead className="sticky top-0 z-10 bg-gray-100 dark:bg-slate-700">
-            <tr>
-              {columns.map((c, idx) => (
-                <th
-                  key={c.label}
-                  onClick={() => onSort(c.label)}
-                  className={`
-                    p-2 text-left font-semibold cursor-pointer select-none
-                    ${idx === 0 ? "w-[8%]"  : ""}
-                    ${idx === 1 ? "w-[10%]" : ""}
-                    ${idx === 2 ? "w-[10%]" : ""}
-                    ${idx === 3 ? "w-[10%]" : ""}
-                    ${idx === 4 ? "w-[10%]" : ""}
-                    ${idx === 5 ? "w-[10%]" : ""}
-                    ${idx === 6 ? "w-[10%]" : ""}
-                    ${idx === 7 ? "w-[16%]" : ""}
-                    ${idx === 8 ? "w-[16%]" : ""}
-                  `}
-                >
-                  {c.label}
-                  {sort.label === c.label ? (sort.dir === "asc" ? " ▲" : " ▼") : ""}
-                </th>
-              ))}
+      <div className="w-full overflow-x-auto">
+        <table className="table-auto w-full text-sm">
+          <thead>
+            <tr className="text-left">
+              <th className="px-3 py-2">Ticker</th>
+              <th className="px-3 py-2">
+                <SortHeader label="Pillars" k="_pillars" />
+              </th>
+              <th className="px-3 py-2">
+                <SortHeader label="Price" k="price" />
+              </th>
+              <th className="px-3 py-2">
+                <SortHeader label="MCap" k="market_cap" />
+              </th>
+              <th className="px-3 py-2">Tech</th>
+              <th className="px-3 py-2">TV</th>
+              <th className="px-3 py-2">Analyst</th>
+              <th className="px-3 py-2">
+                <SortHeader label="Votes" k="analyst_votes" />
+              </th>
+              <th className="px-3 py-2">Sector</th>
+              <th className="px-3 py-2">Industry</th>
             </tr>
           </thead>
 
           <tbody>
-            {sorted.map((r, i) => {
-              try {
-                const ticker = pick(r, "ticker_tv", ["ticker_yf", "ticker", "symbol"]);
-                const price  = r.price;
-                const mcap   = pick(r, "market_cap", ["mcap","MarketCap"]);
-                const tech   = r.technical_local;
-                const tv     = r.tv_reco;
-                const ab     = r.analyst_bucket;
-                const votes  = r.analyst_votes;
-                const sector = r.sector ?? "Unknown";
-                const industry = r.industry ?? "Unknown";
-
-                const tvUrl = ticker ? `https://www.tradingview.com/symbols/${String(ticker).toUpperCase()}/` : undefined;
-                const yfUrl = ticker ? `https://finance.yahoo.com/quote/${String(ticker).toUpperCase().replace(".","-")}` : undefined;
-
-                return (
-                  <tr key={i} className="border-t border-slate-200 dark:border-slate-700">
-                    <td className="p-2 font-mono">
-                      {ticker ? (
-                        <>
-                          <a className="underline mr-2" href={tvUrl} target="_blank" rel="noreferrer">{ticker}</a>
-                          <a className="text-slate-500 underline" href={yfUrl} target="_blank" rel="noreferrer">YF</a>
-                        </>
-                      ) : "—"}
-                    </td>
-                    <td className="p-2">{formatPrice(price)}</td>
-                    <td className="p-2">
-                      <span className={`px-2 py-0.5 rounded ${mcapPill(mcap)}`}>{formatMCap(mcap)}</span>
-                    </td>
-                    <td className="p-2"><span className={`px-2 py-0.5 rounded ${badge(tech)}`}>{tech || "—"}</span></td>
-                    <td className="p-2"><span className={`px-2 py-0.5 rounded ${badge(tv)}`}>{tv || "—"}</span></td>
-                    <td className="p-2"><span className={`px-2 py-0.5 rounded ${badge(ab)}`}>{ab || "—"}</span></td>
-                    <td className={`p-2 ${votesClass(votes)}`}>{toNum(votes) !== null ? `${toNum(votes)} votes` : "—"}</td>
-                    <td className="p-2">{sector}</td>
-                    <td className="p-2">{industry}</td>
-                  </tr>
-                );
-              } catch {
-                // si une ligne est corrompue, on la saute sans planter
-                return null;
-              }
-            })}
-
-            {sorted.length === 0 && (
-              <tr>
-                <td colSpan={columns.length} className="p-4 text-slate-500">No rows.</td>
+            {sorted.map((r, i) => (
+              <tr key={i} className="border-t border-slate-200 dark:border-slate-800">
+                <td className="px-3 py-2 font-medium">
+                  {r._ticker || "-"}
+                  <PillarsBadge n={r._pillars ?? 0} />
+                </td>
+                <td className="px-3 py-2">{r._pillars ?? 0}</td>
+                <td className="px-3 py-2">{r?.price ?? "-"}</td>
+                <td className="px-3 py-2">{r?.market_cap ?? "-"}</td>
+                <td className="px-3 py-2">{r?.technical_local ?? "-"}</td>
+                <td className="px-3 py-2">{r?.tv_reco ?? "-"}</td>
+                <td className="px-3 py-2">{r?.analyst_bucket ?? "-"}</td>
+                <td className="px-3 py-2">{r?.analyst_votes ?? r?.votes ?? "-"}</td>
+                <td className="px-3 py-2">{r?.sector ?? "-"}</td>
+                <td className="px-3 py-2">{r?.industry ?? "-"}</td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>
