@@ -1,0 +1,60 @@
+name: Deploy dashboard to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**/*.csv'
+      - '**/*.CSV'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build (Vite)
+        working-directory: dashboard
+        env:
+          VITE_GH_OWNER: ArnaudVarela
+          VITE_GH_REPO: TradingScan
+          VITE_GH_BRANCH: main
+          # mets 1 si tu vas configurer un domaine custom dans Settings > Pages
+          VITE_CUSTOM_DOMAIN: ''
+        run: |
+          npm ci
+          npm run build
+          # SPA fallback pour GitHub Pages
+          cp dist/index.html dist/404.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dashboard/dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
