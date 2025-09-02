@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Vercel définit VERCEL=1 au build
-const isVercel = !!process.env.VERCEL;
+const repo = process.env.VITE_GH_REPO || 'TradingScan'   // change si besoin
+const useCustomDomain = !!process.env.VITE_CUSTOM_DOMAIN // true si tu mets un domaine
 
 export default defineConfig({
   plugins: [react()],
-  // Vercel: assets à la racine, GitHub Pages: sous-chemin du repo
-  base: isVercel ? '/' : '/TradingScan/'
+  base: useCustomDomain ? '/' : `/${repo}/`,
 })
