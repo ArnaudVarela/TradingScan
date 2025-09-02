@@ -1,0 +1,4 @@
+date_signal,ticker,cohort,bucket,horizons,notes
+2025-08-28,AAPL,P3_confirmed,confirmed,1|3|5|10|20,breakout daily
+2025-08-29,MSFT,P2_highconv,pre_signal,1|3|5|10,good RS
+2025-08-30,TSLA,P1_explore,event,1|3,earnings soon
