@@ -1,18 +1,40 @@
 # fetch_fear_greed.py
-import os, json, datetime as dt, requests, pandas as pd
+import os, io, json, time, random, datetime as dt
+import requests
+import pandas as pd
+from pathlib import Path
+from requests.adapters import HTTPAdapter, Retry
 
-PUBLIC_DIR = "dashboard/public"
-ROOT_SNAP  = "fear_greed.csv"          # snapshot du jour (RAW GitHub)
-HIST_CSV   = "fear_greed_history.csv"  # historique (append/upsert)
-ROOT_JSON  = "fear_greed.json"         # snapshot JSON root (copie aussi en public)
-OUT_JSON   = os.path.join(PUBLIC_DIR, "fear_greed.json")
+# --- Sorties (root + public pour compat) ---
+ROOT_DIR   = Path(".")
+PUBLIC_DIR = Path("dashboard/public")
+PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 
-def ensure_dir(path: str):
-    d = os.path.dirname(path)
-    if d and not os.path.exists(d):
-        os.makedirs(d, exist_ok=True)
+HIST_CSV   = ROOT_DIR / "fear_greed_history.csv"
+OUT_CSV    = ROOT_DIR / "fear_greed.csv"
+OUT_JSON   = ROOT_DIR / "fear_greed.json"
 
-def bucket_label(score: int) -> str:
+# on duplique aussi dans dashboard/public/
+PUB_CSV    = PUBLIC_DIR / "fear_greed.csv"
+PUB_JSON   = PUBLIC_DIR / "fear_greed.json"
+
+CNN_URL    = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
+
+UA_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/125.0 Safari/537.36"
+    ),
+    "Accept": "application/json, text/plain, */*",
+    "Referer": "https://money.cnn.com/data/fear-and-greed/",
+    "Connection": "keep-alive",
+}
+
+def _now_utc_iso():
+    return dt.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+
+def _bucket_label(score: int) -> str:
     s = int(score)
     if s <= 24:  return "Extreme Fear"
     if s <= 44:  return "Fear"
@@ -20,59 +42,87 @@ def bucket_label(score: int) -> str:
     if s <= 75:  return "Greed"
     return "Extreme Greed"
 
-def _ts_to_ymd(ts_ms: int) -> str:
-    return dt.datetime.utcfromtimestamp(int(ts_ms)/1000).strftime("%Y-%m-%d")
+def _mk_session():
+    s = requests.Session()
+    retry = Retry(
+        total=4,
+        backoff_factor=0.8,  # 0.8, 1.6, 2.4...
+        status_forcelist=(418, 429, 500, 502, 503, 504),
+        allowed_methods=frozenset(["GET"]),
+        raise_on_status=False,
+    )
+    s.mount("https://", HTTPAdapter(max_retries=retry))
+    s.mount("http://",  HTTPAdapter(max_retries=retry))
+    return s
+
+def _parse_cnn_payload(j: dict) -> dict:
+    """
+    Retourne {score:int, asof:'YYYY-MM-DD'} depuis les variantes CNN.
+    - Variante A: j['fear_and_greed'] = {'score':.., 'timestamp':..} OU série
+    - Variante B: j['fear_and_greed_historical']['data'] = [{x:ms, y:int}, ...]
+    - Variante C: j['previous_close'] = {'score':.., 'timestamp':..}
+    Lève ValueError si aucune forme exploitable.
+    """
+    # 1) série 'fear_and_greed' (certaines versions mettent déjà [{x,y},...])
+    if isinstance(j.get("fear_and_greed"), list) and j["fear_and_greed"]:
+        last = j["fear_and_greed"][-1]
+        score = int(last.get("y"))
+        ts_ms = int(last.get("x"))
+        asof  = dt.datetime.utcfromtimestamp(ts_ms/1000).strftime("%Y-%m-%d")
+        return {"score": score, "asof": asof}
+
+    if isinstance(j.get("fear_and_greed"), dict):
+        d = j["fear_and_greed"]
+        # soit c'est un "point courant"
+        if "score" in d and "timestamp" in d:
+            score = int(d["score"])
+            ts_ms = int(d["timestamp"])
+            asof  = dt.datetime.utcfromtimestamp(ts_ms/1000).strftime("%Y-%m-%d")
+            return {"score": score, "asof": asof}
+        # soit une sous-clé 'data'
+        if isinstance(d.get("data"), list) and d["data"]:
+            last = d["data"][-1]
+            score = int(last.get("y"))
+            ts_ms = int(last.get("x"))
+            asof  = dt.datetime.utcfromtimestamp(ts_ms/1000).strftime("%Y-%m-%d")
+            return {"score": score, "asof": asof}
+
+    # 2) historique 'fear_and_greed_historical'
+    hist = j.get("fear_and_greed_historical", {})
+    if isinstance(hist, dict) and isinstance(hist.get("data"), list) and hist["data"]:
+        last = hist["data"][-1]
+        score = int(last.get("y"))
+        ts_ms = int(last.get("x"))
+        asof  = dt.datetime.utcfromtimestamp(ts_ms/1000).strftime("%Y-%m-%d")
+        return {"score": score, "asof": asof}
+
+    # 3) previous_close (fallback vu chez CNN)
+    pc = j.get("previous_close")
+    if isinstance(pc, dict) and "score" in pc and "timestamp" in pc:
+        score = int(pc["score"])
+        ts_ms = int(pc["timestamp"])
+        asof  = dt.datetime.utcfromtimestamp(ts_ms/1000).strftime("%Y-%m-%d")
+        return {"score": score, "asof": asof}
+
+    raise ValueError("CNN payload not understood")
 
 def fetch_cnn() -> dict:
-    import time
-    from requests.adapters import HTTPAdapter, Retry
+    sess = _mk_session()
 
-    url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
-    sess = requests.Session()
-    sess.headers.update({
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36",
-        "Referer": "https://edition.cnn.com/markets/fear-and-greed",
-        "Accept": "application/json,text/plain,*/*",
-    })
-    retry = Retry(total=2, backoff_factor=0.6, status_forcelist=[418,429,500,502,503,504])
-    sess.mount("https://", HTTPAdapter(max_retries=retry))
+    # essai 1: endpoint par défaut
+    r = sess.get(CNN_URL, headers=UA_HEADERS, timeout=20)
+    if r.ok:
+        return _parse_cnn_payload(r.json())
 
-    # 2 tentatives "propres" + 2 manuelles si 418 persiste
-    for attempt in range(4):
-        r = sess.get(url, timeout=20)
-        if r.status_code == 418 and attempt < 3:
-            time.sleep(1.2 * (attempt + 1))
-            continue
-        r.raise_for_status()
-        j = r.json()
+    # essai 2: variante avec start date (améliore parfois la fiabilité)
+    start = (dt.datetime.utcnow() - dt.timedelta(days=365)).strftime("%Y-%m-%d")
+    r2 = sess.get(f"{CNN_URL}/{start}", headers=UA_HEADERS, timeout=20)
+    if r2.ok:
+        return _parse_cnn_payload(r2.json())
 
-        # Plusieurs formats possibles dans le temps
-        series = None
-        if isinstance(j.get("fear_and_greed"), list):
-            series = j["fear_and_greed"]
-        elif isinstance(j.get("data"), list):
-            series = j["data"]
-        elif isinstance(j.get("fear_and_greed"), dict) and isinstance(j["fear_and_greed"].get("data"), list):
-            series = j["fear_and_greed"]["data"]
-
-        if series:
-            last = series[-1]
-            score = last.get("y") if "y" in last else last.get("score")
-            ts    = last.get("x") if "x" in last else last.get("timestamp")
-            if score is not None and ts is not None:
-                asof = dt.datetime.utcfromtimestamp(int(ts)/1000).strftime("%Y-%m-%d")
-                return {"score": int(score), "asof": asof}
-
-        prev = j.get("previous_close") or {}
-        if "score" in prev and "timestamp" in prev:
-            asof = dt.datetime.utcfromtimestamp(int(prev["timestamp"])/1000).strftime("%Y-%m-%d")
-            return {"score": int(prev["score"]), "asof": asof}
-
-        # Si format non reconnu, on retente la boucle
-        time.sleep(0.8)
-
-    raise RuntimeError("CNN payload not understood after retries")
+    # si toujours pas ok -> lève
+    r.raise_for_status()
+    raise RuntimeError("CNN fetch failed with no JSON")
 
 def compute_streak(hist: pd.DataFrame, cur_label: str) -> int:
     """Nombre de jours consécutifs (fin) avec le même label (incluant aujourd'hui)."""
@@ -86,103 +136,62 @@ def compute_streak(hist: pd.DataFrame, cur_label: str) -> int:
             break
     return max(1, streak)
 
-def write_root_and_public_json(payload: dict):
-    with open(ROOT_JSON, "w") as f:
-        json.dump(payload, f)
-    ensure_dir(OUT_JSON)
-    with open(OUT_JSON, "w") as f:
-        json.dump(payload, f)
+def write_outputs(score: int | None, label: str, asof: str | None, streak_days: int):
+    # CSV courant (root + public)
+    cur_df = pd.DataFrame([{
+        "score": score, "label": label, "asof": asof, "generated_at_utc": _now_utc_iso()
+    }])
+    cur_df.to_csv(OUT_CSV, index=False)
+    cur_df.to_csv(PUB_CSV, index=False)
+
+    # JSON (root + public)
+    payload = {"score": score, "label": label, "asof": asof, "streak_days": int(streak_days)}
+    with open(OUT_JSON, "w") as f: json.dump(payload, f)
+    with open(PUB_JSON, "w") as f: json.dump(payload, f)
 
 def main():
-    ensure_dir(OUT_JSON)
-
-    # Lire historique existant
-    if os.path.exists(HIST_CSV):
-        try:
-            hist = pd.read_csv(HIST_CSV)
-        except Exception:
-            hist = pd.DataFrame(columns=["date","score","label"])
+    # 1) lire historique existant
+    if HIST_CSV.exists():
+        hist = pd.read_csv(HIST_CSV)
     else:
         hist = pd.DataFrame(columns=["date","score","label"])
 
-    # Fetch du jour
+    # 2) tenter CNN
     try:
         cur = fetch_cnn()
-        print(f"[FG] fetched: score={cur['score']} asof={cur['asof']}")
+        score = int(cur["score"])
+        asof  = str(cur["asof"])
+        label = _bucket_label(score)
+
+        # maj de l'historique (upsert par date)
+        if (hist["date"] == asof).any():
+            hist.loc[hist["date"] == asof, ["score","label"]] = [score, label]
+        else:
+            hist = pd.concat([hist, pd.DataFrame([{"date": asof, "score": score, "label": label}])], ignore_index=True)
+
+        hist = hist.sort_values("date")
+        hist.to_csv(HIST_CSV, index=False)
+
+        streak = compute_streak(hist, label)
+        write_outputs(score, label, asof, streak)
+        print(f"[OK] Fear&Greed {asof}: score={score} ({label}), streak={streak}j")
+
     except Exception as e:
-        print(f"[FG][WARN] fetch failed: {e}")
+        print(f"[WARN] CNN fetch failed: {e}")
+
+        # 3) fallback: dernière valeur connue
         if hist.empty:
-            # placeholder neutre
-            snap = pd.DataFrame([{
-                "date": None, "score": None, "label": "N/A",
-                "generated_at_utc": dt.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "streak_days": 0
-            }])
-            snap.to_csv(ROOT_SNAP, index=False)
-            write_root_and_public_json({
-                "score": None, "label":"N/A", "asof": None,
-                "streak_days": 0,
-                "generated_at_utc": dt.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
-            })
-            print("[FG] wrote placeholders (no history).")
+            write_outputs(None, "N/A", None, 0)
+            print("[FALLBACK] no history -> wrote placeholder")
             return
+
         last = hist.sort_values("date").iloc[-1]
-        payload = {
-            "score": int(last["score"]),
-            "label": str(last["label"]),
-            "asof": str(last["date"]),
-            "streak_days": compute_streak(hist, str(last["label"])),
-            "generated_at_utc": dt.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-        }
-        # snapshot CSV root (reutilise la dernière)
-        snap = pd.DataFrame([{
-            "date": payload["asof"],
-            "score": payload["score"],
-            "label": payload["label"],
-            "streak_days": payload["streak_days"],
-            "generated_at_utc": payload["generated_at_utc"],
-        }])
-        snap.to_csv(ROOT_SNAP, index=False)
-        write_root_and_public_json(payload)
-        print("[FG] reused last history entry due to fetch error.")
-        return
-
-    # Mise à jour label + history (UPSERT du jour)
-    cur_label = bucket_label(cur["score"])
-    today = cur["asof"]
-
-    if (hist["date"] == today).any():
-        hist.loc[hist["date"] == today, ["score","label"]] = [cur["score"], cur_label]
-    else:
-        hist = pd.concat([hist, pd.DataFrame([{"date": today, "score": cur["score"], "label": cur_label}])], ignore_index=True)
-
-    hist = hist.sort_values("date")
-    streak = compute_streak(hist, cur_label)
-
-    # Écrit snapshot CSV root
-    snap = pd.DataFrame([{
-        "date": today,
-        "score": cur["score"],
-        "label": cur_label,
-        "streak_days": int(streak),
-        "generated_at_utc": dt.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-    }])
-    snap.to_csv(ROOT_SNAP, index=False)
-
-    # Écrit history
-    hist.to_csv(HIST_CSV, index=False)
-
-    # JSON root + public
-    payload = {
-        "score": cur["score"],
-        "label": cur_label,
-        "asof": today,
-        "streak_days": int(streak),
-        "generated_at_utc": dt.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-    }
-    write_root_and_public_json(payload)
-
-    print(f"[FG] wrote: {ROOT_SNAP} (snap) + {HIST_CSV} (history) + JSON (root/public)")
+        score = int(last["score"])
+        label = str(last["label"])
+        asof  = str(last["date"])
+        streak = compute_streak(hist, label)
+        write_outputs(score, label, asof, streak)
+        print(f"[FALLBACK] reused last value {asof}: score={score} ({label}), streak={streak}j")
 
 if __name__ == "__main__":
     main()
