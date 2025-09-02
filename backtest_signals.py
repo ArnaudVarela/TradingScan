@@ -215,9 +215,9 @@ def add_pillars_and_cohorts(sig: pd.DataFrame) -> pd.DataFrame:
             break
 
     # booléens 3 piliers
-    s["p_tech"] = s.get(tech_col, "").apply(_is_strong)
-    s["p_tv"]   = s.get(tv_col, "").apply(_is_strong)
-    s["p_an"]   = s.get(an_col, "").astype(str).str.strip().str.upper().eq("BUY")
+    s["p_tech"] = s.get(tech_col, pd.Series("", index=s.index)).apply(_is_strong)
+    s["p_tv"]   = s.get(tv_col,   pd.Series("", index=s.index)).apply(_is_strong)
+    s["p_an"]   = s.get(an_col,   pd.Series("", index=s.index)).astype(str).str.strip().str.upper().eq("BUY")
 
     # compte de piliers
     s["pillars_met"] = (s[["p_tech","p_tv","p_an"]].fillna(False)).sum(axis=1)
