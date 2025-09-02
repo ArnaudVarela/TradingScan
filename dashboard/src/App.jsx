@@ -10,9 +10,11 @@ import EquityCurve from "./components/EquityCurve.jsx";
 import BacktestSummary from "./components/BacktestSummary.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
+// ⬇️ NEW
+import CurationPanel from "./components/CurationPanel.jsx";
+
 // ---------- Déploiement : on consomme les fichiers du /public du site
 const isBrowser = typeof window !== "undefined";
-// Force local (public/) tant que le repo est privé
 const USE_LOCAL = true;
 
 // ---------- Fichiers statiques attendus dans /public
@@ -27,9 +29,7 @@ const FILES = {
   // Backtest
   equity10:         "backtest_equity_10d.csv",
   backtestSummary:  "backtest_summary.csv",
-  // Benchmark SPY (généré par backtest_signals.py)
   bench10:          "backtest_benchmark_spy_10d.csv",
-  // Cohortes
   p3_10:            "backtest_equity_10d_P3_confirmed.csv",
   p2_10:            "backtest_equity_10d_P2_highconv.csv",
 
@@ -62,10 +62,15 @@ export default function App() {
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [warningFiles, setWarningFiles] = useState([]); // fichiers KO
-  const [selectedSectors, setSelectedSectors] = useState([]); // filtre heatmap -> tables
+  const [warningFiles, setWarningFiles] = useState([]);
+  const [selectedSectors, setSelectedSectors] = useState([]);
 
-  // états pliables (mémorisés)
+  // ⬇️ NEW: panneau curation (affichage)
+  const [showCuration, setShowCuration] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("showCuration") === "1";
+  });
+
   const [showHeatmap, setShowHeatmap] = useState(() => {
     if (typeof window === "undefined") return true;
     return localStorage.getItem("showHeatmap") !== "0";
@@ -86,6 +91,13 @@ export default function App() {
       localStorage.setItem("showTimeline", showTimeline ? "1" : "0");
     }
   }, [showTimeline]);
+
+  // ⬇️ NEW: persister l’état du panneau curation
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("showCuration", showCuration ? "1" : "0");
+    }
+  }, [showCuration]);
 
   // ---------- Chargement robuste de tous les CSV / JSON
   async function loadAll() {
@@ -205,8 +217,26 @@ export default function App() {
 
       {/* Info source */}
       <div className="mb-2 text-xs text-slate-500">
-        Source CSV : fichiers statiques (public/) sur Vercel
+        Source CSV : fichiers statiques (public/)
       </div>
+
+      {/* ⬇️ NEW: bouton pour afficher/masquer le panneau curation */}
+      <div className="mb-4">
+        <button
+          onClick={() => setShowCuration(v => !v)}
+          className="px-3 py-2 rounded border dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm"
+          aria-expanded={showCuration}
+        >
+          {showCuration ? "Masquer la curation (backtest manuel)" : "Afficher la curation (backtest manuel)"}
+        </button>
+      </div>
+
+      {/* ⬇️ NEW: panneau de curation */}
+      {showCuration && (
+        <div className="mb-6">
+          <CurationPanel />
+        </div>
+      )}
 
       {/* Bandeau avertissements (certains fichiers KO) */}
       {warningFiles.length > 0 && (
