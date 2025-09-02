@@ -1,5 +1,6 @@
 // dashboard/src/components/DataTable.jsx
 import React, { useMemo, useState } from "react";
+import { addPick } from "../lib/curation.js"; // ⬅️ NEW
 
 /* ---------- utils numériques & formats ---------- */
 const toNum = (v) => {
@@ -59,7 +60,10 @@ function pick(row, key, alts = []) {
 }
 
 /* ---------- “pillars” (Tech / TV / Analyst) ---------- */
-const isStrongTech   = (v) => String(v ?? "").toUpperCase().includes("STRONG") || String(v ?? "").toUpperCase() === "STRONG BUY";
+const isStrongTech   = (v) => {
+  const x = String(v ?? "").toUpperCase();
+  return x.includes("STRONG") || x === "STRONG BUY";
+};
 const isStrongTV     = (v) => String(v ?? "").toUpperCase().includes("STRONG_BUY");
 const isBullAnalyst  = (v) => {
   const x = String(v ?? "").toUpperCase();
@@ -83,6 +87,16 @@ function pillarsBadgeClass(n) {
   return "bg-slate-400 text-white";
 }
 
+/* ---------- déduction cohort (même logique que backtest) ---------- */
+function deriveCohort(row) {
+  const pillars = computePillars(row);
+  const votes = toNum(pick(row, "analyst_votes", ["votes", "rank_votes"])) ?? 0;
+  if (pillars >= 3) return "P3_confirmed";
+  if (pillars === 2 && votes >= 15) return "P2_highconv";
+  if (pillars === 1 && votes >= 20) return "P1_explore";
+  return "P0_other";
+}
+
 /* ---------- colonnes ---------- */
 const columns = [
   { label: "Ticker",   key: "ticker_tv", alts: ["ticker_yf","ticker","symbol","Symbol","Ticker"] },
@@ -97,7 +111,12 @@ const columns = [
   { label: "Industry", key: "industry" },
 ];
 
-export default function DataTable({ rows }) {
+/**
+ * Props:
+ *  - rows: array
+ *  - defaultBucket?: "confirmed" | "pre_signal" | "event" | string
+ */
+export default function DataTable({ rows, defaultBucket = "other" }) {
   const safeRows = Array.isArray(rows) ? rows : [];
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState({ label: null, dir: "asc" });
@@ -138,14 +157,12 @@ export default function DataTable({ rows }) {
     const getter = (r) => (col ? pick(r, col.key, col.alts) : undefined);
     return [...filtered].sort((a, b) => {
       try {
-        // “Pillars” -> tri numérique sur __pillars_num
         if (col?.key === "__pillars_num") {
           const A = toNum(getter(a));
           const B = toNum(getter(b));
           if (A === null || B === null) return 0;
           return sort.dir === "asc" ? A - B : B - A;
         }
-        // sinon: numérique si possible, sinon string
         const A = getter(a), B = getter(b);
         const nA = toNum(A), nB = toNum(B);
         if (nA !== null && nB !== null) return sort.dir === "asc" ? nA - nB : nB - nA;
@@ -162,22 +179,67 @@ export default function DataTable({ rows }) {
       prev.label === label ? { label, dir: prev.dir === "asc" ? "desc" : "asc" } : { label, dir: "asc" }
     );
 
+  /* ---------- ACTION: Ajouter au backtest ---------- */
+  const handleAddBacktest = (row) => {
+    const ticker = (pick(row, "ticker_tv", ["ticker_yf","ticker","symbol"]) || "").toString().toUpperCase().trim();
+    if (!ticker) return;
+
+    // Cohort déduit automatiquement
+    const cohort = deriveCohort(row);
+    // Bucket: fourni par la table (prop) ou depuis la ligne
+    const bucket = defaultBucket || (row.bucket ?? "other");
+
+    // Horizons saisis par l'utilisateur (pré-rempli)
+    const defaultHorizons = "1|3|5|10|20";
+    const horizons = (window.prompt(`Horizons pour ${ticker} (séparés par |)`, defaultHorizons) || "").trim();
+    if (!horizons) return;
+
+    // Date et heure locales (on garde l'heure dans notes pour précision)
+    const now = new Date();
+    const two = (n) => String(n).padStart(2, "0");
+    const date_signal = `${now.getFullYear()}-${two(now.getMonth()+1)}-${two(now.getDate())}`;
+    const time_signal = `${two(now.getHours())}:${two(now.getMinutes())}:${two(now.getSeconds())}`;
+
+    // On met l'heure dans notes (le backtest lit seulement date_signal)
+    const extraNotes = [
+      `time=${time_signal}`,
+      row.price ? `price=${row.price}` : null,
+      `src=${bucket}`,
+    ].filter(Boolean).join("; ");
+
+    addPick({
+      date_signal,
+      ticker,
+      cohort,
+      bucket,
+      horizons,
+      notes: extraNotes,
+    });
+
+    // Feedback visuel léger
+    // (tu peux remplacer par un toast si tu en as)
+    alert(`Ajouté au backtest: ${ticker} (${cohort}, ${bucket}) @ ${date_signal} ${time_signal}\nHorizons: ${horizons}`);
+  };
+
   return (
     <div className="bg-white dark:bg-slate-800 shadow rounded p-4 mb-6">
       {/* Search */}
-      <div className="mb-3">
+      <div className="mb-3 flex items-center justify-between gap-2">
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search ticker / sector / industry…"
           className="w-full md:w-80 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-3 py-2 text-sm"
         />
+        <div className="text-xs opacity-70">Bucket par défaut: <span className="font-mono">{defaultBucket}</span></div>
       </div>
 
       <div className="overflow-auto rounded">
         <table className="min-w-full table-fixed text-sm">
           <thead className="sticky top-0 z-10 bg-gray-100 dark:bg-slate-700">
             <tr>
+              {/* NEW col actions */}
+              <th className="p-2 w-[110px] text-left font-semibold">Actions</th>
               {columns.map((c, idx) => (
                 <th
                   key={c.label}
@@ -222,6 +284,17 @@ export default function DataTable({ rows }) {
 
                 return (
                   <tr key={i} className="border-t border-slate-200 dark:border-slate-700">
+                    {/* ACTIONS */}
+                    <td className="p-2">
+                      <button
+                        onClick={() => handleAddBacktest(r)}
+                        className="px-2 py-1 rounded border text-xs hover:bg-slate-100 dark:hover:bg-slate-700"
+                        title="Ajouter cette ligne au backtest"
+                      >
+                        ➕ Backtest
+                      </button>
+                    </td>
+
                     {/* Ticker + liens */}
                     <td className="p-2 font-mono">
                       {ticker ? (
@@ -269,13 +342,13 @@ export default function DataTable({ rows }) {
                   </tr>
                 );
               } catch {
-                return null; // ligne corrompue => on skip sans crasher
+                return null;
               }
             })}
 
             {sorted.length === 0 && (
               <tr>
-                <td colSpan={columns.length} className="p-4 text-slate-500">No rows.</td>
+                <td colSpan={columns.length + 1} className="p-4 text-slate-500">No rows.</td>
               </tr>
             )}
           </tbody>
