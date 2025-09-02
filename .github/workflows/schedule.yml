@@ -22,8 +22,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Ensure clean working tree (sync to origin/main)
+      - name: Ensure clean working tree (sync to origin)
         run: |
+          set -euo pipefail
           git fetch origin $DEFAULT_BRANCH
           git reset --hard origin/$DEFAULT_BRANCH
           git clean -fd
@@ -35,6 +36,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          set -euo pipefail
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -55,28 +57,30 @@ jobs:
       - name: Fetch Fear & Greed CSV
         run: |
           set -euo pipefail
-          python fetch_fear_greed.py || { echo "fetch_fear_greed.py failed"; exit 1; }
-
-          # Si ton script écrit à la racine, synchronise vers le dossier consommé par le front
+          python fetch_fear_greed.py
+          # Si le script écrit à la racine, on synchronise
           if [ -f "fear_greed.csv" ]; then
             mkdir -p dashboard/public
             cp -f fear_greed.csv dashboard/public/fear_greed.csv
           fi
 
-      - name: Sanity check Fear & Greed
+      - name: Sanity check CSVs in dashboard/public
         run: |
           set -euo pipefail
-          echo "== HEAD root fear_greed.csv =="
-          [ -f "fear_greed.csv" ] && head -n 5 fear_greed.csv || echo "no root fear_greed.csv"
-          echo "== HEAD dashboard/public/fear_greed.csv =="
-          [ -f "dashboard/public/fear_greed.csv" ] && head -n 5 dashboard/public/fear_greed.csv || (echo "missing dashboard/public/fear_greed.csv" && exit 1)
+          echo "== LIST dashboard/public =="
+          ls -lah dashboard/public || true
+          echo "== HEAD fear_greed =="
+          head -n 20 dashboard/public/fear_greed.csv || (echo "missing fear_greed.csv" && exit 1)
+          echo "== HEAD backtest_summary =="
+          head -n 20 dashboard/public/backtest_summary.csv || true
+          echo "== HEAD confirmed_STRONGBUY =="
+          head -n 5 dashboard/public/confirmed_STRONGBUY.csv || true
           echo "== GIT STATUS =="
           git status --porcelain
 
       - name: Check ignore rules for fear_greed.csv
         run: |
           git check-ignore -v dashboard/public/fear_greed.csv || echo "not ignored"
-
 
       - name: Commit & push CSV updates
         run: |
@@ -89,5 +93,5 @@ jobs:
             exit 0
           fi
           git commit -m "auto: update CSVs (fear_greed + others)"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          git pull --rebase origin $DEFAULT_BRANCH
+          git push origin HEAD:$DEFAULT_BRANCH
