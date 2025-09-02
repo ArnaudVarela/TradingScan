@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      DEFAULT_BRANCH: 'main'   # change en 'master' si besoin
+      DEFAULT_BRANCH: 'main'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -40,47 +40,98 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Generate Russell2000 from iShares
-        run: python gen_r2000_from_ishares.py || true
+      # ================== UNIVERS (R1000/R2000) ==================
+      - name: Generate universes (R1000/R2000) from iShares
+        run: |
+          set -euo pipefail
+          python gen_r2000_from_ishares.py
 
+          echo "== ROOT =="
+          ls -lah | sed -n '1,200p'
+          for f in russell1000.csv russell2000.csv; do
+            if [ -f "$f" ]; then
+              echo "--- head $f ---"; head -n 5 "$f"
+            else
+              echo "Missing $f (root)"; exit 1
+            fi
+          done
+
+          echo "== dashboard/public =="
+          ls -lah dashboard/public || true
+          for f in russell1000.csv russell2000.csv; do
+            if [ -f "dashboard/public/$f" ]; then
+              echo "--- head $f (public) ---"; head -n 5 "dashboard/public/$f"
+            else
+              echo "WARN: dashboard/public/$f absent (OK si front lit en RAW root)."
+            fi
+          done
+
+      # ================== SECTEURS ==================
       - name: Build sector catalog (R1K + SPSM)
-        run: python build_sector_catalog.py || true
+        run: |
+          set -euo pipefail
+          python build_sector_catalog.py
 
+          for f in sector_catalog.csv sector_history.csv sector_breadth.csv; do
+            if [ ! -f "dashboard/public/$f" ]; then
+              echo "Missing dashboard/public/$f"; exit 1
+            fi
+            echo "--- head $f ---"; head -n 5 "dashboard/public/$f"
+          done
+
+      # ================== SCREENER ==================
       - name: Run screener
         env:
           PYTHONUNBUFFERED: "1"
-        run: python mix_ab_screen_indices.py
+        run: |
+          set -euo pipefail
+          python mix_ab_screen_indices.py
 
+          # fichier critique
+          test -f dashboard/public/confirmed_STRONGBUY.csv || (echo "Missing confirmed_STRONGBUY.csv"; exit 1)
+          echo "--- head confirmed_STRONGBUY.csv ---"
+          head -n 5 dashboard/public/confirmed_STRONGBUY.csv || true
+
+      # ================== BACKTEST ==================
       - name: Run backtest
-        run: python backtest_signals.py
+        run: |
+          set -euo pipefail
+          python backtest_signals.py
 
+          echo "== Backtest outputs (dashboard/public) =="
+          req=(
+            "backtest_summary.csv"
+            "backtest_trades.csv"
+            "backtest_equity_10d.csv"
+            "backtest_benchmark_spy_10d.csv"
+          )
+          for f in "${req[@]}"; do
+            if [ ! -f "dashboard/public/$f" ]; then
+              echo "Missing dashboard/public/$f"; exit 1
+            fi
+            echo "--- head $f ---"; head -n 5 "dashboard/public/$f" || true
+            echo "--- linecount $f ---"; wc -l "dashboard/public/$f" || true
+          done
+
+      # ================== FEAR & GREED ==================
       - name: Fetch Fear & Greed (root CSV/JSON)
         run: |
           set -euo pipefail
           python fetch_fear_greed.py
 
-      - name: Sanity check CSVs (root + dashboard/public)
+          echo "--- head fear_greed.csv (root) ---"
+          [ -f fear_greed.csv ] && head -n 5 fear_greed.csv || (echo "Missing fear_greed.csv"; exit 1)
+          echo "--- head fear_greed_history.csv (root) ---"
+          [ -f fear_greed_history.csv ] && head -n 5 fear_greed_history.csv || true
+
+      # ================== DIAGNOSTIC GLOBAL ==================
+      - name: Sanity dump (root + public)
         run: |
           set -euo pipefail
-          echo "== ROOT files =="
-          ls -lah || true
-          echo "---- head fear_greed.csv (root) ----"
-          head -n 20 fear_greed.csv || (echo "missing root fear_greed.csv" && exit 1)
-          echo "---- head fear_greed_history.csv (root) ----"
-          head -n 5 fear_greed_history.csv || true
-          echo "---- head fear_greed.json (root) ----"
-          head -n 5 fear_greed.json || true
+          echo "== ROOT (short) =="; ls -lah | sed -n '1,200p'
+          echo "== dashboard/public (short) =="; ls -lah dashboard/public || true
 
-          echo "== dashboard/public =="
-          ls -lah dashboard/public || true
-          echo "---- head backtest_summary.csv ----"
-          head -n 20 dashboard/public/backtest_summary.csv || true
-          echo "---- head confirmed_STRONGBUY.csv ----"
-          head -n 5 dashboard/public/confirmed_STRONGBUY.csv || true
-
-          echo "== GIT STATUS =="
-          git status --porcelain
-
+      # ================== COMMIT / PUSH ==================
       - name: Commit & push CSV updates
         run: |
           set -euo pipefail
@@ -91,6 +142,6 @@ jobs:
             echo "No CSV changes to commit."
             exit 0
           fi
-          git commit -m "auto: update CSVs (fear_greed + others)"
+          git commit -m "auto: update CSVs $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           git pull --rebase origin $DEFAULT_BRANCH
           git push origin HEAD:$DEFAULT_BRANCH
