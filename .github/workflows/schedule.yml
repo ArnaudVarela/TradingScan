@@ -54,33 +54,32 @@ jobs:
       - name: Run backtest
         run: python backtest_signals.py
 
-      - name: Fetch Fear & Greed CSV
+      - name: Fetch Fear & Greed (root CSV/JSON)
         run: |
           set -euo pipefail
           python fetch_fear_greed.py
-          # Si le script écrit à la racine, on synchronise
-          if [ -f "fear_greed.csv" ]; then
-            mkdir -p dashboard/public
-            cp -f fear_greed.csv dashboard/public/fear_greed.csv
-          fi
 
-      - name: Sanity check CSVs in dashboard/public
+      - name: Sanity check CSVs (root + dashboard/public)
         run: |
           set -euo pipefail
-          echo "== LIST dashboard/public =="
+          echo "== ROOT files =="
+          ls -lah || true
+          echo "---- head fear_greed.csv (root) ----"
+          head -n 20 fear_greed.csv || (echo "missing root fear_greed.csv" && exit 1)
+          echo "---- head fear_greed_history.csv (root) ----"
+          head -n 5 fear_greed_history.csv || true
+          echo "---- head fear_greed.json (root) ----"
+          head -n 5 fear_greed.json || true
+
+          echo "== dashboard/public =="
           ls -lah dashboard/public || true
-          echo "== HEAD fear_greed =="
-          head -n 20 dashboard/public/fear_greed.csv || (echo "missing fear_greed.csv" && exit 1)
-          echo "== HEAD backtest_summary =="
+          echo "---- head backtest_summary.csv ----"
           head -n 20 dashboard/public/backtest_summary.csv || true
-          echo "== HEAD confirmed_STRONGBUY =="
+          echo "---- head confirmed_STRONGBUY.csv ----"
           head -n 5 dashboard/public/confirmed_STRONGBUY.csv || true
+
           echo "== GIT STATUS =="
           git status --porcelain
-
-      - name: Check ignore rules for fear_greed.csv
-        run: |
-          git check-ignore -v dashboard/public/fear_greed.csv || echo "not ignored"
 
       - name: Commit & push CSV updates
         run: |
