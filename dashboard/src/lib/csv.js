@@ -1,196 +1,108 @@
 // dashboard/src/lib/csv.js
 //
-// Chargement robuste de CSV côté front :
-//  - Source par défaut : raw.githubusercontent.com (live, pas besoin de redeploy Vercel)
-//  - Fallback : chemin statique local (/dashboard/public/...) pour le dev ou si raw échoue
-//  - Cache-busting via commit SHA (si fourni) sinon timestamp
-//
-// ⚙️ Variables (optionnelles) via Vite :
-//   VITE_GH_OWNER, VITE_GH_REPO, VITE_GH_BRANCH, VITE_DATA_SUBDIR, VITE_COMMIT_SHA
-//
-// Par défaut on suppose : owner=ArnaudVarela, repo=TradingScan, branch=main,
-// et les CSV sont dans dashboard/public/
-//
-// Exemples d’usage :
-//   import { loadCSVObjects, FILES } from "@/lib/csv";
-//   const rows = await loadCSVObjects(FILES.BACKTEST_SUMMARY);
-//   // rows => [{ticker: "...", pillars_met: "3", ...}, ...]
+// Chargement des CSV en direct depuis GitHub raw (repo public).
+// ➡ Pas besoin de redeployer Vercel : dès qu’un commit met à jour les CSV, le front lit la nouvelle version.
 //
 
-// ===== Config par défaut (surchargeable via .env) =============================
+// ======================= CONFIG ============================
 const OWNER  = import.meta.env.VITE_GH_OWNER   || "ArnaudVarela";
 const REPO   = import.meta.env.VITE_GH_REPO    || "TradingScan";
 const BRANCH = import.meta.env.VITE_GH_BRANCH  || "main";
-
-// Sous-dossier des CSV DANS LE REPO
-// Si tes CSV sont dans dashboard/public, garde la valeur par défaut.
-const DATA_SUBDIR = (import.meta.env.VITE_DATA_SUBDIR || "dashboard/public").replace(/^\/+|\/+$/g, "");
-
-// Commit SHA pour un cache-busting stable (injected par CI). Sinon timestamp.
 const COMMIT_SHA = import.meta.env.VITE_COMMIT_SHA || "";
 
-// ===== Générateurs d’URL ======================================================
-export const rawUrl = (relativePath) =>
-  `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${DATA_SUBDIR}/${relativePath}`;
-
-// Pour le fallback local (fichiers statiques du déploiement)
-export const localUrl = (relativePath) =>
-  `/${relativePath}`.replace(/^\/+/, "/"); // on suppose que /public publie à la racine
-
-// Paramètre anti-cache
+// Paramètre anti-cache : commit SHA (si injecté) ou timestamp
 const bust = () => (COMMIT_SHA ? COMMIT_SHA : Date.now().toString());
 
-// ===== Fetch helpers ==========================================================
+// ======================= URL HELPERS =======================
+export const rawUrl = (file) =>
+  `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${file}?v=${bust()}`;
+
+// ======================= FETCH =============================
 async function fetchText(url) {
-  const res = await fetch(`${url}?v=${bust()}`, {
-    cache: "no-store",
-    headers: {
-      // Ces headers côté client peuvent aider certains proxies
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-    },
-  });
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status} on ${url}`);
-  }
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
   return res.text();
 }
 
-/**
- * Charge un CSV en texte brut.
- * Essaie d'abord GitHub raw, puis retombe sur le chemin local.
- */
-export async function loadCSVText(fileName) {
-  // 1) RAW GitHub (live)
-  try {
-    return await fetchText(rawUrl(fileName));
-  } catch (e) {
-    // 2) Fallback local (utile en dev ou si repo privé)
-    // Si ton build copie encore les CSV dans /public, ça marchera sans changer le code.
-    return await fetchText(localUrl(fileName));
-  }
+export async function loadCSVText(file) {
+  return await fetchText(rawUrl(file));
 }
 
-// ===== CSV parser (sans dépendance) ==========================================
-// Parser simple mais robuste : gère les champs quotés, les virgules/retours dans guillemets.
+// ======================= PARSER CSV ========================
+// Parser simple (gère les champs quotés et retours ligne)
 export function parseCSV(text) {
   const rows = [];
   let i = 0, field = "", row = [], inQuotes = false;
-
   const pushField = () => { row.push(field); field = ""; };
   const pushRow = () => { rows.push(row); row = []; };
 
   while (i < text.length) {
     const c = text[i];
-
     if (inQuotes) {
       if (c === '"') {
-        // double quote inside a quoted field => escape
-        if (text[i + 1] === '"') {
-          field += '"';
-          i += 2;
-          continue;
-        }
-        // closing quote
-        inQuotes = false;
-        i++;
-        continue;
+        if (text[i + 1] === '"') { field += '"'; i += 2; continue; }
+        inQuotes = false; i++; continue;
       }
-      field += c;
-      i++;
-      continue;
+      field += c; i++; continue;
     }
-
-    if (c === '"') {
-      inQuotes = true;
-      i++;
-      continue;
-    }
-
-    if (c === ",") {
-      pushField();
-      i++;
-      continue;
-    }
-
-    if (c === "\n") {
-      pushField();
-      pushRow();
-      i++;
-      continue;
-    }
-
-    if (c === "\r") {
-      // ignore CR (handle CRLF)
-      i++;
-      continue;
-    }
-
-    field += c;
-    i++;
+    if (c === '"') { inQuotes = true; i++; continue; }
+    if (c === ",") { pushField(); i++; continue; }
+    if (c === "\n") { pushField(); pushRow(); i++; continue; }
+    if (c === "\r") { i++; continue; }
+    field += c; i++;
   }
-
-  // last field/row
   pushField();
-  if (row.length > 1 || (row.length === 1 && row[0] !== "")) {
-    pushRow();
-  }
-
+  if (row.length > 1 || (row.length === 1 && row[0] !== "")) pushRow();
   return rows;
 }
 
-/**
- * Convertit un CSV en tableau d’objets { header1: value, header2: value, ... }.
- * Trim les headers et valeurs, garde les types en string (tu castes après si besoin).
- */
+// Convertit en objets { header: valeur }
 export function toObjects(rows) {
   if (!rows || rows.length === 0) return [];
   const headers = rows[0].map((h) => (h ?? "").trim());
-  const out = [];
-
-  for (let r = 1; r < rows.length; r++) {
+  return rows.slice(1).map((line) => {
     const obj = {};
-    const line = rows[r];
-    for (let c = 0; c < headers.length; c++) {
-      const key = headers[c] || `col_${c}`;
-      obj[key] = (line?.[c] ?? "").trim();
-    }
-    out.push(obj);
-  }
-  return out;
+    headers.forEach((h, i) => { obj[h] = (line?.[i] ?? "").trim(); });
+    return obj;
+  });
 }
 
-/**
- * Charge et parse un CSV en objets.
- * @param {string} fileName ex: "backtest_summary.csv"
- * @returns {Promise<Array<Record<string,string>>>}
- */
-export async function loadCSVObjects(fileName) {
-  const text = await loadCSVText(fileName);
-  const rows = parseCSV(text);
-  return toObjects(rows);
+// ======================= API ===============================
+export async function loadCSVObjects(file) {
+  const text = await loadCSVText(file);
+  return toObjects(parseCSV(text));
 }
 
-// ===== Fichiers “connus” (facultatif : centralise les noms) ===================
+// ======================= LISTE DES CSV =====================
 export const FILES = {
+  // Fear & Greed
+  FEAR_GREED: "fear_greed.csv",
+  FEAR_GREED_HISTORY: "fear_greed_history.csv",
+
+  // Backtests & signaux
   BACKTEST_SUMMARY: "backtest_summary.csv",
   SIGNALS_HISTORY: "signals_history.csv",
-  // exemples côté “indices / indicateurs” :
+  PILLARS_SUMMARY: "pillars_summary.csv",
+
+  // Cohortes confirmées
   CONFIRMED_STRONGBUY: "confirmed_STRONGBUY.csv",
   CONFIRMED_BUY: "confirmed_BUY.csv",
-  PILLARS_SUMMARY: "pillars_summary.csv",
-  FEAR_GREED: "fear_greed.csv",
-  // ajoute ici les autres CSV que ton UI consomme
+  CONFIRMED_SELL: "confirmed_SELL.csv",
+  CONFIRMED_STRONGSELL: "confirmed_STRONGSELL.csv",
+
+  // Univers de tickers
+  R2000: "r2000.csv",
+  SECTOR_CATALOG: "sector_catalog.csv",
 };
 
-// ===== Utilitaires pratiques ==================================================
-/** Cast numérique safe (string -> number | null) */
+// ======================= UTILS =============================
+// Conversion string → number safe
 export const toNumber = (v) => {
   if (v == null || v === "") return null;
   const n = Number(v);
   return Number.isFinite(n) ? n : null;
 };
 
-/** Equality helper insensible à la casse/espaces */
+// Égalité insensible à la casse
 export const eqI = (a, b) =>
   String(a ?? "").trim().toUpperCase() === String(b ?? "").trim().toUpperCase();
