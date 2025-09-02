@@ -1,78 +1,73 @@
-import React from "react";
+// dashboard/src/components/EquityCurve.jsx
+import React, { useMemo } from "react";
 import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  CartesianGrid,
+  LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid,
 } from "recharts";
 
-// Affiche une courbe d’equity principale (data),
-// + SPY (bench), + cohortes P3 / P2 si fournies.
+// rows: [{date, equity}]
+function normSeries(rows, key) {
+  if (!Array.isArray(rows)) return [];
+  return rows
+    .filter(r => r && r.date != null && r.equity != null && r.equity !== "")
+    .map(r => ({ date: String(r.date), [key]: Number(r.equity) }))
+    .filter(r => Number.isFinite(r[key]));
+}
+
+function mergeOnDate(series) {
+  // series: array of arrays already shaped as {date, keyX}
+  const map = new Map();
+  for (const arr of series) {
+    for (const row of arr) {
+      const d = row.date;
+      if (!map.has(d)) map.set(d, { date: d });
+      Object.assign(map.get(d), row);
+    }
+  }
+  return Array.from(map.values()).sort((a,b) => a.date.localeCompare(b.date));
+}
+
 export default function EquityCurve({
-  data = [],
-  bench = [],   // SPY: [{date, equity}]
-  p3 = [],      // P3  : [{date, equity}]
-  p2 = [],      // P2  : [{date, equity}]
+  data,     // auto model 10d
+  bench,    // spy 10d
+  p3,       // cohort
+  p2,       // cohort
+  user,     // ⬅️ Mes Picks 10d
   title = "Equity curve",
 }) {
-  const key = (d) => {
-    try {
-      return new Date(d.date).toISOString().slice(0, 10);
-    } catch {
-      return String(d.date).slice(0, 10);
-    }
-  };
+  const modelS = useMemo(() => normSeries(data, "Model"), [data]);
+  const spyS   = useMemo(() => normSeries(bench, "SPY"), [bench]);
+  const p3S    = useMemo(() => normSeries(p3, "P3_confirmed"), [p3]);
+  const p2S    = useMemo(() => normSeries(p2, "P2_highconv"), [p2]);
+  const userS  = useMemo(() => normSeries(user, "User_picks"), [user]);
 
-  // merge on ISO date
-  const idx = new Map();
-  (data || []).forEach(d => idx.set(key(d), { date: key(d), model: d.equity }));
-  (bench || []).forEach(d => {
-    const k = key(d);
-    idx.set(k, { ...(idx.get(k) || { date: k }), spy: d.equity });
-  });
-  (p3 || []).forEach(d => {
-    const k = key(d);
-    idx.set(k, { ...(idx.get(k) || { date: k }), p3: d.equity });
-  });
-  (p2 || []).forEach(d => {
-    const k = key(d);
-    idx.set(k, { ...(idx.get(k) || { date: k }), p2: d.equity });
-  });
+  const merged = useMemo(() => mergeOnDate([modelS, spyS, p3S, p2S, userS]), [modelS, spyS, p3S, p2S, userS]);
 
-  const series = Array.from(idx.values()).sort((a, b) =>
-    a.date.localeCompare(b.date)
-  );
-
-  const hasModel = series.some(s => Number.isFinite(s.model));
-  const hasSpy   = series.some(s => Number.isFinite(s.spy));
-  const hasP3    = series.some(s => Number.isFinite(s.p3));
-  const hasP2    = series.some(s => Number.isFinite(s.p2));
+  const hasAny = merged.length > 0;
 
   return (
-    <div className="w-full bg-white dark:bg-slate-900 rounded shadow p-4">
-      <div className="font-semibold mb-2">{title}</div>
-      <div className="h-72">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={series} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" tick={{ fontSize: 10 }} />
-            <YAxis tick={{ fontSize: 10 }} domain={["dataMin", "dataMax"]} />
-            <Tooltip />
-            <Legend />
-            {/* Si P3/P2 existent, on les montre; sinon on garde la courbe 'model' */}
-            {hasP3    && <Line type="monotone" dataKey="p3"    name="P3 (3/3 pillars)" dot={false} strokeWidth={2} />}
-            {hasP2    && <Line type="monotone" dataKey="p2"    name="P2 (2/3 + votes≥15)" dot={false} strokeWidth={2} />}
-            {!hasP3 && !hasP2 && hasModel &&
-              <Line type="monotone" dataKey="model" name="Model" dot={false} strokeWidth={2} />
-            }
-            {hasSpy   && <Line type="monotone" dataKey="spy"   name="SPY (buy & hold)" dot={false} strokeWidth={2} />}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+    <div className="bg-white dark:bg-slate-900 rounded shadow p-4">
+      <h3 className="font-semibold mb-3">{title}</h3>
+      {hasAny ? (
+        <div className="h-72">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={merged} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
+              <Tooltip />
+              <Legend />
+              {/* Laisse Recharts choisir les couleurs par défaut */}
+              {"Model" in merged[0] && <Line type="monotone" dataKey="Model" dot={false} strokeWidth={2} />}
+              {"SPY" in merged[0] && <Line type="monotone" dataKey="SPY" dot={false} strokeWidth={2} />}
+              {"P3_confirmed" in merged[0] && <Line type="monotone" dataKey="P3_confirmed" dot={false} strokeWidth={2} />}
+              {"P2_highconv" in merged[0] && <Line type="monotone" dataKey="P2_highconv" dot={false} strokeWidth={2} />}
+              {"User_picks" in merged[0] && <Line type="monotone" dataKey="User_picks" dot={false} strokeWidth={2} />}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      ) : (
+        <div className="text-sm text-slate-500">Aucune donnée d’équity à afficher.</div>
+      )}
     </div>
   );
 }
