@@ -24,38 +24,55 @@ def _ts_to_ymd(ts_ms: int) -> str:
     return dt.datetime.utcfromtimestamp(int(ts_ms)/1000).strftime("%Y-%m-%d")
 
 def fetch_cnn() -> dict:
-    """
-    Endpoint public utilisé par CNN:
-    https://production.dataviz.cnn.io/index/fearandgreed/graphdata
-      - format 1: {"fear_and_greed":[{"x": 1717286400000, "y": 64}, ...]}
-      - format 2: {"previous_close":{"score": 70, "timestamp": 1717286400000}}
-    """
+    import time
+    from requests.adapters import HTTPAdapter, Retry
+
     url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
-    r = requests.get(url, timeout=20)
-    r.raise_for_status()
-    j = r.json()
+    sess = requests.Session()
+    sess.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+        "Referer": "https://edition.cnn.com/markets/fear-and-greed",
+        "Accept": "application/json,text/plain,*/*",
+    })
+    retry = Retry(total=2, backoff_factor=0.6, status_forcelist=[418,429,500,502,503,504])
+    sess.mount("https://", HTTPAdapter(max_retries=retry))
 
-    series = None
-    if isinstance(j.get("fear_and_greed"), list):
-        series = j["fear_and_greed"]
-    elif isinstance(j.get("data"), list):
-        series = j["data"]
-    elif isinstance(j.get("fear_and_greed"), dict) and isinstance(j["fear_and_greed"].get("data"), list):
-        series = j["fear_and_greed"]["data"]
+    # 2 tentatives "propres" + 2 manuelles si 418 persiste
+    for attempt in range(4):
+        r = sess.get(url, timeout=20)
+        if r.status_code == 418 and attempt < 3:
+            time.sleep(1.2 * (attempt + 1))
+            continue
+        r.raise_for_status()
+        j = r.json()
 
-    if series:
-        last = series[-1]
-        score = last.get("y") if "y" in last else last.get("score")
-        ts    = last.get("x") if "x" in last else last.get("timestamp")
-        if score is not None and ts is not None:
-            return {"score": int(score), "asof": _ts_to_ymd(ts)}
+        # Plusieurs formats possibles dans le temps
+        series = None
+        if isinstance(j.get("fear_and_greed"), list):
+            series = j["fear_and_greed"]
+        elif isinstance(j.get("data"), list):
+            series = j["data"]
+        elif isinstance(j.get("fear_and_greed"), dict) and isinstance(j["fear_and_greed"].get("data"), list):
+            series = j["fear_and_greed"]["data"]
 
-    # fallback
-    prev = j.get("previous_close") or {}
-    if "score" in prev and "timestamp" in prev:
-        return {"score": int(prev["score"]), "asof": _ts_to_ymd(prev["timestamp"])}
+        if series:
+            last = series[-1]
+            score = last.get("y") if "y" in last else last.get("score")
+            ts    = last.get("x") if "x" in last else last.get("timestamp")
+            if score is not None and ts is not None:
+                asof = dt.datetime.utcfromtimestamp(int(ts)/1000).strftime("%Y-%m-%d")
+                return {"score": int(score), "asof": asof}
 
-    raise RuntimeError("CNN payload not understood")
+        prev = j.get("previous_close") or {}
+        if "score" in prev and "timestamp" in prev:
+            asof = dt.datetime.utcfromtimestamp(int(prev["timestamp"])/1000).strftime("%Y-%m-%d")
+            return {"score": int(prev["score"]), "asof": asof}
+
+        # Si format non reconnu, on retente la boucle
+        time.sleep(0.8)
+
+    raise RuntimeError("CNN payload not understood after retries")
 
 def compute_streak(hist: pd.DataFrame, cur_label: str) -> int:
     """Nombre de jours consécutifs (fin) avec le même label (incluant aujourd'hui)."""
