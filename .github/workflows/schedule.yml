@@ -52,25 +52,42 @@ jobs:
       - name: Run backtest
         run: python backtest_signals.py
 
-      - name: Fetch Fear & Greed (CNN)
-        run: python fetch_fear_greed.py
-
-      - name: Commit CSVs if changed
+      - name: Fetch Fear & Greed CSV
         run: |
-          set -e
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "No changes, skip commit"
-            exit 0
+          set -euo pipefail
+          python fetch_fear_greed.py || { echo "fetch_fear_greed.py failed"; exit 1; }
+
+          # Si ton script écrit à la racine, synchronise vers le dossier consommé par le front
+          if [ -f "fear_greed.csv" ]; then
+            mkdir -p dashboard/public
+            cp -f fear_greed.csv dashboard/public/fear_greed.csv
           fi
 
-          git add *.csv dashboard/public/*.csv || true
-          git -c user.name="github-actions[bot]" \
-              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-              commit -m "auto: update CSV $(date -u +'%Y-%m-%dT%H:%M:%SZ')" || true
-
-          git fetch origin $DEFAULT_BRANCH
-          git merge -s recursive -X ours origin/$DEFAULT_BRANCH || true
-          git push origin HEAD:$DEFAULT_BRANCH || true
-
-          echo "--- git status ---"
+      - name: Sanity check Fear & Greed
+        run: |
+          set -euo pipefail
+          echo "== HEAD root fear_greed.csv =="
+          [ -f "fear_greed.csv" ] && head -n 5 fear_greed.csv || echo "no root fear_greed.csv"
+          echo "== HEAD dashboard/public/fear_greed.csv =="
+          [ -f "dashboard/public/fear_greed.csv" ] && head -n 5 dashboard/public/fear_greed.csv || (echo "missing dashboard/public/fear_greed.csv" && exit 1)
+          echo "== GIT STATUS =="
           git status --porcelain
+
+      - name: Check ignore rules for fear_greed.csv
+        run: |
+          git check-ignore -v dashboard/public/fear_greed.csv || echo "not ignored"
+
+
+      - name: Commit & push CSV updates
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No CSV changes to commit."
+            exit 0
+          fi
+          git commit -m "auto: update CSVs (fear_greed + others)"
+          git pull --rebase origin main
+          git push origin HEAD:main
