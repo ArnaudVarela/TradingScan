@@ -1181,3 +1181,979 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-08-31,events,CBSH,CBSH,Financials,Regional Banks,61.93999862670898
 2025-08-31,events,UHAL,UHAL,Industrials,Rental & Leasing Services,57.54999923706055
 2025-08-31,events,HEI-A,HEI.A,Industrials,Aerospace & Defense,245.009994506836
+2025-09-02,pre,AMG,AMG,Financials,Asset Management & Custody Banks,228.05999755859375
+2025-09-02,pre,AL,AL,Industrials,Rental & Leasing Services,64.16000366210938
+2025-09-02,pre,THC,THC,Health Care,Health Care Facilities,184.8800048828125
+2025-09-02,pre,NTRA,NTRA,Health Care,Diagnostics & Research,166.5399932861328
+2025-09-02,pre,DKNG,DKNG,Consumer Discretionary,Gambling,47.099998474121094
+2025-09-02,pre,PODD,PODD,Health Care,Medical Devices,343.3299865722656
+2025-09-02,pre,UAL,UAL,Industrials,Passenger Airlines,102.15010070800781
+2025-09-02,pre,LYV,LYV,Communication Services,Movies & Entertainment,163.6750030517578
+2025-09-02,pre,DAL,DAL,Industrials,Passenger Airlines,60.189998626708984
+2025-09-02,pre,FANG,FANG,Energy,Oil & Gas Exploration & Production,149.23910522460938
+2025-09-02,pre,TTWO,TTWO,Communication Services,Interactive Home Entertainment,237.66000366210938
+2025-09-02,pre,PR,PR,Energy,Oil & Gas Exploration & Production,14.295000076293945
+2025-09-02,pre,BRX,BRX,Real Estate,Retail REITs,27.78499984741211
+2025-09-02,pre,TJX,TJX,Consumer Discretionary,Apparel Retail,138.44000244140625
+2025-09-02,pre,WYNN,WYNN,Consumer Discretionary,Casinos & Gaming,123.27999877929688
+2025-09-02,pre,TKO,TKO,Communication Services,Movies & Entertainment,186.0500030517578
+2025-09-02,pre,BROS,BROS,Consumer Discretionary,Restaurants,71.91000366210938
+2025-09-02,pre,BURL,BURL,Consumer Discretionary,Apparel Retail,286.69000244140625
+2025-09-02,pre,INSM,INSM,Health Care,Biotechnology,142.92999267578125
+2025-09-02,pre,WAL,WAL,Financials,Banks - Regional,87.69999694824219
+2025-09-02,pre,SSB,SSB,Financials,Regional Banks,100.5999984741211
+2025-09-02,pre,ACM,ACM,Industrials,Construction & Engineering,124.11000061035156
+2025-09-02,pre,R,R,Industrials,Cargo Ground Transportation,185.16229248046875
+2025-09-02,pre,IONS,IONS,Health Care,Biotechnology,56.058998107910156
+2025-09-02,pre,W,W,Consumer Discretionary,Internet Retail,77.30999755859375
+2025-09-02,pre,OVV,OVV,Energy,Oil & Gas E&P,42.36000061035156
+2025-09-02,pre,BMRN,BMRN,Health Care,Biotechnology,58.56999969482422
+2025-09-02,pre,REG,REG,Real Estate,Retail REITs,72.69499969482422
+2025-09-02,pre,ROKU,ROKU,Communication Services,Entertainment,94.53800201416016
+2025-09-02,pre,DPZ,DPZ,Consumer Discretionary,Restaurants,468.37249755859375
+2025-09-02,pre,DVN,DVN,Energy,Oil & Gas Exploration & Production,36.314998626708984
+2025-09-02,pre,RF,RF,Financials,Regional Banks,26.614200592041016
+2025-09-02,pre,HBAN,HBAN,Financials,Regional Banks,17.485000610351562
+2025-09-02,pre,MDB,MDB,Information Technology,Systems Software,314.07000732421875
+2025-09-02,pre,FITB,FITB,Financials,Regional Banks,45.04999923706055
+2025-09-02,pre,VICI,VICI,Real Estate,Hotel & Resort REITs,33.41999816894531
+2025-09-02,pre,HUM,HUM,Health Care,Managed Health Care,312.1549987792969
+2025-09-02,pre,BKR,BKR,Energy,Oil & Gas Equipment & Services,45.09000015258789
+2025-09-02,pre,DDOG,DDOG,Information Technology,Application Software,132.08999633789062
+2025-09-02,pre,EW,EW,Health Care,Health Care Equipment,81.58000183105469
+2025-09-02,pre,FLUT,FLUT,Consumer Discretionary,Casinos & Gaming,300.0
+2025-09-02,pre,LNG,LNG,Energy,Oil & Gas Midstream,240.97999572753906
+2025-09-02,pre,GM,GM,Consumer Discretionary,Automobile Manufacturers,58.1349983215332
+2025-09-02,pre,TFC,TFC,Financials,Regional Banks,45.86000061035156
+2025-09-02,pre,SPG,SPG,Real Estate,Retail REITs,178.2449951171875
+2025-09-02,pre,ADSK,ADSK,Information Technology,Application Software,314.8999938964844
+2025-09-02,pre,AZO,AZO,Consumer Discretionary,Automotive Retail,4184.69677734375
+2025-09-02,pre,NET,NET,Information Technology,Software - Infrastructure,204.30499267578125
+2025-09-02,pre,USB,USB,Financials,Diversified Banks,47.970001220703125
+2025-09-02,pre,SNOW,SNOW,Information Technology,Software - Application,230.86000061035156
+2025-09-02,pre,NOC,NOC,Industrials,Aerospace & Defense,589.8800048828125
+2025-09-02,pre,RBLX,RBLX,Communication Services,Electronic Gaming & Multimedia,126.31999969482422
+2025-09-02,pre,CVS,CVS,Health Care,Health Care Services,74.1050033569336
+2025-09-02,pre,RCL,RCL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",349.0
+2025-09-02,pre,HCA,HCA,Health Care,Health Care Facilities,406.375
+2025-09-02,pre,ADI,ADI,Information Technology,Semiconductors,244.67999267578125
+2025-09-02,pre,COP,COP,Energy,Oil & Gas Exploration & Production,98.27999877929688
+2025-09-02,pre,BSX,BSX,Health Care,Health Care Equipment,106.23999786376953
+2025-09-02,pre,APP,APP,Information Technology,Application Software,468.4800109863281
+2025-09-02,pre,ANET,ANET,Information Technology,Communications Equipment,134.4241943359375
+2025-09-02,pre,BA,BA,Industrials,Aerospace & Defense,235.7899932861328
+2025-09-02,pre,FIVE,FIVE,Consumer Discretionary,Other Specialty Retail,148.72000122070312
+2025-09-02,pre,LITE,LITE,Information Technology,Communication Equipment,130.41000366210938
+2025-09-02,pre,CELH,CELH,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,60.790000915527344
+2025-09-02,pre,AFRM,AFRM,Information Technology,Software - Infrastructure,83.1449966430664
+2025-09-02,pre,FCX,FCX,Materials,Copper,44.33000183105469
+2025-09-02,pre,NEM,NEM,Materials,Gold,75.89430236816406
+2025-09-02,pre,WELL,WELL,Real Estate,Health Care REITs,167.74000549316406
+2025-09-02,pre,PENN,PENN,Consumer Discretionary,Casinos & Gaming,19.774999618530273
+2025-09-02,pre,FRT,FRT,Real Estate,Retail REITs,100.16999816894531
+2025-09-02,pre,PSTG,PSTG,Information Technology,Computer Hardware,76.1500015258789
+2025-09-02,pre,LVS,LVS,Consumer Discretionary,Casinos & Gaming,56.72999954223633
+2025-09-02,pre,URI,URI,Industrials,Trading Companies & Distributors,947.10498046875
+2025-09-02,pre,GD,GD,Industrials,Aerospace & Defense,323.7850036621094
+2025-09-02,pre,HST,HST,Real Estate,Hotel & Resort REITs,16.95009994506836
+2025-09-02,pre,ALLY,ALLY,Financials,Credit Services,40.349998474121094
+2025-09-02,pre,HPE,HPE,Information Technology,"Technology Hardware, Storage & Peripherals",22.388500213623047
+2025-09-02,pre,REXR,REXR,Real Estate,REIT - Industrial,40.290000915527344
+2025-09-02,pre,PEN,PEN,Health Care,Health Care Equipment,269.3800048828125
+2025-09-02,pre,VNOM,VNOM,Energy,Oil & Gas Storage & Transportation,39.90999984741211
+2025-09-02,pre,TOL,TOL,Consumer Discretionary,Homebuilding,138.02000427246094
+2025-09-02,pre,RL,RL,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",306.0199890136719
+2025-09-02,pre,TER,TER,Information Technology,Semiconductor Materials & Equipment,118.05500030517578
+2025-09-02,pre,DD,DD,Materials,Specialty Chemicals,75.05999755859375
+2025-09-02,pre,CHRD,CHRD,Energy,Oil & Gas Exploration & Production,110.55999755859375
+2025-09-02,pre,A,A,Health Care,Health Care Equipment,122.44000244140625
+2025-09-02,pre,PVH,PVH,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",84.94000244140625
+2025-09-02,pre,ALK,ALK,Industrials,Passenger Airlines,61.66999816894531
+2025-09-02,pre,OMF,OMF,Financials,Credit Services,60.4900016784668
+2025-09-02,pre,DINO,DINO,Energy,Oil & Gas Refining & Marketing,51.75
+2025-09-02,pre,OHI,OHI,Real Estate,REIT - Healthcare Facilities,42.59000015258789
+2025-09-02,pre,COR,COR,Health Care,Health Care Distributors,296.5150146484375
+2025-09-02,pre,ELF,ELF,Consumer Staples,Personal Care Products,124.0999984741211
+2025-09-02,pre,PHM,PHM,Consumer Discretionary,Homebuilding,131.6649932861328
+2025-09-02,pre,TNL,TNL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",61.88999938964844
+2025-09-02,pre,LEA,LEA,Consumer Discretionary,Automotive Parts & Equipment,109.19000244140625
+2025-09-02,pre,AGNC,AGNC,Financials,REIT - Mortgage,9.630000114440918
+2025-09-02,pre,PFGC,PFGC,Consumer Staples,Food Distributors,104.27999877929688
+2025-09-02,pre,UTHR,UTHR,Health Care,Biotechnology,411.4800109863281
+2025-09-02,pre,SRE,SRE,Utilities,Multi-Utilities,82.70999908447266
+2025-09-02,pre,TEM,TEM,Health Care,Health Information Services,74.8499984741211
+2025-09-02,pre,RJF,RJF,Financials,Investment Banking & Brokerage,167.41000366210938
+2025-09-02,pre,WMS,WMS,Industrials,Building Products & Equipment,140.4199981689453
+2025-09-02,pre,FTAI,FTAI,Industrials,Rental & Leasing Services,148.39500427246094
+2025-09-02,pre,RKLB,RKLB,Industrials,Aerospace & Defense,46.86429977416992
+2025-09-02,pre,NXST,NXST,Communication Services,Broadcasting,202.4199981689453
+2025-09-02,pre,QXO,QXO,Industrials,Industrial Distribution,21.405000686645508
+2025-09-02,pre,PKG,PKG,Materials,Paper & Plastic Packaging Products & Materials,216.3249969482422
+2025-09-02,pre,BPOP,BPOP,Financials,Banks - Regional,124.05000305175781
+2025-09-02,pre,MSI,MSI,Information Technology,Communications Equipment,474.3399963378906
+2025-09-02,pre,THG,THG,Financials,Property & Casualty Insurance,174.61000061035156
+2025-09-02,pre,RGLD,RGLD,Materials,Precious Metals & Minerals,183.39999389648438
+2025-09-02,pre,FLEX,FLEX,Information Technology,Electronic Manufacturing Services,52.790000915527344
+2025-09-02,pre,DORM,DORM,Consumer Cyclical,Auto Parts,161.7100067138672
+2025-09-02,pre,AU,AU,Materials,Gold,58.529998779296875
+2025-09-02,pre,EVR,EVR,Financials,Investment Banking & Brokerage,312.73748779296875
+2025-09-02,pre,LOPE,LOPE,Consumer Discretionary,Education Services,201.86500549316406
+2025-09-02,pre,BILL,BILL,Information Technology,Software - Application,46.09120178222656
+2025-09-02,pre,LYFT,LYFT,Industrials,Passenger Ground Transportation,16.155000686645508
+2025-09-02,pre,ZION,ZION,Financials,Regional Banks,56.43000030517578
+2025-09-02,pre,APA,APA,Energy,Oil & Gas Exploration & Production,23.579999923706055
+2025-09-02,pre,NBIX,NBIX,Health Care,Biotechnology,141.3800048828125
+2025-09-02,pre,KIM,KIM,Real Estate,Retail REITs,22.28499984741211
+2025-09-02,pre,CHRW,CHRW,Industrials,Air Freight & Logistics,127.86499786376953
+2025-09-02,pre,FTI,FTI,Energy,Oil & Gas Equipment & Services,36.84000015258789
+2025-09-02,pre,INCY,INCY,Health Care,Biotechnology,86.37999725341797
+2025-09-02,pre,U,U,Information Technology,Software - Application,39.380001068115234
+2025-09-02,pre,DECK,DECK,Consumer Discretionary,Footwear,122.00070190429688
+2025-09-02,pre,CTRA,CTRA,Energy,Oil & Gas Exploration & Production,24.549999237060547
+2025-09-02,pre,HAL,HAL,Energy,Oil & Gas Equipment & Services,22.424999237060547
+2025-09-02,pre,KEY,KEY,Financials,Regional Banks,18.770000457763672
+2025-09-02,pre,ZM,ZM,Information Technology,Application Software,80.51000213623047
+2025-09-02,pre,EXPE,EXPE,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",209.23500061035156
+2025-09-02,pre,SYF,SYF,Financials,Consumer Finance,74.80000305175781
+2025-09-02,pre,WDC,WDC,Information Technology,"Technology Hardware, Storage & Peripherals",80.3499984741211
+2025-09-02,pre,TSCO,TSCO,Consumer Discretionary,Other Specialty Retail,62.005001068115234
+2025-09-02,pre,EQT,EQT,Energy,Oil & Gas Exploration & Production,52.2599983215332
+2025-09-02,pre,MLM,MLM,Materials,Construction Materials,613.5449829101562
+2025-09-02,pre,HSY,HSY,Consumer Staples,Packaged Foods & Meats,184.8699951171875
+2025-09-02,pre,VMC,VMC,Materials,Construction Materials,290.2650146484375
+2025-09-02,pre,RDDT,RDDT,Communication Services,Interactive Media & Services,214.75
+2025-09-02,pre,CCL,CCL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",30.585800170898438
+2025-09-02,pre,EA,EA,Communication Services,Interactive Home Entertainment,171.97999572753906
+2025-09-02,pre,F,F,Consumer Discretionary,Automobile Manufacturers,11.699899673461914
+2025-09-02,pre,OXY,OXY,Energy,Oil & Gas Exploration & Production,47.82500076293945
+2025-09-02,pre,ALNY,ALNY,Health Care,Biotechnology,449.0799865722656
+2025-09-02,pre,HLT,HLT,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",273.25
+2025-09-02,pre,EOG,EOG,Energy,Oil & Gas Exploration & Production,125.31999969482422
+2025-09-02,pre,PNC,PNC,Financials,Regional Banks,202.83999633789062
+2025-09-02,pre,PH,PH,Industrials,Industrial Machinery & Supplies & Components,746.010009765625
+2025-09-02,pre,PLD,PLD,Real Estate,Industrial REITs,111.2300033569336
+2025-09-02,pre,CVNA,CVNA,Consumer Discretionary,Automotive Retail,359.7900085449219
+2025-09-02,pre,PANW,PANW,Information Technology,Systems Software,189.8699951171875
+2025-09-02,pre,COF,COF,Financials,Consumer Finance,220.91000366210938
+2025-09-02,pre,CFG,CFG,Financials,Regional Banks,51.08000183105469
+2025-09-02,pre,PSA,PSA,Real Estate,Self-Storage REITs,291.875
+2025-09-02,pre,LHX,LHX,Industrials,Aerospace & Defense,276.0
+2025-09-02,pre,PSX,PSX,Energy,Oil & Gas Refining & Marketing,132.3800048828125
+2025-09-02,pre,KMI,KMI,Energy,Oil & Gas Storage & Transportation,26.809999465942383
+2025-09-02,pre,CGNX,CGNX,Information Technology,Electronic Equipment & Instruments,43.64500045776367
+2025-09-02,pre,MGM,MGM,Consumer Discretionary,Casinos & Gaming,38.45000076293945
+2025-09-02,pre,DOCS,DOCS,Health Care,Health Information Services,66.55999755859375
+2025-09-02,pre,FOXA,FOXA,Communication Services,Movies & Entertainment,60.34000015258789
+2025-09-02,pre,SOFI,SOFI,Financials,Credit Services,24.670000076293945
+2025-09-02,pre,VLO,VLO,Energy,Oil & Gas Refining & Marketing,152.7550048828125
+2025-09-02,pre,LH,LH,Health Care,Health Care Services,275.30999755859375
+2025-09-02,pre,MHK,MHK,Consumer Discretionary,Home Furnishings,129.61500549316406
+2025-09-02,pre,EPAM,EPAM,Information Technology,IT Consulting & Other Services,172.66000366210938
+2025-09-02,pre,FHN,FHN,Financials,Regional Banks,22.104999542236328
+2025-09-02,pre,UHS,UHS,Health Care,Health Care Facilities,181.47000122070312
+2025-09-02,pre,DOC,DOC,Real Estate,Health Care REITs,17.885000228881836
+2025-09-02,pre,CIEN,CIEN,Information Technology,Communications Equipment,92.55999755859375
+2025-09-02,pre,DGX,DGX,Health Care,Health Care Services,180.30999755859375
+2025-09-02,pre,CIVI,CIVI,Energy,Oil & Gas Exploration & Production,36.48569869995117
+2025-09-02,pre,KRC,KRC,Real Estate,REIT - Office,40.97999954223633
+2025-09-02,pre,HXL,HXL,Industrials,Aerospace & Defense,64.66999816894531
+2025-09-02,pre,FR,FR,Real Estate,REIT - Industrial,51.47999954223633
+2025-09-02,pre,SNDK,SNDK,Information Technology,"Technology Hardware, Storage & Peripherals",51.18000030517578
+2025-09-02,pre,BWA,BWA,Consumer Discretionary,Automotive Parts & Equipment,42.36000061035156
+2025-09-02,pre,WBS,WBS,Financials,Regional Banks,61.220001220703125
+2025-09-02,pre,HPQ,HPQ,Information Technology,"Technology Hardware, Storage & Peripherals",28.2450008392334
+2025-09-02,pre,WRB,WRB,Financials,Property & Casualty Insurance,71.82499694824219
+2025-09-02,pre,SYY,SYY,Consumer Staples,Food Distributors,80.5115966796875
+2025-09-02,pre,DHI,DHI,Consumer Discretionary,Homebuilding,170.1300048828125
+2025-09-02,pre,NTAP,NTAP,Information Technology,"Technology Hardware, Storage & Peripherals",113.43499755859375
+2025-09-02,pre,PCG,PCG,Utilities,Utilities - Regulated Electric,15.244999885559082
+2025-09-02,pre,MET,MET,Financials,Life & Health Insurance,79.94999694824219
+2025-09-02,pre,MCK,MCK,Health Care,Health Care Distributors,694.0802001953125
+2025-09-02,pre,BYD,BYD,Consumer Discretionary,Casinos & Gaming,85.2699966430664
+2025-09-02,pre,LSCC,LSCC,Information Technology,Semiconductors,65.08999633789062
+2025-09-02,pre,WTFC,WTFC,Financials,Regional Banks,134.86000061035156
+2025-09-02,pre,DTM,DTM,Energy,Oil & Gas Midstream,103.81500244140625
+2025-09-02,pre,NUE,NUE,Materials,Steel,145.86000061035156
+2025-09-02,pre,GTLS,GTLS,Industrials,Specialty Industrial Machinery,198.66000366210938
+2025-09-02,pre,DAY,DAY,Industrials,Human Resource & Employment Services,69.33000183105469
+2025-09-02,pre,EHC,EHC,Health Care,Health Care Facilities,122.91500091552734
+2025-09-02,pre,ARE,ARE,Real Estate,Office REITs,81.5199966430664
+2025-09-02,pre,GLW,GLW,Information Technology,Electronic Components,68.05999755859375
+2025-09-02,pre,MO,MO,Consumer Staples,Tobacco,67.44999694824219
+2025-09-02,pre,GTES,GTES,Industrials,Specialty Industrial Machinery,24.8700008392334
+2025-09-02,pre,LW,LW,Consumer Staples,Packaged Foods & Meats,56.689998626708984
+2025-09-02,pre,LNC,LNC,Financials,Multi-line Insurance,42.04999923706055
+2025-09-02,pre,AN,AN,Consumer Discretionary,Automotive Retail,218.3800048828125
+2025-09-02,pre,WCC,WCC,Industrials,Industrial Distribution,215.89999389648438
+2025-09-02,pre,WPC,WPC,Real Estate,REIT - Diversified,66.26499938964844
+2025-09-02,pre,SPR,SPR,Industrials,Aerospace & Defense,41.654998779296875
+2025-09-02,pre,ESI,ESI,Materials,Specialty Chemicals,25.209999084472656
+2025-09-02,pre,BOKF,BOKF,Financials,Banks - Regional,109.92500305175781
+2025-09-02,pre,INFA,INFA,Information Technology,Software - Infrastructure,24.934999465942383
+2025-09-02,pre,NDSN,NDSN,Industrials,Industrial Machinery & Supplies & Components,221.4499969482422
+2025-09-02,pre,RBA,RBA,Industrials,Specialty Business Services,115.80000305175781
+2025-09-02,pre,ADM,ADM,Consumer Staples,Agricultural Products & Services,62.13999938964844
+2025-09-02,pre,HOG,HOG,Consumer Discretionary,Motorcycle Manufacturers,29.100000381469727
+2025-09-02,pre,OZK,OZK,Financials,Regional Banks,51.584999084472656
+2025-09-02,pre,GNTX,GNTX,Consumer Discretionary,Automotive Parts & Equipment,27.655000686645508
+2025-09-02,pre,POST,POST,Consumer Staples,Packaged Foods & Meats,112.36499786376953
+2025-09-02,pre,HALO,HALO,Health Care,Biotechnology,73.72000122070312
+2025-09-02,pre,FYBR,FYBR,Communication Services,Telecom Services,37.084999084472656
+2025-09-02,pre,JLL,JLL,Real Estate,Real Estate Services,299.30999755859375
+2025-09-02,pre,SGI,SGI,Consumer Discretionary,Home Furnishings,83.93000030517578
+2025-09-02,pre,GPC,GPC,Consumer Discretionary,Automotive Parts & Equipment,138.10459899902344
+2025-09-02,pre,WFRD,WFRD,Energy,Oil & Gas Equipment & Services,63.29999923706055
+2025-09-02,pre,FNB,FNB,Financials,Regional Banks,16.175800323486328
+2025-09-02,pre,HR,HR,Real Estate,REIT - Healthcare Facilities,17.2549991607666
+2025-09-02,pre,AYI,AYI,Industrials,Electrical Components & Equipment,329.8594970703125
+2025-09-02,pre,PAG,PAG,Consumer Discretionary,Auto & Truck Dealerships,183.1199951171875
+2025-09-02,pre,CNXC,CNXC,Information Technology,Data Processing & Outsourced Services,51.209999084472656
+2025-09-02,pre,FULT,FULT,Financial Services,Banks - Regional,19.260000228881836
+2025-09-02,pre,TTC,TTC,Industrials,Agricultural & Farm Machinery,80.73999786376953
+2025-09-02,pre,DCI,DCI,Industrials,Industrial Machinery & Supplies & Components,79.05999755859375
+2025-09-02,pre,AFG,AFG,Financials,Multi-line Insurance,136.64500427246094
+2025-09-02,pre,HHH,HHH,Real Estate,Real Estate - Development,75.44499969482422
+2025-09-02,pre,NFG,NFG,Utilities,Gas Utilities,87.2300033569336
+2025-09-02,pre,DNB,DNB,Industrials,Financial Data & Stock Exchanges,9.149999618530273
+2025-09-02,pre,DDS,DDS,Consumer Discretionary,Broadline Retail,535.8400268554688
+2025-09-02,pre,NVR,NVR,Consumer Discretionary,Homebuilding,8169.990234375
+2025-09-02,pre,VRSN,VRSN,Information Technology,Internet Services & Infrastructure,272.0050048828125
+2025-09-02,pre,ORI,ORI,Financials,Property & Casualty Insurance,40.025001525878906
+2025-09-02,pre,MLI,MLI,Industrials,Industrial Machinery & Supplies & Components,94.87000274658203
+2025-09-02,pre,UI,UI,Information Technology,Communication Equipment,520.3300170898438
+2025-09-02,pre,TFSL,TFSL,Financials,Banks - Regional,13.670000076293945
+2025-09-02,pre,LLYVA,LLYVA,Communication Services,Entertainment,93.36000061035156
+2025-09-02,pre,LLYVK,LLYVK,Communication Services,Entertainment,96.20999908447266
+2025-09-02,pre,RARE,RARE,Health Care,Biotechnology,31.145000457763672
+2025-09-02,pre,SEB,SEB,Consumer Staples,Conglomerates,3930.090087890625
+2025-09-02,pre,VFC,VFC,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",14.895000457763672
+2025-09-02,pre,NEU,NEU,Materials,Specialty Chemicals,833.1300048828125
+2025-09-02,pre,RIVN,RIVN,Consumer Discretionary,Auto Manufacturers,13.3149995803833
+2025-09-02,pre,L,L,Financials,Multi-line Insurance,96.47000122070312
+2025-09-02,pre,FOX,FOX,Communication Services,Movies & Entertainment,54.95000076293945
+2025-09-02,pre,TRV,TRV,Financials,Property & Casualty Insurance,270.9849853515625
+2025-09-02,pre,ORLY,ORLY,Consumer Discretionary,Automotive Retail,103.41000366210938
+2025-09-02,pre,INTC,INTC,Information Technology,Semiconductors,23.934999465942383
+2025-09-02,pre,SAIL,SAIL,Information Technology,Application Software,20.639999389648438
+2025-09-02,pre,HIG,HIG,Financials,Property & Casualty Insurance,131.46499633789062
+2025-09-02,pre,MPC,MPC,Energy,Oil & Gas Refining & Marketing,178.82000732421875
+2025-09-02,pre,ELV,ELV,Health Care,Managed Health Care,324.3399963378906
+2025-09-02,pre,NNN,NNN,Real Estate,Retail REITs,42.32500076293945
+2025-09-02,pre,OLN,OLN,Materials,Diversified Chemicals,23.020000457763672
+2025-09-02,pre,CG,CG,Financials,Asset Management,63.63999938964844
+2025-09-02,pre,ACHC,ACHC,Health Care,Health Care Facilities,23.209999084472656
+2025-09-02,pre,ST,ST,Industrials,Scientific & Technical Instruments,31.739999771118164
+2025-09-02,pre,MOH,MOH,Health Care,Managed Health Care,183.63999938964844
+2025-09-02,pre,PK,PK,Real Estate,Hotel & Resort REITs,11.489999771118164
+2025-09-02,pre,BSY,BSY,Information Technology,Software - Application,54.755001068115234
+2025-09-02,pre,LDOS,LDOS,Industrials,Diversified Support Services,180.75799560546875
+2025-09-02,pre,BK,BK,Financials,Asset Management & Custody Banks,104.04000091552734
+2025-09-02,pre,M,M,Consumer Discretionary,Department Stores,13.324999809265137
+2025-09-02,pre,COLB,COLB,Financials,Regional Banks,26.364999771118164
+2025-09-02,pre,THO,THO,Consumer Discretionary,Leisure Products,107.7249984741211
+2025-09-02,pre,IVZ,IVZ,Financials,Asset Management & Custody Banks,21.389999389648438
+2025-09-02,pre,NTRS,NTRS,Financials,Asset Management & Custody Banks,128.36500549316406
+2025-09-02,pre,ELAN,ELAN,Health Care,Drug Manufacturers - Specialty & Generic,17.895000457763672
+2025-09-02,pre,MEDP,MEDP,Health Care,Diagnostics & Research,468.30499267578125
+2025-09-02,pre,WK,WK,Technology,Software - Application,79.13150024414062
+2025-09-02,pre,PSN,PSN,Industrials,Aerospace & Defense,80.30000305175781
+2025-09-02,pre,SKX,SKX,Consumer Discretionary,Footwear,63.09000015258789
+2025-09-02,pre,HII,HII,Industrials,Aerospace & Defense,270.1820068359375
+2025-09-02,pre,ATO,ATO,Utilities,Gas Utilities,166.11000061035156
+2025-09-02,pre,FAST,FAST,Industrials,Building Products,49.279998779296875
+2025-09-02,pre,HIW,HIW,Real Estate,REIT - Office,31.110000610351562
+2025-09-02,pre,AWI,AWI,Industrials,Building Products & Equipment,194.2570037841797
+2025-09-02,pre,KNSL,KNSL,Financials,Insurance - Property & Casualty,454.8299865722656
+2025-09-02,pre,FHB,FHB,Financials,Regional Banks,25.364999771118164
+2025-09-02,pre,REYN,REYN,Consumer Staples,Packaging & Containers,23.15999984741211
+2025-09-02,pre,CAR,CAR,Industrials,Passenger Ground Transportation,158.97999572753906
+2025-09-02,pre,MSM,MSM,Industrials,Trading Companies & Distributors,89.12999725341797
+2025-09-02,pre,WBA,WBA,Consumer Staples,Drug Retail,11.979999542236328
+2025-09-02,pre,SHC,SHC,Health Care,Diagnostics & Research,16.03499984741211
+2025-09-02,pre,MTG,MTG,Financials,Reinsurance,27.600000381469727
+2025-09-02,pre,LAZ,LAZ,Financials,Capital Markets,55.13999938964844
+2025-09-02,pre,HLI,HLI,Financials,Capital Markets,195.3249969482422
+2025-09-02,pre,CACC,CACC,Financials,Credit Services,506.7900085449219
+2025-09-02,pre,CHE,CHE,Health Care,Health Care Services,463.79998779296875
+2025-09-02,pre,KRMN,KRMN,Industrials,Aerospace & Defense,53.189998626708984
+2025-09-02,pre,SSD,SSD,Industrials,Building Products,189.25999450683594
+2025-09-02,pre,JEF,JEF,Financials,Multi-Sector Holdings,63.5
+2025-09-02,pre,MRP,MRP,Consumer Discretionary,Homebuilding,34.65999984741211
+2025-09-02,pre,TLYS,TLYS,Consumer Cyclical,Apparel Retail,1.8299000263214111
+2025-09-02,pre,SPOK,SPOK,Healthcare,Health Information Services,18.024999618530273
+2025-09-02,pre,CNA,CNA,Financials,Insurance - Property & Casualty,48.970001220703125
+2025-09-02,pre,TPL,TPL,Energy,Oil & Gas Exploration & Production,954.5999755859375
+2025-09-02,events,THC,THC,Health Care,Health Care Facilities,184.8800048828125
+2025-09-02,events,NTRA,NTRA,Health Care,Diagnostics & Research,166.5399932861328
+2025-09-02,events,DKNG,DKNG,Consumer Discretionary,Gambling,47.099998474121094
+2025-09-02,events,PODD,PODD,Health Care,Medical Devices,343.3299865722656
+2025-09-02,events,UAL,UAL,Industrials,Passenger Airlines,102.15010070800781
+2025-09-02,events,LYV,LYV,Communication Services,Movies & Entertainment,163.6750030517578
+2025-09-02,events,DAL,DAL,Industrials,Passenger Airlines,60.189998626708984
+2025-09-02,events,FANG,FANG,Energy,Oil & Gas Exploration & Production,149.23910522460938
+2025-09-02,events,TTWO,TTWO,Communication Services,Interactive Home Entertainment,237.66000366210938
+2025-09-02,events,PR,PR,Energy,Oil & Gas Exploration & Production,14.295000076293945
+2025-09-02,events,BRX,BRX,Real Estate,Retail REITs,27.78499984741211
+2025-09-02,events,TJX,TJX,Consumer Discretionary,Apparel Retail,138.44000244140625
+2025-09-02,events,WYNN,WYNN,Consumer Discretionary,Casinos & Gaming,123.27999877929688
+2025-09-02,events,TKO,TKO,Communication Services,Movies & Entertainment,186.0500030517578
+2025-09-02,events,BROS,BROS,Consumer Discretionary,Restaurants,71.91000366210938
+2025-09-02,events,BURL,BURL,Consumer Discretionary,Apparel Retail,286.69000244140625
+2025-09-02,events,INSM,INSM,Health Care,Biotechnology,142.92999267578125
+2025-09-02,events,WAL,WAL,Financials,Banks - Regional,87.69999694824219
+2025-09-02,events,SSB,SSB,Financials,Regional Banks,100.5999984741211
+2025-09-02,events,ACM,ACM,Industrials,Construction & Engineering,124.11000061035156
+2025-09-02,events,R,R,Industrials,Cargo Ground Transportation,185.16229248046875
+2025-09-02,events,IONS,IONS,Health Care,Biotechnology,56.058998107910156
+2025-09-02,events,W,W,Consumer Discretionary,Internet Retail,77.30999755859375
+2025-09-02,events,OVV,OVV,Energy,Oil & Gas E&P,42.36000061035156
+2025-09-02,events,BMRN,BMRN,Health Care,Biotechnology,58.56999969482422
+2025-09-02,events,REG,REG,Real Estate,Retail REITs,72.69499969482422
+2025-09-02,events,ROKU,ROKU,Communication Services,Entertainment,94.53800201416016
+2025-09-02,events,DPZ,DPZ,Consumer Discretionary,Restaurants,468.37249755859375
+2025-09-02,events,DVN,DVN,Energy,Oil & Gas Exploration & Production,36.314998626708984
+2025-09-02,events,RF,RF,Financials,Regional Banks,26.614200592041016
+2025-09-02,events,HBAN,HBAN,Financials,Regional Banks,17.485000610351562
+2025-09-02,events,MDB,MDB,Information Technology,Systems Software,314.07000732421875
+2025-09-02,events,FITB,FITB,Financials,Regional Banks,45.04999923706055
+2025-09-02,events,VICI,VICI,Real Estate,Hotel & Resort REITs,33.41999816894531
+2025-09-02,events,HUM,HUM,Health Care,Managed Health Care,312.1549987792969
+2025-09-02,events,BKR,BKR,Energy,Oil & Gas Equipment & Services,45.09000015258789
+2025-09-02,events,DDOG,DDOG,Information Technology,Application Software,132.08999633789062
+2025-09-02,events,EW,EW,Health Care,Health Care Equipment,81.58000183105469
+2025-09-02,events,FLUT,FLUT,Consumer Discretionary,Casinos & Gaming,300.0
+2025-09-02,events,LNG,LNG,Energy,Oil & Gas Midstream,240.97999572753906
+2025-09-02,events,GM,GM,Consumer Discretionary,Automobile Manufacturers,58.1349983215332
+2025-09-02,events,TFC,TFC,Financials,Regional Banks,45.86000061035156
+2025-09-02,events,SPG,SPG,Real Estate,Retail REITs,178.2449951171875
+2025-09-02,events,ADSK,ADSK,Information Technology,Application Software,314.8999938964844
+2025-09-02,events,AZO,AZO,Consumer Discretionary,Automotive Retail,4184.69677734375
+2025-09-02,events,NET,NET,Information Technology,Software - Infrastructure,204.30499267578125
+2025-09-02,events,USB,USB,Financials,Diversified Banks,47.970001220703125
+2025-09-02,events,SNOW,SNOW,Information Technology,Software - Application,230.86000061035156
+2025-09-02,events,NOC,NOC,Industrials,Aerospace & Defense,589.8800048828125
+2025-09-02,events,RBLX,RBLX,Communication Services,Electronic Gaming & Multimedia,126.31999969482422
+2025-09-02,events,CVS,CVS,Health Care,Health Care Services,74.1050033569336
+2025-09-02,events,RCL,RCL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",349.0
+2025-09-02,events,HCA,HCA,Health Care,Health Care Facilities,406.375
+2025-09-02,events,ADI,ADI,Information Technology,Semiconductors,244.67999267578125
+2025-09-02,events,COP,COP,Energy,Oil & Gas Exploration & Production,98.27999877929688
+2025-09-02,events,BSX,BSX,Health Care,Health Care Equipment,106.23999786376953
+2025-09-02,events,APP,APP,Information Technology,Application Software,468.4800109863281
+2025-09-02,events,ANET,ANET,Information Technology,Communications Equipment,134.4241943359375
+2025-09-02,events,BA,BA,Industrials,Aerospace & Defense,235.7899932861328
+2025-09-02,events,FIVE,FIVE,Consumer Discretionary,Other Specialty Retail,148.72000122070312
+2025-09-02,events,LITE,LITE,Information Technology,Communication Equipment,130.41000366210938
+2025-09-02,events,CELH,CELH,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,60.790000915527344
+2025-09-02,events,AFRM,AFRM,Information Technology,Software - Infrastructure,83.1449966430664
+2025-09-02,events,FCX,FCX,Materials,Copper,44.33000183105469
+2025-09-02,events,NEM,NEM,Materials,Gold,75.89430236816406
+2025-09-02,events,WELL,WELL,Real Estate,Health Care REITs,167.74000549316406
+2025-09-02,events,PENN,PENN,Consumer Discretionary,Casinos & Gaming,19.774999618530273
+2025-09-02,events,FRT,FRT,Real Estate,Retail REITs,100.16999816894531
+2025-09-02,events,PSTG,PSTG,Information Technology,Computer Hardware,76.1500015258789
+2025-09-02,events,LVS,LVS,Consumer Discretionary,Casinos & Gaming,56.72999954223633
+2025-09-02,events,URI,URI,Industrials,Trading Companies & Distributors,947.10498046875
+2025-09-02,events,GD,GD,Industrials,Aerospace & Defense,323.7850036621094
+2025-09-02,events,HST,HST,Real Estate,Hotel & Resort REITs,16.95009994506836
+2025-09-02,events,ALLY,ALLY,Financials,Credit Services,40.349998474121094
+2025-09-02,events,HPE,HPE,Information Technology,"Technology Hardware, Storage & Peripherals",22.388500213623047
+2025-09-02,events,REXR,REXR,Real Estate,REIT - Industrial,40.290000915527344
+2025-09-02,events,PEN,PEN,Health Care,Health Care Equipment,269.3800048828125
+2025-09-02,events,VNOM,VNOM,Energy,Oil & Gas Storage & Transportation,39.90999984741211
+2025-09-02,events,TOL,TOL,Consumer Discretionary,Homebuilding,138.02000427246094
+2025-09-02,events,RL,RL,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",306.0199890136719
+2025-09-02,events,TER,TER,Information Technology,Semiconductor Materials & Equipment,118.05500030517578
+2025-09-02,events,DD,DD,Materials,Specialty Chemicals,75.05999755859375
+2025-09-02,events,CHRD,CHRD,Energy,Oil & Gas Exploration & Production,110.55999755859375
+2025-09-02,events,A,A,Health Care,Health Care Equipment,122.44000244140625
+2025-09-02,events,PVH,PVH,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",84.94000244140625
+2025-09-02,events,ALK,ALK,Industrials,Passenger Airlines,61.66999816894531
+2025-09-02,events,OMF,OMF,Financials,Credit Services,60.4900016784668
+2025-09-02,events,DINO,DINO,Energy,Oil & Gas Refining & Marketing,51.75
+2025-09-02,events,OHI,OHI,Real Estate,REIT - Healthcare Facilities,42.59000015258789
+2025-09-02,events,COR,COR,Health Care,Health Care Distributors,296.5150146484375
+2025-09-02,events,ELF,ELF,Consumer Staples,Personal Care Products,124.0999984741211
+2025-09-02,events,PHM,PHM,Consumer Discretionary,Homebuilding,131.6649932861328
+2025-09-02,events,TNL,TNL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",61.88999938964844
+2025-09-02,events,LEA,LEA,Consumer Discretionary,Automotive Parts & Equipment,109.19000244140625
+2025-09-02,events,AGNC,AGNC,Financials,REIT - Mortgage,9.630000114440918
+2025-09-02,events,PFGC,PFGC,Consumer Staples,Food Distributors,104.27999877929688
+2025-09-02,events,UTHR,UTHR,Health Care,Biotechnology,411.4800109863281
+2025-09-02,events,SRE,SRE,Utilities,Multi-Utilities,82.70999908447266
+2025-09-02,events,TEM,TEM,Health Care,Health Information Services,74.8499984741211
+2025-09-02,events,RJF,RJF,Financials,Investment Banking & Brokerage,167.41000366210938
+2025-09-02,events,WMS,WMS,Industrials,Building Products & Equipment,140.4199981689453
+2025-09-02,events,FTAI,FTAI,Industrials,Rental & Leasing Services,148.39500427246094
+2025-09-02,events,RKLB,RKLB,Industrials,Aerospace & Defense,46.86429977416992
+2025-09-02,events,NXST,NXST,Communication Services,Broadcasting,202.4199981689453
+2025-09-02,events,QXO,QXO,Industrials,Industrial Distribution,21.405000686645508
+2025-09-02,events,PKG,PKG,Materials,Paper & Plastic Packaging Products & Materials,216.3249969482422
+2025-09-02,events,BPOP,BPOP,Financials,Banks - Regional,124.05000305175781
+2025-09-02,events,MSI,MSI,Information Technology,Communications Equipment,474.3399963378906
+2025-09-02,events,THG,THG,Financials,Property & Casualty Insurance,174.61000061035156
+2025-09-02,events,RGLD,RGLD,Materials,Precious Metals & Minerals,183.39999389648438
+2025-09-02,events,FLEX,FLEX,Information Technology,Electronic Manufacturing Services,52.790000915527344
+2025-09-02,events,DORM,DORM,Consumer Cyclical,Auto Parts,161.7100067138672
+2025-09-02,events,AU,AU,Materials,Gold,58.529998779296875
+2025-09-02,events,EVR,EVR,Financials,Investment Banking & Brokerage,312.73748779296875
+2025-09-02,events,LOPE,LOPE,Consumer Discretionary,Education Services,201.86500549316406
+2025-09-02,events,BILL,BILL,Information Technology,Software - Application,46.09120178222656
+2025-09-02,events,LYFT,LYFT,Industrials,Passenger Ground Transportation,16.155000686645508
+2025-09-02,events,FOUR,FOUR,Information Technology,Software - Infrastructure,88.44999694824219
+2025-09-02,events,GTLB,GTLB,Information Technology,Software - Infrastructure,47.275001525878906
+2025-09-02,events,ZION,ZION,Financials,Regional Banks,56.43000030517578
+2025-09-02,events,APA,APA,Energy,Oil & Gas Exploration & Production,23.579999923706055
+2025-09-02,events,EXAS,EXAS,Health Care,Diagnostics & Research,47.45000076293945
+2025-09-02,events,XPO,XPO,Industrials,Cargo Ground Transportation,125.70999908447266
+2025-09-02,events,KIM,KIM,Real Estate,Retail REITs,22.28499984741211
+2025-09-02,events,CHRW,CHRW,Industrials,Air Freight & Logistics,127.86499786376953
+2025-09-02,events,DT,DT,Information Technology,Software - Application,49.810001373291016
+2025-09-02,events,RBRK,RBRK,Information Technology,Software - Infrastructure,87.16000366210938
+2025-09-02,events,INCY,INCY,Health Care,Biotechnology,86.37999725341797
+2025-09-02,events,U,U,Information Technology,Software - Application,39.380001068115234
+2025-09-02,events,CTRA,CTRA,Energy,Oil & Gas Exploration & Production,24.549999237060547
+2025-09-02,events,HAL,HAL,Energy,Oil & Gas Equipment & Services,22.424999237060547
+2025-09-02,events,FSLR,FSLR,Information Technology,Semiconductors,192.9499969482422
+2025-09-02,events,EXE,EXE,Energy,Oil & Gas Exploration & Production,97.16999816894531
+2025-09-02,events,ZM,ZM,Information Technology,Application Software,80.51000213623047
+2025-09-02,events,HUBS,HUBS,Information Technology,Software - Application,462.9599914550781
+2025-09-02,events,EXPE,EXPE,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",209.23500061035156
+2025-09-02,events,DXCM,DXCM,Health Care,Health Care Equipment,74.41999816894531
+2025-09-02,events,TSCO,TSCO,Consumer Discretionary,Other Specialty Retail,62.005001068115234
+2025-09-02,events,EQT,EQT,Energy,Oil & Gas Exploration & Production,52.2599983215332
+2025-09-02,events,MLM,MLM,Materials,Construction Materials,613.5449829101562
+2025-09-02,events,HSY,HSY,Consumer Staples,Packaged Foods & Meats,184.8699951171875
+2025-09-02,events,VMC,VMC,Materials,Construction Materials,290.2650146484375
+2025-09-02,events,RDDT,RDDT,Communication Services,Interactive Media & Services,214.75
+2025-09-02,events,CCL,CCL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",30.585800170898438
+2025-09-02,events,EA,EA,Communication Services,Interactive Home Entertainment,171.97999572753906
+2025-09-02,events,VRT,VRT,Industrials,Electrical Equipment & Parts,121.41999816894531
+2025-09-02,events,F,F,Consumer Discretionary,Automobile Manufacturers,11.699899673461914
+2025-09-02,events,OXY,OXY,Energy,Oil & Gas Exploration & Production,47.82500076293945
+2025-09-02,events,CTVA,CTVA,Materials,Fertilizers & Agricultural Chemicals,73.76000213623047
+2025-09-02,events,SLB,SLB,Energy,Oil & Gas Equipment & Services,35.84579849243164
+2025-09-02,events,CMG,CMG,Consumer Discretionary,Restaurants,41.61000061035156
+2025-09-02,events,ALNY,ALNY,Health Care,Biotechnology,449.0799865722656
+2025-09-02,events,HLT,HLT,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",273.25
+2025-09-02,events,EOG,EOG,Energy,Oil & Gas Exploration & Production,125.31999969482422
+2025-09-02,events,HWM,HWM,Industrials,Aerospace & Defense,172.41000366210938
+2025-09-02,events,TDG,TDG,Industrials,Aerospace & Defense,1294.2049560546875
+2025-09-02,events,FI,FI,Financials,Transaction & Payment Processing Services,134.64999389648438
+2025-09-02,events,PH,PH,Industrials,Industrial Machinery & Supplies & Components,746.010009765625
+2025-09-02,events,PLD,PLD,Real Estate,Industrial REITs,111.2300033569336
+2025-09-02,events,SNPS,SNPS,Information Technology,Application Software,589.375
+2025-09-02,events,CVNA,CVNA,Consumer Discretionary,Automotive Retail,359.7900085449219
+2025-09-02,events,PANW,PANW,Information Technology,Systems Software,189.8699951171875
+2025-09-02,events,MU,MU,Information Technology,Semiconductors,116.0999984741211
+2025-09-02,events,COF,COF,Financials,Consumer Finance,220.91000366210938
+2025-09-02,events,SPGI,SPGI,Financials,Financial Exchanges & Data,539.4500122070312
+2025-09-02,events,NOW,NOW,Information Technology,Systems Software,899.9000244140625
+2025-09-02,events,TRGP,TRGP,Energy,Oil & Gas Storage & Transportation,165.6999969482422
+2025-09-02,events,PSA,PSA,Real Estate,Self-Storage REITs,291.875
+2025-09-02,events,LHX,LHX,Industrials,Aerospace & Defense,276.0
+2025-09-02,events,KMI,KMI,Energy,Oil & Gas Storage & Transportation,26.809999465942383
+2025-09-02,events,VKTX,VKTX,Health Care,Biotechnology,26.264999389648438
+2025-09-02,events,CGNX,CGNX,Information Technology,Electronic Equipment & Instruments,43.64500045776367
+2025-09-02,events,MGM,MGM,Consumer Discretionary,Casinos & Gaming,38.45000076293945
+2025-09-02,events,SOFI,SOFI,Financials,Credit Services,24.670000076293945
+2025-09-02,events,VTR,VTR,Real Estate,Health Care REITs,67.63999938964844
+2025-09-02,events,CZR,CZR,Consumer Discretionary,Casinos & Gaming,25.81999969482422
+2025-09-02,events,GXO,GXO,Industrials,Air Freight & Logistics,51.380001068115234
+2025-09-02,events,MTDR,MTDR,Energy,Oil & Gas Exploration & Production,50.58000183105469
+2025-09-02,events,LH,LH,Health Care,Health Care Services,275.30999755859375
+2025-09-02,events,DNLI,DNLI,Healthcare,Biotechnology,14.960000038146973
+2025-09-02,events,MHK,MHK,Consumer Discretionary,Home Furnishings,129.61500549316406
+2025-09-02,events,EPAM,EPAM,Information Technology,IT Consulting & Other Services,172.66000366210938
+2025-09-02,events,FHN,FHN,Financials,Regional Banks,22.104999542236328
+2025-09-02,events,UHS,UHS,Health Care,Health Care Facilities,181.47000122070312
+2025-09-02,events,DOC,DOC,Real Estate,Health Care REITs,17.885000228881836
+2025-09-02,events,CIEN,CIEN,Information Technology,Communications Equipment,92.55999755859375
+2025-09-02,events,DGX,DGX,Health Care,Health Care Services,180.30999755859375
+2025-09-02,events,ALAB,ALAB,Information Technology,Semiconductors,168.86000061035156
+2025-09-02,events,CIVI,CIVI,Energy,Oil & Gas Exploration & Production,36.48569869995117
+2025-09-02,events,KRC,KRC,Real Estate,REIT - Office,40.97999954223633
+2025-09-02,events,WH,WH,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",85.80500030517578
+2025-09-02,events,FR,FR,Real Estate,REIT - Industrial,51.47999954223633
+2025-09-02,events,RVMD,RVMD,Health Care,Biotechnology,38.459999084472656
+2025-09-02,events,SNDK,SNDK,Information Technology,"Technology Hardware, Storage & Peripherals",51.18000030517578
+2025-09-02,events,BWA,BWA,Consumer Discretionary,Automotive Parts & Equipment,42.36000061035156
+2025-09-02,events,USFD,USFD,Consumer Staples,Food Distribution,76.56999969482422
+2025-09-02,events,HPQ,HPQ,Information Technology,"Technology Hardware, Storage & Peripherals",28.2450008392334
+2025-09-02,events,SYY,SYY,Consumer Staples,Food Distributors,80.5115966796875
+2025-09-02,events,BRBR,BRBR,Consumer Staples,Packaged Foods & Meats,40.939998626708984
+2025-09-02,events,NTAP,NTAP,Information Technology,"Technology Hardware, Storage & Peripherals",113.43499755859375
+2025-09-02,events,PCG,PCG,Utilities,Utilities - Regulated Electric,15.244999885559082
+2025-09-02,events,MET,MET,Financials,Life & Health Insurance,79.94999694824219
+2025-09-02,events,MCK,MCK,Health Care,Health Care Distributors,694.0802001953125
+2025-09-02,events,BYD,BYD,Consumer Discretionary,Casinos & Gaming,85.2699966430664
+2025-09-02,events,TECH,TECH,Health Care,Life Sciences Tools & Services,52.42499923706055
+2025-09-02,events,DTM,DTM,Energy,Oil & Gas Midstream,103.81500244140625
+2025-09-02,events,TLN,TLN,Utilities,Independent Power Producers & Energy Traders,372.6099853515625
+2025-09-02,events,CASY,CASY,Consumer Staples,Food Retail,494.7850036621094
+2025-09-02,events,STLD,STLD,Materials,Steel,129.0800018310547
+2025-09-02,events,NUE,NUE,Materials,Steel,145.86000061035156
+2025-09-02,events,DAR,DAR,Consumer Staples,Packaged Foods,33.290000915527344
+2025-09-02,events,ALGM,ALGM,Information Technology,Semiconductors,29.610000610351562
+2025-09-02,events,DAY,DAY,Industrials,Human Resource & Employment Services,69.33000183105469
+2025-09-02,events,ARE,ARE,Real Estate,Office REITs,81.5199966430664
+2025-09-02,events,NI,NI,Utilities,Multi-Utilities,42.255001068115234
+2025-09-02,events,GLW,GLW,Information Technology,Electronic Components,68.05999755859375
+2025-09-02,events,MSTR,MSTR,Information Technology,Application Software,342.94500732421875
+2025-09-02,events,MO,MO,Consumer Staples,Tobacco,67.44999694824219
+2025-09-02,events,SLGN,SLGN,Materials,"Metal, Glass & Plastic Containers",46.13999938964844
+2025-09-02,events,SLM,SLM,Financials,Consumer Finance,30.3799991607666
+2025-09-02,events,GTES,GTES,Industrials,Specialty Industrial Machinery,24.8700008392334
+2025-09-02,events,CHDN,CHDN,Consumer Discretionary,Casinos & Gaming,101.91000366210938
+2025-09-02,events,LW,LW,Consumer Staples,Packaged Foods & Meats,56.689998626708984
+2025-09-02,events,WCC,WCC,Industrials,Industrial Distribution,215.89999389648438
+2025-09-02,events,ENTG,ENTG,Information Technology,Semiconductor Equipment & Materials,80.5199966430664
+2025-09-02,events,WPC,WPC,Real Estate,REIT - Diversified,66.26499938964844
+2025-09-02,events,WST,WST,Health Care,Health Care Supplies,242.74000549316406
+2025-09-02,events,SMMT,SMMT,Health Care,Biotechnology,23.631000518798828
+2025-09-02,events,RITM,RITM,Financials,REIT - Mortgage,12.149999618530273
+2025-09-02,events,DRS,DRS,Industrials,Aerospace & Defense,41.560001373291016
+2025-09-02,events,NDSN,NDSN,Industrials,Industrial Machinery & Supplies & Components,221.4499969482422
+2025-09-02,events,SN,SN,Consumer Discretionary,Household Appliances,115.55999755859375
+2025-09-02,events,RBA,RBA,Industrials,Specialty Business Services,115.80000305175781
+2025-09-02,events,TDY,TDY,Industrials,Aerospace & Defense,531.14501953125
+2025-09-02,events,ADM,ADM,Consumer Staples,Agricultural Products & Services,62.13999938964844
+2025-09-02,events,HOG,HOG,Consumer Discretionary,Motorcycle Manufacturers,29.100000381469727
+2025-09-02,events,OZK,OZK,Financials,Regional Banks,51.584999084472656
+2025-09-02,events,GNTX,GNTX,Consumer Discretionary,Automotive Parts & Equipment,27.655000686645508
+2025-09-02,events,POST,POST,Consumer Staples,Packaged Foods & Meats,112.36499786376953
+2025-09-02,events,ESAB,ESAB,Industrials,Industrial Machinery & Supplies & Components,113.0
+2025-09-02,events,FYBR,FYBR,Communication Services,Telecom Services,37.084999084472656
+2025-09-02,events,ATI,ATI,Industrials,Aerospace & Defense,77.30000305175781
+2025-09-02,events,CLH,CLH,Industrials,Environmental & Facilities Services,241.1999969482422
+2025-09-02,events,JLL,JLL,Real Estate,Real Estate Services,299.30999755859375
+2025-09-02,events,GPC,GPC,Consumer Discretionary,Automotive Parts & Equipment,138.10459899902344
+2025-09-02,events,WFRD,WFRD,Energy,Oil & Gas Equipment & Services,63.29999923706055
+2025-09-02,events,HR,HR,Real Estate,REIT - Healthcare Facilities,17.2549991607666
+2025-09-02,events,WTRG,WTRG,Utilities,Water Utilities,39.0
+2025-09-02,events,EEFT,EEFT,Financials,Transaction & Payment Processing Services,90.49500274658203
+2025-09-02,events,SFD,SFD,Consumer Staples,Packaged Foods & Meats,25.469999313354492
+2025-09-02,events,CNXC,CNXC,Information Technology,Data Processing & Outsourced Services,51.209999084472656
+2025-09-02,events,CRUS,CRUS,Information Technology,Semiconductors,111.06500244140625
+2025-09-02,events,DOX,DOX,Information Technology,Software - Infrastructure,84.6500015258789
+2025-09-02,events,AIT,AIT,Industrials,Trading Companies & Distributors,261.0820007324219
+2025-09-02,events,CHX,CHX,Energy,Oil & Gas Equipment & Services,25.809999465942383
+2025-09-02,events,CWEN,CWEN,Utilities,Utilities - Renewable,28.639999389648438
+2025-09-02,events,TTC,TTC,Industrials,Agricultural & Farm Machinery,80.73999786376953
+2025-09-02,events,DCI,DCI,Industrials,Industrial Machinery & Supplies & Components,79.05999755859375
+2025-09-02,events,SCI,SCI,Consumer Discretionary,Specialized Consumer Services,78.23999786376953
+2025-09-02,events,HHH,HHH,Real Estate,Real Estate - Development,75.44499969482422
+2025-09-02,events,KEX,KEX,Industrials,Marine Transportation,95.20999908447266
+2025-09-02,events,LOAR,LOAR,Industrials,Aerospace & Defense,69.875
+2025-09-02,events,NFG,NFG,Utilities,Gas Utilities,87.2300033569336
+2025-09-02,events,DNB,DNB,Industrials,Financial Data & Stock Exchanges,9.149999618530273
+2025-09-02,events,VRSN,VRSN,Information Technology,Internet Services & Infrastructure,272.0050048828125
+2025-09-02,events,UI,UI,Information Technology,Communication Equipment,520.3300170898438
+2025-09-02,events,NOV,NOV,Energy,Oil & Gas Equipment & Services,13.045000076293945
+2025-09-02,events,VFC,VFC,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",14.895000457763672
+2025-09-02,events,S,S,Information Technology,Software - Infrastructure,17.825000762939453
+2025-09-02,events,CFLT,CFLT,Information Technology,Software - Infrastructure,18.940000534057617
+2025-09-02,events,SAIA,SAIA,Industrials,Trucking,290.260009765625
+2025-09-02,events,FND,FND,Consumer Discretionary,Home Improvement Retail,79.13999938964844
+2025-09-02,events,AAL,AAL,Industrials,Passenger Airlines,12.9399995803833
+2025-09-02,events,WING,WING,Consumer Discretionary,Restaurants,324.7300109863281
+2025-09-02,events,AR,AR,Energy,Oil & Gas E&P,31.950000762939453
+2025-09-02,events,AKAM,AKAM,Information Technology,Internet Services & Infrastructure,76.44999694824219
+2025-09-02,events,NCLH,NCLH,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",24.295000076293945
+2025-09-02,events,TXRH,TXRH,Consumer Discretionary,Restaurants,170.6300048828125
+2025-09-02,events,CART,CART,Consumer Staples,Food Retail,43.65999984741211
+2025-09-02,events,CPT,CPT,Real Estate,Multi-Family Residential REITs,109.6449966430664
+2025-09-02,events,GLPI,GLPI,Real Estate,REIT - Specialty,47.650001525878906
+2025-09-02,events,UDR,UDR,Real Estate,Multi-Family Residential REITs,38.619998931884766
+2025-09-02,events,AMH,AMH,Real Estate,REIT - Residential,35.095001220703125
+2025-09-02,events,ILMN,ILMN,Health Care,Life Sciences Tools & Services,95.71720123291016
+2025-09-02,events,BBY,BBY,Consumer Discretionary,Computer & Electronics Retail,71.91000366210938
+2025-09-02,events,OKTA,OKTA,Information Technology,Application Software,89.2699966430664
+2025-09-02,events,TWLO,TWLO,Information Technology,Software - Infrastructure,103.03500366210938
+2025-09-02,events,RIVN,RIVN,Consumer Discretionary,Auto Manufacturers,13.3149995803833
+2025-09-02,events,CHWY,CHWY,Consumer Discretionary,Other Specialty Retail,39.63410186767578
+2025-09-02,events,DKS,DKS,Consumer Discretionary,Other Specialty Retail,208.55999755859375
+2025-09-02,events,MAA,MAA,Real Estate,Multi-Family Residential REITs,143.3300018310547
+2025-09-02,events,INVH,INVH,Real Estate,Single-Family Residential REITs,30.665000915527344
+2025-09-02,events,ZG,ZG,Real Estate,Internet Content & Information,78.66000366210938
+2025-09-02,events,BIIB,BIIB,Health Care,Biotechnology,136.92999267578125
+2025-09-02,events,GPN,GPN,Financials,Transaction & Payment Processing Services,86.33000183105469
+2025-09-02,events,ULTA,ULTA,Consumer Discretionary,Other Specialty Retail,525.780029296875
+2025-09-02,events,DLTR,DLTR,Consumer Staples,Consumer Staples Merchandise Retail,111.22000122070312
+2025-09-02,events,PPG,PPG,Materials,Specialty Chemicals,109.12000274658203
+2025-09-02,events,DG,DG,Consumer Staples,Consumer Staples Merchandise Retail,110.21499633789062
+2025-09-02,events,EQR,EQR,Real Estate,Multi-Family Residential REITs,64.3499984741211
+2025-09-02,events,TOST,TOST,Information Technology,Transaction & Payment Processing Services,43.369998931884766
+2025-09-02,events,TTD,TTD,Communication Services,Advertising,52.95000076293945
+2025-09-02,events,STZ,STZ,Consumer Staples,Distillers & Vintners,150.94769287109375
+2025-09-02,events,AVB,AVB,Real Estate,Multi-Family Residential REITs,190.5800018310547
+2025-09-02,events,WBD,WBD,Communication Services,Broadcasting,11.345000267028809
+2025-09-02,events,QSR,QSR,Consumer Discretionary,Restaurants,62.58000183105469
+2025-09-02,events,EFX,EFX,Industrials,Research & Consulting Services,234.80999755859375
+2025-09-02,events,EXR,EXR,Real Estate,Self-Storage REITs,141.7100067138672
+2025-09-02,events,GEHC,GEHC,Health Care,Health Care Equipment,71.45500183105469
+2025-09-02,events,MCHP,MCHP,Information Technology,Semiconductors,62.689998626708984
+2025-09-02,events,CTSH,CTSH,Information Technology,IT Consulting & Other Services,71.69000244140625
+2025-09-02,events,CHTR,CHTR,Communication Services,Cable & Satellite,264.4649963378906
+2025-09-02,events,ROK,ROK,Industrials,Electrical Components & Equipment,334.92498779296875
+2025-09-02,events,YUM,YUM,Consumer Discretionary,Restaurants,144.42999267578125
+2025-09-02,events,ZS,ZS,Information Technology,Application Software,269.6499938964844
+2025-09-02,events,VEEV,VEEV,Health Care,Health Information Services,267.5874938964844
+2025-09-02,events,KR,KR,Consumer Staples,Food Retail,68.66000366210938
+2025-09-02,events,XYZ,XYZ,Financials,Transaction & Payment Processing Services,75.41500091552734
+2025-09-02,events,FDX,FDX,Industrials,Air Freight & Logistics,224.0
+2025-09-02,events,CARR,CARR,Industrials,Building Products,63.0099983215332
+2025-09-02,events,MRVL,MRVL,Information Technology,Semiconductors,62.44990158081055
+2025-09-02,events,PWR,PWR,Industrials,Construction & Engineering,373.8999938964844
+2025-09-02,events,DLR,DLR,Real Estate,Data Center REITs,163.4149932861328
+2025-09-02,events,CSX,CSX,Industrials,Rail Transportation,32.20000076293945
+2025-09-02,events,REGN,REGN,Health Care,Biotechnology,572.7750244140625
+2025-09-02,events,MNST,MNST,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,62.31999969482422
+2025-09-02,events,WDAY,WDAY,Information Technology,Application Software,227.97999572753906
+2025-09-02,events,APD,APD,Materials,Industrial Gases,292.5150146484375
+2025-09-02,events,PYPL,PYPL,Financials,Transaction & Payment Processing Services,68.53990173339844
+2025-09-02,events,WMB,WMB,Energy,Oil & Gas Storage & Transportation,57.23500061035156
+2025-09-02,events,MAR,MAR,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",261.8900146484375
+2025-09-02,events,UPS,UPS,Industrials,Air Freight & Logistics,85.0999984741211
+2025-09-02,events,RSG,RSG,Industrials,Environmental & Facilities Services,232.27499389648438
+2025-09-02,events,EMR,EMR,Industrials,Electrical Components & Equipment,130.34500122070312
+2025-09-02,events,EQIX,EQIX,Real Estate,Data Center REITs,769.8599853515625
+2025-09-02,events,COIN,COIN,Financials,Financial Data & Stock Exchanges,304.2900085449219
+2025-09-02,events,ECL,ECL,Materials,Specialty Chemicals,275.8450012207031
+2025-09-02,events,MDLZ,MDLZ,Consumer Staples,Packaged Foods & Meats,61.875
+2025-09-02,events,DELL,DELL,Information Technology,"Technology Hardware, Storage & Peripherals",119.61499786376953
+2025-09-02,events,HOOD,HOOD,Financials,Capital Markets,99.23500061035156
+2025-09-02,events,MCO,MCO,Financials,Financial Exchanges & Data,497.5299987792969
+2025-09-02,events,SHW,SHW,Materials,Specialty Chemicals,359.69500732421875
+2025-09-02,events,WM,WM,Industrials,Environmental & Facilities Services,224.8000030517578
+2025-09-02,events,CDNS,CDNS,Information Technology,Application Software,342.07501220703125
+2025-09-02,events,SBUX,SBUX,Consumer Discretionary,Restaurants,87.37000274658203
+2025-09-02,events,VRTX,VRTX,Health Care,Biotechnology,397.85198974609375
+2025-09-02,events,DASH,DASH,Consumer Discretionary,Interactive Media & Services,241.8350067138672
+2025-09-02,events,INTC,INTC,Information Technology,Semiconductors,23.934999465942383
+2025-09-02,events,CRWD,CRWD,Information Technology,Application Software,409.2900085449219
+2025-09-02,events,NKE,NKE,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",74.37999725341797
+2025-09-02,events,KLAC,KLAC,Information Technology,Semiconductor Materials & Equipment,838.760009765625
+2025-09-02,events,LRCX,LRCX,Information Technology,Semiconductor Materials & Equipment,95.70999908447266
+2025-09-02,events,AMAT,AMAT,Information Technology,Semiconductor Materials & Equipment,156.08999633789062
+2025-09-02,events,CMCSA,CMCSA,Communication Services,Cable & Satellite,33.94919967651367
+2025-09-02,events,DE,DE,Industrials,Agricultural & Farm Machinery,476.32000732421875
+2025-09-02,events,UNP,UNP,Industrials,Rail Transportation,219.61500549316406
+2025-09-02,events,HON,HON,Industrials,Industrial Conglomerates,216.2949981689453
+2025-09-02,events,GILD,GILD,Health Care,Biotechnology,111.55999755859375
+2025-09-02,events,LOW,LOW,Consumer Discretionary,Home Improvement Retail,258.1965026855469
+2025-09-02,events,ADBE,ADBE,Information Technology,Application Software,342.8699951171875
+2025-09-02,events,PFE,PFE,Health Care,Pharmaceuticals,24.809999465942383
+2025-09-02,events,SYK,SYK,Health Care,Health Care Equipment,388.3599853515625
+2025-09-02,events,AMGN,AMGN,Health Care,Biotechnology,285.1650085449219
+2025-09-02,events,GEV,GEV,Industrials,Industrial Machinery & Supplies & Components,578.5700073242188
+2025-09-02,events,ISRG,ISRG,Health Care,Health Care Equipment,466.2749938964844
+2025-09-02,events,QCOM,QCOM,Information Technology,Semiconductors,155.86000061035156
+2025-09-02,events,C,C,Financials,Diversified Banks,93.62999725341797
+2025-09-02,events,BKNG,BKNG,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",5500.044921875
+2025-09-02,events,TMO,TMO,Health Care,Life Sciences Tools & Services,481.67999267578125
+2025-09-02,events,INTU,INTU,Information Technology,Application Software,658.8099975585938
+2025-09-02,events,VZ,VZ,Communication Services,Integrated Telecommunication Services,43.84000015258789
+2025-09-02,events,UBER,UBER,Industrials,Passenger Ground Transportation,92.44229888916016
+2025-09-02,events,CAT,CAT,Industrials,Construction Machinery & Heavy Transportation Equipment,414.3399963378906
+2025-09-02,events,DV,DV,Information Technology,Software - Application,15.619999885559082
+2025-09-02,events,KNX,KNX,Industrials,Cargo Ground Transportation,43.150001525878906
+2025-09-02,events,ADC,ADC,Real Estate,REIT - Retail,72.81999969482422
+2025-09-02,events,MTCH,MTCH,Communication Services,Interactive Media & Services,36.66999816894531
+2025-09-02,events,PCTY,PCTY,Information Technology,Application Software,174.88999938964844
+2025-09-02,events,MOS,MOS,Materials,Fertilizers & Agricultural Chemicals,33.060001373291016
+2025-09-02,events,BJ,BJ,Consumer Staples,Hypermarkets & Super Centers,98.08999633789062
+2025-09-02,events,H,H,Consumer Discretionary,Lodging,141.72000122070312
+2025-09-02,events,BLDR,BLDR,Industrials,Building Products,136.27999877929688
+2025-09-02,events,TRU,TRU,Industrials,Financial Data & Stock Exchanges,85.05000305175781
+2025-09-02,events,IFF,IFF,Materials,Specialty Chemicals,65.56500244140625
+2025-09-02,events,GFS,GFS,Information Technology,Semiconductors,32.61000061035156
+2025-09-02,events,WSM,WSM,Consumer Discretionary,Homefurnishing Retail,189.30999755859375
+2025-09-02,events,PTC,PTC,Information Technology,Application Software,210.84280395507812
+2025-09-02,events,FICO,FICO,Information Technology,Application Software,1485.699951171875
+2025-09-02,events,FERG,FERG,Industrials,Industrial Machinery & Supplies & Components,227.82000732421875
+2025-09-02,events,ALL,ALL,Financials,Property & Casualty Insurance,203.8699951171875
+2025-09-02,events,NSC,NSC,Industrials,Rail Transportation,275.75
+2025-09-02,events,AMT,AMT,Real Estate,Telecom Tower REITs,202.52000427246094
+2025-09-02,events,APLS,APLS,Health Care,Biotechnology,28.059999465942383
+2025-09-02,events,AXTA,AXTA,Materials,Specialty Chemicals,30.7549991607666
+2025-09-02,events,RGEN,RGEN,Health Care,Biotechnology,118.66000366210938
+2025-09-02,events,EGP,EGP,Real Estate,REIT - Industrial,166.0749969482422
+2025-09-02,events,CUBE,CUBE,Real Estate,REIT - Industrial,40.29499816894531
+2025-09-02,events,BXP,BXP,Real Estate,Office REITs,72.05999755859375
+2025-09-02,events,DUOL,DUOL,Consumer Discretionary,Education Services,288.83990478515625
+2025-09-02,events,IOT,IOT,Information Technology,Systems Software,34.90999984741211
+2025-09-02,events,TPR,TPR,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",102.5
+2025-09-02,events,TYL,TYL,Information Technology,Application Software,551.8049926757812
+2025-09-02,events,FIS,FIS,Financials,Transaction & Payment Processing Services,68.06999969482422
+2025-09-02,events,KDP,KDP,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,28.815000534057617
+2025-09-02,events,CCI,CCI,Real Estate,Telecom Tower REITs,99.0
+2025-09-02,events,AIG,AIG,Financials,Property & Casualty Insurance,80.5
+2025-09-02,events,OKE,OKE,Energy,Oil & Gas Storage & Transportation,74.80999755859375
+2025-09-02,events,CL,CL,Consumer Staples,Household Products,84.37999725341797
+2025-09-02,events,PGR,PGR,Financials,Property & Casualty Insurance,246.15499877929688
+2025-09-02,events,NEE,NEE,Utilities,Multi-Utilities,71.91000366210938
+2025-09-02,events,RH,RH,Consumer Discretionary,Homefurnishing Retail,222.59500122070312
+2025-09-02,events,EMN,EMN,Materials,Diversified Chemicals,68.77999877929688
+2025-09-02,events,NNN,NNN,Real Estate,Retail REITs,42.32500076293945
+2025-09-02,events,GAP,GAP,Consumer Discretionary,Apparel Retail,22.40999984741211
+2025-09-02,events,AVTR,AVTR,Health Care,Medical Instruments & Supplies,13.154999732971191
+2025-09-02,events,PCOR,PCOR,Information Technology,Software - Application,67.48999786376953
+2025-09-02,events,ELS,ELS,Real Estate,REIT - Residential,59.63999938964844
+2025-09-02,events,SUI,SUI,Real Estate,REIT - Residential,125.13999938964844
+2025-09-02,events,GDDY,GDDY,Information Technology,Software - Infrastructure,144.19500732421875
+2025-09-02,events,SBAC,SBAC,Real Estate,Telecom Tower REITs,205.1999969482422
+2025-09-02,events,VLTO,VLTO,Industrials,Pollution & Treatment Controls,104.5999984741211
+2025-09-02,events,XYL,XYL,Industrials,Industrial Machinery & Supplies & Components,139.39999389648438
+2025-09-02,events,HEI,HEI,Industrials,Aerospace & Defense,312.6499938964844
+2025-09-02,events,ROST,ROST,Consumer Discretionary,Apparel Retail,150.88999938964844
+2025-09-02,events,MMM,MMM,Industrials,Industrial Conglomerates,153.61500549316406
+2025-09-02,events,SO,SO,Utilities,Electric Utilities,92.54000091552734
+2025-09-02,events,FRPT,FRPT,Consumer Staples,Packaged Foods,54.29999923706055
+2025-09-02,events,FBIN,FBIN,Industrials,Building Products,56.994998931884766
+2025-09-02,events,LNW,LNW,Consumer Discretionary,Casinos & Gaming,88.70999908447266
+2025-09-02,events,KMX,KMX,Consumer Discretionary,Automotive Retail,59.567298889160156
+2025-09-02,events,GNRC,GNRC,Industrials,Electrical Components & Equipment,178.30999755859375
+2025-09-02,events,ACI,ACI,Consumer Staples,Food Retail,19.2549991607666
+2025-09-02,events,SJM,SJM,Consumer Staples,Packaged Foods & Meats,109.06999969482422
+2025-09-02,events,ETR,ETR,Utilities,Electric Utilities,87.83000183105469
+2025-09-02,events,AME,AME,Industrials,Electrical Components & Equipment,183.55499267578125
+2025-09-02,events,CPNG,CPNG,Consumer Discretionary,Internet Retail,28.225000381469727
+2025-09-02,events,PCAR,PCAR,Industrials,Construction Machinery & Heavy Transportation Equipment,98.23500061035156
+2025-09-02,events,APO,APO,Financials,Asset Management & Custody Banks,133.77999877929688
+2025-09-02,events,ICE,ICE,Financials,Financial Exchanges & Data,174.02000427246094
+2025-09-02,events,APH,APH,Information Technology,Electronic Components,107.79000091552734
+2025-09-02,events,COLD,COLD,Real Estate,REIT - Industrial,14.234999656677246
+2025-09-02,events,BC,BC,Consumer Discretionary,Leisure Products,62.779998779296875
+2025-09-02,events,BBWI,BBWI,Consumer Discretionary,Other Specialty Retail,29.05500030517578
+2025-09-02,events,OLLI,OLLI,Consumer Discretionary,General Merchandise Stores,124.77999877929688
+2025-09-02,events,CRL,CRL,Health Care,Life Sciences Tools & Services,159.85000610351562
+2025-09-02,events,SWK,SWK,Industrials,Industrial Machinery & Supplies & Components,71.52999877929688
+2025-09-02,events,OC,OC,Industrials,Building Products,148.06500244140625
+2025-09-02,events,COO,COO,Health Care,Health Care Supplies,65.73500061035156
+2025-09-02,events,HOLX,HOLX,Health Care,Health Care Equipment,66.72000122070312
+2025-09-02,events,ZBRA,ZBRA,Information Technology,Electronic Equipment & Instruments,306.5
+2025-09-02,events,WAT,WAT,Health Care,Health Care Distributors,293.3800048828125
+2025-09-02,events,FWONK,FWONK,Communication Services,Entertainment,100.04000091552734
+2025-09-02,events,TW,TW,Financials,Capital Markets,121.72000122070312
+2025-09-02,events,IR,IR,Industrials,Industrial Machinery & Supplies & Components,77.4749984741211
+2025-09-02,events,VRSK,VRSK,Industrials,Research & Consulting Services,265.19500732421875
+2025-09-02,events,CSGP,CSGP,Real Estate,Real Estate Services,87.80000305175781
+2025-09-02,events,ROP,ROP,Industrials,Industrial Conglomerates,517.0900268554688
+2025-09-02,events,VST,VST,Utilities,Utilities - Independent Power Producers,184.8800048828125
+2025-09-02,events,ZTS,ZTS,Health Care,Pharmaceuticals,151.91000366210938
+2025-09-02,events,INSP,INSP,Health Care,Medical Devices,94.12999725341797
+2025-09-02,events,NCNO,NCNO,Information Technology,Software - Application,31.06999969482422
+2025-09-02,events,CAVA,CAVA,Consumer Discretionary,Restaurants,65.3550033569336
+2025-09-02,events,LAD,LAD,Consumer Discretionary,Automotive Retail,333.75
+2025-09-02,events,OSK,OSK,Industrials,Construction Machinery & Heavy Transportation Equipment,136.6199951171875
+2025-09-02,events,ALGN,ALGN,Health Care,Health Care Supplies,135.11000061035156
+2025-09-02,events,MTSI,MTSI,Information Technology,Semiconductors,128.2100067138672
+2025-09-02,events,WLK,WLK,Materials,Specialty Chemicals,85.32749938964844
+2025-09-02,events,CNM,CNM,Industrials,Trading Companies & Distributors,64.03500366210938
+2025-09-02,events,GWRE,GWRE,Information Technology,Software - Application,214.6750030517578
+2025-09-02,events,MKC,MKC,Consumer Staples,Packaged Foods & Meats,69.1050033569336
+2025-09-02,events,EIX,EIX,Utilities,Electric Utilities,55.39500045776367
+2025-09-02,events,ES,ES,Utilities,Multi-Utilities,63.584999084472656
+2025-09-02,events,CNP,CNP,Utilities,Multi-Utilities,38.02000045776367
+2025-09-02,events,RMD,RMD,Health Care,Health Care Equipment,270.9200134277344
+2025-09-02,events,PEG,PEG,Utilities,Electric Utilities,81.5999984741211
+2025-09-02,events,XEL,XEL,Utilities,Multi-Utilities,71.87000274658203
+2025-09-02,events,MSCI,MSCI,Financials,Financial Exchanges & Data,550.0
+2025-09-02,events,AJG,AJG,Financials,Insurance Brokers,300.2449951171875
+2025-09-02,events,PK,PK,Real Estate,Hotel & Resort REITs,11.489999771118164
+2025-09-02,events,SNDR,SNDR,Industrials,Trucking,24.31999969482422
+2025-09-02,events,PB,PB,Financials,Regional Banks,68.1500015258789
+2025-09-02,events,SNV,SNV,Financials,Regional Banks,50.130001068115234
+2025-09-02,events,PNW,PNW,Utilities,Multi-Utilities,88.88500213623047
+2025-09-02,events,IEX,IEX,Industrials,Industrial Machinery & Supplies & Components,161.0
+2025-09-02,events,SFM,SFM,Consumer Staples,Food Retail,138.4499969482422
+2025-09-02,events,BALL,BALL,Materials,"Metal, Glass & Plastic Containers",51.08000183105469
+2025-09-02,events,J,J,Industrials,Construction & Engineering,145.24000549316406
+2025-09-02,events,NTNX,NTNX,Information Technology,Software - Infrastructure,66.1449966430664
+2025-09-02,events,CMS,CMS,Utilities,Multi-Utilities,71.5
+2025-09-02,events,PPL,PPL,Utilities,Electric Utilities,36.3650016784668
+2025-09-02,events,AEE,AEE,Utilities,Multi-Utilities,99.625
+2025-09-02,events,CAH,CAH,Health Care,Health Care Distributors,149.77999877929688
+2025-09-02,events,ARES,ARES,Financials,Asset Management,178.48500061035156
+2025-09-02,events,DUK,DUK,Utilities,Electric Utilities,122.52999877929688
+2025-09-02,events,M,M,Consumer Discretionary,Department Stores,13.324999809265137
+2025-09-02,events,CUZ,CUZ,Real Estate,Office REITs,29.145000457763672
+2025-09-02,events,CROX,CROX,Consumer Discretionary,Footwear,90.76000213623047
+2025-09-02,events,COLB,COLB,Financials,Regional Banks,26.364999771118164
+2025-09-02,events,THO,THO,Consumer Discretionary,Leisure Products,107.7249984741211
+2025-09-02,events,MKTX,MKTX,Financials,Financial Exchanges & Data,180.6699981689453
+2025-09-02,events,AES,AES,Utilities,Independent Power Producers & Energy Traders,13.244999885559082
+2025-09-02,events,AVY,AVY,Materials,Paper & Plastic Packaging Products & Materials,169.38999938964844
+2025-09-02,events,RYAN,RYAN,Financials,Insurance - Specialty,55.43000030517578
+2025-09-02,events,WY,WY,Real Estate,Timber REITs,24.905000686645508
+2025-09-02,events,FE,FE,Utilities,Electric Utilities,43.464599609375
+2025-09-02,events,IP,IP,Materials,Paper & Plastic Packaging Products & Materials,49.13970184326172
+2025-09-02,events,OWL,OWL,Financials,Asset Management,18.155000686645508
+2025-09-02,events,DTE,DTE,Utilities,Multi-Utilities,135.80999755859375
+2025-09-02,events,LPLA,LPLA,Financials,Capital Markets,361.6449890136719
+2025-09-02,events,BRO,BRO,Financials,Insurance Brokers,94.68000030517578
+2025-09-02,events,BRKR,BRKR,Health Care,Health Care Equipment,32.62590026855469
+2025-09-02,events,CLF,CLF,Materials,Steel,10.374899864196777
+2025-09-02,events,VNT,VNT,Information Technology,Electronic Equipment & Instruments,41.959999084472656
+2025-09-02,events,VOYA,VOYA,Financials,Multi-Sector Holdings,74.19000244140625
+2025-09-02,events,PNFP,PNFP,Financials,Regional Banks,95.2699966430664
+2025-09-02,events,AA,AA,Materials,Aluminum,30.565000534057617
+2025-09-02,events,GMED,GMED,Health Care,Health Care Equipment,60.150001525878906
+2025-09-02,events,GL,GL,Financials,Life & Health Insurance,138.14999389648438
+2025-09-02,events,POOL,POOL,Consumer Discretionary,Distributors,303.8599853515625
+2025-09-02,events,SNX,SNX,Information Technology,Technology Distributors,145.9600067138672
+2025-09-02,events,MEDP,MEDP,Health Care,Diagnostics & Research,468.30499267578125
+2025-09-02,events,NLY,NLY,Financials,REIT - Mortgage,20.85420036315918
+2025-09-02,events,TSN,TSN,Consumer Staples,Packaged Foods & Meats,56.459999084472656
+2025-09-02,events,CPAY,CPAY,Financials,Transaction & Payment Processing Services,316.9700012207031
+2025-09-02,events,MTD,MTD,Health Care,Life Sciences Tools & Services,1262.47998046875
+2025-09-02,events,CBRE,CBRE,Real Estate,Real Estate Services,159.28990173339844
+2025-09-02,events,TKR,TKR,Industrials,Industrial Machinery & Supplies & Components,76.04000091552734
+2025-09-02,events,SITE,SITE,Industrials,Industrial Distribution,140.05999755859375
+2025-09-02,events,SKX,SKX,Consumer Discretionary,Footwear,63.09000015258789
+2025-09-02,events,HII,HII,Industrials,Aerospace & Defense,270.1820068359375
+2025-09-02,events,MP,MP,Materials,Diversified Metals & Mining,66.6449966430664
+2025-09-02,events,LNT,LNT,Utilities,Electric Utilities,64.73999786376953
+2025-09-02,events,GEN,GEN,Information Technology,Application Software,29.44499969482422
+2025-09-02,events,IRM,IRM,Real Estate,Other Specialized REITs,89.42500305175781
+2025-09-02,events,ATO,ATO,Utilities,Gas Utilities,166.11000061035156
+2025-09-02,events,KEYS,KEYS,Information Technology,Electronic Equipment & Instruments,161.02999877929688
+2025-09-02,events,BDX,BDX,Health Care,Health Care Equipment,189.77999877929688
+2025-09-02,events,FAST,FAST,Industrials,Building Products,49.279998779296875
+2025-09-02,events,HIW,HIW,Real Estate,REIT - Office,31.110000610351562
+2025-09-02,events,WSC,WSC,Industrials,Rental & Leasing Services,23.55500030517578
+2025-09-02,events,ALSN,ALSN,Industrials,Auto Parts,85.82499694824219
+2025-09-02,events,SARO,SARO,Industrials,Aerospace & Defense,26.28499984741211
+2025-09-02,events,RGA,RGA,Financials,Reinsurance,193.52000427246094
+2025-09-02,events,BG,BG,Consumer Staples,Agricultural Products & Services,82.30000305175781
+2025-09-02,events,NWSA,NWSA,Communication Services,Publishing,28.815000534057617
+2025-09-02,events,SSNC,SSNC,Information Technology,Software - Application,87.00499725341797
+2025-09-02,events,NRG,NRG,Utilities,Independent Power Producers & Energy Traders,142.96499633789062
+2025-09-02,events,IBKR,IBKR,Financials,Investment Banking & Brokerage,61.61000061035156
+2025-09-02,events,ASH,ASH,Materials,Diversified Chemicals,54.529998779296875
+2025-09-02,events,FHB,FHB,Financials,Regional Banks,25.364999771118164
+2025-09-02,events,CAR,CAR,Industrials,Passenger Ground Transportation,158.97999572753906
+2025-09-02,events,OGE,OGE,Utilities,Multi-Utilities,44.47999954223633
+2025-09-02,events,IPG,IPG,Communication Services,Advertising,26.270000457763672
+2025-09-02,events,CR,CR,Industrials,Industrial Machinery & Supplies & Components,181.5500030517578
+2025-09-02,events,ASTS,ASTS,Communication Services,Wireless Telecommunication Services,47.849998474121094
+2025-09-02,events,JBL,JBL,Information Technology,Electronic Manufacturing Services,199.22500610351562
+2025-09-02,events,WAB,WAB,Industrials,Construction Machinery & Heavy Transportation Equipment,190.55999755859375
+2025-09-02,events,RYN,RYN,Real Estate,Timber REITs,25.860000610351562
+2025-09-02,events,MSM,MSM,Industrials,Trading Companies & Distributors,89.12999725341797
+2025-09-02,events,KBR,KBR,Industrials,Diversified Support Services,50.339900970458984
+2025-09-02,events,EXLS,EXLS,Industrials,Data Processing & Outsourced Services,43.040000915527344
+2025-09-02,events,MASI,MASI,Health Care,Health Care Equipment,135.8000030517578
+2025-09-02,events,STWD,STWD,Financials,REIT - Mortgage,20.06999969482422
+2025-09-02,events,WBA,WBA,Consumer Staples,Drug Retail,11.979999542236328
+2025-09-02,events,IDA,IDA,Utilities,Electric Utilities,124.39700317382812
+2025-09-02,events,BIO,BIO,Health Care,Life Sciences Tools & Services,288.25
+2025-09-02,events,LKQ,LKQ,Consumer Discretionary,Distributors,32.16999816894531
+2025-09-02,events,SF,SF,Financials,Investment Banking & Brokerage,113.3499984741211
+2025-09-02,events,ADTN,ADTN,Technology,Communication Equipment,9.130000114440918
+2025-09-02,events,LAZ,LAZ,Financials,Capital Markets,55.13999938964844
+2025-09-02,events,ADT,ADT,Consumer Discretionary,Security & Protection Services,8.59000015258789
+2025-09-02,events,HLI,HLI,Financials,Capital Markets,195.3249969482422
+2025-09-02,events,FNF,FNF,Financials,Insurance - Specialty,58.34000015258789
+2025-09-02,events,VMI,VMI,Industrials,Industrial Machinery & Supplies & Components,361.3900146484375
+2025-09-02,events,JEF,JEF,Financials,Multi-Sector Holdings,63.5
+2025-09-02,events,LBRDK,LBRDK,Communication Services,Telecom Services,60.58000183105469
+2025-09-02,events,NWS,NWS,Communication Services,Publishing,33.20000076293945
+2025-09-02,events,SRPT,SRPT,Health Care,Biotechnology,18.250099182128906
+2025-09-02,events,WEN,WEN,Consumer Discretionary,Restaurants,10.23270034790039
+2025-09-02,events,UAA,UAA,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",5.045000076293945
+2025-09-02,events,ENPH,ENPH,Information Technology,Electronic Components,36.685001373291016
+2025-09-02,events,ETSY,ETSY,Consumer Discretionary,Internet Retail,51.529998779296875
+2025-09-02,events,RRC,RRC,Energy,Oil & Gas Exploration & Production,34.334999084472656
+2025-09-02,events,QRVO,QRVO,Information Technology,Semiconductors,88.63999938964844
+2025-09-02,events,CMA,CMA,Financials,Diversified Banks,68.80999755859375
+2025-09-02,events,MRNA,MRNA,Health Care,Biotechnology,23.43000030517578
+2025-09-02,events,ALB,ALB,Materials,Specialty Chemicals,79.41000366210938
+2025-09-02,events,CPB,CPB,Consumer Staples,Packaged Foods & Meats,31.725000381469727
+2025-09-02,events,LUV,LUV,Industrials,Passenger Airlines,31.895000457763672
+2025-09-02,events,ESS,ESS,Real Estate,Multi-Family Residential REITs,263.56500244140625
+2025-09-02,events,ZBH,ZBH,Health Care,Health Care Equipment,105.55999755859375
+2025-09-02,events,GIS,GIS,Consumer Staples,Packaged Foods & Meats,49.45500183105469
+2025-09-02,events,ODFL,ODFL,Industrials,Cargo Ground Transportation,148.8350067138672
+2025-09-02,events,EL,EL,Consumer Staples,Personal Care Products,89.35079956054688
+2025-09-02,events,EBAY,EBAY,Consumer Discretionary,Broadline Retail,89.9800033569336
+2025-09-02,events,TGT,TGT,Consumer Staples,Consumer Staples Merchandise Retail,92.7300033569336
+2025-09-02,events,FTNT,FTNT,Information Technology,Systems Software,75.88999938964844
+2025-09-02,events,ABNB,ABNB,Consumer Discretionary,"Hotels, Resorts & Cruise lines",126.67289733886719
+2025-09-02,events,BMY,BMY,Health Care,Health Care Distributors,47.18000030517578
+2025-09-02,events,KHC,KHC,Consumer Staples,Packaged Foods & Meats,26.174999237060547
+2025-09-02,events,O,O,Real Estate,Retail REITs,58.01499938964844
+2025-09-02,events,MMC,MMC,Financials,Insurance Brokers,205.58999633789062
+2025-09-02,events,CAG,CAG,Consumer Staples,Packaged Foods & Meats,18.954999923706055
+2025-09-02,events,LINE,LINE,Real Estate,Industrial REITs,41.18000030517578
+2025-09-02,events,BF-B,BF.B,Consumer Staples,Distillers & Vintners,28.920000076293945
+2025-09-02,events,CF,CF,Materials,Fertilizers & Agricultural Chemicals,86.99500274658203
+2025-09-02,events,LYB,LYB,Materials,Specialty Chemicals,55.22999954223633
+2025-09-02,events,CME,CME,Financials,Financial Exchanges & Data,263.8999938964844
+2025-09-02,events,LMT,LMT,Industrials,Aerospace & Defense,452.3594055175781
+2025-09-02,events,CLX,CLX,Consumer Staples,Household Products,119.66999816894531
+2025-09-02,events,DOCU,DOCU,Information Technology,Application Software,73.34500122070312
+2025-09-02,events,LII,LII,Industrials,Building Products,546.5850219726562
+2025-09-02,events,CMI,CMI,Industrials,Industrial Machinery & Supplies & Components,392.4949951171875
+2025-09-02,events,ITW,ITW,Industrials,Industrial Machinery & Supplies & Components,261.1600036621094
+2025-09-02,events,COTY,COTY,Consumer Staples,Personal Care Products,4.184999942779541
+2025-09-02,events,FDS,FDS,Financials,Financial Exchanges & Data,363.44500732421875
+2025-09-02,events,CNC,CNC,Health Care,Managed Health Care,29.625
+2025-09-02,events,SMCI,SMCI,Information Technology,"Technology Hardware, Storage & Peripherals",39.86000061035156
+2025-09-02,events,CTAS,CTAS,Industrials,Diversified Support Services,206.42999267578125
+2025-09-02,events,NSA,NSA,Real Estate,REIT - Industrial,31.780000686645508
+2025-09-02,events,PATH,PATH,Information Technology,Software - Infrastructure,10.800000190734863
+2025-09-02,events,EXPD,EXPD,Industrials,Air Freight & Logistics,119.88999938964844
+2025-09-02,events,CBOE,CBOE,Financials,Financial Exchanges & Data,233.8699951171875
+2025-09-02,events,KVUE,KVUE,Consumer Staples,Personal Care Products,20.774999618530273
+2025-09-02,events,KMB,KMB,Consumer Staples,Household Products,128.55499267578125
+2025-09-02,events,AEP,AEP,Utilities,Electric Utilities,110.68000030517578
+2025-09-02,events,SAM,SAM,Consumer Staples,Brewers,217.00999450683594
+2025-09-02,events,XRAY,XRAY,Health Care,Health Care Supplies,13.78499984741211
+2025-09-02,events,CHH,CHH,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",117.93000030517578
+2025-09-02,events,VNO,VNO,Real Estate,Office REITs,37.72999954223633
+2025-09-02,events,K,K,Consumer Staples,Packaged Foods & Meats,78.91999816894531
+2025-09-02,events,ED,ED,Utilities,Electric Utilities,97.29000091552734
+2025-09-02,events,EXC,EXC,Utilities,Multi-Utilities,43.54499816894531
+2025-09-02,events,SCCO,SCCO,Materials,Copper,96.34500122070312
+2025-09-02,events,LSTR,LSTR,Industrials,Cargo Ground Transportation,131.5
+2025-09-02,events,AGCO,AGCO,Industrials,Agricultural & Farm Machinery,106.37999725341797
+2025-09-02,events,HSIC,HSIC,Health Care,Health Care Distributors,68.57499694824219
+2025-09-02,events,WEC,WEC,Utilities,Electric Utilities,106.4000015258789
+2025-09-02,events,GWW,GWW,Industrials,Industrial Machinery & Supplies & Components,1012.5700073242188
+2025-09-02,events,NVST,NVST,Health Care,Health Care Supplies,20.635000228881836
+2025-09-02,events,AOS,AOS,Industrials,Building Products,70.4000015258789
+2025-09-02,events,RKT,RKT,Financials,Mortgage Finance,17.209999084472656
+2025-09-02,events,PAYX,PAYX,Industrials,Human Resource & Employment Services,136.02499389648438
+2025-09-02,events,D,D,Utilities,Electric Utilities,59.54999923706055
+2025-09-02,events,LCID,LCID,Consumer Discretionary,Automobile Manufacturers,17.55500030517578
+2025-09-02,events,ADP,ADP,Industrials,Human Resource & Employment Services,299.3299865722656
+2025-09-02,events,WU,WU,Information Technology,Data Processing & Outsourced Services,8.635000228881836
+2025-09-02,events,JKHY,JKHY,Financials,Transaction & Payment Processing Services,160.9199981689453
+2025-09-02,events,WSO,WSO,Industrials,Trading Companies & Distributors,394.3900146484375
+2025-09-02,events,EPR,EPR,Real Estate,Other Specialized REITs,53.39500045776367
+2025-09-02,events,LPX,LPX,Materials,Forest Products,93.45500183105469
+2025-09-02,events,BEN,BEN,Financials,Asset Management & Custody Banks,25.21500015258789
+2025-09-02,events,AWK,AWK,Utilities,Water Utilities,142.55999755859375
+2025-09-02,events,BHF,BHF,Financials,Life & Health Insurance,46.0099983215332
+2025-09-02,events,RHI,RHI,Industrials,Human Resource & Employment Services,37.0099983215332
+2025-09-02,events,WEX,WEX,Financials,Transaction & Payment Processing Services,167.63999938964844
+2025-09-02,events,EXP,EXP,Materials,Construction Materials,225.8000030517578
+2025-09-02,events,HRL,HRL,Consumer Staples,Packaged Foods & Meats,25.219999313354492
+2025-09-02,events,DXC,DXC,Information Technology,IT Consulting & Other Services,14.170000076293945
+2025-09-02,events,TFX,TFX,Health Care,Health Care Equipment,124.87999725341797
+2025-09-02,events,SNA,SNA,Industrials,Industrial Machinery & Supplies & Components,322.4549865722656
+2025-09-02,events,MPW,MPW,Real Estate,Health Care REITs,4.34499979019165
+2025-09-02,events,FLO,FLO,Consumer Staples,Packaged Foods & Meats,14.800000190734863
+2025-09-02,events,AM,AM,Energy,Oil & Gas Midstream,17.7450008392334
+2025-09-02,events,PRI,PRI,Financials,Life & Health Insurance,264.6700134277344
+2025-09-02,events,PPC,PPC,Consumer Staples,Packaged Foods & Meats,45.220001220703125
+2025-09-02,events,VTRS,VTRS,Health Care,Pharmaceuticals,10.484999656677246
+2025-09-02,events,SOLV,SOLV,Health Care,Health Care Equipment,71.0
+2025-09-02,events,OGN,OGN,Health Care,Pharmaceuticals,9.305000305175781
+2025-09-02,events,CBSH,CBSH,Financials,Regional Banks,61.209999084472656
+2025-09-02,events,BEPC,BEPC,Utilities,Utilities - Renewable,33.224998474121094
+2025-09-02,events,MKL,MKL,Financials,Insurance - Property & Casualty,1933.31005859375
+2025-09-02,events,HRB,HRB,Consumer Discretionary,Specialized Consumer Services,50.48500061035156
+2025-09-02,events,HEI-A,HEI.A,Industrials,Aerospace & Defense,246.1699981689453

@@ -1,1 +1,1 @@
-date_signal,ticker,sector,bucket,horizon_days,entry,exit,date_exit,ret_pct
+date_signal,ticker,sector,bucket,cohort,votes,horizon_days,entry,exit,date_exit,ret_pct
