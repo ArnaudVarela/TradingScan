@@ -1,1 +1,2 @@
-date,score,label,streak_days
+date,score,label,generated_at_utc,streak_days
+,,N/A,2025-09-02T20:23:05Z,0

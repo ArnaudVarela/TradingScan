@@ -1191,7 +1191,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-09-02,pre,LYV,LYV,Communication Services,Movies & Entertainment,163.6750030517578
 2025-09-02,pre,DAL,DAL,Industrials,Passenger Airlines,60.18999862670898
 2025-09-02,pre,FANG,FANG,Energy,Oil & Gas Exploration & Production,149.23910522460938
-2025-09-02,pre,TTWO,TTWO,Communication Services,Interactive Home Entertainment,237.66000366210932
+2025-09-02,pre,TTWO,TTWO,Communication Services,Interactive Home Entertainment,237.6600036621093
 2025-09-02,pre,PR,PR,Energy,Oil & Gas Exploration & Production,14.295000076293944
 2025-09-02,pre,BRX,BRX,Real Estate,Retail REITs,27.78499984741211
 2025-09-02,pre,TJX,TJX,Consumer Discretionary,Apparel Retail,138.44000244140625
@@ -1334,7 +1334,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-09-02,pre,PLD,PLD,Real Estate,Industrial REITs,111.2300033569336
 2025-09-02,pre,CVNA,CVNA,Consumer Discretionary,Automotive Retail,359.7900085449219
 2025-09-02,pre,PANW,PANW,Information Technology,Systems Software,189.8699951171875
-2025-09-02,pre,COF,COF,Financials,Consumer Finance,220.91000366210932
+2025-09-02,pre,COF,COF,Financials,Consumer Finance,220.9100036621093
 2025-09-02,pre,CFG,CFG,Financials,Regional Banks,51.08000183105469
 2025-09-02,pre,PSA,PSA,Real Estate,Self-Storage REITs,291.875
 2025-09-02,pre,LHX,LHX,Industrials,Aerospace & Defense,276.0
@@ -1374,7 +1374,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-09-02,pre,WTFC,WTFC,Financials,Regional Banks,134.86000061035156
 2025-09-02,pre,DTM,DTM,Energy,Oil & Gas Midstream,103.81500244140624
 2025-09-02,pre,NUE,NUE,Materials,Steel,145.86000061035156
-2025-09-02,pre,GTLS,GTLS,Industrials,Specialty Industrial Machinery,198.66000366210932
+2025-09-02,pre,GTLS,GTLS,Industrials,Specialty Industrial Machinery,198.6600036621093
 2025-09-02,pre,DAY,DAY,Industrials,Human Resource & Employment Services,69.33000183105469
 2025-09-02,pre,EHC,EHC,Health Care,Health Care Facilities,122.91500091552734
 2025-09-02,pre,ARE,ARE,Real Estate,Office REITs,81.5199966430664
@@ -1491,7 +1491,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-09-02,events,LYV,LYV,Communication Services,Movies & Entertainment,163.6750030517578
 2025-09-02,events,DAL,DAL,Industrials,Passenger Airlines,60.18999862670898
 2025-09-02,events,FANG,FANG,Energy,Oil & Gas Exploration & Production,149.23910522460938
-2025-09-02,events,TTWO,TTWO,Communication Services,Interactive Home Entertainment,237.66000366210932
+2025-09-02,events,TTWO,TTWO,Communication Services,Interactive Home Entertainment,237.6600036621093
 2025-09-02,events,PR,PR,Energy,Oil & Gas Exploration & Production,14.295000076293944
 2025-09-02,events,BRX,BRX,Real Estate,Retail REITs,27.78499984741211
 2025-09-02,events,TJX,TJX,Consumer Discretionary,Apparel Retail,138.44000244140625
@@ -1646,7 +1646,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-09-02,events,CVNA,CVNA,Consumer Discretionary,Automotive Retail,359.7900085449219
 2025-09-02,events,PANW,PANW,Information Technology,Systems Software,189.8699951171875
 2025-09-02,events,MU,MU,Information Technology,Semiconductors,116.0999984741211
-2025-09-02,events,COF,COF,Financials,Consumer Finance,220.91000366210932
+2025-09-02,events,COF,COF,Financials,Consumer Finance,220.9100036621093
 2025-09-02,events,SPGI,SPGI,Financials,Financial Exchanges & Data,539.4500122070312
 2025-09-02,events,NOW,NOW,Information Technology,Systems Software,899.9000244140625
 2025-09-02,events,TRGP,TRGP,Energy,Oil & Gas Storage & Transportation,165.6999969482422
@@ -2205,14 +2205,24 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-09-02,pre,APLS,APLS,Health Care,Biotechnology,28.540000915527344
 2025-09-02,pre,BC,BC,Consumer Discretionary,Leisure Products,63.41999816894531
 2025-09-02,pre,WLK,WLK,Materials,Specialty Chemicals,86.37000274658203
-2025-09-02,pre,GWRE,GWRE,Information Technology,Software - Application,215.88499450683594
+2025-09-02,pre,GWRE,GWRE,Information Technology,Software - Application,215.88499450683597
 2025-09-02,pre,SNV,SNV,Financials,Regional Banks,51.040000915527344
 2025-09-02,pre,GL,GL,Financials,Life & Health Insurance,139.64999389648438
-2025-09-02,pre,RGA,RGA,Financials,Reinsurance,194.14500427246094
+2025-09-02,pre,RGA,RGA,Financials,Reinsurance,194.1450042724609
 2025-09-02,pre,ASTS,ASTS,Communication Services,Wireless Telecommunication Services,48.83000183105469
 2025-09-02,pre,MTB,MTB,Financials,Regional Banks,198.0399932861328
 2025-09-02,pre,MTZ,MTZ,Industrials,Construction & Engineering,179.60000610351562
-2025-09-02,pre,EWBC,EWBC,Financials,Regional Banks,104.91999816894531
-2025-09-02,pre,SAIC,SAIC,Industrials,Diversified Support Services,118.05999755859375
+2025-09-02,pre,EWBC,EWBC,Financials,Regional Banks,104.91999816894533
+2025-09-02,pre,SAIC,SAIC,Industrials,Diversified Support Services,118.05999755859376
 2025-09-02,pre,EME,EME,Industrials,Construction & Engineering,619.47998046875
 2025-09-02,pre,FIX,FIX,Industrials,Construction & Engineering,698.9000244140625
+2025-09-02,pre,IBKR,IBKR,Financials,Investment Banking & Brokerage,63.900001525878906
+2025-09-02,pre,BIIB,BIIB,Health Care,Biotechnology,139.67250061035156
+2025-09-02,pre,QCOM,QCOM,Information Technology,Semiconductors,158.77999877929688
+2025-09-02,pre,EIX,EIX,Utilities,Electric Utilities,55.78499984741211
+2025-09-02,pre,VNT,VNT,Information Technology,Electronic Equipment & Instruments,42.400001525878906
+2025-09-02,pre,QRVO,QRVO,Information Technology,Semiconductors,90.33999633789062
+2025-09-02,pre,EXPD,EXPD,Industrials,Air Freight & Logistics,120.83000183105469
+2025-09-02,pre,MKSI,MKSI,Information Technology,Semiconductor Materials & Equipment,101.94999694824219
+2025-09-02,pre,BEN,BEN,Financials,Asset Management & Custody Banks,25.399999618530273
+2025-09-02,pre,GME,GME,Consumer Discretionary,Computer & Electronics Retail,23.40019989013672
