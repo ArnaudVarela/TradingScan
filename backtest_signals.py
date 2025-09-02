@@ -67,13 +67,11 @@ MAX_RETRIES = 3
 RETRY_BACKOFF_BASE = 3.0
 RETRY_JITTER_MAX = 5.0
 
-# Nouveau : paramètres curation
+# Fichier de curation (Mes Picks)
 CURATION_FILES = [
-    "dashboard/public/user_trades.csv",  # recommandé (facile à déposer)
-    "user_trades.csv",                   # fallback à la racine
+    PUBLIC_DIR / "user_trades.csv",
+    Path("user_trades.csv"),
 ]
-USE_CURATED_ONLY = False                # True => ignore totalement les signaux auto
-MERGE_CURATED_WITH_SIGNALS = True       # True => union auto + manuel
 # ===============================================================================
 
 
@@ -82,7 +80,7 @@ def read_csv_first_available(paths):
     for p in paths:
         if os.path.exists(p):
             try:
-                return pd.read_csv(p), p
+                return pd.read_csv(p), str(p)
             except Exception:
                 pass
     return pd.DataFrame(), None
@@ -99,6 +97,7 @@ def placeholder_outputs_when_empty():
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_benchmark_spy_{h}d.csv")
         save_csv(pd.DataFrame(columns=["date","model","spy","generated_at_utc"]), f"backtest_equity_{h}d_combo.csv")
     save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv")
+    save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d_user.csv")  # NEW (Mes Picks)
     for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_10d_{cohort}.csv")
 
@@ -258,7 +257,7 @@ def add_pillars_and_cohorts(sig: pd.DataFrame) -> pd.DataFrame:
 
 # ---------- Main ----------
 def main():
-    # === 1) Charger signaux auto ===
+    # === 1) Charger signaux AUTO ===
     sig, used = read_csv_first_available([
         "signals_history.csv",
         PUBLIC_DIR / "signals_history.csv"
@@ -275,118 +274,126 @@ def main():
             sig = sig[sig["bucket"].astype(str).str.lower() == str(FILTER_BUCKET).lower()]
         sig["source"] = "auto"
 
-    # === 2) Charger curation manuelle ===
-    cur = load_curated_picks()
+    # === 2) Charger curation manuelle (Mes Picks) ===
+    cur = load_curated_picks()  # columns: date_signal,ticker,cohort,bucket,horizons,notes,source=manual
 
-    # === 3) Construire seeds ===
-    seeds = []
-    if MERGE_CURATED_WITH_SIGNALS and auto_ok:
+    # === 3) Construire SEEDS séparés ===
+    seeds_auto = pd.DataFrame(columns=["date_signal","ticker","cohort","bucket","horizons","source"])
+    if auto_ok and not sig.empty:
         s = sig.rename(columns={"date": "date_signal", "ticker_yf": "ticker"})
         s["horizons"] = ""
-        seeds.append(s[["date_signal","ticker","cohort","bucket","horizons","source"]])
-    if USE_CURATED_ONLY or not auto_ok:
-        if not cur.empty:
-            seeds.append(cur)
-    else:
-        if not cur.empty:
-            seeds.append(cur)
+        seeds_auto = s[["date_signal","ticker","cohort","bucket","horizons","source"]].copy()
 
-    if not seeds:
+    seeds_user = pd.DataFrame(columns=["date_signal","ticker","cohort","bucket","horizons","notes","source"])
+    if not cur.empty:
+        seeds_user = cur.copy()
+
+    if seeds_auto.empty and seeds_user.empty:
         print("⚠️ Aucun seed (ni auto ni manuel).")
         placeholder_outputs_when_empty()
         return
 
-    seeds = pd.concat(seeds, ignore_index=True)
-    seeds = seeds.dropna(subset=["ticker"])
-    seeds["ticker"] = seeds["ticker"].astype(str).str.upper()
+    # Fenêtre prix -> couvrir auto+user
+    seeds_all = pd.concat([seeds_auto, seeds_user], ignore_index=True) if not seeds_user.empty else seeds_auto.copy()
+    seeds_all = seeds_all.dropna(subset=["ticker"])
+    seeds_all["ticker"] = seeds_all["ticker"].astype(str).str.upper()
 
-    # Fenêtre de prix à télécharger
-    dmin = seeds["date_signal"].dropna().min()
+    dmin = seeds_all["date_signal"].dropna().min()
     if pd.isna(dmin):
         dmin = (pd.Timestamp.today().normalize() - pd.Timedelta(days=40))
-    dmax = (seeds["date_signal"].dropna().max() if seeds["date_signal"].notna().any() else pd.Timestamp.today().normalize()) + pd.Timedelta(days=max(HORIZONS) + 5)
+    dmax = (seeds_all["date_signal"].dropna().max() if seeds_all["date_signal"].notna().any() else pd.Timestamp.today().normalize()) + pd.Timedelta(days=max(HORIZONS) + 5)
 
-    tickers_unique = seeds["ticker"].unique().tolist()
+    tickers_unique = seeds_all["ticker"].unique().tolist()
     px_map = prefetch_prices(tickers_unique, dmin.strftime("%Y-%m-%d"), dmax.strftime("%Y-%m-%d"))
 
-    # === 4) Construire trades (auto + manual) ===
-    trades = []
-    closed_count = open_count = 0
-
-    for ticker, g in seeds.groupby("ticker"):
-        prices = px_map.get(ticker)
-        if prices is None or prices.empty:
-            continue
-
-        for _, row in g.iterrows():
-            d0 = row["date_signal"]
-            if pd.isna(d0):
-                idx = 0
-            else:
-                idx = prices.index.searchsorted(d0)
-            if idx >= len(prices.index):
+    # === 4) Construire TRADES (séparément pour auto et user) ===
+    def build_trades(seeds, default_sector="Unknown"):
+        out = []
+        for ticker, g in seeds.groupby("ticker"):
+            prices = px_map.get(ticker)
+            if prices is None or prices.empty:
                 continue
+            for _, row in g.iterrows():
+                d0 = row["date_signal"]
+                idx = 0 if pd.isna(d0) else prices.index.searchsorted(d0)
+                if idx >= len(prices.index):
+                    continue
+                d_entry = prices.index[idx]
+                entry = float(prices.iloc[idx]["close"])
+                if not np.isfinite(entry):
+                    continue
+                last_idx = len(prices.index) - 1
+                # horizons personnalisés ?
+                hlist = HORIZONS
+                if row.get("horizons"):
+                    try:
+                        hlist = [int(x) for x in str(row["horizons"]).replace(",", "|").split("|") if x.strip().isdigit()]
+                    except Exception:
+                        hlist = HORIZONS
+                for h in hlist:
+                    exit_idx = idx + h
+                    if exit_idx <= last_idx:
+                        d_exit = prices.index[exit_idx]
+                        exit_price = float(prices.iloc[exit_idx]["close"])
+                        ret_pct = (exit_price / entry - 1.0) * 100.0
+                        status = "closed"; days_elapsed = h
+                    else:
+                        d_exit = prices.index[last_idx]
+                        exit_price = float(prices.iloc[last_idx]["close"])
+                        ret_pct = (exit_price / entry - 1.0) * 100.0
+                        status = "open"; days_elapsed = int(last_idx - idx)
+                    out.append({
+                        "date_signal": pd.to_datetime(d_entry).strftime("%Y-%m-%d"),
+                        "ticker": ticker,
+                        "sector": row.get("sector", default_sector),
+                        "bucket": row.get("bucket", ""),
+                        "cohort": row.get("cohort", "P0_other"),
+                        "votes": 0,  # on ne mélange pas ici
+                        "horizon_days": int(h),
+                        "status": status,
+                        "days_elapsed": int(days_elapsed),
+                        "entry": float(entry),
+                        "exit": float(exit_price),
+                        "date_exit": pd.to_datetime(d_exit).strftime("%Y-%m-%d"),
+                        "ret_pct": float(ret_pct),
+                        "notes": row.get("notes",""),
+                        "source": row.get("source","auto"),
+                    })
+        return pd.DataFrame(out)
 
-            d_entry = prices.index[idx]
-            entry = float(prices.iloc[idx]["close"])
-            if not np.isfinite(entry):
-                continue
+    # Auto trades
+    auto_trades = pd.DataFrame()
+    if not seeds_auto.empty:
+        auto_trades = build_trades(seeds_auto)
+    # User trades
+    user_trades = pd.DataFrame()
+    if not seeds_user.empty:
+        user_trades = build_trades(seeds_user)
 
-            last_idx = len(prices.index) - 1
+    # Dédup Mes Picks (si doublons exacts sur (date_signal,ticker,horizon))
+    if not user_trades.empty:
+        user_trades = (
+            user_trades.sort_values(
+                ["date_signal","ticker","horizon_days","days_elapsed"],
+                ascending=[True, True, True, False]
+            )
+            .drop_duplicates(subset=["date_signal","ticker","horizon_days"], keep="first")
+            .reset_index(drop=True)
+        )
 
-            # horizons personnalisés ?
-            hlist = HORIZONS
-            if row.get("horizons"):
-                try:
-                    hlist = [int(x) for x in str(row["horizons"]).replace(",", "|").split("|") if x.strip().isdigit()]
-                except Exception:
-                    hlist = HORIZONS
-
-            for h in hlist:
-                exit_idx = idx + h
-                if exit_idx <= last_idx:
-                    # CLOSED
-                    d_exit = prices.index[exit_idx]
-                    exit_price = float(prices.iloc[exit_idx]["close"])
-                    ret_pct = (exit_price / entry - 1.0) * 100.0
-                    status = "closed"; days_elapsed = h; closed_count += 1
-                else:
-                    # OPEN
-                    d_exit = prices.index[last_idx]
-                    exit_price = float(prices.iloc[last_idx]["close"])
-                    ret_pct = (exit_price / entry - 1.0) * 100.0
-                    status = "open"; days_elapsed = int(last_idx - idx); open_count += 1
-
-                trades.append({
-                    "date_signal": pd.to_datetime(d_entry).strftime("%Y-%m-%d"),
-                    "ticker": ticker,
-                    "sector": row.get("sector", "Unknown"),
-                    "bucket": row.get("bucket", ""),
-                    "cohort": row.get("cohort", "P0_other"),
-                    "votes": 0 if row.get("source") == "manual" else int(row.get("votes", 0)) if "votes" in row else 0,
-                    "horizon_days": int(h),
-                    "status": status,
-                    "days_elapsed": int(days_elapsed),
-                    "entry": float(entry),
-                    "exit": float(exit_price),
-                    "date_exit": pd.to_datetime(d_exit).strftime("%Y-%m-%d"),
-                    "ret_pct": float(ret_pct),
-                    "notes": row.get("notes",""),
-                    "source": row.get("source","auto"),
-                })
-
-    if not trades:
+    # Concat pour audit complet
+    trades_df = pd.concat([auto_trades, user_trades], ignore_index=True)
+    if trades_df.empty:
         print("⚠️ Aucun trade généré.")
         placeholder_outputs_when_empty()
         return
 
-    trades_df = pd.DataFrame(trades)
     save_csv(trades_df, "backtest_trades.csv")
 
-    # === 5) Résumé CLOSED uniquement (sans votes_bin pour compat globale) ===
-    trades_closed = trades_df[trades_df["status"] == "closed"].copy()
+    # === 5) Résumé (CLOSED seulement) — sur AUTO uniquement pour coller au graphe auto
+    auto_closed = auto_trades[auto_trades["status"] == "closed"].copy()
     summary = (
-        trades_closed
+        auto_closed
         .groupby(["horizon_days","bucket","cohort"], dropna=False)
         .agg(
             n_trades   = ("ret_pct", "count"),
@@ -401,15 +408,14 @@ def main():
     )
     save_csv(summary, "backtest_summary.csv")
 
-    # === 6) Equity curves par horizon (CLOSED only) ===
+    # === 6) Equity (AUTO only) par horizon + SPY + combo
     for h in HORIZONS:
-        sub = trades_closed[trades_closed["horizon_days"] == h]
+        sub = auto_closed[auto_closed["horizon_days"] == h]
         if sub.empty:
             save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_{h}d.csv")
             save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_benchmark_spy_{h}d.csv")
             save_csv(pd.DataFrame(columns=["date","model","spy"]), f"backtest_equity_{h}d_combo.csv")
             continue
-
         daily_ret = sub.groupby("date_exit")["ret_pct"].mean().sort_index()
         eq = equity_from_daily_returns(daily_ret)
         save_csv(eq, f"backtest_equity_{h}d.csv")
@@ -423,10 +429,10 @@ def main():
         )
         save_csv(combo, f"backtest_equity_{h}d_combo.csv")
 
-    # === 7) Equity par COHORTE (10d, CLOSED only) ===
+    # === 7) Equity AUTO par COHORTE (10j) ===
     if 10 in HORIZONS:
         for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
-            subc = trades_closed[(trades_closed["horizon_days"] == 10) & (trades_closed["cohort"] == cohort)]
+            subc = auto_closed[(auto_closed["horizon_days"] == 10) & (auto_closed["cohort"] == cohort)]
             if subc.empty:
                 save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_10d_{cohort}.csv")
                 continue
@@ -434,35 +440,41 @@ def main():
             eqc = equity_from_daily_returns(daily_ret)
             save_csv(eqc, f"backtest_equity_10d_{cohort}.csv")
 
-    # === 8) Copie de sûreté pour le front (10j) ===
+    # === 8) Copie de sûreté AUTO (10j) ===
     prefer = 10
     fallback = max(HORIZONS)
     src = f"backtest_equity_{prefer}d.csv" if prefer in HORIZONS else f"backtest_equity_{fallback}d.csv"
     eq10, _ = read_csv_first_available([src, PUBLIC_DIR / src])
     save_csv(eq10, "backtest_equity_10d.csv")
 
-    # === 9) Stats JSON ===
-    stats = {
-        "seeds_total": int(len(seeds)),
-        "seeds_auto": int((seeds.get("source","") == "auto").sum()) if "source" in seeds.columns else 0,
-        "seeds_manual": int((seeds.get("source","") == "manual").sum()) if "source" in seeds.columns else 0,
-        "tickers_unique": int(seeds["ticker"].nunique()),
-        "date_min_seed": str(pd.to_datetime(seeds["date_signal"]).min().date()) if seeds["date_signal"].notna().any() else None,
-        "date_max_seed": str(pd.to_datetime(seeds["date_signal"]).max().date()) if seeds["date_signal"].notna().any() else None,
-        "trades_total": int(len(trades_df)),
-        "trades_closed": int(len(trades_closed)),
-        "trades_open": int(len(trades_df) - len(trades_closed)),
-    }
-    for h in HORIZONS:
-        stats[f"trades_{h}d_closed"] = int((trades_closed["horizon_days"] == h).sum())
-    print("[STATS] backtest:", stats)
+    # === 9) Courbe "Mes Picks" (10 jours, CLOSED only) ===
+    if 10 in HORIZONS:
+        user_closed = user_trades[user_trades["status"] == "closed"].copy()
+        user10 = user_closed[user_closed["horizon_days"] == 10]
+        if user10.empty:
+            save_csv(pd.DataFrame(columns=["date","equity"]), "backtest_equity_10d_user.csv")
+        else:
+            daily_ret_user = user10.groupby("date_exit")["ret_pct"].mean().sort_index()
+            eq_user = equity_from_daily_returns(daily_ret_user)
+            save_csv(eq_user, "backtest_equity_10d_user.csv")
+    else:
+        save_csv(pd.DataFrame(columns=["date","equity"]), "backtest_equity_10d_user.csv")
 
+    # === 10) Stats JSON ===
+    stats = {
+        "auto_trades": int(len(auto_trades)),
+        "user_trades": int(len(user_trades)),
+        "auto_closed": int((auto_trades["status"]=="closed").sum()),
+        "user_closed": int((user_trades["status"]=="closed").sum()),
+        "tickers_unique": int(seeds_all["ticker"].nunique()),
+    }
+    print("[STATS] backtest:", stats)
     with open("backtest_stats.json", "w") as f:
         json.dump(stats, f)
     with open(PUBLIC_DIR / "backtest_stats.json", "w") as f:
         json.dump(stats, f)
 
-    print("[OK] Backtest écrit : trades (open & closed), summary/equity (closed only), stats JSON.")
+    print("[OK] Backtest écrit : auto (trades/summary/equity) + courbe Mes Picks 10j.")
 
 if __name__ == "__main__":
     main()
