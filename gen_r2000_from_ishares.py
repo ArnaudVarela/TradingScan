@@ -1,105 +1,134 @@
 # gen_r2000_from_ishares.py
 # -----------------------------------------------------------------------------
-# Récupère les constituants des indices Russell 2000 (IWM) et Russell 1000 (IWB)
-# via les CSV "holdings" d'iShares, écrit à la racine ET (en copie) dans
-# dashboard/public/, avec logs et codes d'erreur explicites.
+# Sources: SPDR (principal) + Schwab SCHA (optionnel, parfois 403).
+# Produit russell2000.csv à la racine ET le copie vers dashboard/public/.
 # -----------------------------------------------------------------------------
 
-import os
-import io
-import sys
-import csv
-import time
-import shutil
-import typing as t
+import io, re, sys, os, shutil, requests
 import pandas as pd
-import requests
+from requests.adapters import HTTPAdapter, Retry
 
-ROOT = os.getcwd()
-PUBLIC_DIR = os.path.join(ROOT, "dashboard", "public")
+URL_SPDR = "https://www.ssga.com/library-content/products/fund-data/etfs/emea/holdings-daily-emea-en-zprr-gy.xlsx"
+URL_SCHA = "https://www.schwabassetmanagement.com/allholdings/SCHA"
+OUTPUT = "russell2000.csv"
 
-IWM_URL = (
-    "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf/1467271812596.ajax"
-    "?fileType=csv&fileName=IWM_holdings&dataType=fund"
-)
-IWB_URL = (
-    "https://www.ishares.com/us/products/239724/ishares-russell-1000-etf/1467271812596.ajax"
-    "?fileType=csv&fileName=IWB_holdings&dataType=fund"
-)
+UA = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+    "Referer": "https://www.schwabassetmanagement.com/"
+}
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (TradingScan/CI)"}
+EXCH_SUFFIX = re.compile(r"(\s+|\.)(US|UN|UW|UQ|UR|N|OQ|K|LN|GY|FP|NA|IM|SM|HK|JP|CN|SW|AU)\b.*", re.IGNORECASE)
+RIC_LONG = re.compile(r"\.[A-Z]{2,4}$")
+CLASS_DOT = re.compile(r"^[A-Z][A-Z0-9]{0,5}\.[A-Z]$")
+TICK_RX = re.compile(r"^[A-Z][A-Z0-9]{0,7}(\.[A-Z])?$")
+BAD_VALUES = {"", "ISIN", "USD", "CASH", "FX", "SWAP", "OPTION", "FUT", "FUTURES", "N/A", "NA", "NONE", "-", "—"}
+
+PUBLIC_DIR = os.path.join("dashboard", "public")
 
 
-def _dl_csv(url: str) -> pd.DataFrame:
-    r = requests.get(url, headers=HEADERS, timeout=30)
+def mk_sess():
+    s = requests.Session()
+    r = Retry(total=3, backoff_factor=0.6, status_forcelist=[429, 500, 502, 503, 504])
+    s.mount("https://", HTTPAdapter(max_retries=r))
+    s.mount("http://", HTTPAdapter(max_retries=r))
+    return s
+
+
+def normalize_candidate(x: str) -> str | None:
+    if not isinstance(x, str):
+        return None
+    v = x.strip().upper()
+    if not v or v in BAD_VALUES:
+        return None
+    v = v.replace("/", ".").replace(" EQUITY", "")
+    v = EXCH_SUFFIX.sub("", v).strip()
+    if RIC_LONG.search(v):
+        v = RIC_LONG.sub("", v)
+    v = re.sub(r"\s+", "", v)
+    if TICK_RX.fullmatch(v) or CLASS_DOT.fullmatch(v):
+        return v
+    return None
+
+
+def parse_spdr() -> set[str]:
+    sess = mk_sess()
+    r = sess.get(URL_SPDR, timeout=60)
     r.raise_for_status()
-    # certains CSV iShares ont un préambule; pandas gère bien si on donne un buffer
-    buf = io.StringIO(r.text)
-    try:
-        df = pd.read_csv(buf)
-    except Exception:
-        # fallback: essayer sep="," explicite
-        buf.seek(0)
-        df = pd.read_csv(buf, sep=",")
-    return df
+    xls = pd.ExcelFile(io.BytesIO(r.content), engine="openpyxl")
+    ticks: set[str] = set()
+    for sheet in xls.sheet_names:
+        df = pd.read_excel(xls, sheet_name=sheet)
+        for col in df.columns:
+            ser = df[col].dropna().astype(str)
+            for raw in ser:
+                t = normalize_candidate(raw)
+                if t:
+                    ticks.add(t)
+    print(f"[SPDR] {len(ticks)} tickers")
+    return ticks
 
 
-def _extract_tickers(df: pd.DataFrame) -> pd.DataFrame:
-    # colonnes possibles selon le fonds: "Ticker", "Ticker Symbol", "Underlying Ticker"
-    candidates = ["Ticker", "Ticker Symbol", "Underlying Ticker", "Symbol"]
-    col = None
-    for c in candidates:
-        if c in df.columns:
-            col = c
-            break
-    if col is None:
-        raise RuntimeError(f"Aucune colonne ticker parmi {candidates}. Colonnes: {list(df.columns)}")
-    tickers = (
-        df[col]
-        .astype(str)
-        .str.strip()
-        .str.upper()
-        .replace({"NAN": ""})
-    )
-    tickers = tickers[tickers != ""].drop_duplicates().sort_values().reset_index(drop=True)
-    out = pd.DataFrame({"Ticker": tickers})
-    return out
+def parse_scha() -> set[str]:
+    sess = mk_sess()
+    r = sess.get(URL_SCHA, headers=UA, timeout=60)
+    r.raise_for_status()  # peut lever 403
+    tables = pd.read_html(r.text)
+    ticks: set[str] = set()
+    for t in tables:
+        for col in t.columns:
+            ser = t[col].dropna().astype(str)
+            for raw in ser:
+                tck = normalize_candidate(raw)
+                if tck:
+                    ticks.add(tck)
+    print(f"[SCHA] {len(ticks)} tickers")
+    return ticks
 
 
 def _write_root_and_public(df: pd.DataFrame, name: str):
-    # racine
-    root_path = os.path.join(ROOT, name)
-    df.to_csv(root_path, index=False)
-    print(f"[OK] wrote {name} at repo root: {len(df)} rows")
+    # Écrit à la racine
+    df.to_csv(name, index=False)
+    print(f"[OK] root  {name}: {len(df)} rows")
 
-    # copie vers public (utile si ton front lit encore dashboard/public/*)
-    os.makedirs(PUBLIC_DIR, exist_ok=True)
-    pub_path = os.path.join(PUBLIC_DIR, name)
-    shutil.copy2(root_path, pub_path)
-    print(f"[OK] copied {name} -> dashboard/public/{name}")
+    # Copie vers dashboard/public
+    dst = os.path.join(PUBLIC_DIR, name)
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    df.to_csv(dst, index=False)
+    print(f"[OK] public {name}: {len(df)} rows (copied)")
 
 
 def main():
+    # Toujours définir spdr/scha, même en cas d’échec
+    spdr: set[str] = set()
+    scha: set[str] = set()
+
+    # SPDR d’abord (source principale)
     try:
-        print("[INFO] Downloading IWM holdings (Russell 2000)…")
-        df_iwm = _dl_csv(IWM_URL)
-        r2k = _extract_tickers(df_iwm)
-        _write_root_and_public(r2k, "russell2000.csv")
+        spdr = parse_spdr()
     except Exception as e:
-        print(f"[ERROR] Russell 2000 fetch failed: {e}", file=sys.stderr)
-        sys.exit(1)
+        print(f"[ERROR] SPDR fetch failed: {e}")
+        if not spdr:
+            sys.exit(2)
 
-    # Russell 1000 (optionnel; si ça échoue, on log et continue)
+    # SCHA optionnel (peut souvent renvoyer 403)
     try:
-        print("[INFO] Downloading IWB holdings (Russell 1000)…")
-        df_iwb = _dl_csv(IWB_URL)
-        r1k = _extract_tickers(df_iwb)
-        _write_root_and_public(r1k, "russell1000.csv")
+        scha = parse_scha()
     except Exception as e:
-        print(f"[WARN] Russell 1000 fetch failed (non bloquant): {e}", file=sys.stderr)
+        print(f"[WARN] SCHA fetch failed: {e}")
+        scha = set()
 
-    print("[DONE] Univers updated.")
+    union = sorted(spdr.union(scha))
+    print(f"[MERGED] total unique tickers: {len(union)}")
 
+    # On écrit même si c’est “que” SPDR (ex: 1200–1800 tickers)
+    if len(union) < 500:
+        print("❌ Extraction trop faible — vérifie les sources.")
+        sys.exit(2)
+
+    df = pd.DataFrame({"Ticker": union})
+    _write_root_and_public(df, OUTPUT)
+
+    print("✅ Univers Russell2000 mis à jour.")
 
 if __name__ == "__main__":
     main()
