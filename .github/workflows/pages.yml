@@ -35,12 +35,10 @@ jobs:
           VITE_GH_OWNER: ArnaudVarela
           VITE_GH_REPO: TradingScan
           VITE_GH_BRANCH: main
-          # mets 1 si tu vas configurer un domaine custom dans Settings > Pages
           VITE_CUSTOM_DOMAIN: ''
         run: |
-          npm ci
+          npm install --no-audit --no-fund
           npm run build
-          # SPA fallback pour GitHub Pages
           cp dist/index.html dist/404.html
 
       - name: Upload artifact
