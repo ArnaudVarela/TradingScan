@@ -32,7 +32,8 @@ const FILES = {
   bench10:          "backtest_benchmark_spy_10d.csv",
   p3_10:            "backtest_equity_10d_P3_confirmed.csv",
   p2_10:            "backtest_equity_10d_P2_highconv.csv",
-
+  user_10:          "backtest_equity_10d_user.csv",
+  
   // Sentiment
   fear:             "fear_greed.json",
 };
@@ -57,6 +58,7 @@ export default function App() {
     bench10: [],
     p3_10: [],
     p2_10: [],
+    user_10: [],
     fear: null,
   });
   const [last, setLast] = useState("-");
@@ -117,6 +119,7 @@ export default function App() {
       ["bench10",          FILES.bench10],
       ["p3_10",            FILES.p3_10],
       ["p2_10",            FILES.p2_10],
+      ["user_10",          FILES.user_10],
     ];
 
     try {
@@ -326,6 +329,7 @@ export default function App() {
           bench={data.bench10}  // SPY
           p3={data.p3_10}
           p2={data.p2_10}
+          user={data.user_10} 
           title="Equity curve — 10 trading days: P3 vs P2 vs SPY"
         />
       </div>
