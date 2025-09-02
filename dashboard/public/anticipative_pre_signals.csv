@@ -1,7 +1,6 @@
 ticker_tv,ticker_yf,price,market_cap,sector,industry,technical_local,tech_score,tv_reco,analyst_bucket,analyst_mean,analyst_votes,rank_score
 AYI,AYI,333.2799987792969,10305917418.252563,Industrials,Electrical Components & Equipment,Strong Buy,4,STRONG_BUY,,,8.0,5.4
 AMG,AMG,229.97000122070312,6609475817.08374,Financials,Asset Management & Custody Banks,Strong Buy,4,STRONG_BUY,,,7.0,5.35
-AL,AL,64.27999877929688,7184254063.568115,Industrials,Rental & Leasing Services,Strong Buy,6,STRONG_BUY,,,4.0,5.2
 THC,THC,185.35000610351562,16375858389.251709,Health Care,Health Care Facilities,Strong Buy,6,,Strong Buy,1.59091,21.0,5.0
 NTRA,NTRA,169.33999633789062,23241575817.382812,Health Care,Diagnostics & Research,Strong Buy,4,,Strong Buy,1.45,20.0,5.0
 DKNG,DKNG,47.90999984741211,23785878390.804688,Consumer Discretionary,Gambling,Strong Buy,4,,Strong Buy,1.47059,33.0,5.0
@@ -35,6 +34,7 @@ W,W,77.6500015258789,10068176847.846985,Consumer Discretionary,Internet Retail,S
 OVV,OVV,42.75,10988331408.0,Energy,Oil & Gas E&P,Strong Buy,6,,Buy,1.65217,21.0,4.0
 BMRN,BMRN,59.09000015258789,11346166852.019165,Health Care,Biotechnology,Buy,3,,Strong Buy,1.59259,26.0,4.0
 ROKU,ROKU,95.86000061035156,14123150516.80371,Communication Services,Entertainment,Strong Buy,4,,Buy,2.03333,26.0,4.0
+CELH,CELH,61.40999984741211,15830454481.945435,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,4,,Buy,1.9,20.0,4.0
 DPZ,DPZ,467.29998779296875,15864320555.584717,Consumer Discretionary,Restaurants,Strong Buy,4,,Buy,1.9375,29.0,4.0
 RBRK,RBRK,87.9000015258789,17008034292.046875,Information Technology,Software - Infrastructure,Buy,3,,Strong Buy,1.33333,20.0,4.0
 FSLR,FSLR,195.77999877929688,20997013309.08203,Information Technology,Semiconductors,Buy,3,,Strong Buy,1.58824,30.0,4.0
@@ -74,7 +74,6 @@ APP,APP,481.7300109863281,164702041712.35254,Information Technology,Application 
 BA,BA,237.3800048828125,180628621393.53906,Industrials,Aerospace & Defense,Strong Buy,4,,Buy,1.62963,24.0,4.0
 FIVE,FIVE,149.77000427246094,8526211642.225647,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,,Buy,2.18182,19.0,3.95
 LITE,LITE,132.55499267578125,9265593988.03711,Information Technology,Communication Equipment,Strong Buy,6,,Buy,1.63158,19.0,3.95
-CELH,CELH,61.40999984741211,15830454481.945435,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,4,,Buy,1.9,19.0,3.95
 AFRM,AFRM,82.22000122070312,26774942082.001953,Information Technology,Software - Infrastructure,Strong Buy,4,BUY,Buy,1.78261,19.0,3.95
 FCX,FCX,44.939998626708984,64523501109.22998,Materials,Copper,Strong Buy,4,,Buy,2.1,19.0,3.95
 NEM,NEM,75.86000061035156,83328421311.7207,Materials,Gold,Strong Buy,6,,Buy,2.0,19.0,3.95
@@ -99,10 +98,10 @@ RL,RL,311.0199890136719,18884853814.920044,Consumer Discretionary,"Apparel, Acce
 TER,TER,120.61000061035156,19185915237.091064,Information Technology,Semiconductor Materials & Equipment,Strong Buy,6,,Buy,1.94118,16.0,3.8
 CIVI,CIVI,37.369998931884766,3462704101.0284424,Energy,Oil & Gas Exploration & Production,Strong Buy,4,,Buy,2.25,15.0,3.75
 CHRD,CHRD,111.6500015258789,6392866952.368927,Energy,Oil & Gas Exploration & Production,Buy,2,,Strong Buy,1.53333,15.0,3.75
-A,A,125.20999908447266,35497034740.448,Health Care,Health Care Equipment,Strong Buy,4,BUY,Buy,2.22222,15.0,3.75
+A,A,125.20999908447266,35497034740.448,Health Care,Health Care Equipment,Strong Buy,4,,Buy,2.22222,15.0,3.75
 PVH,PVH,85.95999908447266,4132363631.9877625,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Strong Buy,4,,Buy,2.0,14.0,3.7
 SNV,SNV,51.34000015258789,7126197381.17981,Financials,Regional Banks,Strong Buy,4,,Buy,2.07143,14.0,3.7
-ALK,ALK,62.59000015258789,7263256567.707062,Industrials,Passenger Airlines,Buy,2,BUY,Strong Buy,1.42857,14.0,3.7
+ALK,ALK,62.59000015258789,7263256567.707062,Industrials,Passenger Airlines,Buy,2,,Strong Buy,1.42857,14.0,3.7
 OMF,OMF,61.11000061035156,7264145772.55249,Financials,Credit Services,Strong Buy,4,,Buy,1.8125,14.0,3.7
 DINO,DINO,52.08000183105469,9743178405.915527,Energy,Oil & Gas Refining & Marketing,Strong Buy,6,,Buy,2.2,14.0,3.7
 WLK,WLK,86.52999877929688,11097126223.449707,Materials,Specialty Chemicals,Strong Buy,4,,Buy,2.0,14.0,3.7
@@ -114,7 +113,7 @@ PHM,PHM,132.08999633789062,26061092097.473145,Consumer Discretionary,Homebuildin
 TNL,TNL,62.369998931884766,4054511468.5646057,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,6,,Buy,1.66667,12.0,3.6
 LEA,LEA,110.0199966430664,5853734943.3906555,Consumer Discretionary,Automotive Parts & Equipment,Strong Buy,4,,Buy,2.4,12.0,3.6
 AES,AES,13.40999984741211,9548590176.789795,Utilities,Independent Power Producers & Energy Traders,Strong Buy,4,BUY,Buy,2.35714,12.0,3.6
-AGNC,AGNC,9.760000228881836,10198516883.005493,Financials,REIT - Mortgage,Strong Buy,6,BUY,Buy,2.06667,12.0,3.6
+AGNC,AGNC,9.760000228881836,10198516883.005493,Financials,REIT - Mortgage,Strong Buy,6,,Buy,2.06667,12.0,3.6
 PFGC,PFGC,105.18000030517578,16462669309.20581,Consumer Staples,Food Distributors,Strong Buy,6,,Buy,1.64286,12.0,3.6
 UTHR,UTHR,404.80999755859375,18308058392.58423,Health Care,Biotechnology,Strong Buy,4,,Buy,1.85714,12.0,3.6
 SRE,SRE,82.88999938964844,54083403681.762695,Utilities,Multi-Utilities,Strong Buy,4,,Buy,2.13333,12.0,3.6
@@ -229,7 +228,7 @@ BK,BK,104.69999694824219,73838733060.5752,Financials,Asset Management & Custody 
 GTLS,GTLS,199.08999633789062,8948179521.40503,Industrials,Specialty Industrial Machinery,Strong Buy,4,,,,12.0,2.6
 DAY,DAY,69.5,10967168944.0,Industrials,Human Resource & Employment Services,Buy,2,,Buy,2.46667,12.0,2.6
 EHC,EHC,123.69999694824219,12459558492.614746,Health Care,Health Care Facilities,Strong Buy,4,,,,12.0,2.6
-ARE,ARE,80.91000366210938,13813036087.918945,Real Estate,Office REITs,Buy,2,BUY,Buy,2.41667,12.0,2.6
+ARE,ARE,80.91000366210938,13813036087.918945,Real Estate,Office REITs,Buy,2,,Buy,2.41667,12.0,2.6
 NTRS,NTRS,129.77000427246094,24742077746.43164,Financials,Asset Management & Custody Banks,Strong Buy,4,,,,12.0,2.6
 GLW,GLW,68.47000122070312,58652704523.4375,Information Technology,Electronic Components,Buy,2,,Buy,1.84615,12.0,2.6
 MO,MO,67.12999725341797,112771014308.28418,Consumer Staples,Tobacco,Strong Buy,4,,Hold,2.66667,12.0,2.6
@@ -269,6 +268,7 @@ TTC,TTC,81.44000244140625,8036930747.170898,Industrials,Agricultural & Farm Mach
 DCI,DCI,79.66000366210938,9281983626.708984,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,,Hold,3.125,5.0,2.25
 AFG,AFG,136.8699951171875,11414204260.320312,Financials,Multi-line Insurance,Strong Buy,4,,,,5.0,2.25
 HHH,HHH,74.80000305175781,4443209941.278076,Real Estate,Real Estate - Development,Buy,2,,Buy,1.75,4.0,2.2
+AL,AL,64.27999877929688,7184254063.568115,Industrials,Rental & Leasing Services,Strong Buy,6,,,,4.0,2.2
 DNB,DNB,9.149999618530273,4082629276.8,Industrials,Financial Data & Stock Exchanges,Strong Buy,4,,Sell,3.5,3.0,2.15
 DDS,DDS,553.1900024414062,8629764038.085938,Consumer Discretionary,Broadline Retail,Strong Buy,4,,,,3.0,2.15
 NVR,NVR,8169.85009765625,22574112804.833984,Consumer Discretionary,Homebuilding,Strong Buy,4,,,,3.0,2.15
