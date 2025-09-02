@@ -1,101 +1,17 @@
 name: Run screener and publish CSV
 
 on:
-  schedule:
-    # Toutes les 5 minutes, lundi->vendredi (en UTC)
-    - cron: "*/5 * * * 1-5"
   workflow_dispatch: {}
 
 permissions:
   contents: write
-
-concurrency:
-  group: screener-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      # --- GATE AVANT CHECKOUT ---
-      - name: Decide whether to run now (America/New_York)
-        id: gate
-        run: |
-          set -e
-          TZ="America/New_York"
-
-          # ---- Config
-          TARGETS=("09:30" "12:30" "15:50")   # heure de début des fenêtres
-          WINDOW_MIN=30                       # durée de chaque fenêtre (minutes)
-          MODULO_MIN=15                       # cadence à l'intérieur de la fenêtre
-          TOL=1                               # tolérance (minutes) autour du modulo
-
-          # ---- US Market Holidays (NYSE) 2025
-          US_HOLIDAYS=("2025-01-01" "2025-01-20" "2025-02-17" "2025-04-18" "2025-05-26" \
-                       "2025-06-19" "2025-07-04" "2025-09-01" "2025-11-27" "2025-12-25")
-
-          # ---- Now (NY time)
-          NOW_H=$(TZ=$TZ date +%H)
-          NOW_M=$(TZ=$TZ date +%M)
-          NOW_HM=$(TZ=$TZ date +%H:%M)
-          NOW_MIN=$((10#$NOW_H * 60 + 10#$NOW_M))
-          DOW=$(TZ=$TZ date +%u)
-          DATE=$(TZ=$TZ date +%F)
-
-          RUN=0
-
-          # ---- Check holidays
-          for h in "${US_HOLIDAYS[@]}"; do
-            if [ "$DATE" = "$h" ]; then
-              echo "Market holiday ($h) — skipping."
-              echo "RUN=0" >> $GITHUB_ENV
-              exit 0
-            fi
-          done
-
-          # ---- Weekdays only
-          if [ "$DOW" -lt 1 ] || [ "$DOW" -gt 5 ]; then
-            echo "Weekend — skipping."
-            echo "RUN=0" >> $GITHUB_ENV
-            exit 0
-          fi
-
-          # ---- Window + modulo check
-          in_window=0
-          for t in "${TARGETS[@]}"; do
-            SH=${t%:*}; SM=${t#*:}
-            START_MIN=$((10#$SH * 60 + 10#$SM))
-            END_MIN=$((START_MIN + WINDOW_MIN))
-
-            if [ "$NOW_MIN" -ge "$START_MIN" ] && [ "$NOW_MIN" -lt "$END_MIN" ]; then
-              in_window=1
-              offset=$(( NOW_MIN - START_MIN ))
-              mod=$(( offset % MODULO_MIN ))
-
-              close_to_mark=0
-              if [ "$mod" -le "$TOL" ]; then
-                close_to_mark=1
-              else
-                diff=$(( MODULO_MIN - mod ))
-                if [ "$diff" -le "$TOL" ]; then
-                  close_to_mark=1
-                fi
-              fi
-
-              if [ "$close_to_mark" -eq 1 ]; then
-                RUN=1
-                break
-              fi
-            fi
-          done
-
-          echo "NY time: $NOW_HM (DOW=$DOW, DATE=$DATE) | in_window=$in_window | RUN=$RUN"
-          echo "RUN=$RUN" >> $GITHUB_ENV
-          if [ "$RUN" -ne 1 ]; then
-            echo "Outside window, holiday, or not on a 15-min mark — skipping heavy steps."
-          fi
-
+  
       - name: Checkout repo
         if: env.RUN == '1'
         uses: actions/checkout@v4
