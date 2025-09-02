@@ -118,11 +118,7 @@ jobs:
         run: |
           set -euo pipefail
           python fetch_fear_greed.py
-
-          echo "--- head fear_greed.csv (root) ---"
-          [ -f fear_greed.csv ] && head -n 5 fear_greed.csv || (echo "Missing fear_greed.csv"; exit 1)
-          echo "--- head fear_greed_history.csv (root) ---"
-          [ -f fear_greed_history.csv ] && head -n 5 fear_greed_history.csv || true
+          # (les sorties sont déjà dupliquées vers dashboard/public)
 
       # ================== DIAGNOSTIC GLOBAL ==================
       - name: Sanity dump (root + public)
