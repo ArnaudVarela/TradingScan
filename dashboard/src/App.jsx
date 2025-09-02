@@ -344,21 +344,21 @@ export default function App() {
         <ErrorBoundary fallback="La table Confirmed n'a pas pu s'afficher.">
           <section>
             <h2 className="h1 mb-3">Confirmed STRONG_BUY</h2>
-            <DataTable rows={rowsConfirmed} />
+            <DataTable rows={rowsConfirmed} defaultBucket="confirmed" />
           </section>
         </ErrorBoundary>
 
         <ErrorBoundary fallback="La table Pre-signals n'a pas pu s'afficher.">
           <section>
             <h2 className="h1 mb-3">Anticipative pre-signals</h2>
-            <DataTable rows={rowsPre} />
+            <DataTable rows={rowsPre} defaultBucket="pre_signal" />
           </section>
         </ErrorBoundary>
 
         <ErrorBoundary fallback="La table Event-driven n'a pas pu s'afficher.">
           <section>
             <h2 className="h1 mb-3">Event-driven signals</h2>
-            <DataTable rows={rowsEvents} />
+            <DataTable rows={rowsEvents} defaultBucket="event" />
           </section>
         </ErrorBoundary>
       </div>
