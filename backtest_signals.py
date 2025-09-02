@@ -1,11 +1,71 @@
 # backtest_signals.py
 import os
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import pandas as pd
 import numpy as np
 import yfinance as yf
 from random import uniform
+from pathlib import Path
+
+# =================== SORTIES SÛRES (I/O helpers) =============================
+PUBLIC_DIR = Path("dashboard/public")  # <-- Path (ne plus redéfinir ailleurs)
+PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
+
+def _utc_stamp() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+def _add_generated_at(df: pd.DataFrame | None) -> pd.DataFrame | None:
+    if df is None or df.empty:
+        return df
+    if "generated_at_utc" not in df.columns:
+        df = df.copy()
+        df["generated_at_utc"] = _utc_stamp()
+    return df
+
+def write_csv_public(df: pd.DataFrame | None, name: str, headers: list[str] | None = None):
+    """
+    Écrit dashboard/public/<name>.
+    - Si df vide/None -> écrit au moins les headers (pour éviter fichiers figés)
+    - Ajoute generated_at_utc si df non vide
+    """
+    out = PUBLIC_DIR / name
+    out.parent.mkdir(parents=True, exist_ok=True)
+    if df is None or getattr(df, "empty", True):
+        cols = headers or (list(df.columns) if isinstance(df, pd.DataFrame) else [])
+        pd.DataFrame(columns=cols).to_csv(out, index=False)
+        print(f"[WARN] public {name}: empty -> headers only")
+        return
+    df2 = _add_generated_at(df)
+    df2.to_csv(out, index=False)
+    print(f"[OK] public {name}: {len(df2)} rows")
+
+def write_csv_root(df: pd.DataFrame | None, name: str, headers: list[str] | None = None):
+    """
+    Écrit <repo_root>/<name>. (utile si ton front lit en RAW racine)
+    Même logique que public (headers-only si vide + timestamp si non vide).
+    """
+    out = Path(name)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    if df is None or getattr(df, "empty", True):
+        cols = headers or (list(df.columns) if isinstance(df, pd.DataFrame) else [])
+        pd.DataFrame(columns=cols).to_csv(out, index=False)
+        print(f"[WARN] root {name}: empty -> headers only")
+        return
+    df2 = _add_generated_at(df)
+    df2.to_csv(out, index=False)
+    print(f"[OK] root  {name}: {len(df2)} rows")
+
+def save_csv(df: pd.DataFrame | None, fname: str, also_public: bool = True, headers: list[str] | None = None):
+    """
+    Remplace ta version : écrit à la racine ET (par défaut) dans dashboard/public/.
+    Force un diff grâce à generated_at_utc si DF non vide.
+    """
+    write_csv_root(df, fname, headers=headers)
+    if also_public:
+        write_csv_public(df, fname, headers=headers)
+# ==============================================================================
+
 
 # ====== CONFIG =================================================================
 # Horizons en JOURS DE BOURSE (on ajoute h barres à partir du jour d'entrée)
@@ -18,13 +78,10 @@ FILTER_BUCKET = None     # ex: "confirmed" ou None
 # Limiter le nombre de tickers téléchargés (debug/quota). None = illimité.
 MAX_TICKERS = None              # ex: 100
 
-# Dossier public pour Vercel
-PUBLIC_DIR = os.path.join("dashboard", "public")
-
-# Ancien throttle par ticker (plus utilisé, on garde la variable pour compat)
+# throttle legacy (non utilisé directement mais on garde la variable)
 SLEEP_BETWEEN_TICKERS = 0.0
 
-# Nouveau: paramètres de téléchargement en lot (beaucoup plus safe côté Yahoo)
+# Nouveau: paramètres de téléchargement en lot (plus safe côté Yahoo)
 BATCH_SIZE = 80              # nb de tickers par chunk pour yf.download
 CHUNK_SLEEP_RANGE = (2.0, 4.0)  # pause [min,max] secondes entre chunks
 MAX_RETRIES = 3              # tentatives par chunk
@@ -39,15 +96,6 @@ def _ensure_dir(p: str):
     if d and not os.path.exists(d):
         os.makedirs(d, exist_ok=True)
 
-def save_csv(df: pd.DataFrame, fname: str, also_public: bool = True):
-    """Sauvegarde à la racine + copie dans dashboard/public/."""
-    _ensure_dir(fname)
-    df.to_csv(fname, index=False)
-    if also_public:
-        dst = os.path.join(PUBLIC_DIR, fname)
-        _ensure_dir(dst)
-        df.to_csv(dst, index=False)
-
 def read_csv_first_available(paths):
     """Tente de lire le 1er CSV dispo parmi paths; renvoie (df, path_utilisé)."""
     for p in paths:
@@ -60,19 +108,17 @@ def read_csv_first_available(paths):
 
 def placeholder_outputs_when_empty():
     """Crée des fichiers vides/minimaux pour éviter de casser le front."""
-    trades_cols  = ["date_signal","ticker","sector","bucket","cohort","votes","horizon_days","entry","exit","date_exit","ret_pct"]
-    summary_cols = ["horizon_days","bucket","cohort","votes_bin","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret"]
-    equity_cols  = ["date","equity"]
+    trades_cols  = ["date_signal","ticker","sector","bucket","cohort","votes","horizon_days","entry","exit","date_exit","ret_pct","generated_at_utc"]
+    summary_cols = ["horizon_days","bucket","cohort","votes_bin","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret","generated_at_utc"]
+    equity_cols  = ["date","equity","generated_at_utc"]
 
     save_csv(pd.DataFrame(columns=trades_cols),  "backtest_trades.csv")
     save_csv(pd.DataFrame(columns=summary_cols), "backtest_summary.csv")
-    # On écrit toutes les courbes horizons + la 10j utilisée par le front
     for h in HORIZONS:
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_{h}d.csv")
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_benchmark_spy_{h}d.csv")
-        save_csv(pd.DataFrame(columns=["date","model","spy"]), f"backtest_equity_{h}d_combo.csv")
+        save_csv(pd.DataFrame(columns=["date","model","spy","generated_at_utc"]), f"backtest_equity_{h}d_combo.csv")
     save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv")
-    # Equity par cohortes (10d)
     for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_10d_{cohort}.csv")
 
@@ -143,13 +189,11 @@ def prefetch_prices(tickers, start_date, end_date, batch_size=BATCH_SIZE):
                     group_by="ticker",
                     threads=True,
                 )
-                # Certaines versions renvoient un DataFrame vide en cas de throttling silencieux
                 if df is not None and not df.empty:
                     break
             except Exception as e:
                 print(f"[WARN] batch {i//batch_size+1}: exception {e}")
 
-            # Backoff + jitter avant retry
             sleep_s = RETRY_BACKOFF_BASE * attempt + uniform(0.0, RETRY_JITTER_MAX)
             print(f"[INFO] retry chunk {i//batch_size+1}/{(len(symbols)+batch_size-1)//batch_size} dans {sleep_s:.1f}s…")
             time.sleep(sleep_s)
@@ -157,7 +201,6 @@ def prefetch_prices(tickers, start_date, end_date, batch_size=BATCH_SIZE):
         if df is None or df.empty:
             print(f"[WARN] chunk vide/échec pour {len(chunk)} tickers.")
         else:
-            # Normalisation: si multiindex -> chaque ticker dans df[ticker]["Close"]
             if isinstance(df.columns, pd.MultiIndex):
                 for t in chunk:
                     try:
@@ -166,10 +209,8 @@ def prefetch_prices(tickers, start_date, end_date, batch_size=BATCH_SIZE):
                         if not sub.empty:
                             all_px[t] = sub
                     except Exception:
-                        # si ticker absent dans le batch (delisted, etc.)
                         pass
             else:
-                # Un seul ticker dans le chunk: colonnes simples
                 try:
                     sub = df[["Close"]].rename(columns={"Close": "close"}).dropna()
                     sub.index = pd.to_datetime(sub.index.date)
@@ -178,7 +219,6 @@ def prefetch_prices(tickers, start_date, end_date, batch_size=BATCH_SIZE):
                 except Exception:
                     pass
 
-        # Petite pause “courtoisie” entre chunks pour éviter un 429 global
         sleep_chunk = uniform(*CHUNK_SLEEP_RANGE)
         time.sleep(sleep_chunk)
 
@@ -204,7 +244,6 @@ def _is_strong(s):
 def add_pillars_and_cohorts(sig: pd.DataFrame) -> pd.DataFrame:
     s = sig.copy()
 
-    # colonnes qui peuvent exister selon tes CSV
     tech_col = "technical_local"  # ex: "Strong Buy"
     tv_col   = "tv_reco"          # ex: "STRONG_BUY"
     an_col   = "analyst_bucket"   # ex: "Buy"
@@ -214,26 +253,21 @@ def add_pillars_and_cohorts(sig: pd.DataFrame) -> pd.DataFrame:
             votes_col = cand
             break
 
-    # booléens 3 piliers
     s["p_tech"] = s.get(tech_col, pd.Series("", index=s.index)).apply(_is_strong)
     s["p_tv"]   = s.get(tv_col,   pd.Series("", index=s.index)).apply(_is_strong)
     s["p_an"]   = s.get(an_col,   pd.Series("", index=s.index)).astype(str).str.strip().str.upper().eq("BUY")
 
-    # compte de piliers
     s["pillars_met"] = (s[["p_tech","p_tv","p_an"]].fillna(False)).sum(axis=1)
 
-    # votes normalisés
     if votes_col is None:
         s["votes"] = 0
     else:
         s["votes"] = pd.to_numeric(s[votes_col], errors="coerce").fillna(0).astype(int)
 
-    # bins votes
     s["votes_bin"] = pd.cut(
         s["votes"], bins=[-1,9,14,19,999], labels=["≤9","10–14","15–19","20+"]
     )
 
-    # cohorte
     s["cohort"] = np.select(
         [
             s["pillars_met"] >= 3,
@@ -346,7 +380,6 @@ def main():
     save_csv(trades_df, "backtest_trades.csv")
 
     # 6) Résumés par horizon / bucket / cohort / votes_bin
-    # On rattache votes_bin via un merge rapide depuis les signaux (clé = date_signal + ticker)
     sig_key = sig.copy()
     sig_key["date_signal"] = sig_key["date"].dt.strftime("%Y-%m-%d")
     sig_key = sig_key[["date_signal","ticker_yf","votes_bin"]].rename(columns={"ticker_yf":"ticker"})
@@ -405,7 +438,7 @@ def main():
     prefer = 10
     fallback = max(HORIZONS)
     src = f"backtest_equity_{prefer}d.csv" if prefer in HORIZONS else f"backtest_equity_{fallback}d.csv"
-    eq10, _ = read_csv_first_available([src, os.path.join(PUBLIC_DIR, src)])
+    eq10, _ = read_csv_first_available([src, PUBLIC_DIR / src])
     save_csv(eq10, "backtest_equity_10d.csv")
 
     print("[OK] Backtest écrit : trades, summary, equity (global + cohortes) et SPY combo.")
