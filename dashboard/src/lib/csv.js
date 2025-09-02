@@ -1,7 +1,7 @@
 // dashboard/src/lib/csv.js
 //
 // Chargement des CSV en direct depuis GitHub raw (repo public).
-// ➡ Pas besoin de redeployer Vercel : dès qu’un commit met à jour les CSV, le front lit la nouvelle version.
+// ➡ Pas besoin de redeployer : dès qu’un commit met à jour les CSV, le front lit la nouvelle version.
 //
 
 // ======================= CONFIG ============================
@@ -22,6 +22,12 @@ async function fetchText(url) {
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
   return res.text();
+}
+
+async function fetchJSONInternal(url) {
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
+  return res.json();
 }
 
 export async function loadCSVText(file) {
@@ -82,6 +88,30 @@ export async function loadCSVObjectsOptional(file) {
     console.warn(`[WARN] Impossible de charger ${file}: ${e.message}`);
     return [];
   }
+}
+
+// --------- Compat layer pour anciens imports (App.jsx) -----
+
+// Ancienne signature: fetchCSV('file.csv') -> tableau d'objets
+export async function fetchCSV(file, opts = {}) {
+  const { as = "objects" } = opts;
+  const text = await loadCSVText(file);
+  if (as === "text") return text;
+  return toObjects(parseCSV(text));
+}
+
+// Variante safe
+export async function fetchCSVOptional(file, opts = {}) {
+  try { return await fetchCSV(file, opts); }
+  catch (e) {
+    console.warn(`[WARN] fetchCSVOptional: ${file} indisponible (${e.message})`);
+    return [];
+  }
+}
+
+// Ancienne signature: fetchJSON('file.json') -> objet JSON
+export async function fetchJSON(file) {
+  return await fetchJSONInternal(rawUrl(file));
 }
 
 // ======================= LISTE DES CSV =====================
