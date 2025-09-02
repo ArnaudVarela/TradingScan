@@ -1,1 +1,1 @@
-horizon_days,bucket,cohort,votes_bin,n_trades,winrate,avg_ret,median_ret,p95_ret,p05_ret
+horizon_days,bucket,cohort,n_trades,winrate,avg_ret,median_ret,p95_ret,p05_ret
