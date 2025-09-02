@@ -1,15 +1,17 @@
 # backtest_signals.py
 import os
 import time
-from datetime import datetime, timedelta, timezone
-import pandas as pd
-import numpy as np
-import yfinance as yf
-from random import uniform
+from datetime import datetime, timezone
 from pathlib import Path
+from random import uniform
+import json
+
+import numpy as np
+import pandas as pd
+import yfinance as yf
 
 # =================== SORTIES SÛRES (I/O helpers) =============================
-PUBLIC_DIR = Path("dashboard/public")  # <-- Path (ne plus redéfinir ailleurs)
+PUBLIC_DIR = Path("dashboard/public")
 PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 
 def _utc_stamp() -> str:
@@ -24,11 +26,7 @@ def _add_generated_at(df: pd.DataFrame | None) -> pd.DataFrame | None:
     return df
 
 def write_csv_public(df: pd.DataFrame | None, name: str, headers: list[str] | None = None):
-    """
-    Écrit dashboard/public/<name>.
-    - Si df vide/None -> écrit au moins les headers (pour éviter fichiers figés)
-    - Ajoute generated_at_utc si df non vide
-    """
+    """Écrit dashboard/public/<name> (headers-only si vide) + timestamp si non vide."""
     out = PUBLIC_DIR / name
     out.parent.mkdir(parents=True, exist_ok=True)
     if df is None or getattr(df, "empty", True):
@@ -41,26 +39,20 @@ def write_csv_public(df: pd.DataFrame | None, name: str, headers: list[str] | No
     print(f"[OK] public {name}: {len(df2)} rows")
 
 def write_csv_root(df: pd.DataFrame | None, name: str, headers: list[str] | None = None):
-    """
-    Écrit <repo_root>/<name>. (utile si ton front lit en RAW racine)
-    Même logique que public (headers-only si vide + timestamp si non vide).
-    """
+    """Écrit <repo_root>/<name> (headers-only si vide) + timestamp si non vide."""
     out = Path(name)
     out.parent.mkdir(parents=True, exist_ok=True)
     if df is None or getattr(df, "empty", True):
         cols = headers or (list(df.columns) if isinstance(df, pd.DataFrame) else [])
         pd.DataFrame(columns=cols).to_csv(out, index=False)
-        print(f"[WARN] root {name}: empty -> headers only")
+        print(f"[WARN] root  {name}: empty -> headers only")
         return
     df2 = _add_generated_at(df)
     df2.to_csv(out, index=False)
     print(f"[OK] root  {name}: {len(df2)} rows")
 
 def save_csv(df: pd.DataFrame | None, fname: str, also_public: bool = True, headers: list[str] | None = None):
-    """
-    Remplace ta version : écrit à la racine ET (par défaut) dans dashboard/public/.
-    Force un diff grâce à generated_at_utc si DF non vide.
-    """
+    """Écrit à la racine + (par défaut) copie dans dashboard/public/."""
     write_csv_root(df, fname, headers=headers)
     if also_public:
         write_csv_public(df, fname, headers=headers)
@@ -68,34 +60,25 @@ def save_csv(df: pd.DataFrame | None, fname: str, also_public: bool = True, head
 
 
 # ====== CONFIG =================================================================
-# Horizons en JOURS DE BOURSE (on ajoute h barres à partir du jour d'entrée)
+# Horizons en JOURS DE BOURSE
 HORIZONS = [1, 3, 5, 10, 20]
 
-# Si tu veux restreindre aux signaux d’un bucket donné, mets une string (ex: "confirmed")
-# ou None pour tout backtester. Laisse None si tu veux comparer les cohortes globalement.
-FILTER_BUCKET = None     # ex: "confirmed" ou None
+# Filtre optionnel par bucket (sinon None)
+FILTER_BUCKET = None  # ex: "confirmed" ou None
 
 # Limiter le nombre de tickers téléchargés (debug/quota). None = illimité.
-MAX_TICKERS = None              # ex: 100
+MAX_TICKERS = None
 
-# throttle legacy (non utilisé directement mais on garde la variable)
-SLEEP_BETWEEN_TICKERS = 0.0
-
-# Nouveau: paramètres de téléchargement en lot (plus safe côté Yahoo)
-BATCH_SIZE = 80              # nb de tickers par chunk pour yf.download
-CHUNK_SLEEP_RANGE = (2.0, 4.0)  # pause [min,max] secondes entre chunks
-MAX_RETRIES = 3              # tentatives par chunk
-RETRY_BACKOFF_BASE = 3.0     # base du backoff (secondes) avant retry
-RETRY_JITTER_MAX = 5.0       # jitter aléatoire ajouté au backoff
+# Batch Yahoo
+BATCH_SIZE = 80
+CHUNK_SLEEP_RANGE = (2.0, 4.0)
+MAX_RETRIES = 3
+RETRY_BACKOFF_BASE = 3.0
+RETRY_JITTER_MAX = 5.0
 # ===============================================================================
 
 
 # ---------- Helpers I/O ----------
-def _ensure_dir(p: str):
-    d = os.path.dirname(p)
-    if d and not os.path.exists(d):
-        os.makedirs(d, exist_ok=True)
-
 def read_csv_first_available(paths):
     """Tente de lire le 1er CSV dispo parmi paths; renvoie (df, path_utilisé)."""
     for p in paths:
@@ -108,7 +91,7 @@ def read_csv_first_available(paths):
 
 def placeholder_outputs_when_empty():
     """Crée des fichiers vides/minimaux pour éviter de casser le front."""
-    trades_cols  = ["date_signal","ticker","sector","bucket","cohort","votes","horizon_days","entry","exit","date_exit","ret_pct","generated_at_utc"]
+    trades_cols  = ["date_signal","ticker","sector","bucket","cohort","votes","horizon_days","status","days_elapsed","entry","exit","date_exit","ret_pct","generated_at_utc"]
     summary_cols = ["horizon_days","bucket","cohort","votes_bin","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret","generated_at_utc"]
     equity_cols  = ["date","equity","generated_at_utc"]
 
@@ -284,7 +267,7 @@ def main():
     # 1) Charger les signaux (racine ou public)
     sig, used = read_csv_first_available([
         "signals_history.csv",
-        os.path.join(PUBLIC_DIR, "signals_history.csv")
+        PUBLIC_DIR / "signals_history.csv"
     ])
     if sig.empty:
         print("❌ signals_history.csv introuvable ou vide. Lance d’abord le screener.")
@@ -322,7 +305,7 @@ def main():
         placeholder_outputs_when_empty()
         return
 
-    # 4) Déterminer la fenêtre de prix à télécharger
+    # 4) Fenêtre de prix à télécharger
     dmin = sig["date"].min()
     dmax = sig["date"].max() + pd.Timedelta(days=max(HORIZONS) + 5)
 
@@ -330,8 +313,11 @@ def main():
     tickers_unique = sig["ticker_yf"].astype(str).unique().tolist()
     px_map = prefetch_prices(tickers_unique, dmin.strftime("%Y-%m-%d"), dmax.strftime("%Y-%m-%d"), batch_size=BATCH_SIZE)
 
-    # 5) Construire les trades
+    # 5) Construire les trades (closed + open)
     trades = []  # une ligne par (signal, horizon)
+    closed_count = 0
+    open_count = 0
+
     for ticker, g in sig.groupby("ticker_yf"):
         prices = px_map.get(ticker)
         if prices is None or prices.empty:
@@ -339,6 +325,7 @@ def main():
 
         for _, row in g.iterrows():
             d0 = pd.to_datetime(row["date"])
+            # index du 1er prix >= date signal
             idx = prices.index.searchsorted(d0)
             if idx >= len(prices.index):
                 continue
@@ -347,15 +334,29 @@ def main():
             if not np.isfinite(entry):
                 continue
 
+            last_idx = len(prices.index) - 1
             for h in HORIZONS:
                 exit_idx = idx + h
-                if exit_idx >= len(prices.index):
-                    continue
-                d_exit = prices.index[exit_idx]
-                exit_price = float(prices.iloc[exit_idx]["close"])
-                if not np.isfinite(exit_price):
-                    continue
-                ret_pct = (exit_price / entry - 1.0) * 100.0
+                if exit_idx <= last_idx:
+                    # CLOSED
+                    d_exit = prices.index[exit_idx]
+                    exit_price = float(prices.iloc[exit_idx]["close"])
+                    if not np.isfinite(exit_price):
+                        continue
+                    ret_pct = (exit_price / entry - 1.0) * 100.0
+                    status = "closed"
+                    days_elapsed = h
+                    closed_count += 1
+                else:
+                    # OPEN (horizon non atteint) -> utiliser dernier prix dispo
+                    d_exit = prices.index[last_idx]
+                    exit_price = float(prices.iloc[last_idx]["close"])
+                    if not np.isfinite(exit_price):
+                        continue
+                    ret_pct = (exit_price / entry - 1.0) * 100.0
+                    status = "open"
+                    days_elapsed = int(last_idx - idx)
+                    open_count += 1
 
                 trades.append({
                     "date_signal": d_entry.strftime("%Y-%m-%d"),
@@ -365,9 +366,11 @@ def main():
                     "cohort": row.get("cohort", "P0_other"),
                     "votes": int(row.get("votes", 0)),
                     "horizon_days": h,
+                    "status": status,
+                    "days_elapsed": days_elapsed,
                     "entry": entry,
                     "exit": exit_price,
-                    "date_exit": d_exit.strftime("%Y-%m-%d"),
+                    "date_exit": pd.to_datetime(d_exit).strftime("%Y-%m-%d"),
                     "ret_pct": ret_pct
                 })
 
@@ -379,31 +382,33 @@ def main():
     trades_df = pd.DataFrame(trades)
     save_csv(trades_df, "backtest_trades.csv")
 
-    # 6) Résumés par horizon / bucket / cohort / votes_bin
+    # 6) Résumés par horizon / bucket / cohort / votes_bin (CLOSED uniquement)
     sig_key = sig.copy()
     sig_key["date_signal"] = sig_key["date"].dt.strftime("%Y-%m-%d")
     sig_key = sig_key[["date_signal","ticker_yf","votes_bin"]].rename(columns={"ticker_yf":"ticker"})
-    trades_df = trades_df.merge(sig_key, on=["date_signal","ticker"], how="left")
+
+    trades_closed = trades_df[trades_df["status"] == "closed"].copy()
+    trades_closed = trades_closed.merge(sig_key, on=["date_signal","ticker"], how="left")
 
     summary = (
-        trades_df
+        trades_closed
         .groupby(["horizon_days","bucket","cohort","votes_bin"], dropna=False)
         .agg(
             n_trades   = ("ret_pct", "count"),
-            winrate    = ("ret_pct", lambda s: float((s > 0).mean() * 100.0)),
-            avg_ret    = ("ret_pct", "mean"),
-            median_ret = ("ret_pct", "median"),
-            p95_ret    = ("ret_pct", lambda s: float(s.quantile(0.95))),
-            p05_ret    = ("ret_pct", lambda s: float(s.quantile(0.05))),
+            winrate    = ("ret_pct", lambda s: float((s > 0).mean() * 100.0) if len(s) else 0.0),
+            avg_ret    = ("ret_pct", lambda s: float(s.mean()) if len(s) else 0.0),
+            median_ret = ("ret_pct", lambda s: float(s.median()) if len(s) else 0.0),
+            p95_ret    = ("ret_pct", lambda s: float(s.quantile(0.95)) if len(s) else 0.0),
+            p05_ret    = ("ret_pct", lambda s: float(s.quantile(0.05)) if len(s) else 0.0),
         )
         .reset_index()
         .sort_values(["horizon_days","cohort","bucket","votes_bin"])
     )
     save_csv(summary, "backtest_summary.csv")
 
-    # 7) Equity curves par horizon (global sur le sous-ensemble filtré)
+    # 7) Equity curves par horizon (CLOSED uniquement)
     for h in HORIZONS:
-        sub = trades_df[trades_df["horizon_days"] == h]
+        sub = trades_closed[trades_closed["horizon_days"] == h]
         if sub.empty:
             save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_{h}d.csv")
             save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_benchmark_spy_{h}d.csv")
@@ -423,10 +428,10 @@ def main():
         )
         save_csv(combo, f"backtest_equity_{h}d_combo.csv")
 
-    # 8) Equity par COHORTE (utile pour comparer P3 vs P2 au front)
+    # 8) Equity par COHORTE (10d, CLOSED uniquement)
     if 10 in HORIZONS:
         for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
-            subc = trades_df[(trades_df["horizon_days"] == 10) & (trades_df["cohort"] == cohort)]
+            subc = trades_closed[(trades_closed["horizon_days"] == 10) & (trades_closed["cohort"] == cohort)]
             if subc.empty:
                 save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_10d_{cohort}.csv")
                 continue
@@ -434,14 +439,33 @@ def main():
             eqc = equity_from_daily_returns(daily_ret)
             save_csv(eqc, f"backtest_equity_10d_{cohort}.csv")
 
-    # 9) Pour le front qui lit spécifiquement 10j : copie de sûreté
+    # 9) Copie de sûreté pour le front (10j)
     prefer = 10
     fallback = max(HORIZONS)
     src = f"backtest_equity_{prefer}d.csv" if prefer in HORIZONS else f"backtest_equity_{fallback}d.csv"
     eq10, _ = read_csv_first_available([src, PUBLIC_DIR / src])
     save_csv(eq10, "backtest_equity_10d.csv")
 
-    print("[OK] Backtest écrit : trades, summary, equity (global + cohortes) et SPY combo.")
+    # 10) Stats JSON pour logs/diag
+    stats = {
+        "signals_loaded": int(len(sig)),
+        "tickers_unique": int(sig["ticker_yf"].nunique()),
+        "date_min_signal": str(sig["date"].min().date()),
+        "date_max_signal": str(sig["date"].max().date()),
+        "trades_total": int(len(trades_df)),
+        "trades_closed": int(len(trades_closed)),
+        "trades_open": int(len(trades_df) - len(trades_closed)),
+    }
+    for h in HORIZONS:
+        stats[f"trades_{h}d_closed"] = int((trades_closed["horizon_days"] == h).sum())
+    print("[STATS] backtest:", stats)
+
+    with open("backtest_stats.json", "w") as f:
+        json.dump(stats, f)
+    with open(PUBLIC_DIR / "backtest_stats.json", "w") as f:
+        json.dump(stats, f)
+
+    print("[OK] Backtest écrit : trades (open & closed), summary/equity (closed only), stats JSON.")
 
 if __name__ == "__main__":
     main()
