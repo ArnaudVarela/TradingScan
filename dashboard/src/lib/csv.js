@@ -73,26 +73,46 @@ export async function loadCSVObjects(file) {
   return toObjects(parseCSV(text));
 }
 
+// Variante "safe" : renvoie [] si le fichier est absent ou invalide
+export async function loadCSVObjectsOptional(file) {
+  try {
+    const text = await loadCSVText(file);
+    return toObjects(parseCSV(text));
+  } catch (e) {
+    console.warn(`[WARN] Impossible de charger ${file}: ${e.message}`);
+    return [];
+  }
+}
+
 // ======================= LISTE DES CSV =====================
 export const FILES = {
-  // Fear & Greed
+  // Fear & Greed (root)
   FEAR_GREED: "fear_greed.csv",
   FEAR_GREED_HISTORY: "fear_greed_history.csv",
 
   // Backtests & signaux
   BACKTEST_SUMMARY: "backtest_summary.csv",
   SIGNALS_HISTORY: "signals_history.csv",
-  PILLARS_SUMMARY: "pillars_summary.csv",
 
-  // Cohortes confirmées
+  // Benchmarks / equity (ajoute-les si tes scripts les génèrent)
+  BACKTEST_BENCHMARK: "backtest_benchmark.csv",
+  BACKTEST_EQUITY: "backtest_equity.csv",
+
+  // Cohortes confirmées (tu as au moins celui-ci)
   CONFIRMED_STRONGBUY: "confirmed_STRONGBUY.csv",
-  CONFIRMED_BUY: "confirmed_BUY.csv",
-  CONFIRMED_SELL: "confirmed_SELL.csv",
-  CONFIRMED_STRONGSELL: "confirmed_STRONGSELL.csv",
+  // CONFIRMED_BUY: "confirmed_BUY.csv",
+  // CONFIRMED_SELL: "confirmed_SELL.csv",
+  // CONFIRMED_STRONGSELL: "confirmed_STRONGSELL.csv",
 
-  // Univers de tickers
-  R2000: "r2000.csv",
+  // Univers & secteurs (adapte aux noms réels)
+  RUSSELL2000: "russell2000.csv",
   SECTOR_CATALOG: "sector_catalog.csv",
+  SECTOR_HISTORY: "sector_history.csv",
+  SECTOR_BREADTH: "sector_breadth.csv",
+
+  // Debug / ranking (si utilisés)
+  CANDIDATES_ALL_RANKED: "candidates_all_ranked.csv",
+  RAW_CANDIDATES: "raw_candidates.csv",
 };
 
 // ======================= UTILS =============================
