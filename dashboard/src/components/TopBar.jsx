@@ -1,9 +1,12 @@
+// dashboard/src/components/TopBar.jsx
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
 import FearGreedGauge from "./FearGreedGauge.jsx";
 import LogoRadar from "./LogoRadar.jsx";
+import { fetchFearGreedLive } from "../lib/fng.js"; // ⬅️ chemin corrigé
 
 export default function TopBar({ lastRefreshed, onRefresh, fear }) {
+  // thème
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return false;
     const saved = localStorage.getItem("darkMode");
@@ -21,35 +24,54 @@ export default function TopBar({ lastRefreshed, onRefresh, fear }) {
     }
   }, [darkMode]);
 
+  // Fear & Greed (live si non passé en prop)
+  const [fearLive, setFearLive] = useState(null);
+  useEffect(() => {
+    let stop = false;
+    if (!fear) {
+      fetchFearGreedLive().then((v) => {
+        if (!stop) setFearLive(v);
+      });
+    } else {
+      setFearLive(null); // on respecte la prop si fournie
+    }
+    return () => { stop = true; };
+  }, [fear]);
+
+  const fearData = fear || fearLive; // priorité à la prop (ex: historique + streak)
+
   return (
     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
       {/* Logo + titre */}
-    <div className="flex items-center gap-3 min-w-0">
-      <LogoRadar dark={darkMode} size={38} className="flex-shrink-0" />
-      <div className="min-w-0">
-        <h1 className="text-2xl font-bold truncate">Signal Intelligence Dashboard</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          Confirmed / Anticipative / Event-driven signals — powered by cross-analysis
-        </p>
+      <div className="flex items-center gap-3 min-w-0">
+        <LogoRadar dark={darkMode} size={38} className="flex-shrink-0" />
+        <div className="min-w-0">
+          <h1 className="text-2xl font-bold truncate">Signal Intelligence Dashboard</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            Confirmed / Anticipative / Event-driven signals — powered by cross-analysis
+          </p>
+        </div>
       </div>
-    </div>
 
       {/* Fear & Greed Gauge */}
       <div className="flex items-center gap-4">
-        {fear && (
+        {fearData ? (
           <FearGreedGauge
-            score={Number(fear.score)}
-            label={String(fear.label || "")}
-            streak={Number(fear.streak_days ?? fear.streak ?? 0)}
-            asof={fear.asof}
+            score={Number(fearData.score)}
+            label={String(fearData.label || "")}
+            // l’API alt.me ne donne pas de streak → 0 par défaut si non fourni
+            streak={Number(fearData.streak_days ?? fearData.streak ?? 0)}
+            asof={fearData.asof}
           />
+        ) : (
+          <div className="text-xs text-slate-400">Fear &amp; Greed: N/A</div>
         )}
       </div>
 
       {/* Boutons à droite */}
       <div className="flex gap-2 items-center">
         <span className="text-xs text-slate-500 dark:text-slate-400">
-          Last refresh: {lastRefreshed}
+          Last refresh: {lastRefreshed || "-"}
         </span>
         <button
           type="button"
