@@ -1,1 +1,5 @@
 ticker_tv,ticker_yf,price,market_cap,sector,industry,technical_local,tech_score,tv_reco,analyst_bucket,analyst_mean,analyst_votes,rank_score
+ACM,ACM,125.30000305175781,16595484204.193115,Industrials,Construction & Engineering,Strong Buy,4,STRONG_BUY,Strong Buy,1.53846,11.0,7.55
+AMG,AMG,230.0,6534783000.0,Financials,Asset Management & Custody Banks,Strong Buy,6,STRONG_BUY,Strong Buy,1.42857,7.0,7.35
+AGNC,AGNC,9.845000267028809,10287335971.506409,Financials,REIT - Mortgage,Strong Buy,6,STRONG_BUY,Buy,2.06667,12.0,6.6
+AYI,AYI,333.30999755859375,10214218213.183594,Industrials,Electrical Components & Equipment,Strong Buy,6,STRONG_BUY,Buy,2.0,8.0,6.4
