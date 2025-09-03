@@ -1,3 +1,4 @@
+// dashboard/src/App.jsx
 import { useEffect, useMemo, useState } from "react";
 import TopBar from "./components/TopBar.jsx";
 import MetricCard from "./components/MetricCard.jsx";
@@ -9,8 +10,6 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import EquityCurve from "./components/EquityCurve.jsx";
 import BacktestSummary from "./components/BacktestSummary.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
-
-// ⬇️ NEW
 import CurationPanel from "./components/CurationPanel.jsx";
 
 // ---------- Déploiement : on consomme les fichiers du /public du site
@@ -33,8 +32,8 @@ const FILES = {
   p3_10:            "backtest_equity_10d_P3_confirmed.csv",
   p2_10:            "backtest_equity_10d_P2_highconv.csv",
   user_10:          "backtest_equity_10d_user.csv",
-  
-  // Sentiment
+
+  // Sentiment (optionnel : si non présent, TopBar fetchera en live)
   fear:             "fear_greed.json",
 };
 
@@ -58,8 +57,8 @@ export default function App() {
     bench10: [],
     p3_10: [],
     p2_10: [],
-    user_10: [],
-    fear: null,
+    user_10: [],      // ⬅️ important pour “Mes Picks”
+    fear: null,       // si null, TopBar fera un fetch live
   });
   const [last, setLast] = useState("-");
   const [loading, setLoading] = useState(false);
@@ -67,7 +66,7 @@ export default function App() {
   const [warningFiles, setWarningFiles] = useState([]);
   const [selectedSectors, setSelectedSectors] = useState([]);
 
-  // ⬇️ NEW: panneau curation (affichage)
+  // panneau curation (affichage)
   const [showCuration, setShowCuration] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("showCuration") === "1";
@@ -94,7 +93,6 @@ export default function App() {
     }
   }, [showTimeline]);
 
-  // ⬇️ NEW: persister l’état du panneau curation
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("showCuration", showCuration ? "1" : "0");
@@ -119,13 +117,13 @@ export default function App() {
       ["bench10",          FILES.bench10],
       ["p3_10",            FILES.p3_10],
       ["p2_10",            FILES.p2_10],
-      ["user_10",          FILES.user_10],
+      ["user_10",          FILES.user_10],     // ⬅️ on charge bien Mes Picks
     ];
 
     try {
       const [results, fear] = await Promise.all([
         Promise.allSettled(tasks.map(([_, f]) => fetchCSV(urlFor(f)))),
-        fetchJSON(urlFor(FILES.fear)).catch(() => null),
+        fetchJSON(urlFor(FILES.fear)).catch(() => null), // ok si absent
       ]);
 
       const next = {
@@ -140,6 +138,7 @@ export default function App() {
         bench10: [],
         p3_10: [],
         p2_10: [],
+        user_10: [],                           // ⬅️ on l'initialise
         fear: fear && typeof fear === "object" ? fear : null,
       };
       const failed = [];
@@ -190,7 +189,7 @@ export default function App() {
     universe:  data.all.length,
   }), [data]);
 
-  // ---------- Filtre sectoriel (sélection depuis heatmap)
+  // ---------- Filtre sectoriel
   const sectorFilterActive = selectedSectors.length > 0;
   const filterBySectors = (rows) => {
     if (!sectorFilterActive) return rows;
@@ -219,11 +218,11 @@ export default function App() {
       <TopBar lastRefreshed={last} onRefresh={loadAll} fear={data.fear} />
 
       {/* Info source */}
-      <div className="mb-2 text-xs text-slate-500">
-        Source CSV : fichiers statiques (public/)
+      <div className="mb-2 text-xs text-slate-500 dark:text-slate-400">
+        Source CSV : fichiers statiques (public/). Fear &amp; Greed : JSON local si présent, sinon live via alternative.me.
       </div>
 
-      {/* ⬇️ NEW: bouton pour afficher/masquer le panneau curation */}
+      {/* Panneau curation (toggle) */}
       <div className="mb-4">
         <button
           onClick={() => setShowCuration(v => !v)}
@@ -234,16 +233,15 @@ export default function App() {
         </button>
       </div>
 
-      {/* ⬇️ NEW: panneau de curation */}
       {showCuration && (
         <div className="mb-6">
           <CurationPanel />
         </div>
       )}
 
-      {/* Bandeau avertissements (certains fichiers KO) */}
+      {/* Bandeau avertissements */}
       {warningFiles.length > 0 && (
-        <div className="mb-4 text-sm text-yellow-800 bg-yellow-50 border border-yellow-200 rounded p-2">
+        <div className="mb-4 text-sm text-yellow-800 bg-yellow-50 border border-yellow-200 dark:bg-yellow-950/40 dark:border-yellow-900 rounded p-2">
           Certains fichiers n’ont pas pu être chargés :{" "}
           <span className="font-mono">{warningFiles.join(", ")}</span>
           {" "} (détails dans la console du navigateur).
@@ -283,7 +281,7 @@ export default function App() {
         )}
       </div>
 
-      {/* Affichage du filtre actif */}
+      {/* Filtre actif */}
       {sectorFilterActive && (
         <div className="mb-4 flex items-center gap-2 flex-wrap">
           <span className="text-xs opacity-70">Sector filter:</span>
@@ -301,7 +299,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Timeline (weekly history) pliable */}
+      {/* Timeline pliable */}
       <div className="mb-6 bg-white dark:bg-slate-900 rounded shadow p-4">
         <button
           onClick={() => setShowTimeline(!showTimeline)}
@@ -322,15 +320,16 @@ export default function App() {
         )}
       </div>
 
-      {/* Equity curve (10-day hold): P3 vs P2 vs SPY */}
+      {/* Equity curve (10-day hold): P3 vs P2 vs SPY vs “Mes Picks” */}
       <div className="mb-6">
         <EquityCurve
           data={data.equity10}
-          bench={data.bench10}  // SPY
+          bench={data.bench10}    // SPY aligné modèle auto
           p3={data.p3_10}
           p2={data.p2_10}
-          user={data.user_10} 
+          user={data.user_10}     // “Mes Picks”
           title="Equity curve — 10 trading days: P3 vs P2 vs SPY"
+          storageKey="eqcurve_10d"
         />
       </div>
 
