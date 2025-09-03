@@ -14,7 +14,6 @@ function normSeries(rows, key) {
 }
 
 function mergeOnDate(series) {
-  // series: array of arrays already shaped as {date, keyX}
   const map = new Map();
   for (const arr of series) {
     for (const row of arr) {
@@ -23,8 +22,12 @@ function mergeOnDate(series) {
       Object.assign(map.get(d), row);
     }
   }
-  return Array.from(map.values()).sort((a,b) => a.date.localeCompare(b.date));
+  return Array.from(map.values()).sort((a, b) => a.date.localeCompare(b.date));
 }
+
+// 🔑 helper : vérifie si une clé existe dans au moins une ligne
+const hasKey = (rows, key) =>
+  rows.some(r => Object.prototype.hasOwnProperty.call(r, key));
 
 export default function EquityCurve({
   data,     // auto model 10d
@@ -40,7 +43,10 @@ export default function EquityCurve({
   const p2S    = useMemo(() => normSeries(p2, "P2_highconv"), [p2]);
   const userS  = useMemo(() => normSeries(user, "User_picks"), [user]);
 
-  const merged = useMemo(() => mergeOnDate([modelS, spyS, p3S, p2S, userS]), [modelS, spyS, p3S, p2S, userS]);
+  const merged = useMemo(
+    () => mergeOnDate([modelS, spyS, p3S, p2S, userS]),
+    [modelS, spyS, p3S, p2S, userS]
+  );
 
   const hasAny = merged.length > 0;
 
@@ -56,17 +62,19 @@ export default function EquityCurve({
               <YAxis tick={{ fontSize: 11 }} />
               <Tooltip />
               <Legend />
-              {/* Laisse Recharts choisir les couleurs par défaut */}
-              {"Model" in merged[0] && <Line type="monotone" dataKey="Model" dot={false} strokeWidth={2} />}
-              {"SPY" in merged[0] && <Line type="monotone" dataKey="SPY" dot={false} strokeWidth={2} />}
-              {"P3_confirmed" in merged[0] && <Line type="monotone" dataKey="P3_confirmed" dot={false} strokeWidth={2} />}
-              {"P2_highconv" in merged[0] && <Line type="monotone" dataKey="P2_highconv" dot={false} strokeWidth={2} />}
-              {"User_picks" in merged[0] && <Line type="monotone" dataKey="User_picks" dot={false} strokeWidth={2} />}
+
+              {hasKey(merged, "Model")        && <Line type="monotone" dataKey="Model"        dot={false} strokeWidth={2} />}
+              {hasKey(merged, "SPY")          && <Line type="monotone" dataKey="SPY"          dot={false} strokeWidth={2} />}
+              {hasKey(merged, "P3_confirmed") && <Line type="monotone" dataKey="P3_confirmed" dot={false} strokeWidth={2} />}
+              {hasKey(merged, "P2_highconv")  && <Line type="monotone" dataKey="P2_highconv"  dot={false} strokeWidth={2} />}
+              {hasKey(merged, "User_picks")   && <Line type="monotone" dataKey="User_picks"   dot={false} strokeWidth={2} />}
             </LineChart>
           </ResponsiveContainer>
         </div>
       ) : (
-        <div className="text-sm text-slate-500">Aucune donnée d’équity à afficher.</div>
+        <div className="text-sm text-slate-500">
+          Aucune donnée d’équity à afficher.
+        </div>
       )}
     </div>
   );
