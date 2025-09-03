@@ -107,20 +107,33 @@ date,bucket,sector,count
 2025-09-03T18:27:11Z,,Materials,56
 2025-09-03T18:27:11Z,,Real Estate,62
 2025-09-03T18:27:11Z,,Utilities,41
-2025-W36,pre,Information Technology,35
-2025-W36,pre,Consumer Discretionary,54
-2025-W36,pre,Health Care,31
-2025-W36,pre,Industrials,33
-2025-W36,pre,Communication Services,14
+2025-09-03T19:27:27Z,,Communication Services,49
+2025-09-03T19:27:27Z,,Consumer Discretionary,126
+2025-09-03T19:27:27Z,,Consumer Staples,62
+2025-09-03T19:27:27Z,,Energy,37
+2025-09-03T19:27:27Z,,Financials,154
+2025-09-03T19:27:27Z,,Health Care,106
+2025-09-03T19:27:27Z,,Industrials,173
+2025-09-03T19:27:27Z,,Information Technology,144
+2025-09-03T19:27:27Z,,Materials,56
+2025-09-03T19:27:27Z,,Real Estate,62
+2025-09-03T19:27:27Z,,Utilities,41
+2025-W36,confirmed,Financials,1
+2025-W36,pre,Financials,58
+2025-W36,pre,Information Technology,40
+2025-W36,pre,Consumer Discretionary,52
+2025-W36,pre,Health Care,32
+2025-W36,pre,Industrials,34
+2025-W36,pre,Communication Services,16
 2025-W36,pre,Real Estate,24
 2025-W36,pre,Materials,11
-2025-W36,pre,Financials,56
-2025-W36,pre,Consumer Staples,14
+2025-W36,pre,Consumer Staples,15
 2025-W36,pre,Energy,14
 2025-W36,pre,Healthcare,2
 2025-W36,pre,Utilities,4
 2025-W36,pre,Consumer Cyclical,2
 2025-W36,pre,Financial Services,1
+2025-W36,events,Financials,82
 2025-W36,events,Information Technology,96
 2025-W36,events,Consumer Discretionary,90
 2025-W36,events,Health Care,78
@@ -128,7 +141,6 @@ date,bucket,sector,count
 2025-W36,events,Communication Services,20
 2025-W36,events,Real Estate,58
 2025-W36,events,Materials,36
-2025-W36,events,Financials,82
 2025-W36,events,Consumer Staples,49
 2025-W36,events,Energy,33
 2025-W36,events,Healthcare,1

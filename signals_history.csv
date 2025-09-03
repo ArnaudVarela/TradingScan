@@ -3259,7 +3259,7 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-09-03,events,DHR,DHR,Health Care,Life Sciences Tools & Services,200.94000244140625
 2025-09-03,pre,PINS,PINS,Communication Services,Internet Content & Information,36.96500015258789
 2025-09-03,pre,LH,LH,Health Care,Health Care Services,273.7349853515625
-2025-09-03,pre,SJM,SJM,Consumer Staples,Packaged Foods & Meats,111.75499725341797
+2025-09-03,pre,SJM,SJM,Consumer Staples,Packaged Foods & Meats,111.75499725341795
 2025-09-03,pre,UNM,UNM,Financials,Life & Health Insurance,72.75
 2025-09-03,pre,SRE,SRE,Utilities,Multi-Utilities,81.94999694824219
 2025-09-03,pre,IPG,IPG,Communication Services,Advertising,26.5
@@ -3268,3 +3268,10 @@ date,bucket,ticker_yf,ticker_tv,sector,industry,price
 2025-09-03,pre,VNO,VNO,Real Estate,Office REITs,38.83000183105469
 2025-09-03,pre,COOP,COOP,Financials,Commercial & Residential Mortgage Finance,189.3300018310547
 2025-09-03,pre,FAF,FAF,Financials,Property & Casualty Insurance,65.05500030517578
+2025-09-03,pre,STWD,STWD,Financials,REIT - Mortgage,20.204999923706055
+2025-09-03,pre,VNT,VNT,Information Technology,Electronic Equipment & Instruments,42.400001525878906
+2025-09-03,pre,QRVO,QRVO,Information Technology,Semiconductors,90.3949966430664
+2025-09-03,pre,SIRI,SIRI,Communication Services,Broadcasting,23.405000686645508
+2025-09-03,pre,PEGA,PEGA,Information Technology,Software - Application,54.0
+2025-09-03,pre,LAMR,LAMR,Real Estate,Other Specialized REITs,126.13500213623047
+2025-09-03,pre,KD,KD,Information Technology,IT Consulting & Other Services,31.975000381469727
