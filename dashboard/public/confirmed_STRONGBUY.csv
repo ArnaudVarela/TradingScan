@@ -1,2 +1,7 @@
-ticker_tv,ticker_yf,price,market_cap,sector,industry,technical_local,tech_score,tv_reco,analyst_bucket,analyst_mean,analyst_votes,rank_score
-AGNC,AGNC,9.895000457763672,10339582670.010986,Financials,REIT - Mortgage,Strong Buy,6,STRONG_BUY,Buy,2.06667,12.0,6.6
+ticker_tv,ticker_yf,price,market_cap,sector,industry,technical_local,tech_score,tv_reco,analyst_bucket,analyst_mean,analyst_votes,rank_score,inv_d_label,inv_w_label,inv_m_label,inv_d_vote,inv_w_vote,inv_m_vote,bc_score,bc_label
+AMG,AMG,230.63999938964844,6552966726.65863,Financials,Asset Management & Custody Banks,Strong Buy,6,STRONG_BUY,Strong Buy,1.42857,7.0,7.35,,,,,,,,
+AFRM,AFRM,85.30999755859375,27781199339.996094,Information Technology,Software - Infrastructure,Strong Buy,4,STRONG_BUY,Buy,1.78261,19.0,6.95,,,,,,,,
+AGNC,AGNC,9.949999809265137,10397053141.495422,Financials,REIT - Mortgage,Strong Buy,6,STRONG_BUY,Buy,2.06667,12.0,6.6,,,,,,,,
+NLY,NLY,21.489999771118164,13798213780.720459,Financials,REIT - Mortgage,Strong Buy,6,STRONG_BUY,Buy,2.0,11.0,6.55,,,,,,,,
+AYI,AYI,332.3699951171875,10185412026.367188,Industrials,Electrical Components & Equipment,Strong Buy,6,STRONG_BUY,Buy,2.0,8.0,6.4,,,,,,,,
+AAL,AAL,13.4399995803833,8868101375.604736,Industrials,Passenger Airlines,Buy,2,STRONG_BUY,Buy,2.22727,20.0,6.0,,,,,,,,
