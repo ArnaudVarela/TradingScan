@@ -8,8 +8,14 @@
 #   - debug_all_candidates.csv
 #   - sector_history.csv
 #   - raw_candidates.csv (diag brut)
+#   - sector_breadth.csv
+#
+# Patch : + Investing (résumé technique D/W/M) + BarChart (opinion/score)
+# - Ajout de features: inv_{d,w,m}_vote, inv_{d,w,m}_label, bc_score, bc_label
+# - Rank score prend en compte ces features (pondération douce)
+# - Scrapers robustes (session, headers, retries, cache TTL) + gating
 
-import warnings, time, os, math
+import warnings, time, os, math, re, json, random
 import requests
 import pandas as pd
 import numpy as np
@@ -34,9 +40,21 @@ DELAY_BETWEEN_TV_CALLS_SEC = 0.2
 
 SECTOR_CATALOG_PATH = "sector_catalog.csv"  # optionnel
 
+# --- Nouvelles sources (feature flags) ---
+USE_INVESTING = True
+USE_BARCHART  = True
+
+# --- Gating : n’appeler Invest/BarChart que si prometteur ---
+GATE_MIN_TECH_VOTES = 2  # si TA local votes >= 2
+GATE_TV_ONLY_STRONG = True  # appelle BarChart/Investing si tv_reco STRONG_BUY
+
+# --- Cache simple (TTL secondes) pour endpoints externes ---
+CACHE_TTL_SECONDS = 60 * 60  # 1h
+
 # --- Sorties : racine + copie dans dashboard/public/ pour le front
 PUBLIC_DIR = os.path.join("dashboard", "public")
 
+# ============= UTILS I/O =============
 def _ensure_dir(p: str):
     d = os.path.dirname(p)
     if d and not os.path.exists(d):
@@ -54,6 +72,12 @@ def save_csv(df: pd.DataFrame, fname: str, also_public: bool = True):
 # ============= HELPERS =============
 def yf_norm(s:str)->str: return s.replace(".", "-")
 def tv_norm(s:str)->str: return s.replace("-", ".")
+def base_sym(s:str)->str:
+    """Symbole 'propre' pour requêtes externes (AAPL, BRK.B, etc.)."""
+    s = (s or "").upper().strip()
+    s = s.replace("-", ".")
+    # Certains sites n’aiment pas les suffixes .US/.NYQ, on garde tel quel pour US
+    return s
 
 def fetch_wikipedia_tickers(url: str):
     ua = {"User-Agent":"Mozilla/5.0"}
@@ -189,20 +213,319 @@ def get_tv_summary(symbol: str, exchange: str):
         if alt and alt.get("tv_reco"): return alt
     return {"tv_reco": None}
 
+# ============= NEW: SCRAPERS & CACHE =============
+
+class _TTLCache:
+    def __init__(self, ttl_sec=CACHE_TTL_SECONDS):
+        self.ttl = ttl_sec
+        self.store = {}  # key -> (ts, value)
+    def get(self, key):
+        v = self.store.get(key)
+        if not v: return None
+        ts, val = v
+        if time.time() - ts > self.ttl:
+            self.store.pop(key, None)
+            return None
+        return val
+    def set(self, key, val):
+        self.store[key] = (time.time(), val)
+
+CACHE = _TTLCache()
+
+def _session():
+    s = requests.Session()
+    s.headers.update({
+        "User-Agent": f"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                      f"(KHTML, like Gecko) Chrome/{random.randint(109, 121)}.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.8",
+        "Connection": "keep-alive",
+    })
+    return s
+
+def _retry_get_json(sess, url, params=None, headers=None, referer=None, max_try=3, timeout=20):
+    if referer:
+        sess.headers.update({"Referer": referer})
+    for i in range(max_try):
+        try:
+            r = sess.get(url, params=params, headers=headers, timeout=timeout)
+            if r.status_code == 200:
+                return r.json()
+            if r.status_code in (403, 429):
+                time.sleep(1.5 + i)
+            else:
+                time.sleep(0.3 + 0.2*i)
+        except Exception:
+            time.sleep(0.5 + 0.2*i)
+    return None
+
+def _retry_get_text(sess, url, params=None, headers=None, referer=None, max_try=3, timeout=20):
+    if referer:
+        sess.headers.update({"Referer": referer})
+    for i in range(max_try):
+        try:
+            r = sess.get(url, params=params, headers=headers, timeout=timeout)
+            if r.status_code == 200 and r.text:
+                return r.text
+            if r.status_code in (403, 429):
+                time.sleep(1.5 + i)
+            else:
+                time.sleep(0.3 + 0.2*i)
+        except Exception:
+            time.sleep(0.5 + 0.2*i)
+    return None
+
+# ---- BarChart opinion ---------------------------------------------------------
+def fetch_barchart_opinion(symbol:str):
+    """
+    Renvoie dict: {"bc_score": float|None, "bc_label": str|None}
+    Essaie d'abord l'API proxifiée (JSON), puis fallback parse HTML.
+    """
+    if not USE_BARCHART:
+        return {"bc_score": None, "bc_label": None}
+
+    sym = base_sym(symbol)
+    ck = f"barchart:{sym}"
+    cached = CACHE.get(ck)
+    if cached is not None:
+        return cached
+
+    sess = _session()
+    # Priming cookies
+    referer = f"https://www.barchart.com/stocks/quotes/{sym}/opinion"
+    _ = _retry_get_text(sess, referer, timeout=12)
+
+    # Try JSON proxy endpoint (commune à plusieurs pages)
+    api_url = "https://www.barchart.com/proxies/core-api/v1/opinions/get"
+    params = {"symbols": sym, "orderBy": "symbol"}
+    headers = {"Accept": "application/json", "X-Requested-With": "XMLHttpRequest"}
+
+    data = _retry_get_json(sess, api_url, params=params, headers=headers, referer=referer, timeout=15)
+    score = None; label = None
+
+    def _extract_score_label(obj):
+        sc = None; lb = None
+        if not obj: return sc, lb
+        # Cherche des champs communs
+        for k in ("score","compositeScore","overallScore","opinionScore"):
+            if isinstance(obj.get(k), (int,float)):
+                sc = float(obj[k]); break
+        for k in ("rating","signal","recommendation","opinion","label","composite"):
+            v = obj.get(k)
+            if isinstance(v, str) and v.strip():
+                lb = v.strip(); break
+        return sc, lb
+
+    if data and isinstance(data, dict):
+        # Structure typique: {"data":[{...}]}
+        arr = data.get("data") or data.get("results") or []
+        if arr and isinstance(arr, list):
+            sc, lb = _extract_score_label(arr[0])
+            score = sc; label = lb
+
+    # Fallback: parse HTML pour récupérer label dans __BC_DATA__ (si dispo)
+    if score is None or label is None:
+        html = _retry_get_text(sess, referer, timeout=15)
+        if html:
+            # Cherche JSON dans window.__BC_DATA__ = {...};
+            m = re.search(r"__BC_DATA__\s*=\s*({.*?})\s*;", html, re.DOTALL)
+            if m:
+                try:
+                    j = json.loads(m.group(1))
+                    # Heuristique: plonger récursivement pour trouver score/label
+                    stack = [j]
+                    seen = 0
+                    while stack and seen < 2000:
+                        seen += 1
+                        cur = stack.pop()
+                        if isinstance(cur, dict):
+                            sc, lb = _extract_score_label(cur)
+                            if score is None and sc is not None: score = sc
+                            if (label is None or label.lower()=="none") and lb: label = lb
+                            for v in cur.values():
+                                if isinstance(v, (dict, list)): stack.append(v)
+                        elif isinstance(cur, list):
+                            for v in cur:
+                                if isinstance(v, (dict, list)): stack.append(v)
+                except Exception:
+                    pass
+
+    out = {"bc_score": score, "bc_label": label}
+    CACHE.set(ck, out)
+    # petite pause anti-throttle
+    time.sleep(0.15 + random.random()*0.15)
+    return out
+
+# ---- Investing technical summary (D/W/M) --------------------------------------
+def _map_summary_to_vote(txt:str):
+    """Map 'Strong Buy/Buy/Neutral/Sell/Strong Sell' -> {+2,+1,0,-1,-2}"""
+    if not txt: return None
+    t = txt.strip().lower()
+    if "strong buy" in t:  return +2
+    if "buy" in t:         return +1
+    if "strong sell" in t: return -2
+    if "sell" in t:        return -1
+    if "neutral" in t:     return 0
+    return None
+
+def _first_group(regex, text):
+    m = re.search(regex, text, re.IGNORECASE|re.DOTALL)
+    return m.group(1).strip() if m else None
+
+def fetch_investing_summary(symbol:str):
+    """
+    Retourne: {
+      "inv_d_label": str|None, "inv_w_label": str|None, "inv_m_label": str|None,
+      "inv_d_vote": int|None,  "inv_w_vote": int|None,  "inv_m_vote": int|None
+    }
+    Stratégie:
+      1) search -> récupérer slug/link (équities US) -> pages ‘-technical’ D/W/M
+      2) parser label dans HTML (heuristique robuste)
+    """
+    if not USE_INVESTING:
+        return {"inv_d_label":None,"inv_w_label":None,"inv_m_label":None,
+                "inv_d_vote":None,"inv_w_vote":None,"inv_m_vote":None}
+
+    sym = base_sym(symbol)
+    ck = f"investing:{sym}"
+    cached = CACHE.get(ck)
+    if cached is not None:
+        return cached
+
+    sess = _session()
+    # Petite chauffe pour cookie/csrf
+    _ = _retry_get_text(sess, "https://www.investing.com/", timeout=12)
+
+    # 1) Search endpoints (nouveau et ancien)
+    slug_link = None
+    # Essai API moderne
+    j = _retry_get_json(sess, "https://api.investing.com/api/search/v2/global", params={"q": sym}, timeout=15)
+    candidates = []
+    if j and isinstance(j, dict):
+        for k in ("quotes","all","data","result","results"):
+            arr = j.get(k)
+            if isinstance(arr, list):
+                candidates += arr
+    # Essai ancien endpoint
+    if not candidates:
+        try:
+            r = sess.post("https://www.investing.com/search/service/SearchInner",
+                          data={"search_text": sym, "limit": 20, "action":"getSymbols"},
+                          headers={"X-Requested-With":"XMLHttpRequest"}, timeout=15)
+            if r.status_code==200:
+                jj = r.json()
+                if isinstance(jj, dict):
+                    for k in ("All","all","symbols","quotes"):
+                        arr = jj.get(k)
+                        if isinstance(arr, list):
+                            candidates += arr
+        except Exception:
+            pass
+
+    # Sélectionne un equity US si possible
+    best = None
+    for c in candidates:
+        # diverses formes possibles
+        t = (c.get("type") or c.get("pair_type") or c.get("instrument_type") or "").lower()
+        sect = (c.get("sector") or c.get("sector_type") or "").lower()
+        ex = (c.get("exchange") or c.get("exchange_name") or "").upper()
+        is_equity = ("equities" in t) or (t=="equities") or ("stock" in t) or ("equity" in t)
+        if is_equity and (("NASDAQ" in ex) or ("NYSE" in ex) or ("AMEX" in ex) or ("US" in ex)):
+            best = c; break
+    if not best and candidates:
+        best = candidates[0]
+
+    if best:
+        link = best.get("link") or best.get("url") or best.get("symbol_url")
+        if link and isinstance(link, str):
+            # typiquement: /equities/apple-computer-inc
+            slug_link = "https://www.investing.com" + link
+
+    def _parse_summary_from_html(html_text):
+        # essaie de trouver "Technical Summary: Strong Buy" ou équivalent dans la page
+        # 1) JSON Next.js __NEXT_DATA__ (si présent)
+        lab = _first_group(r'"technicalSummary"\s*:\s*"(Strong Buy|Buy|Neutral|Sell|Strong Sell)"', html_text)
+        if lab: return lab
+        # 2) Autres variantes de labels sérialisés
+        lab = _first_group(r'"summary"\s*:\s*"(Strong Buy|Buy|Neutral|Sell|Strong Sell)"', html_text)
+        if lab: return lab
+        # 3) Recherche textuelle près de "Technical Summary"
+        #    on prend le 1er label connu apparaissant dans la page (heuristique)
+        m = re.search(r"(Strong Buy|Buy|Neutral|Sell|Strong Sell)", html_text, re.IGNORECASE)
+        if m: return m.group(1).title()
+        return None
+
+    # 2) Récupération D/W/M
+    d_lab = w_lab = m_lab = None
+    if slug_link:
+        # Plusieurs paramètres possibles selon versions du site
+        urls = [
+            (slug_link + "-technical?period=daily",   "daily"),
+            (slug_link + "-technical?period=weekly",  "weekly"),
+            (slug_link + "-technical?period=monthly", "monthly"),
+            (slug_link + "-technical?timeFrame=Daily","daily"),
+            (slug_link + "-technical?timeFrame=Weekly","weekly"),
+            (slug_link + "-technical?timeFrame=Monthly","monthly"),
+        ]
+        got_d = got_w = got_m = False
+        for u, kind in urls:
+            if (got_d and kind=="daily") or (got_w and kind=="weekly") or (got_m and kind=="monthly"):
+                continue
+            html = _retry_get_text(sess, u, referer="https://www.investing.com/", timeout=15)
+            if not html: continue
+            lab = _parse_summary_from_html(html)
+            if kind=="daily"   and lab: d_lab, got_d = lab, True
+            if kind=="weekly"  and lab: w_lab, got_w = lab, True
+            if kind=="monthly" and lab: m_lab, got_m = lab, True
+            if got_d and got_w and got_m:
+                break
+
+    out = {
+        "inv_d_label": d_lab, "inv_w_label": w_lab, "inv_m_label": m_lab,
+        "inv_d_vote": _map_summary_to_vote(d_lab),
+        "inv_w_vote": _map_summary_to_vote(w_lab),
+        "inv_m_vote": _map_summary_to_vote(m_lab),
+    }
+    CACHE.set(ck, out)
+    time.sleep(0.15 + random.random()*0.15)
+    return out
+
+# ============= RANKING (avec nouvelles features) =============
 def rank_score_row(s: pd.Series) -> float:
     score = 0.0
+    # TV
     if s.get("tv_reco") == "STRONG_BUY": score += 3.0
+    # TA local
     tb = s.get("technical_local")
     if tb == "Strong Buy": score += 2.0
     elif tb == "Buy":     score += 1.0
+    # Analystes (Yahoo)
     ab = s.get("analyst_bucket")
     if ab == "Strong Buy": score += 2.0
     elif ab == "Buy":      score += 1.0
     av = s.get("analyst_votes")
     if isinstance(av,(int,float)) and av>0: score += min(av, 20)*0.05
+    # Market cap (préférence small/mid)
     mc = s.get("market_cap")
     if isinstance(mc,(int,float)) and mc>0:
         score += max(0.0, 5.0 - math.log10(mc))
+    # --- NEW: Investing votes (D/W/M) -> bonus doux
+    for k in ("inv_d_vote","inv_w_vote","inv_m_vote"):
+        v = s.get(k)
+        if isinstance(v, (int,float)):
+            # vote ∈ {-2,-1,0,1,2} -> +0.5 par point positif / -0.25 par point négatif (moins punitif)
+            score += 0.5*max(v,0) + (-0.25)*min(v,0)
+    # --- NEW: BarChart score/label
+    bc_score = s.get("bc_score")
+    if isinstance(bc_score, (int,float)):
+        # normalise 0..100 -> 0..2 (max) en douceur
+        score += (float(bc_score)/100.0) * 2.0
+    bc_label = (s.get("bc_label") or "").upper()
+    if "STRONG BUY" in bc_label: score += 1.0
+    elif bc_label == "BUY":      score += 0.5
+    elif bc_label == "SELL":     score -= 0.5
+    elif "STRONG SELL" in bc_label: score -= 1.0
+
     return score
 
 # ============= MAIN =============
@@ -230,6 +553,7 @@ def main():
         return sector_map.get(key_yf_tv, ("", ""))
 
     rows=[]
+    bc_hits = ivg_hits = 0
     for i, rec in enumerate(tickers_df.itertuples(index=False), 1):
         tv_sym, yf_sym = rec.tv_symbol, rec.yf_symbol
         try:
@@ -264,6 +588,30 @@ def main():
             sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
             industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
 
+            # --- NEW: External votes (gated) ---
+            inv = {"inv_d_label":None,"inv_w_label":None,"inv_m_label":None,
+                   "inv_d_vote":None,"inv_w_vote":None,"inv_m_vote":None}
+            bc  = {"bc_score":None,"bc_label":None}
+
+            should_call_externals = False
+            if votes is not None and votes >= GATE_MIN_TECH_VOTES:
+                should_call_externals = True
+            if GATE_TV_ONLY_STRONG and tv.get("tv_reco") == "STRONG_BUY":
+                should_call_externals = True
+            if analyst_bucket in {"Buy","Strong Buy"}:
+                should_call_externals = True
+
+            base = base_sym(tv_sym)
+            if should_call_externals:
+                if USE_INVESTING:
+                    inv = fetch_investing_summary(base)
+                    if any([inv.get("inv_d_vote") is not None, inv.get("inv_w_vote") is not None, inv.get("inv_m_vote") is not None]):
+                        ivg_hits += 1
+                if USE_BARCHART:
+                    bc = fetch_barchart_opinion(base)
+                    if bc.get("bc_score") is not None or bc.get("bc_label"):
+                        bc_hits += 1
+
             rows.append({
                 "ticker_tv": tv_sym, "ticker_yf": yf_sym,
                 "exchange": exch, "market_cap": mcap, "price": det.get("price"),
@@ -272,12 +620,21 @@ def main():
                 "tv_reco": tv["tv_reco"],
                 "analyst_bucket": analyst_bucket,
                 "analyst_mean": analyst_mean, "analyst_votes": analyst_votes,
+                # NEW: externals
+                "inv_d_label": inv.get("inv_d_label"),
+                "inv_w_label": inv.get("inv_w_label"),
+                "inv_m_label": inv.get("inv_m_label"),
+                "inv_d_vote": inv.get("inv_d_vote"),
+                "inv_w_vote": inv.get("inv_w_vote"),
+                "inv_m_vote": inv.get("inv_m_vote"),
+                "bc_score": bc.get("bc_score"),
+                "bc_label": bc.get("bc_label"),
             })
         except Exception:
             continue
 
         if i % 50 == 0:
-            print(f"{i}/{len(tickers_df)} traités…")
+            print(f"{i}/{len(tickers_df)} traités… (ivg_hits={ivg_hits}, bc_hits={bc_hits})")
 
     df = pd.DataFrame(rows)
 
@@ -294,13 +651,14 @@ def main():
         # produire quand même des fichiers vides pour le front
         empty_cols = ["ticker_tv","ticker_yf","price","market_cap","sector","industry",
                       "technical_local","tech_score","tv_reco","analyst_bucket",
-                      "analyst_mean","analyst_votes","rank_score"]
+                      "analyst_mean","analyst_votes","rank_score",
+                      "inv_d_label","inv_w_label","inv_m_label",
+                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label"]
         empty = pd.DataFrame(columns=empty_cols)
         save_csv(empty, "confirmed_STRONGBUY.csv")
         save_csv(empty, "anticipative_pre_signals.csv")
         save_csv(empty, "event_driven_signals.csv")
         save_csv(pd.DataFrame(columns=["candidate_type"]+empty_cols), "candidates_all_ranked.csv")
-        # pas de timeline sans données
         return
 
     # Diagnostic global (avant filtres finaux)
@@ -318,7 +676,11 @@ def main():
     confirmed_cols = [
         "ticker_tv","ticker_yf","price","market_cap","sector","industry",
         "technical_local","tech_score","tv_reco",
-        "analyst_bucket","analyst_mean","analyst_votes","rank_score"
+        "analyst_bucket","analyst_mean","analyst_votes","rank_score",
+        # NEW columns visibles dans les CSV
+        "inv_d_label","inv_w_label","inv_m_label",
+        "inv_d_vote","inv_w_vote","inv_m_vote",
+        "bc_score","bc_label"
     ]
     save_csv(confirmed[confirmed_cols], "confirmed_STRONGBUY.csv")
 
@@ -346,7 +708,7 @@ def main():
     save_csv(all_out[all_cols], "candidates_all_ranked.csv")
 
     def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
-    # nb d’actions vues par secteur dans l’univers filtré (US, cap, etc.)
+        # nb d’actions vues par secteur dans l’univers filtré (US, cap, etc.)
         return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
 
     def _sector_counts(df_part: pd.DataFrame) -> pd.Series:
@@ -378,10 +740,9 @@ def main():
         prev = hist[hist["date"] != last_week]
         if not prev.empty:
             prev_week = prev["date"].max()
-            # reconstruire %confirmed de la semaine précédente
             prev_conf = prev[(prev["date"]==prev_week) & (prev["bucket"]=="confirmed")] \
                           .set_index("sector")["count"]
-            prev_univ = prev.groupby("sector")["count"].sum()  # approx si tu n’as pas l’univers par secteur en historique
+            prev_univ = prev.groupby("sector")["count"].sum()
             prev_pct_conf = (prev_conf / prev_univ.replace(0,np.nan) * 100).fillna(0)
             wow_conf = (pct_conf - prev_pct_conf.reindex(univ.index).fillna(0))
 
@@ -450,7 +811,7 @@ def main():
     new_df = new_df.drop_duplicates(subset="__key").drop(columns="__key")
     save_csv(new_df, HISTORY_CSV)
 
-        # === Journalisation des signaux (historique par ticker) ======================
+    # === Journalisation des signaux (historique par ticker) ======================
     from datetime import datetime, timezone
 
     SIGNALS_CSV = "signals_history.csv"
@@ -490,7 +851,7 @@ def main():
     # Sauvegarde racine + copie dans dashboard/public/
     save_csv(merged, SIGNALS_CSV)
 
-    print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)}")
+    print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)} | ivg_hits={ivg_hits}, bc_hits={bc_hits}")
 
 if __name__ == "__main__":
     main()
