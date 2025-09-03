@@ -114,11 +114,9 @@ jobs:
           done
 
       # ================== FEAR & GREED ==================
-      - name: Fetch Fear & Greed (root CSV/JSON)
-        run: |
-          set -euo pipefail
-          python fetch_fear_greed.py
-          # (les sorties sont déjà dupliquées vers dashboard/public)
+      - name: Update Fear & Greed (alt.me)
+        run: python fetch_alt_fng.py
+
 
       # ================== DIAGNOSTIC GLOBAL ==================
       - name: Sanity dump (root + public)
