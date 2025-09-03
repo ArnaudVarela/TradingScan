@@ -101,10 +101,19 @@ def placeholder_outputs_when_empty():
     for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
         save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_10d_{cohort}.csv")
 
-# ---------- SPY ----------
+# ---------- SPY (robuste à l'index sans nom) ----------
 def compute_spy_benchmark(start_dt, end_dt):
+    """
+    Télécharge SPY en daily, normalise base 100 au premier point >= start_dt,
+    renvoie un DataFrame: columns = ['date','equity'] (datetime64, float).
+    """
+    # garde-fous
+    if pd.isna(start_dt) or pd.isna(end_dt):
+        return pd.DataFrame(columns=["date", "equity"])
+
     start_pad = (pd.to_datetime(start_dt) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
     end_pad   = (pd.to_datetime(end_dt)   + pd.Timedelta(days=7)).strftime("%Y-%m-%d")
+
     try:
         hist = yf.Ticker("SPY").history(
             start=start_pad, end=end_pad, interval="1d",
@@ -112,18 +121,34 @@ def compute_spy_benchmark(start_dt, end_dt):
         )
     except Exception:
         return pd.DataFrame(columns=["date","equity"])
+
     if hist is None or hist.empty:
         return pd.DataFrame(columns=["date","equity"])
-    px = hist[["Close"]].rename(columns={"Close": "close"})
+
+    # close -> equity base 100
+    px = hist[["Close"]].rename(columns={"Close": "close"}).dropna()
+    # normalise l'index sur des dates (sans heure)
     px.index = pd.to_datetime(px.index.date)
+
+    # fenêtre exacte
     mask = (px.index >= pd.to_datetime(start_dt)) & (px.index <= pd.to_datetime(end_dt))
     px = px.loc[mask].copy()
     if px.empty:
         return pd.DataFrame(columns=["date","equity"])
+
     base = float(px["close"].iloc[0])
+    if not np.isfinite(base) or base == 0:
+        return pd.DataFrame(columns=["date","equity"])
+
     px["equity"] = (px["close"] / base) * 100.0
-    out = px.reset_index()[["Date","equity"]].rename(columns={"Date":"date"})
+
+    # construit explicitement les colonnes sans dépendre du nom 'Date'
+    out = pd.DataFrame({
+        "date": px.index.astype("datetime64[ns]"),
+        "equity": px["equity"].astype(float).values
+    })
     return out
+
 
 # ---------- Téléchargement des prix ----------
 def prefetch_prices(tickers, start_date, end_date, batch_size=BATCH_SIZE):
