@@ -95,10 +95,11 @@ def fetch_wikipedia_tickers(url: str):
     tables = pd.read_html(r.text)
 
     def flatten(cols):
-        out=[]
+        out = []
         for c in cols:
             if isinstance(c, tuple):
-                out.append(" ". ".join([str(x) for x in c if pd.notna(x)]).strip())
+                # ✅ FIX: " ".join(...) (et pas " ". ".join(...))
+                out.append(" ".join([str(x) for x in c if pd.notna(x)]).strip())
             else:
                 out.append(str(c).strip())
         return out
@@ -110,13 +111,16 @@ def fetch_wikipedia_tickers(url: str):
         for i, name in enumerate(lower):
             if ("ticker" in name) or ("symbol" in name):
                 col_idx = i; break
-        if col_idx is None: continue
+        if col_idx is None:
+            continue
         ser = (t[t.columns[col_idx]].astype(str).str.strip()
                .str.replace(r"\s+","",regex=True)
                .str.replace("\u200b","",regex=False))
         vals = ser[ser.str.match(r"^[A-Za-z.\-]+$")].dropna().tolist()
-        if vals: return vals
+        if vals:
+            return vals
     raise RuntimeError(f"Aucune colonne Ticker/Symbol trouvée sur {url}")
+
 
 def load_universe()->pd.DataFrame:
     ticks=[]
