@@ -151,35 +151,53 @@ date,bucket,sector,count
 2025-09-04T01:46:54Z,,Materials,56
 2025-09-04T01:46:54Z,,Real Estate,62
 2025-09-04T01:46:54Z,,Utilities,41
-2025-W36,confirmed,Consumer Discretionary,2
-2025-W36,confirmed,Industrials,2
-2025-W36,confirmed,Financials,4
-2025-W36,confirmed,Health Care,1
+2025-09-04T02:23:55Z,,Communication Services,49
+2025-09-04T02:23:55Z,,Consumer Discretionary,126
+2025-09-04T02:23:55Z,,Consumer Staples,62
+2025-09-04T02:23:55Z,,Energy,37
+2025-09-04T02:23:55Z,,Financials,154
+2025-09-04T02:23:55Z,,Health Care,106
+2025-09-04T02:23:55Z,,Industrials,173
+2025-09-04T02:23:55Z,,Information Technology,144
+2025-09-04T02:23:55Z,,Materials,56
+2025-09-04T02:23:55Z,,Real Estate,62
+2025-09-04T02:23:55Z,,Utilities,41
+2025-W36,confirmed,Consumer Discretionary,33
+2025-W36,confirmed,Information Technology,23
+2025-W36,confirmed,Health Care,20
+2025-W36,confirmed,Industrials,15
+2025-W36,confirmed,Communication Services,8
+2025-W36,confirmed,Real Estate,7
+2025-W36,confirmed,Materials,8
+2025-W36,confirmed,Financials,40
+2025-W36,confirmed,Consumer Staples,9
+2025-W36,confirmed,Energy,8
+2025-W36,confirmed,Financial Services,1
 2025-W36,pre,Consumer Discretionary,57
 2025-W36,pre,Information Technology,42
 2025-W36,pre,Health Care,34
 2025-W36,pre,Industrials,38
 2025-W36,pre,Communication Services,16
-2025-W36,pre,Financials,62
 2025-W36,pre,Real Estate,22
 2025-W36,pre,Materials,11
-2025-W36,pre,Energy,14
+2025-W36,pre,Financials,62
 2025-W36,pre,Consumer Staples,15
+2025-W36,pre,Energy,14
 2025-W36,pre,Financial Services,1
 2025-W36,pre,Healthcare,2
 2025-W36,pre,Utilities,4
 2025-W36,pre,Consumer Cyclical,2
-2025-W36,events,Consumer Discretionary,56
-2025-W36,events,Information Technology,64
-2025-W36,events,Health Care,51
-2025-W36,events,Industrials,64
-2025-W36,events,Communication Services,13
-2025-W36,events,Financials,56
-2025-W36,events,Real Estate,37
-2025-W36,events,Materials,18
-2025-W36,events,Energy,28
+2025-W36,events,Consumer Discretionary,54
+2025-W36,events,Information Technology,54
+2025-W36,events,Health Care,45
+2025-W36,events,Industrials,49
+2025-W36,events,Communication Services,11
+2025-W36,events,Real Estate,34
+2025-W36,events,Materials,15
+2025-W36,events,Financials,49
 2025-W36,events,Consumer Staples,23
+2025-W36,events,Energy,21
 2025-W36,events,Healthcare,1
-2025-W36,events,Utilities,18
+2025-W36,events,Utilities,14
 2025-W36,events,Consumer Cyclical,1
-2025-W36,events,Technology,2
+2025-W36,events,Technology,1

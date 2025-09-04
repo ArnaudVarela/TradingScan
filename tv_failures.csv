@@ -17,6 +17,11 @@ MCD,NASDAQ,Exchange or symbol not found.
 ABBV,NASDAQ,Exchange or symbol not found.
 AYI,NASDAQ,Exchange or symbol not found.
 TOL,NASDAQ,Exchange or symbol not found.
+TOL,NYSE,"Can't access TradingView's API. HTTP status code: 429. Check for invalid symbol, exchange, or indicators."
+TOL,AMEX,"Can't access TradingView's API. HTTP status code: 429. Check for invalid symbol, exchange, or indicators."
+TOL,BATS,"Can't access TradingView's API. HTTP status code: 429. Check for invalid symbol, exchange, or indicators."
+TOL,NYSEARCA,"Can't access TradingView's API. HTTP status code: 429. Check for invalid symbol, exchange, or indicators."
+TOL,NYSEMKT,"Can't access TradingView's API. HTTP status code: 429. Check for invalid symbol, exchange, or indicators."
 FIVE,NASDAQ,"Can't access TradingView's API. HTTP status code: 429. Check for invalid symbol, exchange, or indicators."
 FIVE,NYSE,"Can't access TradingView's API. HTTP status code: 429. Check for invalid symbol, exchange, or indicators."
 FIVE,AMEX,"Can't access TradingView's API. HTTP status code: 429. Check for invalid symbol, exchange, or indicators."
