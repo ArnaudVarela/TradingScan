@@ -40,6 +40,12 @@ GATE_MIN_TECH_VOTES = 2         # sert à prioriser les appels externes
 MAX_MARKET_CAP      = 200_000_000_000     # < 200B
 KEEP_FULL_UNIVERSE_IN_OUTPUTS = True      # garde tout le seed dans les outputs (même si externes manquants)
 
+# === Ciblage externe sur un sous-ensemble (sniper mode) ===
+EXTERNAL_TARGET_MODE = "topk"   # "topk" ou "toppct"
+EXTERNAL_TOP_K = 150            # on vise ~10–20% de l’univers (ex: 150 sur 1 000–1 500)
+EXTERNAL_TOP_PCT = 0.15         # si mode "toppct", 15% de l’univers
+EXTERNAL_TOP_MIN = 80           # garde un minimum de tickers ciblés
+
 # ---- Confirmed tuning (assoupli) ----
 CONFIRM_MIN_TECH_VOTES = 4              # TA forte
 CONFIRM_MIN_ANALYST_VOTES = 5           # nb mini d'avis analystes pour valider "Buy"
@@ -500,6 +506,35 @@ def main():
         })
 
     seed = pd.DataFrame(seed_rows)
+        # === Pré-score 100% local (rapide) pour cibler les API externes ===
+    if not seed.empty:
+        # Score local simple: tech_score + bonus de label local
+        _lb = seed["local_label"].fillna("").astype(str).str.upper()
+        _lb_bonus = np.select(
+            [_lb.eq("STRONG_BUY"), _lb.eq("BUY"), _lb.eq("NEUTRAL"), _lb.eq("SELL"), _lb.eq("STRONG_SELL")],
+            [2.0,                  1.0,           0.0,              -0.8,           -1.5],
+            default=0.0
+        )
+        # Tech_score borné (évite qu’un extrême écrase tout)
+        _ts = pd.to_numeric(seed["tech_score"], errors="coerce").fillna(0.0).clip(-6, 6)
+
+        seed["local_pre_score"] = _ts + _lb_bonus
+        seed.sort_values(["local_pre_score"], ascending=[False], inplace=True, kind="mergesort")
+        seed.reset_index(drop=True, inplace=True)
+
+        # Sélection du sous-ensemble à enrichir via APIs externes
+        if EXTERNAL_TARGET_MODE == "toppct":
+            shortlist_size = max(int(len(seed) * float(EXTERNAL_TOP_PCT)), int(EXTERNAL_TOP_MIN))
+        else:  # "topk"
+            shortlist_size = max(int(EXTERNAL_TOP_MIN), int(EXTERNAL_TOP_K))
+        shortlist_size = min(shortlist_size, len(seed))
+
+        shortlist = seed.head(shortlist_size)["ticker_yf"].tolist()
+        shortlist_set = set(shortlist)
+        print(f"[TARGET] external shortlist={len(shortlist)} / seed={len(seed)} (mode={EXTERNAL_TARGET_MODE})")
+    else:
+        shortlist_set = set()
+
     print(f"[INFO] Seed TA local (>=60 barres): {len(seed)}/{len(tickers_df)}")
     if seed.empty:
         for name in [
@@ -516,22 +551,25 @@ def main():
     # 2b) FINNHUB — enrichit un sous-ensemble prioritaire
     fh_budget = min(FINNHUB_MAX_CALLS, len(seed)) if USE_FINNHUB and FINNHUB_API_KEY else 0
     finnhub_map = {}
+    fh_calls = 0
     for idx, rec in enumerate(seed.itertuples(index=False), 1):
         yf_sym = rec.ticker_yf
-        if idx <= fh_budget:
+        if yf_sym in shortlist_set and fh_calls < FINNHUB_MAX_CALLS:
             finnhub_map[yf_sym] = fetch_finnhub_label(yf_sym)
+            fh_calls += 1
         else:
             finnhub_map[yf_sym] = {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
 
     # 2c) TV bonus capé
-    tv_budget = min(TV_MAX_CALLS, len(seed))
+    tv_budget = TV_MAX_CALLS
     tv_ok = tv_ko = 0; consec_fail = 0; pause_spent = 0.0
     tv_results = {}
+    tv_calls = 0
 
     for idx, rec in enumerate(seed.itertuples(index=False), 1):
         tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
-        if idx <= tv_budget:
-            if idx % TV_COOLDOWN_EVERY == 0 and pause_spent < TV_MAX_PAUSE_TOTAL:
+        if (yf_sym in shortlist_set) and (tv_calls < tv_budget):
+            if (tv_calls > 0) and (tv_calls % TV_COOLDOWN_EVERY == 0) and (pause_spent < TV_MAX_PAUSE_TOTAL):
                 time.sleep(TV_COOLDOWN_SEC); pause_spent += TV_COOLDOWN_SEC
             exch_hint = ""
             try:
@@ -544,6 +582,7 @@ def main():
                     except Exception: pass
             except Exception: pass
             tv = get_tv_summary_max(tv_sym, yf_sym, exch_hint)
+            tv_calls += 1
             if tv.get("tv_reco"): tv_ok += 1; consec_fail = 0
             else:
                 tv_ko += 1; consec_fail += 1
@@ -552,7 +591,7 @@ def main():
             tv_results[yf_sym] = tv
         else:
             tv_results[yf_sym] = {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
-    print(f"[TV] budget={tv_budget}, ok={tv_ok}, ko={tv_ko}, pause_total≈{pause_spent:.1f}s")
+    print(f"[TV] shortlist_used={tv_calls}, ok={tv_ok}, ko={tv_ko}, pause_total≈{pause_spent:.1f}s")
 
     # 2d) Yahoo info + assemble rows
     rows=[]
