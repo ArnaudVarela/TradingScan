@@ -4,8 +4,8 @@
 #   - confirmed_STRONGBUY.csv
 #   - anticipative_pre_signals.csv
 #   - event_driven_signals.csv
-#   - candidates_all_ranked.csv   (inclut 'universe' = tout le seed filtré US/MCAP)
-#   - universe_today.csv          (univers complet du jour)
+#   - candidates_all_ranked.csv   (inclut 'universe' = tout le seed filtré)
+#   - universe_today.csv
 #   - debug_all_candidates.csv
 #   - sector_breadth.csv
 #   - sector_history.csv
@@ -40,6 +40,12 @@ GATE_MIN_TECH_VOTES = 2         # sert à prioriser les appels externes
 MAX_MARKET_CAP      = 200_000_000_000     # < 200B
 KEEP_FULL_UNIVERSE_IN_OUTPUTS = True      # garde tout le seed dans les outputs (même si externes manquants)
 
+# ---- Confirmed tightening ----
+CONFIRM_MIN_TECH_VOTES = 5              # tech_score mini pour compter comme corroboration
+CONFIRM_MIN_ANALYST_VOTES = 5           # nb mini d'avis analystes pour valider "Buy"
+CONFIRM_MIN_CORROBORATIONS = 2          # nombre d'arguments externes requis (sur 4)
+MIN_AVG_DAILY_VOLUME = 300_000          # filtre liquidité (ten_day / 3m avg volume)
+
 # TradingView : bonus capé (ratelimit fréquent)
 TV_MAX_CALLS = 100
 DELAY_BETWEEN_TV_CALLS_SEC = 0.10
@@ -53,7 +59,7 @@ TV_MAX_PAUSE_TOTAL = 45.0
 USE_FINNHUB = True
 FINNHUB_API_KEY = (os.environ.get("FINNHUB_API_KEY") or "d2sfah1r01qiq7a429ugd2sfah1r01qiq7a429v0").strip()
 FINNHUB_RESOLUTION = "D"          # Daily
-FINNHUB_MAX_CALLS  = 250          # budget global (60 req/min free) → suffisant pour top tickers
+FINNHUB_MAX_CALLS  = 250          # budget global (60 req/min free)
 FINNHUB_SLEEP_BETWEEN = 0.10      # petite pause anti-ban
 FINNHUB_TIMEOUT_SEC = 20
 
@@ -220,7 +226,8 @@ def local_label_from_indicators(det: dict, bucket: str) -> str:
 
         # Oscillateurs
         if rsi is not None:
-            score += 1 if rsi >= 55 else (-1 if rsi <= 45 else 0)
+            # seuils resserrés
+            score += 1 if rsi >= 60 else (-1 if rsi <= 40 else 0)
         if macd is not None and macds is not None and not np.isnan(macd) and not np.isnan(macds):
             score += 1 if macd > macds else -1
         if k is not None and d is not None and not np.isnan(k) and not np.isnan(d):
@@ -228,10 +235,11 @@ def local_label_from_indicators(det: dict, bucket: str) -> str:
     except Exception:
         pass
 
-    if score >= 4:   return "STRONG_BUY"
-    if score >= 2:   return "BUY"
-    if score <= -4:  return "STRONG_SELL"
-    if score <= -2:  return "SELL"
+    # seuils resserrés (vs version précédente)
+    if score >= 5:   return "STRONG_BUY"
+    if score >= 3:   return "BUY"
+    if score <= -5:  return "STRONG_SELL"
+    if score <= -3:  return "SELL"
     return "NEUTRAL"
 
 def analyst_bucket_from_mean(x):
@@ -357,7 +365,6 @@ def fetch_finnhub_label(symbol: str):
     macd_json = _fh_get_json(base, macd_params)
     macd_val = macds_val = None
     if macd_json:
-        # Finnhub renvoie souvent: "macd", "macd_signal", "macd_hist"
         for k in ["macd","MACD","macdValue"]:
             if isinstance(macd_json.get(k), list) and macd_json[k]:
                 macd_val = macd_json[k][-1]; break
@@ -577,6 +584,16 @@ def main():
                 except Exception:
                     info = {}
 
+            # Volume moyen (10j/3m)
+            avg_vol = None
+            try:
+                if fi:
+                    avg_vol = getattr(fi, "ten_day_average_volume", None) or getattr(fi, "three_month_average_volume", None)
+                if avg_vol is None and isinstance(info, dict):
+                    avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
+            except Exception:
+                pass
+
             country = (info.get("country") or info.get("countryOfCompany") or "").strip()
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
             is_us_exchange = str(exch).upper() in {"NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"}
@@ -591,13 +608,10 @@ def main():
             tv = tv_results.get(yf_sym) or {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
             fh = finnhub_map.get(yf_sym) or {"finnhub_label": None}
 
-            # final_signal: Local > Finnhub > TV
-            final_signal = local_label or fh.get("finnhub_label") or tv.get("tv_reco")
+            # final_signal: Finnhub > TV > Local
+            final_signal = fh.get("finnhub_label") or tv.get("tv_reco") or local_label
 
             sec_cat = ind_cat = ""
-            if SECTOR_CATALOG_PATH and os.path.exists(SECTOR_CATALOG_PATH):
-                # sector_from_catalog déjà déf
-                pass
             sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
             sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
             industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
@@ -619,6 +633,7 @@ def main():
                 "final_signal": final_signal,
                 "analyst_bucket": analyst_bucket,
                 "analyst_mean": analyst_mean, "analyst_votes": analyst_votes,
+                "avg_vol": avg_vol,
                 "out_of_scope": out_of_scope
             }
             rows.append(row)
@@ -643,14 +658,11 @@ def main():
         return
 
     # === Univers du jour ===
-    # Si on veut conserver tout le seed dans les outputs (même hors US/MCAP), on “ramène” les lignes out_of_scope
     if KEEP_FULL_UNIVERSE_IN_OUTPUTS:
-        # rien de spécial: df contient déjà tout ce qui a passé le TA seed; on garde même out_of_scope
         pass
     else:
         df = df[~df["out_of_scope"]].copy()
 
-    # Sauvegarde univers_today
     save_csv(df.drop(columns=["out_of_scope"]), "universe_today.csv")
 
     # === Scoring & sorties ===
@@ -658,7 +670,7 @@ def main():
 
     def rank_score_row(s: pd.Series) -> float:
         score = 0.0
-        # Final signal (Local > Finnhub > TV)
+        # Final signal (Finnhub > TV > Local)
         fs = (s.get("final_signal") or "").upper()
         if fs == "STRONG_BUY": score += 3.0
         elif fs == "BUY":      score += 1.8
@@ -690,6 +702,12 @@ def main():
         if isinstance(mc,(int,float)) and mc>0:
             score += max(0.0, 4.8 - math.log10(mc))
 
+        # Liquidité (soft penalty sous le seuil)
+        vol = s.get("avg_vol")
+        if isinstance(vol,(int,float)) and vol is not None:
+            if vol < MIN_AVG_DAILY_VOLUME:
+                score -= 0.5
+
         return float(score)
 
     dbg["rank_score"] = dbg.apply(rank_score_row, axis=1)
@@ -700,30 +718,42 @@ def main():
         "ticker_tv","ticker_yf","price","market_cap","sector","industry",
         "technical_local","tech_score","local_label","finnhub_label",
         "tv_reco","tv_symbol_used","tv_exchange_used",
-        "final_signal","analyst_bucket","analyst_mean","analyst_votes","rank_score"
+        "final_signal","analyst_bucket","analyst_mean","analyst_votes","avg_vol","rank_score"
     ]
 
-    # Buckets (on peut garder les filtres US/MCAP implicitement via le score/final_signal)
+    # ---- Confirmed: besoin de corroborations multiples ----
+    an_ok = df["analyst_bucket"].isin({"Strong Buy","Buy"}) & (df["analyst_votes"].fillna(0) >= CONFIRM_MIN_ANALYST_VOTES)
+    fh_ok = df["finnhub_label"].isin({"BUY","STRONG_BUY"})
+    tv_ok = df["tv_reco"].eq("STRONG_BUY")
+    ta_ok = (df["tech_score"].fillna(-99) >= CONFIRM_MIN_TECH_VOTES)
+    liq_ok = (df["avg_vol"].fillna(0) >= MIN_AVG_DAILY_VOLUME)
+
+    corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
+
     mask_confirm = (
         df["final_signal"].eq("STRONG_BUY")
-    ) & (~df["out_of_scope"])
+        & (corr_count >= CONFIRM_MIN_CORROBORATIONS)
+        & liq_ok
+        & (~df["out_of_scope"])
+    )
     confirmed = df[mask_confirm].copy()
     confirmed["rank_score"] = confirmed.apply(rank_score_row, axis=1)
     confirmed.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
 
+    # Pré-signaux (riche mais on garde la liquidité mini)
     mask_pre = (
-        df["technical_local"].isin({"Buy","Strong Buy"}) |
-        df["local_label"].isin({"BUY","STRONG_BUY"}) |
-        df["finnhub_label"].isin({"BUY","STRONG_BUY"}) |
-        df["tv_reco"].eq("STRONG_BUY")
-    ) & (~df["out_of_scope"])
+        df["technical_local"].isin({"Buy","Strong Buy"})
+        | df["local_label"].isin({"BUY","STRONG_BUY"})
+        | df["finnhub_label"].isin({"BUY","STRONG_BUY"})
+        | df["tv_reco"].eq("STRONG_BUY")
+    ) & (~df["out_of_scope"]) & liq_ok
     pre = df[mask_pre].copy()
     pre["rank_score"] = pre.apply(rank_score_row, axis=1)
     pre.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(pre[base_cols], "anticipative_pre_signals.csv")
 
-    evt = df[df["analyst_bucket"].notna() & (~df["out_of_scope"])].copy()
+    evt = df[df["analyst_bucket"].notna() & (~df["out_of_scope"]) & liq_ok].copy()
     evt["rank_score"] = evt.apply(rank_score_row, axis=1)
     evt.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(evt[base_cols], "event_driven_signals.csv")
@@ -744,7 +774,7 @@ def main():
     save_csv(all_out[["candidate_type"]+base_cols], "candidates_all_ranked.csv")
 
     # === Sector breadth (sur df complet du jour, hors out_of_scope) ===
-    df_sc = df[~df["out_of_scope"]].copy()
+    df_sc = df[~df["out_of_scope"] & liq_ok].copy()
     def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
         return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
     def _sector_counts(df_part: pd.DataFrame) -> pd.Series:
