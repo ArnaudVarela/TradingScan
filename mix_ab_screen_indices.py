@@ -41,13 +41,13 @@ MAX_MARKET_CAP      = 200_000_000_000     # < 200B
 KEEP_FULL_UNIVERSE_IN_OUTPUTS = True      # garde tout le seed dans les outputs (même si externes manquants)
 
 # ---- Confirmed tuning (assoupli) ----
-CONFIRM_MIN_TECH_VOTES = 5              # TA forte
+CONFIRM_MIN_TECH_VOTES = 4              # TA forte
 CONFIRM_MIN_ANALYST_VOTES = 5           # nb mini d'avis analystes pour valider "Buy"
 CONFIRM_MIN_CORROBORATIONS = 1          # nombre d'arguments externes requis (sur 4) si final_signal == STRONG_BUY
-MIN_AVG_DAILY_VOLUME = 200_000          # filtre liquidité (ten_day / 3m avg volume)
+MIN_AVG_DAILY_VOLUME = 150_000          # filtre liquidité (ten_day / 3m avg volume)
 
 # TradingView : bonus capé (ratelimit fréquent)
-TV_MAX_CALLS = 100
+TV_MAX_CALLS = 150
 DELAY_BETWEEN_TV_CALLS_SEC = 0.10
 TV_COOLDOWN_EVERY = 25
 TV_COOLDOWN_SEC   = 2.0
@@ -59,7 +59,7 @@ TV_MAX_PAUSE_TOTAL = 45.0
 USE_FINNHUB = True
 FINNHUB_API_KEY = (os.environ.get("FINNHUB_API_KEY") or "d2sfah1r01qiq7a429ugd2sfah1r01qiq7a429v0").strip()
 FINNHUB_RESOLUTION = "D"
-FINNHUB_MAX_CALLS  = 250
+FINNHUB_MAX_CALLS  = 350
 FINNHUB_SLEEP_BETWEEN = 0.10
 FINNHUB_TIMEOUT_SEC = 20
 
@@ -662,29 +662,43 @@ def main():
         "final_signal","analyst_bucket","analyst_mean","analyst_votes","avg_vol","rank_score"
     ]
 
-    # ---- Confirmed (assoupli mais robuste) ----
-    an_ok = df["analyst_bucket"].isin({"Strong Buy","Buy"}) & (pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= CONFIRM_MIN_ANALYST_VOTES)
-    fh_ok = df["finnhub_label"].isin({"BUY","STRONG_BUY"})
+        # ---- Confirmed (assoupli & plus réaliste) ----
+    an_ok = df["analyst_bucket"].isin({"Strong Buy", "Buy"}) & (
+        pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= CONFIRM_MIN_ANALYST_VOTES
+    )
+    fh_ok = df["finnhub_label"].isin({"BUY", "STRONG_BUY"})
     tv_ok = df["tv_reco"].eq("STRONG_BUY")
     ta_ok = (pd.to_numeric(df["tech_score"], errors="coerce").fillna(-99) >= CONFIRM_MIN_TECH_VOTES)
     liq_ok = (pd.to_numeric(df["avg_vol"], errors="coerce").fillna(0) >= MIN_AVG_DAILY_VOLUME)
 
+    # Compteur de corroborations (diagnostic / éventuellement utile ailleurs)
     corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
 
-    # cas principal: final_signal == STRONG_BUY + ≥1 corroboration
-    mask_confirm_main = df["final_signal"].eq("STRONG_BUY") & (corr_count >= CONFIRM_MIN_CORROBORATIONS)
+    # Porte A : final STRONG_BUY + ≥1 corroboration
+    mask_A = df["final_signal"].fillna("").astype(str).str.upper().eq("STRONG_BUY") & (corr_count >= 1)
 
-    # cas alternatif: final_signal == BUY mais 2 corroborations fortes parmi (FH, TV, TA) ou Buy+Analystes
-    combo_strong_2 = (fh_ok & tv_ok) | (fh_ok & ta_ok) | (tv_ok & ta_ok)
-    combo_buy_with_an = an_ok & (fh_ok | tv_ok | ta_ok)
-    mask_confirm_alt = df["final_signal"].eq("BUY") & (combo_strong_2 | combo_buy_with_an)
+    # Porte B : TV = STRONG_BUY + (analyst Buy/Strong Buy OU TA forte)
+    mask_B = tv_ok & (an_ok | ta_ok)
 
-    mask_confirm = (mask_confirm_main | mask_confirm_alt) & liq_ok & (~df["out_of_scope"])
-    confirmed = df[mask_confirm].copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
+    # Porte C : Analyst = Strong Buy (≥15 votes) + (FH ok OU TA forte)
+    an_strong_enough = df["analyst_bucket"].eq("Strong Buy") & (
+        pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= 15
+    )
+    mask_C = an_strong_enough & (fh_ok | ta_ok)
+
+    # Assemblage final + filtres généraux
+    mask_confirm = (mask_A | mask_B | mask_C) & liq_ok & (~df["out_of_scope"])
+
+    confirmed = df[mask_confirm].copy().sort_values(["rank_score", "market_cap"], ascending=[False, True])
     save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
 
-    # Logs de diag
-    print(f"[CONFIRMED] main={int(mask_confirm_main.sum())}, alt={int((mask_confirm_alt & liq_ok & (~df['out_of_scope'])).sum())}, total={len(confirmed)}")
+    # Log de contrôle (⚠️ reste dans main())
+    print(
+        f"[CONFIRMED] via A={int(mask_A.sum())}, "
+        f"via B={int((mask_B & liq_ok & (~df['out_of_scope'])).sum())}, "
+        f"via C={int((mask_C & liq_ok & (~df['out_of_scope'])).sum())}, "
+        f"total={len(confirmed)}"
+    )
 
     # Pré-signaux
     mask_pre = (
@@ -696,7 +710,9 @@ def main():
     pre = df[mask_pre].copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
     save_csv(pre[base_cols], "anticipative_pre_signals.csv")
 
-    evt = df[df["analyst_bucket"].notna() & (~df["out_of_scope"]) & liq_ok].copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
+    # Event-driven
+    evt = df[df["analyst_bucket"].notna() & (~df["out_of_scope"]) & liq_ok] \
+            .copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
     save_csv(evt[base_cols], "event_driven_signals.csv")
 
     # Reste de l’univers
