@@ -1,5 +1,5 @@
 # mix_ab_screen_indices.py
-# Screener US (Russell 1000 + 2000) — Gratuit, local + Finnhub + TV bonus
+# Screener US — Gratuit, core local rapide + Finnhub (sniper) + TV (bonus capé)
 # Sorties :
 #   - confirmed_STRONGBUY.csv
 #   - anticipative_pre_signals.csv
@@ -25,10 +25,24 @@ from datetime import datetime, timezone
 warnings.filterwarnings("ignore")
 
 # ============= CONFIG =============
+
+# --- Univers à inclure ---
 INCLUDE_RUSSELL_1000 = True
 INCLUDE_RUSSELL_2000 = True
-R1K_FALLBACK_CSV = "russell1000.csv"   # 1 col: Ticker
-R2K_FALLBACK_CSV = "russell2000.csv"   # 1 col: Ticker
+INCLUDE_SP500        = True
+INCLUDE_NASDAQ_COMPOSITE = True
+
+# --- Fichiers fallback ---
+R1K_FALLBACK_CSV = "russell1000.csv"        # 1 col: Ticker
+R2K_FALLBACK_CSV = "russell2000.csv"        # 1 col: Ticker (généré par gen_r2000_from_ishares.py)
+SP500_FALLBACK_CSV = "sp500.csv"            # 1 col: Ticker
+NASDAQ_COMPOSITE_FALLBACK_CSV = "nasdaq_composite.csv"  # 1 col: Ticker
+
+# --- Source Russell 2000 ---
+# "csv"  : utilise exclusivement le CSV généré par gen_r2000_from_ishares.py
+# "wiki" : force Wikipédia (⚠️ souvent incomplet)
+# "auto" : tente wiki, puis fallback CSV si <1000 tickers
+R2K_SOURCE = "csv"
 
 # Fenêtre (suffisant pour SMA200/TA classiques)
 PERIOD   = "1y"
@@ -36,25 +50,23 @@ INTERVAL = "1d"
 TV_INTERVAL = Interval.INTERVAL_1_DAY
 
 # Limites & priorisation
-GATE_MIN_TECH_VOTES = 2         # sert à prioriser les appels externes
-MAX_MARKET_CAP      = 200_000_000_000     # < 200B
-KEEP_FULL_UNIVERSE_IN_OUTPUTS = True      # garde tout le seed dans les outputs (même si externes manquants)
+GATE_MIN_TECH_VOTES = 2                 # sert à prioriser les appels externes (pré-score)
+MAX_MARKET_CAP      = 75_000_000_000    # < 75B
+KEEP_FULL_UNIVERSE_IN_OUTPUTS = True    # garde tout le seed dans les outputs (même si externes manquants)
 
 # === Ciblage externe sur un sous-ensemble (sniper mode) ===
 EXTERNAL_TARGET_MODE = "topk"   # "topk" ou "toppct"
-EXTERNAL_TOP_K = 150            # on vise ~10–20% de l’univers (ex: 150 sur 1 000–1 500)
+EXTERNAL_TOP_K = 150            # ~10–20% de l’univers
 EXTERNAL_TOP_PCT = 0.15         # si mode "toppct", 15% de l’univers
-EXTERNAL_TOP_MIN = 80           # garde un minimum de tickers ciblés
+EXTERNAL_TOP_MIN = 80           # minimum ciblé
 
-# ---- Confirmed tuning (assoupli) ----
+# ---- Confirmed tuning (assoupli & réaliste) ----
 CONFIRM_MIN_TECH_VOTES = 4              # TA forte
 CONFIRM_MIN_ANALYST_VOTES = 5           # nb mini d'avis analystes pour valider "Buy"
-CONFIRM_MIN_CORROBORATIONS = 1          # nombre d'arguments externes requis (sur 4) si final_signal == STRONG_BUY
+CONFIRM_MIN_CORROBORATIONS = 1          # nombre d'arguments externes requis si final_signal == STRONG_BUY
 MIN_AVG_DAILY_VOLUME = 150_000          # filtre liquidité (ten_day / 3m avg volume)
 
-# === Nasdaq Composite (option) ===
-INCLUDE_NASDAQ_COMPOSITE = True
-NASDAQ_COMPOSITE_FALLBACK_CSV = "nasdaq_composite.csv"  # CSV 1 colonne: Ticker
+# Nasdaq Composite (API nasdaq.com)
 NASDAQ_EXCLUDE_ETFS = True  # filtre basique des ETF/ETN/Funds/Trusts par le libellé
 
 # TradingView : bonus capé (ratelimit fréquent)
@@ -134,6 +146,22 @@ def fetch_wikipedia_tickers(url: str):
         if vals: return vals
     raise RuntimeError(f"Aucune colonne Ticker/Symbol trouvée sur {url}")
 
+def fetch_sp500_tickers():
+    """Récupère la liste S&P 500 depuis Wikipédia (stable)."""
+    url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+    ua = {"User-Agent":"Mozilla/5.0"}
+    r = requests.get(url, headers=ua, timeout=45)
+    r.raise_for_status()
+    tables = pd.read_html(r.text)
+    for t in tables:
+        cols = [str(c).lower() for c in t.columns]
+        if any("symbol" in c or "ticker" in c for c in cols):
+            ser = t[t.columns[0]].astype(str).str.strip()
+            vals = ser[ser.str.match(r"^[A-Za-z.\-]+$")].dropna().tolist()
+            if vals:
+                return vals
+    return []
+
 def fetch_nasdaq_composite():
     """
     Récupère tous les tickers listés sur le NASDAQ via l'endpoint screener.
@@ -160,17 +188,26 @@ def fetch_nasdaq_composite():
     for row in rows:
         sym = str(row.get("symbol") or "").strip().upper()
         name = str(row.get("name") or "").strip().upper()
-        # Filtrage basique des ETF/ETN/Funds/Trusts si demandé
         if NASDAQ_EXCLUDE_ETFS:
             if any(tag in name for tag in ("ETF", "ETN", "FUND", "TRUST")):
                 continue
-        # Garde uniquement les tickers alphabetiques + . -
-        if sym and pd.notna(sym) and (len(sym) <= 8) and (pd.notna(sym)) and \
+        if sym and pd.notna(sym) and (len(sym) <= 8) and \
            (pd.Series([sym]).str.match(r"^[A-Z.\-]+$").iloc[0]):
             out.append(sym)
-    # dédoublonne en gardant l'ordre
-    out = list(dict.fromkeys(out))
-    return out
+    return list(dict.fromkeys(out))  # dédoublonne en gardant l'ordre
+
+def _read_tickers_csv(path: str, colname: str = "Ticker") -> list:
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"CSV introuvable: {path}")
+    df = pd.read_csv(path)
+    if colname not in df.columns:
+        colname = df.columns[0]
+    ser = (
+        df[colname].astype(str).str.strip().str.upper()
+        .replace("", np.nan).dropna()
+    )
+    ser = ser[ser.str.match(r"^[A-Z.\-]+$")]
+    return list(dict.fromkeys(ser.tolist()))
 
 def load_universe()->pd.DataFrame:
     ticks = []
@@ -188,20 +225,53 @@ def load_universe()->pd.DataFrame:
                 ticks += r1k_fb
                 print(f"[UNIV] Russell 1000 fallback CSV: {len(r1k_fb)} tickers")
 
-    # --- Russell 2000
+    # --- Russell 2000 (CSV prioritaire)
     if INCLUDE_RUSSELL_2000:
-        try:
-            r2k = fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
+        if R2K_SOURCE.lower() == "csv":
+            try:
+                r2k = _read_tickers_csv(R2K_FALLBACK_CSV, colname="Ticker")
+                ticks += r2k
+                print(f"[UNIV] Russell 2000 (CSV): {len(r2k)} tickers")
+            except Exception as e:
+                print(f"[WARN] Russell 2000 CSV échec: {e} — aucun R2K ajouté")
+        elif R2K_SOURCE.lower() == "wiki":
+            try:
+                r2k = fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
+                ticks += r2k
+                print(f"[UNIV] Russell 2000 (Wiki): {len(r2k)} tickers")
+            except Exception as e:
+                print(f"[WARN] Russell 2000 (Wiki) échec: {e} — aucun R2K ajouté (pas de fallback CSV en mode wiki)")
+        else:  # auto
+            r2k = []
+            try:
+                r2k = fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
+                print(f"[UNIV] Russell 2000 (Wiki tentative): {len(r2k)} tickers")
+            except Exception as e:
+                print(f"[WARN] Russell 2000 (Wiki) échec: {e}")
+            if len(r2k) < 1000:
+                try:
+                    r2k_csv = _read_tickers_csv(R2K_FALLBACK_CSV, colname="Ticker")
+                    if r2k_csv:
+                        r2k = r2k_csv
+                        print(f"[UNIV] Russell 2000 (fallback CSV): {len(r2k)} tickers")
+                except Exception as e:
+                    print(f"[WARN] Russell 2000 fallback CSV échec: {e}")
             ticks += r2k
-            print(f"[UNIV] Russell 2000: {len(r2k)} tickers")
-        except Exception as e:
-            print(f"[WARN] Russell 2000 (Wiki) échec: {e}")
-            if os.path.exists(R2K_FALLBACK_CSV):
-                r2k_fb = pd.read_csv(R2K_FALLBACK_CSV)["Ticker"].astype(str).tolist()
-                ticks += r2k_fb
-                print(f"[UNIV] Russell 2000 fallback CSV: {len(r2k_fb)} tickers")
 
-    # --- Nasdaq Composite (tout Nasdaq via API officielle)
+    # --- S&P 500
+    if INCLUDE_SP500:
+        try:
+            sp = fetch_sp500_tickers()
+            ticks += sp
+            print(f"[UNIV] S&P 500: {len(sp)} tickers")
+        except Exception as e:
+            print(f"[WARN] S&P 500 (Wiki) échec: {e}")
+            if os.path.exists(SP500_FALLBACK_CSV):
+                sp_fb = pd.read_csv(SP500_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                ticks += sp_fb
+                print(f"[UNIV] S&P 500 fallback CSV: {len(sp_fb)} tickers")
+
+    # --- Nasdaq Composite-like (API nasdaq.com)
     if INCLUDE_NASDAQ_COMPOSITE:
         try:
             ndaq = fetch_nasdaq_composite()
@@ -533,7 +603,7 @@ def compute_rank_score(df: pd.DataFrame) -> pd.Series:
 
 # ============= MAIN =============
 def main():
-    print("Chargement des tickers Russell 1000 + 2000…")
+    print("Chargement de l’univers (R1K + R2K + S&P500 + Nasdaq)…")
     tickers_df = load_universe()
     print(f"Tickers dans l'univers (brut): {len(tickers_df)}")
 
@@ -579,35 +649,6 @@ def main():
         })
 
     seed = pd.DataFrame(seed_rows)
-        # === Pré-score 100% local (rapide) pour cibler les API externes ===
-    if not seed.empty:
-        # Score local simple: tech_score + bonus de label local
-        _lb = seed["local_label"].fillna("").astype(str).str.upper()
-        _lb_bonus = np.select(
-            [_lb.eq("STRONG_BUY"), _lb.eq("BUY"), _lb.eq("NEUTRAL"), _lb.eq("SELL"), _lb.eq("STRONG_SELL")],
-            [2.0,                  1.0,           0.0,              -0.8,           -1.5],
-            default=0.0
-        )
-        # Tech_score borné (évite qu’un extrême écrase tout)
-        _ts = pd.to_numeric(seed["tech_score"], errors="coerce").fillna(0.0).clip(-6, 6)
-
-        seed["local_pre_score"] = _ts + _lb_bonus
-        seed.sort_values(["local_pre_score"], ascending=[False], inplace=True, kind="mergesort")
-        seed.reset_index(drop=True, inplace=True)
-
-        # Sélection du sous-ensemble à enrichir via APIs externes
-        if EXTERNAL_TARGET_MODE == "toppct":
-            shortlist_size = max(int(len(seed) * float(EXTERNAL_TOP_PCT)), int(EXTERNAL_TOP_MIN))
-        else:  # "topk"
-            shortlist_size = max(int(EXTERNAL_TOP_MIN), int(EXTERNAL_TOP_K))
-        shortlist_size = min(shortlist_size, len(seed))
-
-        shortlist = seed.head(shortlist_size)["ticker_yf"].tolist()
-        shortlist_set = set(shortlist)
-        print(f"[TARGET] external shortlist={len(shortlist)} / seed={len(seed)} (mode={EXTERNAL_TARGET_MODE})")
-    else:
-        shortlist_set = set()
-
     print(f"[INFO] Seed TA local (>=60 barres): {len(seed)}/{len(tickers_df)}")
     if seed.empty:
         for name in [
@@ -618,20 +659,43 @@ def main():
             save_csv(pd.DataFrame(), name)
         return
 
+    # === Pré-score 100% local (rapide) pour cibler les API externes ===
+    _lb = seed["local_label"].fillna("").astype(str).str.upper()
+    _lb_bonus = np.select(
+        [_lb.eq("STRONG_BUY"), _lb.eq("BUY"), _lb.eq("NEUTRAL"), _lb.eq("SELL"), _lb.eq("STRONG_SELL")],
+        [2.0,                  1.0,           0.0,              -0.8,           -1.5],
+        default=0.0
+    )
+    _ts = pd.to_numeric(seed["tech_score"], errors="coerce").fillna(0.0).clip(-6, 6)
+    seed["local_pre_score"] = _ts + _lb_bonus
+    seed.sort_values(["local_pre_score"], ascending=[False], inplace=True, kind="mergesort")
+    seed.reset_index(drop=True, inplace=True)
+
+    if EXTERNAL_TARGET_MODE == "toppct":
+        shortlist_size = max(int(len(seed) * float(EXTERNAL_TOP_PCT)), int(EXTERNAL_TOP_MIN))
+    else:  # "topk"
+        shortlist_size = max(int(EXTERNAL_TOP_MIN), int(EXTERNAL_TOP_K))
+    shortlist_size = min(shortlist_size, len(seed))
+    shortlist = seed.head(shortlist_size)["ticker_yf"].tolist()
+    shortlist_set = set(shortlist)
+    print(f"[TARGET] external shortlist={len(shortlist)} / seed={len(seed)} (mode={EXTERNAL_TARGET_MODE})")
+
     # === PASS 2: Finnhub (priorité), TV (bonus capé), Yahoo info ===
-    seed = seed.sort_values(["tech_score"], ascending=False).reset_index(drop=True)
 
     # 2b) FINNHUB — enrichit un sous-ensemble prioritaire
-    fh_budget = min(FINNHUB_MAX_CALLS, len(seed)) if USE_FINNHUB and FINNHUB_API_KEY else 0
     finnhub_map = {}
     fh_calls = 0
-    for idx, rec in enumerate(seed.itertuples(index=False), 1):
-        yf_sym = rec.ticker_yf
-        if yf_sym in shortlist_set and fh_calls < FINNHUB_MAX_CALLS:
-            finnhub_map[yf_sym] = fetch_finnhub_label(yf_sym)
-            fh_calls += 1
-        else:
-            finnhub_map[yf_sym] = {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
+    if USE_FINNHUB and FINNHUB_API_KEY:
+        for rec in seed.itertuples(index=False):
+            yf_sym = rec.ticker_yf
+            if yf_sym in shortlist_set and fh_calls < FINNHUB_MAX_CALLS:
+                finnhub_map[yf_sym] = fetch_finnhub_label(yf_sym)
+                fh_calls += 1
+            else:
+                finnhub_map[yf_sym] = {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
+    else:
+        for rec in seed.itertuples(index=False):
+            finnhub_map[rec.ticker_yf] = {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
 
     # 2c) TV bonus capé
     tv_budget = TV_MAX_CALLS
@@ -639,7 +703,7 @@ def main():
     tv_results = {}
     tv_calls = 0
 
-    for idx, rec in enumerate(seed.itertuples(index=False), 1):
+    for rec in seed.itertuples(index=False):
         tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
         if (yf_sym in shortlist_set) and (tv_calls < tv_budget):
             if (tv_calls > 0) and (tv_calls % TV_COOLDOWN_EVERY == 0) and (pause_spent < TV_MAX_PAUSE_TOTAL):
@@ -677,8 +741,11 @@ def main():
             tk = yf.Ticker(yf_sym)
             fi = getattr(tk, "fast_info", None)
             mcap = getattr(fi, "market_cap", None)
+
+            # Appel Yahoo get_info UNIQUEMENT si utile (shortlist ou cap manquante)
             info = {}
-            if mcap is None or True:  # lire get_info pour analysts/secteur
+            need_info = (yf_sym in shortlist_set) or (mcap is None)
+            if need_info:
                 try:
                     info = tk.get_info() or {}
                     if mcap is None:
@@ -697,7 +764,7 @@ def main():
                 pass
 
             country = (info.get("country") or info.get("countryOfCompany") or "").strip()
-            exch = info.get("exchange") or info.get("fullExchangeName") or ""
+            exch = info.get("exchange") or info.get("fullExchangeName") or (getattr(fi, "exchange", "") or "")
             is_us_exchange = str(exch).upper() in {"NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"}
 
             # Filtres (pour la sélection finale)
@@ -717,9 +784,9 @@ def main():
             sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
             industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
 
-            analyst_mean  = info.get("recommendationMean")
-            analyst_votes = info.get("numberOfAnalystOpinions")
-            analyst_bucket = analyst_bucket_from_mean(analyst_mean)
+            analyst_mean  = info.get("recommendationMean") if need_info else None
+            analyst_votes = info.get("numberOfAnalystOpinions") if need_info else None
+            analyst_bucket = analyst_bucket_from_mean(analyst_mean) if need_info else None
 
             rows.append({
                 "ticker_tv": tv_sym, "ticker_yf": yf_sym,
@@ -741,7 +808,8 @@ def main():
             continue
 
         if i % 50 == 0:
-            print(f"{i}/{len(seed)} enrichis… (FH used {min(i,fh_budget)}/{fh_budget}, TV used {min(i,tv_budget)}/{tv_budget})")
+            seen = int(seed.loc[:i-1, "ticker_yf"].isin(shortlist_set).sum())
+            print(f"{i}/{len(seed)} enrichis… shortlist_seen≈{seen}, FH used≈{fh_calls}/{FINNHUB_MAX_CALLS}, TV used≈{tv_calls}/{TV_MAX_CALLS}")
 
     if _tv_fail_log:
         save_csv(pd.DataFrame(_tv_fail_log), "tv_failures.csv")
@@ -760,7 +828,6 @@ def main():
     # === Univers du jour ===
     if not KEEP_FULL_UNIVERSE_IN_OUTPUTS:
         df = df[~df["out_of_scope"]].copy()
-
     save_csv(df.drop(columns=["out_of_scope"]), "universe_today.csv")
 
     # === Scoring vectorisé ===
@@ -774,7 +841,7 @@ def main():
         "final_signal","analyst_bucket","analyst_mean","analyst_votes","avg_vol","rank_score"
     ]
 
-        # ---- Confirmed (assoupli & plus réaliste) ----
+    # ---- Confirmed (assoupli & plus réaliste) ----
     an_ok = df["analyst_bucket"].isin({"Strong Buy", "Buy"}) & (
         pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= CONFIRM_MIN_ANALYST_VOTES
     )
@@ -783,7 +850,7 @@ def main():
     ta_ok = (pd.to_numeric(df["tech_score"], errors="coerce").fillna(-99) >= CONFIRM_MIN_TECH_VOTES)
     liq_ok = (pd.to_numeric(df["avg_vol"], errors="coerce").fillna(0) >= MIN_AVG_DAILY_VOLUME)
 
-    # Compteur de corroborations (diagnostic / éventuellement utile ailleurs)
+    # Compteur de corroborations (diagnostic)
     corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
 
     # Porte A : final STRONG_BUY + ≥1 corroboration
@@ -800,11 +867,10 @@ def main():
 
     # Assemblage final + filtres généraux
     mask_confirm = (mask_A | mask_B | mask_C) & liq_ok & (~df["out_of_scope"])
-
     confirmed = df[mask_confirm].copy().sort_values(["rank_score", "market_cap"], ascending=[False, True])
     save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
 
-    # Log de contrôle (⚠️ reste dans main())
+    # Log de contrôle
     print(
         f"[CONFIRMED] via A={int(mask_A.sum())}, "
         f"via B={int((mask_B & liq_ok & (~df['out_of_scope'])).sum())}, "
@@ -942,7 +1008,7 @@ def main():
     merged = merged.drop_duplicates(subset="__k").drop(columns="__k")
     save_csv(merged, SIGNALS_CSV)
 
-    # Stats de remplissage
+    # Stats de remplissage (diagnostic)
     fill_tv = df["tv_reco"].notna().mean() if not df.empty else 0.0
     fill_fh = df["finnhub_label"].notna().mean() if not df.empty else 0.0
     fill_an = df["analyst_bucket"].notna().mean() if not df.empty else 0.0
