@@ -13,7 +13,7 @@
 #   - raw_candidates.csv
 #   - tv_failures.csv (diagnostic TradingView)
 
-import warnings, time, os, math, random, json
+import warnings, time, os, math, random
 import requests
 import pandas as pd
 import numpy as np
@@ -63,11 +63,11 @@ FINNHUB_MAX_CALLS  = 250          # budget global (60 req/min free)
 FINNHUB_SLEEP_BETWEEN = 0.10      # petite pause anti-ban
 FINNHUB_TIMEOUT_SEC = 20
 
-# Alpha Vantage (optionnel, backup de Finnhub si besoin)
-USE_ALPHA_VANTAGE = True
+# Alpha Vantage (optionnel, backup de Finnhub si besoin) — désactivé
+USE_ALPHA_VANTAGE = False
 ALPHAVANTAGE_API_KEY = (os.environ.get("ALPHAVANTAGE_API_KEY") or "85SZZGRDDJ6MUAEX").strip()
 AV_MAX_CALLS = 20
-AV_SLEEP_BETWEEN = 12.5           # free tier 5 calls/min → 12s mini
+AV_SLEEP_BETWEEN = 12.5
 
 SECTOR_CATALOG_PATH = "sector_catalog.csv"  # optionnel
 
@@ -209,7 +209,7 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
     return bucket, int(votes), details
 
 def local_label_from_indicators(det: dict, bucket: str) -> str:
-    """Composite 'TV-like' local à partir des familles MAs / Oscillateurs."""
+    """Composite 'TV-like' local à partir des familles MAs / Oscillateurs (resserré)."""
     score = 0
     try:
         price, s20, s50, s200 = det.get("price"), det.get("sma20"), det.get("sma50"), det.get("sma200")
@@ -224,9 +224,8 @@ def local_label_from_indicators(det: dict, bucket: str) -> str:
         if s50 is not None and s200 is not None and not np.isnan(s200):
             score += 1 if s50 > s200 else -1
 
-        # Oscillateurs
+        # Oscillateurs (RSI 60/40, plus strict que l'ancien 55/45)
         if rsi is not None:
-            # seuils resserrés
             score += 1 if rsi >= 60 else (-1 if rsi <= 40 else 0)
         if macd is not None and macds is not None and not np.isnan(macd) and not np.isnan(macds):
             score += 1 if macd > macds else -1
@@ -235,7 +234,6 @@ def local_label_from_indicators(det: dict, bucket: str) -> str:
     except Exception:
         pass
 
-    # seuils resserrés (vs version précédente)
     if score >= 5:   return "STRONG_BUY"
     if score >= 3:   return "BUY"
     if score <= -5:  return "STRONG_SELL"
@@ -340,28 +338,15 @@ def fetch_finnhub_label(symbol: str):
 
     base = "https://finnhub.io/api/v1/indicator"
     # RSI
-    rsi_params = {
-        "symbol": symbol,
-        "resolution": FINNHUB_RESOLUTION,
-        "indicator": "rsi",
-        "timeperiod": 14,
-        "token": FINNHUB_API_KEY
-    }
+    rsi_params = {"symbol": symbol, "resolution": FINNHUB_RESOLUTION, "indicator": "rsi", "timeperiod": 14, "token": FINNHUB_API_KEY}
     rsi_json = _fh_get_json(base, rsi_params)
     rsi_val = None
     if rsi_json and isinstance(rsi_json.get("rsi"), list) and rsi_json.get("rsi"):
         rsi_val = rsi_json["rsi"][-1]
 
     # MACD
-    macd_params = {
-        "symbol": symbol,
-        "resolution": FINNHUB_RESOLUTION,
-        "indicator": "macd",
-        "fastperiod": 12,
-        "slowperiod": 26,
-        "signalperiod": 9,
-        "token": FINNHUB_API_KEY
-    }
+    macd_params = {"symbol": symbol, "resolution": FINNHUB_RESOLUTION, "indicator": "macd",
+                   "fastperiod": 12, "slowperiod": 26, "signalperiod": 9, "token": FINNHUB_API_KEY}
     macd_json = _fh_get_json(base, macd_params)
     macd_val = macds_val = None
     if macd_json:
@@ -375,39 +360,6 @@ def fetch_finnhub_label(symbol: str):
     label = _score_from_rsi_macd(rsi_val, macd_val, macds_val)
     time.sleep(FINNHUB_SLEEP_BETWEEN)
     return {"finnhub_label": label, "finnhub_rsi": rsi_val, "finnhub_macd": macd_val, "finnhub_macds": macds_val}
-
-# ========= ALPHA VANTAGE (backup optionnel) =========
-def fetch_alpha_label(symbol: str):
-    if (not USE_ALPHA_VANTAGE) or (not ALPHAVANTAGE_API_KEY):
-        return {"av_label": None}
-    try:
-        # RSI
-        rsi_url = "https://www.alphavantage.co/query"
-        rsi_params = {"function":"RSI","symbol":symbol,"interval":"daily","time_period":"14","series_type":"close","apikey":ALPHAVANTAGE_API_KEY}
-        r = requests.get(rsi_url, params=rsi_params, timeout=30); r.raise_for_status()
-        j = r.json()
-        rsi_val = None
-        ta = j.get("Technical Analysis: RSI", {})
-        if ta:
-            last_key = sorted(ta.keys())[-1]
-            rsi_val = float(ta[last_key]["RSI"])
-
-        # MACD
-        macd_params = {"function":"MACD","symbol":symbol,"interval":"daily","series_type":"close","fastperiod":"12","slowperiod":"26","signalperiod":"9","apikey":ALPHAVANTAGE_API_KEY}
-        r = requests.get(rsi_url, params=macd_params, timeout=30); r.raise_for_status()
-        j2 = r.json()
-        macd_val = macds_val = None
-        tb = j2.get("Technical Analysis: MACD", {})
-        if tb:
-            last_key = sorted(tb.keys())[-1]
-            macd_val = float(tb[last_key]["MACD"])
-            macds_val = float(tb[last_key]["MACD_Signal"])
-
-        label = _score_from_rsi_macd(rsi_val, macd_val, macds_val)
-        time.sleep(AV_SLEEP_BETWEEN)
-        return {"av_label": label}
-    except Exception:
-        return {"av_label": None}
 
 # ========= TRADINGVIEW (bonus) =========
 TV_EXCH_TRY = ["NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"]
@@ -460,6 +412,51 @@ def get_tv_summary_max(tv_symbol: str, yf_symbol: str, exchange_hint: str):
             reco=_tv_try(sym,ex)
             if reco: return {"tv_reco":reco,"tv_symbol_used":sym,"tv_exchange_used":ex}
     return {"tv_reco":None,"tv_symbol_used":None,"tv_exchange_used":None}
+
+# ============= RANK SCORE (vectorisé) =============
+def compute_rank_score(df: pd.DataFrame) -> pd.Series:
+    # Base
+    score = np.zeros(len(df), dtype=float)
+
+    # Final signal (Finnhub > TV > Local)
+    fs = df.get("final_signal").fillna("").astype(str).str.upper()
+    score += np.select(
+        [fs.eq("STRONG_BUY"), fs.eq("BUY"), fs.eq("NEUTRAL"), fs.eq("SELL"), fs.eq("STRONG_SELL")],
+        [3.0,                1.8,          0.0,             -1.0,         -2.0],
+        default=0.0
+    )
+
+    # Renforts individuels
+    lb = df.get("local_label").fillna("").astype(str).str.upper()
+    score += np.where(lb.eq("STRONG_BUY"), 0.8, 0.0)
+    score += np.where(lb.eq("BUY"), 0.3, 0.0)
+
+    fh = df.get("finnhub_label").fillna("").astype(str).str.upper()
+    score += np.where(fh.eq("STRONG_BUY"), 0.5, 0.0)
+    score += np.where(fh.eq("BUY"), 0.2, 0.0)
+
+    tv = df.get("tv_reco").fillna("").astype(str).str.upper()
+    score += np.where(tv.eq("STRONG_BUY"), 0.3, 0.0)
+
+    # Analysts
+    ab = df.get("analyst_bucket")
+    score += np.where(ab.eq("Strong Buy"), 1.2, 0.0)
+    score += np.where(ab.eq("Buy"), 0.6, 0.0)
+
+    av = pd.to_numeric(df.get("analyst_votes"), errors="coerce").fillna(0.0)
+    score += np.minimum(av, 20.0) * 0.04
+
+    # Market cap preference: léger bonus small/mid
+    mc = pd.to_numeric(df.get("market_cap"), errors="coerce")
+    mc_bonus = np.maximum(0.0, 4.8 - np.log10(np.where(mc>0, mc, np.nan)))
+    mc_bonus = np.where(np.isfinite(mc_bonus), mc_bonus, 0.0)
+    score += mc_bonus
+
+    # Liquidité (soft penalty sous le seuil)
+    vol = pd.to_numeric(df.get("avg_vol"), errors="coerce").fillna(0.0)
+    score += np.where(vol < MIN_AVG_DAILY_VOLUME, -0.5, 0.0)
+
+    return pd.Series(score, index=df.index, dtype=float)
 
 # ============= MAIN =============
 def main():
@@ -520,10 +517,9 @@ def main():
         return
 
     # === PASS 2: Finnhub (priorité), TV (bonus capé), Yahoo info ===
-    # 2a) Prioriser par score technique pour les appels externes
     seed = seed.sort_values(["tech_score"], ascending=False).reset_index(drop=True)
 
-    # 2b) FINNHUB — on enrichit un sous-ensemble prioritaire
+    # 2b) FINNHUB — enrichit un sous-ensemble prioritaire
     fh_budget = min(FINNHUB_MAX_CALLS, len(seed)) if USE_FINNHUB and FINNHUB_API_KEY else 0
     finnhub_map = {}
     for idx, rec in enumerate(seed.itertuples(index=False), 1):
@@ -576,7 +572,7 @@ def main():
             fi = getattr(tk, "fast_info", None)
             mcap = getattr(fi, "market_cap", None)
             info = {}
-            if mcap is None or True:  # on lit souvent get_info pour analysts/secteur
+            if mcap is None or True:  # lire get_info pour analysts/secteur
                 try:
                     info = tk.get_info() or {}
                     if mcap is None:
@@ -598,7 +594,7 @@ def main():
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
             is_us_exchange = str(exch).upper() in {"NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"}
 
-            # Filtres (pour la sélection finale) — l'univers complet sera conservé si flag actif
+            # Filtres (pour la sélection finale)
             out_of_scope = False
             if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
                 out_of_scope = True
@@ -611,7 +607,6 @@ def main():
             # final_signal: Finnhub > TV > Local
             final_signal = fh.get("finnhub_label") or tv.get("tv_reco") or local_label
 
-            sec_cat = ind_cat = ""
             sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
             sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
             industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
@@ -620,7 +615,7 @@ def main():
             analyst_votes = info.get("numberOfAnalystOpinions")
             analyst_bucket = analyst_bucket_from_mean(analyst_mean)
 
-            row = {
+            rows.append({
                 "ticker_tv": tv_sym, "ticker_yf": yf_sym,
                 "exchange": exch, "market_cap": mcap, "price": float(last_price) if last_price is not None else None,
                 "sector": sector_val, "industry": industry_val,
@@ -635,8 +630,7 @@ def main():
                 "analyst_mean": analyst_mean, "analyst_votes": analyst_votes,
                 "avg_vol": avg_vol,
                 "out_of_scope": out_of_scope
-            }
-            rows.append(row)
+            })
         except Exception:
             continue
 
@@ -658,62 +652,15 @@ def main():
         return
 
     # === Univers du jour ===
-    if KEEP_FULL_UNIVERSE_IN_OUTPUTS:
-        pass
-    else:
+    if not KEEP_FULL_UNIVERSE_IN_OUTPUTS:
         df = df[~df["out_of_scope"]].copy()
 
     save_csv(df.drop(columns=["out_of_scope"]), "universe_today.csv")
 
-    # === Scoring & sorties ===
-    dbg = df.copy()
+    # === Scoring vectorisé ===
+    df["rank_score"] = compute_rank_score(df)
 
-    def rank_score_row(s: pd.Series) -> float:
-        score = 0.0
-        # Final signal (Finnhub > TV > Local)
-        fs = (s.get("final_signal") or "").upper()
-        if fs == "STRONG_BUY": score += 3.0
-        elif fs == "BUY":      score += 1.8
-        elif fs == "NEUTRAL":  score += 0.0
-        elif fs == "SELL":     score -= 1.0
-        elif fs == "STRONG_SELL": score -= 2.0
-
-        # Renfort: local/finnhub/tv pris séparément (petits bonus)
-        lb = (s.get("local_label") or "").upper()
-        if lb == "STRONG_BUY": score += 0.8
-        elif lb == "BUY":      score += 0.3
-
-        fh = (s.get("finnhub_label") or "").upper()
-        if fh == "STRONG_BUY": score += 0.5
-        elif fh == "BUY":      score += 0.2
-
-        tv = (s.get("tv_reco") or "").upper()
-        if tv == "STRONG_BUY": score += 0.3
-
-        # Analysts
-        ab = s.get("analyst_bucket")
-        if ab == "Strong Buy": score += 1.2
-        elif ab == "Buy":      score += 0.6
-        av = s.get("analyst_votes")
-        if isinstance(av,(int,float)) and av>0: score += min(av, 20)*0.04
-
-        # Market cap preference: léger bonus small/mid
-        mc = s.get("market_cap")
-        if isinstance(mc,(int,float)) and mc>0:
-            score += max(0.0, 4.8 - math.log10(mc))
-
-        # Liquidité (soft penalty sous le seuil)
-        vol = s.get("avg_vol")
-        if isinstance(vol,(int,float)) and vol is not None:
-            if vol < MIN_AVG_DAILY_VOLUME:
-                score -= 0.5
-
-        return float(score)
-
-    dbg["rank_score"] = dbg.apply(rank_score_row, axis=1)
-    dbg.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    save_csv(dbg.drop(columns=["out_of_scope"], errors="ignore"), "debug_all_candidates.csv")
-
+    # === Colonnes de base ===
     base_cols = [
         "ticker_tv","ticker_yf","price","market_cap","sector","industry",
         "technical_local","tech_score","local_label","finnhub_label",
@@ -722,11 +669,11 @@ def main():
     ]
 
     # ---- Confirmed: besoin de corroborations multiples ----
-    an_ok = df["analyst_bucket"].isin({"Strong Buy","Buy"}) & (df["analyst_votes"].fillna(0) >= CONFIRM_MIN_ANALYST_VOTES)
+    an_ok = df["analyst_bucket"].isin({"Strong Buy","Buy"}) & (pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= CONFIRM_MIN_ANALYST_VOTES)
     fh_ok = df["finnhub_label"].isin({"BUY","STRONG_BUY"})
     tv_ok = df["tv_reco"].eq("STRONG_BUY")
-    ta_ok = (df["tech_score"].fillna(-99) >= CONFIRM_MIN_TECH_VOTES)
-    liq_ok = (df["avg_vol"].fillna(0) >= MIN_AVG_DAILY_VOLUME)
+    ta_ok = (pd.to_numeric(df["tech_score"], errors="coerce").fillna(-99) >= CONFIRM_MIN_TECH_VOTES)
+    liq_ok = (pd.to_numeric(df["avg_vol"], errors="coerce").fillna(0) >= MIN_AVG_DAILY_VOLUME)
 
     corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
 
@@ -736,9 +683,7 @@ def main():
         & liq_ok
         & (~df["out_of_scope"])
     )
-    confirmed = df[mask_confirm].copy()
-    confirmed["rank_score"] = confirmed.apply(rank_score_row, axis=1)
-    confirmed.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
+    confirmed = df[mask_confirm].copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
     save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
 
     # Pré-signaux (riche mais on garde la liquidité mini)
@@ -748,21 +693,15 @@ def main():
         | df["finnhub_label"].isin({"BUY","STRONG_BUY"})
         | df["tv_reco"].eq("STRONG_BUY")
     ) & (~df["out_of_scope"]) & liq_ok
-    pre = df[mask_pre].copy()
-    pre["rank_score"] = pre.apply(rank_score_row, axis=1)
-    pre.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
+    pre = df[mask_pre].copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
     save_csv(pre[base_cols], "anticipative_pre_signals.csv")
 
-    evt = df[df["analyst_bucket"].notna() & (~df["out_of_scope"]) & liq_ok].copy()
-    evt["rank_score"] = evt.apply(rank_score_row, axis=1)
-    evt.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
+    evt = df[df["analyst_bucket"].notna() & (~df["out_of_scope"]) & liq_ok].copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
     save_csv(evt[base_cols], "event_driven_signals.csv")
 
     # Reste de l’univers
-    others_idx = df.index.difference(pd.concat([confirmed, pre, evt]).index)
-    universe_rest = df.loc[others_idx].copy()
-    universe_rest["rank_score"] = universe_rest.apply(rank_score_row, axis=1)
-    universe_rest.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
+    used_idx = pd.Index([]).union(confirmed.index).union(pre.index).union(evt.index)
+    universe_rest = df.drop(index=used_idx).copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
 
     all_out = pd.concat([
         confirmed.assign(candidate_type="confirmed"),
@@ -773,8 +712,9 @@ def main():
     all_out.sort_values(["candidate_type","rank_score","market_cap"], ascending=[True, False, True], inplace=True)
     save_csv(all_out[["candidate_type"]+base_cols], "candidates_all_ranked.csv")
 
-    # === Sector breadth (sur df complet du jour, hors out_of_scope) ===
+    # === Sector breadth (sur df complet du jour, hors out_of_scope & avec liquidité) ===
     df_sc = df[~df["out_of_scope"] & liq_ok].copy()
+
     def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
         return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
     def _sector_counts(df_part: pd.DataFrame) -> pd.Series:
