@@ -10,8 +10,9 @@
 #   - sector_breadth.csv
 #   - signals_history.csv
 #   - raw_candidates.csv (diag brut)
+#   - tv_failures.csv (diagnostic TradingView)
 
-import warnings, time, os, math
+import warnings, time, os, math, random
 import requests
 import pandas as pd
 import numpy as np
@@ -28,27 +29,27 @@ INCLUDE_RUSSELL_2000 = True
 R1K_FALLBACK_CSV = "russell1000.csv"   # 1 col: Ticker
 R2K_FALLBACK_CSV = "russell2000.csv"   # 1 col: Ticker
 
-# Fenêtre réduite (suffisant pour SMA200/TA classiques) -> gros gain de temps
-PERIOD   = "1y"     # anciennement "2y"
+# Fenêtre réduite (suffisant pour SMA200/TA classiques)
+PERIOD   = "1y"
 INTERVAL = "1d"
 TV_INTERVAL = Interval.INTERVAL_1_DAY
 
 # Gating pour limiter les appels lents (TV/externes)
-GATE_MIN_TECH_VOTES = 2       # garde seulement si tech_votes >= 2
-GATE_TV_ONLY_STRONG = True    # si STRONG_BUY TV, on appelle aussi les externes
+GATE_MIN_TECH_VOTES = 2
+GATE_TV_ONLY_STRONG = True
 
 # Limites & timings
 MAX_MARKET_CAP = 200_000_000_000     # < 200B
-DELAY_BETWEEN_TV_CALLS_SEC = 0.05    # 50ms pour limiter le spam
+DELAY_BETWEEN_TV_CALLS_SEC = 0.05    # 50ms pour limiter le spam TV
 
-# Activer/désactiver les sources lentes
-USE_ANALYSTS  = True    # True = appelle get_info() plus souvent (lent)
-USE_INVESTING = False   # True = active fetch_investing_summary()
-USE_BARCHART  = True    # True = active fetch_barchart_opinion()
+# Sources
+USE_ANALYSTS  = True     # tu peux le remettre à False si timing serré
+USE_INVESTING = False
+USE_BARCHART  = False
 
-# Budget d’enrichissement externe (si tu actives Investing plus tard)
-# EXTERNAL_MAX   = 120      # nb total de tickers enrichis par run
-# EXTERNAL_SPLIT = (0.4, 0.6)  # (Investing 40%, BarChart 60%) — BC plus “rentable/rapide”
+# Budget externes si tu actives Investing/BarChart (optionnel)
+EXTERNAL_MAX   = 120
+EXTERNAL_SPLIT = (0.4, 0.6)  # (Investing %, BarChart %)
 
 SECTOR_CATALOG_PATH = "sector_catalog.csv"  # optionnel
 
@@ -73,7 +74,6 @@ def save_csv(df: pd.DataFrame, fname: str, also_public: bool = True):
 def yf_norm(s:str)->str: return s.replace(".", "-")
 def tv_norm(s:str)->str: return s.replace("-", ".")
 def base_sym(tv_symbol: str)->str:
-    # base pour Investing/BarChart (souvent 'AAPL', 'MSFT', etc.)
     return (tv_symbol or "").split(".")[0].upper()
 
 def fetch_wikipedia_tickers(url: str):
@@ -132,6 +132,9 @@ def map_exchange_for_tv(exch: str)->str:
     if "NASDAQ" in e: return "NASDAQ"
     if "NYSE"   in e: return "NYSE"
     if "ARCA"   in e: return "AMEX"
+    # BATS/NYSEMKT souvent routables sur AMEX côté TV
+    if "BATS"   in e: return "AMEX"
+    if "NYSEMKT" in e: return "AMEX"
     return "NASDAQ"
 
 def compute_local_technical_bucket(hist: pd.DataFrame):
@@ -195,27 +198,8 @@ def analyst_bucket_from_mean(x):
     if x < 4.2: return "Sell"
     return "Strong Sell"
 
-def get_tv_summary(symbol: str, exchange: str):
-    def try_once(sym, ex):
-        try:
-            h = TA_Handler(symbol=sym, screener="america", exchange=ex, interval=TV_INTERVAL)
-            s = h.get_analysis().summary
-            return {"tv_reco": s.get("RECOMMENDATION")}
-        except Exception:
-            return None
-    first = try_once(symbol, exchange)
-    if first and first.get("tv_reco"): return first
-    for ex in ("NASDAQ", "NYSE", "AMEX"):
-        alt = try_once(symbol, ex)
-        if alt and alt.get("tv_reco"): return alt
-    return {"tv_reco": None}
-
 # ===== BULK HISTORY + TA FAST PASS =====
 def bulk_download_history(yf_symbols, period="1y", interval="1d"):
-    """
-    Téléchargement groupé - bien plus rapide que 1000 appels séquentiels.
-    Retourne: dict[yf_symbol] -> DataFrame avec ['Open','High','Low','Close','Volume']
-    """
     if not yf_symbols:
         return {}
     data = yf.download(
@@ -224,7 +208,6 @@ def bulk_download_history(yf_symbols, period="1y", interval="1d"):
     )
     out = {}
     if isinstance(data.columns, pd.MultiIndex):
-        # Multi-tickers
         tickers_level = data.columns.get_level_values(0)
         for sym in yf_symbols:
             if sym in tickers_level:
@@ -235,35 +218,103 @@ def bulk_download_history(yf_symbols, period="1y", interval="1d"):
                 except Exception:
                     continue
     else:
-        # Single ticker case
         df = data.dropna()
         if not df.empty and len(yf_symbols) == 1:
             out[yf_symbols[0]] = df
     return out
 
 def fast_ta_votes_from_hist(hist_df):
-    """Wrapper minimal autour de compute_local_technical_bucket."""
     return compute_local_technical_bucket(hist_df)
 
 # ==== EXTERNAL STUBS (Investing / BarChart) ====
 def fetch_investing_summary(base_symbol: str):
-    """
-    Stub sûr. À remplacer par ton scraper si tu actives USE_INVESTING.
-    Retourne des votes/jugements daily/weekly/monthly si dispo.
-    """
-    # Exemple de structure:
-    # return {"inv_d_label":"Buy","inv_w_label":"Neutral","inv_m_label":"Buy",
-    #         "inv_d_vote":1,"inv_w_vote":0,"inv_m_vote":1}
     return {"inv_d_label":None,"inv_w_label":None,"inv_m_label":None,
             "inv_d_vote":None,"inv_w_vote":None,"inv_m_vote":None}
 
 def fetch_barchart_opinion(base_symbol: str):
-    """
-    Stub sûr. À remplacer par ton scraper si tu actives USE_BARCHART.
-    """
-    # Exemple de structure:
-    # return {"bc_score":72.0, "bc_label":"Strong Buy"}
     return {"bc_score":None, "bc_label":None}
+
+# ========= TRADINGVIEW: MAX COVERAGE =========
+# Exchanges à tester en priorité (ordre empirique)
+TV_EXCH_TRY = ["NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"]
+# variantes de symboles à tester (ex: BRK.B, BRK-B, BRKB, base)
+def tv_symbol_variants(tv_symbol: str, yf_symbol: str):
+    s = (tv_symbol or "").upper()
+    y = (yf_symbol or "").upper()
+    variants = []
+    # tel quel
+    if s: variants.append(s)
+    # base sans suffixe (BRK)
+    base = base_sym(s)
+    if base and base not in variants: variants.append(base)
+    # BRK.B -> BRK-B
+    if "." in s:
+        dash = s.replace(".", "-")
+        if dash not in variants: variants.append(dash)
+        nodot = s.replace(".", "")
+        if nodot not in variants: variants.append(nodot)
+    # si on a un - dans yf
+    if "-" in y:
+        dot = y.replace("-", ".")
+        if dot not in variants: variants.append(dot)
+        if y not in variants: variants.append(y)
+    # nettoyage doublons
+    out = []
+    for v in variants:
+        v = v.strip()
+        if v and v not in out:
+            out.append(v)
+    return out
+
+# cache simple (mem) pour éviter de retenter 5x le même combo
+_tv_cache = {}   # key: (symbol, exchange, interval) -> "STRONG_BUY"/"BUY"/None
+_tv_fail_log = []  # pour écrire tv_failures.csv
+
+def _tv_try(symbol: str, exchange: str, interval=TV_INTERVAL, retries=2):
+    key = (symbol, exchange, interval)
+    if key in _tv_cache:
+        return _tv_cache[key]
+    last_err = None
+    for attempt in range(retries+1):
+        try:
+            h = TA_Handler(symbol=symbol, screener="america", exchange=exchange, interval=interval)
+            s = h.get_analysis().summary
+            reco = s.get("RECOMMENDATION")
+            _tv_cache[key] = reco
+            # random tiny jitter pour paraître humain
+            if DELAY_BETWEEN_TV_CALLS_SEC:
+                time.sleep(DELAY_BETWEEN_TV_CALLS_SEC + random.uniform(0, 0.02))
+            return reco
+        except Exception as e:
+            last_err = str(e)
+            # petit backoff
+            time.sleep(0.03 + 0.03*attempt)
+    _tv_cache[key] = None
+    _tv_fail_log.append({"symbol":symbol, "exchange":exchange, "err":last_err or "unknown"})
+    return None
+
+def get_tv_summary_max(tv_symbol: str, yf_symbol: str, exchange_hint: str):
+    """
+    Essaie plusieurs variantes de symboles et d’exchanges pour maximiser la couverture.
+    Renvoie dict: {"tv_reco": str|None, "tv_symbol_used": str|None, "tv_exchange_used": str|None}
+    """
+    candidates_sym = tv_symbol_variants(tv_symbol, yf_symbol)
+    # priorité à l’exchange hinté par Yahoo -> puis full liste
+    hint = map_exchange_for_tv(exchange_hint)
+    exch_list = [hint] + [e for e in TV_EXCH_TRY if e != hint]
+
+    for sym in candidates_sym:
+        # 1) d’abord sur l’exchange hinté
+        reco = _tv_try(sym, hint)
+        if reco:
+            return {"tv_reco": reco, "tv_symbol_used": sym, "tv_exchange_used": hint}
+        # 2) sinon, on déroule tous les exchanges
+        for ex in exch_list:
+            reco = _tv_try(sym, ex)
+            if reco:
+                return {"tv_reco": reco, "tv_symbol_used": sym, "tv_exchange_used": ex}
+    # échec total
+    return {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
 
 # ============= MAIN =============
 def main():
@@ -316,34 +367,35 @@ def main():
             "ticker_tv","ticker_yf","price","market_cap","sector","industry",
             "technical_local","tv_reco","analyst_bucket"
         ]), "debug_all_candidates.csv")
-        # produire quand même des fichiers vides pour le front
+        # fichiers vides pour le front
         empty_cols = ["ticker_tv","ticker_yf","price","market_cap","sector","industry",
                       "technical_local","tech_score","tv_reco","analyst_bucket",
                       "analyst_mean","analyst_votes","rank_score",
                       "inv_d_label","inv_w_label","inv_m_label",
-                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label"]
+                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label",
+                      "tv_symbol_used","tv_exchange_used"]
         empty = pd.DataFrame(columns=empty_cols)
         save_csv(empty, "confirmed_STRONGBUY.csv")
         save_csv(empty, "anticipative_pre_signals.csv")
         save_csv(empty, "event_driven_signals.csv")
         save_csv(pd.DataFrame(columns=["candidate_type"]+empty_cols), "candidates_all_ranked.csv")
-        # sector_breadth & histories vides
         save_csv(pd.DataFrame(columns=["sector","universe","confirmed","pre","events",
                                        "pct_confirmed","pct_pre","pct_events",
                                        "breadth","z_breadth","wow_pct_confirmed"]),
                  "sector_breadth.csv")
         return
 
-    # Gate initial: on garde les tickers avec TA local positif
+    # Gate initial
     seed = seed[seed["tech_score"].fillna(0) >= GATE_MIN_TECH_VOTES].reset_index(drop=True)
     if seed.empty:
-        print("⚠️ Gate TA (tech_votes) trop strict, aucun titre retenu. On baisse pas : on continue avec seed vide.")
-        # On va produire des CSV vides, même logique que ci-dessus
+        print("⚠️ Gate TA trop strict, aucun titre retenu.")
+        # sorties vides cohérentes
         empty_cols = ["ticker_tv","ticker_yf","price","market_cap","sector","industry",
                       "technical_local","tech_score","tv_reco","analyst_bucket",
                       "analyst_mean","analyst_votes","rank_score",
                       "inv_d_label","inv_w_label","inv_m_label",
-                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label"]
+                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label",
+                      "tv_symbol_used","tv_exchange_used"]
         empty = pd.DataFrame(columns=empty_cols)
         save_csv(empty, "raw_candidates.csv")
         save_csv(empty, "confirmed_STRONGBUY.csv")
@@ -356,9 +408,24 @@ def main():
                  "sector_breadth.csv")
         return
 
-    # === PASS 2: Info/TV/externes SEULEMENT pour le sous-ensemble ===
+    # Si externes activés : prépare budget
+    budget_total = EXTERNAL_MAX
+    if USE_INVESTING and USE_BARCHART:
+        budget_inv = int(EXTERNAL_SPLIT[0]*budget_total)
+        budget_bc  = budget_total - budget_inv
+    else:
+        budget_inv = budget_total if USE_INVESTING else 0
+        budget_bc  = budget_total if USE_BARCHART  else 0
+    used_inv = used_bc = 0
+
+    # === PASS 2: Info/TV/externes sur sous-ensemble ===
     rows = []
     bc_hits = ivg_hits = 0
+
+    # prioriser les plus forts votes techniques
+    seed = seed.sort_values(["tech_score"], ascending=False).reset_index(drop=True)
+
+    tv_ok = tv_ko = 0
 
     for i, rec in enumerate(seed.itertuples(index=False), 1):
         tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
@@ -367,7 +434,7 @@ def main():
         try:
             tk = yf.Ticker(yf_sym)
 
-            # fast_info pour market_cap; get_info seulement si besoin
+            # fast_info pour market_cap; get_info si nécessaire
             fi = getattr(tk, "fast_info", None)
             mcap = getattr(fi, "market_cap", None)
             info = {}
@@ -381,18 +448,21 @@ def main():
 
             country = (info.get("country") or info.get("countryOfCompany") or "").strip()
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
-            tv_exchange = map_exchange_for_tv(exch)
+            tv_exchange_hint = map_exchange_for_tv(exch)
 
-            # Filtre US + Market Cap ici (après gate TA)
+            # Filtre US + Market Cap ici
             is_us_exchange = str(exch).upper() in {"NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"}
             if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
                 continue
             if isinstance(mcap,(int,float)) and mcap >= MAX_MARKET_CAP:
                 continue
 
-            # TradingView (rapide)
-            tv = get_tv_summary(tv_sym, tv_exchange)
-            time.sleep(DELAY_BETWEEN_TV_CALLS_SEC)
+            # ======= TradingView MAX COVERAGE =======
+            tv = get_tv_summary_max(tv_sym, yf_sym, tv_exchange_hint)
+            if tv.get("tv_reco"):
+                tv_ok += 1
+            else:
+                tv_ko += 1
 
             # Analystes (optionnel)
             analyst_mean  = info.get("recommendationMean") if USE_ANALYSTS else None
@@ -404,27 +474,26 @@ def main():
             sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
             industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
 
-            # Externals (Investing/BarChart) seulement si prometteur
+            # Externals (Investing/BarChart) — budgetisés
             inv = {"inv_d_label":None,"inv_w_label":None,"inv_m_label":None,
                    "inv_d_vote":None,"inv_w_vote":None,"inv_m_vote":None}
             bc  = {"bc_score":None,"bc_label":None}
 
-            should_call_externals = False
-            if tech_votes is not None and tech_votes >= GATE_MIN_TECH_VOTES:
-                should_call_externals = True
-            if GATE_TV_ONLY_STRONG and tv.get("tv_reco") == "STRONG_BUY":
-                should_call_externals = True
-            if USE_ANALYSTS and analyst_bucket in {"Buy","Strong Buy"}:
-                should_call_externals = True
+            promising = (tech_votes is not None and tech_votes >= GATE_MIN_TECH_VOTES)
+            if promising and tv.get("tv_reco") == "STRONG_BUY":
+                promising = True
+            if promising and USE_ANALYSTS and analyst_bucket in {"Buy","Strong Buy"}:
+                promising = True
 
-            base = base_sym(tv_sym)
-            if should_call_externals:
-                if USE_INVESTING:
-                    inv = fetch_investing_summary(base)
-                    if any([inv.get("inv_d_vote") is not None, inv.get("inv_w_vote") is not None, inv.get("inv_m_vote") is not None]):
+            if promising:
+                if USE_INVESTING and used_inv < budget_inv:
+                    inv = fetch_investing_summary(base_sym(tv_sym))
+                    used_inv += 1
+                    if any([inv.get("inv_d_vote"), inv.get("inv_w_vote"), inv.get("inv_m_vote")]):
                         ivg_hits += 1
-                if USE_BARCHART:
-                    bc = fetch_barchart_opinion(base)
+                if USE_BARCHART and used_bc < budget_bc:
+                    bc = fetch_barchart_opinion(base_sym(tv_sym))
+                    used_bc += 1
                     if bc.get("bc_score") is not None or bc.get("bc_label"):
                         bc_hits += 1
 
@@ -434,6 +503,8 @@ def main():
                 "sector": sector_val, "industry": industry_val,
                 "technical_local": tech_bucket, "tech_score": int(tech_votes) if tech_votes is not None else None,
                 "tv_reco": tv.get("tv_reco"),
+                "tv_symbol_used": tv.get("tv_symbol_used"),
+                "tv_exchange_used": tv.get("tv_exchange_used"),
                 "analyst_bucket": analyst_bucket,
                 "analyst_mean": analyst_mean, "analyst_votes": analyst_votes,
                 "inv_d_label": inv.get("inv_d_label"), "inv_w_label": inv.get("inv_w_label"), "inv_m_label": inv.get("inv_m_label"),
@@ -444,13 +515,17 @@ def main():
             continue
 
         if i % 50 == 0:
-            print(f"{i}/{len(seed)} retenus… (ivg_hits={ivg_hits}, bc_hits={bc_hits})")
+            print(f"{i}/{len(seed)} retenus… TV ok/ko: {tv_ok}/{tv_ko} (ivg_hits={ivg_hits}, bc_hits={bc_hits})")
+
+    # Sauvegarde des échecs TV pour diagnostic
+    if _tv_fail_log:
+        save_csv(pd.DataFrame(_tv_fail_log), "tv_failures.csv")
 
     df = pd.DataFrame(rows)
 
-    # dump brut pour diag, toujours
+    # dump brut diag
     save_csv(df, "raw_candidates.csv")
-    print(f"[DIAG] rows collectées: {len(df)}")
+    print(f"[DIAG] rows collectées: {len(df)} — TV ok/ko: {tv_ok}/{tv_ko}")
 
     if df.empty:
         print("⚠️ Aucun titre collecté après filtres US + MCAP + TA local (pass 2).")
@@ -458,25 +533,24 @@ def main():
             "ticker_tv","ticker_yf","price","market_cap","sector","industry",
             "technical_local","tv_reco","analyst_bucket"
         ]), "debug_all_candidates.csv")
-        # produire quand même des fichiers vides pour le front
         empty_cols = ["ticker_tv","ticker_yf","price","market_cap","sector","industry",
                       "technical_local","tech_score","tv_reco","analyst_bucket",
                       "analyst_mean","analyst_votes","rank_score",
                       "inv_d_label","inv_w_label","inv_m_label",
-                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label"]
+                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label",
+                      "tv_symbol_used","tv_exchange_used"]
         empty = pd.DataFrame(columns=empty_cols)
         save_csv(empty, "confirmed_STRONGBUY.csv")
         save_csv(empty, "anticipative_pre_signals.csv")
         save_csv(empty, "event_driven_signals.csv")
         save_csv(pd.DataFrame(columns=["candidate_type"]+empty_cols), "candidates_all_ranked.csv")
-        # pas de timeline sans données
         save_csv(pd.DataFrame(columns=["sector","universe","confirmed","pre","events",
                                        "pct_confirmed","pct_pre","pct_events",
                                        "breadth","z_breadth","wow_pct_confirmed"]),
                  "sector_breadth.csv")
         return
 
-    # Diagnostic global (avant filtres finaux)
+    # ====== Scoring & sorties ======
     dbg = df.copy()
     def rank_score_row(s: pd.Series) -> float:
         score = 0.0
@@ -492,14 +566,13 @@ def main():
         mc = s.get("market_cap")
         if isinstance(mc,(int,float)) and mc>0:
             score += max(0.0, 5.0 - math.log10(mc))
-        # Bonus externes (si activés)
         bc_score = s.get("bc_score")
         if isinstance(bc_score,(int,float)):
-            score += float(bc_score) * 0.01  # 0..+1
+            score += float(bc_score) * 0.01
         for k in ("inv_d_vote","inv_w_vote","inv_m_vote"):
             v = s.get(k)
             if isinstance(v,(int,float)):
-                score += 0.2 * float(v)       # léger poids
+                score += 0.2 * float(v)
         return score
 
     dbg["rank_score"] = dbg.apply(rank_score_row, axis=1)
@@ -508,13 +581,13 @@ def main():
 
     confirmed_cols = [
         "ticker_tv","ticker_yf","price","market_cap","sector","industry",
-        "technical_local","tech_score","tv_reco",
+        "technical_local","tech_score","tv_reco","tv_symbol_used","tv_exchange_used",
         "analyst_bucket","analyst_mean","analyst_votes","rank_score",
         "inv_d_label","inv_w_label","inv_m_label",
         "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label"
     ]
 
-    # ====== 1) Confirmed (assoupli) ======
+    # 1) Confirmed
     mask_tv = df["tv_reco"].eq("STRONG_BUY")
     mask_an = df["analyst_bucket"].isin({"Strong Buy","Buy"}) if USE_ANALYSTS else True
     confirmed = df[mask_tv & mask_an].copy()
@@ -522,23 +595,20 @@ def main():
     confirmed.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(confirmed[confirmed_cols], "confirmed_STRONGBUY.csv")
 
-    # ====== 2) Pré-signaux (forcés) ======
+    # 2) Pré-signaux
     mask_pre = df["technical_local"].isin({"Buy","Strong Buy"}) | df["tv_reco"].eq("STRONG_BUY")
     pre = df[mask_pre].copy()
     pre["rank_score"] = pre.apply(rank_score_row, axis=1)
     pre.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(pre[confirmed_cols], "anticipative_pre_signals.csv")
 
-    # ====== 3) Event-driven (proxy : analystes connus si activés, sinon on prend tout) ======
-    if USE_ANALYSTS:
-        evt = df[df["analyst_bucket"].notna()].copy()
-    else:
-        evt = df.copy()
+    # 3) Event-driven (proxy)
+    evt = df[df["analyst_bucket"].notna()].copy() if USE_ANALYSTS else df.copy()
     evt["rank_score"] = evt.apply(rank_score_row, axis=1)
     evt.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(evt[confirmed_cols], "event_driven_signals.csv")
 
-    # ====== 4) Mix comparatif ======
+    # 4) Mix comparatif
     all_out = pd.concat([
         confirmed.assign(candidate_type="confirmed"),
         pre.assign(candidate_type="anticipative"),
@@ -548,7 +618,7 @@ def main():
     all_cols = ["candidate_type"] + confirmed_cols
     save_csv(all_out[all_cols], "candidates_all_ranked.csv")
 
-    # ====== 5) Sector breadth (univers filtré post-pass2) ======
+    # 5) Sector breadth
     def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
         return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
 
@@ -599,7 +669,7 @@ def main():
 
     save_csv(sector_breadth, "sector_breadth.csv")
 
-    # ====== 6) Sector history (weekly snapshot) ======
+    # 6) Sector history (weekly snapshot)
     HISTORY_CSV = "sector_history.csv"
 
     def _norm_sector(x):
@@ -644,11 +714,10 @@ def main():
     new_df = new_df.drop_duplicates(subset="__key").drop(columns="__key")
     save_csv(new_df, HISTORY_CSV)
 
-    # ====== 7) Journalisation des signaux (historique par ticker) ======
+    # 7) Journalisation des signaux (historique par ticker)
     SIGNALS_CSV = "signals_history.csv"
 
     def _append_signals(bucket_name: str, df_bucket: pd.DataFrame):
-        """Append (date, bucket, ticker_yf, ticker_tv, sector, industry, price)"""
         if df_bucket is None or df_bucket.empty:
             return pd.DataFrame(columns=["date","bucket","ticker_yf","ticker_tv","sector","industry","price"])
         now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -674,12 +743,12 @@ def main():
     else:
         prev = pd.DataFrame(columns=["date","bucket","ticker_yf","ticker_tv","sector","industry","price","__k"])
 
-    hist_all["__k"] = hist_all["date"].astype(str)+"|"+hist_all["bucket"].astype(str)+"|"+hist_all["ticker_yf"].astype(str)
+    hist_all["__k"] = hist_all["date"].astype(str)+"|"+hist_all["bucket"].astype str+"|"+hist_all["ticker_yf"].astype(str)
     merged = pd.concat([prev, hist_all], ignore_index=True)
     merged = merged.drop_duplicates(subset="__k").drop(columns="__k")
     save_csv(merged, SIGNALS_CSV)
 
-    print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)}")
+    print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)} — TV ok/ko: {tv_ok}/{tv_ko}")
 
 if __name__ == "__main__":
     main()
