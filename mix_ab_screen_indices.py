@@ -1,19 +1,19 @@
 # mix_ab_screen_indices.py
-# Screener US — Gratuit, core local rapide + Finnhub (sniper) + TV (bonus capé)
+# Screener US — Gratuit, core local rapide + (externes en sniper optionnels)
 # Sorties :
 #   - confirmed_STRONGBUY.csv
 #   - anticipative_pre_signals.csv
 #   - event_driven_signals.csv
 #   - candidates_all_ranked.csv   (inclut 'universe' = tout le seed filtré)
 #   - universe_today.csv
-#   - debug_all_candidates.csv
+#   - debug_all_candidates.csv (non utilisé ici mais facile à réactiver)
 #   - sector_breadth.csv
 #   - sector_history.csv
 #   - signals_history.csv
 #   - raw_candidates.csv
 #   - tv_failures.csv (diagnostic TradingView)
 
-import warnings, time, os, math, random
+import warnings, time, os, math, random, re
 import requests
 import pandas as pd
 import numpy as np
@@ -55,21 +55,21 @@ MAX_MARKET_CAP      = 75_000_000_000    # < 75B
 KEEP_FULL_UNIVERSE_IN_OUTPUTS = True    # garde tout le seed dans les outputs (même si externes manquants)
 
 # === Ciblage externe sur un sous-ensemble (sniper mode) ===
-EXTERNAL_TARGET_MODE = "topk"   # "topk" ou "toppct"
-EXTERNAL_TOP_K = 50            # ~10–20% de l’univers
-EXTERNAL_TOP_PCT = 0.05         # si mode "toppct", 15% de l’univers
-EXTERNAL_TOP_MIN = 80           # minimum ciblé
+EXTERNAL_TARGET_MODE = "toppct"   # "topk" ou "toppct"
+EXTERNAL_TOP_K = 50               # utilisé si mode "topk"
+EXTERNAL_TOP_PCT = 0.12           # 12% si "toppct"
+EXTERNAL_TOP_MIN = 120            # minimum
+ANALYST_TOP_CAP = 220             # plafond dur d'appels Yahoo get_info()
 
 # ---- Confirmed tuning (assoupli & réaliste) ----
 CONFIRM_MIN_TECH_VOTES = 4              # TA forte
 CONFIRM_MIN_ANALYST_VOTES = 5           # nb mini d'avis analystes pour valider "Buy"
-CONFIRM_MIN_CORROBORATIONS = 1          # nombre d'arguments externes requis si final_signal == STRONG_BUY
 MIN_AVG_DAILY_VOLUME = 150_000          # filtre liquidité (ten_day / 3m avg volume)
 
 # Nasdaq Composite (API nasdaq.com)
 NASDAQ_EXCLUDE_ETFS = True  # filtre basique des ETF/ETN/Funds/Trusts par le libellé
 
-# TradingView : bonus capé (ratelimit fréquent)
+# TradingView : bonus capé (ratelimit fréquent) — désactivé par défaut
 TV_MAX_CALLS = 0
 DELAY_BETWEEN_TV_CALLS_SEC = 0.10
 TV_COOLDOWN_EVERY = 25
@@ -78,9 +78,9 @@ TV_MAX_CONSEC_FAIL = 10
 TV_FAIL_PAUSE_SEC  = 6.0
 TV_MAX_PAUSE_TOTAL = 45.0
 
-# Finnhub (gratuit)
+# Finnhub (gratuit) — désactivé par défaut
 USE_FINNHUB = False
-FINNHUB_API_KEY = (os.environ.get("FINNHUB_API_KEY") or "d2sfah1r01qiq7a429ugd2sfah1r01qiq7a429v0").strip()
+FINNHUB_API_KEY = (os.environ.get("FINNHUB_API_KEY") or "").strip()
 FINNHUB_RESOLUTION = "D"
 FINNHUB_MAX_CALLS  = 350
 FINNHUB_SLEEP_BETWEEN = 0.10
@@ -88,7 +88,7 @@ FINNHUB_TIMEOUT_SEC = 20
 
 # Alpha Vantage (optionnel, désactivé)
 USE_ALPHA_VANTAGE = False
-ALPHAVANTAGE_API_KEY = (os.environ.get("ALPHAVANTAGE_API_KEY") or "85SZZGRDDJ6MUAEX").strip()
+ALPHAVANTAGE_API_KEY = (os.environ.get("ALPHAVANTAGE_API_KEY") or "").strip()
 AV_MAX_CALLS = 20
 AV_SLEEP_BETWEEN = 12.5
 
@@ -113,22 +113,18 @@ def save_csv(df: pd.DataFrame, fname: str, also_public: bool = True):
 # ============= HELPERS =============
 def yf_norm(s:str)->str: return s.replace(".", "-")
 def tv_norm(s:str)->str: return s.replace("-", ".")
-def base_sym(tv_symbol: str)->str:
-    return (tv_symbol or "").split(".")[0].upper()
+def base_sym(tv_symbol: str)->str: return (tv_symbol or "").split(".")[0].upper()
 
 def fetch_wikipedia_tickers(url: str):
     ua = {"User-Agent":"Mozilla/5.0"}
-    r = requests.get(url, headers=ua, timeout=45)
-    r.raise_for_status()
+    r = requests.get(url, headers=ua, timeout=45); r.raise_for_status()
     tables = pd.read_html(r.text)
 
     def flatten(cols):
         out=[]
         for c in cols:
-            if isinstance(c, tuple):
-                out.append(" ".join([str(x) for x in c if pd.notna(x)]).strip())
-            else:
-                out.append(str(c).strip())
+            if isinstance(c, tuple): out.append(" ".join([str(x) for x in c if pd.notna(x)]).strip())
+            else: out.append(str(c).strip())
         return out
 
     for t in tables:
@@ -147,28 +143,24 @@ def fetch_wikipedia_tickers(url: str):
     raise RuntimeError(f"Aucune colonne Ticker/Symbol trouvée sur {url}")
 
 def fetch_sp500_tickers():
-    """Récupère la liste S&P 500 depuis Wikipédia (stable)."""
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     ua = {"User-Agent":"Mozilla/5.0"}
-    r = requests.get(url, headers=ua, timeout=45)
-    r.raise_for_status()
+    r = requests.get(url, headers=ua, timeout=45); r.raise_for_status()
     tables = pd.read_html(r.text)
     for t in tables:
         cols = [str(c).lower() for c in t.columns]
         if any("symbol" in c or "ticker" in c for c in cols):
             ser = t[t.columns[0]].astype(str).str.strip()
             vals = ser[ser.str.match(r"^[A-Za-z.\-]+$")].dropna().tolist()
-            if vals:
-                return vals
+            if vals: return vals
     return []
 
 def fetch_nasdaq_composite():
     """
     Récupère tous les tickers listés sur le NASDAQ via l'endpoint screener.
     Filtre fort:
-      - schéma symbole: 1–5 lettres (A–Z), éventuellement suffixe . ou - + 1–2 lettres
-      - accepte suffixes unit/warrant les plus courants (U, W, R) ex: ABCD, ABCDW, ABCDU
-      - rejette tout 'mot' sectoriel (AIRLINES, BANKS, etc.)
+      - schéma symbole: 1–5 lettres, éventuellement suffixe . ou - + 1–2 lettres
+      - accepte suffixes unit/warrant/rights (U/W/R), ex: ABCD, ABCDW, ABCDU
       - filtre ETF/ETN/FUND/TRUST dans le 'name'
     """
     url = "https://api.nasdaq.com/api/screener/stocks"
@@ -179,43 +171,30 @@ def fetch_nasdaq_composite():
         "Referer": "https://www.nasdaq.com/market-activity/stocks/screener",
         "Origin": "https://www.nasdaq.com",
     }
-    r = requests.get(url, headers=headers, params=params, timeout=45)
-    r.raise_for_status()
+    r = requests.get(url, headers=headers, params=params, timeout=45); r.raise_for_status()
     js = r.json()
 
     rows = (((js or {}).get("data") or {}).get("table") or {}).get("rows") or []
     out = []
-    bad_words = {"AIRLINES","BANK","BANKS","ENERGY","MEDIA","EURO","CURRENCY","CHINA",
-                 "CANADA","BELGIUM","ISRAEL","IRELAND","PANAMA","BERMUDA","SWEDEN",
-                 "SOFTWARE","TOBACCO","GRAILINC","DOLEPLC","XPERIINC","STEPANCO","IBEXLTD","ENERSYS","DELEK"}
-    import re
-    pat_core   = re.compile(r"^[A-Z]{1,5}$")                    # core 1–5 letters
-    pat_suffix = re.compile(r"^[A-Z]{1,5}[.-][A-Z]{1,2}$")      # . or - + 1–2 letters
-    pat_spac   = re.compile(r"^[A-Z]{1,5}[UWR]$")               # SPAC units/warrants/rights
+    pat_core   = re.compile(r"^[A-Z]{1,5}$")
+    pat_suffix = re.compile(r"^[A-Z]{1,5}[.-][A-Z]{1,2}$")
+    pat_spac   = re.compile(r"^[A-Z]{1,5}[UWR]$")
 
     for row in rows:
         sym = str(row.get("symbol") or "").strip().upper()
         name = str(row.get("name") or "").strip().upper()
-
-        if NASDAQ_EXCLUDE_ETFS and any(tag in name for tag in ("ETF","ETN","FUND","TRUST")):
-            continue
-        if not sym or sym in bad_words:
-            continue
-
-        if not (pat_core.match(sym) or pat_suffix.match(sym) or pat_spac.match(sym)):
-            continue
-
+        if NASDAQ_EXCLUDE_ETFS and any(tag in name for tag in ("ETF","ETN","FUND","TRUST")): continue
+        if not sym: continue
+        if not (pat_core.match(sym) or pat_suffix.match(sym) or pat_spac.match(sym)): continue
         out.append(sym)
 
     return list(dict.fromkeys(out))
-
 
 def _read_tickers_csv(path: str, colname: str = "Ticker") -> list:
     if not os.path.exists(path):
         raise FileNotFoundError(f"CSV introuvable: {path}")
     df = pd.read_csv(path)
-    if colname not in df.columns:
-        colname = df.columns[0]
+    if colname not in df.columns: colname = df.columns[0]
     ser = (
         df[colname].astype(str).str.strip().str.upper()
         .replace("", np.nan).dropna()
@@ -226,82 +205,81 @@ def _read_tickers_csv(path: str, colname: str = "Ticker") -> list:
 def load_universe()->pd.DataFrame:
     ticks = []
 
-    # --- Russell 1000
+    # Russell 1000
     if INCLUDE_RUSSELL_1000:
         try:
             r1k = fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_1000_Index")
             ticks += r1k
-            print(f"[UNIV] Russell 1000: {len(r1k)} tickers")
+            print(f"[UNIV] Russell 1000: {len(r1k)}")
         except Exception as e:
             print(f"[WARN] Russell 1000 (Wiki) échec: {e}")
             if os.path.exists(R1K_FALLBACK_CSV):
-                r1k_fb = pd.read_csv(R1K_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                r1k_fb = _read_tickers_csv(R1K_FALLBACK_CSV, "Ticker")
                 ticks += r1k_fb
-                print(f"[UNIV] Russell 1000 fallback CSV: {len(r1k_fb)} tickers")
+                print(f"[UNIV] Russell 1000 fallback CSV: {len(r1k_fb)}")
 
-    # --- Russell 2000 (CSV prioritaire)
+    # Russell 2000
     if INCLUDE_RUSSELL_2000:
         if R2K_SOURCE.lower() == "csv":
             try:
-                r2k = _read_tickers_csv(R2K_FALLBACK_CSV, colname="Ticker")
+                r2k = _read_tickers_csv(R2K_FALLBACK_CSV, "Ticker")
                 ticks += r2k
-                print(f"[UNIV] Russell 2000 (CSV): {len(r2k)} tickers")
+                print(f"[UNIV] Russell 2000 (CSV): {len(r2k)}")
             except Exception as e:
                 print(f"[WARN] Russell 2000 CSV échec: {e} — aucun R2K ajouté")
         elif R2K_SOURCE.lower() == "wiki":
             try:
                 r2k = fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
                 ticks += r2k
-                print(f"[UNIV] Russell 2000 (Wiki): {len(r2k)} tickers")
+                print(f"[UNIV] Russell 2000 (Wiki): {len(r2k)}")
             except Exception as e:
-                print(f"[WARN] Russell 2000 (Wiki) échec: {e} — aucun R2K ajouté (pas de fallback CSV en mode wiki)")
+                print(f"[WARN] Russell 2000 (Wiki) échec: {e}")
         else:  # auto
-            r2k = []
+            r2k=[]
             try:
                 r2k = fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
-                print(f"[UNIV] Russell 2000 (Wiki tentative): {len(r2k)} tickers")
+                print(f"[UNIV] Russell 2000 (Wiki tentative): {len(r2k)}")
             except Exception as e:
                 print(f"[WARN] Russell 2000 (Wiki) échec: {e}")
             if len(r2k) < 1000:
                 try:
-                    r2k_csv = _read_tickers_csv(R2K_FALLBACK_CSV, colname="Ticker")
+                    r2k_csv = _read_tickers_csv(R2K_FALLBACK_CSV, "Ticker")
                     if r2k_csv:
                         r2k = r2k_csv
-                        print(f"[UNIV] Russell 2000 (fallback CSV): {len(r2k)} tickers")
+                        print(f"[UNIV] Russell 2000 (fallback CSV): {len(r2k)}")
                 except Exception as e:
                     print(f"[WARN] Russell 2000 fallback CSV échec: {e}")
             ticks += r2k
 
-    # --- S&P 500
+    # S&P 500
     if INCLUDE_SP500:
         try:
             sp = fetch_sp500_tickers()
             ticks += sp
-            print(f"[UNIV] S&P 500: {len(sp)} tickers")
+            print(f"[UNIV] S&P 500: {len(sp)}")
         except Exception as e:
             print(f"[WARN] S&P 500 (Wiki) échec: {e}")
             if os.path.exists(SP500_FALLBACK_CSV):
-                sp_fb = pd.read_csv(SP500_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                sp_fb = _read_tickers_csv(SP500_FALLBACK_CSV, "Ticker")
                 ticks += sp_fb
-                print(f"[UNIV] S&P 500 fallback CSV: {len(sp_fb)} tickers")
+                print(f"[UNIV] S&P 500 fallback CSV: {len(sp_fb)}")
 
-    # --- Nasdaq Composite-like (API nasdaq.com)
+    # Nasdaq Composite-like
     if INCLUDE_NASDAQ_COMPOSITE:
         try:
             ndaq = fetch_nasdaq_composite()
             ticks += ndaq
-            print(f"[UNIV] Nasdaq Composite-like (API): {len(ndaq)} tickers (ETF filtered={NASDAQ_EXCLUDE_ETFS})")
+            print(f"[UNIV] Nasdaq Composite-like (API): {len(ndaq)} (ETF filtered={NASDAQ_EXCLUDE_ETFS})")
         except Exception as e:
             print(f"[WARN] Nasdaq API échec: {e}")
             if os.path.exists(NASDAQ_COMPOSITE_FALLBACK_CSV):
-                nzfb = pd.read_csv(NASDAQ_COMPOSITE_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                nzfb = _read_tickers_csv(NASDAQ_COMPOSITE_FALLBACK_CSV, "Ticker")
                 ticks += nzfb
-                print(f"[UNIV] Nasdaq fallback CSV: {len(nzfb)} tickers")
+                print(f"[UNIV] Nasdaq fallback CSV: {len(nzfb)}")
 
     if not ticks:
-        raise RuntimeError("Impossible de charger l’univers (Wikipédia/CSV/Api).")
+        raise RuntimeError("Impossible de charger l’univers (Wikipédia/CSV/API).")
 
-    # Normalisation TV/YF + dédoublonnage
     tv_syms = [tv_norm(s) for s in ticks]
     yf_syms = [yf_norm(s) for s in ticks]
     df = pd.DataFrame({"tv_symbol": tv_syms, "yf_symbol": yf_syms}).drop_duplicates().reset_index(drop=True)
@@ -372,24 +350,17 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
     return bucket, int(votes), details
 
 def local_label_from_indicators(det: dict, bucket: str) -> str:
-    """Composite 'TV-like' local à partir des familles MAs / Oscillateurs (resserré)."""
     score = 0
     try:
         price, s20, s50, s200 = det.get("price"), det.get("sma20"), det.get("sma50"), det.get("sma200")
         rsi, macd, macds = det.get("rsi"), det.get("macd"), det.get("macds")
         k, d = det.get("stoch_k"), det.get("stoch_d")
 
-        # MAs (tendance)
-        if price is not None and s20 is not None:
-            score += 1 if price > s20 else -1
-        if s20 is not None and s50 is not None:
-            score += 1 if s20 > s50 else -1
-        if s50 is not None and s200 is not None and not np.isnan(s200):
-            score += 1 if s50 > s200 else -1
+        if price is not None and s20 is not None: score += 1 if price > s20 else -1
+        if s20 is not None and s50 is not None:  score += 1 if s20 > s50 else -1
+        if s50 is not None and s200 is not None and not np.isnan(s200): score += 1 if s50 > s200 else -1
 
-        # Oscillateurs (RSI 60/40)
-        if rsi is not None:
-            score += 1 if rsi >= 60 else (-1 if rsi <= 40 else 0)
+        if rsi is not None: score += 1 if rsi >= 60 else (-1 if rsi <= 40 else 0)
         if macd is not None and macds is not None and not np.isnan(macd) and not np.isnan(macds):
             score += 1 if macd > macds else -1
         if k is not None and d is not None and not np.isnan(k) and not np.isnan(d):
@@ -437,7 +408,7 @@ def _bulk_download_chunk(symbols, period="1y", interval="1d"):
 def bulk_download_history(yf_symbols, period="1y", interval="1d", chunk_size=200, fallback_limit=None):
     if not yf_symbols:
         return {}
-    yf_symbols = list(dict.fromkeys(yf_symbols))  # dédoublonne
+    yf_symbols = list(dict.fromkeys(yf_symbols))
 
     all_hist = {}
     for i in range(0, len(yf_symbols), chunk_size):
@@ -463,7 +434,7 @@ def bulk_download_history(yf_symbols, period="1y", interval="1d", chunk_size=200
 
     return all_hist
 
-# ========= FINNHUB: label composite (RSI + MACD) =========
+# ========= FINNHUB (option) =========
 def _fh_get_json(url, params, timeout=FINNHUB_TIMEOUT_SEC):
     try:
         r = requests.get(url, params=params, timeout=timeout)
@@ -495,19 +466,14 @@ def _score_from_rsi_macd(rsi_val, macd_val, macds_val):
     return "STRONG_SELL"
 
 def fetch_finnhub_label(symbol: str):
-    """Interroge Finnhub RSI(14) et MACD(12,26,9) et produit un label simple."""
     if (not USE_FINNHUB) or (not FINNHUB_API_KEY):
         return {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
-
     base = "https://finnhub.io/api/v1/indicator"
-    # RSI
     rsi_params = {"symbol": symbol, "resolution": FINNHUB_RESOLUTION, "indicator": "rsi", "timeperiod": 14, "token": FINNHUB_API_KEY}
     rsi_json = _fh_get_json(base, rsi_params)
     rsi_val = None
     if rsi_json and isinstance(rsi_json.get("rsi"), list) and rsi_json.get("rsi"):
         rsi_val = rsi_json["rsi"][-1]
-
-    # MACD
     macd_params = {"symbol": symbol, "resolution": FINNHUB_RESOLUTION, "indicator": "macd",
                    "fastperiod": 12, "slowperiod": 26, "signalperiod": 9, "token": FINNHUB_API_KEY}
     macd_json = _fh_get_json(base, macd_params)
@@ -519,12 +485,11 @@ def fetch_finnhub_label(symbol: str):
         for k in ["macd_signal","signal","MACDs","macdSignal"]:
             if isinstance(macd_json.get(k), list) and macd_json[k]:
                 macds_val = macd_json[k][-1]; break
-
     label = _score_from_rsi_macd(rsi_val, macd_val, macds_val)
     time.sleep(FINNHUB_SLEEP_BETWEEN)
     return {"finnhub_label": label, "finnhub_rsi": rsi_val, "finnhub_macd": macd_val, "finnhub_macds": macds_val}
 
-# ========= TRADINGVIEW (bonus) =========
+# ========= TRADINGVIEW (option) =========
 TV_EXCH_TRY = ["NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"]
 _tv_cache = {}; _tv_fail_log=[]
 
@@ -598,7 +563,7 @@ def compute_rank_score(df: pd.DataFrame) -> pd.Series:
     tv = df.get("tv_reco").fillna("").astype(str).str.upper()
     score += np.where(tv.eq("STRONG_BUY"), 0.3, 0.0)
 
-    ab = df.get("analyst_bucket")
+    ab = df.get("analyst_bucket").fillna("")
     score += np.where(ab.eq("Strong Buy"), 1.2, 0.0)
     score += np.where(ab.eq("Buy"), 0.6, 0.0)
 
@@ -645,6 +610,19 @@ def main():
     bulk = bulk_download_history(yf_list, period=PERIOD, interval=INTERVAL, chunk_size=200, fallback_limit=None)
     print(f"[INFO] Historique dispo après bulk+fallback: {len(bulk)}/{len(yf_list)}")
 
+    # Pré-calcul avg vol local (10 jours, fallback 60 jours)
+    avg_vol_map = {}
+    for sym, hist in bulk.items():
+        try:
+            if "Volume" in hist.columns:
+                v10 = float(hist["Volume"].tail(10).mean())
+                v60 = float(hist["Volume"].tail(60).mean())
+                avg_vol_map[sym] = v10 if not np.isnan(v10) and v10>0 else (v60 if not np.isnan(v60) and v60>0 else None)
+            else:
+                avg_vol_map[sym] = None
+        except Exception:
+            avg_vol_map[sym] = None
+
     seed_rows = []
     for rec in tickers_df.itertuples(index=False):
         tv_sym, yf_sym = rec.tv_symbol, rec.yf_symbol
@@ -659,7 +637,8 @@ def main():
             "ticker_tv": tv_sym, "ticker_yf": yf_sym,
             "technical_local": bucket, "tech_score": votes,
             "price": det.get("price"),
-            "local_label": local_label
+            "local_label": local_label,
+            "avg_vol_est": avg_vol_map.get(yf_sym)
         })
 
     seed = pd.DataFrame(seed_rows)
@@ -673,7 +652,7 @@ def main():
             save_csv(pd.DataFrame(), name)
         return
 
-    # === Pré-score 100% local (rapide) pour cibler les API externes ===
+    # === Pré-score 100% local (rapide) pour cibler les appels lourds ===
     _lb = seed["local_label"].fillna("").astype(str).str.upper()
     _lb_bonus = np.select(
         [_lb.eq("STRONG_BUY"), _lb.eq("BUY"), _lb.eq("NEUTRAL"), _lb.eq("SELL"), _lb.eq("STRONG_SELL")],
@@ -685,172 +664,136 @@ def main():
     seed.sort_values(["local_pre_score"], ascending=[False], inplace=True, kind="mergesort")
     seed.reset_index(drop=True, inplace=True)
 
+    # Sélection short-list pour ANALYST seulement (Yahoo get_info), avec cap
     if EXTERNAL_TARGET_MODE == "toppct":
         shortlist_size = max(int(len(seed) * float(EXTERNAL_TOP_PCT)), int(EXTERNAL_TOP_MIN))
     else:  # "topk"
         shortlist_size = max(int(EXTERNAL_TOP_MIN), int(EXTERNAL_TOP_K))
-    shortlist_size = min(shortlist_size, len(seed))
+    shortlist_size = min(shortlist_size, int(ANALYST_TOP_CAP))
     shortlist = seed.head(shortlist_size)["ticker_yf"].tolist()
     shortlist_set = set(shortlist)
-        # === Avg volume map from bulk history (no per-ticker Yahoo calls) ===
-    avg_vol_map = {}
-    for yf_sym, h in bulk.items():
-        try:
-            if ("Volume" in h.columns) and (len(h["Volume"].dropna()) >= 10):
-                vol = h["Volume"].dropna()
-                v10 = float(vol.tail(10).mean())
-                v60 = float(vol.tail(min(60, len(vol))).mean())
-                # conservative pick: prefer near-term, but allow 0.8 * 60d as fallback
-                avg_vol_map[yf_sym] = max(v10, v60 * 0.8)
-        except Exception:
-            pass
-    print(f"[TARGET] external shortlist={len(shortlist)} / seed={len(seed)} (mode={EXTERNAL_TARGET_MODE})")
+    print(f"[TARGET] analyst shortlist={len(shortlist)} / seed={len(seed)} (mode={EXTERNAL_TARGET_MODE}, cap={ANALYST_TOP_CAP})")
 
-    # === PASS 2: Finnhub (priorité), TV (bonus capé), Yahoo info ===
-
-    # 2b) FINNHUB — enrichit un sous-ensemble prioritaire
+    # === PASS 2: (optionnels) Finnhub, TV — désactivés par défaut ===
     finnhub_map = {}
-    fh_calls = 0
     if USE_FINNHUB and FINNHUB_API_KEY:
+        fh_calls = 0
         for rec in seed.itertuples(index=False):
             yf_sym = rec.ticker_yf
             if yf_sym in shortlist_set and fh_calls < FINNHUB_MAX_CALLS:
                 finnhub_map[yf_sym] = fetch_finnhub_label(yf_sym)
                 fh_calls += 1
             else:
-                finnhub_map[yf_sym] = {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
+                finnhub_map[yf_sym] = {"finnhub_label": None}
     else:
         for rec in seed.itertuples(index=False):
-            finnhub_map[rec.ticker_yf] = {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
+            finnhub_map[rec.ticker_yf] = {"finnhub_label": None}
 
-    # 2c) TV bonus capé
-    tv_budget = TV_MAX_CALLS
-    tv_ok = tv_ko = 0; consec_fail = 0; pause_spent = 0.0
     tv_results = {}
-    tv_calls = 0
-
-    for rec in seed.itertuples(index=False):
-        tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
-        if (yf_sym in shortlist_set) and (tv_calls < tv_budget):
-            if (tv_calls > 0) and (tv_calls % TV_COOLDOWN_EVERY == 0) and (pause_spent < TV_MAX_PAUSE_TOTAL):
-                time.sleep(TV_COOLDOWN_SEC); pause_spent += TV_COOLDOWN_SEC
-            exch_hint = ""
-            try:
-                tk=yf.Ticker(yf_sym); fi=getattr(tk,"fast_info",None)
-                exch_hint=getattr(fi,"exchange",None) or ""
-                if not exch_hint:
-                    try:
-                        info=tk.get_info() or {}
-                        exch_hint=info.get("exchange") or info.get("fullExchangeName") or ""
-                    except Exception: pass
-            except Exception: pass
-            tv = get_tv_summary_max(tv_sym, yf_sym, exch_hint)
-            tv_calls += 1
-            if tv.get("tv_reco"): tv_ok += 1; consec_fail = 0
-            else:
-                tv_ko += 1; consec_fail += 1
-                if consec_fail >= TV_MAX_CONSEC_FAIL and pause_spent < TV_MAX_PAUSE_TOTAL:
-                    time.sleep(TV_FAIL_PAUSE_SEC); pause_spent += TV_FAIL_PAUSE_SEC; consec_fail = 0
-            tv_results[yf_sym] = tv
-        else:
-            tv_results[yf_sym] = {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
-    print(f"[TV] shortlist_used={tv_calls}, ok={tv_ok}, ko={tv_ko}, pause_total≈{pause_spent:.1f}s")
-
-    # 2d) Yahoo info (shortlist-only) + assemble rows
-    rows = []
-    for i, rec in enumerate(seed.itertuples(index=False), 1):
-        tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
-        tech_bucket, tech_votes, last_price = rec.technical_local, rec.tech_score, rec.price
-        local_label = rec.local_label
-
-        try:
-            # Defaults (no per-ticker Yahoo call for non-shortlist)
-            mcap = None
-            avg_vol = avg_vol_map.get(yf_sym, None)
-            exch = ""
-            country = ""
-            info = {}
-
-            # Only for shortlist: probe Yahoo for mcap/exchange/analysts if needed
-            if yf_sym in shortlist_set:
+    tv_calls = 0; tv_ok = tv_ko = 0; pause_spent = 0.0
+    if TV_MAX_CALLS > 0:
+        for idx, rec in enumerate(seed.itertuples(index=False), 1):
+            tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
+            if (yf_sym in shortlist_set) and (tv_calls < TV_MAX_CALLS):
+                if (tv_calls > 0) and (tv_calls % TV_COOLDOWN_EVERY == 0) and (pause_spent < TV_MAX_PAUSE_TOTAL):
+                    time.sleep(TV_COOLDOWN_SEC); pause_spent += TV_COOLDOWN_SEC
+                exch_hint = ""
                 try:
-                    tk = yf.Ticker(yf_sym)
-                    fi = getattr(tk, "fast_info", None)
-                    mcap = getattr(fi, "market_cap", None) if fi else None
-                    exch = (getattr(fi, "exchange", "") if fi else "") or ""
-                    # analysts/sector need get_info
-                    need_info = True
-                    if need_info:
+                    tk=yf.Ticker(yf_sym); fi=getattr(tk,"fast_info",None)
+                    exch_hint=getattr(fi,"exchange",None) or ""
+                    if not exch_hint:
                         try:
-                            info = tk.get_info() or {}
-                            if mcap is None:
-                                mcap = info.get("marketCap")
-                            # Volume from history is preferred; fallback to info if missing
-                            if avg_vol is None:
-                                avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
-                            country = (info.get("country") or info.get("countryOfCompany") or "").strip()
-                            if not exch:
-                                exch = info.get("exchange") or info.get("fullExchangeName") or ""
-                        except Exception:
-                            info = {}
-                except Exception:
-                    info = {}
-
-            # Scope filters (light if we have little info)
-            is_us_exchange = str(exch).upper() in {"NASDAQ", "NYSE", "AMEX", "BATS", "NYSEARCA", "NYSEMKT"}
-            out_of_scope = False
-            if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
-                out_of_scope = True
-            if isinstance(mcap, (int, float)) and mcap >= MAX_MARKET_CAP:
-                out_of_scope = True
-
-            # TV & Finnhub results already computed (shortlist-gated earlier)
-            tv = tv_results.get(yf_sym) or {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
-            fh = finnhub_map.get(yf_sym) or {"finnhub_label": None}
-
-            # final_signal: Finnhub > TV > Local
-            final_signal = fh.get("finnhub_label") or tv.get("tv_reco") or local_label
-
-            # Sector/industry: prefer your catalog, else info (if we fetched it), else "Unknown"
-            sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
-            sector_val   = sec_cat or ((info.get("sector") or "").strip() if info else "") or "Unknown"
-            industry_val = ind_cat or ((info.get("industry") or "").strip() if info else "") or "Unknown"
-
-            # Analysts only exist if we ran get_info (i.e., shortlist)
-            analyst_mean  = info.get("recommendationMean") if info else None
-            analyst_votes = info.get("numberOfAnalystOpinions") if info else None
-            analyst_bucket = analyst_bucket_from_mean(analyst_mean)
-
-            rows.append({
-                "ticker_tv": tv_sym, "ticker_yf": yf_sym,
-                "exchange": exch, "market_cap": mcap,
-                "price": float(last_price) if last_price is not None else None,
-                "sector": sector_val, "industry": industry_val,
-                "technical_local": tech_bucket, "tech_score": int(tech_votes) if tech_votes is not None else None,
-                "local_label": local_label,
-                "finnhub_label": fh.get("finnhub_label"),
-                "tv_reco": tv.get("tv_reco"),
-                "tv_symbol_used": tv.get("tv_symbol_used"),
-                "tv_exchange_used": tv.get("tv_exchange_used"),
-                "final_signal": final_signal,
-                "analyst_bucket": analyst_bucket,
-                "analyst_mean": analyst_mean, "analyst_votes": analyst_votes,
-                "avg_vol": avg_vol,
-                "out_of_scope": out_of_scope
-            })
-        except Exception:
-            continue
-
-        if i % 50 == 0:
-            seen = int(seed.loc[:i-1, "ticker_yf"].isin(shortlist_set).sum())
-            print(f"{i}/{len(seed)} enrichis… shortlist_seen≈{seen}, FH used≈{fh_calls}/{FINNHUB_MAX_CALLS}, TV used≈{tv_calls}/{TV_MAX_CALLS}")
+                            info=tk.get_info() or {}
+                            exch_hint=info.get("exchange") or info.get("fullExchangeName") or ""
+                        except Exception: pass
+                except Exception: pass
+                tv = get_tv_summary_max(tv_sym, yf_sym, exch_hint)
+                tv_calls += 1
+                if tv.get("tv_reco"): tv_ok += 1
+                else: tv_ko += 1
+                tv_results[yf_sym] = tv
+            else:
+                tv_results[yf_sym] = {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
+        print(f"[TV] shortlist_used={tv_calls}, ok={tv_ok}, ko={tv_ko}, pause_total≈{pause_spent:.1f}s")
+    else:
+        for rec in seed.itertuples(index=False):
+            tv_results[rec.ticker_yf] = {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
 
     if _tv_fail_log:
         save_csv(pd.DataFrame(_tv_fail_log), "tv_failures.csv")
 
+    # === PASS 3: Yahoo info (UNIQUEMENT shortlist) + assemblage final ===
+    rows = []
+    analyst_calls = 0
+    for i, rec in enumerate(seed.itertuples(index=False), 1):
+        tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
+        tech_bucket, tech_votes, last_price = rec.technical_local, rec.tech_score, rec.price
+        local_label = rec.local_label
+        avg_vol = rec.avg_vol_est
+        mcap = None; exch = ""; country = ""
+        info = {}
+        try:
+            if (yf_sym in shortlist_set) and (analyst_calls < ANALYST_TOP_CAP):
+                tk = yf.Ticker(yf_sym)
+                fi = getattr(tk, "fast_info", None)
+                mcap = getattr(fi, "market_cap", None) if fi else None
+                exch = (getattr(fi, "exchange", "") if fi else "") or ""
+                info = tk.get_info() or {}
+                if avg_vol is None:
+                    avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
+                if not exch:
+                    exch = info.get("exchange") or info.get("fullExchangeName") or ""
+                country = (info.get("country") or info.get("countryOfCompany") or "").strip()
+                analyst_calls += 1
+            # sinon: on garde avg_vol local + secteur/industrie depuis catalogue
+        except Exception:
+            info = {}
+
+        # Scope filters (light si infos manquantes : on ne coupe pas agressivement)
+        is_us_exchange = str(exch).upper() in {"NASDAQ", "NYSE", "AMEX", "BATS", "NYSEARCA", "NYSEMKT"}
+        out_of_scope = False
+        if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
+            out_of_scope = True
+        if isinstance(mcap, (int, float)) and mcap >= MAX_MARKET_CAP:
+            out_of_scope = True
+
+        tv = tv_results.get(yf_sym) or {"tv_reco": None}
+        fh = finnhub_map.get(yf_sym) or {"finnhub_label": None}
+
+        final_signal = fh.get("finnhub_label") or tv.get("tv_reco") or local_label
+
+        sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
+        sector_val   = sec_cat or ((info.get("sector") or "").strip() if info else "") or "Unknown"
+        industry_val = ind_cat or ((info.get("industry") or "").strip() if info else "") or "Unknown"
+
+        analyst_mean  = info.get("recommendationMean") if info else None
+        analyst_votes = info.get("numberOfAnalystOpinions") if info else None
+        analyst_bucket = analyst_bucket_from_mean(analyst_mean)
+
+        rows.append({
+            "ticker_tv": tv_sym, "ticker_yf": yf_sym,
+            "exchange": exch, "market_cap": mcap,
+            "price": float(last_price) if last_price is not None else None,
+            "sector": sector_val, "industry": industry_val,
+            "technical_local": tech_bucket, "tech_score": int(tech_votes) if tech_votes is not None else None,
+            "local_label": local_label,
+            "finnhub_label": fh.get("finnhub_label"),
+            "tv_reco": tv.get("tv_reco"),
+            "tv_symbol_used": tv.get("tv_symbol_used"),
+            "tv_exchange_used": tv.get("tv_exchange_used"),
+            "final_signal": final_signal,
+            "analyst_bucket": analyst_bucket,
+            "analyst_mean": analyst_mean, "analyst_votes": analyst_votes,
+            "avg_vol": avg_vol,
+            "out_of_scope": out_of_scope
+        })
+
+        if i % 200 == 0:
+            seen = int(seed.loc[:i-1, "ticker_yf"].isin(shortlist_set).sum())
+            print(f"{i}/{len(seed)} enrichis… shortlist_seen≈{seen}, analyst_calls≈{analyst_calls}/{ANALYST_TOP_CAP}")
+
     df = pd.DataFrame(rows)
     save_csv(df, "raw_candidates.csv")
-
     if df.empty:
         for name in [
             "debug_all_candidates.csv","confirmed_STRONGBUY.csv","anticipative_pre_signals.csv",
@@ -859,15 +802,14 @@ def main():
             save_csv(pd.DataFrame(), name)
         return
 
-    # === Univers du jour ===
+    # Univers du jour (optionnellement filtre out_of_scope)
     if not KEEP_FULL_UNIVERSE_IN_OUTPUTS:
         df = df[~df["out_of_scope"]].copy()
     save_csv(df.drop(columns=["out_of_scope"]), "universe_today.csv")
 
-    # === Scoring vectorisé ===
+    # Scoring
     df["rank_score"] = compute_rank_score(df)
 
-    # === Colonnes de base ===
     base_cols = [
         "ticker_tv","ticker_yf","price","market_cap","sector","industry",
         "technical_local","tech_score","local_label","finnhub_label",
@@ -875,42 +817,35 @@ def main():
         "final_signal","analyst_bucket","analyst_mean","analyst_votes","avg_vol","rank_score"
     ]
 
-    # ---- Confirmed (assoupli & plus réaliste) ----
+    # ---- Confirmed ----
     an_ok = df["analyst_bucket"].isin({"Strong Buy", "Buy"}) & (
         pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= CONFIRM_MIN_ANALYST_VOTES
     )
     fh_ok = df["finnhub_label"].isin({"BUY", "STRONG_BUY"})
     tv_ok = df["tv_reco"].eq("STRONG_BUY")
     ta_ok = (pd.to_numeric(df["tech_score"], errors="coerce").fillna(-99) >= CONFIRM_MIN_TECH_VOTES)
+    ta_strong = (df["local_label"].isin({"STRONG_BUY"}) &
+                 (pd.to_numeric(df["tech_score"], errors="coerce").fillna(-99) >= max(CONFIRM_MIN_TECH_VOTES, 5)))
     liq_ok = (pd.to_numeric(df["avg_vol"], errors="coerce").fillna(0) >= MIN_AVG_DAILY_VOLUME)
 
-    # Compteur de corroborations (diagnostic)
-    corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
+    EXTERNAL_PRESENT = (df["finnhub_label"].notna().any() or df["tv_reco"].notna().any())
 
-    # Porte A : final STRONG_BUY + ≥1 corroboration
-    mask_A = df["final_signal"].fillna("").astype(str).str.upper().eq("STRONG_BUY") & (corr_count >= 1)
+    if EXTERNAL_PRESENT:
+        corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
+        mask_A = df["final_signal"].fillna("").astype(str).str.upper().eq("STRONG_BUY") & (corr_count >= 1)
+        mask_B = tv_ok & (an_ok | ta_ok)
+        an_strong_enough = df["analyst_bucket"].eq("Strong Buy") & (
+            pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= 15
+        )
+        mask_C = an_strong_enough & (fh_ok | ta_ok)
+        mask_confirm = (mask_A | mask_B | mask_C) & liq_ok & (~df["out_of_scope"])
+        print(f"[CONFIRMED/ext] via A={int(mask_A.sum())}, via B={int((mask_B & liq_ok & (~df['out_of_scope'])).sum())}, via C={int((mask_C & liq_ok & (~df['out_of_scope'])).sum())}")
+    else:
+        mask_confirm = (an_ok | ta_strong) & liq_ok & (~df["out_of_scope"])
+        print("[CONFIRMED/local-only] externals missing → rule = (analyst ok) OR (strong local TA)")
 
-    # Porte B : TV = STRONG_BUY + (analyst Buy/Strong Buy OU TA forte)
-    mask_B = tv_ok & (an_ok | ta_ok)
-
-    # Porte C : Analyst = Strong Buy (≥15 votes) + (FH ok OU TA forte)
-    an_strong_enough = df["analyst_bucket"].eq("Strong Buy") & (
-        pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= 15
-    )
-    mask_C = an_strong_enough & (fh_ok | ta_ok)
-
-    # Assemblage final + filtres généraux
-    mask_confirm = (mask_A | mask_B | mask_C) & liq_ok & (~df["out_of_scope"])
     confirmed = df[mask_confirm].copy().sort_values(["rank_score", "market_cap"], ascending=[False, True])
     save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
-
-    # Log de contrôle
-    print(
-        f"[CONFIRMED] via A={int(mask_A.sum())}, "
-        f"via B={int((mask_B & liq_ok & (~df['out_of_scope'])).sum())}, "
-        f"via C={int((mask_C & liq_ok & (~df['out_of_scope'])).sum())}, "
-        f"total={len(confirmed)}"
-    )
 
     # Pré-signaux
     mask_pre = (
@@ -940,7 +875,7 @@ def main():
     all_out.sort_values(["candidate_type","rank_score","market_cap"], ascending=[True, False, True], inplace=True)
     save_csv(all_out[["candidate_type"]+base_cols], "candidates_all_ranked.csv")
 
-    # === Sector breadth (sur df complet du jour, hors out_of_scope & avec liquidité) ===
+    # === Sector breadth (hors out_of_scope & avec liquidité) ===
     df_sc = df[~df["out_of_scope"] & liq_ok].copy()
 
     def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
