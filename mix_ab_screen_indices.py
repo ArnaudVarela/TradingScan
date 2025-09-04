@@ -56,8 +56,8 @@ KEEP_FULL_UNIVERSE_IN_OUTPUTS = True    # garde tout le seed dans les outputs (m
 
 # === Ciblage externe sur un sous-ensemble (sniper mode) ===
 EXTERNAL_TARGET_MODE = "topk"   # "topk" ou "toppct"
-EXTERNAL_TOP_K = 150            # ~10–20% de l’univers
-EXTERNAL_TOP_PCT = 0.15         # si mode "toppct", 15% de l’univers
+EXTERNAL_TOP_K = 100            # ~10–20% de l’univers
+EXTERNAL_TOP_PCT = 0.10         # si mode "toppct", 15% de l’univers
 EXTERNAL_TOP_MIN = 80           # minimum ciblé
 
 # ---- Confirmed tuning (assoupli & réaliste) ----
@@ -165,36 +165,50 @@ def fetch_sp500_tickers():
 def fetch_nasdaq_composite():
     """
     Récupère tous les tickers listés sur le NASDAQ via l'endpoint screener.
-    NB: c'est 'tout Nasdaq' (Composite-like), pas seulement le Nasdaq-100.
+    Filtre fort:
+      - schéma symbole: 1–5 lettres (A–Z), éventuellement suffixe . ou - + 1–2 lettres
+      - accepte suffixes unit/warrant les plus courants (U, W, R) ex: ABCD, ABCDW, ABCDU
+      - rejette tout 'mot' sectoriel (AIRLINES, BANKS, etc.)
+      - filtre ETF/ETN/FUND/TRUST dans le 'name'
     """
     url = "https://api.nasdaq.com/api/screener/stocks"
-    params = {"tableonly": "true", "limit": "9999", "exchange": "nasdaq"}  # 9999 pour tout ramener
+    params = {"tableonly": "true", "limit": "9999", "exchange": "nasdaq"}
     headers = {
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)",
         "Accept": "application/json, text/plain, */*",
         "Referer": "https://www.nasdaq.com/market-activity/stocks/screener",
         "Origin": "https://www.nasdaq.com",
-        "Connection": "keep-alive",
     }
-    try:
-        r = requests.get(url, headers=headers, params=params, timeout=45)
-        r.raise_for_status()
-        js = r.json()
-    except Exception as e:
-        raise RuntimeError(f"Nasdaq API error: {e}")
+    r = requests.get(url, headers=headers, params=params, timeout=45)
+    r.raise_for_status()
+    js = r.json()
 
     rows = (((js or {}).get("data") or {}).get("table") or {}).get("rows") or []
     out = []
+    bad_words = {"AIRLINES","BANK","BANKS","ENERGY","MEDIA","EURO","CURRENCY","CHINA",
+                 "CANADA","BELGIUM","ISRAEL","IRELAND","PANAMA","BERMUDA","SWEDEN",
+                 "SOFTWARE","TOBACCO","GRAILINC","DOLEPLC","XPERIINC","STEPANCO","IBEXLTD","ENERSYS","DELEK"}
+    import re
+    pat_core   = re.compile(r"^[A-Z]{1,5}$")                    # core 1–5 letters
+    pat_suffix = re.compile(r"^[A-Z]{1,5}[.-][A-Z]{1,2}$")      # . or - + 1–2 letters
+    pat_spac   = re.compile(r"^[A-Z]{1,5}[UWR]$")               # SPAC units/warrants/rights
+
     for row in rows:
         sym = str(row.get("symbol") or "").strip().upper()
         name = str(row.get("name") or "").strip().upper()
-        if NASDAQ_EXCLUDE_ETFS:
-            if any(tag in name for tag in ("ETF", "ETN", "FUND", "TRUST")):
-                continue
-        if sym and pd.notna(sym) and (len(sym) <= 8) and \
-           (pd.Series([sym]).str.match(r"^[A-Z.\-]+$").iloc[0]):
-            out.append(sym)
-    return list(dict.fromkeys(out))  # dédoublonne en gardant l'ordre
+
+        if NASDAQ_EXCLUDE_ETFS and any(tag in name for tag in ("ETF","ETN","FUND","TRUST")):
+            continue
+        if not sym or sym in bad_words:
+            continue
+
+        if not (pat_core.match(sym) or pat_suffix.match(sym) or pat_spac.match(sym)):
+            continue
+
+        out.append(sym)
+
+    return list(dict.fromkeys(out))
+
 
 def _read_tickers_csv(path: str, colname: str = "Ticker") -> list:
     if not os.path.exists(path):
@@ -739,6 +753,39 @@ def main():
 
         try:
             tk = yf.Ticker(yf_sym)
+            # inside the for ... enrich loop, after tk = yf.Ticker(yf_sym) and fi = tk.fast_info:
+            info = {}
+            mcap = getattr(fi, "market_cap", None)
+            avg_vol = None
+            try:
+                if fi:
+                avg_vol = getattr(fi, "ten_day_average_volume", None) or getattr(fi, "three_month_average_volume", None)
+            except Exception:
+                pass
+
+            # Only for shortlist: heavy call
+            if yf_sym in shortlist_set:
+                try:
+                    info = tk.get_info() or {}
+                    if mcap is None:
+                        mcap = info.get("marketCap")
+                    if avg_vol is None:
+                        avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
+                except Exception:
+                    info = {}
+            else:
+                info = {}  # keep light
+
+            # …then derive sector/industry:
+            sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
+            sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
+            industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
+
+            # analysts only available if we did get_info (i.e., shortlist)
+            analyst_mean  = info.get("recommendationMean") if info else None
+            analyst_votes = info.get("numberOfAnalystOpinions") if info else None
+            analyst_bucket = analyst_bucket_from_mean(analyst_mean)
+
             fi = getattr(tk, "fast_info", None)
             mcap = getattr(fi, "market_cap", None)
 
