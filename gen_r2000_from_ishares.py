@@ -1,134 +1,83 @@
 # gen_r2000_from_ishares.py
-# -----------------------------------------------------------------------------
-# Sources: SPDR (principal) + Schwab SCHA (optionnel, parfois 403).
-# Produit russell2000.csv à la racine ET le copie vers dashboard/public/.
-# -----------------------------------------------------------------------------
+# Génère russell2000.csv (liste complète) depuis le fichier officiel SSGA (IWM ETF)
 
-import io, re, sys, os, shutil, requests
+import os
 import pandas as pd
-from requests.adapters import HTTPAdapter, Retry
+import requests
 
-URL_SPDR = "https://www.ssga.com/library-content/products/fund-data/etfs/emea/holdings-daily-emea-en-zprr-gy.xlsx"
-URL_SCHA = "https://www.schwabassetmanagement.com/allholdings/SCHA"
-OUTPUT = "russell2000.csv"
-
-UA = {
-    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
-    "Referer": "https://www.schwabassetmanagement.com/"
-}
-
-EXCH_SUFFIX = re.compile(r"(\s+|\.)(US|UN|UW|UQ|UR|N|OQ|K|LN|GY|FP|NA|IM|SM|HK|JP|CN|SW|AU)\b.*", re.IGNORECASE)
-RIC_LONG = re.compile(r"\.[A-Z]{2,4}$")
-CLASS_DOT = re.compile(r"^[A-Z][A-Z0-9]{0,5}\.[A-Z]$")
-TICK_RX = re.compile(r"^[A-Z][A-Z0-9]{0,7}(\.[A-Z])?$")
-BAD_VALUES = {"", "ISIN", "USD", "CASH", "FX", "SWAP", "OPTION", "FUT", "FUTURES", "N/A", "NA", "NONE", "-", "—"}
-
+OUTFILE = "russell2000.csv"
 PUBLIC_DIR = os.path.join("dashboard", "public")
 
+# Lien direct vers les holdings de l’ETF IWM (SPDR Russell 2000 ETF)
+SSGA_IWM_XLSX = "https://www.ssga.com/library-content/products/fund-data/etfs/us/holdings-daily-us-en-iwm.xlsx"
 
-def mk_sess():
-    s = requests.Session()
-    r = Retry(total=3, backoff_factor=0.6, status_forcelist=[429, 500, 502, 503, 504])
-    s.mount("https://", HTTPAdapter(max_retries=r))
-    s.mount("http://", HTTPAdapter(max_retries=r))
-    return s
+def _ensure_dir(p: str):
+    d = os.path.dirname(p)
+    if d and not os.path.exists(d):
+        os.makedirs(d, exist_ok=True)
 
-
-def normalize_candidate(x: str) -> str | None:
-    if not isinstance(x, str):
-        return None
-    v = x.strip().upper()
-    if not v or v in BAD_VALUES:
-        return None
-    v = v.replace("/", ".").replace(" EQUITY", "")
-    v = EXCH_SUFFIX.sub("", v).strip()
-    if RIC_LONG.search(v):
-        v = RIC_LONG.sub("", v)
-    v = re.sub(r"\s+", "", v)
-    if TICK_RX.fullmatch(v) or CLASS_DOT.fullmatch(v):
-        return v
-    return None
-
-
-def parse_spdr() -> set[str]:
-    sess = mk_sess()
-    r = sess.get(URL_SPDR, timeout=60)
+def fetch_r2000_from_ssga():
+    """Télécharge et parse l'Excel officiel de SSGA pour IWM (Russell 2000 ETF)."""
+    r = requests.get(SSGA_IWM_XLSX, timeout=60)
     r.raise_for_status()
-    xls = pd.ExcelFile(io.BytesIO(r.content), engine="openpyxl")
-    ticks: set[str] = set()
+    local_path = "iwm_holdings.xlsx"
+    with open(local_path, "wb") as f:
+        f.write(r.content)
+
+    # Lecture Excel (souvent 2-3 lignes d'entête, on cherche la colonne 'Ticker')
+    xls = pd.ExcelFile(local_path)
+    df = None
     for sheet in xls.sheet_names:
-        df = pd.read_excel(xls, sheet_name=sheet)
-        for col in df.columns:
-            ser = df[col].dropna().astype(str)
-            for raw in ser:
-                t = normalize_candidate(raw)
-                if t:
-                    ticks.add(t)
-    print(f"[SPDR] {len(ticks)} tickers")
-    return ticks
+        try:
+            tmp = pd.read_excel(local_path, sheet_name=sheet)
+            # Cherche une colonne contenant 'Ticker' ou 'Symbol'
+            cols = [str(c).lower() for c in tmp.columns]
+            if any("ticker" in c or "symbol" in c for c in cols):
+                df = tmp
+                break
+        except Exception:
+            continue
 
+    if df is None or df.empty:
+        raise RuntimeError("Impossible de trouver une colonne Ticker dans le fichier IWM téléchargé.")
 
-def parse_scha() -> set[str]:
-    sess = mk_sess()
-    r = sess.get(URL_SCHA, headers=UA, timeout=60)
-    r.raise_for_status()  # peut lever 403
-    tables = pd.read_html(r.text)
-    ticks: set[str] = set()
-    for t in tables:
-        for col in t.columns:
-            ser = t[col].dropna().astype(str)
-            for raw in ser:
-                tck = normalize_candidate(raw)
-                if tck:
-                    ticks.add(tck)
-    print(f"[SCHA] {len(ticks)} tickers")
-    return ticks
+    # Normalisation tickers
+    ticker_col = None
+    for c in df.columns:
+        if "ticker" in str(c).lower() or "symbol" in str(c).lower():
+            ticker_col = c
+            break
 
+    tickers = (
+        df[ticker_col]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+        .dropna()
+        .tolist()
+    )
 
-def _write_root_and_public(df: pd.DataFrame, name: str):
-    # Écrit à la racine
-    df.to_csv(name, index=False)
-    print(f"[OK] root  {name}: {len(df)} rows")
+    # Nettoyage : uniquement A-Z . -
+    tickers = [t for t in tickers if pd.Series([t]).str.match(r"^[A-Z.\-]+$").iloc[0]]
+    tickers = list(dict.fromkeys(tickers))  # dédoublonne
 
-    # Copie vers dashboard/public
-    dst = os.path.join(PUBLIC_DIR, name)
-    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    return tickers
+
+def save_csv(tickers, path):
+    df = pd.DataFrame({"Ticker": tickers})
+    _ensure_dir(path)
+    df.to_csv(path, index=False)
+    dst = os.path.join(PUBLIC_DIR, os.path.basename(path))
+    _ensure_dir(dst)
     df.to_csv(dst, index=False)
-    print(f"[OK] public {name}: {len(df)} rows (copied)")
-
 
 def main():
-    # Toujours définir spdr/scha, même en cas d’échec
-    spdr: set[str] = set()
-    scha: set[str] = set()
-
-    # SPDR d’abord (source principale)
     try:
-        spdr = parse_spdr()
+        tickers = fetch_r2000_from_ssga()
+        print(f"[OK] Russell 2000 récupéré: {len(tickers)} tickers")
+        save_csv(tickers, OUTFILE)
     except Exception as e:
-        print(f"[ERROR] SPDR fetch failed: {e}")
-        if not spdr:
-            sys.exit(2)
-
-    # SCHA optionnel (peut souvent renvoyer 403)
-    try:
-        scha = parse_scha()
-    except Exception as e:
-        print(f"[WARN] SCHA fetch failed: {e}")
-        scha = set()
-
-    union = sorted(spdr.union(scha))
-    print(f"[MERGED] total unique tickers: {len(union)}")
-
-    # On écrit même si c’est “que” SPDR (ex: 1200–1800 tickers)
-    if len(union) < 500:
-        print("❌ Extraction trop faible — vérifie les sources.")
-        sys.exit(2)
-
-    df = pd.DataFrame({"Ticker": union})
-    _write_root_and_public(df, OUTPUT)
-
-    print("✅ Univers Russell2000 mis à jour.")
+        print(f"[ERROR] Impossible de générer russell2000.csv: {e}")
 
 if __name__ == "__main__":
     main()
