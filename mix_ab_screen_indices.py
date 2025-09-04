@@ -4,15 +4,16 @@
 #   - confirmed_STRONGBUY.csv
 #   - anticipative_pre_signals.csv
 #   - event_driven_signals.csv
-#   - candidates_all_ranked.csv
+#   - candidates_all_ranked.csv   (inclut désormais un bucket 'universe' = tout le seed)
+#   - universe_today.csv          (diagnostic : tout l’univers avec TA/TV/analystes)
 #   - debug_all_candidates.csv
-#   - sector_history.csv
 #   - sector_breadth.csv
+#   - sector_history.csv
 #   - signals_history.csv
 #   - raw_candidates.csv (diag brut)
 #   - tv_failures.csv (diagnostic TradingView)
 
-import warnings, time, os, math, random
+import warnings, time, os, math, random, re
 import requests
 import pandas as pd
 import numpy as np
@@ -34,18 +35,25 @@ PERIOD   = "1y"
 INTERVAL = "1d"
 TV_INTERVAL = Interval.INTERVAL_1_DAY
 
-# Gating pour limiter les appels lents (TV/externes)
+# Gating = sert à PRIORISER les appels lents (ne filtre plus les sorties)
 GATE_MIN_TECH_VOTES = 2
-GATE_TV_ONLY_STRONG = True
 
-# Limites & timings
+# TradingView budget & throttling
+TV_MAX_CALLS = 450          # cap global d'appels TV par run (priorisés)
+DELAY_BETWEEN_TV_CALLS_SEC = 0.10   # base delay + jitter
+TV_COOLDOWN_EVERY = 25       # toutes les 25 requêtes, on fait une pause
+TV_COOLDOWN_SEC   = 2.0
+TV_MAX_CONSEC_FAIL = 12      # si trop d'échecs d'affilée -> pause
+TV_FAIL_PAUSE_SEC  = 8.0
+TV_MAX_PAUSE_TOTAL = 60.0    # ne pas dépasser Xs de pause cumulée liée à la protection
+
+# Limites
 MAX_MARKET_CAP = 200_000_000_000     # < 200B
-DELAY_BETWEEN_TV_CALLS_SEC = 0.05    # 50ms pour limiter le spam TV
 
 # Sources
-USE_ANALYSTS  = True     # remets à False si timing serré
+USE_ANALYSTS  = True
 USE_INVESTING = False
-USE_BARCHART  = True
+USE_BARCHART  = True  # stub dessous (à brancher si tu as une clé API)
 
 # Budget externes si tu actives Investing/BarChart (optionnel)
 EXTERNAL_MAX   = 120
@@ -200,7 +208,6 @@ def analyst_bucket_from_mean(x):
 
 # ===== BULK HISTORY + FALLBACK =====
 def _bulk_download_chunk(symbols, period="1y", interval="1d"):
-    """Télécharge un chunk de symboles en une fois."""
     data = yf.download(
         symbols, period=period, interval=interval,
         auto_adjust=True, actions=False, progress=False, group_by="ticker", threads=True
@@ -217,22 +224,16 @@ def _bulk_download_chunk(symbols, period="1y", interval="1d"):
                 except Exception:
                     continue
     else:
-        # cas 1 symbole
         df = data.dropna()
         if not df.empty and len(symbols) == 1:
             out[symbols[0]] = df
     return out
 
 def bulk_download_history(yf_symbols, period="1y", interval="1d", chunk_size=200, fallback_limit=None):
-    """
-    Téléchargement groupé par chunks + fallback par symbole manquant.
-    fallback_limit: limite max de fallback per-ticker (None = tous)
-    """
     if not yf_symbols:
         return {}
     yf_symbols = list(dict.fromkeys(yf_symbols))  # dédoublonne en gardant l'ordre
 
-    # Pass 1: chunks
     all_hist = {}
     for i in range(0, len(yf_symbols), chunk_size):
         sub = yf_symbols[i:i+chunk_size]
@@ -240,19 +241,16 @@ def bulk_download_history(yf_symbols, period="1y", interval="1d", chunk_size=200
             part = _bulk_download_chunk(sub, period=period, interval=interval)
             all_hist.update(part)
         except Exception:
-            # on continue même si un chunk plante
             continue
 
     missing = [s for s in yf_symbols if s not in all_hist]
-    # Pass 2: fallback par symbole manquant (rapide, on s'arrête dès qu'on a >=60 barres)
     count_fb = 0
     for sym in missing:
         if (fallback_limit is not None) and (count_fb >= fallback_limit):
             break
         try:
             tk = yf.Ticker(sym)
-            df = tk.history(period=period, interval=interval, auto_adjust=True, actions=False)
-            df = df.dropna()
+            df = tk.history(period=period, interval=interval, auto_adjust=True, actions=False).dropna()
             if not df.empty and len(df) >= 60:
                 all_hist[sym] = df
                 count_fb += 1
@@ -270,11 +268,13 @@ def fetch_investing_summary(base_symbol: str):
             "inv_d_vote":None,"inv_w_vote":None,"inv_m_vote":None}
 
 def fetch_barchart_opinion(base_symbol: str):
-    # stub : à brancher si tu veux scorer le bc_score/bc_label
+    # stub : à brancher si tu as une clé API BarChart
     return {"bc_score":None, "bc_label":None}
 
-# ========= TRADINGVIEW: MAX COVERAGE =========
+# ========= TRADINGVIEW: MAX COVERAGE + ADAPTIVE THROTTLE =========
 TV_EXCH_TRY = ["NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"]
+_tv_cache = {}     # (symbol, exchange, interval) -> reco
+_tv_fail_log = []  # liste des échecs (pour tv_failures.csv)
 
 def tv_symbol_variants(tv_symbol: str, yf_symbol: str):
     s = (tv_symbol or "").upper()
@@ -299,10 +299,7 @@ def tv_symbol_variants(tv_symbol: str, yf_symbol: str):
             out.append(v)
     return out
 
-_tv_cache = {}     # (symbol, exchange, interval) -> reco
-_tv_fail_log = []  # liste des échecs (pour tv_failures.csv)
-
-def _tv_try(symbol: str, exchange: str, interval=TV_INTERVAL, retries=2):
+def _tv_try(symbol: str, exchange: str, interval=TV_INTERVAL, retries=1):
     key = (symbol, exchange, interval)
     if key in _tv_cache:
         return _tv_cache[key]
@@ -313,12 +310,15 @@ def _tv_try(symbol: str, exchange: str, interval=TV_INTERVAL, retries=2):
             s = h.get_analysis().summary
             reco = s.get("RECOMMENDATION")
             _tv_cache[key] = reco
-            if DELAY_BETWEEN_TV_CALLS_SEC:
-                time.sleep(DELAY_BETWEEN_TV_CALLS_SEC + random.uniform(0, 0.02))
+            # petite pause + jitter
+            base = DELAY_BETWEEN_TV_CALLS_SEC
+            if base:
+                time.sleep(base + random.uniform(0, 0.03))
             return reco
         except Exception as e:
             last_err = str(e)
-            time.sleep(0.03 + 0.03*attempt)
+            # backoff léger
+            time.sleep(0.04 + 0.06*attempt)
     _tv_cache[key] = None
     _tv_fail_log.append({"symbol":symbol, "exchange":exchange, "err":last_err or "unknown"})
     return None
@@ -387,71 +387,80 @@ def main():
     print(f"[INFO] Seed avec TA local (>=60 barres): {len(seed)}/{len(tickers_df)}")
 
     if seed.empty:
-        print("⚠️ Aucun titre collecté après TA local (pass 1).")
-        save_csv(pd.DataFrame(columns=[
-            "ticker_tv","ticker_yf","price","market_cap","sector","industry",
-            "technical_local","tv_reco","analyst_bucket"
-        ]), "debug_all_candidates.csv")
-        # fichiers vides pour le front
-        empty_cols = ["ticker_tv","ticker_yf","price","market_cap","sector","industry",
-                      "technical_local","tech_score","tv_reco","analyst_bucket",
-                      "analyst_mean","analyst_votes","rank_score",
-                      "inv_d_label","inv_w_label","inv_m_label",
-                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label",
-                      "tv_symbol_used","tv_exchange_used"]
-        empty = pd.DataFrame(columns=empty_cols)
-        save_csv(empty, "confirmed_STRONGBUY.csv")
-        save_csv(empty, "anticipative_pre_signals.csv")
-        save_csv(empty, "event_driven_signals.csv")
-        save_csv(pd.DataFrame(columns=["candidate_type"]+empty_cols), "candidates_all_ranked.csv")
-        save_csv(pd.DataFrame(columns=["sector","universe","confirmed","pre","events",
-                                       "pct_confirmed","pct_pre","pct_events",
-                                       "breadth","z_breadth","wow_pct_confirmed"]),
-                 "sector_breadth.csv")
-        return
-
-    # Gate initial
-    seed = seed[seed["tech_score"].fillna(0) >= GATE_MIN_TECH_VOTES].reset_index(drop=True)
-    print(f"[INFO] Après gate (tech_votes>={GATE_MIN_TECH_VOTES}): {len(seed)}")
-
-    if seed.empty:
-        print("⚠️ Gate TA trop strict, aucun titre retenu.")
         # sorties vides cohérentes
-        empty_cols = ["ticker_tv","ticker_yf","price","market_cap","sector","industry",
-                      "technical_local","tech_score","tv_reco","analyst_bucket",
-                      "analyst_mean","analyst_votes","rank_score",
-                      "inv_d_label","inv_w_label","inv_m_label",
-                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label",
-                      "tv_symbol_used","tv_exchange_used"]
-        empty = pd.DataFrame(columns=empty_cols)
-        save_csv(empty, "raw_candidates.csv")
-        save_csv(empty, "confirmed_STRONGBUY.csv")
-        save_csv(empty, "anticipative_pre_signals.csv")
-        save_csv(empty, "event_driven_signals.csv")
-        save_csv(pd.DataFrame(columns=["candidate_type"]+empty_cols), "candidates_all_ranked.csv")
-        save_csv(pd.DataFrame(columns=["sector","universe","confirmed","pre","events",
-                                       "pct_confirmed","pct_pre","pct_events",
-                                       "breadth","z_breadth","wow_pct_confirmed"]),
-                 "sector_breadth.csv")
+        for name in [
+            "debug_all_candidates.csv","confirmed_STRONGBUY.csv","anticipative_pre_signals.csv",
+            "event_driven_signals.csv","candidates_all_ranked.csv","sector_breadth.csv",
+            "universe_today.csv","raw_candidates.csv"
+        ]:
+            save_csv(pd.DataFrame(), name)
         return
 
-    # Budget externes
-    budget_total = EXTERNAL_MAX
-    if USE_INVESTING and USE_BARCHART:
-        budget_inv = int(EXTERNAL_SPLIT[0]*budget_total)
-        budget_bc  = budget_total - budget_inv
-    else:
-        budget_inv = budget_total if USE_INVESTING else 0
-        budget_bc  = budget_total if USE_BARCHART  else 0
-    used_inv = used_bc = 0
+    # === PASS 2: Info Yahoo & TV (budgetisé/priorisé), externes sous budget ===
+    # 2a) Prépare ranking pour PRIORISER les appels TV/externes
+    seed = seed.sort_values(["tech_score"], ascending=[False]).reset_index(drop=True)
 
-    # === PASS 2: Info/TV/externes sur sous-ensemble ===
-    rows = []
-    bc_hits = ivg_hits = 0
-
-    seed = seed.sort_values(["tech_score"], ascending=False).reset_index(drop=True)
-
+    # 2b) Appels TV priorisés (budget + throttle adaptatif)
+    tv_budget = min(TV_MAX_CALLS, len(seed))
     tv_ok = tv_ko = 0
+    consec_fail = 0
+    pause_spent = 0.0
+
+    # Pour éviter de perdre l'univers en sortie, on prépare un dict résultat par ticker
+    tv_results = {}
+
+    for idx, rec in enumerate(seed.itertuples(index=False), 1):
+        tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
+        if idx <= tv_budget:
+            # cooldown périodique
+            if idx % TV_COOLDOWN_EVERY == 0 and pause_spent < TV_MAX_PAUSE_TOTAL:
+                time.sleep(TV_COOLDOWN_SEC)
+                pause_spent += TV_COOLDOWN_SEC
+
+            # On a besoin de l'exchange hint -> via fast_info/get_info léger
+            exch_hint = ""
+            try:
+                info = {}
+                tk = yf.Ticker(yf_sym)
+                fi = getattr(tk, "fast_info", None)
+                exch_hint = getattr(fi, "exchange", None) or ""
+                if not exch_hint:
+                    try:
+                        info = tk.get_info() or {}
+                        exch_hint = info.get("exchange") or info.get("fullExchangeName") or ""
+                    except Exception:
+                        info = {}
+            except Exception:
+                pass
+
+            tv = get_tv_summary_max(tv_sym, yf_sym, exch_hint)
+            if tv.get("tv_reco"):
+                tv_ok += 1
+                consec_fail = 0
+            else:
+                tv_ko += 1
+                consec_fail += 1
+                # si avalanche d'échecs → petite pause (probable ratelimit)
+                if consec_fail >= TV_MAX_CONSEC_FAIL and pause_spent < TV_MAX_PAUSE_TOTAL:
+                    time.sleep(TV_FAIL_PAUSE_SEC)
+                    pause_spent += TV_FAIL_PAUSE_SEC
+                    consec_fail = 0
+            tv_results[yf_sym] = tv
+        else:
+            # Pas d'appel TV (budget dépassé) → None
+            tv_results[yf_sym] = {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
+
+    print(f"[TV] budget={tv_budget}, ok={tv_ok}, ko={tv_ko}, pause_total≈{pause_spent:.1f}s")
+
+    # 2c) Enrichissements Yahoo (analystes, secteurs, mcap) + externes sous budget
+    rows = []
+    used_inv = used_bc = 0
+    if USE_INVESTING and USE_BARCHART:
+        budget_inv = int(EXTERNAL_SPLIT[0]*EXTERNAL_MAX)
+        budget_bc  = EXTERNAL_MAX - budget_inv
+    else:
+        budget_inv = EXTERNAL_MAX if USE_INVESTING else 0
+        budget_bc  = EXTERNAL_MAX if USE_BARCHART else 0
 
     for i, rec in enumerate(seed.itertuples(index=False), 1):
         tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
@@ -459,8 +468,6 @@ def main():
 
         try:
             tk = yf.Ticker(yf_sym)
-
-            # fast_info pour market_cap; get_info si nécessaire
             fi = getattr(tk, "fast_info", None)
             mcap = getattr(fi, "market_cap", None)
             info = {}
@@ -476,29 +483,24 @@ def main():
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
             tv_exchange_hint = map_exchange_for_tv(exch)
 
-            # Filtre US + Market Cap ici
+            # Filtre US + Market Cap (pour la suite des sorties — mais on garde universe_today pour tous seed)
             is_us_exchange = str(exch).upper() in {"NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"}
             if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
                 continue
             if isinstance(mcap,(int,float)) and mcap >= MAX_MARKET_CAP:
                 continue
 
-            # TradingView max coverage
-            tv = get_tv_summary_max(tv_sym, yf_sym, tv_exchange_hint)
-            if tv.get("tv_reco"): tv_ok += 1
-            else: tv_ko += 1
+            tv = tv_results.get(yf_sym) or {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
 
-            # Analystes (optionnel)
             analyst_mean  = info.get("recommendationMean") if USE_ANALYSTS else None
             analyst_votes = info.get("numberOfAnalystOpinions") if USE_ANALYSTS else None
             analyst_bucket = analyst_bucket_from_mean(analyst_mean) if USE_ANALYSTS else None
 
-            # Secteurs
             sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
             sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
             industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
 
-            # Externals (budgetisés)
+            # Externals (optionnels et budgetisés)
             inv = {"inv_d_label":None,"inv_w_label":None,"inv_m_label":None,
                    "inv_d_vote":None,"inv_w_vote":None,"inv_m_vote":None}
             bc  = {"bc_score":None,"bc_label":None}
@@ -511,15 +513,9 @@ def main():
 
             if promising:
                 if USE_INVESTING and used_inv < budget_inv:
-                    inv = fetch_investing_summary(base_sym(tv_sym))
-                    used_inv += 1
-                    if any([inv.get("inv_d_vote"), inv.get("inv_w_vote"), inv.get("inv_m_vote")]):
-                        ivg_hits += 1
+                    inv = fetch_investing_summary(base_sym(tv_sym)); used_inv += 1
                 if USE_BARCHART and used_bc < budget_bc:
-                    bc = fetch_barchart_opinion(base_sym(tv_sym))
-                    used_bc += 1
-                    if bc.get("bc_score") is not None or bc.get("bc_label"):
-                        bc_hits += 1
+                    bc = fetch_barchart_opinion(base_sym(tv_sym)); used_bc += 1
 
             rows.append({
                 "ticker_tv": tv_sym, "ticker_yf": yf_sym,
@@ -539,7 +535,7 @@ def main():
             continue
 
         if i % 50 == 0:
-            print(f"{i}/{len(seed)} retenus… TV ok/ko: {tv_ok}/{tv_ko} (ivg_hits={ivg_hits}, bc_hits={bc_hits})")
+            print(f"{i}/{len(seed)} enrichis… (TV used {min(i,tv_budget)}/{tv_budget}, inv_used={used_inv}/{budget_inv}, bc_used={used_bc}/{budget_bc})")
 
     # Sauvegarde des échecs TV pour diagnostic
     if _tv_fail_log:
@@ -549,32 +545,22 @@ def main():
 
     # dump brut diag
     save_csv(df, "raw_candidates.csv")
-    print(f"[DIAG] rows collectées: {len(df)} — TV ok/ko: {tv_ok}/{tv_ko}")
 
+    # ========== Sorties ==========
     if df.empty:
-        print("⚠️ Aucun titre collecté après filtres US + MCAP + TA local (pass 2).")
-        save_csv(pd.DataFrame(columns=[
-            "ticker_tv","ticker_yf","price","market_cap","sector","industry",
-            "technical_local","tv_reco","analyst_bucket"
-        ]), "debug_all_candidates.csv")
-        empty_cols = ["ticker_tv","ticker_yf","price","market_cap","sector","industry",
-                      "technical_local","tech_score","tv_reco","analyst_bucket",
-                      "analyst_mean","analyst_votes","rank_score",
-                      "inv_d_label","inv_w_label","inv_m_label",
-                      "inv_d_vote","inv_w_vote","inv_m_vote","bc_score","bc_label",
-                      "tv_symbol_used","tv_exchange_used"]
-        empty = pd.DataFrame(columns=empty_cols)
-        save_csv(empty, "confirmed_STRONGBUY.csv")
-        save_csv(empty, "anticipative_pre_signals.csv")
-        save_csv(empty, "event_driven_signals.csv")
-        save_csv(pd.DataFrame(columns=["candidate_type"]+empty_cols), "candidates_all_ranked.csv")
-        save_csv(pd.DataFrame(columns=["sector","universe","confirmed","pre","events",
-                                       "pct_confirmed","pct_pre","pct_events",
-                                       "breadth","z_breadth","wow_pct_confirmed"]),
-                 "sector_breadth.csv")
+        # fichiers vides cohérents
+        for name in [
+            "debug_all_candidates.csv","confirmed_STRONGBUY.csv","anticipative_pre_signals.csv",
+            "event_driven_signals.csv","candidates_all_ranked.csv","sector_breadth.csv",
+            "universe_today.csv"
+        ]:
+            save_csv(pd.DataFrame(), name)
         return
 
-    # ====== Scoring & sorties ======
+    # 0) universe_today.csv : TOUT l’univers vu aujourd’hui (après filtres US/MCAP)
+    save_csv(df.copy(), "universe_today.csv")
+
+    # Scoring
     dbg = df.copy()
     def rank_score_row(s: pd.Series) -> float:
         score = 0.0
@@ -632,17 +618,24 @@ def main():
     evt.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(evt[confirmed_cols], "event_driven_signals.csv")
 
-    # 4) Mix comparatif
+    # 4) Mix comparatif — inclut désormais UNIVERSE
+    others_idx = df.index.difference(pd.concat([confirmed, pre, evt]).index)
+    universe_rest = df.loc[others_idx].copy()
+    universe_rest["rank_score"] = universe_rest.apply(rank_score_row, axis=1)
+    universe_rest.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
+
     all_out = pd.concat([
         confirmed.assign(candidate_type="confirmed"),
         pre.assign(candidate_type="anticipative"),
-        evt.assign(candidate_type="event")
+        evt.assign(candidate_type="event"),
+        universe_rest.assign(candidate_type="universe"),  # << NEW
     ], ignore_index=True)
-    all_out.sort_values(["rank_score","candidate_type","market_cap"], ascending=[False, True, True], inplace=True)
+
+    all_out.sort_values(["candidate_type","rank_score","market_cap"], ascending=[True, False, True], inplace=True)
     all_cols = ["candidate_type"] + confirmed_cols
     save_csv(all_out[all_cols], "candidates_all_ranked.csv")
 
-    # 5) Sector breadth
+    # 5) Sector breadth (sur df complet du jour)
     def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
         return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
 
@@ -659,6 +652,7 @@ def main():
     pct_evt  = (c_evt  / univ.replace(0, np.nan) * 100).fillna(0)
 
     breadth = (2*pct_conf + 1*pct_pre - 1*pct_evt)
+    z_breadth = (breadth - breadth.mean()) / (breadth.std(ddof=1) or 1)
 
     # Momentum WoW depuis sector_history.csv (Si pas dispo -> 0)
     hist_path = "sector_history.csv"
@@ -674,8 +668,6 @@ def main():
             prev_univ = prev.groupby("sector")["count"].sum()
             prev_pct_conf = (prev_conf / prev_univ.replace(0,np.nan) * 100).fillna(0)
             wow_conf = (pct_conf - prev_pct_conf.reindex(univ.index).fillna(0))
-
-    z_breadth = (breadth - breadth.mean()) / (breadth.std(ddof=1) or 1)
 
     sector_breadth = pd.DataFrame({
         "sector": univ.index,
@@ -756,7 +748,6 @@ def main():
     hist_blocks.append(_append_signals("events",    evt))
     hist_all = pd.concat(hist_blocks, ignore_index=True)
 
-    # Dédupe (même date + même ticker_yf + bucket) — FIX SyntaxError ici
     if os.path.exists(SIGNALS_CSV):
         try:
             prev = pd.read_csv(SIGNALS_CSV)
@@ -772,10 +763,11 @@ def main():
     merged = merged.drop_duplicates(subset="__k").drop(columns="__k")
     save_csv(merged, SIGNALS_CSV)
 
+    # Stats de remplissage
     fill_tv = df["tv_reco"].notna().mean() if not df.empty else 0.0
     fill_an = df["analyst_bucket"].notna().mean() if not df.empty else 0.0
     fill_bc = ((df["bc_label"].notna()) | (df["bc_score"].notna())).mean() if not df.empty else 0.0
-    print(f"[OK] confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, all={len(all_out)} — TV fill={fill_tv:.0%}, Analysts fill={fill_an:.0%}, BC fill={fill_bc:.0%}")
+    print(f"[OK] universe={len(df)} (après filtres US/MCAP), confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, universe_rest={len(universe_rest)}, all={len(all_out)} — TV fill={fill_tv:.0%}, Analysts fill={fill_an:.0%}, BC fill={fill_bc:.0%}")
 
 if __name__ == "__main__":
     main()
