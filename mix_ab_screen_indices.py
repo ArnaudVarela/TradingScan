@@ -45,7 +45,7 @@ DELAY_BETWEEN_TV_CALLS_SEC = 0.05    # 50ms pour limiter le spam TV
 # Sources
 USE_ANALYSTS  = True     # tu peux le remettre à False si timing serré
 USE_INVESTING = False
-USE_BARCHART  = False
+USE_BARCHART  = True
 
 # Budget externes si tu actives Investing/BarChart (optionnel)
 EXTERNAL_MAX   = 120
