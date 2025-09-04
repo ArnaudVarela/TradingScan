@@ -40,11 +40,11 @@ GATE_MIN_TECH_VOTES = 2         # sert à prioriser les appels externes
 MAX_MARKET_CAP      = 200_000_000_000     # < 200B
 KEEP_FULL_UNIVERSE_IN_OUTPUTS = True      # garde tout le seed dans les outputs (même si externes manquants)
 
-# ---- Confirmed tightening ----
-CONFIRM_MIN_TECH_VOTES = 5              # tech_score mini pour compter comme corroboration
+# ---- Confirmed tuning (assoupli) ----
+CONFIRM_MIN_TECH_VOTES = 5              # TA forte
 CONFIRM_MIN_ANALYST_VOTES = 5           # nb mini d'avis analystes pour valider "Buy"
-CONFIRM_MIN_CORROBORATIONS = 2          # nombre d'arguments externes requis (sur 4)
-MIN_AVG_DAILY_VOLUME = 300_000          # filtre liquidité (ten_day / 3m avg volume)
+CONFIRM_MIN_CORROBORATIONS = 1          # nombre d'arguments externes requis (sur 4) si final_signal == STRONG_BUY
+MIN_AVG_DAILY_VOLUME = 200_000          # filtre liquidité (ten_day / 3m avg volume)
 
 # TradingView : bonus capé (ratelimit fréquent)
 TV_MAX_CALLS = 100
@@ -55,15 +55,15 @@ TV_MAX_CONSEC_FAIL = 10
 TV_FAIL_PAUSE_SEC  = 6.0
 TV_MAX_PAUSE_TOTAL = 45.0
 
-# Finnhub (gratuit) — on limite le volume pour rester <30mn
+# Finnhub (gratuit)
 USE_FINNHUB = True
 FINNHUB_API_KEY = (os.environ.get("FINNHUB_API_KEY") or "d2sfah1r01qiq7a429ugd2sfah1r01qiq7a429v0").strip()
-FINNHUB_RESOLUTION = "D"          # Daily
-FINNHUB_MAX_CALLS  = 250          # budget global (60 req/min free)
-FINNHUB_SLEEP_BETWEEN = 0.10      # petite pause anti-ban
+FINNHUB_RESOLUTION = "D"
+FINNHUB_MAX_CALLS  = 250
+FINNHUB_SLEEP_BETWEEN = 0.10
 FINNHUB_TIMEOUT_SEC = 20
 
-# Alpha Vantage (optionnel, backup de Finnhub si besoin) — désactivé
+# Alpha Vantage (optionnel, désactivé)
 USE_ALPHA_VANTAGE = False
 ALPHAVANTAGE_API_KEY = (os.environ.get("ALPHAVANTAGE_API_KEY") or "85SZZGRDDJ6MUAEX").strip()
 AV_MAX_CALLS = 20
@@ -224,7 +224,7 @@ def local_label_from_indicators(det: dict, bucket: str) -> str:
         if s50 is not None and s200 is not None and not np.isnan(s200):
             score += 1 if s50 > s200 else -1
 
-        # Oscillateurs (RSI 60/40, plus strict que l'ancien 55/45)
+        # Oscillateurs (RSI 60/40)
         if rsi is not None:
             score += 1 if rsi >= 60 else (-1 if rsi <= 40 else 0)
         if macd is not None and macds is not None and not np.isnan(macd) and not np.isnan(macds):
@@ -415,10 +415,8 @@ def get_tv_summary_max(tv_symbol: str, yf_symbol: str, exchange_hint: str):
 
 # ============= RANK SCORE (vectorisé) =============
 def compute_rank_score(df: pd.DataFrame) -> pd.Series:
-    # Base
     score = np.zeros(len(df), dtype=float)
 
-    # Final signal (Finnhub > TV > Local)
     fs = df.get("final_signal").fillna("").astype(str).str.upper()
     score += np.select(
         [fs.eq("STRONG_BUY"), fs.eq("BUY"), fs.eq("NEUTRAL"), fs.eq("SELL"), fs.eq("STRONG_SELL")],
@@ -426,7 +424,6 @@ def compute_rank_score(df: pd.DataFrame) -> pd.Series:
         default=0.0
     )
 
-    # Renforts individuels
     lb = df.get("local_label").fillna("").astype(str).str.upper()
     score += np.where(lb.eq("STRONG_BUY"), 0.8, 0.0)
     score += np.where(lb.eq("BUY"), 0.3, 0.0)
@@ -438,7 +435,6 @@ def compute_rank_score(df: pd.DataFrame) -> pd.Series:
     tv = df.get("tv_reco").fillna("").astype(str).str.upper()
     score += np.where(tv.eq("STRONG_BUY"), 0.3, 0.0)
 
-    # Analysts
     ab = df.get("analyst_bucket")
     score += np.where(ab.eq("Strong Buy"), 1.2, 0.0)
     score += np.where(ab.eq("Buy"), 0.6, 0.0)
@@ -446,13 +442,11 @@ def compute_rank_score(df: pd.DataFrame) -> pd.Series:
     av = pd.to_numeric(df.get("analyst_votes"), errors="coerce").fillna(0.0)
     score += np.minimum(av, 20.0) * 0.04
 
-    # Market cap preference: léger bonus small/mid
     mc = pd.to_numeric(df.get("market_cap"), errors="coerce")
     mc_bonus = np.maximum(0.0, 4.8 - np.log10(np.where(mc>0, mc, np.nan)))
     mc_bonus = np.where(np.isfinite(mc_bonus), mc_bonus, 0.0)
     score += mc_bonus
 
-    # Liquidité (soft penalty sous le seuil)
     vol = pd.to_numeric(df.get("avg_vol"), errors="coerce").fillna(0.0)
     score += np.where(vol < MIN_AVG_DAILY_VOLUME, -0.5, 0.0)
 
@@ -668,7 +662,7 @@ def main():
         "final_signal","analyst_bucket","analyst_mean","analyst_votes","avg_vol","rank_score"
     ]
 
-    # ---- Confirmed: besoin de corroborations multiples ----
+    # ---- Confirmed (assoupli mais robuste) ----
     an_ok = df["analyst_bucket"].isin({"Strong Buy","Buy"}) & (pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= CONFIRM_MIN_ANALYST_VOTES)
     fh_ok = df["finnhub_label"].isin({"BUY","STRONG_BUY"})
     tv_ok = df["tv_reco"].eq("STRONG_BUY")
@@ -677,16 +671,22 @@ def main():
 
     corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
 
-    mask_confirm = (
-        df["final_signal"].eq("STRONG_BUY")
-        & (corr_count >= CONFIRM_MIN_CORROBORATIONS)
-        & liq_ok
-        & (~df["out_of_scope"])
-    )
+    # cas principal: final_signal == STRONG_BUY + ≥1 corroboration
+    mask_confirm_main = df["final_signal"].eq("STRONG_BUY") & (corr_count >= CONFIRM_MIN_CORROBORATIONS)
+
+    # cas alternatif: final_signal == BUY mais 2 corroborations fortes parmi (FH, TV, TA) ou Buy+Analystes
+    combo_strong_2 = (fh_ok & tv_ok) | (fh_ok & ta_ok) | (tv_ok & ta_ok)
+    combo_buy_with_an = an_ok & (fh_ok | tv_ok | ta_ok)
+    mask_confirm_alt = df["final_signal"].eq("BUY") & (combo_strong_2 | combo_buy_with_an)
+
+    mask_confirm = (mask_confirm_main | mask_confirm_alt) & liq_ok & (~df["out_of_scope"])
     confirmed = df[mask_confirm].copy().sort_values(["rank_score","market_cap"], ascending=[False, True])
     save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
 
-    # Pré-signaux (riche mais on garde la liquidité mini)
+    # Logs de diag
+    print(f"[CONFIRMED] main={int(mask_confirm_main.sum())}, alt={int((mask_confirm_alt & liq_ok & (~df['out_of_scope'])).sum())}, total={len(confirmed)}")
+
+    # Pré-signaux
     mask_pre = (
         df["technical_local"].isin({"Buy","Strong Buy"})
         | df["local_label"].isin({"BUY","STRONG_BUY"})
@@ -743,7 +743,7 @@ def main():
         "pct_events": pct_evt.values,
         "breadth": breadth.values,
         "z_breadth": z_breadth.values,
-        "wow_pct_confirmed": 0.0,  # calcul WoW optionnel
+        "wow_pct_confirmed": 0.0,
     }).sort_values(["z_breadth","breadth"], ascending=[False, False])
 
     save_csv(sector_breadth, "sector_breadth.csv")
