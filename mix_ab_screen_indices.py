@@ -745,7 +745,7 @@ def main():
     print(f"[TV] shortlist_used={tv_calls}, ok={tv_ok}, ko={tv_ko}, pause_total≈{pause_spent:.1f}s")
 
     # 2d) Yahoo info + assemble rows
-    rows=[]
+    rows = []
     for i, rec in enumerate(seed.itertuples(index=False), 1):
         tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
         tech_bucket, tech_votes, last_price = rec.technical_local, rec.tech_score, rec.price
@@ -753,87 +753,72 @@ def main():
 
         try:
             tk = yf.Ticker(yf_sym)
-            # inside the for ... enrich loop, after tk = yf.Ticker(yf_sym) and fi = tk.fast_info:
-            info = {}
-            mcap = getattr(fi, "market_cap", None)
+            fi = getattr(tk, "fast_info", None)
+
+            # Market cap & volume 'fast' si possible
+            mcap = getattr(fi, "market_cap", None) if fi else None
             avg_vol = None
             try:
                 if fi:
-                avg_vol = getattr(fi, "ten_day_average_volume", None) or getattr(fi, "three_month_average_volume", None)
+                    avg_vol = (
+                        getattr(fi, "ten_day_average_volume", None)
+                        or getattr(fi, "three_month_average_volume", None)
+                    )
             except Exception:
                 pass
 
-            # Only for shortlist: heavy call
-            if yf_sym in shortlist_set:
-                try:
-                    info = tk.get_info() or {}
-                    if mcap is None:
-                        mcap = info.get("marketCap")
-                    if avg_vol is None:
-                        avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
-                except Exception:
-                    info = {}
-            else:
-                info = {}  # keep light
-
-            # …then derive sector/industry:
-            sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
-            sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
-            industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
-
-            # analysts only available if we did get_info (i.e., shortlist)
-            analyst_mean  = info.get("recommendationMean") if info else None
-            analyst_votes = info.get("numberOfAnalystOpinions") if info else None
-            analyst_bucket = analyst_bucket_from_mean(analyst_mean)
-
-            fi = getattr(tk, "fast_info", None)
-            mcap = getattr(fi, "market_cap", None)
-
-            # Appel Yahoo get_info UNIQUEMENT si utile (shortlist ou cap manquante)
+            # Appel lourd get_info UNIQUEMENT pour la shortlist
             info = {}
-            need_info = (yf_sym in shortlist_set) or (mcap is None)
+            need_info = (yf_sym in shortlist_set) or (mcap is None) or (avg_vol is None)
             if need_info:
                 try:
                     info = tk.get_info() or {}
                     if mcap is None:
                         mcap = info.get("marketCap")
+                    if avg_vol is None and isinstance(info, dict):
+                        avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
                 except Exception:
                     info = {}
 
-            # Volume moyen (10j/3m)
-            avg_vol = None
+            # Pays / bourse
             try:
-                if fi:
-                    avg_vol = getattr(fi, "ten_day_average_volume", None) or getattr(fi, "three_month_average_volume", None)
-                if avg_vol is None and isinstance(info, dict):
-                    avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
+                country = (info.get("country") or info.get("countryOfCompany") or "").strip()
             except Exception:
-                pass
-
-            country = (info.get("country") or info.get("countryOfCompany") or "").strip()
-            exch = info.get("exchange") or info.get("fullExchangeName") or (getattr(fi, "exchange", "") or "")
-            is_us_exchange = str(exch).upper() in {"NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"}
+                country = ""
+            try:
+                exch = (
+                    info.get("exchange")
+                    or info.get("fullExchangeName")
+                    or (getattr(fi, "exchange", "") if fi else "")
+                    or ""
+                )
+            except Exception:
+                exch = ""
+            is_us_exchange = str(exch).upper() in {"NASDAQ", "NYSE", "AMEX", "BATS", "NYSEARCA", "NYSEMKT"}
 
             # Filtres (pour la sélection finale)
             out_of_scope = False
-            if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
+            if country and (country.upper() not in {"USA", "US", "UNITED STATES", "UNITED STATES OF AMERICA"} and not is_us_exchange):
                 out_of_scope = True
-            if isinstance(mcap,(int,float)) and mcap >= MAX_MARKET_CAP:
+            if isinstance(mcap, (int, float)) and mcap >= MAX_MARKET_CAP:
                 out_of_scope = True
 
+            # TV & Finnhub injectés des étapes précédentes
             tv = tv_results.get(yf_sym) or {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
             fh = finnhub_map.get(yf_sym) or {"finnhub_label": None}
 
             # final_signal: Finnhub > TV > Local
             final_signal = fh.get("finnhub_label") or tv.get("tv_reco") or local_label
 
+            # Secteur/industrie : d’abord catalog, sinon info (si dispo), sinon Unknown
             sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
-            sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
-            industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
+            sector_val = sec_cat or (info.get("sector") or "").strip() or "Unknown" if isinstance(info, dict) else (sec_cat or "Unknown")
+            industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown" if isinstance(info, dict) else (ind_cat or "Unknown")
 
-            analyst_mean  = info.get("recommendationMean") if need_info else None
-            analyst_votes = info.get("numberOfAnalystOpinions") if need_info else None
-            analyst_bucket = analyst_bucket_from_mean(analyst_mean) if need_info else None
+            # Analysts : seulement si get_info a tourné
+            analyst_mean = info.get("recommendationMean") if info else None
+            analyst_votes = info.get("numberOfAnalystOpinions") if info else None
+            analyst_bucket = analyst_bucket_from_mean(analyst_mean)
 
             rows.append({
                 "ticker_tv": tv_sym, "ticker_yf": yf_sym,
@@ -852,6 +837,7 @@ def main():
                 "out_of_scope": out_of_scope
             })
         except Exception:
+            # en cas de souci isolé, on continue
             continue
 
         if i % 50 == 0:
