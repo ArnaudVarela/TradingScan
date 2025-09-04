@@ -1,7 +1,11 @@
-ticker_tv,ticker_yf,price,market_cap,sector,industry,technical_local,tech_score,tv_reco,analyst_bucket,analyst_mean,analyst_votes,rank_score,inv_d_label,inv_w_label,inv_m_label,inv_d_vote,inv_w_vote,inv_m_vote,bc_score,bc_label
-AMG,AMG,230.63999938964844,6552966726.65863,Financials,Asset Management & Custody Banks,Strong Buy,6,STRONG_BUY,Strong Buy,1.42857,7.0,7.35,,,,,,,,
-AFRM,AFRM,85.30999755859375,27781199339.996094,Information Technology,Software - Infrastructure,Strong Buy,4,STRONG_BUY,Buy,1.78261,19.0,6.95,,,,,,,,
-AGNC,AGNC,9.949999809265137,10397053141.495422,Financials,REIT - Mortgage,Strong Buy,6,STRONG_BUY,Buy,2.06667,12.0,6.6,,,,,,,,
-NLY,NLY,21.489999771118164,13798213780.720459,Financials,REIT - Mortgage,Strong Buy,6,STRONG_BUY,Buy,2.0,11.0,6.55,,,,,,,,
-AYI,AYI,332.3699951171875,10185412026.367188,Industrials,Electrical Components & Equipment,Strong Buy,6,STRONG_BUY,Buy,2.0,8.0,6.4,,,,,,,,
-AAL,AAL,13.4399995803833,8868101375.604736,Industrials,Passenger Airlines,Buy,2,STRONG_BUY,Buy,2.22727,20.0,6.0,,,,,,,,
+ticker_tv,ticker_yf,price,market_cap,sector,industry,technical_local,tech_score,tv_reco,tv_symbol_used,tv_exchange_used,analyst_bucket,analyst_mean,analyst_votes,rank_score,inv_d_label,inv_w_label,inv_m_label,inv_d_vote,inv_w_vote,inv_m_vote,bc_score,bc_label
+TJX,TJX,139.47000122070312,155221747621.60938,Consumer Discretionary,Apparel Retail,Strong Buy,6,STRONG_BUY,TJX,NYSE,Strong Buy,1.47619,18.0,7.9,,,,,,,,
+LYFT,LYFT,16.920000076293945,6876998400.2890625,Industrials,Passenger Ground Transportation,Strong Buy,6,STRONG_BUY,LYFT,NASDAQ,Buy,2.47619,35.0,7.0,,,,,,,,
+IONS,IONS,60.4900016784668,9641562341.452515,Health Care,Biotechnology,Strong Buy,6,STRONG_BUY,IONS,NASDAQ,Buy,1.96296,26.0,7.0,,,,,,,,
+TRV,TRV,276.54998779296875,62260804951.78223,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,TRV,NYSE,Buy,2.43478,20.0,7.0,,,,,,,,
+RBLX,RBLX,133.4600067138672,92520746071.32812,Communication Services,Electronic Gaming & Multimedia,Strong Buy,6,STRONG_BUY,RBLX,NYSE,Buy,2.0,31.0,7.0,,,,,,,,
+FIVE,FIVE,150.97500610351562,8325592199.081421,Consumer Discretionary,Other Specialty Retail,Strong Buy,6,STRONG_BUY,FIVE,NASDAQ,Buy,2.18182,19.0,6.95,,,,,,,,
+TOL,TOL,140.7899932861328,13569761922.897339,Consumer Discretionary,Homebuilding,Strong Buy,6,STRONG_BUY,TOL,NYSE,Buy,1.82353,16.0,6.8,,,,,,,,
+TEM,TEM,76.28500366210938,13252841116.210938,Health Care,Health Information Services,Strong Buy,6,STRONG_BUY,TEM,NASDAQ,Buy,2.15385,11.0,6.55,,,,,,,,
+THG,THG,177.42999267578125,6346741810.009766,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,THG,NYSE,Buy,2.0,7.0,6.35,,,,,,,,
+ORI,ORI,40.36000061035156,10028249351.654053,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,ORI,NYSE,Buy,2.33333,2.0,6.1,,,,,,,,
