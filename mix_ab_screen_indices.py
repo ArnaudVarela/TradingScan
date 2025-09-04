@@ -1,5 +1,5 @@
 # mix_ab_screen_indices.py
-# Screener US (Russell 1000 + 2000) — Barchart intégré
+# Screener US (Russell 1000 + 2000) — Gratuit, local + Finnhub + TV bonus
 # Sorties :
 #   - confirmed_STRONGBUY.csv
 #   - anticipative_pre_signals.csv
@@ -38,8 +38,9 @@ TV_INTERVAL = Interval.INTERVAL_1_DAY
 # Limites & priorisation
 GATE_MIN_TECH_VOTES = 2         # sert à prioriser les appels externes
 MAX_MARKET_CAP      = 200_000_000_000     # < 200B
+KEEP_FULL_UNIVERSE_IN_OUTPUTS = True      # garde tout le seed dans les outputs (même si externes manquants)
 
-# TradingView : garder en bonus, capé
+# TradingView : bonus capé (ratelimit fréquent)
 TV_MAX_CALLS = 100
 DELAY_BETWEEN_TV_CALLS_SEC = 0.10
 TV_COOLDOWN_EVERY = 25
@@ -48,21 +49,19 @@ TV_MAX_CONSEC_FAIL = 10
 TV_FAIL_PAUSE_SEC  = 6.0
 TV_MAX_PAUSE_TOTAL = 45.0
 
-# Barchart OnDemand (clé requise) — endpoint configurable
-USE_BARCHART = True
-BARCHART_API_KEY   = os.environ.get("BARCHART_API_KEY", "").strip()
-BARCHART_ENDPOINT  = os.environ.get("BARCHART_ENDPOINT", "getSignal").strip()  # ex: getSignal ou getTechnicalOpinion
-BARCHART_BASE_URL  = "https://ondemand.websol.barchart.com"
-BARCHART_BATCH_SIZE = 100
-BARCHART_SLEEP_BETWEEN = 0.15  # anti-ratelimit léger
+# Finnhub (gratuit) — on limite le volume pour rester <30mn
+USE_FINNHUB = True
+FINNHUB_API_KEY = (os.environ.get("FINNHUB_API_KEY") or "d2sfah1r01qiq7a429ugd2sfah1r01qiq7a429v0").strip()
+FINNHUB_RESOLUTION = "D"          # Daily
+FINNHUB_MAX_CALLS  = 250          # budget global (60 req/min free) → suffisant pour top tickers
+FINNHUB_SLEEP_BETWEEN = 0.10      # petite pause anti-ban
+FINNHUB_TIMEOUT_SEC = 20
 
-# Analysts (Yahoo)
-USE_ANALYSTS = True
-
-# Investing (désactivé par défaut)
-USE_INVESTING = False
-EXTERNAL_MAX   = 100
-EXTERNAL_SPLIT = (0.4, 0.6)  # (Investing %, BarChart %) — ici BC est “principal”, TV bonus
+# Alpha Vantage (optionnel, backup de Finnhub si besoin)
+USE_ALPHA_VANTAGE = True
+ALPHAVANTAGE_API_KEY = (os.environ.get("ALPHAVANTAGE_API_KEY") or "85SZZGRDDJ6MUAEX").strip()
+AV_MAX_CALLS = 20
+AV_SLEEP_BETWEEN = 12.5           # free tier 5 calls/min → 12s mini
 
 SECTOR_CATALOG_PATH = "sector_catalog.csv"  # optionnel
 
@@ -95,10 +94,9 @@ def fetch_wikipedia_tickers(url: str):
     tables = pd.read_html(r.text)
 
     def flatten(cols):
-        out = []
+        out=[]
         for c in cols:
             if isinstance(c, tuple):
-                # ✅ FIX: " ".join(...) (et pas " ". ".join(...))
                 out.append(" ".join([str(x) for x in c if pd.notna(x)]).strip())
             else:
                 out.append(str(c).strip())
@@ -111,16 +109,13 @@ def fetch_wikipedia_tickers(url: str):
         for i, name in enumerate(lower):
             if ("ticker" in name) or ("symbol" in name):
                 col_idx = i; break
-        if col_idx is None:
-            continue
+        if col_idx is None: continue
         ser = (t[t.columns[col_idx]].astype(str).str.strip()
                .str.replace(r"\s+","",regex=True)
                .str.replace("\u200b","",regex=False))
         vals = ser[ser.str.match(r"^[A-Za-z.\-]+$")].dropna().tolist()
-        if vals:
-            return vals
+        if vals: return vals
     raise RuntimeError(f"Aucune colonne Ticker/Symbol trouvée sur {url}")
-
 
 def load_universe()->pd.DataFrame:
     ticks=[]
@@ -209,7 +204,6 @@ def compute_local_technical_bucket(hist: pd.DataFrame):
 
 def local_label_from_indicators(det: dict, bucket: str) -> str:
     """Composite 'TV-like' local à partir des familles MAs / Oscillateurs."""
-    # Poids simples et lisibles
     score = 0
     try:
         price, s20, s50, s200 = det.get("price"), det.get("sma20"), det.get("sma50"), det.get("sma200")
@@ -300,90 +294,113 @@ def bulk_download_history(yf_symbols, period="1y", interval="1d", chunk_size=200
 
     return all_hist
 
-# ==== EXTERNAL STUB (Investing) ====
-def fetch_investing_summary(base_symbol: str):
-    return {"inv_d_label":None,"inv_w_label":None,"inv_m_label":None,
-            "inv_d_vote":None,"inv_w_vote":None,"inv_m_vote":None}
-
-# ========= BARCHART: Signal composite =========
-def _normalize_barchart_label(lbl: str):
-    if not lbl: return None
-    s = str(lbl).strip().upper()
-    if s in {"STRONGBUY","STRONG BUY","STRONG_BUY"}: return "STRONG_BUY"
-    if s in {"BUY"}: return "BUY"
-    if s in {"HOLD","NEUTRAL"}: return "NEUTRAL"
-    if s in {"SELL"}: return "SELL"
-    if s in {"STRONGSELL","STRONG SELL","STRONG_SELL"}: return "STRONG_SELL"
-    return None
-
-def fetch_barchart_opinion_batch(symbols):
-    """
-    Tente de récupérer un signal composite officiel via Barchart OnDemand.
-    - Supporte plusieurs endpoints 'proches' (getSignal, getTechnicalOpinion) via BARCHART_ENDPOINT.
-    - Retour: dict { symbol -> {"bc_label":LABEL, "bc_score":score_float} }
-    """
-    out = {s: {"bc_label": None, "bc_score": None} for s in symbols}
-    if not USE_BARCHART or not BARCHART_API_KEY or not symbols:
-        return out
-
-    endpoint = BARCHART_ENDPOINT or "getSignal"
-    url = f"{BARCHART_BASE_URL}/{endpoint}.json"
-
-    # Barchart accepte souvent une liste (symbols=AAA,BBB,CCC). On normalise les symboles (yfinance format).
-    params = {
-        "apikey": BARCHART_API_KEY,
-        "symbols": ",".join(symbols),
-    }
-
+# ========= FINNHUB: label composite (RSI + MACD) =========
+def _fh_get_json(url, params, timeout=FINNHUB_TIMEOUT_SEC):
     try:
-        r = requests.get(url, params=params, timeout=30)
+        r = requests.get(url, params=params, timeout=timeout)
         r.raise_for_status()
-        data = r.json()
-
-        # On tente quelques structures connues:
-        # 1) {"results":[{"symbol":"AAPL","opinion":"Buy","strength":88.5}, ...]}
-        # 2) {"results":[{"symbol":"AAPL","signal":"Buy","score":88.5}, ...]}
-        # 3) {"results":[{"symbol":"AAPL","recommendation":"Buy", "strength":"88"}, ...]}
-        results = data.get("results") or data.get("data") or []
-
-        for item in results:
-            sym = str(item.get("symbol") or item.get("ticker") or "").strip().upper()
-            if not sym: continue
-            raw_label = item.get("opinion") or item.get("signal") or item.get("recommendation")
-            lbl = _normalize_barchart_label(raw_label)
-
-            # score/strength → float
-            raw_score = item.get("strength") or item.get("score") or item.get("confidence") or None
-            try:
-                sc = float(raw_score) if raw_score is not None else None
-            except Exception:
-                sc = None
-
-            if sym in out:
-                out[sym]["bc_label"] = lbl
-                out[sym]["bc_score"] = sc
-
+        return r.json()
     except Exception:
-        # En cas d'échec (endpoint différent, plan restreint…), on garde None et on continue le run
+        return None
+
+def _score_from_rsi_macd(rsi_val, macd_val, macds_val):
+    score = 0
+    if rsi_val is not None:
+        try:
+            r = float(rsi_val)
+            if r >= 60: score += 1
+            elif r <= 40: score -= 1
+        except Exception:
+            pass
+    try:
+        m = float(macd_val) if macd_val is not None else None
+        ms = float(macds_val) if macds_val is not None else None
+        if m is not None and ms is not None:
+            score += 1 if m > ms else -1
+    except Exception:
         pass
+    if score >= 2: return "STRONG_BUY"
+    if score == 1: return "BUY"
+    if score == 0: return "NEUTRAL"
+    if score == -1: return "SELL"
+    return "STRONG_SELL"
 
-    return out
+def fetch_finnhub_label(symbol: str):
+    """Interroge Finnhub RSI(14) et MACD(12,26,9) et produit un label simple."""
+    if (not USE_FINNHUB) or (not FINNHUB_API_KEY):
+        return {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
 
-def fetch_barchart_opinion_all(yf_symbols):
-    """
-    Batch multi-symboles avec taille BARCHART_BATCH_SIZE.
-    Retourne {symbol -> {"bc_label":..., "bc_score":...}}
-    """
-    agg = {}
-    if not USE_BARCHART or not BARCHART_API_KEY:
-        return {s: {"bc_label": None, "bc_score": None} for s in yf_symbols}
+    base = "https://finnhub.io/api/v1/indicator"
+    # RSI
+    rsi_params = {
+        "symbol": symbol,
+        "resolution": FINNHUB_RESOLUTION,
+        "indicator": "rsi",
+        "timeperiod": 14,
+        "token": FINNHUB_API_KEY
+    }
+    rsi_json = _fh_get_json(base, rsi_params)
+    rsi_val = None
+    if rsi_json and isinstance(rsi_json.get("rsi"), list) and rsi_json.get("rsi"):
+        rsi_val = rsi_json["rsi"][-1]
 
-    for i in range(0, len(yf_symbols), BARCHART_BATCH_SIZE):
-        chunk = yf_symbols[i:i+BARCHART_BATCH_SIZE]
-        res = fetch_barchart_opinion_batch(chunk)
-        agg.update(res)
-        time.sleep(BARCHART_SLEEP_BETWEEN)
-    return agg
+    # MACD
+    macd_params = {
+        "symbol": symbol,
+        "resolution": FINNHUB_RESOLUTION,
+        "indicator": "macd",
+        "fastperiod": 12,
+        "slowperiod": 26,
+        "signalperiod": 9,
+        "token": FINNHUB_API_KEY
+    }
+    macd_json = _fh_get_json(base, macd_params)
+    macd_val = macds_val = None
+    if macd_json:
+        # Finnhub renvoie souvent: "macd", "macd_signal", "macd_hist"
+        for k in ["macd","MACD","macdValue"]:
+            if isinstance(macd_json.get(k), list) and macd_json[k]:
+                macd_val = macd_json[k][-1]; break
+        for k in ["macd_signal","signal","MACDs","macdSignal"]:
+            if isinstance(macd_json.get(k), list) and macd_json[k]:
+                macds_val = macd_json[k][-1]; break
+
+    label = _score_from_rsi_macd(rsi_val, macd_val, macds_val)
+    time.sleep(FINNHUB_SLEEP_BETWEEN)
+    return {"finnhub_label": label, "finnhub_rsi": rsi_val, "finnhub_macd": macd_val, "finnhub_macds": macds_val}
+
+# ========= ALPHA VANTAGE (backup optionnel) =========
+def fetch_alpha_label(symbol: str):
+    if (not USE_ALPHA_VANTAGE) or (not ALPHAVANTAGE_API_KEY):
+        return {"av_label": None}
+    try:
+        # RSI
+        rsi_url = "https://www.alphavantage.co/query"
+        rsi_params = {"function":"RSI","symbol":symbol,"interval":"daily","time_period":"14","series_type":"close","apikey":ALPHAVANTAGE_API_KEY}
+        r = requests.get(rsi_url, params=rsi_params, timeout=30); r.raise_for_status()
+        j = r.json()
+        rsi_val = None
+        ta = j.get("Technical Analysis: RSI", {})
+        if ta:
+            last_key = sorted(ta.keys())[-1]
+            rsi_val = float(ta[last_key]["RSI"])
+
+        # MACD
+        macd_params = {"function":"MACD","symbol":symbol,"interval":"daily","series_type":"close","fastperiod":"12","slowperiod":"26","signalperiod":"9","apikey":ALPHAVANTAGE_API_KEY}
+        r = requests.get(rsi_url, params=macd_params, timeout=30); r.raise_for_status()
+        j2 = r.json()
+        macd_val = macds_val = None
+        tb = j2.get("Technical Analysis: MACD", {})
+        if tb:
+            last_key = sorted(tb.keys())[-1]
+            macd_val = float(tb[last_key]["MACD"])
+            macds_val = float(tb[last_key]["MACD_Signal"])
+
+        label = _score_from_rsi_macd(rsi_val, macd_val, macds_val)
+        time.sleep(AV_SLEEP_BETWEEN)
+        return {"av_label": label}
+    except Exception:
+        return {"av_label": None}
 
 # ========= TRADINGVIEW (bonus) =========
 TV_EXCH_TRY = ["NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"]
@@ -495,19 +512,19 @@ def main():
             save_csv(pd.DataFrame(), name)
         return
 
-    # === PASS 2: Barchart (principal), TV (bonus capé), Yahoo info ===
+    # === PASS 2: Finnhub (priorité), TV (bonus capé), Yahoo info ===
     # 2a) Prioriser par score technique pour les appels externes
     seed = seed.sort_values(["tech_score"], ascending=False).reset_index(drop=True)
 
-    # 2b) Barchart (multi-symboles) — priorité absolue, pas de dépendance TV
-    bc_map = {}
-    if USE_BARCHART and BARCHART_API_KEY:
-        print(f"[BC] Fetching Barchart signals… endpoint={BARCHART_ENDPOINT}")
-        bc_map = fetch_barchart_opinion_all(seed["ticker_yf"].tolist())
-        bc_fill = np.mean([1.0 if (v and (v.get("bc_label") is not None)) else 0.0 for v in bc_map.values()]) if bc_map else 0.0
-        print(f"[BC] fill≈{bc_fill:.0%}")
-    else:
-        bc_map = {s: {"bc_label": None, "bc_score": None} for s in seed["ticker_yf"]}
+    # 2b) FINNHUB — on enrichit un sous-ensemble prioritaire
+    fh_budget = min(FINNHUB_MAX_CALLS, len(seed)) if USE_FINNHUB and FINNHUB_API_KEY else 0
+    finnhub_map = {}
+    for idx, rec in enumerate(seed.itertuples(index=False), 1):
+        yf_sym = rec.ticker_yf
+        if idx <= fh_budget:
+            finnhub_map[yf_sym] = fetch_finnhub_label(yf_sym)
+        else:
+            finnhub_map[yf_sym] = {"finnhub_label": None, "finnhub_rsi": None, "finnhub_macd": None, "finnhub_macds": None}
 
     # 2c) TV bonus capé
     tv_budget = min(TV_MAX_CALLS, len(seed))
@@ -540,7 +557,7 @@ def main():
             tv_results[yf_sym] = {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
     print(f"[TV] budget={tv_budget}, ok={tv_ok}, ko={tv_ko}, pause_total≈{pause_spent:.1f}s")
 
-    # 2d) Yahoo info + analysts + assemble rows
+    # 2d) Yahoo info + assemble rows
     rows=[]
     for i, rec in enumerate(seed.itertuples(index=False), 1):
         tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
@@ -552,7 +569,7 @@ def main():
             fi = getattr(tk, "fast_info", None)
             mcap = getattr(fi, "market_cap", None)
             info = {}
-            if mcap is None or USE_ANALYSTS:
+            if mcap is None or True:  # on lit souvent get_info pour analysts/secteur
                 try:
                     info = tk.get_info() or {}
                     if mcap is None:
@@ -563,47 +580,53 @@ def main():
             country = (info.get("country") or info.get("countryOfCompany") or "").strip()
             exch = info.get("exchange") or info.get("fullExchangeName") or ""
             is_us_exchange = str(exch).upper() in {"NASDAQ","NYSE","AMEX","BATS","NYSEARCA","NYSEMKT"}
+
+            # Filtres (pour la sélection finale) — l'univers complet sera conservé si flag actif
+            out_of_scope = False
             if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
-                continue
+                out_of_scope = True
             if isinstance(mcap,(int,float)) and mcap >= MAX_MARKET_CAP:
-                continue
+                out_of_scope = True
 
             tv = tv_results.get(yf_sym) or {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
-            bc = bc_map.get(yf_sym, {"bc_label": None, "bc_score": None})
-            analyst_mean  = info.get("recommendationMean") if USE_ANALYSTS else None
-            analyst_votes = info.get("numberOfAnalystOpinions") if USE_ANALYSTS else None
-            analyst_bucket = analyst_bucket_from_mean(analyst_mean) if USE_ANALYSTS else None
+            fh = finnhub_map.get(yf_sym) or {"finnhub_label": None}
 
+            # final_signal: Local > Finnhub > TV
+            final_signal = local_label or fh.get("finnhub_label") or tv.get("tv_reco")
+
+            sec_cat = ind_cat = ""
+            if SECTOR_CATALOG_PATH and os.path.exists(SECTOR_CATALOG_PATH):
+                # sector_from_catalog déjà déf
+                pass
             sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
             sector_val   = sec_cat or (info.get("sector") or "").strip() or "Unknown"
             industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown"
 
-            # final_signal: priorise Barchart, puis TV, puis local
-            final_signal = bc.get("bc_label") or tv.get("tv_reco") or local_label
+            analyst_mean  = info.get("recommendationMean")
+            analyst_votes = info.get("numberOfAnalystOpinions")
+            analyst_bucket = analyst_bucket_from_mean(analyst_mean)
 
-            rows.append({
+            row = {
                 "ticker_tv": tv_sym, "ticker_yf": yf_sym,
                 "exchange": exch, "market_cap": mcap, "price": float(last_price) if last_price is not None else None,
                 "sector": sector_val, "industry": industry_val,
                 "technical_local": tech_bucket, "tech_score": int(tech_votes) if tech_votes is not None else None,
                 "local_label": local_label,
+                "finnhub_label": fh.get("finnhub_label"),
                 "tv_reco": tv.get("tv_reco"),
                 "tv_symbol_used": tv.get("tv_symbol_used"),
                 "tv_exchange_used": tv.get("tv_exchange_used"),
-                "bc_label": bc.get("bc_label"),
-                "bc_score": bc.get("bc_score"),
                 "final_signal": final_signal,
                 "analyst_bucket": analyst_bucket,
                 "analyst_mean": analyst_mean, "analyst_votes": analyst_votes,
-                # placeholders Investing off
-                "inv_d_label": None, "inv_w_label": None, "inv_m_label": None,
-                "inv_d_vote": None,   "inv_w_vote": None,   "inv_m_vote": None,
-            })
+                "out_of_scope": out_of_scope
+            }
+            rows.append(row)
         except Exception:
             continue
 
         if i % 50 == 0:
-            print(f"{i}/{len(seed)} enrichis… (TV used {min(i,tv_budget)}/{tv_budget})")
+            print(f"{i}/{len(seed)} enrichis… (FH used {min(i,fh_budget)}/{fh_budget}, TV used {min(i,tv_budget)}/{tv_budget})")
 
     if _tv_fail_log:
         save_csv(pd.DataFrame(_tv_fail_log), "tv_failures.csv")
@@ -619,27 +642,41 @@ def main():
             save_csv(pd.DataFrame(), name)
         return
 
-    # ========== Sorties ==========
-    # 0) univers du jour (après filtres US/MCAP)
-    save_csv(df.copy(), "universe_today.csv")
+    # === Univers du jour ===
+    # Si on veut conserver tout le seed dans les outputs (même hors US/MCAP), on “ramène” les lignes out_of_scope
+    if KEEP_FULL_UNIVERSE_IN_OUTPUTS:
+        # rien de spécial: df contient déjà tout ce qui a passé le TA seed; on garde même out_of_scope
+        pass
+    else:
+        df = df[~df["out_of_scope"]].copy()
 
-    # Scoring
+    # Sauvegarde univers_today
+    save_csv(df.drop(columns=["out_of_scope"]), "universe_today.csv")
+
+    # === Scoring & sorties ===
     dbg = df.copy()
+
     def rank_score_row(s: pd.Series) -> float:
         score = 0.0
-        # Final signal (Barchart > TV > Local)
+        # Final signal (Local > Finnhub > TV)
         fs = (s.get("final_signal") or "").upper()
-        if fs == "STRONG_BUY": score += 3.5
-        elif fs == "BUY":      score += 2.0
+        if fs == "STRONG_BUY": score += 3.0
+        elif fs == "BUY":      score += 1.8
         elif fs == "NEUTRAL":  score += 0.0
-        elif fs == "SELL":     score -= 1.5
-        elif fs == "STRONG_SELL": score -= 3.0
+        elif fs == "SELL":     score -= 1.0
+        elif fs == "STRONG_SELL": score -= 2.0
 
-        # Garde aussi les composantes individuelles (bonus)
-        if s.get("tv_reco") == "STRONG_BUY": score += 0.5
-        lb = s.get("local_label")
-        if lb == "STRONG_BUY": score += 0.5
-        elif lb == "BUY":      score += 0.2
+        # Renfort: local/finnhub/tv pris séparément (petits bonus)
+        lb = (s.get("local_label") or "").upper()
+        if lb == "STRONG_BUY": score += 0.8
+        elif lb == "BUY":      score += 0.3
+
+        fh = (s.get("finnhub_label") or "").upper()
+        if fh == "STRONG_BUY": score += 0.5
+        elif fh == "BUY":      score += 0.2
+
+        tv = (s.get("tv_reco") or "").upper()
+        if tv == "STRONG_BUY": score += 0.3
 
         # Analysts
         ab = s.get("analyst_bucket")
@@ -653,54 +690,45 @@ def main():
         if isinstance(mc,(int,float)) and mc>0:
             score += max(0.0, 4.8 - math.log10(mc))
 
-        # Barchart strength si dispo
-        bc_score = s.get("bc_score")
-        if isinstance(bc_score,(int,float)):
-            score += float(bc_score) * 0.008
-
         return float(score)
 
     dbg["rank_score"] = dbg.apply(rank_score_row, axis=1)
     dbg.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
-    save_csv(dbg, "debug_all_candidates.csv")
+    save_csv(dbg.drop(columns=["out_of_scope"], errors="ignore"), "debug_all_candidates.csv")
 
     base_cols = [
         "ticker_tv","ticker_yf","price","market_cap","sector","industry",
-        "technical_local","tech_score","local_label",
+        "technical_local","tech_score","local_label","finnhub_label",
         "tv_reco","tv_symbol_used","tv_exchange_used",
-        "bc_label","bc_score","final_signal",
-        "analyst_bucket","analyst_mean","analyst_votes","rank_score"
+        "final_signal","analyst_bucket","analyst_mean","analyst_votes","rank_score"
     ]
 
-    # 1) Confirmed (équivalent TV strong + analysts Buy/Strong Buy, ou Barchart STRONG_BUY)
+    # Buckets (on peut garder les filtres US/MCAP implicitement via le score/final_signal)
     mask_confirm = (
-        df["bc_label"].eq("STRONG_BUY") |
-        df["tv_reco"].eq("STRONG_BUY")
-    )
-    mask_an = df["analyst_bucket"].isin({"Strong Buy","Buy"}) if USE_ANALYSTS else True
-    confirmed = df[mask_confirm & mask_an].copy()
+        df["final_signal"].eq("STRONG_BUY")
+    ) & (~df["out_of_scope"])
+    confirmed = df[mask_confirm].copy()
     confirmed["rank_score"] = confirmed.apply(rank_score_row, axis=1)
     confirmed.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
 
-    # 2) Pré-signaux (TA local fort OU Barchart Buy/Strong Buy OU TV STRONG_BUY)
     mask_pre = (
         df["technical_local"].isin({"Buy","Strong Buy"}) |
-        df["bc_label"].isin({"STRONG_BUY","BUY"}) |
+        df["local_label"].isin({"BUY","STRONG_BUY"}) |
+        df["finnhub_label"].isin({"BUY","STRONG_BUY"}) |
         df["tv_reco"].eq("STRONG_BUY")
-    )
+    ) & (~df["out_of_scope"])
     pre = df[mask_pre].copy()
     pre["rank_score"] = pre.apply(rank_score_row, axis=1)
     pre.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(pre[base_cols], "anticipative_pre_signals.csv")
 
-    # 3) Event-driven (proxy : analystes connus)
-    evt = df[df["analyst_bucket"].notna()].copy() if USE_ANALYSTS else df.copy()
+    evt = df[df["analyst_bucket"].notna() & (~df["out_of_scope"])].copy()
     evt["rank_score"] = evt.apply(rank_score_row, axis=1)
     evt.sort_values(["rank_score","market_cap"], ascending=[False, True], inplace=True)
     save_csv(evt[base_cols], "event_driven_signals.csv")
 
-    # 4) Mix comparatif — inclut UNIVERSE
+    # Reste de l’univers
     others_idx = df.index.difference(pd.concat([confirmed, pre, evt]).index)
     universe_rest = df.loc[others_idx].copy()
     universe_rest["rank_score"] = universe_rest.apply(rank_score_row, axis=1)
@@ -715,13 +743,14 @@ def main():
     all_out.sort_values(["candidate_type","rank_score","market_cap"], ascending=[True, False, True], inplace=True)
     save_csv(all_out[["candidate_type"]+base_cols], "candidates_all_ranked.csv")
 
-    # 5) Sector breadth (sur df complet du jour)
+    # === Sector breadth (sur df complet du jour, hors out_of_scope) ===
+    df_sc = df[~df["out_of_scope"]].copy()
     def _sector_universe(df_all: pd.DataFrame) -> pd.Series:
         return df_all.groupby(df_all["sector"].fillna("Unknown"))["ticker_yf"].nunique()
     def _sector_counts(df_part: pd.DataFrame) -> pd.Series:
         return df_part.groupby(df_part["sector"].fillna("Unknown"))["ticker_yf"].nunique()
 
-    univ = _sector_universe(df)
+    univ = _sector_universe(df_sc)
     c_conf = _sector_counts(confirmed).reindex(univ.index, fill_value=0)
     c_pre  = _sector_counts(pre).reindex(univ.index, fill_value=0)
     c_evt  = _sector_counts(evt).reindex(univ.index, fill_value=0)
@@ -744,12 +773,12 @@ def main():
         "pct_events": pct_evt.values,
         "breadth": breadth.values,
         "z_breadth": z_breadth.values,
-        "wow_pct_confirmed": 0.0,  # calcul WoW optionnel, cf. historique
+        "wow_pct_confirmed": 0.0,  # calcul WoW optionnel
     }).sort_values(["z_breadth","breadth"], ascending=[False, False])
 
     save_csv(sector_breadth, "sector_breadth.csv")
 
-    # 6) Sector history (weekly snapshot)
+    # === Sector history (weekly snapshot) ===
     HISTORY_CSV = "sector_history.csv"
     def _norm_sector(x): return (x or "").strip() or "Unknown"
     def _count_by_sector(rows_df):
@@ -782,7 +811,7 @@ def main():
     new_df = new_df.drop_duplicates(subset="__key").drop(columns="__key")
     save_csv(new_df, HISTORY_CSV)
 
-    # 7) Journalisation des signaux (historique par ticker)
+    # === Journalisation des signaux (historique par ticker) ===
     SIGNALS_CSV = "signals_history.csv"
     def _append_signals(bucket_name: str, df_bucket: pd.DataFrame):
         if df_bucket is None or df_bucket.empty:
@@ -817,9 +846,9 @@ def main():
 
     # Stats de remplissage
     fill_tv = df["tv_reco"].notna().mean() if not df.empty else 0.0
-    fill_bc = df["bc_label"].notna().mean() if not df.empty else 0.0
+    fill_fh = df["finnhub_label"].notna().mean() if not df.empty else 0.0
     fill_an = df["analyst_bucket"].notna().mean() if not df.empty else 0.0
-    print(f"[OK] universe={len(df)} — confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, universe_rest={len(universe_rest)} — BC fill={fill_bc:.0%}, TV fill={fill_tv:.0%}, Analysts fill={fill_an:.0%}")
+    print(f"[OK] universe={len(df)} — confirmed={len(confirmed)}, pre={len(pre)}, event={len(evt)}, universe_rest={len(universe_rest)} — FH fill={fill_fh:.0%}, TV fill={fill_tv:.0%}, Analysts fill={fill_an:.0%}")
 
 if __name__ == "__main__":
     main()
