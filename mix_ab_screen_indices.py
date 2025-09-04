@@ -56,8 +56,8 @@ KEEP_FULL_UNIVERSE_IN_OUTPUTS = True    # garde tout le seed dans les outputs (m
 
 # === Ciblage externe sur un sous-ensemble (sniper mode) ===
 EXTERNAL_TARGET_MODE = "topk"   # "topk" ou "toppct"
-EXTERNAL_TOP_K = 100            # ~10–20% de l’univers
-EXTERNAL_TOP_PCT = 0.10         # si mode "toppct", 15% de l’univers
+EXTERNAL_TOP_K = 50            # ~10–20% de l’univers
+EXTERNAL_TOP_PCT = 0.05         # si mode "toppct", 15% de l’univers
 EXTERNAL_TOP_MIN = 80           # minimum ciblé
 
 # ---- Confirmed tuning (assoupli & réaliste) ----
@@ -70,7 +70,7 @@ MIN_AVG_DAILY_VOLUME = 150_000          # filtre liquidité (ten_day / 3m avg vo
 NASDAQ_EXCLUDE_ETFS = True  # filtre basique des ETF/ETN/Funds/Trusts par le libellé
 
 # TradingView : bonus capé (ratelimit fréquent)
-TV_MAX_CALLS = 150
+TV_MAX_CALLS = 0
 DELAY_BETWEEN_TV_CALLS_SEC = 0.10
 TV_COOLDOWN_EVERY = 25
 TV_COOLDOWN_SEC   = 2.0
@@ -79,7 +79,7 @@ TV_FAIL_PAUSE_SEC  = 6.0
 TV_MAX_PAUSE_TOTAL = 45.0
 
 # Finnhub (gratuit)
-USE_FINNHUB = True
+USE_FINNHUB = False
 FINNHUB_API_KEY = (os.environ.get("FINNHUB_API_KEY") or "d2sfah1r01qiq7a429ugd2sfah1r01qiq7a429v0").strip()
 FINNHUB_RESOLUTION = "D"
 FINNHUB_MAX_CALLS  = 350
@@ -692,6 +692,18 @@ def main():
     shortlist_size = min(shortlist_size, len(seed))
     shortlist = seed.head(shortlist_size)["ticker_yf"].tolist()
     shortlist_set = set(shortlist)
+        # === Avg volume map from bulk history (no per-ticker Yahoo calls) ===
+    avg_vol_map = {}
+    for yf_sym, h in bulk.items():
+        try:
+            if ("Volume" in h.columns) and (len(h["Volume"].dropna()) >= 10):
+                vol = h["Volume"].dropna()
+                v10 = float(vol.tail(10).mean())
+                v60 = float(vol.tail(min(60, len(vol))).mean())
+                # conservative pick: prefer near-term, but allow 0.8 * 60d as fallback
+                avg_vol_map[yf_sym] = max(v10, v60 * 0.8)
+        except Exception:
+            pass
     print(f"[TARGET] external shortlist={len(shortlist)} / seed={len(seed)} (mode={EXTERNAL_TARGET_MODE})")
 
     # === PASS 2: Finnhub (priorité), TV (bonus capé), Yahoo info ===
@@ -744,7 +756,7 @@ def main():
             tv_results[yf_sym] = {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
     print(f"[TV] shortlist_used={tv_calls}, ok={tv_ok}, ko={tv_ko}, pause_total≈{pause_spent:.1f}s")
 
-    # 2d) Yahoo info + assemble rows
+    # 2d) Yahoo info (shortlist-only) + assemble rows
     rows = []
     for i, rec in enumerate(seed.itertuples(index=False), 1):
         tv_sym, yf_sym = rec.ticker_tv, rec.ticker_yf
@@ -752,77 +764,67 @@ def main():
         local_label = rec.local_label
 
         try:
-            tk = yf.Ticker(yf_sym)
-            fi = getattr(tk, "fast_info", None)
-
-            # Market cap & volume 'fast' si possible
-            mcap = getattr(fi, "market_cap", None) if fi else None
-            avg_vol = None
-            try:
-                if fi:
-                    avg_vol = (
-                        getattr(fi, "ten_day_average_volume", None)
-                        or getattr(fi, "three_month_average_volume", None)
-                    )
-            except Exception:
-                pass
-
-            # Appel lourd get_info UNIQUEMENT pour la shortlist
+            # Defaults (no per-ticker Yahoo call for non-shortlist)
+            mcap = None
+            avg_vol = avg_vol_map.get(yf_sym, None)
+            exch = ""
+            country = ""
             info = {}
-            need_info = (yf_sym in shortlist_set) or (mcap is None) or (avg_vol is None)
-            if need_info:
+
+            # Only for shortlist: probe Yahoo for mcap/exchange/analysts if needed
+            if yf_sym in shortlist_set:
                 try:
-                    info = tk.get_info() or {}
-                    if mcap is None:
-                        mcap = info.get("marketCap")
-                    if avg_vol is None and isinstance(info, dict):
-                        avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
+                    tk = yf.Ticker(yf_sym)
+                    fi = getattr(tk, "fast_info", None)
+                    mcap = getattr(fi, "market_cap", None) if fi else None
+                    exch = (getattr(fi, "exchange", "") if fi else "") or ""
+                    # analysts/sector need get_info
+                    need_info = True
+                    if need_info:
+                        try:
+                            info = tk.get_info() or {}
+                            if mcap is None:
+                                mcap = info.get("marketCap")
+                            # Volume from history is preferred; fallback to info if missing
+                            if avg_vol is None:
+                                avg_vol = info.get("averageDailyVolume10Day") or info.get("averageDailyVolume3Month")
+                            country = (info.get("country") or info.get("countryOfCompany") or "").strip()
+                            if not exch:
+                                exch = info.get("exchange") or info.get("fullExchangeName") or ""
+                        except Exception:
+                            info = {}
                 except Exception:
                     info = {}
 
-            # Pays / bourse
-            try:
-                country = (info.get("country") or info.get("countryOfCompany") or "").strip()
-            except Exception:
-                country = ""
-            try:
-                exch = (
-                    info.get("exchange")
-                    or info.get("fullExchangeName")
-                    or (getattr(fi, "exchange", "") if fi else "")
-                    or ""
-                )
-            except Exception:
-                exch = ""
+            # Scope filters (light if we have little info)
             is_us_exchange = str(exch).upper() in {"NASDAQ", "NYSE", "AMEX", "BATS", "NYSEARCA", "NYSEMKT"}
-
-            # Filtres (pour la sélection finale)
             out_of_scope = False
-            if country and (country.upper() not in {"USA", "US", "UNITED STATES", "UNITED STATES OF AMERICA"} and not is_us_exchange):
+            if country and (country.upper() not in {"USA","US","UNITED STATES","UNITED STATES OF AMERICA"} and not is_us_exchange):
                 out_of_scope = True
             if isinstance(mcap, (int, float)) and mcap >= MAX_MARKET_CAP:
                 out_of_scope = True
 
-            # TV & Finnhub injectés des étapes précédentes
+            # TV & Finnhub results already computed (shortlist-gated earlier)
             tv = tv_results.get(yf_sym) or {"tv_reco": None, "tv_symbol_used": None, "tv_exchange_used": None}
             fh = finnhub_map.get(yf_sym) or {"finnhub_label": None}
 
             # final_signal: Finnhub > TV > Local
             final_signal = fh.get("finnhub_label") or tv.get("tv_reco") or local_label
 
-            # Secteur/industrie : d’abord catalog, sinon info (si dispo), sinon Unknown
+            # Sector/industry: prefer your catalog, else info (if we fetched it), else "Unknown"
             sec_cat, ind_cat = sector_from_catalog(tv_sym, yf_sym)
-            sector_val = sec_cat or (info.get("sector") or "").strip() or "Unknown" if isinstance(info, dict) else (sec_cat or "Unknown")
-            industry_val = ind_cat or (info.get("industry") or "").strip() or "Unknown" if isinstance(info, dict) else (ind_cat or "Unknown")
+            sector_val   = sec_cat or ((info.get("sector") or "").strip() if info else "") or "Unknown"
+            industry_val = ind_cat or ((info.get("industry") or "").strip() if info else "") or "Unknown"
 
-            # Analysts : seulement si get_info a tourné
-            analyst_mean = info.get("recommendationMean") if info else None
+            # Analysts only exist if we ran get_info (i.e., shortlist)
+            analyst_mean  = info.get("recommendationMean") if info else None
             analyst_votes = info.get("numberOfAnalystOpinions") if info else None
             analyst_bucket = analyst_bucket_from_mean(analyst_mean)
 
             rows.append({
                 "ticker_tv": tv_sym, "ticker_yf": yf_sym,
-                "exchange": exch, "market_cap": mcap, "price": float(last_price) if last_price is not None else None,
+                "exchange": exch, "market_cap": mcap,
+                "price": float(last_price) if last_price is not None else None,
                 "sector": sector_val, "industry": industry_val,
                 "technical_local": tech_bucket, "tech_score": int(tech_votes) if tech_votes is not None else None,
                 "local_label": local_label,
@@ -837,7 +839,6 @@ def main():
                 "out_of_scope": out_of_scope
             })
         except Exception:
-            # en cas de souci isolé, on continue
             continue
 
         if i % 50 == 0:
