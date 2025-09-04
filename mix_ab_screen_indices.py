@@ -52,6 +52,11 @@ CONFIRM_MIN_ANALYST_VOTES = 5           # nb mini d'avis analystes pour valider 
 CONFIRM_MIN_CORROBORATIONS = 1          # nombre d'arguments externes requis (sur 4) si final_signal == STRONG_BUY
 MIN_AVG_DAILY_VOLUME = 150_000          # filtre liquidité (ten_day / 3m avg volume)
 
+# === Nasdaq Composite (option) ===
+INCLUDE_NASDAQ_COMPOSITE = True
+NASDAQ_COMPOSITE_FALLBACK_CSV = "nasdaq_composite.csv"  # CSV 1 colonne: Ticker
+NASDAQ_EXCLUDE_ETFS = True  # filtre basique des ETF/ETN/Funds/Trusts par le libellé
+
 # TradingView : bonus capé (ratelimit fréquent)
 TV_MAX_CALLS = 150
 DELAY_BETWEEN_TV_CALLS_SEC = 0.10
@@ -129,26 +134,94 @@ def fetch_wikipedia_tickers(url: str):
         if vals: return vals
     raise RuntimeError(f"Aucune colonne Ticker/Symbol trouvée sur {url}")
 
+def fetch_nasdaq_composite():
+    """
+    Récupère tous les tickers listés sur le NASDAQ via l'endpoint screener.
+    NB: c'est 'tout Nasdaq' (Composite-like), pas seulement le Nasdaq-100.
+    """
+    url = "https://api.nasdaq.com/api/screener/stocks"
+    params = {"tableonly": "true", "limit": "9999", "exchange": "nasdaq"}  # 9999 pour tout ramener
+    headers = {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)",
+        "Accept": "application/json, text/plain, */*",
+        "Referer": "https://www.nasdaq.com/market-activity/stocks/screener",
+        "Origin": "https://www.nasdaq.com",
+        "Connection": "keep-alive",
+    }
+    try:
+        r = requests.get(url, headers=headers, params=params, timeout=45)
+        r.raise_for_status()
+        js = r.json()
+    except Exception as e:
+        raise RuntimeError(f"Nasdaq API error: {e}")
+
+    rows = (((js or {}).get("data") or {}).get("table") or {}).get("rows") or []
+    out = []
+    for row in rows:
+        sym = str(row.get("symbol") or "").strip().upper()
+        name = str(row.get("name") or "").strip().upper()
+        # Filtrage basique des ETF/ETN/Funds/Trusts si demandé
+        if NASDAQ_EXCLUDE_ETFS:
+            if any(tag in name for tag in ("ETF", "ETN", "FUND", "TRUST")):
+                continue
+        # Garde uniquement les tickers alphabetiques + . -
+        if sym and pd.notna(sym) and (len(sym) <= 8) and (pd.notna(sym)) and \
+           (pd.Series([sym]).str.match(r"^[A-Z.\-]+$").iloc[0]):
+            out.append(sym)
+    # dédoublonne en gardant l'ordre
+    out = list(dict.fromkeys(out))
+    return out
+
 def load_universe()->pd.DataFrame:
-    ticks=[]
+    ticks = []
+
+    # --- Russell 1000
     if INCLUDE_RUSSELL_1000:
         try:
-            ticks += fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_1000_Index")
-        except:
+            r1k = fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_1000_Index")
+            ticks += r1k
+            print(f"[UNIV] Russell 1000: {len(r1k)} tickers")
+        except Exception as e:
+            print(f"[WARN] Russell 1000 (Wiki) échec: {e}")
             if os.path.exists(R1K_FALLBACK_CSV):
-                ticks += pd.read_csv(R1K_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                r1k_fb = pd.read_csv(R1K_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                ticks += r1k_fb
+                print(f"[UNIV] Russell 1000 fallback CSV: {len(r1k_fb)} tickers")
+
+    # --- Russell 2000
     if INCLUDE_RUSSELL_2000:
         try:
-            ticks += fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
-        except:
+            r2k = fetch_wikipedia_tickers("https://en.wikipedia.org/wiki/Russell_2000_Index")
+            ticks += r2k
+            print(f"[UNIV] Russell 2000: {len(r2k)} tickers")
+        except Exception as e:
+            print(f"[WARN] Russell 2000 (Wiki) échec: {e}")
             if os.path.exists(R2K_FALLBACK_CSV):
-                ticks += pd.read_csv(R2K_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                r2k_fb = pd.read_csv(R2K_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                ticks += r2k_fb
+                print(f"[UNIV] Russell 2000 fallback CSV: {len(r2k_fb)} tickers")
 
-    if not ticks: raise RuntimeError("Impossible de charger l’univers (Wikipédia + CSV fallback).")
+    # --- Nasdaq Composite (tout Nasdaq via API officielle)
+    if INCLUDE_NASDAQ_COMPOSITE:
+        try:
+            ndaq = fetch_nasdaq_composite()
+            ticks += ndaq
+            print(f"[UNIV] Nasdaq Composite-like (API): {len(ndaq)} tickers (ETF filtered={NASDAQ_EXCLUDE_ETFS})")
+        except Exception as e:
+            print(f"[WARN] Nasdaq API échec: {e}")
+            if os.path.exists(NASDAQ_COMPOSITE_FALLBACK_CSV):
+                nzfb = pd.read_csv(NASDAQ_COMPOSITE_FALLBACK_CSV)["Ticker"].astype(str).tolist()
+                ticks += nzfb
+                print(f"[UNIV] Nasdaq fallback CSV: {len(nzfb)} tickers")
 
+    if not ticks:
+        raise RuntimeError("Impossible de charger l’univers (Wikipédia/CSV/Api).")
+
+    # Normalisation TV/YF + dédoublonnage
     tv_syms = [tv_norm(s) for s in ticks]
     yf_syms = [yf_norm(s) for s in ticks]
     df = pd.DataFrame({"tv_symbol": tv_syms, "yf_symbol": yf_syms}).drop_duplicates().reset_index(drop=True)
+    print(f"[UNIV] Total combiné (unique): {len(df)}")
     return df
 
 def map_exchange_for_tv(exch: str)->str:
