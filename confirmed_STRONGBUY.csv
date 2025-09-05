@@ -1,8 +1,11 @@
-ticker_yf,sector,price,local_score,local_label,analyst_bucket,analyst_votes,rank_score,tv_reco,tv_score,bucket,ticker_tv
-THC,Health Care,196.19000244140625,90.0,Strong Buy,BUY,,93.0,,,confirmed,THC
-SNDK,Information Technology,68.55000305175781,90.0,Strong Buy,BUY,,93.0,,,confirmed,SNDK
-BOKF,Financials,112.81999969482422,90.0,Strong Buy,BUY,,93.0,,,confirmed,BOKF
-LITE,Information Technology,149.4600067138672,90.0,Strong Buy,BUY,,93.0,,,confirmed,LITE
-RF,Financials,27.030000686645508,90.0,Strong Buy,BUY,,93.0,,,confirmed,RF
-MDB,Information Technology,324.739990234375,90.0,Strong Buy,BUY,,93.0,,,confirmed,MDB
-HBAN,Financials,17.6299991607666,90.0,Strong Buy,BUY,,93.0,,,confirmed,HBAN
+ticker_yf,ticker_tv,price,mcap_usd,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket
+ABT,ABT,,,,0.5575757575757576,STRONG_BUY,BUY,35.0,HEALTHCARE,MEDICAL DEVICES,True,True,True,3,20+,1.3345454545454545,confirmed
+AGNC,AGNC,,,,0.603030303030303,STRONG_BUY,BUY,21.0,REAL ESTATE,REIT - MORTGAGE,True,True,True,3,20+,1.3318181818181818,confirmed
+ALK,ALK,,,,0.603030303030303,STRONG_BUY,BUY,20.0,INDUSTRIALS,AIRLINES,True,True,True,3,20+,1.3284848484848484,confirmed
+NLY,NLY,,,,0.603030303030303,STRONG_BUY,BUY,18.0,Unknown,Unknown,True,True,True,3,15–19,1.3218181818181818,confirmed
+ALLY,ALLY,,,,0.5575757575757576,STRONG_BUY,BUY,26.0,Unknown,Unknown,True,True,True,3,20+,1.321212121212121,confirmed
+ANET,ANET,,,,0.5121212121212121,STRONG_BUY,BUY,33.0,Unknown,Communications Equipment,True,True,True,3,20+,1.3072727272727271,confirmed
+AME,AME,,,,0.5121212121212121,STRONG_BUY,BUY,22.0,Unknown,Electrical Components & Equipment,True,True,True,3,20+,1.2806060606060603,confirmed
+AOS,AOS,,,,0.5121212121212121,STRONG_BUY,BUY,20.0,INDUSTRIALS,SPECIALTY INDUSTRIAL MACHINERY,True,True,True,3,20+,1.2739393939393937,confirmed
+WMS,WMS,,,,0.5121212121212121,STRONG_BUY,BUY,14.0,INDUSTRIALS,BUILDING PRODUCTS & EQUIPMENT,True,True,True,3,10–14,1.2539393939393937,confirmed
+AYI,AYI,,,,0.5121212121212121,STRONG_BUY,BUY,14.0,INDUSTRIALS,ELECTRICAL EQUIPMENT & PARTS,True,True,True,3,10–14,1.2539393939393937,confirmed

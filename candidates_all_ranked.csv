@@ -1,251 +1,121 @@
-ticker_yf,sector,price,local_score,local_label,analyst_bucket,analyst_votes,rank_score,tv_reco,tv_score,bucket
-THC,Health Care,196.19000244140625,90.0,Strong Buy,BUY,,93.0,,,confirmed
-SNDK,Information Technology,68.55000305175781,90.0,Strong Buy,BUY,,93.0,,,confirmed
-BOKF,Financials,112.81999969482422,90.0,Strong Buy,BUY,,93.0,,,confirmed
-LITE,Information Technology,149.4600067138672,90.0,Strong Buy,BUY,,93.0,,,confirmed
-RF,Financials,27.030000686645508,90.0,Strong Buy,BUY,,93.0,,,confirmed
-MDB,Information Technology,324.739990234375,90.0,Strong Buy,BUY,,93.0,,,confirmed
-HBAN,Financials,17.6299991607666,90.0,Strong Buy,BUY,,93.0,,,confirmed
-ROIV,Health Care,12.920000076293945,90.0,Strong Buy,STRONG BUY,,93.0,,,pre_signal
-CFG,Financials,51.720001220703125,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-NLY,Financials,22.079999923706055,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-SSB,Financials,103.12000274658203,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-URI,Industrials,975.77001953125,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-KEY,Financials,18.94499969482422,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-HPE,Information Technology,23.53499984741211,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-HCA,Health Care,420.82501220703125,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-MSI,Information Technology,478.93499755859375,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-PSTG,Information Technology,79.21009826660156,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-ALLY,Financials,41.375,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-WBS,Financials,61.97999954223633,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-IONS,Health Care,61.22999954223633,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-NBIX,Health Care,144.10000610351562,90.0,Strong Buy,STRONG BUY,,93.0,,,pre_signal
-NU,Financials,14.734999656677246,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-CIEN,Information Technology,116.72000122070312,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-GLW,Information Technology,71.18000030517578,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-AYI,Industrials,338.19500732421875,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-STX,Information Technology,188.16000366210938,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-FITB,Financials,45.619998931884766,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-ACM,Industrials,126.66999816894531,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-INSM,Health Care,145.10000610351562,90.0,Strong Buy,STRONG BUY,,93.0,,,pre_signal
-AMG,Financials,230.3800048828125,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-WTFC,Financials,139.52999877929688,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-CVS,Health Care,73.76020050048828,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-AGNC,Financials,10.369999885559082,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-FLEX,Information Technology,55.65999984741211,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-BPOP,Financials,125.33999633789062,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-WDC,Information Technology,92.04000091552734,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-WAL,Financials,90.67749786376953,90.0,Strong Buy,STRONG BUY,,93.0,,,pre_signal
-TER,Information Technology,120.19999694824219,90.0,Strong Buy,BUY,,93.0,,,pre_signal
-OMF,Financials,61.4900016784668,87.0,Strong Buy,BUY,,90.9,,,pre_signal
-BAC,Financials,49.7599983215332,87.0,Strong Buy,BUY,,90.9,,,pre_signal
-ADI,Information Technology,247.07000732421875,87.0,Strong Buy,BUY,,90.9,,,pre_signal
-BSX,Health Care,107.22000122070312,83.0,Strong Buy,STRONG BUY,,88.1,,,pre_signal
-AME,Industrials,187.49000549316406,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-GTES,Industrials,25.920000076293945,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-AVGO,Information Technology,334.8900146484375,83.0,Strong Buy,STRONG BUY,,88.1,,,pre_signal
-SITE,Industrials,153.02999877929688,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-AFRM,Information Technology,87.3499984741211,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-UAL,Industrials,106.58999633789062,83.0,Strong Buy,STRONG BUY,,88.1,,,pre_signal
-MU,Information Technology,131.3699951171875,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-NET,Information Technology,214.4199981689453,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-GE,Industrials,279.3800048828125,83.0,Strong Buy,STRONG BUY,,88.1,,,pre_signal
-APP,Information Technology,490.239990234375,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-CNM,Industrials,66.94999694824219,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-NDSN,Industrials,225.02999877929688,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-NTAP,Information Technology,118.75,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-FERG,Industrials,238.33999633789062,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-AXP,Financials,326.2900085449219,83.0,Strong Buy,BUY,,88.1,,,pre_signal
-ORI,Financials,40.45000076293945,80.0,Strong Buy,BUY,,86.0,,,pre_signal
-VOYA,Financials,76.5,80.0,Strong Buy,BUY,,86.0,,,pre_signal
-MTB,Financials,199.5800018310547,80.0,Strong Buy,BUY,,86.0,,,pre_signal
-TRV,Financials,275.3450012207031,80.0,Strong Buy,BUY,,86.0,,,pre_signal
-APPF,Information Technology,284.80999755859375,80.0,Buy,BUY,,86.0,,,pre_signal
-THG,Financials,177.6199951171875,80.0,Strong Buy,BUY,,86.0,,,pre_signal
-PEN,Health Care,281.4200134277344,77.0,Buy,BUY,,83.9,,,pre_signal
-JAZZ,Health Care,129.5,77.0,Buy,STRONG BUY,,83.9,,,pre_signal
-GD,Industrials,322.8599853515625,77.0,Buy,BUY,,83.9,,,pre_signal
-ABT,Health Care,132.94000244140625,77.0,Buy,BUY,,83.9,,,pre_signal
-ZM,Information Technology,83.68000030517578,77.0,Buy,BUY,,83.9,,,pre_signal
-HUM,Health Care,307.6300048828125,77.0,Buy,BUY,,83.9,,,pre_signal
-UTHR,Health Care,400.5199890136719,77.0,Buy,BUY,,83.9,,,pre_signal
-ALK,Industrials,63.15999984741211,77.0,Buy,STRONG BUY,,83.9,,,event
-DAY,Industrials,69.02999877929688,77.0,Buy,BUY,,83.9,,,event
-QCOM,Information Technology,159.83999633789062,77.0,Buy,BUY,,83.9,,,event
-TEM,Health Care,79.62000274658203,77.0,Buy,BUY,,83.9,,,event
-WRB,Financials,71.9800033569336,74.0,Buy,BUY,,81.8,,,event
-LH,Health Care,278.4700012207031,73.0,Buy,BUY,,81.1,,,event
-CGNX,Information Technology,44.939998626708984,73.0,Buy,BUY,,81.1,,,event
-JNJ,Health Care,178.3800048828125,73.0,Buy,BUY,,81.1,,,event
-NVT,Industrials,92.80999755859375,73.0,Buy,STRONG BUY,,81.1,,,event
-ABBV,Health Care,212.52999877929688,73.0,Buy,BUY,,81.1,,,event
-AZN,Health Care,81.69999694824219,73.0,Buy,BUY,,81.1,,,event
-TEL,Information Technology,208.64999389648438,73.0,Buy,BUY,,81.1,,,event
-WMS,Industrials,148.4949951171875,73.0,Buy,STRONG BUY,,81.1,,,event
-FTAI,Industrials,154.0,73.0,Buy,STRONG BUY,,81.1,,,event
-AMKR,Information Technology,24.639999389648438,73.0,Buy,BUY,,81.1,,,event
-ANET,Information Technology,142.92999267578125,73.0,Buy,BUY,,81.1,,,event
-R,Industrials,187.23899841308594,73.0,Buy,STRONG BUY,,81.1,,,event
-RITM,Financials,12.619999885559082,73.0,Buy,STRONG BUY,,81.1,,,event
-ITT,Industrials,170.80499267578125,70.0,Buy,BUY,,79.0,,,event
-EVR,Financials,318.92999267578125,70.0,Buy,BUY,,79.0,,,event
-EW,Health Care,80.91500091552734,70.0,Buy,BUY,,79.0,,,event
-GL,Financials,139.83999633789062,70.0,Buy,BUY,,79.0,,,event
-PH,Industrials,758.530029296875,70.0,Buy,BUY,,79.0,,,event
-CHRW,Industrials,126.12999725341797,70.0,Buy,BUY,,79.0,,,event
-SWK,Industrials,78.4000015258789,70.0,Buy,BUY,,79.0,,,event
-CRUS,Information Technology,115.72000122070312,70.0,Buy,BUY,,79.0,,,event
-PTC,Information Technology,213.89999389648438,70.0,Buy,BUY,,79.0,,,event
-TTC,Industrials,81.61000061035156,70.0,Buy,BUY,,79.0,,,event
-AIT,Industrials,265.4750061035156,70.0,Buy,STRONG BUY,,79.0,,,event
-AAPL,Information Technology,239.69000244140625,70.0,Buy,BUY,,79.0,,,event
-A,Health Care,128.7899932861328,70.0,Buy,BUY,,79.0,,,event
-SSNC,Information Technology,88.80000305175781,70.0,Buy,BUY,,79.0,,,event
-EXLS,Industrials,44.97999954223633,69.0,Buy,BUY,,78.3,,,event
-DCI,Industrials,81.05000305175781,90.0,Strong Buy,HOLD,,78.0,,,pre_signal
-AFG,Financials,138.7100067138672,90.0,Strong Buy,HOLD,,78.0,,,pre_signal
-U,Information Technology,43.869998931884766,90.0,Strong Buy,NONE,,78.0,,,pre_signal
-KRMN,Industrials,62.470001220703125,90.0,Strong Buy,NONE,,78.0,,,pre_signal
-HALO,Health Care,74.93000030517578,90.0,Strong Buy,NONE,,78.0,,,pre_signal
-UI,Information Technology,575.2849731445312,90.0,Strong Buy,HOLD,,78.0,,,pre_signal
-USB,Financials,48.81999969482422,90.0,Strong Buy,NONE,,78.0,,,pre_signal
-EHC,Health Care,125.5824966430664,90.0,Strong Buy,NONE,,78.0,,,pre_signal
-MLI,Industrials,97.55999755859375,90.0,Strong Buy,NONE,,78.0,,,pre_signal
-PNC,Financials,204.39999389648438,90.0,Strong Buy,NONE,,78.0,,,pre_signal
-AL,Industrials,63.709999084472656,90.0,Strong Buy,HOLD,,78.0,,,pre_signal
-PODD,Health Care,348.42999267578125,90.0,Strong Buy,NONE,,78.0,,,pre_signal
-TDY,Information Technology,548.7849731445312,67.0,Buy,STRONG BUY,,76.9,,,event
-WCC,Industrials,219.19000244140625,67.0,Buy,BUY,,76.9,,,event
-SHOP,Information Technology,146.82000732421875,67.0,Buy,BUY,,76.9,,,event
-BK,Financials,103.69999694824219,67.0,Buy,BUY,,76.9,,,event
-DGX,Health Care,183.4600067138672,67.0,Buy,BUY,,76.9,,,event
-LRCX,Information Technology,102.94999694824219,67.0,Buy,BUY,,76.9,,,event
-CAT,Industrials,423.1199951171875,67.0,Buy,BUY,,76.9,,,event
-SYF,Financials,75.68000030517578,87.0,Strong Buy,NONE,,75.9,,,pre_signal
-OZK,Financials,52.349998474121094,87.0,Strong Buy,NONE,,75.9,,,pre_signal
-FHB,Financials,25.729999542236328,87.0,Strong Buy,NONE,,75.9,,,pre_signal
-EXAS,Health Care,53.810001373291016,65.0,Buy,STRONG BUY,,75.5,,,event
-STWD,Financials,20.59000015258789,65.0,Buy,BUY,,75.5,,,event
-ADSK,Information Technology,326.3699951171875,65.0,Buy,BUY,,75.5,,,event
-GWRE,Information Technology,260.5400085449219,65.0,Buy,BUY,,75.5,,,event
-EWBC,Financials,107.57499694824219,65.0,Buy,BUY,,75.5,,,event
-PANW,Information Technology,194.4600067138672,65.0,Buy,BUY,,75.5,,,event
-MET,Financials,79.5199966430664,64.0,Buy,BUY,,74.8,,,event
-TKR,Industrials,77.81999969482422,64.0,Buy,BUY,,74.8,,,event
-C,Financials,95.43000030517578,64.0,Buy,BUY,,74.8,,,event
-NTRA,Health Care,168.02000427246094,64.0,Buy,STRONG BUY,,74.8,,,event
-CINF,Financials,153.36000061035156,64.0,Buy,BUY,,74.8,,,event
-AXS,Financials,97.44999694824219,63.0,Buy,BUY,,74.1,,,event
-UNH,Health Care,315.3971862792969,62.0,Buy,BUY,,73.4,,,event
-COOP,Financials,213.11000061035156,83.0,Strong Buy,NONE,,73.1,,,pre_signal
-IPGP,Information Technology,84.2699966430664,83.0,Strong Buy,NONE,,73.1,,,pre_signal
-DOCS,Health Care,69.3499984741211,83.0,Strong Buy,NONE,,73.1,,,pre_signal
-QRVO,Information Technology,92.88999938964844,83.0,Strong Buy,HOLD,,73.1,,,pre_signal
-MTG,Financials,28.399999618530273,83.0,Strong Buy,NONE,,73.1,,,pre_signal
-PNR,Industrials,110.62999725341797,83.0,Strong Buy,NONE,,73.1,,,pre_signal
-HXL,Industrials,64.9000015258789,83.0,Strong Buy,HOLD,,73.1,,,pre_signal
-TFC,Financials,46.54499816894531,83.0,Strong Buy,NONE,,73.1,,,pre_signal
-MSM,Industrials,92.36399841308594,83.0,Strong Buy,HOLD,,73.1,,,pre_signal
-FHN,Financials,22.2549991607666,61.0,Buy,BUY,,72.7,,,event
-HIG,Financials,131.6300048828125,61.0,Buy,BUY,,72.7,,,event
-HUBB,Industrials,436.2349853515625,61.0,Buy,BUY,,72.7,,,event
-MMM,Industrials,155.3800048828125,61.0,Buy,BUY,,72.7,,,event
-ALAB,Information Technology,191.1999969482422,61.0,Neutral,BUY,,72.7,,,event
-DAL,Industrials,61.189998626708984,61.0,Neutral,STRONG BUY,,72.7,,,event
-G,Information Technology,44.88999938964844,59.0,Buy,BUY,,71.3,,,event
-ZION,Financials,56.52000045776367,80.0,Strong Buy,HOLD,,71.0,,,pre_signal
-FNB,Financials,16.475000381469727,80.0,Strong Buy,NONE,,71.0,,,pre_signal
-LYFT,Industrials,16.65999984741211,80.0,Strong Buy,HOLD,,71.0,,,pre_signal
-MEDP,Health Care,486.9800109863281,80.0,Buy,HOLD,,71.0,,,pre_signal
-SAIL,Information Technology,21.979999542236328,58.0,Buy,BUY,,70.6,,,event
-CI,Health Care,305.3699951171875,58.0,Buy,BUY,,70.6,,,event
-BIIB,Health Care,140.6699981689453,58.0,Neutral,BUY,,70.6,,,event
-CRL,Health Care,163.99000549316406,58.0,Buy,BUY,,70.6,,,event
-XP,Financials,18.90999984741211,58.0,Buy,BUY,,70.6,,,event
-CSL,Industrials,396.2200012207031,58.0,Buy,BUY,,70.6,,,event
-CDNS,Information Technology,351.010009765625,58.0,Neutral,BUY,,70.6,,,event
-SYK,Health Care,392.2799987792969,58.0,Buy,BUY,,70.6,,,event
-CG,Financials,63.75,58.0,Neutral,BUY,,70.6,,,event
-VRSN,Information Technology,280.0899963378906,58.0,Buy,BUY,,70.6,,,event
-TXT,Industrials,81.44000244140625,58.0,Buy,BUY,,70.6,,,event
-ASML,Information Technology,781.7000122070312,58.0,Buy,BUY,,70.6,,,event
-IOT,Information Technology,42.060001373291016,57.0,Buy,BUY,,69.9,,,event
-BILL,Information Technology,51.54999923706055,57.0,Buy,BUY,,69.9,,,event
-MIDD,Industrials,144.42999267578125,57.0,Buy,BUY,,69.9,,,event
-ACHC,Health Care,23.719999313354492,57.0,Buy,BUY,,69.9,,,event
-FICO,Information Technology,1533.530029296875,57.0,Buy,BUY,,69.9,,,event
-ZBH,Health Care,105.69000244140625,57.0,Buy,BUY,,69.9,,,event
-RVMD,Health Care,40.5,57.0,Buy,STRONG BUY,,69.9,,,event
-CPRT,Industrials,48.56999969482422,56.0,Buy,BUY,,69.2,,,event
-KEYS,Information Technology,167.8699951171875,77.0,Buy,NONE,,68.9,,,pre_signal
-HPQ,Information Technology,29.350000381469727,77.0,Buy,HOLD,,68.9,,,pre_signal
-DBX,Information Technology,29.8700008392334,77.0,Buy,NONE,,68.9,,,event
-COLB,Financials,26.899999618530273,77.0,Buy,HOLD,,68.9,,,event
-UWMC,Financials,6.320000171661377,77.0,Buy,HOLD,,68.9,,,event
-UHS,Health Care,190.1699981689453,77.0,Buy,NONE,,68.9,,,event
-MDT,Health Care,92.9000015258789,55.0,Neutral,BUY,,68.5,,,event
-SNOW,Information Technology,225.60499572753906,55.0,Buy,BUY,,68.5,,,event
-ALNY,Health Care,452.0,55.0,Neutral,BUY,,68.5,,,event
-APH,Information Technology,110.44999694824219,55.0,Neutral,BUY,,68.5,,,event
-FSLR,Information Technology,205.13999938964844,55.0,Neutral,BUY,,68.5,,,event
-GXO,Industrials,52.630001068115234,55.0,Neutral,BUY,,68.5,,,event
-OSK,Industrials,139.5399932861328,55.0,Neutral,BUY,,68.5,,,event
-SNV,Financials,51.4900016784668,55.0,Buy,BUY,,68.5,,,event
-COF,Financials,221.5500030517578,74.0,Buy,NONE,,66.8,,,event
-BRK-B,Financials,499.8599853515625,74.0,Buy,NONE,,66.8,,,event
-LFUS,Information Technology,262.6300048828125,73.0,Buy,NONE,,66.1,,,event
-MPWR,Information Technology,865.8599853515625,73.0,Buy,NONE,,66.1,,,event
-FAF,Financials,67.08999633789062,73.0,Buy,NONE,,66.1,,,event
-AWI,Industrials,198.38499450683594,73.0,Buy,NONE,,66.1,,,event
-ALLE,Industrials,171.86000061035156,73.0,Buy,HOLD,,66.1,,,event
-VNT,Information Technology,43.435001373291016,73.0,Buy,NONE,,66.1,,,event
-LSCC,Information Technology,66.11000061035156,73.0,Buy,NONE,,66.1,,,event
-SSD,Industrials,195.85000610351562,73.0,Buy,NONE,,66.1,,,event
-IVZ,Financials,21.9950008392334,73.0,Buy,NONE,,66.1,,,event
-HLI,Financials,196.99000549316406,70.0,Buy,HOLD,,64.0,,,event
-LAZ,Financials,56.435001373291016,70.0,Buy,HOLD,,64.0,,,event
-HII,Industrials,270.989990234375,70.0,Buy,NONE,,64.0,,,event
-ITW,Industrials,266.2200012207031,70.0,Buy,HOLD,,64.0,,,event
-LECO,Industrials,244.32000732421875,70.0,Buy,NONE,,64.0,,,event
-LNC,Financials,42.099998474121094,70.0,Buy,NONE,,64.0,,,event
-MS,Financials,148.1300048828125,70.0,Buy,HOLD,,64.0,,,event
-BLDR,Industrials,149.30999755859375,70.0,Buy,NONE,,64.0,,,event
-PRI,Financials,273.375,70.0,Buy,NONE,,64.0,,,event
-L,Financials,96.625,70.0,Buy,NONE,,64.0,,,event
-DNB,Industrials,9.149999618530273,69.0,Buy,HOLD,,63.3,,,event
-SOFI,Financials,25.600000381469727,67.0,Buy,HOLD,,61.9,,,event
-SNX,Information Technology,149.39999389648438,67.0,Buy,NONE,,61.9,,,event
-ELAN,Health Care,18.43000030517578,67.0,Buy,NONE,,61.9,,,event
-RKT,Financials,20.250999450683594,67.0,Buy,HOLD,,61.9,,,event
-TFSL,Financials,13.609999656677246,67.0,Buy,NONE,,61.9,,,event
-RTX,Industrials,157.5500030517578,67.0,Buy,NONE,,61.9,,,event
-JEF,Financials,63.4900016784668,67.0,Buy,HOLD,,61.9,,,event
-AOS,Industrials,73.69999694824219,67.0,Buy,HOLD,,61.9,,,event
-LMT,Industrials,463.9100036621094,65.0,Buy,HOLD,,60.5,,,event
-CACC,Financials,522.6099853515625,65.0,Buy,NONE,,60.5,,,event
-CNXC,Information Technology,53.81999969482422,65.0,Buy,NONE,,60.5,,,event
-MKSI,Information Technology,104.48999786376953,64.0,Buy,NONE,,59.8,,,event
-GS,Financials,738.6699829101562,64.0,Buy,HOLD,,59.8,,,event
-RNG,Information Technology,31.94499969482422,64.0,Buy,NONE,,59.8,,,event
-SWKS,Information Technology,75.19999694824219,64.0,Buy,NONE,,59.8,,,event
-NVST,Health Care,21.325000762939453,64.0,Buy,HOLD,,59.8,,,event
-HAYW,Industrials,16.270000457763672,64.0,Buy,HOLD,,59.8,,,event
-JHG,Financials,44.290000915527344,64.0,Buy,NONE,,59.8,,,event
-JPM,Financials,294.55999755859375,63.0,Buy,NONE,,59.1,,,event
-EQH,Financials,53.369998931884766,62.0,Neutral,NONE,,58.4,,,event
-TFX,Health Care,130.7899932861328,62.0,Buy,HOLD,,58.4,,,event
-WU,Information Technology,8.845000267028809,62.0,Buy,HOLD,,58.4,,,event
-VMI,Industrials,377.4800109863281,61.0,Neutral,NONE,,57.7,,,event
-CXT,Industrials,61.09000015258789,61.0,Buy,NONE,,57.7,,,event
-FIX,Industrials,706.3200073242188,61.0,Buy,NONE,,57.7,,,event
-EME,Industrials,624.4600219726562,61.0,Buy,NONE,,57.7,,,event
-PEGA,Information Technology,55.5099983215332,58.0,Buy,NONE,,55.6,,,event
-FLS,Industrials,55.189998626708984,58.0,Buy,NONE,,55.6,,,event
-CMI,Industrials,399.9100036621094,58.0,Neutral,NONE,,55.6,,,event
-DOCU,Information Technology,79.86000061035156,57.0,Buy,HOLD,,54.9,,,event
-ENPH,Information Technology,39.650001525878906,57.0,Buy,HOLD,,54.9,,,event
-DXC,Information Technology,14.793999671936035,57.0,Buy,NONE,,54.9,,,event
-PFG,Financials,79.9800033569336,55.0,Buy,NONE,,53.5,,,event
-CMA,Financials,68.83000183105469,55.0,Neutral,HOLD,,53.5,,,event
-TROW,Financials,108.16000366210938,55.0,Neutral,NONE,,53.5,,,event
-EXPD,Industrials,120.93000030517578,58.0,Neutral,UNDERPERFORM,,40.6,,,event
+ticker_yf,ticker_tv,price,mcap_usd,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket
+ABT,ABT,,,,0.5575757575757576,STRONG_BUY,BUY,35.0,HEALTHCARE,MEDICAL DEVICES,True,True,True,3,20+,1.3345454545454545,confirmed
+AGNC,AGNC,,,,0.603030303030303,STRONG_BUY,BUY,21.0,REAL ESTATE,REIT - MORTGAGE,True,True,True,3,20+,1.3318181818181818,confirmed
+ALK,ALK,,,,0.603030303030303,STRONG_BUY,BUY,20.0,INDUSTRIALS,AIRLINES,True,True,True,3,20+,1.3284848484848484,confirmed
+NLY,NLY,,,,0.603030303030303,STRONG_BUY,BUY,18.0,Unknown,Unknown,True,True,True,3,15–19,1.3218181818181818,confirmed
+ALLY,ALLY,,,,0.5575757575757576,STRONG_BUY,BUY,26.0,Unknown,Unknown,True,True,True,3,20+,1.321212121212121,confirmed
+ANET,ANET,,,,0.5121212121212121,STRONG_BUY,BUY,33.0,Unknown,Communications Equipment,True,True,True,3,20+,1.3072727272727271,confirmed
+AME,AME,,,,0.5121212121212121,STRONG_BUY,BUY,22.0,Unknown,Electrical Components & Equipment,True,True,True,3,20+,1.2806060606060603,confirmed
+AOS,AOS,,,,0.5121212121212121,STRONG_BUY,BUY,20.0,INDUSTRIALS,SPECIALTY INDUSTRIAL MACHINERY,True,True,True,3,20+,1.2739393939393937,confirmed
+WMS,WMS,,,,0.5121212121212121,STRONG_BUY,BUY,14.0,INDUSTRIALS,BUILDING PRODUCTS & EQUIPMENT,True,True,True,3,10–14,1.2539393939393937,confirmed
+AYI,AYI,,,,0.5121212121212121,STRONG_BUY,BUY,14.0,INDUSTRIALS,ELECTRICAL EQUIPMENT & PARTS,True,True,True,3,10–14,1.2539393939393937,confirmed
+ARW,ARW,,,,0.603030303030303,STRONG_BUY,SELL,14.0,Unknown,Technology Distributors,True,True,False,2,10–14,1.0084848484848485,pre_signal
+BLDR,BLDR,,,,0.603030303030303,STRONG_BUY,,,Unknown,Building Products,True,True,False,2,,0.9618181818181818,pre_signal
+CSL,CSL,,,,0.5575757575757576,STRONG_BUY,,,Unknown,Industrial Conglomerates,True,True,False,2,,0.9345454545454546,pre_signal
+AVGO,AVGO,,,,0.5575757575757576,STRONG_BUY,,,Unknown,Semiconductors,True,True,False,2,,0.9345454545454546,pre_signal
+CRL,CRL,,,,0.5575757575757576,STRONG_BUY,,,Unknown,Life Sciences Tools & Services,True,True,False,2,,0.9345454545454546,pre_signal
+BIO,BIO,,,,0.5121212121212121,STRONG_BUY,,,Unknown,Life Sciences Tools & Services,True,True,False,2,,0.9072727272727272,pre_signal
+A,A,,,,0.49090909090909096,BUY,BUY,26.0,HEALTHCARE,DIAGNOSTICS & RESEARCH,False,False,True,1,20+,0.6812121212121212,pre_signal
+AXP,AXP,,,,0.4454545454545455,BUY,BUY,35.0,Unknown,Consumer Finance,False,False,True,1,20+,0.6672727272727272,pre_signal
+AAPL,AAPL,,,,0.4454545454545455,BUY,BUY,55.0,Unknown,"Technology Hardware, Storage & Peripherals",False,False,True,1,20+,0.6672727272727272,pre_signal
+ALLE,ALLE,,,,0.4666666666666667,BUY,BUY,19.0,INDUSTRIALS,SECURITY & PROTECTION SERVICES,False,False,True,1,15–19,0.6433333333333333,pre_signal
+AKAM,AKAM,,,,0.403030303030303,BUY,BUY,31.0,TECHNOLOGY,SOFTWARE - INFRASTRUCTURE,False,False,True,1,20+,0.6418181818181817,pre_signal
+AFRM,AFRM,,,,0.4,BUY,BUY,31.0,TECHNOLOGY,SOFTWARE - INFRASTRUCTURE,False,False,True,1,20+,0.64,pre_signal
+ACM,ACM,,,,0.4666666666666667,BUY,BUY,18.0,INDUSTRIALS,ENGINEERING & CONSTRUCTION,False,False,True,1,15–19,0.6399999999999999,pre_signal
+AMKR,AMKR,,,,0.4666666666666667,BUY,BUY,17.0,Unknown,Semiconductors,False,False,True,1,15–19,0.6366666666666666,pre_signal
+ALNY,ALNY,,,,0.37575757575757573,BUY,BUY,39.0,Unknown,Unknown,False,False,True,1,20+,0.6254545454545454,pre_signal
+AWI,AWI,,,,0.4666666666666667,BUY,BUY,13.0,Unknown,Unknown,False,False,True,1,10–14,0.6233333333333333,pre_signal
+APPF,APPF,,,,0.4666666666666667,BUY,BUY,13.0,Unknown,Application Software,False,False,True,1,10–14,0.6233333333333333,pre_signal
+AFG,AFG,,,,0.4454545454545455,BUY,BUY,11.0,Unknown,Multi-line Insurance,False,False,True,1,10–14,0.6039393939393939,pre_signal
+APLS,APLS,,,,0.3090909090909091,BUY,BUY,27.0,Unknown,Biotechnology,False,False,True,1,20+,0.5754545454545454,pre_signal
+ADI,ADI,,,,0.28787878787878785,BUY,BUY,40.0,Unknown,Semiconductors,False,False,True,1,20+,0.5727272727272726,pre_signal
+ALAB,ALAB,,,,0.3303030303030303,BUY,BUY,22.0,Unknown,Semiconductors,False,False,True,1,20+,0.5715151515151515,pre_signal
+ATI,ATI,,,,0.35757575757575755,BUY,BUY,17.0,Unknown,Aerospace & Defense,False,False,True,1,15–19,0.5712121212121212,pre_signal
+AIT,AIT,,,,0.3787878787878788,BUY,BUY,13.0,Unknown,Trading Companies & Distributors,False,False,True,1,10–14,0.5706060606060606,pre_signal
+MMM,MMM,,,,0.31212121212121213,BUY,BUY,23.0,INDUSTRIALS,CONGLOMERATES,False,False,True,1,20+,0.563939393939394,pre_signal
+APH,APH,,,,0.3090909090909091,BUY,BUY,23.0,Unknown,Electronic Components,False,False,True,1,20+,0.5621212121212121,pre_signal
+AL,AL,,,,0.35454545454545455,BUY,BUY,14.0,INDUSTRIALS,RENTAL & LEASING SERVICES,False,False,True,1,10–14,0.5593939393939393,pre_signal
+APP,APP,,,,0.26363636363636367,BUY,BUY,30.0,Unknown,Application Software,False,False,True,1,20+,0.5581818181818182,pre_signal
+ABBV,ABBV,,,,0.26363636363636367,BUY,BUY,37.0,HEALTHCARE,DRUG MANUFACTURERS - GENERAL,False,False,True,1,20+,0.5581818181818182,pre_signal
+AMG,AMG,,,,0.3090909090909091,BUY,BUY,10.0,FINANCIAL SERVICES,ASSET MANAGEMENT,False,False,True,1,10–14,0.5187878787878788,pre_signal
+AAL,AAL,,,,0.2,BUY,BUY,27.0,Unknown,Passenger Airlines,False,False,True,1,20+,0.51,pre_signal
+AFL,AFL,,,,0.2212121212121212,BUY,BUY,19.0,FINANCIAL SERVICES,INSURANCE - LIFE,False,False,True,1,15–19,0.4960606060606061,pre_signal
+AON,AON,,,,0.17575757575757575,NEUTRAL,BUY,26.0,Unknown,Insurance Brokers,False,False,True,1,20+,0.4921212121212121,other
+ALSN,ALSN,,,,0.22424242424242424,BUY,BUY,15.0,CONSUMER CYCLICAL,AUTO PARTS,False,False,True,1,15–19,0.48454545454545456,pre_signal
+AGCO,AGCO,,,,0.17878787878787877,NEUTRAL,BUY,21.0,INDUSTRIALS,FARM & HEAVY CONSTRUCTION MACHINERY,False,False,True,1,20+,0.47727272727272724,other
+ACHC,ACHC,,,,0.15454545454545454,NEUTRAL,BUY,20.0,HEALTHCARE,MEDICAL CARE FACILITIES,False,False,True,1,20+,0.45939393939393935,other
+ACGL,ACGL,,,,0.04242424242424242,NEUTRAL,BUY,24.0,Unknown,Reinsurance,False,False,True,1,20+,0.40545454545454546,other
+AIZ,AIZ,,,,0.04242424242424242,NEUTRAL,BUY,13.0,Unknown,Multi-line Insurance,False,False,True,1,10–14,0.3687878787878788,other
+ALL,ALL,,,,-0.13333333333333333,NEUTRAL,BUY,27.0,Unknown,Property & Casualty Insurance,False,False,True,1,20+,0.31,other
+ADSK,ADSK,,,,0.49090909090909096,BUY,,,Unknown,Application Software,False,False,False,0,,0.29454545454545455,pre_signal
+ACN,ACN,,,,-0.17575757575757575,NEUTRAL,BUY,30.0,TECHNOLOGY,INFORMATION TECHNOLOGY SERVICES,False,False,True,1,20+,0.29454545454545455,other
+BILL,BILL,,,,0.46969696969696967,BUY,,,Unknown,Unknown,False,False,False,0,,0.2818181818181818,pre_signal
+BIIB,BIIB,,,,0.46969696969696967,BUY,,,Unknown,Biotechnology,False,False,False,0,,0.2818181818181818,pre_signal
+ALGM,ALGM,,,,-0.13333333333333333,NEUTRAL,BUY,18.0,TECHNOLOGY,SEMICONDUCTORS,False,False,True,1,15–19,0.27999999999999997,other
+APG,APG,,,,-0.13636363636363635,NEUTRAL,BUY,15.0,Unknown,Construction & Engineering,False,False,True,1,15–19,0.2681818181818182,other
+CIEN,CIEN,,,,0.4212121212121212,BUY,,,Unknown,Communications Equipment,False,False,False,0,,0.2527272727272727,pre_signal
+CI,CI,,,,0.403030303030303,BUY,,,Unknown,Managed Health Care,False,False,False,0,,0.2418181818181818,pre_signal
+AVTR,AVTR,,,,0.403030303030303,BUY,,,Unknown,Unknown,False,False,False,0,,0.2418181818181818,pre_signal
+AMAT,AMAT,,,,-0.26666666666666666,SELL,BUY,41.0,Unknown,Semiconductor Materials & Equipment,False,False,True,1,20+,0.24,other
+BSX,BSX,,,,0.4,BUY,,,Unknown,Health Care Equipment,False,False,False,0,,0.24,pre_signal
+BRK-B,BRK.B,,,,0.4,BUY,,,Unknown,Multi-Sector Holdings,False,False,False,0,,0.24,pre_signal
+ARES,ARES,,,,-0.24545454545454548,SELL,BUY,23.0,Unknown,Unknown,False,False,True,1,20+,0.22939393939393937,other
+CAT,CAT,,,,0.3787878787878788,BUY,,,Unknown,Construction Machinery & Heavy Transportation Equipment,False,False,False,0,,0.22727272727272727,pre_signal
+AVT,AVT,,,,0.3787878787878788,BUY,,,Unknown,Technology Distributors,False,False,False,0,,0.22727272727272727,pre_signal
+CCCS,CCCS,,,,0.3787878787878788,BUY,,,Unknown,Unknown,False,False,False,0,,0.22727272727272727,pre_signal
+AMD,AMD,,,,-0.2909090909090909,SELL,BUY,59.0,TECHNOLOGY,SEMICONDUCTORS,False,False,True,1,20+,0.22545454545454546,other
+BOKF,BOKF,,,,0.37575757575757573,BUY,,,Unknown,Unknown,False,False,False,0,,0.22545454545454544,pre_signal
+AMGN,AMGN,,,,-0.3090909090909091,SELL,BUY,40.0,Unknown,Biotechnology,False,False,True,1,20+,0.21454545454545454,other
+CDNS,CDNS,,,,0.35454545454545455,BUY,,,Unknown,Application Software,False,False,False,0,,0.21272727272727274,pre_signal
+AGO,AGO,,,,-0.2,SELL,BUY,8.0,Unknown,Unknown,False,False,True,1,≤9,0.20666666666666667,other
+AMTM,AMTM,,,,-0.24545454545454548,SELL,BUY,15.0,Unknown,Diversified Support Services,False,False,True,1,15–19,0.2027272727272727,other
+OZK,OZK,,,,0.3333333333333333,BUY,,,Unknown,Regional Banks,False,False,False,0,,0.19999999999999998,pre_signal
+ALGN,ALGN,,,,-0.3090909090909091,SELL,BUY,24.0,HEALTHCARE,MEDICAL INSTRUMENTS & SUPPLIES,False,False,True,1,20+,0.19454545454545455,other
+AJG,AJG,,,,-0.31212121212121213,SELL,BUY,23.0,Unknown,Insurance Brokers,False,False,True,1,20+,0.1893939393939394,other
+DOX,DOX,,,,-0.26666666666666666,SELL,BUY,12.0,Unknown,Unknown,False,False,True,1,10–14,0.18,other
+ADBE,ADBE,,,,-0.4,SELL,BUY,46.0,TECHNOLOGY,SOFTWARE - APPLICATION,False,False,True,1,20+,0.16,other
+COF,COF,,,,0.26666666666666666,BUY,,,Unknown,Consumer Finance,False,False,False,0,,0.16,pre_signal
+BAC,BAC,,,,0.26666666666666666,BUY,,,Unknown,Diversified Banks,False,False,False,0,,0.16,pre_signal
+AAON,AAON,,,,-0.31212121212121213,SELL,BUY,12.0,INDUSTRIALS,BUILDING PRODUCTS & EQUIPMENT,False,False,True,1,10–14,0.1527272727272727,other
+BX,BX,,,,0.24545454545454548,BUY,,,Unknown,Asset Management & Custody Banks,False,False,False,0,,0.14727272727272728,pre_signal
+CHE,CHE,,,,0.22424242424242424,BUY,,,Unknown,Health Care Services,False,False,False,0,,0.13454545454545455,pre_signal
+BDX,BDX,,,,0.17878787878787877,NEUTRAL,,,Unknown,Health Care Equipment,False,False,False,0,,0.10727272727272726,other
+TECH,TECH,,,,0.17878787878787877,NEUTRAL,,,Unknown,Life Sciences Tools & Services,False,False,False,0,,0.10727272727272726,other
+BK,BK,,,,0.17575757575757575,NEUTRAL,,,Unknown,Asset Management & Custody Banks,False,False,False,0,,0.10545454545454545,other
+CHRW,CHRW,,,,0.17575757575757575,NEUTRAL,,,Unknown,Air Freight & Logistics,False,False,False,0,,0.10545454545454545,other
+CINF,CINF,,,,0.17575757575757575,NEUTRAL,,,Unknown,Property & Casualty Insurance,False,False,False,0,,0.10545454545454545,other
+COR,COR,,,,0.1575757575757576,NEUTRAL,,,Unknown,Health Care Distributors,False,False,False,0,,0.09454545454545456,other
+CDW,CDW,,,,0.1575757575757576,NEUTRAL,,,Unknown,Technology Distributors,False,False,False,0,,0.09454545454545456,other
+CB,CB,,,,0.13333333333333333,NEUTRAL,,,Unknown,Property & Casualty Insurance,False,False,False,0,,0.08,other
+BSY,BSY,,,,0.09090909090909091,NEUTRAL,,,Unknown,Unknown,False,False,False,0,,0.05454545454545454,other
+AMP,AMP,,,,-0.5575757575757576,STRONG_SELL,BUY,19.0,Unknown,Asset Management & Custody Banks,False,False,True,1,15–19,0.028787878787878793,other
+CG,CG,,,,0.04242424242424242,NEUTRAL,,,Unknown,Unknown,False,False,False,0,,0.025454545454545452,other
+APO,APO,,,,-0.603030303030303,STRONG_SELL,BUY,24.0,Unknown,Asset Management & Custody Banks,False,False,True,1,20+,0.018181818181818188,other
+BAX,BAX,,,,0.024242424242424246,NEUTRAL,,,Unknown,Health Care Equipment,False,False,False,0,,0.014545454545454547,other
+BR,BR,,,,0.024242424242424246,NEUTRAL,,,Unknown,Data Processing & Outsourced Services,False,False,False,0,,0.014545454545454547,other
+BA,BA,,,,0.0,NEUTRAL,,,Unknown,Aerospace & Defense,False,False,False,0,,0.0,other
+CBOE,CBOE,,,,,,,,Unknown,Financial Exchanges & Data,False,False,False,0,,0.0,other
+BWXT,BWXT,,,,-0.003030303030303022,NEUTRAL,,,Unknown,Unknown,False,False,False,0,,-0.0018181818181818132,other
+AIG,AIG,,,,-0.6484848484848484,STRONG_SELL,BUY,24.0,Unknown,Property & Casualty Insurance,False,False,True,1,20+,-0.009090909090909038,other
+CNC,CNC,,,,-0.04242424242424242,NEUTRAL,,,Unknown,Managed Health Care,False,False,False,0,,-0.025454545454545452,other
+CAR,CAR,,,,-0.06666666666666667,NEUTRAL,,,Unknown,Passenger Ground Transportation,False,False,False,0,,-0.04,other
+TEAM,TEAM,,,,-0.08787878787878788,NEUTRAL,,,Unknown,Application Software,False,False,False,0,,-0.05272727272727273,other
+CACI,CACI,,,,-0.08787878787878788,NEUTRAL,,,Unknown,Diversified Support Services,False,False,False,0,,-0.05272727272727273,other
+XYZ,XYZ,,,,-0.09090909090909091,NEUTRAL,,,Unknown,Transaction & Payment Processing Services,False,False,False,0,,-0.05454545454545454,other
+AXS,AXS,,,,-0.15454545454545454,NEUTRAL,,,Unknown,Unknown,False,False,False,0,,-0.09272727272727273,other
+BLK,BLK,,,,-0.1575757575757576,NEUTRAL,,,Unknown,Asset Management & Custody Banks,False,False,False,0,,-0.09454545454545456,other
+CARR,CARR,,,,-0.17575757575757575,NEUTRAL,,,Unknown,Building Products,False,False,False,0,,-0.10545454545454545,other
+BAM,BAM,,,,-0.17878787878787877,NEUTRAL,,,Unknown,Asset Management & Custody Banks,False,False,False,0,,-0.10727272727272726,other
+AXON,AXON,,,,-0.2,SELL,,,Unknown,Aerospace & Defense,False,False,False,0,,-0.12,other
+CAH,CAH,,,,-0.2212121212121212,SELL,,,Unknown,Health Care Distributors,False,False,False,0,,-0.13272727272727272,other
+BMY,BMY,,,,-0.26666666666666666,SELL,,,Unknown,Health Care Distributors,False,False,False,0,,-0.16,other
+SCHW,SCHW,,,,-0.2909090909090909,SELL,,,Unknown,Investment Banking & Brokerage,False,False,False,0,,-0.17454545454545453,other
+BRKR,BRKR,,,,-0.35454545454545455,SELL,,,Unknown,Health Care Equipment,False,False,False,0,,-0.21272727272727274,other
+AUR,AUR,,,,-0.35454545454545455,SELL,,,Unknown,Unknown,False,False,False,0,,-0.21272727272727274,other
+CERT,CERT,,,,-0.4454545454545455,SELL,,,Unknown,Unknown,False,False,False,0,,-0.2672727272727273,other
+BRO,BRO,,,,-0.4666666666666667,SELL,,,Unknown,Insurance Brokers,False,False,False,0,,-0.27999999999999997,other
+BMRN,BMRN,,,,-0.4666666666666667,SELL,,,Unknown,Unknown,False,False,False,0,,-0.27999999999999997,other
+OWL,OWL,,,,-0.5121212121212121,STRONG_SELL,,,Unknown,Unknown,False,False,False,0,,-0.30727272727272725,other
+BAH,BAH,,,,-0.5575757575757576,STRONG_SELL,,,Unknown,Unknown,False,False,False,0,,-0.33454545454545453,other
+ADP,ADP,,,,-0.603030303030303,STRONG_SELL,,,Unknown,Human Resource & Employment Services,False,False,False,0,,-0.3618181818181818,other
+BHF,BHF,,,,-0.603030303030303,STRONG_SELL,,,Unknown,Life & Health Insurance,False,False,False,0,,-0.3618181818181818,other
