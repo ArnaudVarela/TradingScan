@@ -56,10 +56,10 @@ KEEP_FULL_UNIVERSE_IN_OUTPUTS = True    # garde tout le seed dans les outputs (m
 
 # === Ciblage externe sur un sous-ensemble (sniper mode) ===
 EXTERNAL_TARGET_MODE = "toppct"   # "topk" ou "toppct"
-EXTERNAL_TOP_K = 50               # utilisé si mode "topk"
-EXTERNAL_TOP_PCT = 0.12           # 12% si "toppct"
-EXTERNAL_TOP_MIN = 120            # minimum
-ANALYST_TOP_CAP = 220             # plafond dur d'appels Yahoo get_info()
+EXTERNAL_TOP_K = 100               # utilisé si mode "topk"
+EXTERNAL_TOP_PCT = 0.20           # 12% si "toppct"
+EXTERNAL_TOP_MIN = 250            # minimum
+ANALYST_TOP_CAP = 500             # plafond dur d'appels Yahoo get_info()
 
 # ---- Confirmed tuning (assoupli & réaliste) ----
 CONFIRM_MIN_TECH_VOTES = 4              # TA forte
@@ -190,16 +190,50 @@ def fetch_nasdaq_composite():
 
     return list(dict.fromkeys(out))
 
+def _sanitize_symbols(sym_list: list) -> list:
+    import re
+    pat = re.compile(r"^[A-Z]{1,5}(?:[.\-][A-Z]{1,2})?$")  # ticker compact US
+    bad_words = {
+        "AIRLINES","BANK","BANKS","ENERGY","MEDIA","EURO","CURRENCY","CHINA","CANADA",
+        "BELGIUM","ISRAEL","IRELAND","PANAMA","BERMUDA","SWEDEN","SOFTWARE","TOBACCO",
+        "GRAILINC","DELEK","ENERSYS","STEPANCO","IBEXLTD","XPERIINC","DOLEPLC","KBHOME",
+        "OOMAINC","ARKOCORP","SEDOL"
+    }
+    out = []
+    for s in sym_list:
+        s = str(s).strip().upper()
+        if s in bad_words: 
+            continue
+        if pat.match(s):
+            out.append(s)
+    return list(dict.fromkeys(out))
+
+
 def _read_tickers_csv(path: str, colname: str = "Ticker") -> list:
     if not os.path.exists(path):
         raise FileNotFoundError(f"CSV introuvable: {path}")
     df = pd.read_csv(path)
-    if colname not in df.columns: colname = df.columns[0]
-    ser = (
-        df[colname].astype(str).str.strip().str.upper()
-        .replace("", np.nan).dropna()
-    )
-    ser = ser[ser.str.match(r"^[A-Z.\-]+$")]
+
+    # 1) choisir la bonne colonne si possible
+    candidates = [c for c in df.columns if str(c).strip().lower() in {"ticker","symbol","tickers","symbols","code"}]
+    if candidates:
+        colname = candidates[0]
+    else:
+        # 2) heuristique: colonne avec le + de valeurs qui matchent un ticker
+        import re
+        pat = re.compile(r"^[A-Z]{1,5}(?:[.\-][A-Z]{1,2})?$")  # ex: AAPL, BRK.B, BRK-B
+        best, best_hits = None, -1
+        for c in df.columns:
+            ser = df[c].astype(str).str.strip().str.upper()
+            hits = ser.apply(lambda x: bool(pat.match(x))).sum()
+            if hits > best_hits:
+                best, best_hits = c, hits
+        colname = best if best is not None else df.columns[0]
+
+    ser = df[colname].astype(str).str.strip().str.upper()
+    # Filtre dur "vrai ticker"
+    ser = ser[ser.str.match(r"^[A-Z]{1,5}(?:[.\-][A-Z]{1,2})?$")]
+    # dédoublonne
     return list(dict.fromkeys(ser.tolist()))
 
 def load_universe()->pd.DataFrame:
@@ -279,6 +313,8 @@ def load_universe()->pd.DataFrame:
 
     if not ticks:
         raise RuntimeError("Impossible de charger l’univers (Wikipédia/CSV/API).")
+
+    ticks = _sanitize_symbols(ticks)
 
     tv_syms = [tv_norm(s) for s in ticks]
     yf_syms = [yf_norm(s) for s in ticks]
@@ -817,35 +853,66 @@ def main():
         "final_signal","analyst_bucket","analyst_mean","analyst_votes","avg_vol","rank_score"
     ]
 
-    # ---- Confirmed ----
+    # ---- Confirmed (robuste & conscient du contexte externe) ----
+    valid_mcap = pd.to_numeric(df["market_cap"], errors="coerce").fillna(0) > 0
+
+    # Flags "externes présents ?" pour durcir si on n’a pas d’APIs
+    EXTERNAL_PRESENT = False
+    try:
+        EXTERNAL_PRESENT = (
+            df["finnhub_label"].notna().any() or
+            df["tv_reco"].notna().any() or
+            df["analyst_bucket"].notna().any()
+        )
+    except Exception:
+        EXTERNAL_PRESENT = False
+
+    # Analyses / TA / liquidité
     an_ok = df["analyst_bucket"].isin({"Strong Buy", "Buy"}) & (
         pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= CONFIRM_MIN_ANALYST_VOTES
     )
     fh_ok = df["finnhub_label"].isin({"BUY", "STRONG_BUY"})
     tv_ok = df["tv_reco"].eq("STRONG_BUY")
     ta_ok = (pd.to_numeric(df["tech_score"], errors="coerce").fillna(-99) >= CONFIRM_MIN_TECH_VOTES)
-    ta_strong = (df["local_label"].isin({"STRONG_BUY"}) &
-                 (pd.to_numeric(df["tech_score"], errors="coerce").fillna(-99) >= max(CONFIRM_MIN_TECH_VOTES, 5)))
+
+    # TA "forte" (plus stricte si on est en mode 100% local)
+    ta_strong = (
+        df["local_label"].isin({"STRONG_BUY"}) &
+        (pd.to_numeric(df["tech_score"], errors="coerce").fillna(-99) >= max(CONFIRM_MIN_TECH_VOTES, 5))
+    )
+
     liq_ok = (pd.to_numeric(df["avg_vol"], errors="coerce").fillna(0) >= MIN_AVG_DAILY_VOLUME)
 
-    EXTERNAL_PRESENT = (df["finnhub_label"].notna().any() or df["tv_reco"].notna().any())
+    # Compteur de corroborations (utile quand externes présents)
+    corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
 
     if EXTERNAL_PRESENT:
-        corr_count = an_ok.astype(int) + fh_ok.astype(int) + tv_ok.astype(int) + ta_ok.astype(int)
+        # Porte A : final STRONG_BUY + ≥1 corroboration
         mask_A = df["final_signal"].fillna("").astype(str).str.upper().eq("STRONG_BUY") & (corr_count >= 1)
+
+        # Porte B : TV = STRONG_BUY + (analyst Buy/Strong Buy OU TA forte)
         mask_B = tv_ok & (an_ok | ta_ok)
+
+        # Porte C : Analyst = Strong Buy (≥15 votes) + (FH ok OU TA forte)
         an_strong_enough = df["analyst_bucket"].eq("Strong Buy") & (
             pd.to_numeric(df["analyst_votes"], errors="coerce").fillna(0) >= 15
         )
         mask_C = an_strong_enough & (fh_ok | ta_ok)
-        mask_confirm = (mask_A | mask_B | mask_C) & liq_ok & (~df["out_of_scope"])
-        print(f"[CONFIRMED/ext] via A={int(mask_A.sum())}, via B={int((mask_B & liq_ok & (~df['out_of_scope'])).sum())}, via C={int((mask_C & liq_ok & (~df['out_of_scope'])).sum())}")
-    else:
-        mask_confirm = (an_ok | ta_strong) & liq_ok & (~df["out_of_scope"])
-        print("[CONFIRMED/local-only] externals missing → rule = (analyst ok) OR (strong local TA)")
 
-    confirmed = df[mask_confirm].copy().sort_values(["rank_score", "market_cap"], ascending=[False, True])
-    save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
+        mask_confirm = (mask_A | mask_B | mask_C) & liq_ok & (~df["out_of_scope"]) & valid_mcap
+
+        print(
+            f"[CONFIRMED/ext] via A={int(mask_A.sum())}, "
+            f"via B={int((mask_B & liq_ok & valid_mcap & (~df['out_of_scope'])).sum())}, "
+            f"via C={int((mask_C & liq_ok & valid_mcap & (~df['out_of_scope'])).sum())}"
+        )
+    else:
+        # Sans externes: exiger (Analyst ok) OU (TA très forte) + market cap valide
+        mask_confirm = (an_ok | ta_strong) & liq_ok & (~df["out_of_scope"]) & valid_mcap
+        print(
+            "[CONFIRMED/local-only] externals missing → rule = (analyst ok) OR (strong local TA) + mcap>0"
+        )
+
 
     # Pré-signaux
     mask_pre = (
