@@ -1,14 +1,16 @@
 # build_universe.py
 # Construit un univers unique à partir de plusieurs indices publics,
-# l'enrichit avec market cap & liquidité (Yahoo), filtre MCAP < 75B$,
-# puis écrit universe_today.csv (racine + dashboard/public/).
+# enrichit avec market cap & liquidité (Yahoo), associe SECTOR (Wikipedia),
+# filtre MCAP < 75B$ + secteur (IT/HC/Financials/Industrials),
+# puis écrit raw_universe.csv, universe_in_scope.csv, universe_today.csv
+# (en racine + dashboard/public/).
 
 import io
 import os
 import re
 import time
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Tuple, Dict, List
 
 import pandas as pd
 import requests
@@ -20,9 +22,19 @@ PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 MCAP_MAX_USD = 75_000_000_000  # < 75B$
 MIN_ROW_LEN = 1
 
+# Secteurs “autorisés” (on tolère quelques variantes fréquentes)
+SECTORS_IN = {
+    "Information Technology", "Technology",
+    "Health Care", "Healthcare",
+    "Financials",
+    "Industrials",
+}
+
 UA = {"User-Agent": "Mozilla/5.0"}
 
 def _save(df: pd.DataFrame, name: str):
+    if df is None:
+        df = pd.DataFrame()
     # racine
     df.to_csv(name, index=False)
     # public
@@ -34,7 +46,7 @@ def _norm_yf(t: str) -> str | None:
     if not isinstance(t, str): return None
     t = t.strip().upper()
     if not t or t in {"N/A", "-", "—"}: return None
-    # BRK.B (TV) → BRK-B (Yahoo)
+    # BRK.B (TV/Wiki) → BRK-B (Yahoo)
     t = t.replace(".", "-")
     t = re.sub(r"[^A-Z0-9\-]", "", t)
     return t or None
@@ -51,65 +63,101 @@ def _union(*series: Iterable[str]) -> list[str]:
             if n: seen.setdefault(n, True)
     return list(seen.keys())
 
-def _wiki_table(url: str) -> list[pd.DataFrame]:
+def _wiki_tables(url: str) -> list[pd.DataFrame]:
     r = requests.get(url, headers=UA, timeout=45)
     r.raise_for_status()
-    return pd.read_html(r.text)
+    # Wrap dans StringIO pour éviter le FutureWarning
+    return pd.read_html(io.StringIO(r.text))
 
-def get_sp500() -> list[str]:
-    # Wikipedia "List of S&P 500 companies"
+def _extract_symbol_and_sector(df: pd.DataFrame) -> Tuple[List[str], Dict[str, str]]:
+    """
+    Essaie de trouver les colonnes 'symbol/ticker' et 'sector' (ou GICS Sector).
+    Retourne (liste_tickers, mapping{ticker->sector})
+    """
+    cols_lower = [str(c).lower() for c in df.columns]
+    sym_idx = None
+    sec_idx = None
+
+    for i, c in enumerate(cols_lower):
+        if "symbol" in c or "ticker" in c:
+            sym_idx = i
+            break
+    for i, c in enumerate(cols_lower):
+        if "sector" in c and "sub" not in c:
+            sec_idx = i
+            break
+
+    syms = []
+    sector_map = {}
+    if sym_idx is None:
+        return syms, sector_map
+
+    sym_col = df.columns[sym_idx]
+    syms_raw = df[sym_col].dropna().astype(str).tolist()
+
+    if sec_idx is not None:
+        sec_col = df.columns[sec_idx]
+        for _, row in df.iterrows():
+            sym = row.get(sym_col)
+            sec = row.get(sec_col)
+            yf_sym = _norm_yf(str(sym)) if pd.notna(sym) else None
+            if yf_sym:
+                syms.append(yf_sym)
+                if pd.notna(sec):
+                    sector_map[yf_sym] = str(sec).strip()
+        return syms, sector_map
+
+    # pas de secteur dans cette table
+    for s in syms_raw:
+        yf_sym = _norm_yf(s)
+        if yf_sym:
+            syms.append(yf_sym)
+    return syms, sector_map
+
+def get_sp500() -> Tuple[List[str], Dict[str,str]]:
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-    out = []
-    for t in _wiki_table(url):
-        cols = [str(c).lower() for c in t.columns]
-        if any("symbol" in c for c in cols):
-            sym_col = t.columns[cols.index(next(c for c in cols if "symbol" in c))]
-            out.extend(t[sym_col].dropna().astype(str).tolist())
+    out_syms, out_map = [], {}
+    for t in _wiki_tables(url):
+        syms, smap = _extract_symbol_and_sector(t)
+        if syms:
+            out_syms.extend(syms)
+            out_map.update(smap)
             break
-    print(f"[SRC] S&P500: {len(out)} tickers")
-    return out
+    print(f"[SRC] S&P500: {len(out_syms)} tickers (with sector for {len(out_map)})")
+    return out_syms, out_map
 
-def get_r1000() -> list[str]:
-    # Wikipedia "Russell 1000 Index"
+def get_r1000() -> Tuple[List[str], Dict[str,str]]:
     url = "https://en.wikipedia.org/wiki/Russell_1000_Index"
-    out = []
-    for t in _wiki_table(url):
-        cols = [str(c).lower() for c in t.columns]
-        if any("ticker" in c or "symbol" in c for c in cols):
-            try:
-                idx = next(i for i,c in enumerate(cols) if "ticker" in c or "symbol" in c)
-            except StopIteration:
-                continue
-            out.extend(t.iloc[:, idx].dropna().astype(str).tolist())
+    out_syms, out_map = [], {}
+    for t in _wiki_tables(url):
+        syms, smap = _extract_symbol_and_sector(t)
+        if syms:
+            out_syms.extend(syms)
+            out_map.update(smap)
             break
-    print(f"[SRC] R1000: {len(out)} tickers")
-    return out
+    print(f"[SRC] R1000: {len(out_syms)} tickers (with sector for {len(out_map)})")
+    return out_syms, out_map
 
-def get_nasdaq100() -> list[str]:
-    # Wikipedia "NASDAQ-100"
+def get_nasdaq100() -> Tuple[List[str], Dict[str,str]]:
     url = "https://en.wikipedia.org/wiki/NASDAQ-100"
-    out = []
-    for t in _wiki_table(url):
-        cols = [str(c).lower() for c in t.columns]
-        if any("ticker" in c or "symbol" in c for c in cols):
-            try:
-                idx = next(i for i,c in enumerate(cols) if "ticker" in c or "symbol" in c)
-            except StopIteration:
-                continue
-            out.extend(t.iloc[:, idx].dropna().astype(str).tolist())
+    out_syms, out_map = [], {}
+    for t in _wiki_tables(url):
+        syms, smap = _extract_symbol_and_sector(t)
+        if syms:
+            out_syms.extend(syms)
+            out_map.update(smap)
             break
-    print(f"[SRC] NASDAQ-100: {len(out)} tickers")
-    return out
+    print(f"[SRC] NASDAQ-100: {len(out_syms)} tickers (with sector for {len(out_map)})")
+    return out_syms, out_map
 
-def get_r2000_from_csv(path="russell2000.csv") -> list[str]:
+def get_r2000_from_csv(path="russell2000.csv") -> List[str]:
     if not os.path.exists(path):
         print("[SRC] R2000: missing russell2000.csv → skip")
         return []
     try:
         df = pd.read_csv(path)
-        # support either "Ticker" or first column
         col = "Ticker" if "Ticker" in df.columns else df.columns[0]
-        vals = df[col].dropna().astype(str).tolist()
+        vals = [s for s in df[col].dropna().astype(str).tolist() if _norm_yf(s)]
         print(f"[SRC] R2000(csv): {len(vals)} tickers")
         return vals
     except Exception as e:
@@ -126,10 +174,6 @@ def enrich_with_yf(tickers: list[str]) -> pd.DataFrame:
             mcap = fi.get("market_cap")
             price = fi.get("last_price")
             vol10 = fi.get("ten_day_average_volume")
-            if mcap is None:
-                # fallback très léger (evite .info si possible)
-                # on garde None si pas dispo
-                pass
             avg_dollar = None
             if isinstance(price, (int,float)) and isinstance(vol10, (int,float)):
                 avg_dollar = float(price)*float(vol10)
@@ -139,38 +183,58 @@ def enrich_with_yf(tickers: list[str]) -> pd.DataFrame:
         if i % 100 == 0:
             print(f"[YF] {i}/{len(tickers)} enriched…")
             time.sleep(1.0)
-    df = pd.DataFrame(rows)
-    return df
+    return pd.DataFrame(rows)
 
 def main():
-    r1000  = get_r1000()
-    sp500  = get_sp500()
-    ndx100 = get_nasdaq100()
-    r2000  = get_r2000_from_csv()  # optionnel
+    # 1) Sources
+    r1_syms, r1_sec = get_r1000()
+    sp_syms, sp_sec = get_sp500()
+    nd_syms, nd_sec = get_nasdaq100()
+    r2_syms         = get_r2000_from_csv()  # pas de secteur
 
-    universe = _union(r1000, sp500, ndx100, r2000)
+    # 2) Union (normalisée Yahoo)
+    universe = _union(r1_syms, sp_syms, nd_syms, r2_syms)
     if len(universe) < MIN_ROW_LEN:
         raise SystemExit("❌ universe empty")
-
     print(f"[UNION] unique tickers before YF: {len(universe)}")
 
+    # 3) Enrichissement Yahoo (cap/liquidité)
     meta = enrich_with_yf(universe)
+
+    # 4) Ajout du sector via mapping Wikipedia (R1000/S&P500/NASDAQ-100)
+    sector_map = {}
+    sector_map.update(r1_sec)
+    sector_map.update(sp_sec)
+    sector_map.update(nd_sec)
+
     meta["ticker_tv"] = meta["ticker_yf"].map(_yf_to_tv)
+    meta["sector"]    = meta["ticker_yf"].map(lambda t: sector_map.get(t, ""))
 
-    # filtre MCAP < 75B (garde mcap manquants pour ne pas perdre des noms,
-    # mais on préfère filtrer strictement)
-    before = len(meta)
-    meta_f = meta[pd.to_numeric(meta["mcap_usd"], errors="coerce").fillna(0) < MCAP_MAX_USD].copy()
-    print(f"[FILTER] mcap < 75B: {len(meta_f)}/{before}")
+    # 5) Sauvegarde RAW (avant filtre)
+    raw_cols = ["ticker_yf","ticker_tv","mcap_usd","avg_dollar_vol","sector"]
+    raw = meta[raw_cols].copy()
+    _save(raw, "raw_universe.csv")
 
-    # tri simple (liquidité décroissante)
-    meta_f["avg_dollar_vol"] = pd.to_numeric(meta_f["avg_dollar_vol"], errors="coerce")
-    meta_f = meta_f.sort_values(["avg_dollar_vol","mcap_usd"], ascending=[False, True])
+    # 6) Filtre MCAP + Secteurs
+    mcap_num = pd.to_numeric(raw["mcap_usd"], errors="coerce").fillna(0)
+    sec_norm = raw["sector"].astype(str).str.strip()
 
-    # colonnes finales
-    out = meta_f[["ticker_yf","ticker_tv","mcap_usd","avg_dollar_vol"]].reset_index(drop=True)
+    in_scope = raw[
+        (mcap_num < MCAP_MAX_USD) &
+        (sec_norm.isin(SECTORS_IN))
+    ].copy()
 
-    _save(out, "universe_today.csv")
+    # tri simple (liquidité décroissante, puis cap croissant)
+    in_scope["avg_dollar_vol"] = pd.to_numeric(in_scope["avg_dollar_vol"], errors="coerce")
+    in_scope = in_scope.sort_values(["avg_dollar_vol","mcap_usd"], ascending=[False, True])
+
+    # 7) Sauvegardes attendues par le workflow
+    _save(in_scope, "universe_in_scope.csv")
+    # compat historique (ton ancien front lisait universe_today.csv)
+    _save(in_scope.rename(columns={"ticker_yf":"ticker_yf", "sector":"sector"}), "universe_today.csv")
+
+    print(f"[FILTER] mcap < 75B & sector in {sorted(SECTORS_IN)}: {len(in_scope)}/{len(raw)}")
+    print("[DONE] build_universe complete.")
 
 if __name__ == "__main__":
     main()
