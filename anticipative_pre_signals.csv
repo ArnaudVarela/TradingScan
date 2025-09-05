@@ -1,549 +1,538 @@
 ticker_tv,ticker_yf,price,market_cap,sector,industry,technical_local,tech_score,local_label,finnhub_label,tv_reco,tv_symbol_used,tv_exchange_used,final_signal,analyst_bucket,analyst_mean,analyst_votes,avg_vol,rank_score
-THC,THC,192.52000427246094,17009334897.476196,Health Care,Health Care Facilities,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.59091,21.0,934117.0,5.8
-AXSM,AXSM,124.41000366210938,6208245797.744751,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.26316,19.0,576375.8,5.76
-BRX,BRX,28.139999389648438,8613653813.171387,Real Estate,Retail REITs,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.52941,17.0,1994921.3,5.68
-BURL,BURL,301.3500061035156,18995597634.735107,Consumer Discretionary,Apparel Retail,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.27778,16.0,1272690.3,5.64
-IDYA,IDYA,25.829999923706055,2263836660.9933167,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.4,15.0,991351.7,5.6
-WAL,WAL,91.33999633789062,10081104055.81665,Financials,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.46667,15.0,949037.0,5.6
-ELF,ELF,133.72000122070312,7586590897.25647,Consumer Staples,Personal Care Products,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.5625,14.0,1817541.4,5.5600000000000005
-IRTC,IRTC,182.1699981689453,5852721267.172241,Healthcare,Medical Devices,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.35714,13.0,396378.7,5.52
-WTFC,WTFC,139.80999755859375,9360600899.542236,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.53846,13.0,412295.6,5.52
-EYPT,EYPT,11.880000114440918,820980428.3885651,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.30769,12.0,540154.8,5.48
-SMTC,SMTC,59.900001525878906,5197762732.406616,Technology,Semiconductors,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.57143,12.0,2680632.9,5.48
-PFGC,PFGC,105.25,16473625592.0,Consumer Staples,Food Distributors,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.57143,12.0,1426456.4,5.48
-ACM,ACM,125.94000244140625,16680249563.354492,Industrials,Construction & Engineering,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.53846,11.0,986479.6,5.44
-AQST,AQST,5.059999942779541,612128433.0778122,Healthcare,Drug Manufacturers - Specialty & Generic,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.4,10.0,2572040.4,5.4
-TRML,TRML,25.100000381469727,644876739.8008347,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.18182,10.0,161784.5,5.4
-RZLT,RZLT,7.380000114440918,651047374.095726,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.33333,9.0,961504.1,5.36
-SGI,SGI,86.87999725341797,18235068863.52539,Consumer Discretionary,Home Furnishings,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.5,9.0,2206326.7,5.36
-VSTM,VSTM,10.5600004196167,649918393.8254356,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.22222,8.0,2788757.3,5.32
-AMLX,AMLX,9.949999809265137,887215612.9926682,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.3,8.0,1732699.6,5.32
-PRCH,PRCH,17.950000762939453,1871628629.5509338,Technology,Software - Application,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.25,8.0,2232961.1,5.32
-MLYS,MLYS,33.119998931884766,2195696953.189087,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.375,8.0,3419069.2,5.32
-R,R,188.63999938964844,7694738759.103394,Industrials,Cargo Ground Transportation,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.5,8.0,252686.6,5.32
-CSGS,CSGS,64.62000274658203,1859014087.0147705,Technology,Software - Infrastructure,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.33333,7.0,180987.4,5.28
-AMG,AMG,233.0500030517578,6621439991.706848,Financials,Asset Management & Custody Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.42857,7.0,178911.0,5.28
-NSSC,NSSC,39.25,1399513700.0,Industrials,Security & Protection Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.5,6.0,638956.8,5.24
-OSIS,OSIS,235.7100067138672,3966033001.966858,Technology,Electronic Components,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.5,6.0,240163.3,5.24
-IONS,IONS,59.349998474121094,9459856081.588623,Health Care,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.88889,26.0,4270800.9,5.199999999999999
-NXT,NXT,68.8499984741211,10450190468.399048,Technology,Solar,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.80769,25.0,1739806.2,5.199999999999999
-NCLH,NCLH,25.59000015258789,11565067694.240112,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.73913,21.0,13769163.1,5.199999999999999
-FTI,FTI,39.650001525878906,16296785027.160645,Energy,Oil & Gas Equipment & Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.78261,22.0,4021028.7,5.199999999999999
-RF,RF,27.360000610351562,24413546549.101562,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.29167,22.0,18270248.0,5.199999999999999
-FITB,FITB,46.2599983215332,30618890398.804688,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.91667,22.0,3716369.1,5.199999999999999
-WDC,WDC,90.48999786376953,31392969591.054688,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.64,21.0,7274045.1,5.199999999999999
-TRV,TRV,279.42999267578125,62909191971.069336,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.43478,20.0,1235852.0,5.199999999999999
-HDSN,HDSN,10.359999656677246,452404609.00764465,Basic Materials,Specialty Chemicals,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.5,4.0,367310.9,5.16
-SHLS,SHLS,7.150000095367432,1196645523.1609802,Technology,Solar,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.95,19.0,5195046.1,5.159999999999999
-RUN,RUN,16.43000030517578,3790943128.974121,Technology,Solar,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.09091,19.0,10042259.4,5.159999999999999
-FIVE,FIVE,152.8000030517578,8426232568.29071,Consumer Discretionary,Other Specialty Retail,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.18182,19.0,1723790.7,5.159999999999999
-LITE,LITE,141.91000366210938,9919509255.981445,Information Technology,Communication Equipment,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.63158,19.0,3926184.8,5.159999999999999
-LYTS,LYTS,23.25,698216100.0,Technology,Electronic Components,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.33333,3.0,295478.1,5.12
-UPB,UPB,19.68000030517578,1060937008.4518433,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.5,3.0,601127.6,5.12
-TPR,TPR,105.81999969482422,22023681616.485596,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.75,18.0,4439251.2,5.119999999999999
-HIG,HIG,134.6999969482422,37873867541.93115,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.2,18.0,1282556.6,5.119999999999999
-HST,HST,17.59000015258789,12250204087.706787,Real Estate,Hotel & Resort REITs,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.88889,17.0,8671320.7,5.079999999999999
-ALLY,ALLY,41.56999969482422,12798696548.601562,Financials,Credit Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.1,17.0,2420593.9,5.079999999999999
-SUI,SUI,128.91000366210938,16635964882.598877,Real Estate,REIT - Residential,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.23529,17.0,931244.6,5.079999999999999
-FEIM,FEIM,33.040000915527344,322115889.72572327,Technology,Communication Equipment,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Strong Buy,1.0,1.0,226176.4,5.04
-PTCT,PTCT,58.0099983215332,4651172053.422546,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.0,16.0,1113977.7,5.039999999999999
-REXR,REXR,42.08000183105469,10303456768.341064,Real Estate,REIT - Industrial,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.4375,16.0,2759322.0,5.039999999999999
-FHN,FHN,22.790000915527344,11571577384.857178,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.9375,16.0,11527544.0,5.039999999999999
-TOL,TOL,145.41000366210938,14015052382.965088,Consumer Discretionary,Homebuilding,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.82353,16.0,1686857.0,5.039999999999999
-CIEN,CIEN,116.91999816894531,16528630316.509277,Information Technology,Communications Equipment,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.11765,16.0,3233041.5,5.039999999999999
-RL,RL,320.75,19429206725.0,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.66667,16.0,576666.2,5.039999999999999
-WBS,WBS,62.91999816894531,10456611072.338867,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.625,15.0,1044118.1,4.999999999999999
-SYY,SYY,82.51000213623047,39457273141.571045,Consumer Staples,Food Distributors,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.94118,15.0,2658987.4,4.999999999999999
-ARWR,ARWR,28.0,3871224000.0,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.86667,14.0,3109503.6,4.959999999999999
-OMF,OMF,62.61000061035156,7442450772.55249,Financials,Credit Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.8125,14.0,855386.7,4.959999999999999
-PHM,PHM,137.61000061035156,27150177900.421143,Consumer Discretionary,Homebuilding,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.0,13.0,1953955.1,4.92
-COGT,COGT,12.9399995803833,1807730777.8591309,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.76923,12.0,1282098.1,4.879999999999999
-AGNC,AGNC,10.199999809265137,10625645638.105774,Financials,REIT - Mortgage,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.06667,12.0,20079736.6,4.879999999999999
-VOYA,VOYA,77.62000274658203,7483949900.819397,Financials,Multi-Sector Holdings,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.41667,11.0,797044.0,4.84
-NLY,NLY,21.799999237060547,13997257007.734863,Financials,REIT - Mortgage,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.0,11.0,6373878.2,4.84
-VLY,VLY,10.649999618530273,5961028692.083374,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.18182,10.0,7481497.1,4.8
-BPOP,BPOP,127.05999755859375,8587070403.00293,Financials,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.875,8.0,606380.0,4.72
-AYI,AYI,339.3999938964844,10400844932.958984,Industrials,Electrical Components & Equipment,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.0,8.0,215005.9,4.72
-THG,THG,181.33999633789062,6486604205.004883,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.0,7.0,182681.7,4.68
-SATS,SATS,67.22000122070312,19340269871.21582,Communication Services,Telecom Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.42857,7.0,10947046.4,4.68
-FLEX,FLEX,55.16999816894531,21069808932.067383,Information Technology,Electronic Manufacturing Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.66667,7.0,3488577.4,4.68
-CINF,CINF,155.58999633789062,24330541267.333984,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.125,6.0,399491.4,4.64
-TLS,TLS,6.570000171661377,482826684.6153259,Technology,Software - Infrastructure,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.8,5.0,1291847.7,4.6
-FCFS,FCFS,150.8300018310547,6691512699.234009,Financial Services,Credit Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.66667,5.0,312006.9,4.6
-HSY,HSY,185.3000030517578,37564757818.66455,Consumer Staples,Packaged Foods & Meats,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,3.08333,22.0,1099433.4,4.6
-FBNC,FBNC,55.54999923706055,2303236288.366699,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.4,4.0,220326.2,4.56
-ADEA,ADEA,15.40999984741211,1685376273.311615,Technology,Software - Application,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.66667,3.0,522522.2,4.52
-AEHR,AEHR,26.290000915527344,786468006.388092,Technology,Semiconductor Equipment & Materials,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.33333,2.0,2842038.8,4.4799999999999995
-SCSC,SCSC,44.70000076293945,978237166.6965485,Technology,Electronics & Computer Distribution,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,1.66667,2.0,362920.7,4.4799999999999995
-ORI,ORI,41.09000015258789,10209632337.913513,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.33333,2.0,1086795.1,4.4799999999999995
-NBBK,NBBK,19.1299991607666,761878998.576355,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Buy,2.0,1.0,175855.8,4.4399999999999995
-WRB,WRB,72.91999816894531,27658044282.13379,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.5,15.0,1409713.1,4.3999999999999995
-NTAP,NTAP,118.83000183105469,23720607305.511475,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.5,14.0,2558909.0,4.359999999999999
-DRVN,DRVN,19.209999084472656,3155818649.597168,Consumer Cyclical,Auto & Truck Dealerships,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,13.0,1150456.3,4.32
-RGNX,RGNX,9.420000076293945,475843767.8539276,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,12.0,619680.9,4.279999999999999
-TSHA,TSHA,3.259999990463257,889311723.4784241,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,12.0,3784626.9,4.279999999999999
-EHC,EHC,124.4800033569336,12538123858.12378,Health Care,Health Care Facilities,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,12.0,714824.2,4.279999999999999
-AN,AN,225.66000366210938,8508736098.083496,Consumer Discretionary,Automotive Retail,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,11.0,372232.5,4.24
-UMBF,UMBF,123.62999725341797,9387016014.976685,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,11.0,489782.3,4.24
-BOKF,BOKF,113.0,7188054300.0,Financials,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.5,10.0,185716.0,4.2
-BEN,BEN,25.739999771118164,13364079387.085693,Financials,Asset Management & Custody Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,10.0,3339271.2,4.2
-EQH,EQH,54.06999969482422,16195911428.588867,Financials,Asset Management,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,10.0,2746787.8,4.2
-OZK,OZK,52.93000030517578,5962088164.375305,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,9.0,761483.7,4.16
-BLZE,BLZE,8.6899995803833,490661708.30726624,Technology,Software - Infrastructure,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,8.0,627497.9,4.12
-SLRC,SLRC,16.690000534057617,910516303.1352997,Financial Services,Asset Management,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.625,8.0,161559.4,4.12
-FNB,FNB,16.790000915527344,6030028088.806152,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,8.0,9205802.2,4.12
-GOSS,GOSS,2.509999990463257,570726287.7515259,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,7.0,4151153.7,4.08
-NMIH,NMIH,40.099998474121094,3110721131.2313232,Financial Services,Insurance - Specialty,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,7.0,311845.1,4.08
-OPEN,OPEN,5.960000038146973,4386285772.7144165,Real Estate,Real Estate Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,7.0,412310539.7,4.08
-MSM,MSM,92.66000366210938,5158919831.890869,Industrials,Trading Companies & Distributors,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.81818,7.0,436549.1,4.08
-AM,AM,18.09000015258789,8654455207.719727,Energy,Oil & Gas Midstream,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,3.375,7.0,2169937.3,4.08
-RPRX,RPRX,36.900001525878906,21303810276.149414,Health Care,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,7.0,3366850.1,4.08
-OPRX,OPRX,18.610000610351562,345494661.33117676,Healthcare,Health Information Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,6.0,367630.4,4.04
-PINC,PINC,26.280000686645508,2169403544.682312,Healthcare,Health Information Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,3.14286,6.0,1382694.6,4.04
-FRME,FRME,41.880001068115234,2417828785.664749,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,6.0,211016.5,4.04
-SBCF,SBCF,31.649999618530273,2780601348.08609,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,6.0,584331.6,4.04
-EXTR,EXTR,22.450000762939453,2968114600.868225,Technology,Communication Equipment,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,6.0,1513775.8,4.04
-MTG,MTG,28.440000534057617,6556074470.632568,Financials,Reinsurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,6.0,1400806.0,4.04
-CATY,CATY,50.375,3480580025.0,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.8,5.0,301088.8,4.0
-DCI,DCI,80.62000274658203,9393842720.031738,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,3.125,5.0,916138.0,4.0
-AFG,AFG,139.67999267578125,11648542590.480469,Financials,Multi-line Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.66667,5.0,406739.4,4.0
-MCFT,MCFT,22.610000610351562,368687713.9526367,Consumer Cyclical,Recreational Vehicles,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.8,4.0,266656.7,3.96
-KE,KE,29.760000228881836,720742565.5431747,Industrials,Electrical Equipment & Parts,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,244007.5,3.96
-SFIX,SFIX,5.610000133514404,732032087.4218941,Consumer Cyclical,Apparel Retail,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,2516234.9,3.96
-HCSG,HCSG,15.75,1140500088.0,Healthcare,Medical Care Facilities,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,597097.4,3.96
-CRCT,CRCT,5.860000133514404,1245050788.3672714,Technology,Computer Hardware,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,674961.9,3.96
-BBSI,BBSI,49.16999816894531,1268359770.767212,Industrials,Staffing & Employment Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,189008.1,3.96
-INVA,INVA,20.920000076293945,1318399324.8081207,Healthcare,Biotechnology,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,636755.1,3.96
-PAHC,PAHC,39.06999969482422,1583647739.630127,Healthcare,Drug Manufacturers - Specialty & Generic,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,3.0,4.0,480709.8,3.96
-TASK,TASK,17.989999771118164,1606859583.556366,Technology,Information Technology Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,457395.5,3.96
-WAFD,WAFD,31.950000762939453,2517407527.3135986,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,335414.5,3.96
-FTDR,FTDR,63.290000915527344,4610638592.695618,Consumer Cyclical,Personal Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,618420.1,3.96
-IDCC,IDCC,287.8800048828125,7427995037.988281,Technology,Software - Application,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,4.0,304912.8,3.96
-ETON,ETON,17.8700008392334,479228747.50614166,Healthcare,Drug Manufacturers - Specialty & Generic,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,3.0,211469.3,3.92
-HONE,HONE,13.0,561061800.0,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,3.0,220870.5,3.92
-ATRO,ATRO,39.060001373291016,1389129888.8397217,Industrials,Aerospace & Defense,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,3.0,692944.3,3.92
-AL,AL,63.63999938964844,7112724531.784058,Industrials,Rental & Leasing Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,2.66667,3.0,2756563.1,3.92
-DAKT,DAKT,17.440000534057617,864710106.4796448,Technology,Electronic Components,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,2.0,260499.6,3.88
-MLI,MLI,97.37000274658203,10778956674.049377,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,2.0,665746.5,3.88
-UI,UI,565.1300048828125,34189630626.40381,Information Technology,Communication Equipment,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,Hold,3.0,2.0,299777.3,3.88
-CFFN,CFFN,6.550000190734863,853334024.848938,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,1.0,600126.6,3.84
-CSQ,CSQ,18.719999313354492,3002126289.88266,Financial Services,Asset Management,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,162765.2,3.8
-IBOC,IBOC,72.41500091552734,4501055762.905884,Financial Services,Banks - Regional,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,216252.6,3.8
-L,L,97.52999877929688,20230257526.794434,Financials,Multi-line Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,759058.7,3.8
-GALT,GALT,4.670000076293945,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,200422.7,3.8
-SCPH,SCPH,5.579999923706055,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,4065358.0,3.8
-ALEC,ALEC,2.819999933242798,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,969323.5,3.8
-FOSL,FOSL,3.4200000762939453,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,645615.8,3.8
-SOGP,SOGP,35.900001525878906,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,16852723.7,3.8
-MDXH,MDXH,3.5299999713897705,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,200056.1,3.8
-SHIP,SHIP,8.25,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,154447.9,3.8
-ANTE,ANTE,5.260000228881836,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2509918.1,3.8
-QMMM,QMMM,7.119999885559082,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2875643.7,3.8
-IVVD,IVVD,0.9975000023841858,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,25746067.4,3.8
-VTGN,VTGN,3.619999885559082,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,355265.3,3.8
-HLVX,HLVX,2.0999999046325684,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,785428.3,3.8
-TYGO,TYGO,1.4700000286102295,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,246730.3,3.8
-AMPG,AMPG,4.260000228881836,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1048630.7,3.8
-AEI,AEI,1.840000033378601,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2002650.4,3.8
-FMST,FMST,3.3499999046325684,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,316234.9,3.8
-ALLR,ALLR,1.7300000190734863,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,42100709.9,3.8
-AQB,AQB,1.2799999713897705,,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,12554698.0,3.8
-KEYS,KEYS,166.9499969482422,,Information Technology,Electronic Equipment & Instruments,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,986376.0,3.8
-SNDK,SNDK,62.5,,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,3098760.9,3.8
-IRON,IRON,60.189998626708984,,Unknown,Unknown,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,244986.0,3.8
-BBNX,BBNX,20.100000381469727,,Unknown,Unknown,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,497012.3,3.8
-TITN,TITN,20.450000762939453,,Unknown,Unknown,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,207321.4,3.8
-ONEG,ONEG,12.239999771118164,,Unknown,Unknown,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,280273.8,3.8
-WGRX,WGRX,1.3700000047683716,,Unknown,Unknown,Strong Buy,5,BUY,,,,,BUY,,,,4356183.8,2.1
-AOS,AOS,72.63999938964844,,Industrials,Building Products,Strong Buy,4,BUY,,,,,BUY,,,,985947.0,2.1
-ADT,ADT,8.819999694824219,,Consumer Discretionary,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,9103949.4,2.1
-AFRM,AFRM,89.66000366210938,,Information Technology,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,13786774.3,2.1
-ALL,ALL,208.3300018310547,,Financials,Property & Casualty Insurance,Strong Buy,4,BUY,,,,,BUY,,,,1207037.3,2.1
-AXP,AXP,330.6499938964844,,Financials,Consumer Finance,Strong Buy,4,BUY,,,,,BUY,,,,2402319.8,2.1
-AME,AME,187.8699951171875,,Industrials,Electrical Components & Equipment,Strong Buy,4,BUY,,,,,BUY,,,,1020413.9,2.1
-APH,APH,112.75,,Information Technology,Electronic Components,Strong Buy,4,BUY,,,,,BUY,,,,6693583.1,2.1
-ADI,ADI,246.11000061035156,,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,,,,4056230.3,2.1
-AU,AU,57.95000076293945,,Materials,Gold,Strong Buy,4,BUY,,,,,BUY,,,,3399123.5,2.1
-APA,APA,23.440000534057617,,Energy,Oil & Gas Exploration & Production,Strong Buy,4,BUY,,,,,BUY,,,,6264264.6,2.1
-APPF,APPF,279.239990234375,,Information Technology,Application Software,Strong Buy,4,BUY,,,,,BUY,,,,250460.9,2.1
-AAPL,AAPL,239.77999877929688,,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,4,BUY,,,,,BUY,,,,42407082.8,2.1
-APP,APP,499.9700012207031,,Information Technology,Application Software,Strong Buy,4,BUY,,,,,BUY,,,,5077473.7,2.1
-APTV,APTV,80.44999694824219,,Consumer Discretionary,Automotive Parts & Equipment,Strong Buy,4,BUY,,,,,BUY,,,,2365595.9,2.1
-ACGL,ACGL,92.22000122070312,,Financials,Reinsurance,Strong Buy,4,BUY,,,,,BUY,,,,1730687.9,2.1
-ANET,ANET,141.1699981689453,,Information Technology,Communications Equipment,Strong Buy,4,BUY,,,,,BUY,,,,6989956.8,2.1
-ALAB,ALAB,187.9499969482422,,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,,,,4236678.1,2.1
-ADSK,ADSK,319.92999267578125,,Information Technology,Application Software,Strong Buy,4,BUY,,,,,BUY,,,,2187694.5,2.1
-BKR,BKR,46.31999969482422,,Energy,Oil & Gas Equipment & Services,Strong Buy,4,BUY,,,,,BUY,,,,5416360.0,2.1
-BAC,BAC,50.619998931884766,,Financials,Diversified Banks,Strong Buy,4,BUY,,,,,BUY,,,,38250853.5,2.1
-BBY,BBY,77.05000305175781,,Consumer Discretionary,Computer & Electronics Retail,Strong Buy,4,BUY,,,,,BUY,,,,4582478.3,2.1
-BIIB,BIIB,139.94000244140625,,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,,,,1473204.4,2.1
-BWA,BWA,43.849998474121094,,Consumer Discretionary,Automotive Parts & Equipment,Strong Buy,4,BUY,,,,,BUY,,,,2265989.4,2.1
-BYD,BYD,86.47000122070312,,Consumer Discretionary,Casinos & Gaming,Strong Buy,4,BUY,,,,,BUY,,,,820372.4,2.1
-AVGO,AVGO,306.1000061035156,,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,,,,18663529.7,2.1
-COF,COF,226.32000732421875,,Financials,Consumer Finance,Strong Buy,4,BUY,,,,,BUY,,,,3037174.2,2.1
-CG,CG,64.93000030517578,,Financials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2497945.3,2.1
-CCL,CCL,31.760000228881836,,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,4,BUY,,,,,BUY,,,,15693738.2,2.1
-CVNA,CVNA,370.1700134277344,,Consumer Discretionary,Automotive Retail,Strong Buy,4,BUY,,,,,BUY,,,,2112700.0,2.1
-SCHW,SCHW,97.62999725341797,,Financials,Investment Banking & Brokerage,Strong Buy,4,BUY,,,,,BUY,,,,7287396.9,2.1
-CVX,CVX,157.69000244140625,,Energy,Integrated Oil & Gas,Strong Buy,4,BUY,,,,,BUY,,,,8050632.6,2.1
-CHWY,CHWY,41.15999984741211,,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,BUY,,,,,BUY,,,,5269665.0,2.1
-CFG,CFG,52.5099983215332,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,3596571.5,2.1
-CLH,CLH,245.1300048828125,,Industrials,Environmental & Facilities Services,Strong Buy,4,BUY,,,,,BUY,,,,266189.1,2.1
-NET,NET,209.97999572753906,,Information Technology,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1917707.6,2.1
-COKE,COKE,119.30999755859375,,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,4,BUY,,,,,BUY,,,,398799.0,2.1
-FIX,FIX,723.9500122070312,,Industrials,Construction & Engineering,Strong Buy,4,BUY,,,,,BUY,,,,359891.4,2.1
-CNM,CNM,65.8499984741211,,Industrials,Trading Companies & Distributors,Strong Buy,4,BUY,,,,,BUY,,,,1491297.2,2.1
-GLW,GLW,69.72000122070312,,Information Technology,Electronic Components,Strong Buy,4,BUY,,,,,BUY,,,,6459390.5,2.1
-CXT,CXT,61.720001220703125,,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,,,,411884.8,2.1
-CVS,CVS,73.69000244140625,,Health Care,Health Care Services,Strong Buy,4,BUY,,,,,BUY,,,,5993399.9,2.1
-DHI,DHI,176.69000244140625,,Consumer Discretionary,Homebuilding,Strong Buy,4,BUY,,,,,BUY,,,,3513332.8,2.1
-DRI,DRI,210.19000244140625,,Consumer Discretionary,Restaurants,Strong Buy,4,BUY,,,,,BUY,,,,768331.3,2.1
-DKS,DKS,222.02999877929688,,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,BUY,,,,,BUY,,,,2785645.2,2.1
-DOCS,DOCS,68.5199966430664,,Health Care,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1129802.6,2.1
-DKNG,DKNG,47.400001525878906,,Consumer Discretionary,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,6606877.2,2.1
-DBX,DBX,29.43000030517578,,Information Technology,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2784623.5,2.1
-DTM,DTM,105.30000305175781,,Energy,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,739877.9,2.1
-DNB,DNB,9.149999618530273,,Industrials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,5208242.2,2.1
-DD,DD,77.1500015258789,,Materials,Specialty Chemicals,Strong Buy,4,BUY,,,,,BUY,,,,2356035.6,2.1
-BROS,BROS,71.43000030517578,,Consumer Discretionary,Restaurants,Strong Buy,4,BUY,,,,,BUY,,,,3365618.7,2.1
-EWBC,EWBC,108.58999633789062,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,763935.5,2.1
-EW,EW,80.95999908447266,,Health Care,Health Care Equipment,Strong Buy,4,BUY,,,,,BUY,,,,3856970.6,2.1
-EME,EME,640.5700073242188,,Industrials,Construction & Engineering,Strong Buy,4,BUY,,,,,BUY,,,,313113.2,2.1
-EG,EG,345.260009765625,,Financials,Reinsurance,Strong Buy,4,BUY,,,,,BUY,,,,309346.9,2.1
-ECG,ECG,77.38999938964844,,Industrials,Construction & Engineering,Strong Buy,4,BUY,,,,,BUY,,,,416875.5,2.1
-EXPD,EXPD,121.63999938964844,,Industrials,Air Freight & Logistics,Strong Buy,4,BUY,,,,,BUY,,,,1150526.7,2.1
-FRT,FRT,100.98999786376953,,Real Estate,Retail REITs,Strong Buy,4,BUY,,,,,BUY,,,,609553.8,2.1
-FERG,FERG,238.1699981689453,,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,,,,1290280.9,2.1
-FHB,FHB,26.1299991607666,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,1079794.1,2.1
-FSLR,FSLR,201.8699951171875,,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,,,,2555905.8,2.1
-FLS,FLS,54.54999923706055,,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,,,,1320557.6,2.1
-FOXA,FOXA,60.810001373291016,,Communication Services,Movies & Entertainment,Strong Buy,4,BUY,,,,,BUY,,,,2623511.6,2.1
-FOX,FOX,55.31999969482422,,Communication Services,Movies & Entertainment,Strong Buy,4,BUY,,,,,BUY,,,,1282236.5,2.1
-FCX,FCX,46.06999969482422,,Materials,Copper,Strong Buy,4,BUY,,,,,BUY,,,,10214676.1,2.1
-FYBR,FYBR,37.130001068115234,,Communication Services,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2668743.2,2.1
-CFR,CFR,130.2100067138672,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,444532.2,2.1
-GLPI,GLPI,48.34000015258789,,Real Estate,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1910454.6,2.1
-GAP,GAP,23.93000030517578,,Consumer Discretionary,Apparel Retail,Strong Buy,4,BUY,,,,,BUY,,,,14670900.9,2.1
-GTES,GTES,25.93000030517578,,Industrials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1877133.6,2.1
-GL,GL,141.4499969482422,,Financials,Life & Health Insurance,Strong Buy,4,BUY,,,,,BUY,,,,454538.3,2.1
-LOPE,LOPE,205.13999938964844,,Consumer Discretionary,Education Services,Strong Buy,4,BUY,,,,,BUY,,,,224963.6,2.1
-HALO,HALO,73.4000015258789,,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,,,,2101985.7,2.1
-HR,HR,17.489999771118164,,Real Estate,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3046597.6,2.1
-HEI.A,HEI-A,253.50999450683594,,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,,,,250295.1,2.1
-HEI,HEI,322.2900085449219,,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,,,,533370.5,2.1
-HPE,HPE,23.15999984741211,,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,4,BUY,,,,,BUY,,,,25609324.0,2.1
-HXL,HXL,64.13999938964844,,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,,,,850573.5,2.1
-DINO,DINO,51.560001373291016,,Energy,Oil & Gas Refining & Marketing,Strong Buy,4,BUY,,,,,BUY,,,,2339309.4,2.1
-HLT,HLT,278.05999755859375,,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,4,BUY,,,,,BUY,,,,1468341.9,2.1
-HD,HD,411.69000244140625,,Consumer Discretionary,Home Improvement Retail,Strong Buy,4,BUY,,,,,BUY,,,,3305688.2,2.1
-HWM,HWM,179.52999877929688,,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,,,,2309015.6,2.1
-HPQ,HPQ,28.920000076293945,,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,4,BUY,,,,,BUY,,,,11175922.3,2.1
-HBAN,HBAN,17.8799991607666,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,25761901.4,2.1
-INSM,INSM,142.52999877929688,,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,,,,2404262.4,2.1
-PODD,PODD,346.4700012207031,,Health Care,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,531596.3,2.1
-INTC,INTC,24.610000610351562,,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,,,,91063658.5,2.1
-IBKR,IBKR,64.27999877929688,,Financials,Investment Banking & Brokerage,Strong Buy,4,BUY,,,,,BUY,,,,15588931.7,2.1
-IPG,IPG,26.84000015258789,,Communication Services,Advertising,Strong Buy,4,BUY,,,,,BUY,,,,5547316.1,2.1
-ITT,ITT,171.89999389648438,,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,,,,284540.5,2.1
-JNJ,JNJ,178.75999450683594,,Health Care,Pharmaceuticals,Strong Buy,4,BUY,,,,,BUY,,,,7521656.3,2.1
-JPM,JPM,303.82000732421875,,Financials,Diversified Banks,Strong Buy,4,BUY,,,,,BUY,,,,6715141.4,2.1
-KEY,KEY,19.18000030517578,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,26091312.0,2.1
-KRC,KRC,41.400001525878906,,Real Estate,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1211437.5,2.1
-KIM,KIM,22.790000915527344,,Real Estate,Retail REITs,Strong Buy,4,BUY,,,,,BUY,,,,3451022.9,2.1
-LAMR,LAMR,128.00999450683594,,Real Estate,Other Specialized REITs,Strong Buy,4,BUY,,,,,BUY,,,,521810.6,2.1
-LEA,LEA,110.37000274658203,,Consumer Discretionary,Automotive Parts & Equipment,Strong Buy,4,BUY,,,,,BUY,,,,531362.7,2.1
-LBTYK,LBTYK,12.140000343322754,,Communication Services,Cable & Satellite,Strong Buy,4,BUY,,,,,BUY,,,,812646.5,2.1
-LNC,LNC,43.220001220703125,,Financials,Multi-line Insurance,Strong Buy,4,BUY,,,,,BUY,,,,1541024.2,2.1
-LYFT,LYFT,16.790000915527344,,Industrials,Passenger Ground Transportation,Strong Buy,4,BUY,,,,,BUY,,,,21016809.0,2.1
-MTB,MTB,202.36000061035156,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,893640.0,2.1
-M,M,17.239999771118164,,Consumer Discretionary,Department Stores,Strong Buy,4,BUY,,,,,BUY,,,,13732494.3,2.1
-MLM,MLM,618.969970703125,,Materials,Construction Materials,Strong Buy,4,BUY,,,,,BUY,,,,422794.3,2.1
-MTZ,MTZ,182.50999450683594,,Industrials,Construction & Engineering,Strong Buy,4,BUY,,,,,BUY,,,,795882.7,2.1
-MEDP,MEDP,482.3399963378906,,Health Care,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,309985.7,2.1
-MET,MET,81.75,,Financials,Life & Health Insurance,Strong Buy,4,BUY,,,,,BUY,,,,2649173.8,2.1
-TIGO,TIGO,47.90999984741211,,Communication Services,Integrated Telecommunication Services,Strong Buy,4,BUY,,,,,BUY,,,,1238242.6,2.1
-MDB,MDB,322.04998779296875,,Information Technology,Systems Software,Strong Buy,4,BUY,,,,,BUY,,,,6058034.0,2.1
-MNST,MNST,63.45000076293945,,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,4,BUY,,,,,BUY,,,,4668537.3,2.1
-MS,MS,150.52999877929688,,Financials,Investment Banking & Brokerage,Strong Buy,4,BUY,,,,,BUY,,,,4092209.8,2.1
-MSI,MSI,478.6199951171875,,Information Technology,Communications Equipment,Strong Buy,4,BUY,,,,,BUY,,,,972735.1,2.1
-COOP,COOP,202.61000061035156,,Financials,Commercial & Residential Mortgage Finance,Strong Buy,4,BUY,,,,,BUY,,,,785474.2,2.1
-NFLX,NFLX,1257.47998046875,,Communication Services,Movies & Entertainment,Strong Buy,4,BUY,,,,,BUY,,,,2457908.3,2.1
-NBIX,NBIX,140.39999389648438,,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,,,,747485.2,2.1
-NEM,NEM,74.87999725341797,,Materials,Gold,Strong Buy,4,BUY,,,,,BUY,,,,8994888.1,2.1
-NDSN,NDSN,226.00999450683594,,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,,,,465315.9,2.1
-ORLY,ORLY,105.04000091552734,,Consumer Discretionary,Automotive Retail,Strong Buy,4,BUY,,,,,BUY,,,,3510815.9,2.1
-OMC,OMC,78.54000091552734,,Communication Services,Advertising,Strong Buy,4,BUY,,,,,BUY,,,,3460251.8,2.1
-OVV,OVV,42.599998474121094,,Energy,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2755723.7,2.1
-PK,PK,12.109999656677246,,Real Estate,Hotel & Resort REITs,Strong Buy,4,BUY,,,,,BUY,,,,3470049.5,2.1
-PENN,PENN,19.649999618530273,,Consumer Discretionary,Casinos & Gaming,Strong Buy,4,BUY,,,,,BUY,,,,2869663.6,2.1
-PSX,PSX,131.5800018310547,,Energy,Oil & Gas Refining & Marketing,Strong Buy,4,BUY,,,,,BUY,,,,2089377.7,2.1
-PINS,PINS,37.119998931884766,,Communication Services,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,6462270.6,2.1
-PNC,PNC,207.36000061035156,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,1665829.1,2.1
-PFG,PFG,81.30000305175781,,Financials,Life & Health Insurance,Strong Buy,4,BUY,,,,,BUY,,,,1102332.0,2.1
-PG,PG,159.19000244140625,,Consumer Staples,Personal Care Products,Strong Buy,4,BUY,,,,,BUY,,,,5732563.7,2.1
-PSTG,PSTG,78.7300033569336,,Information Technology,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,5847496.9,2.1
-PVH,PVH,89.33000183105469,,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Strong Buy,4,BUY,,,,,BUY,,,,1552571.0,2.1
-QRVO,QRVO,92.19999694824219,,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,,,,1328378.2,2.1
-RJF,RJF,171.08999633789062,,Financials,Investment Banking & Brokerage,Strong Buy,4,BUY,,,,,BUY,,,,775728.5,2.1
-RBA,RBA,116.02999877929688,,Industrials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,771246.8,2.1
-RDDT,RDDT,232.11000061035156,,Communication Services,Interactive Media & Services,Strong Buy,4,BUY,,,,,BUY,,,,5284184.9,2.1
-REG,REG,73.55999755859375,,Real Estate,Retail REITs,Strong Buy,4,BUY,,,,,BUY,,,,1143745.9,2.1
-REYN,REYN,23.56999969482422,,Consumer Staples,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,951703.3,2.1
-RITM,RITM,12.5600004196167,,Financials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,4781167.1,2.1
-RKT,RKT,19.149999618530273,,Financials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,18694566.8,2.1
-ROIV,ROIV,12.569999694824219,,Health Care,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,5876768.4,2.1
-ROKU,ROKU,97.1500015258789,,Communication Services,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3129829.7,2.1
-ROST,ROST,152.80999755859375,,Consumer Discretionary,Apparel Retail,Strong Buy,4,BUY,,,,,BUY,,,,3510411.4,2.1
-RCL,RCL,360.05999755859375,,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,4,BUY,,,,,BUY,,,,1782004.0,2.1
-RGLD,RGLD,180.4600067138672,,Materials,Precious Metals & Minerals,Strong Buy,4,BUY,,,,,BUY,,,,691967.8,2.1
-SN,SN,121.22000122070312,,Consumer Discretionary,Household Appliances,Strong Buy,4,BUY,,,,,BUY,,,,1747165.9,2.1
-SPG,SPG,181.52000427246094,,Real Estate,Retail REITs,Strong Buy,4,BUY,,,,,BUY,,,,1682281.9,2.1
-SITE,SITE,147.38999938964844,,Industrials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,470231.7,2.1
-SKX,SKX,63.22999954223633,,Consumer Discretionary,Footwear,Strong Buy,4,BUY,,,,,BUY,,,,2493753.3,2.1
-SCCO,SCCO,100.81999969482422,,Materials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,971906.5,2.1
-SSB,SSB,103.55000305175781,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,715253.6,2.1
-STAG,STAG,36.7599983215332,,Real Estate,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1039154.1,2.1
-STWD,STWD,20.469999313354492,,Financials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2292832.7,2.1
-SYK,SYK,394.3399963378906,,Health Care,Health Care Equipment,Strong Buy,4,BUY,,,,,BUY,,,,947524.8,2.1
-SYF,SYF,76.86000061035156,,Financials,Consumer Finance,Strong Buy,4,BUY,,,,,BUY,,,,2740103.8,2.1
-SNV,SNV,52.119998931884766,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,1853880.0,2.1
-TTWO,TTWO,240.64999389648438,,Communication Services,Interactive Home Entertainment,Strong Buy,4,BUY,,,,,BUY,,,,1251077.4,2.1
-SNX,SNX,149.1999969482422,,Information Technology,Technology Distributors,Strong Buy,4,BUY,,,,,BUY,,,,498101.1,2.1
-TFX,TFX,129.08999633789062,,Health Care,Health Care Equipment,Strong Buy,4,BUY,,,,,BUY,,,,554421.2,2.1
-TEM,TEM,78.12000274658203,,Health Care,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,9391307.7,2.1
-TER,TER,119.38999938964844,,Information Technology,Semiconductor Materials & Equipment,Strong Buy,4,BUY,,,,,BUY,,,,3354132.2,2.1
-TXT,TXT,81.33000183105469,,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,,,,1089701.4,2.1
-TFSL,TFSL,13.619999885559082,,Financials,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,420970.7,2.1
-TKO,TKO,190.0800018310547,,Communication Services,Movies & Entertainment,Strong Buy,4,BUY,,,,,BUY,,,,666607.9,2.1
-BLD,BLD,429.4200134277344,,Consumer Discretionary,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,313817.5,2.1
-TNL,TNL,63.45000076293945,,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,4,BUY,,,,,BUY,,,,684959.5,2.1
-TFC,TFC,47.06999969482422,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,7461688.5,2.1
-ULTA,ULTA,529.5,,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,BUY,,,,,BUY,,,,1256589.3,2.1
-UAL,UAL,106.05000305175781,,Industrials,Passenger Airlines,Strong Buy,4,BUY,,,,,BUY,,,,4443207.3,2.1
-UTHR,UTHR,380.4700012207031,,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,,,,1106936.7,2.1
-UHS,UHS,185.67999267578125,,Health Care,Health Care Facilities,Strong Buy,4,BUY,,,,,BUY,,,,706271.6,2.1
-VLO,VLO,155.38999938964844,,Energy,Oil & Gas Refining & Marketing,Strong Buy,4,BUY,,,,,BUY,,,,2452638.2,2.1
-VMI,VMI,377.4800109863281,,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,,,,233760.9,2.1
-VRSN,VRSN,277.0799865722656,,Information Technology,Internet Services & Infrastructure,Strong Buy,4,BUY,,,,,BUY,,,,654810.0,2.1
-VICI,VICI,33.5,,Real Estate,Hotel & Resort REITs,Strong Buy,4,BUY,,,,,BUY,,,,8586126.8,2.1
-VIK,VIK,63.09000015258789,,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,4,BUY,,,,,BUY,,,,2491836.3,2.1
-VMC,VMC,292.3299865722656,,Materials,Construction Materials,Strong Buy,4,BUY,,,,,BUY,,,,710039.5,2.1
-WMT,WMT,100.93000030517578,,Consumer Staples,Consumer Staples Merchandise Retail,Strong Buy,4,BUY,,,,,BUY,,,,22344071.8,2.1
-W,W,82.80000305175781,,Consumer Discretionary,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,4505622.3,2.1
-WU,WU,8.720000267028809,,Information Technology,Data Processing & Outsourced Services,Strong Buy,4,BUY,,,,,BUY,,,,8447582.9,2.1
-WEX,WEX,173.36000061035156,,Financials,Transaction & Payment Processing Services,Strong Buy,4,BUY,,,,,BUY,,,,321778.4,2.1
-WSM,WSM,202.91000366210938,,Consumer Discretionary,Homefurnishing Retail,Strong Buy,4,BUY,,,,,BUY,,,,1710888.5,2.1
-WYNN,WYNN,122.88999938964844,,Consumer Discretionary,Casinos & Gaming,Strong Buy,4,BUY,,,,,BUY,,,,2277723.8,2.1
-ZION,ZION,58.11000061035156,,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,,1229744.1,2.1
-ZM,ZM,82.79000091552734,,Information Technology,Application Software,Strong Buy,4,BUY,,,,,BUY,,,,5433990.4,2.1
-TEL,TEL,208.5399932861328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1645218.8,2.1
-SHOP,SHOP,145.14999389648438,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,5279714.4,2.1
+FSLR,FSLR,201.8699951171875,21650153236.328125,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.58824,30.0,2555920.0,4.1
+DKNG,DKNG,47.400001525878906,23532679515.953125,Consumer Discretionary,Gambling,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.47059,33.0,6606877.2,4.1
+PINS,PINS,37.119998931884766,25239000279.836426,Communication Services,Internet Content & Information,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.525,36.0,6462270.6,4.1
+UAL,UAL,106.05000305175781,34331779587.95166,Industrials,Passenger Airlines,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.45455,20.0,4443980.0,4.1
+VICI,VICI,33.5,35723394464.0,Real Estate,Hotel & Resort REITs,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.52174,22.0,8586126.8,4.1
+TTWO,TTWO,240.64999389648438,44392704374.08447,Communication Services,Interactive Home Entertainment,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.40741,27.0,1251800.0,4.1
+HWM,HWM,179.52999877929688,72373213160.38281,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.43478,20.0,2310890.0,4.1
+MTZ,MTZ,182.50999450683594,14401498646.54541,Industrials,Construction & Engineering,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.41176,18.0,830250.0,4.02
+WYNN,WYNN,122.88999938964844,12777733466.537476,Consumer Discretionary,Casinos & Gaming,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.38889,17.0,2279010.0,3.98
+TKO,TKO,190.0800018310547,15660349206.8573,Communication Services,Movies & Entertainment,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.47368,17.0,666670.0,3.98
+BROS,BROS,71.43000030517578,11751592791.647217,Consumer Discretionary,Restaurants,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.47059,16.0,3365618.7,3.94
+INSM,INSM,142.52999877929688,30127279632.213867,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.26316,16.0,2404290.0,3.94
+ALAB,ALAB,187.9499969482422,31240862046.339844,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.5625,16.0,4236678.1,3.94
+DD,DD,77.1500015258789,32304016571.711426,Materials,Specialty Chemicals,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.41176,16.0,2403580.0,3.94
+AQB,AQB,1.2799999713897705,4963455.889058113,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,12554698.0,3.8
+ALLR,ALLR,1.7300000190734863,25291908.27884674,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,42100709.9,3.8
+FMST,FMST,3.3499999046325684,40808023.83828163,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,316234.9,3.8
+AEI,AEI,1.840000033378601,72167929.30916548,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2002650.4,3.8
+AMPG,AMPG,4.260000228881836,87643540.70892334,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1048630.7,3.8
+TYGO,TYGO,1.4700000286102295,96637948.88083935,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,246730.3,3.8
+HLVX,HLVX,2.0999999046325684,105263545.2196598,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,785428.3,3.8
+VTGN,VTGN,3.619999885559082,112904176.43070221,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,355265.3,3.8
+SOGP,SOGP,35.900001525878906,122332845.19958496,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,16852723.7,3.8
+SHIP,SHIP,8.25,172444800.0,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,154630.0,3.8
+MDXH,MDXH,3.5299999713897705,174725467.5838709,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,200056.1,3.8
+FOSL,FOSL,3.4200000762939453,183946072.10350037,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,645620.0,3.8
+ONEG,ONEG,12.239999771118164,195839996.33789062,Unknown,Unknown,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,280273.8,3.8
+IVVD,IVVD,0.9975000023841858,208853550.01919365,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,25746067.4,3.8
+ALEC,ALEC,2.819999933242798,285417833.24337006,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,969323.5,3.8
+GALT,GALT,4.670000076293945,299161605.887413,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,200540.0,3.8
+SCPH,SCPH,5.579999923706055,299527699.90463257,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,4065358.0,3.8
+FEIM,FEIM,33.040000915527344,322115889.72572327,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,226780.0,3.8
+OPRX,OPRX,18.610000610351562,345494661.33117676,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,367630.0,3.8
+EM,EM,1.3799999952316284,349966629.8307457,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2877335.6,3.8
+MCFT,MCFT,22.610000610351562,368687713.9526367,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,266656.7,3.8
+QMMM,QMMM,7.119999885559082,407308849.4532585,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2875643.7,3.8
+UROY,UROY,3.2300000190734863,432593902.554512,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3104205.5,3.8
+HDSN,HDSN,10.359999656677246,452404609.00764465,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,367970.0,3.8
+TITN,TITN,20.450000762939453,472080087.6121521,Unknown,Unknown,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,207520.0,3.8
+RGNX,RGNX,9.420000076293945,475843767.8539276,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,619680.9,3.8
+ETON,ETON,17.8700008392334,479228747.50614166,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,211469.3,3.8
+TLS,TLS,6.570000171661377,482826684.6153259,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1291847.7,3.8
+CMPS,CMPS,5.099999904632568,489300600.450325,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2102414.7,3.8
+BLZE,BLZE,8.6899995803833,490661708.30726624,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,627497.9,3.8
+HONE,HONE,13.0,561061800.0,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,220870.5,3.8
+GOSS,GOSS,2.509999990463257,570726287.7515259,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,4151153.7,3.8
+ANTE,ANTE,5.260000228881836,582355665.3404236,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2510120.0,3.8
+AQST,AQST,5.059999942779541,612128433.0778122,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2572040.4,3.8
+TRML,TRML,25.100000381469727,644876739.8008347,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,161784.5,3.8
+VSTM,VSTM,10.5600004196167,649918393.8254356,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2788757.3,3.8
+RZLT,RZLT,7.380000114440918,651047374.095726,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,961504.1,3.8
+LYTS,LYTS,23.25,698216100.0,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,295690.0,3.8
+KE,KE,29.760000228881836,720742565.5431747,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,244007.5,3.8
+SFIX,SFIX,5.610000133514404,732032087.4218941,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2516234.9,3.8
+SIFY,SIFY,10.239999771118164,744125382.4075012,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,152240.0,3.8
+NBBK,NBBK,19.1299991607666,761878998.576355,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,175855.8,3.8
+AEHR,AEHR,26.290000915527344,786468006.388092,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2842140.0,3.8
+EYPT,EYPT,11.880000114440918,820980428.3885651,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,556380.0,3.8
+CFFN,CFFN,6.550000190734863,853334024.848938,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,603720.0,3.8
+DAKT,DAKT,17.440000534057617,856666778.2333374,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,260730.0,3.8
+BBNX,BBNX,20.100000381469727,873749026.5825272,Unknown,Unknown,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,497012.3,3.8
+AMLX,AMLX,9.949999809265137,887215612.9926682,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1732699.6,3.8
+TSHA,TSHA,3.259999990463257,889311723.4784241,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3784626.9,3.8
+SLRC,SLRC,16.690000534057617,910516303.1352997,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,161790.0,3.8
+QURE,QURE,17.729999542236328,972790111.8839264,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,895851.1,3.8
+SCSC,SCSC,44.70000076293945,978237166.6965485,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,363110.0,3.8
+UPB,UPB,19.68000030517578,1078188496.7193604,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,601127.6,3.8
+HCSG,HCSG,15.75,1140500088.0,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,602810.0,3.8
+SHLS,SHLS,7.150000095367432,1196645523.1609802,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,5195046.1,3.8
+CRCT,CRCT,5.860000133514404,1245050788.3672714,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,674961.9,3.8
+BBSI,BBSI,49.16999816894531,1268359770.767212,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,189210.0,3.8
+INVA,INVA,20.920000076293945,1318399324.8081207,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,639010.0,3.8
+ATRO,ATRO,39.060001373291016,1389129888.8397217,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,694950.0,3.8
+NSSC,NSSC,39.25,1399513700.0,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,639690.0,3.8
+PAHC,PAHC,39.06999969482422,1583647739.630127,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,480709.8,3.8
+TASK,TASK,17.989999771118164,1597096338.720581,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,457395.5,3.8
+ADEA,ADEA,15.40999984741211,1685376273.311615,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,523606.3,3.8
+COGT,COGT,12.9399995803833,1807730777.8591309,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1282098.1,3.8
+SUPX,SUPX,68.0,1858222400.0,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,332469.9,3.8
+CSGS,CSGS,64.62000274658203,1859014087.0147705,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,181180.0,3.8
+PRCH,PRCH,17.950000762939453,1871628629.5509338,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2232961.1,3.8
+SEDG,SEDG,34.15999984741211,2028243158.9401245,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3713660.5,3.8
+IRON,IRON,60.189998626708984,2092541416.2567139,Unknown,Unknown,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,244986.0,3.8
+PINC,PINC,26.280000686645508,2169403544.682312,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1382694.6,3.8
+MLYS,MLYS,33.119998931884766,2195696953.189087,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3419069.2,3.8
+TIGR,TIGR,12.720000267028809,2260369487.4515533,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,9022255.9,3.8
+IDYA,IDYA,25.829999923706055,2263836660.9933167,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,991351.7,3.8
+FBNC,FBNC,55.54999923706055,2303236288.366699,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,220450.0,3.8
+FRME,FRME,41.880001068115234,2417828785.664749,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,212240.0,3.8
+WAFD,WAFD,31.950000762939453,2517407527.3135986,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,336570.0,3.8
+PSNYW,PSNYW,0.37619999051094055,2631278093.399704,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,20169437.5,3.8
+KNSA,KNSA,35.5099983215332,2631564160.572693,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,408957.2,3.8
+SBCF,SBCF,31.649999618530273,2780601348.08609,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,585640.0,3.8
+EXTR,EXTR,22.450000762939453,2968114600.868225,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1513790.0,3.8
+CSQ,CSQ,18.719999313354492,3002126289.88266,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,162770.0,3.8
+NMIH,NMIH,40.099998474121094,3110721131.2313232,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,311845.1,3.8
+DRVN,DRVN,19.209999084472656,3155818649.597168,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1150456.3,3.8
+JOYY,JOYY,62.040000915527344,3186554363.0241394,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,637636.3,3.8
+LIVN,LIVN,58.150001525878906,3193679493.803406,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,608252.1,3.8
+CATY,CATY,50.380001068115234,3480925565.799713,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,301530.0,3.8
+RUN,RUN,16.43000030517578,3790943128.974121,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,10042259.4,3.8
+MLTX,MLTX,59.720001220703125,3792303685.5163574,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,569064.2,3.8
+ARWR,ARWR,28.0,3871224000.0,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3110720.0,3.8
+MLCO,MLCO,10.09000015258789,3939206770.291382,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3149600.0,3.8
+OSIS,OSIS,235.7100067138672,3966033001.966858,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,240310.0,3.8
+OPEN,OPEN,5.960000038146973,4386285772.7144165,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,412310539.7,3.8
+IBOC,IBOC,72.41999816894531,4501366374.188232,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,216880.0,3.8
+FTDR,FTDR,63.290000915527344,4610638592.695618,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,618420.1,3.8
+PTCT,PTCT,58.0099983215332,4651172053.422546,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1113977.7,3.8
+MSM,MSM,92.66000366210938,5158919831.890869,Industrials,Trading Companies & Distributors,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,436550.0,3.8
+SMTC,SMTC,59.900001525878906,5197762732.406616,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2691940.0,3.8
+IRTC,IRTC,182.1699981689453,5852721267.172241,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,396378.7,3.8
+VLY,VLY,10.649999618530273,5961028692.083374,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,7503850.0,3.8
+OZK,OZK,52.93000030517578,5962088164.375305,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,764880.0,3.8
+FNB,FNB,16.790000915527344,6030028088.806152,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,9205800.0,3.8
+AXSM,AXSM,124.41000366210938,6208245797.744751,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,576375.8,3.8
+THG,THG,181.33999633789062,6486604205.004883,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,182680.0,3.8
+MTG,MTG,28.440000534057617,6556074470.632568,Financials,Reinsurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1400810.0,3.8
+AMG,AMG,233.0500030517578,6621439991.706848,Financials,Asset Management & Custody Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,178910.0,3.8
+FCFS,FCFS,150.8300018310547,6691512699.234009,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,312730.0,3.8
+JHG,JHG,45.099998474121094,7034653022.794922,Financials,Asset Management & Custody Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1013834.0,3.8
+TSEM,TSEM,62.970001220703125,7042942756.530762,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1994750.0,3.8
+AL,AL,63.63999938964844,7112724531.784058,Industrials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2756600.0,3.8
+BOKF,BOKF,113.0,7188054300.0,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,186290.0,3.8
+IDCC,IDCC,287.8800048828125,7427995037.988281,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,305620.0,3.8
+OMF,OMF,62.61000061035156,7442450772.55249,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,855386.7,3.8
+VOYA,VOYA,77.62000274658203,7483949900.819397,Financials,Multi-Sector Holdings,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,797044.0,3.8
+ELF,ELF,133.72000122070312,7586590897.25647,Consumer Staples,Personal Care Products,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1817541.4,3.8
+R,R,188.63999938964844,7694738759.103394,Industrials,Cargo Ground Transportation,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,252690.0,3.8
+AXS,AXS,99.29000091552734,7761896531.570435,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,535320.0,3.8
+FIVE,FIVE,152.8000030517578,8426232568.29071,Consumer Discretionary,Other Specialty Retail,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1723790.7,3.8
+AN,AN,225.66000366210938,8508736098.083496,Consumer Discretionary,Automotive Retail,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,372230.0,3.8
+OTEX,OTEX,33.470001220703125,8523336630.859375,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1634190.0,3.8
+BPOP,BPOP,127.05999755859375,8587070403.00293,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,630480.0,3.8
+BRX,BRX,28.139999389648438,8613653813.171387,Real Estate,Retail REITs,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1994921.3,3.8
+AM,AM,18.09000015258789,8654455207.719727,Energy,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2169937.3,3.8
+SNDK,SNDK,62.5,9112875000.0,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,3098760.9,3.8
+WTFC,WTFC,139.80999755859375,9360600899.542236,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,413370.0,3.8
+UMBF,UMBF,123.62999725341797,9387016014.976685,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,490790.0,3.8
+DCI,DCI,80.62000274658203,9393842720.031738,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,916140.0,3.8
+IONS,IONS,59.349998474121094,9459856081.588623,Health Care,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,4281150.0,3.8
+LITE,LITE,141.91000366210938,9919509255.981445,Information Technology,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3926184.8,3.8
+WAL,WAL,91.33999633789062,10081104055.81665,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,949060.0,3.8
+NXT,NXT,68.8499984741211,10187321174.224854,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1739806.2,3.8
+ORI,ORI,41.09000015258789,10209632337.913513,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1086800.0,3.8
+REXR,REXR,42.08000183105469,10303456768.341064,Real Estate,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2759322.0,3.8
+AYI,AYI,339.3999938964844,10400844932.958984,Industrials,Electrical Components & Equipment,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,215010.0,3.8
+WBS,WBS,62.91999816894531,10456611072.338867,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1044120.0,3.8
+BZ,BZ,24.010000228881836,10606610065.270386,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,5288066.0,3.8
+AGNC,AGNC,10.199999809265137,10625645638.105774,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,20102520.0,3.8
+MLI,MLI,97.37000274658203,10778956674.049377,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,665750.0,3.8
+NCLH,NCLH,25.59000015258789,11565067694.240112,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,13769163.1,3.8
+FHN,FHN,22.790000915527344,11571577384.857178,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,11527540.0,3.8
+AFG,AFG,139.67999267578125,11648542590.480469,Financials,Multi-line Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,406740.0,3.8
+HST,HST,17.59000015258789,12250204087.706787,Real Estate,Hotel & Resort REITs,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,8689960.0,3.8
+EHC,EHC,124.4800033569336,12538123858.12378,Health Care,Health Care Facilities,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,714820.0,3.8
+ALLY,ALLY,41.56999969482422,12798696548.601562,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2420593.9,3.8
+BEN,BEN,25.739999771118164,13364079387.085693,Financials,Asset Management & Custody Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3339270.0,3.8
+NLY,NLY,21.799999237060547,13997257007.734863,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,6426870.0,3.8
+TOL,TOL,145.41000366210938,14015052382.965088,Consumer Discretionary,Homebuilding,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1708330.0,3.8
+LOGI,LOGI,106.5199966430664,15689969425.53711,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,425530.0,3.8
+EQH,EQH,54.06999969482422,16195911428.588867,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2746787.8,3.8
+FTI,FTI,39.650001525878906,16296785027.160645,Energy,Oil & Gas Equipment & Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,4021030.0,3.8
+PFGC,PFGC,105.25,16473625592.0,Consumer Staples,Food Distributors,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1426456.4,3.8
+CIEN,CIEN,116.91999816894531,16528630316.509277,Information Technology,Communications Equipment,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3273190.0,3.8
+SUI,SUI,128.91000366210938,16635964882.598877,Real Estate,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,931240.0,3.8
+ACM,ACM,125.94000244140625,16680249563.354492,Industrials,Construction & Engineering,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,986480.0,3.8
+GMAB,GMAB,27.3799991607666,16840642806.691895,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1589835.3,3.8
+THC,THC,192.52000427246094,17009334897.476196,Health Care,Health Care Facilities,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,937210.0,3.8
+PNR,PNR,110.05999755859375,18042246340.257812,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1106940.0,3.8
+SGI,SGI,86.87999725341797,18235068863.52539,Consumer Discretionary,Home Furnishings,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2221120.0,3.8
+BURL,BURL,301.3500061035156,18995597634.735107,Consumer Discretionary,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1272690.3,3.8
+SATS,SATS,67.22000122070312,19340269871.21582,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,10947240.0,3.8
+RL,RL,320.75,19429206725.0,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,576690.0,3.8
+L,L,97.52999877929688,20230257526.794434,Financials,Multi-line Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,759060.0,3.8
+FLEX,FLEX,55.16999816894531,21069808932.067383,Information Technology,Electronic Manufacturing Services,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3491020.0,3.8
+RPRX,RPRX,36.900001525878906,21303810276.149414,Health Care,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3366850.1,3.8
+TPR,TPR,105.81999969482422,22023681616.485596,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,4439260.0,3.8
+CRDO,CRDO,134.0,23178516000.0,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,5681653.7,3.8
+NTAP,NTAP,118.83000183105469,23720607305.511475,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2558910.0,3.8
+CINF,CINF,155.58999633789062,24330541267.333984,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,400940.0,3.8
+RF,RF,27.360000610351562,24413546549.101562,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,18270250.0,3.8
+PHM,PHM,137.61000061035156,27150177900.421143,Consumer Discretionary,Homebuilding,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1954030.0,3.8
+WRB,WRB,72.91999816894531,27658044282.13379,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1409720.0,3.8
+KEYS,KEYS,166.9499969482422,28691358675.53711,Information Technology,Electronic Equipment & Instruments,Strong Buy,5,STRONG_BUY,,,,,STRONG_BUY,,,,986376.0,3.8
+FITB,FITB,46.2599983215332,30618890398.804688,Financials,Regional Banks,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3732320.0,3.8
+WDC,WDC,90.48999786376953,31392969591.054688,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,7274790.0,3.8
+BIDU,BIDU,98.20999908447266,33732482229.861084,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,5217140.0,3.8
+UI,UI,565.1300048828125,34189630626.40381,Information Technology,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,299780.0,3.8
+ONC,ONC,318.7300109863281,37364400457.91626,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,298688.3,3.8
+HSY,HSY,185.3000030517578,37564757818.66455,Consumer Staples,Packaged Foods & Meats,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1099550.0,3.8
+HIG,HIG,134.6999969482422,37873867541.93115,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1282600.0,3.8
+STX,STX,183.97999572753906,39128312079.50586,Unknown,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,3111090.0,3.8
+SYY,SYY,82.51000213623047,39457273141.571045,Consumer Staples,Food Distributors,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,2658990.0,3.8
+TRV,TRV,279.42999267578125,62909191971.069336,Financials,Property & Casualty Insurance,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,1236430.0,3.8
+NU,NU,14.869999885559082,71857047039.9414,Financials,Unknown,Strong Buy,6,STRONG_BUY,,,,,STRONG_BUY,,,,51938747.0,3.8
+SSB,SSB,103.55000305175781,10620709613.006592,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.58333,12.0,715260.0,3.78
+ITT,ITT,171.89999389648438,13408199523.925781,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.53846,12.0,284540.0,3.78
+RITM,RITM,12.5600004196167,6660467742.519379,Financials,REIT - Mortgage,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.36364,10.0,4781167.1,3.6999999999999997
+SN,SN,121.22000122070312,17108748532.287598,Consumer Discretionary,Household Appliances,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.27273,10.0,1747165.9,3.6999999999999997
+CLH,CLH,245.1300048828125,13146959499.87793,Industrials,Environmental & Facilities Services,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.4,9.0,266190.0,3.6599999999999997
+W,W,82.80000305175781,10285995979.110718,Consumer Discretionary,Internet Retail,Strong Buy,4,BUY,,,,,BUY,Buy,2.06061,29.0,4505622.3,3.5
+OVV,OVV,42.599998474121094,10949775466.992676,Energy,Oil & Gas E&P,Strong Buy,4,BUY,,,,,BUY,Buy,1.65217,21.0,2755720.0,3.5
+GLPI,GLPI,48.34000015258789,13680606763.183594,Real Estate,REIT - Specialty,Strong Buy,4,BUY,,,,,BUY,Buy,2.08696,22.0,1910454.6,3.5
+ROKU,ROKU,97.1500015258789,14313207652.009277,Communication Services,Entertainment,Strong Buy,4,BUY,,,,,BUY,Buy,2.03333,26.0,3129829.7,3.5
+KIM,KIM,22.790000915527344,15433388619.995117,Real Estate,Retail REITs,Strong Buy,4,BUY,,,,,BUY,Buy,2.375,21.0,3451100.0,3.5
+BBY,BBY,77.05000305175781,16284287611.379883,Consumer Discretionary,Computer & Electronics Retail,Strong Buy,4,BUY,,,,,BUY,Buy,2.37037,21.0,4582510.0,3.5
+CHWY,CHWY,41.15999984741211,16991465666.289429,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,BUY,,,,,BUY,Buy,2.03448,21.0,5269665.0,3.5
+DKS,DKS,222.02999877929688,17783871091.345703,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,BUY,,,,,BUY,Buy,2.26923,20.0,2820780.0,3.5
+BIIB,BIIB,139.94000244140625,20517304577.466797,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,Buy,2.18182,27.0,1503390.0,3.5
+KEY,KEY,19.18000030517578,21031252707.11133,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Buy,2.17391,22.0,26091310.0,3.5
+ULTA,ULTA,529.5,23741932800.0,Consumer Discretionary,Other Specialty Retail,Strong Buy,4,BUY,,,,,BUY,Buy,2.21429,23.0,1258810.0,3.5
+DRI,DRI,210.19000244140625,24507103334.65576,Consumer Discretionary,Restaurants,Strong Buy,4,BUY,,,,,BUY,Buy,2.0,27.0,768330.0,3.5
+ZM,ZM,82.79000091552734,24987678076.324463,Information Technology,Application Software,Strong Buy,4,BUY,,,,,BUY,Buy,2.25,27.0,5433990.4,3.5
+HBAN,HBAN,17.8799991607666,26085308717.394043,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Buy,1.71429,20.0,25783450.0,3.5
+MDB,MDB,322.04998779296875,26200987363.67383,Information Technology,Systems Software,Strong Buy,4,BUY,,,,,BUY,Buy,1.675,36.0,6058034.0,3.5
+MLM,MLM,618.969970703125,37327603053.22266,Materials,Construction Materials,Strong Buy,4,BUY,,,,,BUY,Buy,1.80952,22.0,422790.0,3.5
+VMC,VMC,292.3299865722656,38623807145.87402,Materials,Construction Materials,Strong Buy,4,BUY,,,,,BUY,Buy,1.61905,21.0,710040.0,3.5
+CCL,CCL,31.760000228881836,43062747077.69629,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,4,BUY,,,,,BUY,Buy,1.71429,22.0,15808390.0,3.5
+RDDT,RDDT,232.11000061035156,43440779274.23096,Communication Services,Interactive Media & Services,Strong Buy,4,BUY,,,,,BUY,Buy,2.07407,26.0,5284184.9,3.5
+BKR,BKR,46.31999969482422,46187016087.38037,Energy,Oil & Gas Equipment & Services,Strong Buy,4,BUY,,,,,BUY,Buy,1.91304,21.0,5416400.0,3.5
+EW,EW,80.95999908447266,47905567755.2251,Health Care,Health Care Equipment,Strong Buy,4,BUY,,,,,BUY,Buy,2.15152,30.0,3856970.0,3.5
+MNST,MNST,63.45000076293945,61954359375.35547,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,4,BUY,,,,,BUY,Buy,2.16,22.0,4749880.0,3.5
+HLT,HLT,278.05999755859375,65398043065.7959,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,4,BUY,,,,,BUY,Buy,2.32,24.0,1468341.9,3.5
+ADSK,ADSK,319.92999267578125,68145088439.94141,Information Technology,Application Software,Strong Buy,4,BUY,,,,,BUY,Buy,1.6129,29.0,2187880.0,3.5
+SPG,SPG,181.52000427246094,68470617703.76221,Real Estate,Retail REITs,Strong Buy,4,BUY,,,,,BUY,Buy,2.25,20.0,1698310.0,3.5
+NET,NET,209.97999572753906,73174245511.44434,Information Technology,Software - Infrastructure,Strong Buy,4,BUY,,,,,BUY,Buy,2.11765,29.0,1917707.6,3.5
+REG,REG,73.55999755859375,13381961784.341797,Real Estate,Retail REITs,Strong Buy,4,BUY,,,,,BUY,Buy,1.8,19.0,1145670.0,3.46
+CFG,CFG,52.5099983215332,22650134845.91504,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Buy,1.7,19.0,3596571.5,3.46
+WSM,WSM,202.91000366210938,24712409346.0083,Consumer Discretionary,Homefurnishing Retail,Strong Buy,4,BUY,,,,,BUY,Buy,2.3913,19.0,1710950.0,3.46
+MTB,MTB,202.36000061035156,31622593316.499023,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Buy,2.1,19.0,893640.0,3.46
+FERG,FERG,238.1699981689453,47797384252.53296,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,Buy,1.95455,19.0,1290280.0,3.46
+PSX,PSX,131.5800018310547,53174636659.973145,Energy,Oil & Gas Refining & Marketing,Strong Buy,4,BUY,,,,,BUY,Buy,2.1,19.0,2089377.7,3.46
+ALL,ALL,208.3300018310547,54895995465.85205,Financials,Property & Casualty Insurance,Strong Buy,4,BUY,,,,,BUY,Buy,1.86364,19.0,1207780.0,3.46
+FCX,FCX,46.06999969482422,66145922724.71777,Materials,Copper,Strong Buy,4,BUY,,,,,BUY,Buy,2.1,19.0,10215710.0,3.46
+PENN,PENN,19.649999618530273,2861904544.441223,Consumer Discretionary,Casinos & Gaming,Strong Buy,4,BUY,,,,,BUY,Buy,2.15,18.0,2874500.0,3.42
+LOPE,LOPE,205.13999938964844,5772762666.824341,Consumer Discretionary,Education Services,Strong Buy,4,BUY,,,,,BUY,Strong Buy,1.33333,3.0,230750.0,3.42
+FRT,FRT,100.98999786376953,8712012850.755737,Real Estate,Retail REITs,Strong Buy,4,BUY,,,,,BUY,Buy,2.0,18.0,611680.0,3.42
+PSTG,PSTG,78.7300033569336,25731484457.15332,Information Technology,Computer Hardware,Strong Buy,4,BUY,,,,,BUY,Buy,1.9,18.0,5847496.9,3.42
+VLO,VLO,155.38999938964844,48272214090.39307,Energy,Oil & Gas Refining & Marketing,Strong Buy,4,BUY,,,,,BUY,Buy,1.85,18.0,2452640.0,3.42
+GAP,GAP,23.93000030517578,8879155014.67456,Consumer Discretionary,Apparel Retail,Strong Buy,4,BUY,,,,,BUY,Buy,2.38889,17.0,14806130.0,3.3800000000000003
+HPE,HPE,23.15999984741211,30391015740.891113,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,4,BUY,,,,,BUY,Buy,2.05,17.0,25609324.0,3.3800000000000003
+HEI,HEI,322.2900085449219,39056714685.51636,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,Buy,1.85,17.0,533520.0,3.3800000000000003
+ROST,ROST,152.80999755859375,50621521923.71289,Consumer Discretionary,Apparel Retail,Strong Buy,4,BUY,,,,,BUY,Buy,1.63158,17.0,3518240.0,3.3800000000000003
+TER,TER,119.38999938964844,18991844762.908936,Information Technology,Semiconductor Materials & Equipment,Strong Buy,4,BUY,,,,,BUY,Buy,1.94118,16.0,3354240.0,3.3400000000000003
+AME,AME,187.8699951171875,43389326852.29492,Industrials,Electrical Components & Equipment,Strong Buy,4,BUY,,,,,BUY,Buy,1.70588,16.0,1054900.0,3.3400000000000003
+BWA,BWA,43.849998474121094,9488832369.010498,Consumer Discretionary,Automotive Parts & Equipment,Strong Buy,4,BUY,,,,,BUY,Buy,2.0,15.0,2271670.0,3.3000000000000003
+TXT,TXT,81.33000183105469,14493412325.663086,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,Buy,2.1875,15.0,1089700.0,3.3000000000000003
+CG,CG,64.93000030517578,23485505240.943604,Financials,Asset Management,Strong Buy,4,BUY,,,,,BUY,Buy,2.1875,15.0,2497945.3,3.3000000000000003
+DHI,DHI,176.69000244140625,52675530287.8418,Consumer Discretionary,Homebuilding,Strong Buy,4,BUY,,,,,BUY,Buy,2.35,15.0,3513410.0,3.3000000000000003
+PVH,PVH,89.33000183105469,4294370111.024475,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Strong Buy,4,BUY,,,,,BUY,Buy,2.07143,14.0,1552620.0,3.2600000000000002
+SNV,SNV,52.119998931884766,7234464331.741333,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Buy,2.13333,14.0,1853880.0,3.2600000000000002
+DINO,DINO,51.560001373291016,9645896204.436646,Energy,Oil & Gas Refining & Marketing,Strong Buy,4,BUY,,,,,BUY,Buy,2.2,14.0,2339310.0,3.2600000000000002
+CNM,CNM,65.8499984741211,12980813176.008057,Industrials,Trading Companies & Distributors,Strong Buy,4,BUY,,,,,BUY,Buy,2.07692,14.0,1491297.2,3.2600000000000002
+MET,MET,81.75,54365874192.0,Financials,Life & Health Insurance,Strong Buy,4,BUY,,,,,BUY,Buy,1.875,14.0,2713060.0,3.2600000000000002
+BYD,BYD,86.47000122070312,6933527871.8811035,Consumer Discretionary,Casinos & Gaming,Strong Buy,4,BUY,,,,,BUY,Buy,2.125,13.0,820370.0,3.22
+DTM,DTM,105.30000305175781,10697743210.037231,Energy,Oil & Gas Midstream,Strong Buy,4,BUY,,,,,BUY,Buy,2.35714,13.0,739877.9,3.22
+EWBC,EWBC,108.58999633789062,15022557273.376465,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Buy,1.92308,13.0,771580.0,3.22
+UTHR,UTHR,380.4700012207031,17207250416.207886,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,Buy,1.85714,12.0,1106940.0,3.18
+GLW,GLW,69.72000122070312,59723478283.4375,Information Technology,Electronic Components,Strong Buy,4,BUY,,,,,BUY,Buy,1.69231,12.0,6546980.0,3.18
+TNL,TNL,63.45000076293945,4124719579.59671,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Strong Buy,4,BUY,,,,,BUY,Buy,1.66667,11.0,684960.0,3.14
+GTES,GTES,25.93000030517578,6679153198.608398,Industrials,Specialty Industrial Machinery,Strong Buy,4,BUY,,,,,BUY,Buy,1.63636,11.0,1877133.6,3.14
+GL,GL,141.4499969482422,11457945393.596924,Financials,Life & Health Insurance,Strong Buy,4,BUY,,,,,BUY,Buy,1.72727,11.0,454540.0,3.14
+SNX,SNX,149.1999969482422,12304091665.130371,Information Technology,Technology Distributors,Strong Buy,4,BUY,,,,,BUY,Buy,1.63636,11.0,498100.0,3.14
+TEM,TEM,78.12000274658203,13252824730.909424,Health Care,Health Information Services,Strong Buy,4,BUY,,,,,BUY,Buy,2.15385,11.0,9391307.7,3.14
+SITE,SITE,147.38999938964844,6575451086.77063,Industrials,Industrial Distribution,Strong Buy,4,BUY,,,,,BUY,Buy,2.18182,10.0,470231.7,3.1
+NDSN,NDSN,226.00999450683594,12698665354.359436,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,Buy,2.0,10.0,465810.0,3.1
+RBA,RBA,116.02999877929688,21535052671.67871,Industrials,Specialty Business Services,Strong Buy,4,BUY,,,,,BUY,Buy,2.0,10.0,771250.0,3.1
+STWD,STWD,20.469999313354492,7711847235.073853,Financials,REIT - Mortgage,Strong Buy,4,BUY,,,,,BUY,Buy,2.125,7.0,2292880.0,2.9800000000000004
+RGLD,RGLD,180.4600067138672,11879826609.979248,Materials,Precious Metals & Minerals,Strong Buy,4,BUY,,,,,BUY,Buy,1.71429,7.0,691970.0,2.9800000000000004
+AU,AU,57.95000076293945,29249915185.08911,Materials,Gold,Strong Buy,4,BUY,,,,,BUY,Buy,2.33333,6.0,3399140.0,2.9400000000000004
+LYFT,LYFT,16.790000915527344,6876982894.989014,Industrials,Passenger Ground Transportation,Strong Buy,4,BUY,,,,,BUY,Hold,2.52273,36.0,21016809.0,2.9000000000000004
+APA,APA,23.440000534057617,8386503656.03833,Energy,Oil & Gas Exploration & Production,Strong Buy,4,BUY,,,,,BUY,Hold,2.96552,28.0,6264370.0,2.9000000000000004
+QRVO,QRVO,92.19999694824219,8542726546.041504,Information Technology,Semiconductors,Strong Buy,4,BUY,,,,,BUY,Hold,2.73077,21.0,1328378.2,2.9000000000000004
+ZION,ZION,58.11000061035156,8578430730.102539,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Hold,2.73913,21.0,1229740.0,2.9000000000000004
+NBIX,NBIX,140.39999389648438,13925082556.24414,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,,,26.0,749030.0,2.9000000000000004
+PODD,PODD,346.4700012207031,24388888175.04834,Health Care,Medical Devices,Strong Buy,4,BUY,,,,,BUY,,,23.0,534240.0,2.9000000000000004
+SYF,SYF,76.86000061035156,28596376877.32617,Financials,Consumer Finance,Strong Buy,4,BUY,,,,,BUY,,,21.0,2740103.8,2.9000000000000004
+TFC,TFC,47.06999969482422,60693940406.49414,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,,,21.0,7485590.0,2.9000000000000004
+APPF,APPF,279.239990234375,10011591369.873047,Information Technology,Application Software,Strong Buy,4,BUY,,,,,BUY,Buy,2.0,4.0,250460.9,2.8600000000000003
+VMI,VMI,377.4800109863281,7450889196.853638,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,Buy,2.0,3.0,233760.0,2.8200000000000003
+DOCS,DOCS,68.5199966430664,12605280634.281738,Health Care,Health Information Services,Strong Buy,4,BUY,,,,,BUY,,,18.0,1129802.6,2.8200000000000003
+FOXA,FOXA,60.810001373291016,25848385663.742065,Communication Services,Movies & Entertainment,Strong Buy,4,BUY,,,,,BUY,,,18.0,2623511.6,2.8200000000000003
+VRSN,VRSN,277.0799865722656,25881653633.73413,Information Technology,Internet Services & Infrastructure,Strong Buy,4,BUY,,,,,BUY,Buy,2.0,3.0,655710.0,2.8200000000000003
+UHS,UHS,185.67999267578125,11816433349.89624,Health Care,Health Care Facilities,Strong Buy,4,BUY,,,,,BUY,,,16.0,707070.0,2.74
+KRC,KRC,41.400001525878906,4897371780.502319,Real Estate,REIT - Office,Strong Buy,4,BUY,,,,,BUY,Hold,3.0,15.0,1211440.0,2.7
+HXL,HXL,64.13999938964844,5103189756.878418,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,Hold,2.66667,15.0,850570.0,2.7
+EXPD,EXPD,121.63999938964844,16508860050.283691,Industrials,Air Freight & Logistics,Strong Buy,4,BUY,,,,,BUY,Sell,3.64706,15.0,1150530.0,2.7
+HPQ,HPQ,28.920000076293945,27031582374.032104,Information Technology,"Technology Hardware, Storage & Peripherals",Strong Buy,4,BUY,,,,,BUY,Hold,2.8125,15.0,11175970.0,2.7
+PK,PK,12.109999656677246,2420958471.364975,Real Estate,Hotel & Resort REITs,Strong Buy,4,BUY,,,,,BUY,Hold,2.6,13.0,3470049.5,2.62
+CFR,CFR,130.2100067138672,8375797744.871521,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Hold,3.21429,13.0,444530.0,2.62
+M,M,17.239999771118164,4613423938.751221,Consumer Discretionary,Department Stores,Strong Buy,4,BUY,,,,,BUY,Hold,2.76923,12.0,13905570.0,2.58
+LEA,LEA,110.37000274658203,5872357403.134918,Consumer Discretionary,Automotive Parts & Equipment,Strong Buy,4,BUY,,,,,BUY,,,12.0,531360.0,2.58
+BLD,BLD,429.4200134277344,12083363873.840332,Consumer Discretionary,Engineering & Construction,Strong Buy,4,BUY,,,,,BUY,,,12.0,313817.5,2.58
+PFG,PFG,81.30000305175781,18111039079.833984,Financials,Life & Health Insurance,Strong Buy,4,BUY,,,,,BUY,,,12.0,1102380.0,2.58
+RKT,RKT,19.149999618530273,40419713614.035645,Financials,Mortgage Finance,Strong Buy,4,BUY,,,,,BUY,Hold,2.76923,12.0,18694566.8,2.58
+WU,WU,8.720000267028809,2816272396.0014954,Information Technology,Data Processing & Outsourced Services,Strong Buy,4,BUY,,,,,BUY,Hold,3.46667,11.0,8447590.0,2.54
+STAG,STAG,36.7599983215332,7009984639.923096,Real Estate,REIT - Industrial,Strong Buy,4,BUY,,,,,BUY,,,11.0,1039160.0,2.54
+LNC,LNC,43.220001220703125,8193647831.420898,Financials,Multi-line Insurance,Strong Buy,4,BUY,,,,,BUY,,,11.0,1541030.0,2.54
+MEDP,MEDP,482.3399963378906,13550377517.120361,Health Care,Diagnostics & Research,Strong Buy,4,BUY,,,,,BUY,Hold,3.33333,11.0,309985.7,2.54
+RJF,RJF,171.08999633789062,34112607829.833984,Financials,Investment Banking & Brokerage,Strong Buy,4,BUY,,,,,BUY,,,11.0,775730.0,2.54
+FLS,FLS,54.54999923706055,7134158000.221252,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,,,10.0,1320560.0,2.5
+SKX,SKX,63.22999954223633,9501951411.209106,Consumer Discretionary,Footwear,Strong Buy,4,BUY,,,,,BUY,Hold,2.64286,10.0,2500730.0,2.5
+WEX,WEX,173.36000061035156,5940059068.913269,Financials,Transaction & Payment Processing Services,Strong Buy,4,BUY,,,,,BUY,Hold,2.61538,9.0,327390.0,2.46
+HALO,HALO,73.4000015258789,8585304578.475952,Health Care,Biotechnology,Strong Buy,4,BUY,,,,,BUY,,,9.0,2170590.0,2.46
+FYBR,FYBR,37.130001068115234,9306709027.72522,Communication Services,Telecom Services,Strong Buy,4,BUY,,,,,BUY,Hold,3.08333,9.0,2668743.2,2.46
+OMC,OMC,78.54000091552734,15215005225.67871,Communication Services,Advertising,Strong Buy,4,BUY,,,,,BUY,,,9.0,3460250.0,2.46
+FHB,FHB,26.1299991607666,3256529535.40802,Financials,Regional Banks,Strong Buy,4,BUY,,,,,BUY,Sell,3.77778,8.0,1079794.1,2.42
+REYN,REYN,23.56999969482422,4957359997.253906,Consumer Staples,Packaging & Containers,Strong Buy,4,BUY,,,,,BUY,,,8.0,951703.3,2.42
+TFX,TFX,129.08999633789062,5704848390.161133,Health Care,Health Care Equipment,Strong Buy,4,BUY,,,,,BUY,Hold,3.0,8.0,554420.0,2.42
+HR,HR,17.489999771118164,6222382238.571167,Real Estate,REIT - Healthcare Facilities,Strong Buy,4,BUY,,,,,BUY,Hold,3.0,8.0,3046597.6,2.42
+DBX,DBX,29.43000030517578,7942009076.915039,Information Technology,Software - Infrastructure,Strong Buy,4,BUY,,,,,BUY,,,8.0,2784623.5,2.42
+IPG,IPG,26.84000015258789,9830579066.447754,Communication Services,Advertising,Strong Buy,4,BUY,,,,,BUY,,,8.0,5547320.0,2.42
+CXT,CXT,61.720001220703125,3543851374.090576,Industrials,Industrial Machinery & Supplies & Components,Strong Buy,4,BUY,,,,,BUY,,,6.0,412000.0,2.34
+COOP,COOP,202.61000061035156,12965682552.05841,Financials,Commercial & Residential Mortgage Finance,Strong Buy,4,BUY,,,,,BUY,,,6.0,785474.2,2.34
+EME,EME,640.5700073242188,28674603921.862793,Industrials,Construction & Engineering,Strong Buy,4,BUY,,,,,BUY,,,6.0,313130.0,2.34
+LAMR,LAMR,128.00999450683594,12778853721.633911,Real Estate,Other Specialized REITs,Strong Buy,4,BUY,,,,,BUY,,,5.0,522520.0,2.3000000000000003
+FIX,FIX,723.9500122070312,25542042355.682373,Industrials,Construction & Engineering,Strong Buy,4,BUY,,,,,BUY,,,5.0,364390.0,2.3000000000000003
+ECG,ECG,77.38999938964844,4041506982.1258545,Industrials,Construction & Engineering,Strong Buy,4,BUY,,,,,BUY,,,3.0,416875.5,2.22
+DNB,DNB,9.149999618530273,4082629276.8,Industrials,Financial Data & Stock Exchanges,Strong Buy,4,BUY,,,,,BUY,Sell,3.5,3.0,5208242.2,2.22
+TFSL,TFSL,13.619999885559082,3822970527.8778076,Financials,Banks - Regional,Strong Buy,4,BUY,,,,,BUY,,,1.0,421600.0,2.14
+HEI.A,HEI-A,253.50999450683594,39093520714.82471,Industrials,Aerospace & Defense,Strong Buy,4,BUY,,,,,BUY,Hold,3.0,1.0,250300.0,2.14
+WGRX,WGRX,1.3700000047683716,121548318.4230566,Unknown,Unknown,Strong Buy,5,BUY,,,,,BUY,,,,4356183.8,2.1
+ADT,ADT,8.819999694824219,7233114381.411133,Consumer Discretionary,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,9103949.4,2.1
+AOS,AOS,72.63999938964844,10179043114.471436,Industrials,Building Products,Strong Buy,4,BUY,,,,,BUY,,,,1006950.0,2.1
+COKE,COKE,119.30999755859375,10275287195.739746,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Strong Buy,4,BUY,,,,,BUY,,,,398810.0,2.1
+FOX,FOX,55.31999969482422,25752178575.37671,Communication Services,Movies & Entertainment,Strong Buy,4,BUY,,,,,BUY,,,,1282236.5,2.1
+AFRM,AFRM,89.66000366210938,29197778758.00586,Information Technology,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,13786774.3,2.1
 PDD,PDD,123.87000274658203,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,13266437.3,2.1
 ARGX,ARGX,733.6599731445312,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,389887.3,2.1
 FUTU,FUTU,189.1199951171875,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2329095.1,2.1
 CYBR,CYBR,458.1000061035156,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,840890.5,2.1
 ASND,ASND,198.1300048828125,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,416826.5,2.1
 BBIO,BBIO,51.83000183105469,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2304676.1,2.1
-MDGL,MDGL,431.2099914550781,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,378272.8,2.1
+MDGL,MDGL,431.2099914550781,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,378270.0,2.1
 VRNA,VRNA,106.23999786376953,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1354509.6,2.1
-ONB,ONB,23.170000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2893478.8,2.1
-STRL,STRL,288.67999267578125,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,383526.3,2.1
+ONB,ONB,23.170000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2893480.0,2.1
+STRL,STRL,288.67999267578125,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,383590.0,2.1
 GH,GH,61.36000061035156,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2271854.5,2.1
 STEP,STEP,61.650001525878906,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,472429.7,2.1
 IREN,IREN,26.1299991607666,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,33339619.8,2.1
 ROAD,ROAD,121.44000244140625,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,458072.4,2.1
 ABVX,ABVX,85.55000305175781,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1021705.9,2.1
-SANM,SANM,119.86000061035156,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,577315.7,2.1
+SANM,SANM,119.86000061035156,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,579080.0,2.1
 RNA,RNA,48.470001220703125,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1984226.2,2.1
-CYTK,CYTK,49.75,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3367492.2,2.1
+CYTK,CYTK,49.75,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3401950.0,2.1
 NUVL,NUVL,79.66999816894531,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,430726.7,2.1
 ACT,ACT,38.400001525878906,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,281909.6,2.1
 FROG,FROG,48.400001525878906,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1629306.7,2.1
-UBSI,UBSI,38.650001525878906,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,538565.5,2.1
+UBSI,UBSI,38.650001525878906,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,540110.0,2.1
 PI,PI,188.1300048828125,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,540783.4,2.1
-SNEX,SNEX,104.55999755859375,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,458015.0,2.1
-HWC,HWC,63.529998779296875,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,615589.6,2.1
+SNEX,SNEX,104.55999755859375,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,458710.0,2.1
+HWC,HWC,63.529998779296875,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,616430.0,2.1
 ATAT,ATAT,38.900001525878906,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1862645.1,2.1
-ACIW,ACIW,49.63999938964844,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,911560.0,2.1
-MZTI,MZTI,183.91000366210938,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,173925.6,2.1
-SKYW,SKYW,120.5,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,385212.1,2.1
+ACIW,ACIW,49.63999938964844,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,914760.0,2.1
+MZTI,MZTI,183.91000366210938,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,174310.0,2.1
+SKYW,SKYW,120.5,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,388610.0,2.1
 VCTR,VCTR,72.30999755859375,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,570034.1,2.1
 DOOO,DOOO,65.41999816894531,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,439221.4,2.1
-TTMI,TTMI,46.06999969482422,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1922641.3,2.1
-GLNG,GLNG,43.849998474121094,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1313620.6,2.1
-RUSHA,RUSHA,58.52000045776367,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,253820.0,2.1
+TTMI,TTMI,46.06999969482422,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1927320.0,2.1
+GLNG,GLNG,43.849998474121094,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1314450.0,2.1
+RUSHA,RUSHA,58.52000045776367,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,254560.0,2.1
 STNE,STNE,16.510000228881836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3929022.8,2.1
-CVCO,CVCO,555.239990234375,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,167667.4,2.1
+CVCO,CVCO,555.239990234375,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,167880.0,2.1
 BTSG,BTSG,24.09000015258789,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1860090.8,2.1
-SSRM,SSRM,20.40999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3847080.0,2.1
+SSRM,SSRM,20.40999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3869060.0,2.1
 LAUR,LAUR,27.719999313354492,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,833902.2,2.1
 RELY,RELY,19.68000030517578,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3387211.2,2.1
 ACLX,ACLX,72.16000366210938,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,581370.5,2.1
-GSAT,GSAT,30.690000534057617,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,846286.6,2.1
+GSAT,GSAT,30.690000534057617,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,850650.0,2.1
 MIRM,MIRM,74.18000030517578,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,918275.6,2.1
 INTR,INTR,8.4399995803833,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2000205.6,2.1
 PTGX,PTGX,59.599998474121094,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,839626.4,2.1
 EBC,EBC,17.350000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1409545.3,2.1
 COMM,COMM,16.260000228881836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,5794526.5,2.1
-INDB,INDB,72.05000305175781,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,256590.5,2.1
-FULT,FULT,19.719999313354492,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1256066.6,2.1
-NWE,NWE,57.709999084472656,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,382696.7,2.1
+INDB,INDB,72.05000305175781,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,257130.0,2.1
+FULT,FULT,19.719999313354492,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1258010.0,2.1
+NWE,NWE,57.709999084472656,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,382980.0,2.1
 MGNI,MGNI,24.850000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3168814.6,2.1
-TBBK,TBBK,76.52999877929688,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,731983.3,2.1
+TBBK,TBBK,76.52999877929688,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,732590.0,2.1
 HSAI,HSAI,26.40999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3319805.8,2.1
 AMBA,AMBA,81.19000244140625,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1687350.4,2.1
-FIBK,FIBK,32.82500076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,719914.1,2.1
-VSEC,VSEC,164.72000122070312,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,188811.5,2.1
+FIBK,FIBK,32.83000183105469,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,720890.0,2.1
+VSEC,VSEC,164.72000122070312,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,189100.0,2.1
 CRNX,CRNX,34.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1157086.1,2.1
 INDV,INDV,24.729999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1939049.4,2.1
-SFNC,SFNC,21.15999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,773011.7,2.1
+SFNC,SFNC,21.15999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,774350.0,2.1
 PGY,PGY,37.18000030517578,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3390860.7,2.1
 CIFR,CIFR,7.400000095367432,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,34285023.0,2.1
 NAMS,NAMS,25.65999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,781378.9,2.1
 PRVA,PRVA,23.1200008392334,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,711320.1,2.1
 WB,WB,11.539999961853027,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,980426.0,2.1
-CVBF,CVBF,20.450000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,568124.5,2.1
-SIMO,SIMO,81.16999816894531,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,213029.9,2.1
+CVBF,CVBF,20.450000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,569470.0,2.1
+SIMO,SIMO,81.16999816894531,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,213600.0,2.1
 HUT,HUT,25.610000610351562,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,5830759.0,2.1
-CHEF,CHEF,65.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,376942.3,2.1
+CHEF,CHEF,65.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,377780.0,2.1
 GTX,GTX,13.180000305175781,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3446108.1,2.1
-VIAV,VIAV,11.729999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3530792.2,2.1
+VIAV,VIAV,11.729999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3535200.0,2.1
 IQ,IQ,2.7100000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,27078901.1,2.1
-FFBC,FFBC,26.700000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,461298.1,2.1
-HURN,HURN,145.14999389648438,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,241773.8,2.1
-MEOH,MEOH,37.09000015258789,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,306302.1,2.1
+FFBC,FFBC,26.700000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,462200.0,2.1
+HURN,HURN,145.14999389648438,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,242020.0,2.1
+MEOH,MEOH,37.09000015258789,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,307350.0,2.1
 VCYT,VCYT,31.520000457763672,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,928679.7,2.1
-FOLD,FOLD,8.020000457763672,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3676435.7,2.1
-ATEC,ATEC,16.549999237060547,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2268005.8,2.1
+FOLD,FOLD,8.020000457763672,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3857750.0,2.1
+ATEC,ATEC,16.549999237060547,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2295570.0,2.1
 CELC,CELC,54.470001220703125,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,850550.1,2.1
 XNET,XNET,7.320000171661377,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1187258.3,2.1
-SBLK,SBLK,19.110000610351562,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1136453.5,2.1
+SBLK,SBLK,19.110000610351562,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1138160.0,2.1
 TRMD,TRMD,22.770000457763672,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,921926.0,2.1
 OCUL,OCUL,12.699999809265137,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2122019.7,2.1
-BUSE,BUSE,24.770000457763672,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,482665.9,2.1
+BUSE,BUSE,24.770000457763672,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,484440.0,2.1
 PAX,PAX,13.850000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,607127.0,2.1
-SHOO,SHOO,30.1200008392334,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1353457.2,2.1
-CENTA,CENTA,34.099998474121094,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,382977.5,2.1
-PRDO,PRDO,32.880001068115234,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,546699.9,2.1
+SHOO,SHOO,30.1200008392334,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1356340.0,2.1
+CENTA,CENTA,34.099998474121094,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,383710.0,2.1
+PRDO,PRDO,32.880001068115234,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,548540.0,2.1
 COCO,COCO,37.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,810961.8,2.1
-TRIP,TRIP,17.959999084472656,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1870545.5,2.1
+TRIP,TRIP,17.959999084472656,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1887100.0,2.1
 PPTA,PPTA,18.06999969482422,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2098417.7,2.1
 ARQT,ARQT,16.209999084472656,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1282554.6,2.1
 EOSE,EOSE,7.340000152587891,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,11367123.8,2.1
 VBTX,VBTX,34.72999954223633,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,855521.0,2.1
 TVTX,TVTX,21.149999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2004453.8,2.1
-NWBI,NWBI,12.850000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,701688.9,2.1
-NTCT,NTCT,25.049999237060547,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,519270.4,2.1
+NWBI,NWBI,12.850000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,702290.0,2.1
+NTCT,NTCT,25.049999237060547,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,519790.0,2.1
 SONO,SONO,14.369999885559082,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1764809.1,2.1
-CECO,CECO,48.77000045776367,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,453188.2,2.1
+CECO,CECO,48.77000045776367,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,457150.0,2.1
 EXPI,EXPI,10.90999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1036246.8,2.1
 IMCR,IMCR,35.2599983215332,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,285512.4,2.1
 AUPH,AUPH,12.529999732971191,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1551512.4,2.1
 AVAH,AVAH,8.079999923706055,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1389162.7,2.1
-TILE,TILE,27.8799991607666,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,364763.2,2.1
-TRS,TRS,39.2599983215332,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,536527.0,2.1
+TILE,TILE,27.8799991607666,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,366930.0,2.1
+TRS,TRS,39.2599983215332,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,536530.0,2.1
 ARDX,ARDX,6.570000171661377,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3037415.3,2.1
 VRDN,VRDN,18.639999389648438,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,867521.5,2.1
-CLMT,CLMT,17.040000915527344,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,902230.5,2.1
+CLMT,CLMT,17.040000915527344,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,903150.0,2.1
 LASR,LASR,29.530000686645508,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1055639.4,2.1
 TDUP,TDUP,11.710000038146973,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2728953.3,2.1
-ANDE,ANDE,41.4900016784668,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,245487.4,2.1
+ANDE,ANDE,41.4900016784668,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,246520.0,2.1
 ARRY,ARRY,9.09000015258789,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,6559367.4,2.1
-STAA,STAA,27.780000686645508,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,765193.4,2.1
+STAA,STAA,27.780000686645508,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,765830.0,2.1
 PGEN,PGEN,4.559999942779541,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,12326174.0,2.1
 MOMO,MOMO,8.350000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,595662.1,2.1
 BASE,BASE,24.440000534057617,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,712001.4,2.1
 PENG,PENG,24.709999084472656,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,534212.4,2.1
-CNOB,CNOB,25.579999923706055,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,282539.2,2.1
-CSWC,CSWC,23.0,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,470901.9,2.1
+CNOB,CNOB,25.579999923706055,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,282720.0,2.1
+CSWC,CSWC,23.0,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,471350.0,2.1
 COLL,COLL,39.22999954223633,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,414284.5,2.1
-IART,IART,15.649999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1356926.9,2.1
-PCRX,PCRX,26.729999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,639808.7,2.1
-GIII,GIII,27.6299991607666,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,681050.3,2.1
+IART,IART,15.649999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1361550.0,2.1
+PCRX,PCRX,26.729999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,639810.0,2.1
+GIII,GIII,27.6299991607666,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,682210.0,2.1
 ONDS,ONDS,5.329999923706055,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,45533609.3,2.1
 LENZ,LENZ,39.91999816894531,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,467314.4,2.1
-HLIT,HLIT,9.920000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1269895.4,2.1
-OCFC,OCFC,18.670000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,300835.6,2.1
+HLIT,HLIT,9.920000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1273500.0,2.1
+OCFC,OCFC,18.670000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,301060.0,2.1
 RZLV,RZLV,4.320000171661377,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,12999708.6,2.1
 ORIC,ORIC,10.770000457763672,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,826370.4,2.1
-EZPW,EZPW,16.899999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,524194.1,2.1
+EZPW,EZPW,16.899999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,525350.0,2.1
 REAL,REAL,8.680000305175781,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,4063504.5,2.1
-OSBC,OSBC,18.760000228881836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,202868.1,2.1
-TREE,TREE,71.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,263079.8,2.1
+OSBC,OSBC,18.760000228881836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,202870.0,2.1
+TREE,TREE,71.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,263340.0,2.1
 GHRS,GHRS,14.050000190734863,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,223005.8,2.1
 PHAT,PHAT,12.0,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1256867.5,2.1
-HFWA,HFWA,25.030000686645508,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,163098.4,2.1
-HSTM,HSTM,28.200000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,191824.9,2.1
-NTGR,NTGR,27.979999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,394298.2,2.1
+HFWA,HFWA,25.030000686645508,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,163290.0,2.1
+HSTM,HSTM,28.200000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,191950.0,2.1
+NTGR,NTGR,27.979999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,395520.0,2.1
 DNTH,DNTH,24.65999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,364481.8,2.1
-ABUS,ABUS,4.010000228881836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1163755.5,2.1
-MATW,MATW,24.889999389648438,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,186204.7,2.1
-STKL,STKL,6.429999828338623,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,502255.8,2.1
+ABUS,ABUS,4.010000228881836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1165230.0,2.1
+MATW,MATW,24.889999389648438,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,186610.0,2.1
+STKL,STKL,6.429999828338623,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,503900.0,2.1
 KALV,KALV,15.199999809265137,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,749361.6,2.1
-HBNC,HBNC,16.81999969482422,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,857420.6,2.1
-GPRE,GPRE,11.149999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2535719.0,2.1
+HBNC,HBNC,16.81999969482422,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,858240.0,2.1
+GPRE,GPRE,11.149999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2540850.0,2.1
 ZBIO,ZBIO,16.979999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,180645.5,2.1
-SCVL,SCVL,25.889999389648438,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,537264.3,2.1
+SCVL,SCVL,25.889999389648438,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,537350.0,2.1
 VMEO,VMEO,4.269999980926514,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1149427.4,2.1
 KURA,KURA,8.130000114440918,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1871048.1,2.1
-NKTR,NKTR,35.97999954223633,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,857173.1,2.1
-ODP,ODP,21.309999465942383,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,439501.0,2.1
+NKTR,NKTR,35.97999954223633,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,857930.0,2.1
+ODP,ODP,21.309999465942383,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,440870.0,2.1
 ORGO,ORGO,5.03000020980835,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,796204.4,2.1
-HTBK,HTBK,10.34000015258789,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,508512.4,2.1
-MYGN,MYGN,6.789999961853027,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1253855.9,2.1
+HTBK,HTBK,10.34000015258789,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,509390.0,2.1
+MYGN,MYGN,6.789999961853027,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1257390.0,2.1
 KROS,KROS,15.550000190734863,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,506004.6,2.1
 SEPN,SEPN,14.119999885559082,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,271283.5,2.1
 SNDL,SNDL,2.440000057220459,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,4519142.6,2.1
 SVRA,SVRA,3.5799999237060547,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1982056.5,2.1
 PHLT,PHLT,7.659999847412109,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1068912.6,2.1
 AMRK,AMRK,23.8700008392334,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,208479.8,2.1
-APEI,APEI,31.719999313354492,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,245419.4,2.1
-ACIC,ACIC,11.65999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,194172.5,2.1
-GILT,GILT,9.890000343322754,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,734408.8,2.1
-MNRO,MNRO,17.170000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,953969.9,2.1
+APEI,APEI,31.719999313354492,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,245600.0,2.1
+ACIC,ACIC,11.65999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,194300.0,2.1
+GILT,GILT,9.890000343322754,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,734470.0,2.1
+MNRO,MNRO,17.170000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,954990.0,2.1
 ESPR,ESPR,2.5299999713897705,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,5661728.6,2.1
-NFBK,NFBK,11.979999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,166973.2,2.1
-FFIC,FFIC,13.819999694824219,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,182256.8,2.1
+NFBK,NFBK,11.979999542236328,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,167200.0,2.1
+FFIC,FFIC,13.819999694824219,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,182470.0,2.1
 CMPX,CMPX,3.369999885559082,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,864142.6,2.1
 LE,LE,14.489999771118164,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,269446.4,2.1
 OLMA,OLMA,6.349999904632568,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,836324.7,2.1
 ATXS,ATXS,7.0,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,286291.7,2.1
-LWLG,LWLG,3.0199999809265137,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3844146.6,2.1
+LWLG,LWLG,3.0199999809265137,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3844190.0,2.1
 YMAB,YMAB,8.569999694824219,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,898432.0,2.1
 MAMA,MAMA,9.399999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,252345.3,2.1
-KOPN,KOPN,2.140000104904175,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2580437.4,2.1
+KOPN,KOPN,2.140000104904175,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2581230.0,2.1
 DSGN,DSGN,6.110000133514404,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,172571.5,2.1
 PANL,PANL,5.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,185277.8,2.1
-ALLT,ALLT,8.399999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,648127.5,2.1
-ZUMZ,ZUMZ,18.450000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,233819.8,2.1
-AMCX,AMCX,7.360000133514404,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,356691.6,2.1
+ALLT,ALLT,8.399999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,648150.0,2.1
+ZUMZ,ZUMZ,18.450000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,234160.0,2.1
+AMCX,AMCX,7.360000133514404,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,357590.0,2.1
 FDMT,FDMT,6.610000133514404,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,536871.5,2.1
 LOVE,LOVE,20.010000228881836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,370728.4,2.1
 BRLT,BRLT,2.869999885559082,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,404433.4,2.1
-GASS,GASS,7.480000019073486,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,234393.6,2.1
+GASS,GASS,7.480000019073486,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,234440.0,2.1
 KRRO,KRRO,28.084999084472656,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,187221.4,2.1
-ELVA,ELVA,6.389999866485596,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,589320.4,2.1
+ELVA,ELVA,6.389999866485596,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,589430.0,2.1
 ENGN,ENGN,5.0,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,291539.3,2.1
-III,III,5.289999961853027,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,172940.8,2.1
+III,III,5.289999961853027,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,173030.0,2.1
 PRQR,PRQR,2.390000104904175,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,360580.8,2.1
-DENN,DENN,4.809999942779541,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,625021.3,2.1
-LPTH,LPTH,5.71999979019165,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2131136.4,2.1
+DENN,DENN,4.809999942779541,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,625110.0,2.1
+LPTH,LPTH,5.71999979019165,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2131380.0,2.1
 ACRS,ACRS,2.069999933242798,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,577315.7,2.1
 HYMC,HYMC,5.510000228881836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1028430.3,2.1
 VYGR,VYGR,3.880000114440918,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,509171.5,2.1
 TNYA,TNYA,1.2400000095367432,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2574024.8,2.1
 IMRX,IMRX,5.460000038146973,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1503451.7,2.1
 POWW,POWW,1.5299999713897705,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,358849.1,2.1
-LTRX,LTRX,4.519999980926514,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1010055.5,2.1
-HAIN,HAIN,1.8600000143051147,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,802335.2,2.1
+LTRX,LTRX,4.519999980926514,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1010160.0,2.1
+HAIN,HAIN,1.8600000143051147,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,803110.0,2.1
 AREC,AREC,1.8700000047683716,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,5078995.7,2.1
 CLYM,CLYM,2.3299999237060547,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,571106.7,2.1
 CHRS,CHRS,1.309999942779541,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1426245.0,2.1
 LUCD,LUCD,1.3799999952316284,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1112479.9,2.1
 CCLD,CCLD,3.5,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1100344.5,2.1
-INO,INO,2.75,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2526198.7,2.1
+INO,INO,2.75,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2527460.0,2.1
 SCLX,SCLX,20.3799991607666,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,186298.0,2.1
-AXTI,AXTI,2.9600000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,696617.5,2.1
+AXTI,AXTI,2.9600000381469727,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,696810.0,2.1
 AVTX,AVTX,10.15999984741211,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,169152.1,2.1
 MATH,MATH,3.2300000190734863,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,168307.2,2.1
 MGNX,MGNX,1.940000057220459,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1026721.6,2.1
@@ -556,58 +545,59 @@ KALA,KALA,14.529999732971191,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,290179
 PYXS,PYXS,1.6100000143051147,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,732905.9,2.1
 CCG,CCG,1.1399999856948853,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,935299.1,2.1
 OVID,OVID,1.2899999618530273,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1678225.5,2.1
-GEG,GEG,3.0,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1696044.9,2.1
+GEG,GEG,3.0,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1697320.0,2.1
 STRO,STRO,1.0199999809265137,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,512869.1,2.1
-FBIO,FBIO,2.8399999141693115,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,961996.6,2.1
-IRD,IRD,1.2799999713897705,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,235718.0,2.1
+FBIO,FBIO,2.8399999141693115,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,981810.0,2.1
+IRD,IRD,1.2799999713897705,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,235720.0,2.1
 STTK,STTK,1.5099999904632568,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2206309.8,2.1
 PMEC,PMEC,1.7549999952316284,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,441515.2,2.1
-PRTS,PRTS,1.100000023841858,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1342741.8,2.1
+PRTS,PRTS,1.100000023841858,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,1343630.0,2.1
 INHD,INHD,8.199999809265137,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,31905101.6,2.1
 FTHM,FTHM,1.850000023841858,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2322659.1,2.1
-SYPR,SYPR,2.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,629338.5,2.1
+SYPR,SYPR,2.25,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,631620.0,2.1
 RLMD,RLMD,1.3700000047683716,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2903190.7,2.1
 RNXT,RNXT,1.190000057220459,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,427139.6,2.1
 MOB,MOB,5.670000076293945,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,623136.8,2.1
 HWH,HWH,6.199999809265137,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,38155634.2,2.1
 ONMD,ONMD,0.8600000143051147,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2976029.6,2.1
 BLNE,BLNE,1.909999966621399,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2580650.7,2.1
-NVFY,NVFY,2.6700000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,182009.0,2.1
+NVFY,NVFY,2.6700000762939453,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,182520.0,2.1
 ZOOZ,ZOOZ,2.740000009536743,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,375387.3,2.1
 RMCO,RMCO,2.0199999809265137,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,169021.0,2.1
 BCAB,BCAB,0.49889999628067017,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,792922.6,2.1
 RENT,RENT,5.980000019073486,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,266068.6,2.1
 VSME,VSME,2.5299999713897705,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,4413284.8,2.1
+KITT,KITT,4.787099838256836,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,4064416.3,2.1
 IPDN,IPDN,8.039999961853027,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,34150233.7,2.1
 PWM,PWM,0.5841000080108643,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,246480.9,2.1
 CPOP,CPOP,1.2200000286102295,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,244687.1,2.1
 HOTH,HOTH,1.340000033378601,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,2590248.0,2.1
 BTBD,BTBD,2.869999885559082,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,10853920.5,2.1
-CARV,CARV,3.059999942779541,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,439289.2,2.1
+CARV,CARV,3.059999942779541,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,440090.0,2.1
 SINT,SINT,4.380000114440918,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,3974148.7,2.1
 PSIG,PSIG,0.44999998807907104,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,233791.6,2.1
 LSH,LSH,1.2000000476837158,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,709369.9,2.1
 MOVE,MOVE,1.0800000429153442,,Unknown,Unknown,Strong Buy,4,BUY,,,,,BUY,,,,14223333.9,2.1
-AIT,AIT,267.9599914550781,,Industrials,Trading Companies & Distributors,Buy,3,BUY,,,,,BUY,,,,203324.9,2.1
-CPB,CPB,32.65999984741211,,Consumer Staples,Packaged Foods & Meats,Buy,3,BUY,,,,,BUY,,,,9068581.2,2.1
-LNG,LNG,236.97000122070312,,Energy,Unknown,Buy,3,BUY,,,,,BUY,,,,1662046.7,2.1
+AIT,AIT,267.9599914550781,,Industrials,Trading Companies & Distributors,Buy,3,BUY,,,,,BUY,,,,206690.0,2.1
+CPB,CPB,32.65999984741211,,Consumer Staples,Packaged Foods & Meats,Buy,3,BUY,,,,,BUY,,,,9084080.0,2.1
+LNG,LNG,236.97000122070312,,Energy,Unknown,Buy,3,BUY,,,,,BUY,,,,1665070.0,2.1
 CNXC,CNXC,52.459999084472656,,Information Technology,Data Processing & Outsourced Services,Buy,3,BUY,,,,,BUY,,,,609076.2,2.1
-DXCM,DXCM,80.76000213623047,,Health Care,Health Care Equipment,Buy,3,BUY,,,,,BUY,,,,4812851.6,2.1
-DPZ,DPZ,462.6000061035156,,Consumer Discretionary,Restaurants,Buy,3,BUY,,,,,BUY,,,,626474.8,2.1
+DXCM,DXCM,80.76000213623047,,Health Care,Health Care Equipment,Buy,3,BUY,,,,,BUY,,,,4812860.0,2.1
+DPZ,DPZ,462.6000061035156,,Consumer Discretionary,Restaurants,Buy,3,BUY,,,,,BUY,,,,626490.0,2.1
 MTSI,MTSI,131.88999938964844,,Information Technology,Semiconductors,Buy,3,BUY,,,,,BUY,,,,778201.2,2.1
-MDT,MDT,92.8499984741211,,Health Care,Health Care Equipment,Buy,3,BUY,,,,,BUY,,,,5721071.4,2.1
-MGM,MGM,37.029998779296875,,Consumer Discretionary,Casinos & Gaming,Buy,3,BUY,,,,,BUY,,,,4010419.4,2.1
+MDT,MDT,92.8499984741211,,Health Care,Health Care Equipment,Buy,3,BUY,,,,,BUY,,,,5722410.0,2.1
+MGM,MGM,37.029998779296875,,Consumer Discretionary,Casinos & Gaming,Buy,3,BUY,,,,,BUY,,,,4010570.0,2.1
 OLLI,OLLI,133.86000061035156,,Consumer Discretionary,General Merchandise Stores,Buy,3,BUY,,,,,BUY,,,,1474276.8,2.1
 QXO,QXO,20.639999389648438,,Industrials,Unknown,Buy,3,BUY,,,,,BUY,,,,8465462.3,2.1
-RNR,RNR,244.6300048828125,,Financials,Reinsurance,Buy,3,BUY,,,,,BUY,,,,352708.8,2.1
-SLM,SLM,31.770000457763672,,Financials,Consumer Finance,Buy,3,BUY,,,,,BUY,,,,1667222.1,2.1
-SMG,SMG,62.66999816894531,,Materials,Fertilizers & Agricultural Chemicals,Buy,3,BUY,,,,,BUY,,,,781247.9,2.1
-SPR,SPR,41.18000030517578,,Industrials,Unknown,Buy,3,BUY,,,,,BUY,,,,867775.0,2.1
+RNR,RNR,244.6300048828125,,Financials,Reinsurance,Buy,3,BUY,,,,,BUY,,,,352710.0,2.1
+SLM,SLM,31.770000457763672,,Financials,Consumer Finance,Buy,3,BUY,,,,,BUY,,,,1669700.0,2.1
+SMG,SMG,62.66999816894531,,Materials,Fertilizers & Agricultural Chemicals,Buy,3,BUY,,,,,BUY,,,,781250.0,2.1
+SPR,SPR,41.18000030517578,,Industrials,Unknown,Buy,3,BUY,,,,,BUY,,,,867780.0,2.1
 SARO,SARO,27.479999542236328,,Industrials,Aerospace & Defense,Buy,3,BUY,,,,,BUY,,,,1497844.4,2.1
-TDY,TDY,547.0,,Industrials,Aerospace & Defense,Buy,3,BUY,,,,,BUY,,,,234726.9,2.1
-OLED,OLED,144.67999267578125,,Information Technology,Semiconductors,Buy,3,BUY,,,,,BUY,,,,540868.7,2.1
+TDY,TDY,547.0,,Industrials,Aerospace & Defense,Buy,3,BUY,,,,,BUY,,,,234730.0,2.1
+OLED,OLED,144.67999267578125,,Information Technology,Semiconductors,Buy,3,BUY,,,,,BUY,,,,540870.0,2.1
 USFD,USFD,78.0,,Consumer Staples,Unknown,Buy,3,BUY,,,,,BUY,,,,1609566.5,2.1
-ASML,ASML,753.4299926757812,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1212130.6,2.1
+ASML,ASML,753.4299926757812,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1217170.0,2.1
 MRUS,MRUS,66.2300033569336,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,596206.5,2.1
 RIOT,RIOT,13.15999984741211,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,39892865.9,2.1
 MTSR,MTSR,36.290000915527344,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1324572.2,2.1
@@ -619,10 +609,10 @@ AGIO,AGIO,36.130001068115234,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,876521.9,2.1
 EVCM,EVCM,11.319999694824219,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,232027.9,2.1
 PGNY,PGNY,23.559999465942383,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,895849.8,2.1
 PSIX,PSIX,86.91999816894531,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,715567.7,2.1
-PZZA,PZZA,47.369998931884766,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1208212.3,2.1
-CLDX,CLDX,22.780000686645508,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1655806.8,2.1
+PZZA,PZZA,47.369998931884766,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1208740.0,2.1
+CLDX,CLDX,22.780000686645508,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1658030.0,2.1
 OMDA,OMDA,23.719999313354492,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,388128.8,2.1
-INOD,INOD,41.099998474121094,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1508750.1,2.1
+INOD,INOD,41.099998474121094,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1509410.0,2.1
 GRAL,GRAL,33.59000015258789,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,584925.5,2.1
 SYRE,SYRE,16.989999771118164,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,450875.7,2.1
 TBLA,TBLA,3.359999895095825,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,1244083.0,2.1
@@ -643,240 +633,240 @@ ABAT,ABAT,2.509999990463257,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,3250746.4,2.1
 OGI,OGI,1.6100000143051147,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,890963.6,2.1
 UFG,UFG,5.639999866485596,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,852490.8,2.1
 VOXR,VOXR,3.430000066757202,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,364287.7,2.1
-USAU,USAU,12.3100004196167,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,318272.1,2.1
+USAU,USAU,12.3100004196167,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,318280.0,2.1
 BDTX,BDTX,2.869999885559082,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,716015.9,2.1
 TARA,TARA,3.1700000762939453,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,157570.1,2.1
 SPRO,SPRO,2.140000104904175,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,362826.4,2.1
 SPWH,SPWH,3.009999990463257,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,333469.4,2.1
 PLRX,PLRX,1.6299999952316284,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,611138.8,2.1
 ASST,ASST,5.510000228881836,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,5418721.6,2.1
-OMEX,OMEX,1.7200000286102295,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,3467334.5,2.1
+OMEX,OMEX,1.7200000286102295,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,3467420.0,2.1
 ENGS,ENGS,4.590000152587891,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,307495.0,2.1
 NRXP,NRXP,2.630000114440918,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,509498.6,2.1
 THAR,THAR,3.990000009536743,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,25041824.4,2.1
 MNYWW,MNYWW,0.10000000149011612,,Unknown,Unknown,Buy,3,BUY,,,,,BUY,,,,156033.1,2.1
-TRI,TRI,178.77000427246094,,Unknown,Unknown,Buy,2,BUY,,,,,BUY,,,,996163.0,2.1
+TRI,TRI,178.77000427246094,,Unknown,Unknown,Buy,2,BUY,,,,,BUY,,,,998610.0,2.1
 LI,LI,23.979999542236328,,Unknown,Unknown,Buy,2,BUY,,,,,BUY,,,,7855301.1,2.1
 MRX,MRX,35.540000915527344,,Unknown,Unknown,Buy,2,BUY,,,,,BUY,,,,1004846.1,2.1
-CLFD,CLFD,33.04999923706055,,Unknown,Unknown,Buy,2,BUY,,,,,BUY,,,,167759.4,2.1
+CLFD,CLFD,33.04999923706055,,Unknown,Unknown,Buy,2,BUY,,,,,BUY,,,,167900.0,2.1
 KRMN,KRMN,53.380001068115234,,Industrials,Unknown,Buy,3,NEUTRAL,,,,,NEUTRAL,,,,1068609.4,0.0
 EPSM,EPSM,23.799999237060547,,Unknown,Unknown,Buy,3,NEUTRAL,,,,,NEUTRAL,,,,445402.4,0.0
 MSW,MSW,2.390000104904175,,Unknown,Unknown,Buy,3,NEUTRAL,,,,,NEUTRAL,,,,198338.4,0.0
 WMS,WMS,144.05999755859375,,Industrials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,767870.5,0.0
-AFL,AFL,108.55000305175781,,Financials,Life & Health Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2784605.2,0.0
-A,A,128.47999572753906,,Health Care,Health Care Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2040796.6,0.0
-ALK,ALK,62.810001373291016,,Industrials,Passenger Airlines,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2302930.5,0.0
-ARE,ARE,82.88999938964844,,Real Estate,Office REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,996783.7,0.0
+AFL,AFL,108.55000305175781,,Financials,Life & Health Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2794280.0,0.0
+A,A,128.47999572753906,,Health Care,Health Care Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2040800.0,0.0
+ALK,ALK,62.810001373291016,,Industrials,Passenger Airlines,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2302970.0,0.0
+ARE,ARE,82.88999938964844,,Real Estate,Office REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1014910.0,0.0
 ALLE,ALLE,170.75,,Industrials,Building Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,756118.2,0.0
-ALNY,ALNY,453.5400085449219,,Health Care,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,962290.2,0.0
-MO,MO,66.58999633789062,,Consumer Staples,Tobacco,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6561027.4,0.0
-AMKR,AMKR,24.290000915527344,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1627893.2,0.0
-AON,AON,373.489990234375,,Financials,Insurance Brokers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1046666.4,0.0
+ALNY,ALNY,453.5400085449219,,Health Care,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,968210.0,0.0
+MO,MO,66.58999633789062,,Consumer Staples,Tobacco,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6651990.0,0.0
+AMKR,AMKR,24.290000915527344,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1627890.0,0.0
+AON,AON,373.489990234375,,Financials,Insurance Brokers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1046680.0,0.0
 APLS,APLS,28.649999618530273,,Health Care,Biotechnology,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1816142.7,0.0
-ADM,ADM,61.939998626708984,,Consumer Staples,Agricultural Products & Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3622892.2,0.0
-AWI,AWI,197.1699981689453,,Industrials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,329030.5,0.0
+ADM,ADM,61.939998626708984,,Consumer Staples,Agricultural Products & Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3622890.0,0.0
+AWI,AWI,197.1699981689453,,Industrials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,329030.0,0.0
 AXTA,AXTA,31.229999542236328,,Materials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2002804.9,0.0
-BBWI,BBWI,31.8700008392334,,Consumer Discretionary,Other Specialty Retail,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7390036.1,0.0
-BRK.B,BRK-B,506.9100036621094,,Financials,Multi-Sector Holdings,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4368464.0,0.0
-BK,BK,105.55999755859375,,Financials,Asset Management & Custody Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2798413.5,0.0
-SAM,SAM,222.8699951171875,,Consumer Staples,Brewers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,210897.0,0.0
-BC,BC,65.44000244140625,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,682462.7,0.0
-BLDR,BLDR,143.27000427246094,,Industrials,Building Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1955708.8,0.0
-CHRW,CHRW,127.83999633789062,,Industrials,Air Freight & Logistics,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1668143.2,0.0
-CBRE,CBRE,161.69000244140625,,Real Estate,Real Estate Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1719752.2,0.0
-CELH,CELH,60.7599983215332,,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5343114.0,0.0
-CB,CB,279.8800048828125,,Financials,Property & Casualty Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1478608.8,0.0
-CHD,CHD,95.2300033569336,,Consumer Staples,Household Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1759736.9,0.0
-CRUS,CRUS,115.26000213623047,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,471005.7,0.0
-C,C,97.08000183105469,,Financials,Diversified Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,12825948.7,0.0
-CIVI,CIVI,35.470001220703125,,Energy,Oil & Gas Exploration & Production,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2851487.0,0.0
-CLX,CLX,124.62999725341797,,Consumer Staples,Household Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1965898.6,0.0
-CGNX,CGNX,44.27000045776367,,Information Technology,Electronic Equipment & Instruments,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1858368.1,0.0
-COLB,COLB,26.770000457763672,,Financials,Regional Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7230382.3,0.0
-COLM,COLM,57.52000045776367,,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Buy,2,NEUTRAL,,,,,NEUTRAL,,,,736893.5,0.0
-CMA,CMA,70.5999984741211,,Financials,Diversified Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1882776.1,0.0
-CPRT,CPRT,49.970001220703125,,Industrials,Diversified Support Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5923549.0,0.0
-CRH,CRH,111.61000061035156,,Materials,Construction Materials,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3610172.5,0.0
-CMI,CMI,400.92999267578125,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,664034.0,0.0
+BBWI,BBWI,31.8700008392334,,Consumer Discretionary,Other Specialty Retail,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7390070.0,0.0
+BRK.B,BRK-B,506.9100036621094,,Financials,Multi-Sector Holdings,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4417840.0,0.0
+BK,BK,105.55999755859375,,Financials,Asset Management & Custody Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2798440.0,0.0
+SAM,SAM,222.8699951171875,,Consumer Staples,Brewers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,210900.0,0.0
+BC,BC,65.44000244140625,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,690120.0,0.0
+BLDR,BLDR,143.27000427246094,,Industrials,Building Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1974570.0,0.0
+CHRW,CHRW,127.83999633789062,,Industrials,Air Freight & Logistics,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1668140.0,0.0
+CBRE,CBRE,161.69000244140625,,Real Estate,Real Estate Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1719760.0,0.0
+CELH,CELH,60.7599983215332,,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5361290.0,0.0
+CB,CB,279.8800048828125,,Financials,Property & Casualty Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1478610.0,0.0
+CHD,CHD,95.2300033569336,,Consumer Staples,Household Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1759740.0,0.0
+CRUS,CRUS,115.26000213623047,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,473530.0,0.0
+C,C,97.08000183105469,,Financials,Diversified Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,13018140.0,0.0
+CIVI,CIVI,35.470001220703125,,Energy,Oil & Gas Exploration & Production,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2851490.0,0.0
+CLX,CLX,124.62999725341797,,Consumer Staples,Household Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2016060.0,0.0
+CGNX,CGNX,44.27000045776367,,Information Technology,Electronic Equipment & Instruments,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1861550.0,0.0
+COLB,COLB,26.770000457763672,,Financials,Regional Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7290750.0,0.0
+COLM,COLM,57.52000045776367,,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Buy,2,NEUTRAL,,,,,NEUTRAL,,,,738330.0,0.0
+CMA,CMA,70.5999984741211,,Financials,Diversified Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1912260.0,0.0
+CPRT,CPRT,49.970001220703125,,Industrials,Diversified Support Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5972200.0,0.0
+CRH,CRH,111.61000061035156,,Materials,Construction Materials,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3610200.0,0.0
+CMI,CMI,400.92999267578125,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,676020.0,0.0
 DAY,DAY,69.55000305175781,,Industrials,Human Resource & Employment Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3343487.2,0.0
-DECK,DECK,123.91000366210938,,Consumer Discretionary,Footwear,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2665652.1,0.0
-DAL,DAL,60.54999923706055,,Industrials,Passenger Airlines,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6379027.1,0.0
-DVN,DVN,35.58000183105469,,Energy,Oil & Gas Exploration & Production,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6429024.9,0.0
-DXC,DXC,14.5,,Information Technology,IT Consulting & Other Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1462716.6,0.0
+DECK,DECK,123.91000366210938,,Consumer Discretionary,Footwear,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2728130.0,0.0
+DAL,DAL,60.54999923706055,,Industrials,Passenger Airlines,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6385730.0,0.0
+DVN,DVN,35.58000183105469,,Energy,Oil & Gas Exploration & Production,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6429190.0,0.0
+DXC,DXC,14.5,,Information Technology,IT Consulting & Other Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1462790.0,0.0
 ESI,ESI,25.700000762939453,,Materials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1693824.8,0.0
-EVR,EVR,318.1400146484375,,Financials,Investment Banking & Brokerage,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,383852.6,0.0
-EXLS,EXLS,44.130001068115234,,Industrials,Data Processing & Outsourced Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1017808.9,0.0
-EXPE,EXPE,216.52000427246094,,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1402296.9,0.0
-EXR,EXR,143.83999633789062,,Real Estate,Self-Storage REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,966437.0,0.0
-XOM,XOM,112.4000015258789,,Energy,Integrated Oil & Gas,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,14058213.6,0.0
-FAST,FAST,50.27000045776367,,Industrials,Building Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5093208.8,0.0
-FNF,FNF,60.41999816894531,,Financials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1009561.1,0.0
-FAF,FAF,66.2699966430664,,Financials,Property & Casualty Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,513246.4,0.0
-FR,FR,52.029998779296875,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,965636.2,0.0
-F,F,11.680000305175781,,Consumer Discretionary,Automobile Manufacturers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,47160045.9,0.0
+EVR,EVR,318.1400146484375,,Financials,Investment Banking & Brokerage,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,383920.0,0.0
+EXLS,EXLS,44.130001068115234,,Industrials,Data Processing & Outsourced Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1023560.0,0.0
+EXPE,EXPE,216.52000427246094,,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1406570.0,0.0
+EXR,EXR,143.83999633789062,,Real Estate,Self-Storage REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,966440.0,0.0
+XOM,XOM,112.4000015258789,,Energy,Integrated Oil & Gas,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,14071030.0,0.0
+FAST,FAST,50.27000045776367,,Industrials,Building Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5093220.0,0.0
+FNF,FNF,60.41999816894531,,Financials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1030080.0,0.0
+FAF,FAF,66.2699966430664,,Financials,Property & Casualty Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,513810.0,0.0
+FR,FR,52.029998779296875,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,965640.0,0.0
+F,F,11.680000305175781,,Consumer Discretionary,Automobile Manufacturers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,47470740.0,0.0
 FTAI,FTAI,155.5500030517578,,Industrials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1130532.4,0.0
-GRMN,GRMN,237.66000366210938,,Consumer Discretionary,Consumer Electronics,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,924273.3,0.0
-GD,GD,322.44000244140625,,Industrials,Aerospace & Defense,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,818499.1,0.0
-GM,GM,58.150001525878906,,Consumer Discretionary,Automobile Manufacturers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6505243.5,0.0
-GNTX,GNTX,28.1200008392334,,Consumer Discretionary,Automotive Parts & Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1873355.1,0.0
-GPC,GPC,141.25,,Consumer Discretionary,Automotive Parts & Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1179199.4,0.0
-GS,GS,748.9000244140625,,Financials,Investment Banking & Brokerage,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1597526.9,0.0
-HOG,HOG,30.190000534057617,,Consumer Discretionary,Motorcycle Manufacturers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1557770.2,0.0
-HAS,HAS,80.4000015258789,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1286468.5,0.0
-HIW,HIW,31.290000915527344,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1125091.5,0.0
+GRMN,GRMN,237.66000366210938,,Consumer Discretionary,Consumer Electronics,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,946580.0,0.0
+GD,GD,322.44000244140625,,Industrials,Aerospace & Defense,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,818510.0,0.0
+GM,GM,58.150001525878906,,Consumer Discretionary,Automobile Manufacturers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6597310.0,0.0
+GNTX,GNTX,28.1200008392334,,Consumer Discretionary,Automotive Parts & Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1899720.0,0.0
+GPC,GPC,141.25,,Consumer Discretionary,Automotive Parts & Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1179220.0,0.0
+GS,GS,748.9000244140625,,Financials,Investment Banking & Brokerage,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1597600.0,0.0
+HOG,HOG,30.190000534057617,,Consumer Discretionary,Motorcycle Manufacturers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1557780.0,0.0
+HAS,HAS,80.4000015258789,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1286470.0,0.0
+HIW,HIW,31.290000915527344,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1125090.0,0.0
 HLI,HLI,197.4600067138672,,Financials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,399080.1,0.0
-HHH,HHH,77.72000122070312,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,310824.4,0.0
-HUM,HUM,312.0,,Health Care,Managed Health Care,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1307706.3,0.0
-HII,HII,269.9800109863281,,Industrials,Aerospace & Defense,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,387709.3,0.0
-H,H,145.27999877929688,,Consumer Discretionary,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,797060.5,0.0
-ITW,ITW,265.6700134277344,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,878920.9,0.0
-INCY,INCY,85.44000244140625,,Health Care,Biotechnology,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1660314.1,0.0
+HHH,HHH,77.72000122070312,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,310830.0,0.0
+HUM,HUM,312.0,,Health Care,Managed Health Care,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1328590.0,0.0
+HII,HII,269.9800109863281,,Industrials,Aerospace & Defense,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,387740.0,0.0
+H,H,145.27999877929688,,Consumer Discretionary,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,797060.0,0.0
+ITW,ITW,265.6700134277344,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,878920.0,0.0
+INCY,INCY,85.44000244140625,,Health Care,Biotechnology,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1667770.0,0.0
 INFA,INFA,24.780000686645508,,Information Technology,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3974354.8,0.0
-IVZ,IVZ,21.959999084472656,,Financials,Asset Management & Custody Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3503281.0,0.0
-IPGP,IPGP,82.33999633789062,,Information Technology,Electronic Manufacturing Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,245937.0,0.0
-JAZZ,JAZZ,128.02000427246094,,Health Care,Pharmaceuticals,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,768083.9,0.0
-JEF,JEF,64.97000122070312,,Financials,Multi-Sector Holdings,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1310855.7,0.0
-JLL,JLL,307.67999267578125,,Real Estate,Real Estate Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,363367.2,0.0
-LH,LH,275.2300109863281,,Health Care,Health Care Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,400589.3,0.0
-LVS,LVS,55.11000061035156,,Consumer Discretionary,Casinos & Gaming,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4296517.6,0.0
-LSCC,LSCC,65.97000122070312,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2152294.0,0.0
-LAZ,LAZ,56.81999969482422,,Financials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,858110.6,0.0
-LEN,LEN,138.07000732421875,,Consumer Discretionary,Homebuilding,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2756316.6,0.0
-LBTYA,LBTYA,11.90999984741211,,Communication Services,Cable & Satellite,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1582432.0,0.0
+IVZ,IVZ,21.959999084472656,,Financials,Asset Management & Custody Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3549620.0,0.0
+IPGP,IPGP,82.33999633789062,,Information Technology,Electronic Manufacturing Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,246950.0,0.0
+JAZZ,JAZZ,128.02000427246094,,Health Care,Pharmaceuticals,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,769740.0,0.0
+JEF,JEF,64.97000122070312,,Financials,Multi-Sector Holdings,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1310860.0,0.0
+JLL,JLL,307.67999267578125,,Real Estate,Real Estate Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,363370.0,0.0
+LH,LH,275.2300109863281,,Health Care,Health Care Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,400590.0,0.0
+LVS,LVS,55.11000061035156,,Consumer Discretionary,Casinos & Gaming,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4296520.0,0.0
+LSCC,LSCC,65.97000122070312,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2180940.0,0.0
+LAZ,LAZ,56.81999969482422,,Financials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,858110.0,0.0
+LEN,LEN,138.07000732421875,,Consumer Discretionary,Homebuilding,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2801780.0,0.0
+LBTYA,LBTYA,11.90999984741211,,Communication Services,Cable & Satellite,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1626050.0,0.0
 LLYVK,LLYVK,96.94999694824219,,Communication Services,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,453379.4,0.0
-LLY,LLY,742.9099731445312,,Health Care,Pharmaceuticals,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3497973.1,0.0
-LECO,LECO,243.97999572753906,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,252738.5,0.0
-LFUS,LFUS,259.5799865722656,,Information Technology,Electronic Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,178246.9,0.0
-LYV,LYV,162.97999572753906,,Communication Services,Movies & Entertainment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1614641.1,0.0
-LMT,LMT,456.8500061035156,,Industrials,Aerospace & Defense,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1464087.0,0.0
-LOW,LOW,264.57000732421875,,Consumer Discretionary,Home Improvement Retail,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2384585.0,0.0
-MPC,MPC,178.97999572753906,,Energy,Oil & Gas Refining & Marketing,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1828722.0,0.0
-MA,MA,595.6400146484375,,Financials,Transaction & Payment Processing Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2314620.0,0.0
-MTCH,MTCH,37.38999938964844,,Communication Services,Interactive Media & Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3184680.1,0.0
-MAT,MAT,18.649999618530273,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2634022.5,0.0
-MPW,MPW,4.449999809265137,,Real Estate,Health Care REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6762700.0,0.0
-MHK,MHK,135.4199981689453,,Consumer Discretionary,Home Furnishings,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,628660.2,0.0
+LLY,LLY,742.9099731445312,,Health Care,Pharmaceuticals,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3529320.0,0.0
+LECO,LECO,243.97999572753906,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,253140.0,0.0
+LFUS,LFUS,259.5799865722656,,Information Technology,Electronic Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,179310.0,0.0
+LYV,LYV,162.97999572753906,,Communication Services,Movies & Entertainment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1614640.0,0.0
+LMT,LMT,456.8500061035156,,Industrials,Aerospace & Defense,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1464150.0,0.0
+LOW,LOW,264.57000732421875,,Consumer Discretionary,Home Improvement Retail,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2384590.0,0.0
+MPC,MPC,178.97999572753906,,Energy,Oil & Gas Refining & Marketing,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1857390.0,0.0
+MA,MA,595.6400146484375,,Financials,Transaction & Payment Processing Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2314650.0,0.0
+MTCH,MTCH,37.38999938964844,,Communication Services,Interactive Media & Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3196440.0,0.0
+MAT,MAT,18.649999618530273,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2644370.0,0.0
+MPW,MPW,4.449999809265137,,Real Estate,Health Care REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6818120.0,0.0
+MHK,MHK,135.4199981689453,,Consumer Discretionary,Home Furnishings,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,628670.0,0.0
 MPWR,MPWR,848.1099853515625,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,445190.0,0.0
 NTRA,NTRA,166.55999755859375,,Health Care,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,930009.9,0.0
 NSA,NSA,32.68000030517578,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,947336.8,0.0
-NWL,NWL,6.309999942779541,,Consumer Discretionary,Housewares & Specialties,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7724537.8,0.0
-NXST,NXST,206.66000366210938,,Communication Services,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,328348.1,0.0
+NWL,NWL,6.309999942779541,,Consumer Discretionary,Housewares & Specialties,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7735890.0,0.0
+NXST,NXST,206.66000366210938,,Communication Services,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,329230.0,0.0
 NVT,NVT,91.93000030517578,,Industrials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1484934.1,0.0
-OXY,OXY,46.61000061035156,,Energy,Oil & Gas Exploration & Production,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,8257804.6,0.0
-OLN,OLN,24.079999923706055,,Materials,Diversified Chemicals,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2109530.6,0.0
-OHI,OHI,42.72999954223633,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1798364.8,0.0
+OXY,OXY,46.61000061035156,,Energy,Oil & Gas Exploration & Production,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,8258520.0,0.0
+OLN,OLN,24.079999923706055,,Materials,Diversified Chemicals,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2109570.0,0.0
+OHI,OHI,42.72999954223633,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1798360.0,0.0
 OGN,OGN,9.680000305175781,,Health Care,Pharmaceuticals,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3689150.6,0.0
-OSK,OSK,139.1199951171875,,Industrials,Construction Machinery & Heavy Transportation Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,548941.7,0.0
-PKG,PKG,216.72000122070312,,Materials,Paper & Plastic Packaging Products & Materials,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1060248.6,0.0
+OSK,OSK,139.1199951171875,,Industrials,Construction Machinery & Heavy Transportation Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,548940.0,0.0
+PKG,PKG,216.72000122070312,,Materials,Paper & Plastic Packaging Products & Materials,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1060250.0,0.0
 PANW,PANW,192.35000610351562,,Information Technology,Systems Software,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6478313.3,0.0
-PH,PH,756.9600219726562,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,608517.0,0.0
-PAG,PAG,186.5800018310547,,Consumer Discretionary,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,185655.0,0.0
+PH,PH,756.9600219726562,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,608520.0,0.0
+PAG,PAG,186.5800018310547,,Consumer Discretionary,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,185660.0,0.0
 PEN,PEN,279.7200012207031,,Health Care,Health Care Equipment,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,494897.3,0.0
 PR,PR,14.329999923706055,,Energy,Oil & Gas Exploration & Production,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,9731218.9,0.0
-PCG,PCG,15.229999542236328,,Utilities,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,19737679.1,0.0
-PNFP,PNFP,99.3499984741211,,Financials,Regional Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1088902.4,0.0
-TROW,TROW,111.5199966430664,,Financials,Asset Management & Custody Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1555867.1,0.0
-PLD,PLD,112.61000061035156,,Real Estate,Industrial REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3090464.7,0.0
-PRU,PRU,108.83999633789062,,Financials,Life & Health Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1500453.3,0.0
-PTC,PTC,213.25,,Information Technology,Application Software,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,742813.0,0.0
-QCOM,QCOM,159.7100067138672,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7081836.4,0.0
-DGX,DGX,180.11000061035156,,Health Care,Health Care Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,809320.1,0.0
-RGA,RGA,197.58999633789062,,Financials,Reinsurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,267210.7,0.0
+PCG,PCG,15.229999542236328,,Utilities,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,19737790.0,0.0
+PNFP,PNFP,99.3499984741211,,Financials,Regional Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1092170.0,0.0
+TROW,TROW,111.5199966430664,,Financials,Asset Management & Custody Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1558380.0,0.0
+PLD,PLD,112.61000061035156,,Real Estate,Industrial REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3152900.0,0.0
+PRU,PRU,108.83999633789062,,Financials,Life & Health Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1556510.0,0.0
+PTC,PTC,213.25,,Information Technology,Application Software,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,742880.0,0.0
+QCOM,QCOM,159.7100067138672,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7082470.0,0.0
+DGX,DGX,180.11000061035156,,Health Care,Health Care Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,809320.0,0.0
+RGA,RGA,197.58999633789062,,Financials,Reinsurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,267210.0,0.0
 RH,RH,235.24000549316406,,Consumer Discretionary,Homefurnishing Retail,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1035561.3,0.0
 RIVN,RIVN,13.699999809265137,,Consumer Discretionary,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,52896980.6,0.0
-RTX,RTX,158.67999267578125,,Industrials,Aerospace & Defense,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3300554.7,0.0
-SEE,SEE,32.310001373291016,,Materials,Paper & Plastic Packaging Products & Materials,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1167417.7,0.0
-SSD,SSD,192.88999938964844,,Industrials,Building Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,231181.1,0.0
-SIRI,SIRI,23.579999923706055,,Communication Services,Broadcasting,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3251250.2,0.0
-SWKS,SWKS,74.63999938964844,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2098906.2,0.0
-SJM,SJM,112.33999633789062,,Consumer Staples,Packaged Foods & Meats,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2966557.5,0.0
-SNA,SNA,328.7699890136719,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,206877.5,0.0
+RTX,RTX,158.67999267578125,,Industrials,Aerospace & Defense,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3406180.0,0.0
+SEE,SEE,32.310001373291016,,Materials,Paper & Plastic Packaging Products & Materials,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1167420.0,0.0
+SSD,SSD,192.88999938964844,,Industrials,Building Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,231180.0,0.0
+SIRI,SIRI,23.579999923706055,,Communication Services,Broadcasting,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3254120.0,0.0
+SWKS,SWKS,74.63999938964844,,Information Technology,Semiconductors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2098920.0,0.0
+SJM,SJM,112.33999633789062,,Consumer Staples,Packaged Foods & Meats,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2971660.0,0.0
+SNA,SNA,328.7699890136719,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,206880.0,0.0
 SNOW,SNOW,221.89999389648438,,Information Technology,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,11337798.7,0.0
 SOFI,SOFI,25.3799991607666,,Financials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,72341226.5,0.0
-SSNC,SSNC,88.7300033569336,,Information Technology,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1106017.1,0.0
-STT,STT,114.05999755859375,,Financials,Asset Management & Custody Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1608592.8,0.0
-SF,SF,115.70999908447266,,Financials,Investment Banking & Brokerage,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,649191.4,0.0
-TMUS,TMUS,252.1199951171875,,Communication Services,Wireless Telecommunication Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3936487.8,0.0
+SSNC,SSNC,88.7300033569336,,Information Technology,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1109410.0,0.0
+STT,STT,114.05999755859375,,Financials,Asset Management & Custody Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1609090.0,0.0
+SF,SF,115.70999908447266,,Financials,Investment Banking & Brokerage,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,655110.0,0.0
+TMUS,TMUS,252.1199951171875,,Communication Services,Wireless Telecommunication Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3936590.0,0.0
 TLN,TLN,380.44000244140625,,Utilities,Independent Power Producers & Energy Traders,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1550855.2,0.0
-THO,THO,111.70999908447266,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,625626.7,0.0
-TTC,TTC,80.61000061035156,,Industrials,Agricultural & Farm Machinery,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1030920.5,0.0
-URI,URI,964.6599731445312,,Industrials,Trading Companies & Distributors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,532740.6,0.0
+THO,THO,111.70999908447266,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,625630.0,0.0
+TTC,TTC,80.61000061035156,,Industrials,Agricultural & Farm Machinery,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1030920.0,0.0
+URI,URI,964.6599731445312,,Industrials,Trading Companies & Distributors,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,532750.0,0.0
 UWMC,UWMC,5.900000095367432,,Financials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7007920.4,0.0
-UNH,UNH,310.3800048828125,,Health Care,Managed Health Care,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,11440028.9,0.0
+UNH,UNH,310.3800048828125,,Health Care,Managed Health Care,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,11511080.0,0.0
 U,U,40.18000030517578,,Information Technology,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,10545069.3,0.0
-UNM,UNM,73.06999969482422,,Financials,Life & Health Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1347736.8,0.0
-VZ,VZ,44.18000030517578,,Communication Services,Integrated Telecommunication Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,16444560.0,0.0
-VFC,VFC,14.970000267028809,,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7842839.5,0.0
-V,V,350.989990234375,,Financials,Transaction & Payment Processing Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5255843.7,0.0
+UNM,UNM,73.06999969482422,,Financials,Life & Health Insurance,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1347740.0,0.0
+VZ,VZ,44.18000030517578,,Communication Services,Integrated Telecommunication Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,16445110.0,0.0
+VFC,VFC,14.970000267028809,,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7843800.0,0.0
+V,V,350.989990234375,,Financials,Transaction & Payment Processing Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5257230.0,0.0
 VNT,VNT,43.290000915527344,,Information Technology,Electronic Equipment & Instruments,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,841532.7,0.0
-VNO,VNO,39.88999938964844,,Real Estate,Office REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2229648.3,0.0
-WPC,WPC,66.9000015258789,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1130388.5,0.0
-GWW,GWW,1028.030029296875,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,303292.3,0.0
+VNO,VNO,39.88999938964844,,Real Estate,Office REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2229650.0,0.0
+WPC,WPC,66.9000015258789,,Real Estate,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1130400.0,0.0
+GWW,GWW,1028.030029296875,,Industrials,Industrial Machinery & Supplies & Components,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,303350.0,0.0
 WBA,WBA,11.979999542236328,,Consumer Staples,Drug Retail,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,64181503.6,0.0
 WFRD,WFRD,62.66999816894531,,Energy,Oil & Gas Equipment & Services,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,964154.7,0.0
-WFC,WFC,81.83000183105469,,Financials,Diversified Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,12262644.7,0.0
-WELL,WELL,167.67999267578125,,Real Estate,Health Care REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2256599.2,0.0
-WCC,WCC,218.3699951171875,,Industrials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,596950.8,0.0
-WST,WST,247.5399932861328,,Health Care,Health Care Supplies,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,501041.8,0.0
-WLK,WLK,87.63999938964844,,Materials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1094214.5,0.0
-WTW,WTW,329.8399963378906,,Financials,Insurance Brokers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,440594.9,0.0
+WFC,WFC,81.83000183105469,,Financials,Diversified Banks,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,12423220.0,0.0
+WELL,WELL,167.67999267578125,,Real Estate,Health Care REITs,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2256610.0,0.0
+WCC,WCC,218.3699951171875,,Industrials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,597030.0,0.0
+WST,WST,247.5399932861328,,Health Care,Health Care Supplies,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,501040.0,0.0
+WLK,WLK,87.63999938964844,,Materials,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1094220.0,0.0
+WTW,WTW,329.8399963378906,,Financials,Insurance Brokers,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,441760.0,0.0
 XP,XP,17.899999618530273,,Financials,Investment Banking & Brokerage,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7743366.4,0.0
 YETI,YETI,36.209999084472656,,Consumer Discretionary,Leisure Products,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1727125.7,0.0
-PSKY,PSKY,14.739999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,12460295.6,0.0
-TCOM,TCOM,72.98999786376953,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3666209.4,0.0
+PSKY,PSKY,14.739999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,12505480.0,0.0
+TCOM,TCOM,72.98999786376953,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3677410.0,0.0
 FER,FER,54.970001220703125,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,332887.2,0.0
-VOD,VOD,11.75,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5144579.4,0.0
-ERIC,ERIC,7.940000057220459,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,9137077.0,0.0
+VOD,VOD,11.75,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,5161650.0,0.0
+ERIC,ERIC,7.940000057220459,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,9353430.0,0.0
 WMG,WMG,32.810001373291016,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1993122.3,0.0
-HTHT,HTHT,36.38999938964844,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2344269.7,0.0
-ENSG,ENSG,173.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,347932.1,0.0
+HTHT,HTHT,36.38999938964844,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2345660.0,0.0
+ENSG,ENSG,173.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,348400.0,0.0
 SRAD,SRAD,30.899999618530273,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1275229.0,0.0
-DSGX,DSGX,106.22000122070312,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,591585.9,0.0
+DSGX,DSGX,106.22000122070312,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,592900.0,0.0
 HQY,HQY,97.69999694824219,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1570263.8,0.0
 WIX,WIX,147.14999389648438,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1272119.6,0.0
-RMBS,RMBS,75.4000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1241830.7,0.0
+RMBS,RMBS,75.4000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1241960.0,0.0
 RYTM,RYTM,104.56999969482422,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,582737.7,0.0
 LIF,LIF,88.4800033569336,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,633950.3,0.0
 RRR,RRR,61.970001220703125,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,752205.0,0.0
 GLBE,GLBE,35.060001373291016,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1420691.7,0.0
-RDNT,RDNT,72.30000305175781,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,610869.1,0.0
-MMSI,MMSI,92.1500015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,505015.1,0.0
-FFIN,FFIN,37.2400016784668,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,501139.1,0.0
-DORM,DORM,162.52999877929688,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,201700.2,0.0
-SIGI,SIGI,81.04000091552734,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,563190.4,0.0
-SBRA,SBRA,19.079999923706055,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2315319.9,0.0
-ACAD,ACAD,25.5,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2004514.2,0.0
-MRCY,MRCY,67.88999938964844,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,442045.6,0.0
-VSAT,VSAT,30.100000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4787088.9,0.0
-TCBI,TCBI,87.19999694824219,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,488134.9,0.0
+RDNT,RDNT,72.30000305175781,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,611520.0,0.0
+MMSI,MMSI,92.1500015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,507050.0,0.0
+FFIN,FFIN,37.2400016784668,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,501870.0,0.0
+DORM,DORM,162.52999877929688,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,201700.0,0.0
+SIGI,SIGI,81.04000091552734,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,564520.0,0.0
+SBRA,SBRA,19.079999923706055,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2318330.0,0.0
+ACAD,ACAD,25.5,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2010300.0,0.0
+MRCY,MRCY,67.88999938964844,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,442050.0,0.0
+VSAT,VSAT,30.100000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4792000.0,0.0
+TCBI,TCBI,87.19999694824219,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,488430.0,0.0
 CLBT,CLBT,16.3700008392334,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2048583.7,0.0
-PATK,PATK,114.05999755859375,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,246144.7,0.0
+PATK,PATK,114.05999755859375,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,246510.0,0.0
 WGS,WGS,130.25999450683594,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,645187.9,0.0
-EXPO,EXPO,72.9800033569336,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,469069.5,0.0
+EXPO,EXPO,72.9800033569336,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,469630.0,0.0
 CARG,CARG,36.18000030517578,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1182340.1,0.0
-WULF,WULF,8.869999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,41544216.3,0.0
-VC,VC,125.4000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,285568.4,0.0
+WULF,WULF,8.869999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,41567140.0,0.0
+VC,VC,125.4000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,286660.0,0.0
 PTON,PTON,8.119999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,9172008.1,0.0
-WSFS,WSFS,58.40999984741211,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,273078.3,0.0
-POWL,POWL,270.7300109863281,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,224116.8,0.0
+WSFS,WSFS,58.40999984741211,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,275260.0,0.0
+POWL,POWL,270.7300109863281,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,230780.0,0.0
 ALHC,ALHC,16.299999237060547,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2681216.7,0.0
 MBLY,MBLY,14.850000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3669242.4,0.0
-WSBC,WSBC,32.9900016784668,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,374128.7,0.0
+WSBC,WSBC,32.9900016784668,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,376990.0,0.0
 NMRK,NMRK,17.920000076293945,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1459648.7,0.0
 AMRX,AMRX,9.550000190734863,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1425409.1,0.0
 SUPN,SUPN,45.43000030517578,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,642290.2,0.0
 XMTR,XMTR,49.15999984741211,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,797515.5,0.0
 LQDA,LQDA,28.84000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2329329.6,0.0
-SPNS,SPNS,42.93000030517578,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,682864.1,0.0
+SPNS,SPNS,42.93000030517578,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,683220.0,0.0
 CGON,CGON,30.940000534057617,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,612938.7,0.0
-NBTB,NBTB,44.58000183105469,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,163847.3,0.0
-VICR,VICR,51.89500045776367,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,349301.0,0.0
+NBTB,NBTB,44.58000183105469,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,164210.0,0.0
+VICR,VICR,51.900001525878906,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,349300.0,0.0
 VITL,VITL,51.599998474121094,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1117699.9,0.0
-HUBG,HUBG,37.349998474121094,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,750558.3,0.0
+HUBG,HUBG,37.349998474121094,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,750560.0,0.0
 UPWK,UPWK,16.780000686645508,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2971761.1,0.0
-LMAT,LMAT,97.06999969482422,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,192693.4,0.0
+LMAT,LMAT,97.06999969482422,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,193790.0,0.0
 LFST,LFST,5.46999979019165,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2173170.7,0.0
-ANIP,ANIP,96.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,435287.5,0.0
+ANIP,ANIP,96.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,436250.0,0.0
 SKWD,SKWD,51.15999984741211,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,406836.6,0.0
 AVDX,AVDX,9.9399995803833,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1222324.0,0.0
 ADPT,ADPT,13.020000457763672,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1678687.5,0.0
@@ -887,126 +877,126 @@ DYN,DYN,13.239999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2609083
 BEAM,BEAM,18.540000915527344,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2735452.1,0.0
 BLBD,BLBD,58.06999969482422,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,647395.5,0.0
 GO,GO,18.1200008392334,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2423571.0,0.0
-ASTH,ASTH,30.81999969482422,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,352839.5,0.0
+ASTH,ASTH,30.81999969482422,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,353620.0,0.0
 CDTX,CDTX,64.93000030517578,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,379964.9,0.0
-MNKD,MNKD,5.340000152587891,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7526028.7,0.0
+MNKD,MNKD,5.340000152587891,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7528330.0,0.0
 LILAK,LILAK,8.170000076293945,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1243490.8,0.0
 LILA,LILA,8.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,571026.9,0.0
 OPRA,OPRA,17.799999237060547,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,907430.1,0.0
 FLYW,FLYW,13.050000190734863,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1708158.8,0.0
 EWTX,EWTX,14.619999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,900525.6,0.0
-OMCL,OMCL,33.119998931884766,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,534143.1,0.0
+OMCL,OMCL,33.119998931884766,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,539120.0,0.0
 LGIH,LGIH,65.45999908447266,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,423291.7,0.0
-AVDL,AVDL,14.989999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1495282.8,0.0
-HOPE,HOPE,11.260000228881836,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,625742.8,0.0
-MLKN,MLKN,21.170000076293945,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,390520.0,0.0
+AVDL,AVDL,14.989999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1499780.0,0.0
+HOPE,HOPE,11.260000228881836,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,627120.0,0.0
+MLKN,MLKN,21.170000076293945,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,391140.0,0.0
 METC,METC,24.979999542236328,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2610083.1,0.0
 NAVI,NAVI,13.770000457763672,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,788899.9,0.0
-DCOM,DCOM,30.989999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,167117.3,0.0
+DCOM,DCOM,30.989999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,167330.0,0.0
 EVLV,EVLV,7.889999866485596,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3118375.6,0.0
 XERS,XERS,7.889999866485596,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2041652.1,0.0
 NTLA,NTLA,11.619999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3568718.4,0.0
-NEOG,NEOG,5.739999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4289632.8,0.0
-BLFS,BLFS,25.8700008392334,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,459482.8,0.0
+NEOG,NEOG,5.739999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4296600.0,0.0
+BLFS,BLFS,25.8700008392334,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,460150.0,0.0
 JAMF,JAMF,8.989999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1461439.9,0.0
 ULCC,ULCC,5.179999828338623,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4711410.0,0.0
-ALGT,ALGT,64.2699966430664,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,331601.0,0.0
+ALGT,ALGT,64.2699966430664,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,332140.0,0.0
 FWRG,FWRG,18.65999984741211,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,919447.1,0.0
 TRIN,TRIN,16.190000534057617,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,517250.7,0.0
-NMFC,NMFC,10.640000343322754,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,398207.0,0.0
+NMFC,NMFC,10.640000343322754,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,398680.0,0.0
 REAX,REAX,5.25,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3145506.6,0.0
 STOK,STOK,19.6299991607666,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,896663.0,0.0
 FSUN,FSUN,38.63999938964844,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,235666.1,0.0
-ASTE,ASTE,46.97999954223633,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,212846.8,0.0
-NEO,NEO,8.0600004196167,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3268588.0,0.0
+ASTE,ASTE,46.97999954223633,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,213150.0,0.0
+NEO,NEO,8.0600004196167,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3271260.0,0.0
 ATAI,ATAI,4.559999942779541,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6185073.4,0.0
-AMWD,AMWD,66.44000244140625,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,213367.5,0.0
+AMWD,AMWD,66.44000244140625,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,213570.0,0.0
 FTRE,FTRE,10.510000228881836,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2253426.0,0.0
 NESR,NESR,9.710000038146973,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,881924.4,0.0
 SWIM,SWIM,8.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,607936.7,0.0
-SPTN,SPTN,26.809999465942383,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,622163.1,0.0
+SPTN,SPTN,26.809999465942383,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,622540.0,0.0
 TH,TH,8.6899995803833,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,386215.9,0.0
-LQDT,LQDT,26.93000030517578,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,189696.7,0.0
+LQDT,LQDT,26.93000030517578,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,190560.0,0.0
 LIND,LIND,14.479999542236328,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,405084.3,0.0
-ALNT,ALNT,46.025001525878906,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,174249.2,0.0
-ADTN,ADTN,9.670000076293945,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,777132.9,0.0
-HAFC,HAFC,25.299999237060547,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,180223.5,0.0
+ALNT,ALNT,46.029998779296875,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,174350.0,0.0
+ADTN,ADTN,9.670000076293945,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,778260.0,0.0
+HAFC,HAFC,25.299999237060547,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,180400.0,0.0
 DAWN,DAWN,7.409999847412109,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1071672.2,0.0
-FDUS,FDUS,21.389999389648438,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,157236.8,0.0
-RBBN,RBBN,4.159999847412109,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,509651.4,0.0
-RIGL,RIGL,40.130001068115234,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,773091.8,0.0
+FDUS,FDUS,21.389999389648438,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,157350.0,0.0
+RBBN,RBBN,4.159999847412109,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,509970.0,0.0
+RIGL,RIGL,40.130001068115234,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,773420.0,0.0
 TBPH,TBPH,14.050000190734863,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,596787.8,0.0
 SNCY,SNCY,12.960000038146973,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,699824.2,0.0
 RLAY,RLAY,4.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1145791.0,0.0
 FLGT,FLGT,21.979999542236328,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,223944.1,0.0
 CSTL,CSTL,23.09000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,502991.6,0.0
-PRAA,PRAA,16.959999084472656,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,197615.3,0.0
+PRAA,PRAA,16.959999084472656,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,198390.0,0.0
 BCAX,BCAX,12.0600004196167,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,271566.0,0.0
 TYRA,TYRA,12.140000343322754,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,283728.8,0.0
-HIVE,HIVE,2.7100000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,22560671.0,0.0
+HIVE,HIVE,2.7100000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,22568830.0,0.0
 TERN,TERN,7.059999942779541,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1144974.5,0.0
-SIGA,SIGA,8.489999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,525714.5,0.0
-EGBN,EGBN,19.940000534057617,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,418580.9,0.0
+SIGA,SIGA,8.489999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,525720.0,0.0
+EGBN,EGBN,19.940000534057617,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,419150.0,0.0
 CCAP,CCAP,15.90999984741211,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,240637.6,0.0
-HELE,HELE,25.670000076293945,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,702993.1,0.0
+HELE,HELE,25.670000076293945,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,704770.0,0.0
 BAND,BAND,15.649999618530273,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,225203.4,0.0
-CYRX,CYRX,8.850000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,480437.3,0.0
+CYRX,CYRX,8.850000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,481920.0,0.0
 CNDT,CNDT,2.7899999618530273,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,891368.6,0.0
-ANGO,ANGO,10.729999542236328,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,378447.6,0.0
-KRNY,KRNY,6.699999809265137,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,434933.4,0.0
+ANGO,ANGO,10.729999542236328,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,381300.0,0.0
+KRNY,KRNY,6.699999809265137,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,434930.0,0.0
 IMXI,IMXI,14.569999694824219,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,502703.6,0.0
 CRVS,CRVS,5.730000019073486,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,561769.0,0.0
 RMNI,RMNI,4.389999866485596,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,276853.5,0.0
 IHRT,IHRT,2.2799999713897705,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,547351.6,0.0
-NEWT,NEWT,12.34000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,171596.3,0.0
+NEWT,NEWT,12.34000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,171880.0,0.0
 NPCE,NPCE,9.609999656677246,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,174169.2,0.0
 CTNM,CTNM,10.989999771118164,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,292807.7,0.0
 OPRT,OPRT,6.75,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,699703.2,0.0
 RITR,RITR,4.710000038146973,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,448064.2,0.0
-MPAA,MPAA,14.869999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,181588.6,0.0
+MPAA,MPAA,14.869999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,181710.0,0.0
 LXEO,LXEO,4.96999979019165,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,313136.8,0.0
 LPRO,LPRO,2.259999990463257,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,645340.2,0.0
 PBYI,PBYI,5.110000133514404,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,588695.5,0.0
 HITI,HITI,3.1700000762939453,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1299790.5,0.0
 NB,NB,4.550000190734863,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3008493.6,0.0
-GEOS,GEOS,18.850000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,223192.9,0.0
+GEOS,GEOS,18.850000381469727,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,223320.0,0.0
 BZUN,BZUN,3.859999895095825,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,717076.2,0.0
 INGN,INGN,8.119999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,188927.5,0.0
 XGN,XGN,9.829999923706055,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,214182.2,0.0
-SSSS,SSSS,8.699999809265137,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,157882.8,0.0
-INSG,INSG,12.8100004196167,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,372006.4,0.0
+SSSS,SSSS,8.699999809265137,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,157880.0,0.0
+INSG,INSG,12.8100004196167,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,372010.0,0.0
 CGTX,CGTX,2.5899999141693115,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,10606803.8,0.0
 TRUE,TRUE,2.119999885559082,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,391854.1,0.0
 BIOA,BIOA,4.710000038146973,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,208196.9,0.0
 MIST,MIST,1.7799999713897705,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1081998.4,0.0
-THTX,THTX,3.25,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,413175.1,0.0
+THTX,THTX,3.25,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,413210.0,0.0
 DLTH,DLTH,3.5899999141693115,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6918192.5,0.0
 ZURA,ZURA,2.069999933242798,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,324606.6,0.0
 OSS,OSS,5.820000171661377,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,797216.1,0.0
 PRPL,PRPL,1.100000023841858,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,589412.7,0.0
-TROO,TROO,1.0099999904632568,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,169521.3,0.0
+TROO,TROO,1.0099999904632568,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,169580.0,0.0
 QIPT,QIPT,2.5999999046325684,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1321943.6,0.0
 GMHS,GMHS,2.0299999713897705,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,16170637.9,0.0
-EDAP,EDAP,2.5199999809265137,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,268724.7,0.0
+EDAP,EDAP,2.5199999809265137,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,268720.0,0.0
 IFRX,IFRX,1.5700000524520874,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1360903.7,0.0
 ZTEK,ZTEK,0.878000020980835,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1587566.8,0.0
-GNSS,GNSS,2.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,151414.2,0.0
+GNSS,GNSS,2.0,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,151400.0,0.0
 WRAP,WRAP,1.7400000095367432,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,343221.1,0.0
 KLRS,KLRS,4.659999847412109,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1248170.4,0.0
-QVCGA,QVCGA,9.84000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,425604.8,0.0
+QVCGA,QVCGA,9.84000015258789,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,425690.0,0.0
 NAMI,NAMI,1.0800000429153442,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4849990.8,0.0
 CIGL,CIGL,2.9100000858306885,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,13311802.6,0.0
 PRLD,PRLD,1.1399999856948853,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,297315.7,0.0
 PAVS,PAVS,0.9319000244140625,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,266821.8,0.0
-DRRX,DRRX,1.909999966621399,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,538916.8,0.0
+DRRX,DRRX,1.909999966621399,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,538940.0,0.0
 MOBX,MOBX,1.059999942779541,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2485838.5,0.0
-RMTI,RMTI,1.6799999475479126,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4593690.1,0.0
+RMTI,RMTI,1.6799999475479126,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4599980.0,0.0
 ALXO,ALXO,1.0800000429153442,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1073395.5,0.0
-SCWO,SCWO,0.36410000920295715,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1615279.9,0.0
+SCWO,SCWO,0.36000001430511475,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1615380.0,0.0
 PTNM,PTNM,2.1500000953674316,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6617936.0,0.0
 LXEH,LXEH,2.1500000953674316,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4069879.2,0.0
 LVTX,LVTX,1.5499999523162842,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,150663.2,0.0
-SKBL,SKBL,1.2999999523162842,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,12455161.1,0.0
+SKBL,SKBL,1.2999999523162842,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,12455620.0,0.0
 XLO,XLO,0.7179999947547913,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,397819.9,0.0
 ASBP,ASBP,0.5447999835014343,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,7623655.9,0.0
 RLYB,RLYB,0.5860000252723694,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,431663.5,0.0
@@ -1015,11 +1005,11 @@ STI,STI,6.860000133514404,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,9305068.
 LEXX,LEXX,0.965399980545044,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,195579.0,0.0
 PTHL,PTHL,1.0299999713897705,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3220947.8,0.0
 WETH,WETH,1.1399999856948853,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,345143.4,0.0
-IBIO,IBIO,0.8112999796867371,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3302731.9,0.0
+IBIO,IBIO,0.8100000023841858,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,3302990.0,0.0
 SHFS,SHFS,3.819999933242798,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,4447993.0,0.0
 IOTR,IOTR,0.42980000376701355,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,169543.0,0.0
 STSS,STSS,10.449999809265137,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,6166056.2,0.0
-TLPH,TLPH,0.5156999826431274,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,438151.9,0.0
+TLPH,TLPH,0.5199999809265137,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,438150.0,0.0
 NCI,NCI,2.0299999713897705,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2181061.2,0.0
 LCFY,LCFY,5.329999923706055,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,2983880.9,0.0
 POLA,POLA,2.890000104904175,,Unknown,Unknown,Buy,2,NEUTRAL,,,,,NEUTRAL,,,,1707953.4,0.0
