@@ -95,15 +95,12 @@ def tv_scan_batch(symbols_tv: List[str]) -> Dict[str, Dict]:
             print(f"[TV] HTTP {r.status_code} -> skip batch")
             return out
         data = r.json()
-        # la réponse list "data" contient entries avec "s" (symbol) et "d" (values)
         for row in data.get("data", []):
             sym = row.get("s", "")
-            # sym format "NASDAQ:XYZ" → garde XYZ (on se base sur notre liste)
             base = sym.split(":")[-1]
             vals = row.get("d", [])
             tv_score = _safe_num(vals[0]) if vals else None
             tv_reco = _label_from_tv_score(tv_score)
-            # on ne sait pas si cela correspond NASDAQ:XYZ ou NYSE:XYZ ; on set si pas déjà présent
             if base and base not in out:
                 out[base] = {"tv_score": tv_score, "tv_reco": tv_reco}
         print(f"[TV] filled {len(out)}/{len(symbols_tv)}")
@@ -126,15 +123,12 @@ def finnhub_analyst(symbol_yf: str) -> Tuple[str | None, int | None]:
         arr = r.json()
         if not isinstance(arr, list) or not arr:
             return (None, None)
-        # on prend la plus récente (première)
         rec = arr[0]
-        # votes: somme des catégories
         votes = 0
         for k in ("strongBuy","buy","hold","sell","strongSell"):
             v = rec.get(k)
             if isinstance(v, int):
                 votes += v
-        # label simple: si (strongBuy+buy) >> (sell) -> BUY ; si inverse -> SELL ; sinon HOLD
         sb = (rec.get("strongBuy") or 0) + (rec.get("buy") or 0)
         ss = (rec.get("strongSell") or 0) + (rec.get("sell") or 0)
         if sb >= ss + 3:
@@ -176,40 +170,54 @@ def yf_price_fast(symbol_yf: str) -> float | None:
 
 # --------- Main pipeline ---------
 def main():
+    # 0) Univers filtré
     uni = _read_csv_required("universe_in_scope.csv")
     print(f"[UNI] in-scope: {len(uni)}")
 
-    # mapping secteurs
-    cat = _read_csv_required("sector_catalog.csv")  # contient au moins ticker,sector,industry
-    cat_cols = [c.lower() for c in cat.columns]
-    # normalise colonnes
+    # 1) Mapping secteurs depuis sector_catalog (robuste aux noms de colonnes)
+    cat = _read_csv_required("sector_catalog.csv")
     def pickcol(df, names):
         for n in names:
-            if n in df.columns: return n
-            # tolère case insensitive
+            if n in df.columns:
+                return n
             for c in df.columns:
-                if c.lower() == n.lower(): return c
+                if c.lower() == n.lower():
+                    return c
         return None
-    tcol = pickcol(cat, ["ticker","ticker_yf","symbol"])
-    scol = pickcol(cat, ["sector"])
-    icol = pickcol(cat, ["industry","gics_sub_industry","sub_industry"])
 
-    cat = cat.rename(columns={tcol:"ticker_yf", scol:"sector", icol:"industry"})[["ticker_yf","sector","industry"]].drop_duplicates("ticker_yf")
+    tcol = pickcol(cat, ["ticker", "ticker_yf", "symbol"])
+    scol = pickcol(cat, ["sector", "gics sector", "gics_sector"])
+    icol = pickcol(cat, ["industry", "gics sub-industry", "gics_sub_industry", "sub_industry"])
 
-    # join mapping sur univers
+    if tcol is None:
+        print("[CAT] WARNING: no ticker column found in sector_catalog.csv -> sector/industry fallback to Unknown")
+        cat = pd.DataFrame(columns=["ticker_yf", "sector", "industry"])
+    else:
+        rename_map = {tcol: "ticker_yf"}
+        if scol is not None: rename_map[scol] = "sector"
+        if icol is not None: rename_map[icol] = "industry"
+        cat = cat.rename(columns=rename_map)
+        if "sector" not in cat.columns: cat["sector"] = "Unknown"
+        if "industry" not in cat.columns: cat["industry"] = "Unknown"
+        cat = cat[["ticker_yf", "sector", "industry"]].drop_duplicates("ticker_yf")
+
     base = uni.merge(cat, on="ticker_yf", how="left")
+    if "sector" not in base.columns: base["sector"] = "Unknown"
+    if "industry" not in base.columns: base["industry"] = "Unknown"
     base["sector"] = base["sector"].fillna("Unknown")
     base["industry"] = base["industry"].fillna("Unknown")
 
-    # tri par liquidité (avg_dollar_vol desc) puis mcap asc (pour départager)
+    # 2) Sélection TOP_N par liquidité
     base["avg_dollar_vol"] = pd.to_numeric(base.get("avg_dollar_vol"), errors="coerce")
-    base["mcap_usd"] = pd.to_numeric(base.get("mcap_usd"), errors="coerce")
-    base = base.sort_values(["avg_dollar_vol","mcap_usd"], ascending=[False, True])
-    cand = base.head(TOP_N).reset_index(drop=True)
-    print(f"[PICK] top {len(cand)} by liquidity for deep enrichment")
+    cand = (base.sort_values(["avg_dollar_vol","mcap_usd"], ascending=[False, True])
+                 .head(TOP_N)
+                 .reset_index(drop=True))
+    # ticker_tv peut venir d'universe; sinon on le construit
+    if "ticker_tv" not in cand.columns:
+        cand["ticker_tv"] = cand["ticker_yf"].map(_yf_symbol_to_tv)
 
-    # ---------- Enrichissement cascade ----------
-    # prix (Yahoo)
+    # 3) Enrichissement cascade
+    # 3.1 Prix (Yahoo)
     prices = []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         prices.append(yf_price_fast(sym))
@@ -218,8 +226,8 @@ def main():
         time.sleep(SLEEP_BETWEEN_CALLS/2)
     cand["price"] = prices
 
-    # TradingView en batch
-    syms_tv = [ _yf_symbol_to_tv(s) for s in cand["ticker_yf"] ]
+    # 3.2 TradingView (batch)
+    syms_tv = [_yf_symbol_to_tv(s) for s in cand["ticker_yf"]]
     tv_out: Dict[str, Dict] = {}
     for i in range(0, len(syms_tv), TV_BATCH):
         chunk = [s for s in syms_tv[i:i+TV_BATCH] if s]
@@ -229,10 +237,10 @@ def main():
         tv_out.update(part)
         time.sleep(SLEEP_BETWEEN_CALLS)
 
-    cand["tv_score"] = [ tv_out.get(_yf_symbol_to_tv(s),{}).get("tv_score") for s in cand["ticker_yf"] ]
-    cand["tv_reco"]  = [ tv_out.get(_yf_symbol_to_tv(s),{}).get("tv_reco")  for s in cand["ticker_yf"] ]
+    cand["tv_score"] = [tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_score") for s in cand["ticker_yf"]]
+    cand["tv_reco"]  = [tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_reco")  for s in cand["ticker_yf"]]
 
-    # Finnhub (analystes)
+    # 3.3 Finnhub (analystes)
     an_bucket, an_votes = [], []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         b, v = finnhub_analyst(sym)
@@ -244,60 +252,54 @@ def main():
     cand["analyst_bucket"] = an_bucket
     cand["analyst_votes"]  = an_votes
 
-    # Fallback Alpha Vantage pour sector/industry si Unknown
+    # 3.4 Fallback Alpha Vantage pour sector/industry si Unknown
     if ALPHAV_KEY:
-        miss = cand["sector"].eq("Unknown").sum()
+        miss = int(cand["sector"].eq("Unknown").sum())
         if miss:
             print(f"[AV] trying to fill sector/industry for {miss} unknown…")
         sec_f, ind_f = [], []
-        for i, row in cand.iterrows():
+        for _, row in cand.iterrows():
             if row["sector"] != "Unknown":
                 sec_f.append(None); ind_f.append(None); continue
             sec, ind = alphav_overview(row["ticker_yf"])
             sec_f.append(sec); ind_f.append(ind)
             time.sleep(SLEEP_BETWEEN_CALLS)
-        # uniquement si non-null -> remplace
         for i, (sec, ind) in enumerate(zip(sec_f, ind_f)):
-            if pd.notna(sec) and isinstance(sec, str) and sec.strip():
+            if isinstance(sec, str) and sec.strip():
                 cand.loc[i, "sector"] = sec
-            if pd.notna(ind) and isinstance(ind, str) and ind.strip():
+            if isinstance(ind, str) and ind.strip():
                 cand.loc[i, "industry"] = ind
 
-    # ---------- Pillars & score ----------
-    # Tech/TV pillar
+    # 4) Pillars & score
     def is_strong_tv(v):
         return str(v or "").upper() == "STRONG_BUY"
-    # Analyst pillar
     def is_bull_an(v):
         return _bucket_from_analyst(v) == "BUY"
 
     cand["p_tv"] = cand["tv_reco"].map(is_strong_tv)
     cand["p_an"] = cand["analyst_bucket"].map(is_bull_an)
-    # (optionnel) p_tech_local si tu ajoutes plus tard → pour l’instant = p_tv
-    cand["p_tech"] = cand["p_tv"]
+    cand["p_tech"] = cand["p_tv"]  # placeholder
 
     cand["pillars_met"] = cand[["p_tech","p_tv","p_an"]].fillna(False).sum(axis=1)
-    # votes_bin (pour résumé)
+
     votes = pd.to_numeric(cand["analyst_votes"], errors="coerce")
     cand["votes_bin"] = pd.cut(votes.fillna(-1), bins=[-1,9,14,19,999], labels=["≤9","10–14","15–19","20+"])
 
-    # score agrégé simple : tv_score pondéré + bonus pour pillars & votes
-    s_tv = cand["tv_score"].fillna(0)
-    s_p  = cand["pillars_met"].fillna(0)
+    s_tv = pd.to_numeric(cand["tv_score"], errors="coerce").fillna(0)
+    s_p  = pd.to_numeric(cand["pillars_met"], errors="coerce").fillna(0)
     s_v  = votes.fillna(0).clip(lower=0, upper=30) / 30.0
     cand["rank_score"] = (s_tv * 0.6) + (s_p * 0.3) + (s_v * 0.1)
 
-    # ---------- Buckets ----------
-    # confirmed: STRONG_BUY TV + analyst BUY (ou >= 12 votes “bull” de manière large)
-    cond_confirmed = (cand["tv_reco"].str.upper().eq("STRONG_BUY")) & (cand["analyst_bucket"].map(_bucket_from_analyst).eq("BUY"))
-    # pre_signal: TV fort (BUY ou STRONG_BUY) mais analyst HOLD/low votes
-    cond_pre = (cand["tv_reco"].str.upper().isin(["STRONG_BUY","BUY"])) & (~cond_confirmed)
+    # 5) Buckets
+    tvu = cand["tv_reco"].astype(str).str.upper()
+    cond_confirmed = (tvu.eq("STRONG_BUY")) & (cand["analyst_bucket"].map(_bucket_from_analyst).eq("BUY"))
+    cond_pre       = tvu.isin(["STRONG_BUY","BUY"]) & (~cond_confirmed)
 
     cand["bucket"] = "other"
     cand.loc[cond_pre, "bucket"] = "pre_signal"
     cand.loc[cond_confirmed, "bucket"] = "confirmed"
 
-    # tri final pour export
+    # 6) Tri & exports
     export_cols = [
         "ticker_yf","ticker_tv","price","mcap_usd","avg_dollar_vol",
         "tv_score","tv_reco","analyst_bucket","analyst_votes",
@@ -305,13 +307,11 @@ def main():
         "p_tech","p_tv","p_an","pillars_met","votes_bin",
         "rank_score","bucket"
     ]
-    # ticker_tv peut venir de universe_in_scope.csv
     if "ticker_tv" not in cand.columns:
         cand["ticker_tv"] = cand["ticker_yf"].map(_yf_symbol_to_tv)
 
     cand = cand[export_cols].copy().sort_values("rank_score", ascending=False).reset_index(drop=True)
 
-    # ---------- Exports ----------
     _save(cand, "candidates_all_ranked.csv")
 
     confirmed = cand[cand["bucket"] == "confirmed"].copy()
@@ -320,11 +320,17 @@ def main():
     pre = cand[cand["bucket"] == "pre_signal"].copy()
     _save(pre, "anticipative_pre_signals.csv")
 
-    # events placeholder (à brancher sur tes détections “news/events”)
     events = cand.head(0).copy()
     _save(events, "event_driven_signals.csv")
 
-    # ---------- Couverture / Diagnostics ----------
+    # 7) signals_history minimal (pour l’Action/backtest)
+    from datetime import datetime, timezone
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    sig_hist = cand[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]].copy()
+    sig_hist.insert(0, "date", today)
+    _save(sig_hist, "signals_history.csv")
+
+    # 8) Couverture / Diagnostics
     cov = {
         "topN": int(len(cand)),
         "tv_reco_filled": int(cand["tv_reco"].notna().sum()),
