@@ -1,263 +1,587 @@
-date,bucket,sector,count
-2025-W35,confirmed,Information Technology,1
-2025-W35,confirmed,Health Care,1
-2025-W35,pre,Information Technology,70
-2025-W35,pre,Health Care,40
-2025-W35,pre,Industrials,66
-2025-W35,pre,Energy,27
-2025-W35,pre,Consumer Discretionary,60
-2025-W35,pre,Real Estate,46
-2025-W35,pre,Communication Services,21
-2025-W35,pre,Financials,73
-2025-W35,pre,Consumer Staples,16
-2025-W35,pre,Utilities,9
-2025-W35,pre,Materials,26
-2025-W35,pre,Healthcare,2
-2025-W35,pre,Consumer Cyclical,2
-2025-W35,pre,Technology,2
-2025-W35,pre,Financial Services,1
-2025-W35,events,Information Technology,99
-2025-W35,events,Health Care,76
-2025-W35,events,Energy,34
-2025-W35,events,Consumer Discretionary,87
-2025-W35,events,Industrials,122
-2025-W35,events,Real Estate,59
-2025-W35,events,Communication Services,24
-2025-W35,events,Financials,91
-2025-W35,events,Consumer Staples,47
-2025-W35,events,Utilities,37
-2025-W35,events,Materials,36
-2025-W35,events,Healthcare,1
-2025-W35,events,Consumer Cyclical,1
-2025-W35,events,Technology,1
-2025-09-02T19:20:27Z,,Communication Services,49
-2025-09-02T19:20:27Z,,Consumer Discretionary,126
-2025-09-02T19:20:27Z,,Consumer Staples,62
-2025-09-02T19:20:27Z,,Energy,37
-2025-09-02T19:20:27Z,,Financials,154
-2025-09-02T19:20:27Z,,Health Care,106
-2025-09-02T19:20:27Z,,Industrials,173
-2025-09-02T19:20:27Z,,Information Technology,144
-2025-09-02T19:20:27Z,,Materials,56
-2025-09-02T19:20:27Z,,Real Estate,62
-2025-09-02T19:20:27Z,,Utilities,41
-2025-09-02T20:01:16Z,,Communication Services,49
-2025-09-02T20:01:16Z,,Consumer Discretionary,126
-2025-09-02T20:01:16Z,,Consumer Staples,62
-2025-09-02T20:01:16Z,,Energy,37
-2025-09-02T20:01:16Z,,Financials,154
-2025-09-02T20:01:16Z,,Health Care,106
-2025-09-02T20:01:16Z,,Industrials,173
-2025-09-02T20:01:16Z,,Information Technology,144
-2025-09-02T20:01:16Z,,Materials,56
-2025-09-02T20:01:16Z,,Real Estate,62
-2025-09-02T20:01:16Z,,Utilities,41
-2025-09-02T22:34:55Z,,Communication Services,49
-2025-09-02T22:34:55Z,,Consumer Discretionary,126
-2025-09-02T22:34:55Z,,Consumer Staples,62
-2025-09-02T22:34:55Z,,Energy,37
-2025-09-02T22:34:55Z,,Financials,154
-2025-09-02T22:34:55Z,,Health Care,106
-2025-09-02T22:34:55Z,,Industrials,173
-2025-09-02T22:34:55Z,,Information Technology,144
-2025-09-02T22:34:55Z,,Materials,56
-2025-09-02T22:34:55Z,,Real Estate,62
-2025-09-02T22:34:55Z,,Utilities,41
-2025-09-02T23:12:53Z,,Communication Services,49
-2025-09-02T23:12:53Z,,Consumer Discretionary,126
-2025-09-02T23:12:53Z,,Consumer Staples,62
-2025-09-02T23:12:53Z,,Energy,37
-2025-09-02T23:12:53Z,,Financials,154
-2025-09-02T23:12:53Z,,Health Care,106
-2025-09-02T23:12:53Z,,Industrials,173
-2025-09-02T23:12:53Z,,Information Technology,144
-2025-09-02T23:12:53Z,,Materials,56
-2025-09-02T23:12:53Z,,Real Estate,62
-2025-09-02T23:12:53Z,,Utilities,41
-2025-09-03T14:01:36Z,,Communication Services,49
-2025-09-03T14:01:36Z,,Consumer Discretionary,126
-2025-09-03T14:01:36Z,,Consumer Staples,62
-2025-09-03T14:01:36Z,,Energy,37
-2025-09-03T14:01:36Z,,Financials,154
-2025-09-03T14:01:36Z,,Health Care,106
-2025-09-03T14:01:36Z,,Industrials,173
-2025-09-03T14:01:36Z,,Information Technology,144
-2025-09-03T14:01:36Z,,Materials,56
-2025-09-03T14:01:36Z,,Real Estate,62
-2025-09-03T14:01:36Z,,Utilities,41
-2025-09-03T17:31:27Z,,Communication Services,49
-2025-09-03T17:31:27Z,,Consumer Discretionary,126
-2025-09-03T17:31:27Z,,Consumer Staples,62
-2025-09-03T17:31:27Z,,Energy,37
-2025-09-03T17:31:27Z,,Financials,154
-2025-09-03T17:31:27Z,,Health Care,106
-2025-09-03T17:31:27Z,,Industrials,173
-2025-09-03T17:31:27Z,,Information Technology,144
-2025-09-03T17:31:27Z,,Materials,56
-2025-09-03T17:31:27Z,,Real Estate,62
-2025-09-03T17:31:27Z,,Utilities,41
-2025-09-03T18:27:11Z,,Communication Services,49
-2025-09-03T18:27:11Z,,Consumer Discretionary,126
-2025-09-03T18:27:11Z,,Consumer Staples,62
-2025-09-03T18:27:11Z,,Energy,37
-2025-09-03T18:27:11Z,,Financials,154
-2025-09-03T18:27:11Z,,Health Care,106
-2025-09-03T18:27:11Z,,Industrials,173
-2025-09-03T18:27:11Z,,Information Technology,144
-2025-09-03T18:27:11Z,,Materials,56
-2025-09-03T18:27:11Z,,Real Estate,62
-2025-09-03T18:27:11Z,,Utilities,41
-2025-09-03T19:27:27Z,,Communication Services,49
-2025-09-03T19:27:27Z,,Consumer Discretionary,126
-2025-09-03T19:27:27Z,,Consumer Staples,62
-2025-09-03T19:27:27Z,,Energy,37
-2025-09-03T19:27:27Z,,Financials,154
-2025-09-03T19:27:27Z,,Health Care,106
-2025-09-03T19:27:27Z,,Industrials,173
-2025-09-03T19:27:27Z,,Information Technology,144
-2025-09-03T19:27:27Z,,Materials,56
-2025-09-03T19:27:27Z,,Real Estate,62
-2025-09-03T19:27:27Z,,Utilities,41
-2025-09-03T23:45:04Z,,Communication Services,49
-2025-09-03T23:45:04Z,,Consumer Discretionary,126
-2025-09-03T23:45:04Z,,Consumer Staples,62
-2025-09-03T23:45:04Z,,Energy,37
-2025-09-03T23:45:04Z,,Financials,154
-2025-09-03T23:45:04Z,,Health Care,106
-2025-09-03T23:45:04Z,,Industrials,173
-2025-09-03T23:45:04Z,,Information Technology,144
-2025-09-03T23:45:04Z,,Materials,56
-2025-09-03T23:45:04Z,,Real Estate,62
-2025-09-03T23:45:04Z,,Utilities,41
-2025-09-04T00:19:57Z,,Communication Services,49
-2025-09-04T00:19:57Z,,Consumer Discretionary,126
-2025-09-04T00:19:57Z,,Consumer Staples,62
-2025-09-04T00:19:57Z,,Energy,37
-2025-09-04T00:19:57Z,,Financials,154
-2025-09-04T00:19:57Z,,Health Care,106
-2025-09-04T00:19:57Z,,Industrials,173
-2025-09-04T00:19:57Z,,Information Technology,144
-2025-09-04T00:19:57Z,,Materials,56
-2025-09-04T00:19:57Z,,Real Estate,62
-2025-09-04T00:19:57Z,,Utilities,41
-2025-09-04T01:46:54Z,,Communication Services,49
-2025-09-04T01:46:54Z,,Consumer Discretionary,126
-2025-09-04T01:46:54Z,,Consumer Staples,62
-2025-09-04T01:46:54Z,,Energy,37
-2025-09-04T01:46:54Z,,Financials,154
-2025-09-04T01:46:54Z,,Health Care,106
-2025-09-04T01:46:54Z,,Industrials,173
-2025-09-04T01:46:54Z,,Information Technology,144
-2025-09-04T01:46:54Z,,Materials,56
-2025-09-04T01:46:54Z,,Real Estate,62
-2025-09-04T01:46:54Z,,Utilities,41
-2025-09-04T02:23:55Z,,Communication Services,49
-2025-09-04T02:23:55Z,,Consumer Discretionary,126
-2025-09-04T02:23:55Z,,Consumer Staples,62
-2025-09-04T02:23:55Z,,Energy,37
-2025-09-04T02:23:55Z,,Financials,154
-2025-09-04T02:23:55Z,,Health Care,106
-2025-09-04T02:23:55Z,,Industrials,173
-2025-09-04T02:23:55Z,,Information Technology,144
-2025-09-04T02:23:55Z,,Materials,56
-2025-09-04T02:23:55Z,,Real Estate,62
-2025-09-04T02:23:55Z,,Utilities,41
-2025-09-04T15:58:31Z,,Communication Services,49
-2025-09-04T15:58:31Z,,Consumer Discretionary,126
-2025-09-04T15:58:31Z,,Consumer Staples,62
-2025-09-04T15:58:31Z,,Energy,37
-2025-09-04T15:58:31Z,,Financials,154
-2025-09-04T15:58:31Z,,Health Care,106
-2025-09-04T15:58:31Z,,Industrials,173
-2025-09-04T15:58:31Z,,Information Technology,144
-2025-09-04T15:58:31Z,,Materials,56
-2025-09-04T15:58:31Z,,Real Estate,62
-2025-09-04T15:58:31Z,,Utilities,41
-2025-09-04T16:49:55Z,,Communication Services,49
-2025-09-04T16:49:55Z,,Consumer Discretionary,126
-2025-09-04T16:49:55Z,,Consumer Staples,62
-2025-09-04T16:49:55Z,,Energy,37
-2025-09-04T16:49:55Z,,Financials,154
-2025-09-04T16:49:55Z,,Health Care,106
-2025-09-04T16:49:55Z,,Industrials,173
-2025-09-04T16:49:55Z,,Information Technology,144
-2025-09-04T16:49:55Z,,Materials,56
-2025-09-04T16:49:55Z,,Real Estate,62
-2025-09-04T16:49:55Z,,Utilities,41
-2025-09-04T18:30:41Z,,Communication Services,49
-2025-09-04T18:30:41Z,,Consumer Discretionary,126
-2025-09-04T18:30:41Z,,Consumer Staples,62
-2025-09-04T18:30:41Z,,Energy,37
-2025-09-04T18:30:41Z,,Financials,154
-2025-09-04T18:30:41Z,,Health Care,106
-2025-09-04T18:30:41Z,,Industrials,173
-2025-09-04T18:30:41Z,,Information Technology,144
-2025-09-04T18:30:41Z,,Materials,56
-2025-09-04T18:30:41Z,,Real Estate,62
-2025-09-04T18:30:41Z,,Utilities,41
-2025-09-04T22:24:00Z,,Communication Services,49
-2025-09-04T22:24:00Z,,Consumer Discretionary,126
-2025-09-04T22:24:00Z,,Consumer Staples,62
-2025-09-04T22:24:00Z,,Energy,37
-2025-09-04T22:24:00Z,,Financials,154
-2025-09-04T22:24:00Z,,Health Care,106
-2025-09-04T22:24:00Z,,Industrials,173
-2025-09-04T22:24:00Z,,Information Technology,144
-2025-09-04T22:24:00Z,,Materials,56
-2025-09-04T22:24:00Z,,Real Estate,62
-2025-09-04T22:24:00Z,,Utilities,41
-2025-09-04T23:20:26Z,,Communication Services,49
-2025-09-04T23:20:26Z,,Consumer Discretionary,126
-2025-09-04T23:20:26Z,,Consumer Staples,62
-2025-09-04T23:20:26Z,,Energy,37
-2025-09-04T23:20:26Z,,Financials,154
-2025-09-04T23:20:26Z,,Health Care,106
-2025-09-04T23:20:26Z,,Industrials,173
-2025-09-04T23:20:26Z,,Information Technology,144
-2025-09-04T23:20:26Z,,Materials,56
-2025-09-04T23:20:26Z,,Real Estate,62
-2025-09-04T23:20:26Z,,Utilities,41
-2025-09-05T00:25:06Z,,Communication Services,49
-2025-09-05T00:25:06Z,,Consumer Discretionary,126
-2025-09-05T00:25:06Z,,Consumer Staples,62
-2025-09-05T00:25:06Z,,Energy,37
-2025-09-05T00:25:06Z,,Financials,154
-2025-09-05T00:25:06Z,,Health Care,106
-2025-09-05T00:25:06Z,,Industrials,173
-2025-09-05T00:25:06Z,,Information Technology,144
-2025-09-05T00:25:06Z,,Materials,56
-2025-09-05T00:25:06Z,,Real Estate,62
-2025-09-05T00:25:06Z,,Utilities,41
-2025-W36,confirmed,Information Technology,10
-2025-W36,confirmed,Consumer Discretionary,12
-2025-W36,confirmed,Communication Services,3
-2025-W36,confirmed,Industrials,11
-2025-W36,confirmed,Real Estate,5
-2025-W36,confirmed,Health Care,5
-2025-W36,confirmed,Materials,1
-2025-W36,confirmed,Unknown,113
-2025-W36,confirmed,Financials,30
-2025-W36,confirmed,Consumer Staples,4
-2025-W36,confirmed,Energy,2
-2025-W36,pre,Information Technology,46
-2025-W36,pre,Consumer Discretionary,64
-2025-W36,pre,Communication Services,18
-2025-W36,pre,Industrials,68
-2025-W36,pre,Real Estate,29
-2025-W36,pre,Health Care,32
-2025-W36,pre,Materials,14
-2025-W36,pre,Unknown,626
-2025-W36,pre,Financials,87
-2025-W36,pre,Consumer Staples,17
-2025-W36,pre,Energy,17
-2025-W36,pre,Utilities,2
-2025-W36,events,Information Technology,16
-2025-W36,events,Consumer Discretionary,24
-2025-W36,events,Communication Services,6
-2025-W36,events,Industrials,20
-2025-W36,events,Real Estate,9
-2025-W36,events,Health Care,7
-2025-W36,events,Materials,6
-2025-W36,events,Financials,18
-2025-W36,events,Energy,7
-2025-W36,events,Consumer Staples,1
+ticker,sector,industry
+MMM,Industrials,Industrial Conglomerates
+AOS,Industrials,Building Products
+AAON,Industrials,Building Products
+ABT,Health Care,Health Care Equipment
+ABBV,Health Care,Pharmaceuticals
+ACHC,Health Care,Health Care Facilities
+ACN,Information Technology,IT Consulting & Other Services
+AYI,Industrials,Electrical Components & Equipment
+ADBE,Information Technology,Application Software
+WMS,Industrials,Unknown
+AMD,Information Technology,Semiconductors
+ACM,Industrials,Construction & Engineering
+AMG,Financials,Asset Management & Custody Banks
+AFRM,Information Technology,Unknown
+AFL,Financials,Life & Health Insurance
+AGCO,Industrials,Agricultural & Farm Machinery
+A,Health Care,Health Care Equipment
+AGNC,Financials,Unknown
+AL,Industrials,Unknown
+AKAM,Information Technology,Internet Services & Infrastructure
+ALK,Industrials,Passenger Airlines
+ALGN,Health Care,Health Care Supplies
+ALLE,Industrials,Building Products
+ALGM,Information Technology,Unknown
+ALSN,Industrials,Unknown
+ALL,Financials,Property & Casualty Insurance
+ALLY,Financials,Unknown
+ALNY,Health Care,Unknown
+DOX,Information Technology,Unknown
+AMTM,Industrials,Diversified Support Services
+AAL,Industrials,Passenger Airlines
+AXP,Financials,Consumer Finance
+AFG,Financials,Multi-line Insurance
+AIG,Financials,Property & Casualty Insurance
+AMP,Financials,Asset Management & Custody Banks
+AME,Industrials,Electrical Components & Equipment
+AMGN,Health Care,Biotechnology
+AMKR,Information Technology,Semiconductors
+APH,Information Technology,Electronic Components
+ADI,Information Technology,Semiconductors
+NLY,Financials,Unknown
+AON,Financials,Insurance Brokers
+APG,Industrials,Construction & Engineering
+APLS,Health Care,Biotechnology
+APO,Financials,Asset Management & Custody Banks
+APPF,Information Technology,Application Software
+AAPL,Information Technology,"Technology Hardware, Storage & Peripherals"
+AIT,Industrials,Trading Companies & Distributors
+AMAT,Information Technology,Semiconductor Materials & Equipment
+APP,Information Technology,Application Software
+ACGL,Financials,Reinsurance
+ARES,Financials,Unknown
+ANET,Information Technology,Communications Equipment
+AWI,Industrials,Unknown
+ARW,Information Technology,Technology Distributors
+AJG,Financials,Insurance Brokers
+AIZ,Financials,Multi-line Insurance
+AGO,Financials,Unknown
+ALAB,Information Technology,Semiconductors
+ATI,Industrials,Aerospace & Defense
+TEAM,Information Technology,Application Software
+AUR,Information Technology,Unknown
+ADSK,Information Technology,Application Software
+ADP,Industrials,Human Resource & Employment Services
+AVTR,Health Care,Unknown
+CAR,Industrials,Passenger Ground Transportation
+AVT,Information Technology,Technology Distributors
+AXS,Financials,Unknown
+AXON,Industrials,Aerospace & Defense
+BAC,Financials,Diversified Banks
+OZK,Financials,Regional Banks
+BAX,Health Care,Health Care Equipment
+BDX,Health Care,Health Care Equipment
+BSY,Information Technology,Unknown
+BRK-B,Financials,Multi-Sector Holdings
+BILL,Information Technology,Unknown
+BIO,Health Care,Life Sciences Tools & Services
+TECH,Health Care,Life Sciences Tools & Services
+BIIB,Health Care,Biotechnology
+BMRN,Health Care,Unknown
+BLK,Financials,Asset Management & Custody Banks
+BX,Financials,Asset Management & Custody Banks
+XYZ,Financials,Transaction & Payment Processing Services
+OWL,Financials,Unknown
+BK,Financials,Asset Management & Custody Banks
+BA,Industrials,Aerospace & Defense
+BOKF,Financials,Unknown
+BAH,Industrials,Unknown
+BSX,Health Care,Health Care Equipment
+BHF,Financials,Life & Health Insurance
+BMY,Health Care,Health Care Distributors
+AVGO,Information Technology,Semiconductors
+BR,Industrials,Data Processing & Outsourced Services
+BAM,Financials,Asset Management & Custody Banks
+BRO,Financials,Insurance Brokers
+BRKR,Health Care,Health Care Equipment
+BLDR,Industrials,Building Products
+BWXT,Industrials,Unknown
+CHRW,Industrials,Air Freight & Logistics
+CACI,Industrials,Diversified Support Services
+CDNS,Information Technology,Application Software
+COF,Financials,Consumer Finance
+CAH,Health Care,Health Care Distributors
+CSL,Industrials,Industrial Conglomerates
+CG,Financials,Unknown
+CARR,Industrials,Building Products
+CAT,Industrials,Construction Machinery & Heavy Transportation Equipment
+CBOE,Financials,Financial Exchanges & Data
+CCCS,Information Technology,Unknown
+CDW,Information Technology,Technology Distributors
+COR,Health Care,Health Care Distributors
+CNC,Health Care,Managed Health Care
+CERT,Health Care,Unknown
+CRL,Health Care,Life Sciences Tools & Services
+SCHW,Financials,Investment Banking & Brokerage
+CHE,Health Care,Health Care Services
+CB,Financials,Property & Casualty Insurance
+CIEN,Information Technology,Communications Equipment
+CI,Health Care,Managed Health Care
+CINF,Financials,Property & Casualty Insurance
+CTAS,Industrials,Diversified Support Services
+CRUS,Information Technology,Semiconductors
+CSCO,Information Technology,Communications Equipment
+C,Financials,Diversified Banks
+CFG,Financials,Regional Banks
+CLVT,Industrials,Unknown
+CLH,Industrials,Environmental & Facilities Services
+NET,Information Technology,Unknown
+CME,Financials,Financial Exchanges & Data
+CNA,Financials,Unknown
+CNH,Industrials,Unknown
+CGNX,Information Technology,Electronic Equipment & Instruments
+CTSH,Information Technology,IT Consulting & Other Services
+COHR,Information Technology,Electronic Components
+COIN,Financials,Unknown
+COLB,Financials,Regional Banks
+CMA,Financials,Diversified Banks
+FIX,Industrials,Construction & Engineering
+CBSH,Financials,Regional Banks
+CNXC,Information Technology,Data Processing & Outsourced Services
+CFLT,Information Technology,Unknown
+COO,Health Care,Health Care Supplies
+CPRT,Industrials,Diversified Support Services
+CORT,Health Care,Pharmaceuticals
+CNM,Industrials,Trading Companies & Distributors
+GLW,Information Technology,Electronic Components
+CPAY,Financials,Transaction & Payment Processing Services
+CR,Industrials,Industrial Machinery & Supplies & Components
+CXT,Industrials,Industrial Machinery & Supplies & Components
+CACC,Financials,Unknown
+CRWD,Information Technology,Application Software
+CSX,Industrials,Rail Transportation
+CMI,Industrials,Industrial Machinery & Supplies & Components
+CW,Industrials,Aerospace & Defense
+CVS,Health Care,Health Care Services
+DHR,Health Care,Life Sciences Tools & Services
+DDOG,Information Technology,Application Software
+DVA,Health Care,Health Care Facilities
+DAY,Industrials,Human Resource & Employment Services
+DE,Industrials,Agricultural & Farm Machinery
+DAL,Industrials,Passenger Airlines
+DELL,Information Technology,"Technology Hardware, Storage & Peripherals"
+XRAY,Health Care,Health Care Supplies
+DXCM,Health Care,Health Care Equipment
+DOCU,Information Technology,Application Software
+DLB,Information Technology,Unknown
+DCI,Industrials,Industrial Machinery & Supplies & Components
+DV,Information Technology,Unknown
+DOV,Industrials,Industrial Machinery & Supplies & Components
+DOCS,Health Care,Unknown
+DBX,Information Technology,Unknown
+DNB,Industrials,Unknown
+DXC,Information Technology,IT Consulting & Other Services
+DT,Information Technology,Unknown
+EWBC,Financials,Regional Banks
+ETN,Industrials,Electrical Components & Equipment
+EW,Health Care,Health Care Equipment
+ELAN,Health Care,Unknown
+ESTC,Information Technology,Unknown
+ELV,Health Care,Managed Health Care
+EME,Industrials,Construction & Engineering
+EMR,Industrials,Electrical Components & Equipment
+EHC,Health Care,Health Care Facilities
+ENPH,Information Technology,Electronic Components
+ENTG,Information Technology,Unknown
+NVST,Health Care,Health Care Supplies
+EPAM,Information Technology,IT Consulting & Other Services
+EFX,Industrials,Research & Consulting Services
+EQH,Financials,Unknown
+ESAB,Industrials,Industrial Machinery & Supplies & Components
+EEFT,Financials,Transaction & Payment Processing Services
+EVR,Financials,Investment Banking & Brokerage
+EG,Financials,Reinsurance
+ECG,Industrials,Construction & Engineering
+EXAS,Health Care,Unknown
+EXEL,Health Care,Biotechnology
+EXLS,Industrials,Data Processing & Outsourced Services
+EXPD,Industrials,Air Freight & Logistics
+FFIV,Information Technology,Communications Equipment
+FDS,Financials,Financial Exchanges & Data
+FICO,Information Technology,Application Software
+FAST,Industrials,Building Products
+FDX,Industrials,Air Freight & Logistics
+FERG,Industrials,Industrial Machinery & Supplies & Components
+FNF,Financials,Unknown
+FIS,Financials,Transaction & Payment Processing Services
+FITB,Financials,Regional Banks
+FAF,Financials,Property & Casualty Insurance
+FCNCA,Financials,Unknown
+FHB,Financials,Regional Banks
+FHN,Financials,Regional Banks
+FSLR,Information Technology,Semiconductors
+FI,Financials,Transaction & Payment Processing Services
+FLEX,Information Technology,Electronic Manufacturing Services
+FLS,Industrials,Industrial Machinery & Supplies & Components
+FNB,Financials,Regional Banks
+FTNT,Information Technology,Systems Software
+FTV,Industrials,Industrial Machinery & Supplies & Components
+FBIN,Industrials,Building Products
+BEN,Financials,Asset Management & Custody Banks
+FRHC,Financials,Unknown
+CFR,Financials,Regional Banks
+FTAI,Industrials,Unknown
+FCN,Industrials,Research & Consulting Services
+IT,Information Technology,IT Consulting & Other Services
+GTES,Industrials,Unknown
+GE,Industrials,Aerospace & Defense
+GEHC,Health Care,Health Care Equipment
+GEV,Industrials,Industrial Machinery & Supplies & Components
+GEN,Information Technology,Application Software
+GNRC,Industrials,Electrical Components & Equipment
+GD,Industrials,Aerospace & Defense
+G,Information Technology,IT Consulting & Other Services
+GILD,Health Care,Biotechnology
+GTLB,Information Technology,Unknown
+GPN,Financials,Transaction & Payment Processing Services
+GFS,Information Technology,Unknown
+GLOB,Information Technology,Unknown
+GL,Financials,Life & Health Insurance
+GMED,Health Care,Health Care Equipment
+GDDY,Information Technology,Unknown
+GS,Financials,Investment Banking & Brokerage
+GGG,Industrials,Industrial Machinery & Supplies & Components
+GWRE,Information Technology,Unknown
+GXO,Industrials,Air Freight & Logistics
+HALO,Health Care,Biotechnology
+HLNE,Financials,Unknown
+THG,Financials,Property & Casualty Insurance
+HIG,Financials,Property & Casualty Insurance
+HAYW,Industrials,Unknown
+HCA,Health Care,Health Care Facilities
+HEI-A,Industrials,Aerospace & Defense
+HEI,Industrials,Aerospace & Defense
+JKHY,Financials,Transaction & Payment Processing Services
+HPE,Information Technology,"Technology Hardware, Storage & Peripherals"
+HXL,Industrials,Aerospace & Defense
+HOLX,Health Care,Health Care Equipment
+HON,Industrials,Industrial Conglomerates
+HLI,Financials,Unknown
+HWM,Industrials,Aerospace & Defense
+HPQ,Information Technology,"Technology Hardware, Storage & Peripherals"
+HUBB,Industrials,Industrial Machinery & Supplies & Components
+HUBS,Information Technology,Unknown
+HUM,Health Care,Managed Health Care
+HBAN,Financials,Regional Banks
+HII,Industrials,Aerospace & Defense
+IBM,Information Technology,IT Consulting & Other Services
+IEX,Industrials,Industrial Machinery & Supplies & Components
+IDXX,Health Care,Health Care Equipment
+ITW,Industrials,Industrial Machinery & Supplies & Components
+ILMN,Health Care,Life Sciences Tools & Services
+INCY,Health Care,Biotechnology
+INFA,Information Technology,Unknown
+IR,Industrials,Industrial Machinery & Supplies & Components
+INGM,Information Technology,Technology Distributors
+INSM,Health Care,Biotechnology
+INSP,Health Care,Unknown
+PODD,Health Care,Unknown
+INTC,Information Technology,Semiconductors
+IBKR,Financials,Investment Banking & Brokerage
+ICE,Financials,Financial Exchanges & Data
+INTU,Information Technology,Application Software
+ISRG,Health Care,Health Care Equipment
+IVZ,Financials,Asset Management & Custody Banks
+IONS,Health Care,Unknown
+IPGP,Information Technology,Electronic Manufacturing Services
+IQV,Health Care,Life Sciences Tools & Services
+ITT,Industrials,Industrial Machinery & Supplies & Components
+JBL,Information Technology,Electronic Manufacturing Services
+J,Industrials,Construction & Engineering
+JHG,Financials,Asset Management & Custody Banks
+JAZZ,Health Care,Pharmaceuticals
+JBHT,Industrials,Cargo Ground Transportation
+JEF,Financials,Multi-Sector Holdings
+JNJ,Health Care,Pharmaceuticals
+JCI,Industrials,Building Products
+JPM,Financials,Diversified Banks
+KRMN,Industrials,Unknown
+KBR,Industrials,Diversified Support Services
+KMPR,Financials,Multi-line Insurance
+KEY,Financials,Regional Banks
+KEYS,Information Technology,Electronic Equipment & Instruments
+KNSL,Financials,Unknown
+KEX,Industrials,Marine Transportation
+KKR,Financials,Asset Management & Custody Banks
+KLAC,Information Technology,Semiconductor Materials & Equipment
+KNX,Industrials,Cargo Ground Transportation
+KD,Information Technology,IT Consulting & Other Services
+LHX,Industrials,Aerospace & Defense
+LH,Health Care,Health Care Services
+LRCX,Information Technology,Semiconductor Materials & Equipment
+LSTR,Industrials,Cargo Ground Transportation
+LSCC,Information Technology,Semiconductors
+LAZ,Financials,Unknown
+LDOS,Industrials,Diversified Support Services
+LII,Industrials,Building Products
+DRS,Industrials,Aerospace & Defense
+LLY,Health Care,Pharmaceuticals
+LECO,Industrials,Industrial Machinery & Supplies & Components
+LNC,Financials,Multi-line Insurance
+LFUS,Information Technology,Electronic Components
+LOAR,Industrials,Aerospace & Defense
+LMT,Industrials,Aerospace & Defense
+L,Financials,Multi-line Insurance
+LPLA,Financials,Unknown
+LITE,Information Technology,Unknown
+LYFT,Industrials,Passenger Ground Transportation
+MTB,Financials,Regional Banks
+MTSI,Information Technology,Semiconductors
+MANH,Information Technology,Unknown
+MAN,Industrials,Human Resource & Employment Services
+MKL,Financials,Unknown
+MKTX,Financials,Financial Exchanges & Data
+MMC,Financials,Insurance Brokers
+MRVL,Information Technology,Semiconductors
+MAS,Industrials,Building Products
+MASI,Health Care,Health Care Equipment
+MTZ,Industrials,Construction & Engineering
+MA,Financials,Transaction & Payment Processing Services
+MCK,Health Care,Health Care Distributors
+MEDP,Health Care,Unknown
+MDT,Health Care,Health Care Equipment
+MRK,Health Care,Pharmaceuticals
+MET,Financials,Life & Health Insurance
+MTD,Health Care,Life Sciences Tools & Services
+MTG,Financials,Reinsurance
+MCHP,Information Technology,Semiconductors
+MU,Information Technology,Semiconductors
+MSFT,Information Technology,Systems Software
+MSTR,Information Technology,Application Software
+MIDD,Industrials,Industrial Machinery & Supplies & Components
+MKSI,Information Technology,Semiconductor Materials & Equipment
+MRNA,Health Care,Biotechnology
+MOH,Health Care,Managed Health Care
+MDB,Information Technology,Systems Software
+MPWR,Information Technology,Semiconductors
+MCO,Financials,Financial Exchanges & Data
+MS,Financials,Investment Banking & Brokerage
+MORN,Financials,Unknown
+MSI,Information Technology,Communications Equipment
+COOP,Financials,Commercial & Residential Mortgage Finance
+MSA,Industrials,Office Services & Supplies
+MSM,Industrials,Trading Companies & Distributors
+MSCI,Financials,Financial Exchanges & Data
+MLI,Industrials,Industrial Machinery & Supplies & Components
+NDAQ,Financials,Financial Exchanges & Data
+NTRA,Health Care,Unknown
+NCNO,Information Technology,Unknown
+NTAP,Information Technology,"Technology Hardware, Storage & Peripherals"
+NBIX,Health Care,Biotechnology
+NDSN,Industrials,Industrial Machinery & Supplies & Components
+NSC,Industrials,Rail Transportation
+NTRS,Financials,Asset Management & Custody Banks
+NOC,Industrials,Aerospace & Defense
+NU,Financials,Unknown
+NTNX,Information Technology,Unknown
+NVT,Industrials,Unknown
+NVDA,Information Technology,Semiconductors
+OKTA,Information Technology,Application Software
+ODFL,Industrials,Cargo Ground Transportation
+ORI,Financials,Property & Casualty Insurance
+ON,Information Technology,Semiconductors
+OMF,Financials,Unknown
+ONTO,Information Technology,Semiconductor Materials & Equipment
+ORCL,Information Technology,Application Software
+OGN,Health Care,Pharmaceuticals
+OSK,Industrials,Construction Machinery & Heavy Transportation Equipment
+OTIS,Industrials,Industrial Machinery & Supplies & Components
+OC,Industrials,Building Products
+PCAR,Industrials,Construction Machinery & Heavy Transportation Equipment
+PLTR,Information Technology,Internet Services & Infrastructure
+PANW,Information Technology,Systems Software
+PH,Industrials,Industrial Machinery & Supplies & Components
+PSN,Industrials,Aerospace & Defense
+PAYX,Industrials,Human Resource & Employment Services
+PAYC,Information Technology,Application Software
+PCTY,Information Technology,Application Software
+PYPL,Financials,Transaction & Payment Processing Services
+PEGA,Information Technology,Unknown
+PNR,Industrials,Industrial Machinery & Supplies & Components
+PEN,Health Care,Health Care Equipment
+PRGO,Health Care,Pharmaceuticals
+PFE,Health Care,Pharmaceuticals
+PNFP,Financials,Regional Banks
+PNC,Financials,Regional Banks
+BPOP,Financials,Unknown
+TROW,Financials,Asset Management & Custody Banks
+PRI,Financials,Life & Health Insurance
+PFG,Financials,Life & Health Insurance
+PCOR,Information Technology,Unknown
+PGR,Financials,Property & Casualty Insurance
+PB,Financials,Regional Banks
+PRU,Financials,Life & Health Insurance
+PTC,Information Technology,Application Software
+PSTG,Information Technology,Unknown
+QGEN,Health Care,Unknown
+QRVO,Information Technology,Semiconductors
+QCOM,Information Technology,Semiconductors
+PWR,Industrials,Construction & Engineering
+DGX,Health Care,Health Care Services
+QXO,Industrials,Unknown
+RAL,Information Technology,Unknown
+RJF,Financials,Investment Banking & Brokerage
+RBA,Industrials,Unknown
+RBC,Industrials,Unknown
+RRX,Industrials,Electrical Components & Equipment
+REGN,Health Care,Biotechnology
+RF,Financials,Regional Banks
+RGA,Financials,Reinsurance
+RNR,Financials,Reinsurance
+RGEN,Health Care,Biotechnology
+RSG,Industrials,Environmental & Facilities Services
+RMD,Health Care,Health Care Equipment
+RVMD,Health Care,Unknown
+RVTY,Health Care,Health Care Equipment
+RNG,Information Technology,Unknown
+RITM,Financials,Unknown
+RLI,Financials,Unknown
+RHI,Industrials,Human Resource & Employment Services
+HOOD,Financials,Unknown
+RKT,Financials,Unknown
+RKLB,Industrials,Aerospace & Defense
+ROK,Industrials,Electrical Components & Equipment
+ROIV,Health Care,Unknown
+ROL,Industrials,Environmental & Facilities Services
+ROP,Industrials,Industrial Conglomerates
+RPRX,Health Care,Unknown
+RTX,Industrials,Aerospace & Defense
+RBRK,Information Technology,Unknown
+RYAN,Financials,Unknown
+R,Industrials,Cargo Ground Transportation
+SPGI,Financials,Financial Exchanges & Data
+SAIA,Industrials,Unknown
+SAIL,Information Technology,Application Software
+SAIC,Industrials,Diversified Support Services
+CRM,Information Technology,Application Software
+SLM,Financials,Consumer Finance
+IOT,Information Technology,Systems Software
+SNDK,Information Technology,"Technology Hardware, Storage & Peripherals"
+SRPT,Health Care,Unknown
+HSIC,Health Care,Health Care Distributors
+SNDR,Industrials,Unknown
+SEIC,Financials,Asset Management & Custody Banks
+ST,Industrials,Unknown
+S,Information Technology,Unknown
+NOW,Information Technology,Systems Software
+FOUR,Information Technology,Unknown
+SSD,Industrials,Building Products
+SITE,Industrials,Unknown
+SWKS,Information Technology,Semiconductors
+SNA,Industrials,Industrial Machinery & Supplies & Components
+SNOW,Information Technology,Unknown
+SOFI,Financials,Unknown
+SOLV,Health Care,Health Care Equipment
+SHC,Health Care,Unknown
+SSB,Financials,Regional Banks
+LUV,Industrials,Passenger Airlines
+SPR,Industrials,Unknown
+SSNC,Information Technology,Unknown
+SARO,Industrials,Aerospace & Defense
+SWK,Industrials,Industrial Machinery & Supplies & Components
+STWD,Financials,Unknown
+STT,Financials,Asset Management & Custody Banks
+STE,Health Care,Health Care Equipment
+SF,Financials,Investment Banking & Brokerage
+SYK,Health Care,Health Care Equipment
+SMMT,Health Care,Unknown
+SMCI,Information Technology,"Technology Hardware, Storage & Peripherals"
+SYF,Financials,Consumer Finance
+SNPS,Information Technology,Application Software
+SNV,Financials,Regional Banks
+SNX,Information Technology,Technology Distributors
+TDY,Industrials,Aerospace & Defense
+TFX,Health Care,Health Care Equipment
+TEM,Health Care,Unknown
+THC,Health Care,Health Care Facilities
+TDC,Information Technology,IT Consulting & Other Services
+TER,Information Technology,Semiconductor Materials & Equipment
+TTEK,Industrials,Environmental & Facilities Services
+TXN,Information Technology,Semiconductors
+TXT,Industrials,Aerospace & Defense
+TMO,Health Care,Life Sciences Tools & Services
+TFSL,Financials,Unknown
+TKR,Industrials,Industrial Machinery & Supplies & Components
+TOST,Information Technology,Transaction & Payment Processing Services
+TTC,Industrials,Agricultural & Farm Machinery
+TPG,Financials,Unknown
+TW,Financials,Unknown
+TT,Industrials,Building Products
+TDG,Industrials,Aerospace & Defense
+TRU,Industrials,Unknown
+TRV,Financials,Property & Casualty Insurance
+TREX,Industrials,Building Products
+TRMB,Information Technology,Electronic Equipment & Instruments
+TFC,Financials,Regional Banks
+TWLO,Information Technology,Unknown
+TYL,Information Technology,Application Software
+UHAL,Industrials,Unknown
+UHAL-B,Industrials,Unknown
+USB,Financials,Diversified Banks
+UBER,Industrials,Passenger Ground Transportation
+UI,Information Technology,Unknown
+PATH,Information Technology,Unknown
+RARE,Health Care,Unknown
+UNP,Industrials,Rail Transportation
+UAL,Industrials,Passenger Airlines
+UPS,Industrials,Air Freight & Logistics
+URI,Industrials,Trading Companies & Distributors
+UTHR,Health Care,Biotechnology
+UWMC,Financials,Unknown
+UNH,Health Care,Managed Health Care
+U,Information Technology,Unknown
+OLED,Information Technology,Semiconductors
+UHS,Health Care,Health Care Facilities
+UNM,Financials,Life & Health Insurance
+VMI,Industrials,Industrial Machinery & Supplies & Components
+VEEV,Health Care,Unknown
+VLTO,Industrials,Unknown
+VRSN,Information Technology,Internet Services & Infrastructure
+VRSK,Industrials,Research & Consulting Services
+VRTX,Health Care,Biotechnology
+VRT,Industrials,Unknown
+VTRS,Health Care,Pharmaceuticals
+VKTX,Health Care,Biotechnology
+VIRT,Financials,Unknown
+V,Financials,Transaction & Payment Processing Services
+VNT,Information Technology,Electronic Equipment & Instruments
+VOYA,Financials,Multi-Sector Holdings
+WRB,Financials,Property & Casualty Insurance
+GWW,Industrials,Industrial Machinery & Supplies & Components
+WAB,Industrials,Construction Machinery & Heavy Transportation Equipment
+WM,Industrials,Environmental & Facilities Services
+WAT,Health Care,Health Care Distributors
+WSO,Industrials,Trading Companies & Distributors
+WBS,Financials,Regional Banks
+WFC,Financials,Diversified Banks
+WCC,Industrials,Unknown
+WST,Health Care,Health Care Supplies
+WAL,Financials,Unknown
+WDC,Information Technology,"Technology Hardware, Storage & Peripherals"
+WU,Information Technology,Data Processing & Outsourced Services
+WEX,Financials,Transaction & Payment Processing Services
+WTM,Financials,Unknown
+WTW,Financials,Insurance Brokers
+WSC,Industrials,Unknown
+WTFC,Financials,Regional Banks
+WWD,Industrials,Electrical Components & Equipment
+WDAY,Information Technology,Application Software
+XP,Financials,Investment Banking & Brokerage
+XPO,Industrials,Cargo Ground Transportation
+XYL,Industrials,Industrial Machinery & Supplies & Components
+ZBRA,Information Technology,Electronic Equipment & Instruments
+ZBH,Health Care,Health Care Equipment
+ZION,Financials,Regional Banks
+ZTS,Health Care,Pharmaceuticals
+ZM,Information Technology,Application Software
+ZS,Information Technology,Application Software
+ERIE,nan,Unknown
+NXPI,nan,Unknown
+STX,nan,Unknown
+TEL,nan,Unknown
+ARM,nan,Unknown
+ASML,nan,Unknown
+AZN,nan,Unknown
+SHOP,nan,Unknown
+TRI,nan,Unknown

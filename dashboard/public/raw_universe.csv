@@ -1,0 +1,2341 @@
+ticker_yf,ticker_tv,mcap_usd,avg_dollar_vol,sector
+MMM,MMM,,,Industrials
+AOS,AOS,,,Industrials
+AAON,AAON,,,Industrials
+ABT,ABT,,,Health Care
+ABBV,ABBV,,,Health Care
+ACHC,ACHC,,,Health Care
+ACN,ACN,,,Information Technology
+AYI,AYI,,,Industrials
+ADBE,ADBE,,,Information Technology
+ADT,ADT,,,Consumer Discretionary
+WMS,WMS,,,Industrials
+AMD,AMD,,,Information Technology
+ACM,ACM,,,Industrials
+AES,AES,,,Utilities
+AMG,AMG,,,Financials
+AFRM,AFRM,,,Information Technology
+AFL,AFL,,,Financials
+AGCO,AGCO,,,Industrials
+A,A,,,Health Care
+ADC,ADC,,,Real Estate
+AGNC,AGNC,,,Financials
+AL,AL,,,Industrials
+APD,APD,,,Materials
+ABNB,ABNB,,,Consumer Discretionary
+AKAM,AKAM,,,Information Technology
+ALK,ALK,,,Industrials
+ALB,ALB,,,Materials
+ACI,ACI,,,Consumer Staples
+AA,AA,,,Materials
+ARE,ARE,,,Real Estate
+ALGN,ALGN,,,Health Care
+ALLE,ALLE,,,Industrials
+ALGM,ALGM,,,Information Technology
+LNT,LNT,,,Utilities
+ALSN,ALSN,,,Industrials
+ALL,ALL,,,Financials
+ALLY,ALLY,,,Financials
+ALNY,ALNY,,,Health Care
+GOOGL,GOOGL,,,Communication Services
+GOOG,GOOG,,,Communication Services
+MO,MO,,,Consumer Staples
+AMZN,AMZN,,,Consumer Discretionary
+AMCR,AMCR,,,Materials
+DOX,DOX,,,Information Technology
+AMTM,AMTM,,,Industrials
+AS,AS,,,Consumer Discretionary
+AEE,AEE,,,Utilities
+AAL,AAL,,,Industrials
+AEP,AEP,,,Utilities
+AXP,AXP,,,Financials
+AFG,AFG,,,Financials
+AMH,AMH,,,Real Estate
+AIG,AIG,,,Financials
+AMT,AMT,,,Real Estate
+AWK,AWK,,,Utilities
+COLD,COLD,,,Real Estate
+AMP,AMP,,,Financials
+AME,AME,,,Industrials
+AMGN,AMGN,,,Health Care
+AMKR,AMKR,,,Information Technology
+APH,APH,,,Information Technology
+ADI,ADI,,,Information Technology
+AU,AU,,,Materials
+NLY,NLY,,,Financials
+AM,AM,,,Energy
+AR,AR,,,Energy
+AON,AON,,,Financials
+APA,APA,,,Energy
+APG,APG,,,Industrials
+APLS,APLS,,,Health Care
+APO,APO,,,Financials
+APPF,APPF,,,Information Technology
+AAPL,AAPL,,,Information Technology
+AIT,AIT,,,Industrials
+AMAT,AMAT,,,Information Technology
+APP,APP,,,Information Technology
+ATR,ATR,,,Materials
+APTV,APTV,,,Consumer Discretionary
+ARMK,ARMK,,,Consumer Discretionary
+ACGL,ACGL,,,Financials
+ADM,ADM,,,Consumer Staples
+ARES,ARES,,,Financials
+ANET,ANET,,,Information Technology
+AWI,AWI,,,Industrials
+ARW,ARW,,,Information Technology
+AJG,AJG,,,Financials
+ASH,ASH,,,Materials
+AIZ,AIZ,,,Financials
+AGO,AGO,,,Financials
+ALAB,ALAB,,,Information Technology
+ASTS,ASTS,,,Communication Services
+T,T,,,Communication Services
+ATI,ATI,,,Industrials
+TEAM,TEAM,,,Information Technology
+ATO,ATO,,,Utilities
+AUR,AUR,,,Information Technology
+ADSK,ADSK,,,Information Technology
+ADP,ADP,,,Industrials
+AN,AN,,,Consumer Discretionary
+AZO,AZO,,,Consumer Discretionary
+AVB,AVB,,,Real Estate
+AVTR,AVTR,,,Health Care
+AVY,AVY,,,Materials
+CAR,CAR,,,Industrials
+AVT,AVT,,,Information Technology
+AXTA,AXTA,,,Materials
+AXS,AXS,,,Financials
+AXON,AXON,,,Industrials
+BKR,BKR,,,Energy
+BALL,BALL,,,Materials
+BAC,BAC,,,Financials
+OZK,OZK,,,Financials
+BBWI,BBWI,,,Consumer Discretionary
+BAX,BAX,,,Health Care
+BDX,BDX,,,Health Care
+BRBR,BRBR,,,Consumer Staples
+BSY,BSY,,,Information Technology
+BRK-B,BRK.B,,,Financials
+BBY,BBY,,,Consumer Discretionary
+BILL,BILL,,,Information Technology
+BIO,BIO,,,Health Care
+TECH,TECH,,,Health Care
+BIIB,BIIB,,,Health Care
+BMRN,BMRN,,,Health Care
+BIRK,BIRK,,,Consumer Discretionary
+BJ,BJ,,,Consumer Staples
+BLK,BLK,,,Financials
+BX,BX,,,Financials
+HRB,HRB,,,Consumer Discretionary
+XYZ,XYZ,,,Financials
+OWL,OWL,,,Financials
+BK,BK,,,Financials
+BA,BA,,,Industrials
+BOKF,BOKF,,,Financials
+BKNG,BKNG,,,Consumer Discretionary
+BAH,BAH,,,Industrials
+BWA,BWA,,,Consumer Discretionary
+SAM,SAM,,,Consumer Staples
+BSX,BSX,,,Health Care
+BYD,BYD,,,Consumer Discretionary
+BFAM,BFAM,,,Consumer Discretionary
+BHF,BHF,,,Financials
+BMY,BMY,,,Health Care
+BRX,BRX,,,Real Estate
+AVGO,AVGO,,,Information Technology
+BR,BR,,,Industrials
+BAM,BAM,,,Financials
+BEPC,BEPC,,,Utilities
+BRO,BRO,,,Financials
+BF-A,BF.A,,,Consumer Staples
+BF-B,BF.B,,,Consumer Staples
+BRKR,BRKR,,,Health Care
+BC,BC,,,Consumer Discretionary
+BLDR,BLDR,,,Industrials
+BG,BG,,,Consumer Staples
+BURL,BURL,,,Consumer Discretionary
+BWXT,BWXT,,,Industrials
+BXP,BXP,,,Real Estate
+CHRW,CHRW,,,Industrials
+CACI,CACI,,,Industrials
+CDNS,CDNS,,,Information Technology
+CZR,CZR,,,Consumer Discretionary
+CPT,CPT,,,Real Estate
+CPB,CPB,,,Consumer Staples
+COF,COF,,,Financials
+CAH,CAH,,,Health Care
+CSL,CSL,,,Industrials
+CG,CG,,,Financials
+KMX,KMX,,,Consumer Discretionary
+CCL,CCL,,,Consumer Discretionary
+CRS,CRS,,,Materials
+CARR,CARR,,,Industrials
+CVNA,CVNA,,,Consumer Discretionary
+CASY,CASY,,,Consumer Staples
+CAT,CAT,,,Industrials
+CAVA,CAVA,,,Consumer Discretionary
+CBOE,CBOE,,,Financials
+CBRE,CBRE,,,Real Estate
+CCCS,CCCS,,,Information Technology
+CDW,CDW,,,Information Technology
+CE,CE,,,Materials
+CELH,CELH,,,Consumer Staples
+COR,COR,,,Health Care
+CNC,CNC,,,Health Care
+CNP,CNP,,,Utilities
+CERT,CERT,,,Health Care
+CF,CF,,,Materials
+CRL,CRL,,,Health Care
+SCHW,SCHW,,,Financials
+CHTR,CHTR,,,Communication Services
+CHE,CHE,,,Health Care
+LNG,LNG,,,Energy
+CVX,CVX,,,Energy
+CHWY,CHWY,,,Consumer Discretionary
+CMG,CMG,,,Consumer Discretionary
+CHH,CHH,,,Consumer Discretionary
+CHRD,CHRD,,,Energy
+CB,CB,,,Financials
+CHD,CHD,,,Consumer Staples
+CHDN,CHDN,,,Consumer Discretionary
+CIEN,CIEN,,,Information Technology
+CI,CI,,,Health Care
+CINF,CINF,,,Financials
+CTAS,CTAS,,,Industrials
+CRUS,CRUS,,,Information Technology
+CSCO,CSCO,,,Information Technology
+C,C,,,Financials
+CFG,CFG,,,Financials
+CIVI,CIVI,,,Energy
+CLVT,CLVT,,,Industrials
+CLH,CLH,,,Industrials
+CWEN-A,CWEN.A,,,Utilities
+CWEN,CWEN,,,Utilities
+CLF,CLF,,,Materials
+CLX,CLX,,,Consumer Staples
+NET,NET,,,Information Technology
+CME,CME,,,Financials
+CMS,CMS,,,Utilities
+CNA,CNA,,,Financials
+CNH,CNH,,,Industrials
+KO,KO,,,Consumer Staples
+COKE,COKE,,,Consumer Staples
+CGNX,CGNX,,,Information Technology
+CTSH,CTSH,,,Information Technology
+COHR,COHR,,,Information Technology
+COIN,COIN,,,Financials
+CL,CL,,,Consumer Staples
+COLB,COLB,,,Financials
+COLM,COLM,,,Consumer Discretionary
+CMCSA,CMCSA,,,Communication Services
+CMA,CMA,,,Financials
+FIX,FIX,,,Industrials
+CBSH,CBSH,,,Financials
+CAG,CAG,,,Consumer Staples
+CNXC,CNXC,,,Information Technology
+CFLT,CFLT,,,Information Technology
+COP,COP,,,Energy
+ED,ED,,,Utilities
+STZ,STZ,,,Consumer Staples
+CEG,CEG,,,Utilities
+COO,COO,,,Health Care
+CPRT,CPRT,,,Industrials
+CORT,CORT,,,Health Care
+CNM,CNM,,,Industrials
+GLW,GLW,,,Information Technology
+CPAY,CPAY,,,Financials
+CTVA,CTVA,,,Materials
+CSGP,CSGP,,,Real Estate
+COST,COST,,,Consumer Staples
+CTRA,CTRA,,,Energy
+COTY,COTY,,,Consumer Staples
+CPNG,CPNG,,,Consumer Discretionary
+CUZ,CUZ,,,Real Estate
+CR,CR,,,Industrials
+CXT,CXT,,,Industrials
+CACC,CACC,,,Financials
+CRH,CRH,,,Materials
+CROX,CROX,,,Consumer Discretionary
+CRWD,CRWD,,,Information Technology
+CCI,CCI,,,Real Estate
+CCK,CCK,,,Materials
+CSX,CSX,,,Industrials
+CUBE,CUBE,,,Real Estate
+CMI,CMI,,,Industrials
+CW,CW,,,Industrials
+CVS,CVS,,,Health Care
+DHI,DHI,,,Consumer Discretionary
+DHR,DHR,,,Health Care
+DRI,DRI,,,Consumer Discretionary
+DAR,DAR,,,Consumer Staples
+DDOG,DDOG,,,Information Technology
+DVA,DVA,,,Health Care
+DAY,DAY,,,Industrials
+DECK,DECK,,,Consumer Discretionary
+DE,DE,,,Industrials
+DAL,DAL,,,Industrials
+DELL,DELL,,,Information Technology
+XRAY,XRAY,,,Health Care
+DVN,DVN,,,Energy
+DXCM,DXCM,,,Health Care
+FANG,FANG,,,Energy
+DKS,DKS,,,Consumer Discretionary
+DLR,DLR,,,Real Estate
+DDS,DDS,,,Consumer Discretionary
+DOCU,DOCU,,,Information Technology
+DLB,DLB,,,Information Technology
+DG,DG,,,Consumer Staples
+DLTR,DLTR,,,Consumer Staples
+D,D,,,Utilities
+DPZ,DPZ,,,Consumer Discretionary
+DCI,DCI,,,Industrials
+DASH,DASH,,,Consumer Discretionary
+DV,DV,,,Information Technology
+DOV,DOV,,,Industrials
+DOW,DOW,,,Materials
+DOCS,DOCS,,,Health Care
+DKNG,DKNG,,,Consumer Discretionary
+DBX,DBX,,,Information Technology
+DTM,DTM,,,Energy
+DTE,DTE,,,Utilities
+DUK,DUK,,,Utilities
+DNB,DNB,,,Industrials
+DUOL,DUOL,,,Consumer Discretionary
+DD,DD,,,Materials
+BROS,BROS,,,Consumer Discretionary
+DXC,DXC,,,Information Technology
+DT,DT,,,Information Technology
+ELF,ELF,,,Consumer Staples
+EXP,EXP,,,Materials
+EWBC,EWBC,,,Financials
+EGP,EGP,,,Real Estate
+EMN,EMN,,,Materials
+ETN,ETN,,,Industrials
+EBAY,EBAY,,,Consumer Discretionary
+ECL,ECL,,,Materials
+EIX,EIX,,,Utilities
+EW,EW,,,Health Care
+ELAN,ELAN,,,Health Care
+ESTC,ESTC,,,Information Technology
+EA,EA,,,Communication Services
+ESI,ESI,,,Materials
+ELV,ELV,,,Health Care
+EME,EME,,,Industrials
+EMR,EMR,,,Industrials
+EHC,EHC,,,Health Care
+ENPH,ENPH,,,Information Technology
+ENTG,ENTG,,,Information Technology
+ETR,ETR,,,Utilities
+NVST,NVST,,,Health Care
+EOG,EOG,,,Energy
+EPAM,EPAM,,,Information Technology
+EPR,EPR,,,Real Estate
+EQT,EQT,,,Energy
+EFX,EFX,,,Industrials
+EQIX,EQIX,,,Real Estate
+EQH,EQH,,,Financials
+ELS,ELS,,,Real Estate
+EQR,EQR,,,Real Estate
+ESAB,ESAB,,,Industrials
+WTRG,WTRG,,,Utilities
+ESS,ESS,,,Real Estate
+EL,EL,,,Consumer Staples
+ETSY,ETSY,,,Consumer Discretionary
+EEFT,EEFT,,,Financials
+EVR,EVR,,,Financials
+EG,EG,,,Financials
+EVRG,EVRG,,,Utilities
+ES,ES,,,Utilities
+ECG,ECG,,,Industrials
+EXAS,EXAS,,,Health Care
+EXEL,EXEL,,,Health Care
+EXC,EXC,,,Utilities
+EXLS,EXLS,,,Industrials
+EXE,EXE,,,Energy
+EXPE,EXPE,,,Consumer Discretionary
+EXPD,EXPD,,,Industrials
+EXR,EXR,,,Real Estate
+XOM,XOM,,,Energy
+FFIV,FFIV,,,Information Technology
+FDS,FDS,,,Financials
+FICO,FICO,,,Information Technology
+FAST,FAST,,,Industrials
+FRT,FRT,,,Real Estate
+FDX,FDX,,,Industrials
+FERG,FERG,,,Industrials
+FNF,FNF,,,Financials
+FIS,FIS,,,Financials
+FITB,FITB,,,Financials
+FAF,FAF,,,Financials
+FCNCA,FCNCA,,,Financials
+FHB,FHB,,,Financials
+FHN,FHN,,,Financials
+FR,FR,,,Real Estate
+FSLR,FSLR,,,Information Technology
+FE,FE,,,Utilities
+FI,FI,,,Financials
+FIVE,FIVE,,,Consumer Discretionary
+FLEX,FLEX,,,Information Technology
+FND,FND,,,Consumer Discretionary
+FLO,FLO,,,Consumer Staples
+FLS,FLS,,,Industrials
+FLUT,FLUT,,,Consumer Discretionary
+FMC,FMC,,,Materials
+FNB,FNB,,,Financials
+F,F,,,Consumer Discretionary
+FTNT,FTNT,,,Information Technology
+FTV,FTV,,,Industrials
+FBIN,FBIN,,,Industrials
+FOXA,FOXA,,,Communication Services
+FOX,FOX,,,Communication Services
+BEN,BEN,,,Financials
+FRHC,FRHC,,,Financials
+FCX,FCX,,,Materials
+FRPT,FRPT,,,Consumer Staples
+FYBR,FYBR,,,Communication Services
+CFR,CFR,,,Financials
+FTAI,FTAI,,,Industrials
+FCN,FCN,,,Industrials
+GME,GME,,,Consumer Discretionary
+GLPI,GLPI,,,Real Estate
+GAP,GAP,,,Consumer Discretionary
+GRMN,GRMN,,,Consumer Discretionary
+IT,IT,,,Information Technology
+GTES,GTES,,,Industrials
+GLIBA,GLIBA,,,Communication Services
+GLIBK,GLIBK,,,Communication Services
+GE,GE,,,Industrials
+GEHC,GEHC,,,Health Care
+GEV,GEV,,,Industrials
+GEN,GEN,,,Information Technology
+GNRC,GNRC,,,Industrials
+GD,GD,,,Industrials
+GIS,GIS,,,Consumer Staples
+GM,GM,,,Consumer Discretionary
+G,G,,,Information Technology
+GNTX,GNTX,,,Consumer Discretionary
+GPC,GPC,,,Consumer Discretionary
+GILD,GILD,,,Health Care
+GTLB,GTLB,,,Information Technology
+GPN,GPN,,,Financials
+GFS,GFS,,,Information Technology
+GLOB,GLOB,,,Information Technology
+GL,GL,,,Financials
+GMED,GMED,,,Health Care
+GDDY,GDDY,,,Information Technology
+GS,GS,,,Financials
+GGG,GGG,,,Industrials
+LOPE,LOPE,,,Consumer Discretionary
+GPK,GPK,,,Materials
+GWRE,GWRE,,,Information Technology
+GXO,GXO,,,Industrials
+HAL,HAL,,,Energy
+HALO,HALO,,,Health Care
+HLNE,HLNE,,,Financials
+THG,THG,,,Financials
+HOG,HOG,,,Consumer Discretionary
+HIG,HIG,,,Financials
+HAS,HAS,,,Consumer Discretionary
+HAYW,HAYW,,,Industrials
+HCA,HCA,,,Health Care
+HR,HR,,,Real Estate
+DOC,DOC,,,Real Estate
+HEI-A,HEI.A,,,Industrials
+HEI,HEI,,,Industrials
+JKHY,JKHY,,,Financials
+HSY,HSY,,,Consumer Staples
+HPE,HPE,,,Information Technology
+HXL,HXL,,,Industrials
+DINO,DINO,,,Energy
+HIW,HIW,,,Real Estate
+HLT,HLT,,,Consumer Discretionary
+HOLX,HOLX,,,Health Care
+HD,HD,,,Consumer Discretionary
+HON,HON,,,Industrials
+HRL,HRL,,,Consumer Staples
+HST,HST,,,Real Estate
+HLI,HLI,,,Financials
+HHH,HHH,,,Real Estate
+HWM,HWM,,,Industrials
+HPQ,HPQ,,,Information Technology
+HUBB,HUBB,,,Industrials
+HUBS,HUBS,,,Information Technology
+HUM,HUM,,,Health Care
+HBAN,HBAN,,,Financials
+HII,HII,,,Industrials
+HUN,HUN,,,Materials
+H,H,,,Consumer Discretionary
+IAC,IAC,,,Communication Services
+IBM,IBM,,,Information Technology
+IDA,IDA,,,Utilities
+IEX,IEX,,,Industrials
+IDXX,IDXX,,,Health Care
+ITW,ITW,,,Industrials
+ILMN,ILMN,,,Health Care
+INCY,INCY,,,Health Care
+INFA,INFA,,,Information Technology
+IR,IR,,,Industrials
+INGM,INGM,,,Information Technology
+INGR,INGR,,,Consumer Staples
+INSM,INSM,,,Health Care
+INSP,INSP,,,Health Care
+PODD,PODD,,,Health Care
+INTC,INTC,,,Information Technology
+IBKR,IBKR,,,Financials
+ICE,ICE,,,Financials
+IFF,IFF,,,Materials
+IP,IP,,,Materials
+IPG,IPG,,,Communication Services
+INTU,INTU,,,Information Technology
+ISRG,ISRG,,,Health Care
+IVZ,IVZ,,,Financials
+INVH,INVH,,,Real Estate
+IONS,IONS,,,Health Care
+IPGP,IPGP,,,Information Technology
+IQV,IQV,,,Health Care
+IRDM,IRDM,,,Communication Services
+IRM,IRM,,,Real Estate
+ITT,ITT,,,Industrials
+JBL,JBL,,,Information Technology
+J,J,,,Industrials
+JHX,JHX,,,Materials
+JHG,JHG,,,Financials
+JAZZ,JAZZ,,,Health Care
+JBHT,JBHT,,,Industrials
+JEF,JEF,,,Financials
+JNJ,JNJ,,,Health Care
+JCI,JCI,,,Industrials
+JLL,JLL,,,Real Estate
+JPM,JPM,,,Financials
+KRMN,KRMN,,,Industrials
+KBR,KBR,,,Industrials
+K,K,,,Consumer Staples
+KMPR,KMPR,,,Financials
+KVUE,KVUE,,,Consumer Staples
+KDP,KDP,,,Consumer Staples
+KEY,KEY,,,Financials
+KEYS,KEYS,,,Information Technology
+KRC,KRC,,,Real Estate
+KMB,KMB,,,Consumer Staples
+KIM,KIM,,,Real Estate
+KMI,KMI,,,Energy
+KNSL,KNSL,,,Financials
+KEX,KEX,,,Industrials
+KKR,KKR,,,Financials
+KLAC,KLAC,,,Information Technology
+KNX,KNX,,,Industrials
+KHC,KHC,,,Consumer Staples
+KR,KR,,,Consumer Staples
+KD,KD,,,Information Technology
+LHX,LHX,,,Industrials
+LH,LH,,,Health Care
+LRCX,LRCX,,,Information Technology
+LAMR,LAMR,,,Real Estate
+LW,LW,,,Consumer Staples
+LSTR,LSTR,,,Industrials
+LVS,LVS,,,Consumer Discretionary
+LSCC,LSCC,,,Information Technology
+LAZ,LAZ,,,Financials
+LEA,LEA,,,Consumer Discretionary
+LDOS,LDOS,,,Industrials
+LEN,LEN,,,Consumer Discretionary
+LEN-B,LEN.B,,,Consumer Discretionary
+LII,LII,,,Industrials
+DRS,DRS,,,Industrials
+LBRDA,LBRDA,,,Communication Services
+LBRDK,LBRDK,,,Communication Services
+LBTYA,LBTYA,,,Communication Services
+LBTYK,LBTYK,,,Communication Services
+FWONA,FWONA,,,Communication Services
+FWONK,FWONK,,,Communication Services
+LLYVA,LLYVA,,,Communication Services
+LLYVK,LLYVK,,,Communication Services
+LNW,LNW,,,Consumer Discretionary
+LLY,LLY,,,Health Care
+LECO,LECO,,,Industrials
+LNC,LNC,,,Financials
+LIN,LIN,,,Materials
+LINE,LINE,,,Real Estate
+LAD,LAD,,,Consumer Discretionary
+LFUS,LFUS,,,Information Technology
+LYV,LYV,,,Communication Services
+LKQ,LKQ,,,Consumer Discretionary
+LOAR,LOAR,,,Industrials
+LMT,LMT,,,Industrials
+L,L,,,Financials
+LPX,LPX,,,Materials
+LOW,LOW,,,Consumer Discretionary
+LPLA,LPLA,,,Financials
+LCID,LCID,,,Consumer Discretionary
+LULU,LULU,,,Consumer Discretionary
+LITE,LITE,,,Information Technology
+LYFT,LYFT,,,Industrials
+LYB,LYB,,,Materials
+MTB,MTB,,,Financials
+MTSI,MTSI,,,Information Technology
+M,M,,,Consumer Discretionary
+MSGS,MSGS,,,Communication Services
+MANH,MANH,,,Information Technology
+MAN,MAN,,,Industrials
+CART,CART,,,Consumer Staples
+MPC,MPC,,,Energy
+MKL,MKL,,,Financials
+MKTX,MKTX,,,Financials
+MAR,MAR,,,Consumer Discretionary
+MMC,MMC,,,Financials
+MLM,MLM,,,Materials
+MRVL,MRVL,,,Information Technology
+MAS,MAS,,,Industrials
+MASI,MASI,,,Health Care
+MTZ,MTZ,,,Industrials
+MA,MA,,,Financials
+MTDR,MTDR,,,Energy
+MTCH,MTCH,,,Communication Services
+MAT,MAT,,,Consumer Discretionary
+MKC,MKC,,,Consumer Staples
+MCD,MCD,,,Consumer Discretionary
+MCK,MCK,,,Health Care
+MDU,MDU,,,Utilities
+MPW,MPW,,,Real Estate
+MEDP,MEDP,,,Health Care
+MDT,MDT,,,Health Care
+MRK,MRK,,,Health Care
+META,META,,,Communication Services
+MET,MET,,,Financials
+MTD,MTD,,,Health Care
+MTG,MTG,,,Financials
+MGM,MGM,,,Consumer Discretionary
+MCHP,MCHP,,,Information Technology
+MU,MU,,,Information Technology
+MSFT,MSFT,,,Information Technology
+MSTR,MSTR,,,Information Technology
+MAA,MAA,,,Real Estate
+MIDD,MIDD,,,Industrials
+TIGO,TIGO,,,Communication Services
+MRP,MRP,,,Consumer Discretionary
+MKSI,MKSI,,,Information Technology
+MRNA,MRNA,,,Health Care
+MHK,MHK,,,Consumer Discretionary
+MOH,MOH,,,Health Care
+TAP,TAP,,,Consumer Staples
+MDLZ,MDLZ,,,Consumer Staples
+MDB,MDB,,,Information Technology
+MPWR,MPWR,,,Information Technology
+MNST,MNST,,,Consumer Staples
+MCO,MCO,,,Financials
+MS,MS,,,Financials
+MORN,MORN,,,Financials
+MOS,MOS,,,Materials
+MSI,MSI,,,Information Technology
+MP,MP,,,Materials
+COOP,COOP,,,Financials
+MSA,MSA,,,Industrials
+MSM,MSM,,,Industrials
+MSCI,MSCI,,,Financials
+MLI,MLI,,,Industrials
+MUSA,MUSA,,,Consumer Discretionary
+NDAQ,NDAQ,,,Financials
+NTRA,NTRA,,,Health Care
+NFG,NFG,,,Utilities
+NSA,NSA,,,Real Estate
+NCNO,NCNO,,,Information Technology
+NTAP,NTAP,,,Information Technology
+NFLX,NFLX,,,Communication Services
+NBIX,NBIX,,,Health Care
+NYT,NYT,,,Communication Services
+NWL,NWL,,,Consumer Discretionary
+NEU,NEU,,,Materials
+NEM,NEM,,,Materials
+NWSA,NWSA,,,Communication Services
+NWS,NWS,,,Communication Services
+NXST,NXST,,,Communication Services
+NEE,NEE,,,Utilities
+NKE,NKE,,,Consumer Discretionary
+NI,NI,,,Utilities
+NNN,NNN,,,Real Estate
+NDSN,NDSN,,,Industrials
+NSC,NSC,,,Industrials
+NTRS,NTRS,,,Financials
+NOC,NOC,,,Industrials
+NCLH,NCLH,,,Consumer Discretionary
+NOV,NOV,,,Energy
+NRG,NRG,,,Utilities
+NU,NU,,,Financials
+NUE,NUE,,,Materials
+NTNX,NTNX,,,Information Technology
+NVT,NVT,,,Industrials
+NVDA,NVDA,,,Information Technology
+NVR,NVR,,,Consumer Discretionary
+ORLY,ORLY,,,Consumer Discretionary
+OXY,OXY,,,Energy
+OGE,OGE,,,Utilities
+OKTA,OKTA,,,Information Technology
+ODFL,ODFL,,,Industrials
+ORI,ORI,,,Financials
+OLN,OLN,,,Materials
+OLLI,OLLI,,,Consumer Discretionary
+OHI,OHI,,,Real Estate
+OMC,OMC,,,Communication Services
+ONON,ONON,,,Consumer Discretionary
+ON,ON,,,Information Technology
+OMF,OMF,,,Financials
+OKE,OKE,,,Energy
+ONTO,ONTO,,,Information Technology
+ORCL,ORCL,,,Information Technology
+OGN,OGN,,,Health Care
+OSK,OSK,,,Industrials
+OTIS,OTIS,,,Industrials
+OVV,OVV,,,Energy
+OC,OC,,,Industrials
+PCAR,PCAR,,,Industrials
+PKG,PKG,,,Materials
+PLTR,PLTR,,,Information Technology
+PANW,PANW,,,Information Technology
+PK,PK,,,Real Estate
+PH,PH,,,Industrials
+PSN,PSN,,,Industrials
+PAYX,PAYX,,,Industrials
+PAYC,PAYC,,,Industrials
+PCTY,PCTY,,,Information Technology
+PYPL,PYPL,,,Financials
+PEGA,PEGA,,,Information Technology
+PENN,PENN,,,Consumer Discretionary
+PAG,PAG,,,Consumer Discretionary
+PNR,PNR,,,Industrials
+PEN,PEN,,,Health Care
+PEP,PEP,,,Consumer Staples
+PFGC,PFGC,,,Consumer Staples
+PR,PR,,,Energy
+PRGO,PRGO,,,Health Care
+PFE,PFE,,,Health Care
+PCG,PCG,,,Utilities
+PM,PM,,,Consumer Staples
+PSX,PSX,,,Energy
+PPC,PPC,,,Consumer Staples
+PNFP,PNFP,,,Financials
+PNW,PNW,,,Utilities
+PINS,PINS,,,Communication Services
+PLNT,PLNT,,,Consumer Discretionary
+PNC,PNC,,,Financials
+POOL,POOL,,,Consumer Discretionary
+BPOP,BPOP,,,Financials
+POST,POST,,,Consumer Staples
+PPG,PPG,,,Materials
+PPL,PPL,,,Utilities
+TROW,TROW,,,Financials
+PRI,PRI,,,Financials
+PRMB,PRMB,,,Consumer Staples
+PFG,PFG,,,Financials
+PCOR,PCOR,,,Information Technology
+PG,PG,,,Consumer Staples
+PGR,PGR,,,Financials
+PLD,PLD,,,Real Estate
+PB,PB,,,Financials
+PRU,PRU,,,Financials
+PTC,PTC,,,Information Technology
+PSA,PSA,,,Real Estate
+PEG,PEG,,,Utilities
+PHM,PHM,,,Consumer Discretionary
+PSTG,PSTG,,,Information Technology
+PVH,PVH,,,Consumer Discretionary
+QGEN,QGEN,,,Health Care
+QRVO,QRVO,,,Information Technology
+QCOM,QCOM,,,Information Technology
+PWR,PWR,,,Industrials
+QS,QS,,,Consumer Discretionary
+DGX,DGX,,,Health Care
+QXO,QXO,,,Industrials
+RAL,RAL,,,Information Technology
+RL,RL,,,Consumer Discretionary
+RRC,RRC,,,Energy
+RJF,RJF,,,Financials
+RYN,RYN,,,Real Estate
+RBA,RBA,,,Industrials
+RBC,RBC,,,Industrials
+O,O,,,Real Estate
+RDDT,RDDT,,,Communication Services
+RRX,RRX,,,Industrials
+REG,REG,,,Real Estate
+REGN,REGN,,,Health Care
+RF,RF,,,Financials
+RGA,RGA,,,Financials
+RS,RS,,,Materials
+RNR,RNR,,,Financials
+RGEN,RGEN,,,Health Care
+RSG,RSG,,,Industrials
+RMD,RMD,,,Health Care
+QSR,QSR,,,Consumer Discretionary
+RVMD,RVMD,,,Health Care
+RVTY,RVTY,,,Health Care
+REXR,REXR,,,Real Estate
+REYN,REYN,,,Consumer Staples
+RH,RH,,,Consumer Discretionary
+RNG,RNG,,,Information Technology
+RITM,RITM,,,Financials
+RIVN,RIVN,,,Consumer Discretionary
+RLI,RLI,,,Financials
+RHI,RHI,,,Industrials
+HOOD,HOOD,,,Financials
+RBLX,RBLX,,,Communication Services
+RKT,RKT,,,Financials
+RKLB,RKLB,,,Industrials
+ROK,ROK,,,Industrials
+ROIV,ROIV,,,Health Care
+ROKU,ROKU,,,Communication Services
+ROL,ROL,,,Industrials
+ROP,ROP,,,Information Technology
+ROST,ROST,,,Consumer Discretionary
+RCL,RCL,,,Consumer Discretionary
+RGLD,RGLD,,,Materials
+RPRX,RPRX,,,Health Care
+RPM,RPM,,,Materials
+RTX,RTX,,,Industrials
+RBRK,RBRK,,,Information Technology
+RYAN,RYAN,,,Financials
+R,R,,,Industrials
+SPGI,SPGI,,,Financials
+SAIA,SAIA,,,Industrials
+SAIL,SAIL,,,Information Technology
+SAIC,SAIC,,,Industrials
+CRM,CRM,,,Information Technology
+SLM,SLM,,,Financials
+IOT,IOT,,,Information Technology
+SNDK,SNDK,,,Information Technology
+SRPT,SRPT,,,Health Care
+SBAC,SBAC,,,Real Estate
+HSIC,HSIC,,,Health Care
+SLB,SLB,,,Energy
+SNDR,SNDR,,,Industrials
+SMG,SMG,,,Materials
+SEB,SEB,,,Consumer Staples
+SEE,SEE,,,Materials
+SEIC,SEIC,,,Financials
+SRE,SRE,,,Utilities
+ST,ST,,,Industrials
+S,S,,,Information Technology
+SCI,SCI,,,Consumer Discretionary
+NOW,NOW,,,Information Technology
+SN,SN,,,Consumer Discretionary
+SHW,SHW,,,Materials
+FOUR,FOUR,,,Information Technology
+SLGN,SLGN,,,Materials
+SPG,SPG,,,Real Estate
+SSD,SSD,,,Industrials
+SIRI,SIRI,,,Communication Services
+SITE,SITE,,,Industrials
+SKX,SKX,,,Consumer Discretionary
+SWKS,SWKS,,,Information Technology
+SFD,SFD,,,Consumer Staples
+SJM,SJM,,,Consumer Staples
+SW,SW,,,Materials
+SNA,SNA,,,Industrials
+SNOW,SNOW,,,Information Technology
+SOFI,SOFI,,,Financials
+SOLV,SOLV,,,Health Care
+SGI,SGI,,,Consumer Discretionary
+SON,SON,,,Materials
+SHC,SHC,,,Health Care
+SO,SO,,,Utilities
+SCCO,SCCO,,,Materials
+SSB,SSB,,,Financials
+LUV,LUV,,,Industrials
+SPR,SPR,,,Industrials
+SPOT,SPOT,,,Communication Services
+SFM,SFM,,,Consumer Staples
+SSNC,SSNC,,,Information Technology
+STAG,STAG,,,Real Estate
+SARO,SARO,,,Industrials
+SWK,SWK,,,Industrials
+SBUX,SBUX,,,Consumer Discretionary
+STWD,STWD,,,Financials
+STT,STT,,,Financials
+STLD,STLD,,,Materials
+STE,STE,,,Health Care
+SF,SF,,,Financials
+SYK,SYK,,,Health Care
+SMMT,SMMT,,,Health Care
+SUI,SUI,,,Real Estate
+SMCI,SMCI,,,Information Technology
+SYF,SYF,,,Financials
+SNPS,SNPS,,,Information Technology
+SNV,SNV,,,Financials
+SYY,SYY,,,Consumer Staples
+TMUS,TMUS,,,Communication Services
+TTWO,TTWO,,,Communication Services
+TLN,TLN,,,Utilities
+TPR,TPR,,,Consumer Discretionary
+TRGP,TRGP,,,Energy
+TGT,TGT,,,Consumer Staples
+SNX,SNX,,,Information Technology
+FTI,FTI,,,Energy
+TDY,TDY,,,Information Technology
+TFX,TFX,,,Health Care
+TEM,TEM,,,Health Care
+THC,THC,,,Health Care
+TDC,TDC,,,Information Technology
+TER,TER,,,Information Technology
+TSLA,TSLA,,,Consumer Discretionary
+TTEK,TTEK,,,Industrials
+TXN,TXN,,,Information Technology
+TPL,TPL,,,Energy
+TXRH,TXRH,,,Consumer Discretionary
+TXT,TXT,,,Industrials
+TMO,TMO,,,Health Care
+TFSL,TFSL,,,Financials
+THO,THO,,,Consumer Discretionary
+TKR,TKR,,,Industrials
+TJX,TJX,,,Consumer Discretionary
+TKO,TKO,,,Communication Services
+TOST,TOST,,,Information Technology
+TOL,TOL,,,Consumer Discretionary
+BLD,BLD,,,Consumer Discretionary
+TTC,TTC,,,Industrials
+TPG,TPG,,,Financials
+TSCO,TSCO,,,Consumer Discretionary
+TTD,TTD,,,Communication Services
+TW,TW,,,Financials
+TT,TT,,,Industrials
+TDG,TDG,,,Industrials
+TRU,TRU,,,Industrials
+TNL,TNL,,,Consumer Discretionary
+TRV,TRV,,,Financials
+TREX,TREX,,,Industrials
+TRMB,TRMB,,,Information Technology
+TFC,TFC,,,Financials
+DJT,DJT,,,Communication Services
+TWLO,TWLO,,,Information Technology
+TYL,TYL,,,Information Technology
+TSN,TSN,,,Consumer Staples
+UHAL,UHAL,,,Industrials
+UHAL-B,UHAL.B,,,Industrials
+USB,USB,,,Financials
+UBER,UBER,,,Industrials
+UI,UI,,,Information Technology
+UDR,UDR,,,Real Estate
+UGI,UGI,,,Utilities
+PATH,PATH,,,Information Technology
+ULTA,ULTA,,,Consumer Discretionary
+RARE,RARE,,,Health Care
+UAA,UAA,,,Consumer Discretionary
+UA,UA,,,Consumer Discretionary
+UNP,UNP,,,Industrials
+UAL,UAL,,,Industrials
+UPS,UPS,,,Industrials
+URI,URI,,,Industrials
+UTHR,UTHR,,,Health Care
+UWMC,UWMC,,,Financials
+UNH,UNH,,,Health Care
+U,U,,,Information Technology
+OLED,OLED,,,Information Technology
+UHS,UHS,,,Health Care
+UNM,UNM,,,Financials
+USFD,USFD,,,Consumer Staples
+MTN,MTN,,,Consumer Discretionary
+VLO,VLO,,,Energy
+VMI,VMI,,,Industrials
+VVV,VVV,,,Materials
+VEEV,VEEV,,,Health Care
+VTR,VTR,,,Real Estate
+VLTO,VLTO,,,Industrials
+VRSN,VRSN,,,Information Technology
+VRSK,VRSK,,,Industrials
+VZ,VZ,,,Communication Services
+VRTX,VRTX,,,Health Care
+VRT,VRT,,,Industrials
+VFC,VFC,,,Consumer Discretionary
+VTRS,VTRS,,,Health Care
+VICI,VICI,,,Real Estate
+VIK,VIK,,,Consumer Discretionary
+VKTX,VKTX,,,Health Care
+VNOM,VNOM,,,Energy
+VIRT,VIRT,,,Financials
+V,V,,,Financials
+VST,VST,,,Utilities
+VNT,VNT,,,Information Technology
+VNO,VNO,,,Real Estate
+VOYA,VOYA,,,Financials
+VMC,VMC,,,Materials
+WPC,WPC,,,Real Estate
+WRB,WRB,,,Financials
+GWW,GWW,,,Industrials
+WAB,WAB,,,Industrials
+WBA,WBA,,,Consumer Staples
+WMT,WMT,,,Consumer Staples
+DIS,DIS,,,Communication Services
+WBD,WBD,,,Communication Services
+WM,WM,,,Industrials
+WAT,WAT,,,Health Care
+WSO,WSO,,,Industrials
+W,W,,,Consumer Discretionary
+WFRD,WFRD,,,Energy
+WBS,WBS,,,Financials
+WEC,WEC,,,Utilities
+WFC,WFC,,,Financials
+WELL,WELL,,,Real Estate
+WEN,WEN,,,Consumer Discretionary
+WCC,WCC,,,Industrials
+WST,WST,,,Health Care
+WAL,WAL,,,Financials
+WDC,WDC,,,Information Technology
+WU,WU,,,Information Technology
+WLK,WLK,,,Materials
+WEX,WEX,,,Financials
+WY,WY,,,Real Estate
+WHR,WHR,,,Consumer Discretionary
+WTM,WTM,,,Financials
+WMB,WMB,,,Energy
+WSM,WSM,,,Consumer Discretionary
+WTW,WTW,,,Financials
+WSC,WSC,,,Industrials
+WING,WING,,,Consumer Discretionary
+WTFC,WTFC,,,Financials
+WWD,WWD,,,Industrials
+WDAY,WDAY,,,Information Technology
+WH,WH,,,Consumer Discretionary
+WYNN,WYNN,,,Consumer Discretionary
+XEL,XEL,,,Utilities
+XP,XP,,,Financials
+XPO,XPO,,,Industrials
+XYL,XYL,,,Industrials
+YETI,YETI,,,Consumer Discretionary
+YUM,YUM,,,Consumer Discretionary
+ZBRA,ZBRA,,,Information Technology
+ZG,ZG,,,Real Estate
+Z,Z,,,Real Estate
+ZBH,ZBH,,,Health Care
+ZION,ZION,,,Financials
+ZTS,ZTS,,,Health Care
+ZM,ZM,,,Information Technology
+GTM,GTM,,,Communication Services
+ZS,ZS,,,Information Technology
+ERIE,ERIE,,,Financials
+NXPI,NXPI,,,Information Technology
+PSKY,PSKY,,,Communication Services
+STX,STX,,,Information Technology
+TEL,TEL,,,Information Technology
+ARM,ARM,,,Information Technology
+ASML,ASML,,,Information Technology
+AZN,AZN,,,Health Care
+CCEP,CCEP,,,Consumer Staples
+MELI,MELI,,,Consumer Discretionary
+PDD,PDD,,,Consumer Discretionary
+SHOP,SHOP,,,Information Technology
+TRI,TRI,,,Industrials
+AIRLINES,AIRLINES,,,
+ARKOCORP,ARKOCORP,,,
+B00BYZ5,B00BYZ5,,,
+B00CR04,B00CR04,,,
+B00G0F2,B00G0F2,,,
+B00N2S0,B00N2S0,,,
+B00YZY0,B00YZY0,,,
+B011WL6,B011WL6,,,
+B016HX8,B016HX8,,,
+B018PR4,B018PR4,,,
+B018V76,B018V76,,,
+B019BK2,B019BK2,,,
+B019FW2,B019FW2,,,
+B01KGF5,B01KGF5,,,
+B01WL78,B01WL78,,,
+B01Z7M4,B01Z7M4,,,
+B020GQ5,B020GQ5,,,
+B02H882,B02H882,,,
+B02NVQ9,B02NVQ9,,,
+B02R1L6,B02R1L6,,,
+B02T2D1,B02T2D1,,,
+B02VKG6,B02VKG6,,,
+B034L49,B034L49,,,
+B034L50,B034L50,,,
+B034LG1,B034LG1,,,
+B03L311,B03L311,,,
+B03PGL4,B03PGL4,,,
+B0406N0,B0406N0,,,
+B0539H3,B0539H3,,,
+B05BRL7,B05BRL7,,,
+B0650P3,B0650P3,,,
+B065G33,B065G33,,,
+B066PX9,B066PX9,,,
+B06FLD8,B06FLD8,,,
+B06RWD1,B06RWD1,,,
+B081QB7,B081QB7,,,
+B090B96,B090B96,,,
+B095X84,B095X84,,,
+B0BV2Y9,B0BV2Y9,,,
+B0C8KV2,B0C8KV2,,,
+B0FPH75,B0FPH75,,,
+B0G7SZ5,B0G7SZ5,,,
+B0M02F6,B0M02F6,,,
+B0PPHS6,B0PPHS6,,,
+B0PZN33,B0PZN33,,,
+B0VLLY2,B0VLLY2,,,
+B0X46B1,B0X46B1,,,
+B0XXJN1,B0XXJN1,,,
+B0ZN8Z4,B0ZN8Z4,,,
+B11FJD6,B11FJD6,,,
+B125XQ6,B125XQ6,,,
+B12W3P6,B12W3P6,,,
+B142B38,B142B38,,,
+B14TC70,B14TC70,,,
+B15CJ33,B15CJ33,,,
+B15M2C3,B15M2C3,,,
+B15RZR4,B15RZR4,,,
+B17MTL9,B17MTL9,,,
+B17VCN9,B17VCN9,,,
+B19FQ48,B19FQ48,,,
+B19HNF4,B19HNF4,,,
+B1BJSL9,B1BJSL9,,,
+B1FL1D4,B1FL1D4,,,
+B1FP363,B1FP363,,,
+B1G3M58,B1G3M58,,,
+B1G6TJ0,B1G6TJ0,,,
+B1G7Q03,B1G7Q03,,,
+B1GC200,B1GC200,,,
+B1GZ005,B1GZ005,,,
+B1HJLW5,B1HJLW5,,,
+B1HP598,B1HP598,,,
+B1JNG19,B1JNG19,,,
+B1LDZK9,B1LDZK9,,,
+B1P36Y6,B1P36Y6,,,
+B1P5YY8,B1P5YY8,,,
+B1Q1RR9,B1Q1RR9,,,
+B1R0CV4,B1R0CV4,,,
+B1R2HW6,B1R2HW6,,,
+B1VQ1H7,B1VQ1H7,,,
+B1W7RQ0,B1W7RQ0,,,
+B1WTHL1,B1WTHL1,,,
+B1XHRL4,B1XHRL4,,,
+B1XRCZ3,B1XRCZ3,,,
+B1Y1PC2,B1Y1PC2,,,
+B1YWPP8,B1YWPP8,,,
+B1YWQK0,B1YWQK0,,,
+B1Z3TW5,B1Z3TW5,,,
+B23PS12,B23PS12,,,
+B292GM4,B292GM4,,,
+B292PW7,B292PW7,,,
+B298495,B298495,,,
+B29H3T5,B29H3T5,,,
+B2NC471,B2NC471,,,
+B2PFJR3,B2PFJR3,,,
+B2QGDP1,B2QGDP1,,,
+B2QXCJ9,B2QXCJ9,,,
+B39GTS0,B39GTS0,,,
+B39XGV3,B39XGV3,,,
+B3B5J07,B3B5J07,,,
+B3BBRD4,B3BBRD4,,,
+B3BRJZ8,B3BRJZ8,,,
+B3CLS18,B3CLS18,,,
+B3CTNK6,B3CTNK6,,,
+B3D32T9,B3D32T9,,,
+B3F05P5,B3F05P5,,,
+B3K9Z35,B3K9Z35,,,
+B3KFWW1,B3KFWW1,,,
+B3KKGQ8,B3KKGQ8,,,
+B3KWJV0,B3KWJV0,,,
+B3M3278,B3M3278,,,
+B3M7R64,B3M7R64,,,
+B3MZ6K5,B3MZ6K5,,,
+B3N4753,B3N4753,,,
+B3N5WD9,B3N5WD9,,,
+B3N6F00,B3N6F00,,,
+B3NNTZ4,B3NNTZ4,,,
+B3NTLD4,B3NTLD4,,,
+B3P6D26,B3P6D26,,,
+B3PGPB9,B3PGPB9,,,
+B3PY1N7,B3PY1N7,,,
+B3R0638,B3R0638,,,
+B3RDWC8,B3RDWC8,,,
+B3S4L67,B3S4L67,,,
+B3SWPT2,B3SWPT2,,,
+B3TPPZ6,B3TPPZ6,,,
+B3V8JL7,B3V8JL7,,,
+B3WLLH5,B3WLLH5,,,
+B3WNNP3,B3WNNP3,,,
+B3X26D8,B3X26D8,,,
+B3YM983,B3YM983,,,
+B3ZY290,B3ZY290,,,
+B45K9N8,B45K9N8,,,
+B4JSZL8,B4JSZL8,,,
+B4JTYX6,B4JTYX6,,,
+B4MF0Q6,B4MF0Q6,,,
+B4MG4Z6,B4MG4Z6,,,
+B4N0JJ6,B4N0JJ6,,,
+B4N8MH9,B4N8MH9,,,
+B4NB858,B4NB858,,,
+B4RGHN0,B4RGHN0,,,
+B4TZV44,B4TZV44,,,
+B4WCCG1,B4WCCG1,,,
+B4WHS46,B4WHS46,,,
+B4WXG84,B4WXG84,,,
+B4XBDV9,B4XBDV9,,,
+B4Y1MH7,B4Y1MH7,,,
+B4Z5FD5,B4Z5FD5,,,
+B51JS17,B51JS17,,,
+B523Z73,B523Z73,,,
+B55BN47,B55BN47,,,
+B566T98,B566T98,,,
+B57VWJ3,B57VWJ3,,,
+B5LL2C2,B5LL2C2,,,
+B5LYMC1,B5LYMC1,,,
+B5NLBP6,B5NLBP6,,,
+B5Q3KZ2,B5Q3KZ2,,,
+B5T0CW1,B5T0CW1,,,
+B603LG3,B603LG3,,,
+B63RTD5,B63RTD5,,,
+B6452T5,B6452T5,,,
+B64B9P8,B64B9P8,,,
+B6T6J81,B6T6J81,,,
+B6TPXR5,B6TPXR5,,,
+B6VRG58,B6VRG58,,,
+B6XHXY4,B6XHXY4,,,
+B6YR5K3,B6YR5K3,,,
+B6YVN56,B6YVN56,,,
+B6ZC3N6,B6ZC3N6,,,
+B6ZJTH3,B6ZJTH3,,,
+B719DK5,B719DK5,,,
+B7254K9,B7254K9,,,
+B725NJ1,B725NJ1,,,
+B72ZBG4,B72ZBG4,,,
+B75DGJ3,B75DGJ3,,,
+B77PWP5,B77PWP5,,,
+B7F4TJ7,B7F4TJ7,,,
+B7JB336,B7JB336,,,
+B7KCD72,B7KCD72,,,
+B7KH3G6,B7KH3G6,,,
+B7KN3P3,B7KN3P3,,,
+B7KY3Z6,B7KY3Z6,,,
+B7LG306,B7LG306,,,
+B7M66F1,B7M66F1,,,
+B7N96Q0,B7N96Q0,,,
+B7XJTN8,B7XJTN8,,,
+B7ZKH46,B7ZKH46,,,
+B7ZR219,B7ZR219,,,
+B827VB2,B827VB2,,,
+B828K63,B828K63,,,
+B82C9Z7,B82C9Z7,,,
+B82GC49,B82GC49,,,
+B832462,B832462,,,
+B83TNY4,B83TNY4,,,
+B847RJ0,B847RJ0,,,
+B84KWJ4,B84KWJ4,,,
+B84T2F7,B84T2F7,,,
+B86V808,B86V808,,,
+B87LKR8,B87LKR8,,,
+B888DV3,B888DV3,,,
+B8BBRW8,B8BBRW8,,,
+B8FW545,B8FW545,,,
+B8GNC91,B8GNC91,,,
+B8JFD24,B8JFD24,,,
+B8KHZT0,B8KHZT0,,,
+B8NB2R6,B8NB2R6,,,
+B8QV5C9,B8QV5C9,,,
+B8SW166,B8SW166,,,
+B8W3QK4,B8W3QK4,,,
+B8X64T7,B8X64T7,,,
+B91XRN2,B91XRN2,,,
+B92CQF3,B92CQF3,,,
+B92RRW2,B92RRW2,,,
+B94QHZ0,B94QHZ0,,,
+B96FTB5,B96FTB5,,,
+B9B9F36,B9B9F36,,,
+B9BP4R1,B9BP4R1,,,
+B9GT0J2,B9GT0J2,,,
+B9HHD96,B9HHD96,,,
+B9L5200,B9L5200,,,
+B9NSBM2,B9NSBM2,,,
+BANKOF,BANKOF,,,
+BANKS,BANKS,,,
+BB2C2R1,BB2C2R1,,,
+BBBSBJ5,BBBSBJ5,,,
+BBK3WF4,BBK3WF4,,,
+BBN23F5,BBN23F5,,,
+BBNBTD2,BBNBTD2,,,
+BBXZ194,BBXZ194,,,
+BC30V41,BC30V41,,,
+BCBVTX1,BCBVTX1,,,
+BCD47X4,BCD47X4,,,
+BCDWBX6,BCDWBX6,,,
+BCGCR57,BCGCR57,,,
+BCRY5H0,BCRY5H0,,,
+BCRY5K3,BCRY5K3,,,
+BCRYTK1,BCRYTK1,,,
+BCZS820,BCZS820,,,
+BD02SG8,BD02SG8,,,
+BD06CS0,BD06CS0,,,
+BD06LM7,BD06LM7,,,
+BD08758,BD08758,,,
+BD0NG78,BD0NG78,,,
+BD0NN55,BD0NN55,,,
+BD0SJ96,BD0SJ96,,,
+BD1KGN4,BD1KGN4,,,
+BD1XH30,BD1XH30,,,
+BD2B4V0,BD2B4V0,,,
+BD2B5Y0,BD2B5Y0,,,
+BD2BLX1,BD2BLX1,,,
+BD2ZJQ2,BD2ZJQ2,,,
+BD3BX01,BD3BX01,,,
+BD3FZ18,BD3FZ18,,,
+BD3WG50,BD3WG50,,,
+BD3WZS6,BD3WZS6,,,
+BD420Q8,BD420Q8,,,
+BD4LHG4,BD4LHG4,,,
+BD59BS7,BD59BS7,,,
+BD5G1Z5,BD5G1Z5,,,
+BD5G2C9,BD5G2C9,,,
+BD60BG7,BD60BG7,,,
+BD6JFC8,BD6JFC8,,,
+BD6JX35,BD6JX35,,,
+BD6P6L2,BD6P6L2,,,
+BD82PS1,BD82PS1,,,
+BD845X2,BD845X2,,,
+BD8FF02,BD8FF02,,,
+BD8GP05,BD8GP05,,,
+BD8S5H8,BD8S5H8,,,
+BD8ZJW2,BD8ZJW2,,,
+BD8ZZ24,BD8ZZ24,,,
+BD93QN5,BD93QN5,,,
+BD978B9,BD978B9,,,
+BD9F675,BD9F675,,,
+BD9MTK0,BD9MTK0,,,
+BD9Q3P5,BD9Q3P5,,,
+BD9Q3Q6,BD9Q3Q6,,,
+BDBRDR8,BDBRDR8,,,
+BDC84D3,BDC84D3,,,
+BDCBCD8,BDCBCD8,,,
+BDCBXH9,BDCBXH9,,,
+BDCD1P9,BDCD1P9,,,
+BDCWFT8,BDCWFT8,,,
+BDCWQ73,BDCWQ73,,,
+BDD0HG2,BDD0HG2,,,
+BDD19F8,BDD19F8,,,
+BDD1BB8,BDD1BB8,,,
+BDDVW37,BDDVW37,,,
+BDDXF67,BDDXF67,,,
+BDFCGV4,BDFCGV4,,,
+BDFFBM9,BDFFBM9,,,
+BDFGDQ0,BDFGDQ0,,,
+BDFKQ07,BDFKQ07,,,
+BDFS3G6,BDFS3G6,,,
+BDGMC59,BDGMC59,,,
+BDH2902,BDH2902,,,
+BDH6M05,BDH6M05,,,
+BDHF495,BDHF495,,,
+BDHF4K6,BDHF4K6,,,
+BDHSLL5,BDHSLL5,,,
+BDQYWV1,BDQYWV1,,,
+BDR7T18,BDR7T18,,,
+BDRJH21,BDRJH21,,,
+BDRW1L7,BDRW1L7,,,
+BDRW1P1,BDRW1P1,,,
+BDRY7P9,BDRY7P9,,,
+BDRYFB1,BDRYFB1,,,
+BDT56V9,BDT56V9,,,
+BDT5M66,BDT5M66,,,
+BDT5ZH8,BDT5ZH8,,,
+BDTYR13,BDTYR13,,,
+BDVPZV0,BDVPZV0,,,
+BDW0D09,BDW0D09,,,
+BDZ30Q0,BDZ30Q0,,,
+BDZDRC5,BDZDRC5,,,
+BDZDSJ9,BDZDSJ9,,,
+BDZT9Y9,BDZT9Y9,,,
+BELGIUM,BELGIUM,,,
+BERMUDA,BERMUDA,,,
+BF01Q65,BF01Q65,,,
+BF04JD2,BF04JD2,,,
+BF081J4,BF081J4,,,
+BF0DMK7,BF0DMK7,,,
+BF0XVC2,BF0XVC2,,,
+BF0YMC2,BF0YMC2,,,
+BF16ZX9,BF16ZX9,,,
+BF1GM16,BF1GM16,,,
+BF1Q6P8,BF1Q6P8,,,
+BF1STB1,BF1STB1,,,
+BF23JJ3,BF23JJ3,,,
+BF27XF9,BF27XF9,,,
+BF2F1Q0,BF2F1Q0,,,
+BF2G4D1,BF2G4D1,,,
+BF2GC59,BF2GC59,,,
+BF2KYH7,BF2KYH7,,,
+BF2X272,BF2X272,,,
+BF2YWG4,BF2YWG4,,,
+BF321D7,BF321D7,,,
+BF329J9,BF329J9,,,
+BF3FPW3,BF3FPW3,,,
+BF3FTF4,BF3FTF4,,,
+BF3W461,BF3W461,,,
+BF43645,BF43645,,,
+BF49P79,BF49P79,,,
+BF4HN46,BF4HN46,,,
+BF5C2N2,BF5C2N2,,,
+BF5D6S8,BF5D6S8,,,
+BF5GRT5,BF5GRT5,,,
+BF5HDJ0,BF5HDJ0,,,
+BF5HDT0,BF5HDT0,,,
+BF5L3R0,BF5L3R0,,,
+BF5MM09,BF5MM09,,,
+BF5P189,BF5P189,,,
+BF5QHG2,BF5QHG2,,,
+BF5S9H3,BF5S9H3,,,
+BF7J7N6,BF7J7N6,,,
+BF7J9X0,BF7J9X0,,,
+BF7MQ72,BF7MQ72,,,
+BF8G134,BF8G134,,,
+BF950B1,BF950B1,,,
+BFD1TJ6,BFD1TJ6,,,
+BFFJPG7,BFFJPG7,,,
+BFFK0X2,BFFK0X2,,,
+BFFK5Z9,BFFK5Z9,,,
+BFFK7S6,BFFK7S6,,,
+BFFVV54,BFFVV54,,,
+BFMB9P3,BFMB9P3,,,
+BFMKYK0,BFMKYK0,,,
+BFMQPR2,BFMQPR2,,,
+BFMZC67,BFMZC67,,,
+BFNF1D6,BFNF1D6,,,
+BFNR303,BFNR303,,,
+BFNSSD4,BFNSSD4,,,
+BFRBX34,BFRBX34,,,
+BFTWZY0,BFTWZY0,,,
+BFV4XW8,BFV4XW8,,,
+BFWGXR8,BFWGXR8,,,
+BFWGXV2,BFWGXV2,,,
+BFWK4R7,BFWK4R7,,,
+BFWLC09,BFWLC09,,,
+BFXC911,BFXC911,,,
+BFXC933,BFXC933,,,
+BFXH9H2,BFXH9H2,,,
+BFXSFB1,BFXSFB1,,,
+BFXX5X8,BFXX5X8,,,
+BFY7DC4,BFY7DC4,,,
+BFY8W20,BFY8W20,,,
+BFYDQ34,BFYDQ34,,,
+BFYF094,BFYF094,,,
+BFYQFJ2,BFYQFJ2,,,
+BFYVKR0,BFYVKR0,,,
+BFYZGX0,BFYZGX0,,,
+BFZ4N46,BFZ4N46,,,
+BFZ9DB8,BFZ9DB8,,,
+BFZNYB7,BFZNYB7,,,
+BFZNZC5,BFZNZC5,,,
+BFZP4R9,BFZP4R9,,,
+BFZQ0L8,BFZQ0L8,,,
+BG0WPH9,BG0WPH9,,,
+BG0ZML1,BG0ZML1,,,
+BG216W6,BG216W6,,,
+BG31GH0,BG31GH0,,,
+BG3G1B4,BG3G1B4,,,
+BG5HXX1,BG5HXX1,,,
+BG88WJ0,BG88WJ0,,,
+BG88WS9,BG88WS9,,,
+BGCYWN8,BGCYWN8,,,
+BGDLVV9,BGDLVV9,,,
+BGDW5G5,BGDW5G5,,,
+BGGJFT6,BGGJFT6,,,
+BGGJFV8,BGGJFV8,,,
+BGK38H3,BGK38H3,,,
+BGKG6G7,BGKG6G7,,,
+BGKG6M3,BGKG6M3,,,
+BGL0JK3,BGL0JK3,,,
+BGLN838,BGLN838,,,
+BGLRLT7,BGLRLT7,,,
+BGM1B98,BGM1B98,,,
+BGMGBW6,BGMGBW6,,,
+BGPYWG8,BGPYWG8,,,
+BGPZ5W8,BGPZ5W8,,,
+BGQT8S6,BGQT8S6,,,
+BGRFWV4,BGRFWV4,,,
+BGT0PL8,BGT0PL8,,,
+BGV1W52,BGV1W52,,,
+BGYTGH3,BGYTGH3,,,
+BH3T3L4,BH3T3L4,,,
+BH3T5K7,BH3T5K7,,,
+BH3Z4P3,BH3Z4P3,,,
+BH65L93,BH65L93,,,
+BHBFXS1,BHBFXS1,,,
+BHCQVP6,BHCQVP6,,,
+BHCVTN5,BHCVTN5,,,
+BHK15K6,BHK15K6,,,
+BHNDW86,BHNDW86,,,
+BHXD297,BHXD297,,,
+BJ0CK86,BJ0CK86,,,
+BJ0KXV4,BJ0KXV4,,,
+BJ0LT31,BJ0LT31,,,
+BJ0XLZ3,BJ0XLZ3,,,
+BJ1FD74,BJ1FD74,,,
+BJ1FDK7,BJ1FDK7,,,
+BJ1N1M9,BJ1N1M9,,,
+BJ367P1,BJ367P1,,,
+BJ36RP1,BJ36RP1,,,
+BJ38KJ2,BJ38KJ2,,,
+BJ4LDC4,BJ4LDC4,,,
+BJ5FZ74,BJ5FZ74,,,
+BJ5KPZ7,BJ5KPZ7,,,
+BJ7BVV6,BJ7BVV6,,,
+BJ7JPH4,BJ7JPH4,,,
+BJ7MB31,BJ7MB31,,,
+BJ7WJS2,BJ7WJS2,,,
+BJ9J282,BJ9J282,,,
+BJBLBN4,BJBLBN4,,,
+BJBLT85,BJBLT85,,,
+BJBZRJ4,BJBZRJ4,,,
+BJCYG26,BJCYG26,,,
+BJDQMV2,BJDQMV2,,,
+BJDQXG4,BJDQXG4,,,
+BJDRX78,BJDRX78,,,
+BJDX8Y8,BJDX8Y8,,,
+BJDX8Z9,BJDX8Z9,,,
+BJH08B2,BJH08B2,,,
+BJH08C3,BJH08C3,,,
+BJH9ZN0,BJH9ZN0,,,
+BJJD5G3,BJJD5G3,,,
+BJKGLW9,BJKGLW9,,,
+BJLD0Y4,BJLD0Y4,,,
+BJLKVS6,BJLKVS6,,,
+BJLTMX5,BJLTMX5,,,
+BJLV8T9,BJLV8T9,,,
+BJM0H98,BJM0H98,,,
+BJMYWL7,BJMYWL7,,,
+BJN4K01,BJN4K01,,,
+BJN4MY9,BJN4MY9,,,
+BJNPYY6,BJNPYY6,,,
+BJQ05Z6,BJQ05Z6,,,
+BJQ0608,BJQ0608,,,
+BJRFD78,BJRFD78,,,
+BJRFDF6,BJRFDF6,,,
+BJRFSB7,BJRFSB7,,,
+BJSP4C9,BJSP4C9,,,
+BJSVLL5,BJSVLL5,,,
+BJT16S6,BJT16S6,,,
+BJTD9L6,BJTD9L6,,,
+BJTJGC4,BJTJGC4,,,
+BJV2ZZ7,BJV2ZZ7,,,
+BJVNMJ3,BJVNMJ3,,,
+BJVR9Y9,BJVR9Y9,,,
+BJXSDM6,BJXSDM6,,,
+BJXT857,BJXT857,,,
+BJY21L2,BJY21L2,,,
+BJYLZK6,BJYLZK6,,,
+BJZ2ZR5,BJZ2ZR5,,,
+BK0VHF6,BK0VHF6,,,
+BK1K484,BK1K484,,,
+BK1KWF7,BK1KWF7,,,
+BK1KWG8,BK1KWG8,,,
+BK1KX10,BK1KX10,,,
+BK228T8,BK228T8,,,
+BK4PZ38,BK4PZ38,,,
+BK5TLP3,BK5TLP3,,,
+BK6H4Z7,BK6H4Z7,,,
+BK6L288,BK6L288,,,
+BK6MJ46,BK6MJ46,,,
+BK6TM04,BK6TM04,,,
+BK7FYL6,BK7FYL6,,,
+BK7Y2V9,BK7Y2V9,,,
+BK7Y2Z3,BK7Y2Z3,,,
+BK80YJ8,BK80YJ8,,,
+BK8MDM0,BK8MDM0,,,
+BK953M8,BK953M8,,,
+BK95GR4,BK95GR4,,,
+BK9TGC1,BK9TGC1,,,
+BKBDP79,BKBDP79,,,
+BKBQD30,BKBQD30,,,
+BKBS530,BKBS530,,,
+BKC9SX3,BKC9SX3,,,
+BKDNG30,BKDNG30,,,
+BKDRF35,BKDRF35,,,
+BKDSMB5,BKDSMB5,,,
+BKDV6G7,BKDV6G7,,,
+BKDZ6W5,BKDZ6W5,,,
+BKF9DQ8,BKF9DQ8,,,
+BKFVZS0,BKFVZS0,,,
+BKKMP44,BKKMP44,,,
+BKLCWZ3,BKLCWZ3,,,
+BKLCX50,BKLCX50,,,
+BKLKXD2,BKLKXD2,,,
+BKLX9J9,BKLX9J9,,,
+BKLXFX5,BKLXFX5,,,
+BKM4KV0,BKM4KV0,,,
+BKM5C62,BKM5C62,,,
+BKM5C84,BKM5C84,,,
+BKMQF66,BKMQF66,,,
+BKMQX40,BKMQX40,,,
+BKP4P23,BKP4P23,,,
+BKP4ZK1,BKP4ZK1,,,
+BKPG0T1,BKPG0T1,,,
+BKPH157,BKPH157,,,
+BKPR6S5,BKPR6S5,,,
+BKPVGH6,BKPVGH6,,,
+BKQVBN6,BKQVBN6,,,
+BKRMRM9,BKRMRM9,,,
+BKRN595,BKRN595,,,
+BKRQQR9,BKRQQR9,,,
+BKRT1C8,BKRT1C8,,,
+BKS3RS7,BKS3RS7,,,
+BKS48R6,BKS48R6,,,
+BKSGZN7,BKSGZN7,,,
+BKT1TK6,BKT1TK6,,,
+BKT61V6,BKT61V6,,,
+BKTC5L2,BKTC5L2,,,
+BKTC976,BKTC976,,,
+BKTNTS0,BKTNTS0,,,
+BKTPCS7,BKTPCS7,,,
+BKV28S8,BKV28S8,,,
+BKVDFF7,BKVDFF7,,,
+BKVF0J2,BKVF0J2,,,
+BKVK9N4,BKVK9N4,,,
+BKVKB49,BKVKB49,,,
+BKWD3M9,BKWD3M9,,,
+BKWQKM7,BKWQKM7,,,
+BKX9VD3,BKX9VD3,,,
+BKY5JZ8,BKY5JZ8,,,
+BKY7X18,BKY7X18,,,
+BKY83Q6,BKY83Q6,,,
+BKYC3F7,BKYC3F7,,,
+BKZH191,BKZH191,,,
+BL0P090,BL0P090,,,
+BL1J6B5,BL1J6B5,,,
+BL25F37,BL25F37,,,
+BL53QN5,BL53QN5,,,
+BL54JF1,BL54JF1,,,
+BL54JK6,BL54JK6,,,
+BL55460,BL55460,,,
+BL55Q42,BL55Q42,,,
+BL5DCB5,BL5DCB5,,,
+BL5FDV8,BL5FDV8,,,
+BL66YS4,BL66YS4,,,
+BL68L90,BL68L90,,,
+BL6CB69,BL6CB69,,,
+BL6JGD2,BL6JGD2,,,
+BL6JK96,BL6JK96,,,
+BL6JSP8,BL6JSP8,,,
+BL72R71,BL72R71,,,
+BL95N25,BL95N25,,,
+BL970N1,BL970N1,,,
+BL97B49,BL97B49,,,
+BL97CD5,BL97CD5,,,
+BL989M6,BL989M6,,,
+BL9X5X4,BL9X5X4,,,
+BL9XML1,BL9XML1,,,
+BL9ZHM3,BL9ZHM3,,,
+BLB0YH0,BLB0YH0,,,
+BLB2P06,BLB2P06,,,
+BLB56T1,BLB56T1,,,
+BLBCWZ0,BLBCWZ0,,,
+BLBCYD2,BLBCYD2,,,
+BLBLMD5,BLBLMD5,,,
+BLBQL66,BLBQL66,,,
+BLCB610,BLCB610,,,
+BLCHF11,BLCHF11,,,
+BLCY1J2,BLCY1J2,,,
+BLCY7G1,BLCY7G1,,,
+BLD13F2,BLD13F2,,,
+BLD30Q8,BLD30Q8,,,
+BLD30T1,BLD30T1,,,
+BLD36T3,BLD36T3,,,
+BLD3B98,BLD3B98,,,
+BLD5321,BLD5321,,,
+BLDBS68,BLDBS68,,,
+BLDDYL1,BLDDYL1,,,
+BLF81K2,BLF81K2,,,
+BLF8447,BLF8447,,,
+BLFB3Y9,BLFB3Y9,,,
+BLFBZ32,BLFBZ32,,,
+BLFDQC4,BLFDQC4,,,
+BLFDXF6,BLFDXF6,,,
+BLFGJD5,BLFGJD5,,,
+BLFGN66,BLFGN66,,,
+BLG38Q1,BLG38Q1,,,
+BLGZN51,BLGZN51,,,
+BLLCYB0,BLLCYB0,,,
+BLLHH27,BLLHH27,,,
+BLN9Z50,BLN9Z50,,,
+BLNB073,BLNB073,,,
+BLNB9R6,BLNB9R6,,,
+BLNMFN7,BLNMFN7,,,
+BLNPMM4,BLNPMM4,,,
+BLP5GX1,BLP5GX1,,,
+BLPHWK6,BLPHWK6,,,
+BLPNQJ1,BLPNQJ1,,,
+BLPNRR6,BLPNRR6,,,
+BLR4TK4,BLR4TK4,,,
+BLR6XK8,BLR6XK8,,,
+BLR7B41,BLR7B41,,,
+BLR7B52,BLR7B52,,,
+BLR7H87,BLR7H87,,,
+BLR8XV5,BLR8XV5,,,
+BLSPX60,BLSPX60,,,
+BLTFST7,BLTFST7,,,
+BLY2FB4,BLY2FB4,,,
+BM4QJF5,BM4QJF5,,,
+BM7V485,BM7V485,,,
+BM8BPB4,BM8BPB4,,,
+BM8FWX7,BM8FWX7,,,
+BM8GQP0,BM8GQP0,,,
+BM8J3J2,BM8J3J2,,,
+BM8JV32,BM8JV32,,,
+BM8MM05,BM8MM05,,,
+BM8NGX9,BM8NGX9,,,
+BM8NHT2,BM8NHT2,,,
+BM8TFC9,BM8TFC9,,,
+BM90J52,BM90J52,,,
+BM92RJ8,BM92RJ8,,,
+BM9FJ13,BM9FJ13,,,
+BM9HHL5,BM9HHL5,,,
+BM9VY27,BM9VY27,,,
+BM9W3L2,BM9W3L2,,,
+BM9XCN0,BM9XCN0,,,
+BMB5CZ6,BMB5CZ6,,,
+BMBK002,BMBK002,,,
+BMBKL65,BMBKL65,,,
+BMBP1Q0,BMBP1Q0,,,
+BMBPL15,BMBPL15,,,
+BMBR683,BMBR683,,,
+BMBR9W8,BMBR9W8,,,
+BMBT0Z4,BMBT0Z4,,,
+BMBX3P7,BMBX3P7,,,
+BMCCHR3,BMCCHR3,,,
+BMCCS58,BMCCS58,,,
+BMCCXH5,BMCCXH5,,,
+BMCG195,BMCG195,,,
+BMCKSV8,BMCKSV8,,,
+BMCLHR0,BMCLHR0,,,
+BMCMWY5,BMCMWY5,,,
+BMCNFN8,BMCNFN8,,,
+BMCQX44,BMCQX44,,,
+BMCR7V2,BMCR7V2,,,
+BMCRLL0,BMCRLL0,,,
+BMCS168,BMCS168,,,
+BMCWKZ2,BMCWKZ2,,,
+BMD78K7,BMD78K7,,,
+BMDBB99,BMDBB99,,,
+BMDCDP2,BMDCDP2,,,
+BMDH249,BMDH249,,,
+BMDH2B6,BMDH2B6,,,
+BMDJ085,BMDJ085,,,
+BMDJ0C9,BMDJ0C9,,,
+BMDJ0D0,BMDJ0D0,,,
+BMDLW29,BMDLW29,,,
+BMDNMR0,BMDNMR0,,,
+BMDNMT2,BMDNMT2,,,
+BMDP209,BMDP209,,,
+BMDPVF7,BMDPVF7,,,
+BMDTR28,BMDTR28,,,
+BMDW0L7,BMDW0L7,,,
+BMDW0R3,BMDW0R3,,,
+BMDXB06,BMDXB06,,,
+BMF1JR1,BMF1JR1,,,
+BMF1LH5,BMF1LH5,,,
+BMF5Q83,BMF5Q83,,,
+BMF7DQ6,BMF7DQ6,,,
+BMF7DT9,BMF7DT9,,,
+BMFD115,BMFD115,,,
+BMFJJ97,BMFJJ97,,,
+BMFK3H6,BMFK3H6,,,
+BMFLYL0,BMFLYL0,,,
+BMFND53,BMFND53,,,
+BMFNRG2,BMFNRG2,,,
+BMFPHK2,BMFPHK2,,,
+BMFPJH3,BMFPJH3,,,
+BMFPJK6,BMFPJK6,,,
+BMFPWT6,BMFPWT6,,,
+BMFTC10,BMFTC10,,,
+BMFX6P4,BMFX6P4,,,
+BMFX8Y7,BMFX8Y7,,,
+BMFYH21,BMFYH21,,,
+BMFZ3F9,BMFZ3F9,,,
+BMFZ702,BMFZ702,,,
+BMFZKV4,BMFZKV4,,,
+BMG3PQ7,BMG3PQ7,,,
+BMG42V4,BMG42V4,,,
+BMG79C3,BMG79C3,,,
+BMG97J2,BMG97J2,,,
+BMGCGK5,BMGCGK5,,,
+BMGH6N3,BMGH6N3,,,
+BMGJZJ8,BMGJZJ8,,,
+BMGMH68,BMGMH68,,,
+BMGNBJ2,BMGNBJ2,,,
+BMGNTQ5,BMGNTQ5,,,
+BMGS7L1,BMGS7L1,,,
+BMGSDK2,BMGSDK2,,,
+BMGTLY5,BMGTLY5,,,
+BMGWSJ8,BMGWSJ8,,,
+BMH0MP5,BMH0MP5,,,
+BMH0MS8,BMH0MS8,,,
+BMH0MV1,BMH0MV1,,,
+BMH10B0,BMH10B0,,,
+BMH5RL1,BMH5RL1,,,
+BMH6DN8,BMH6DN8,,,
+BMH73N1,BMH73N1,,,
+BMHD630,BMHD630,,,
+BMHG0X7,BMHG0X7,,,
+BMHLZ26,BMHLZ26,,,
+BMHR7L7,BMHR7L7,,,
+BMHRMK1,BMHRMK1,,,
+BMHSG57,BMHSG57,,,
+BMHVDS8,BMHVDS8,,,
+BMHVMY7,BMHVMY7,,,
+BMHWY55,BMHWY55,,,
+BMHYQY4,BMHYQY4,,,
+BMJ0GR3,BMJ0GR3,,,
+BMMVY68,BMMVY68,,,
+BMN9870,BMN9870,,,
+BMNDK09,BMNDK09,,,
+BMP8TL6,BMP8TL6,,,
+BMPRJ46,BMPRJ46,,,
+BMPRZV5,BMPRZV5,,,
+BMQ60Q1,BMQ60Q1,,,
+BMQ67R1,BMQ67R1,,,
+BMQ89L5,BMQ89L5,,,
+BMQ8XV3,BMQ8XV3,,,
+BMTD360,BMTD360,,,
+BMTD3M6,BMTD3M6,,,
+BMTRDW8,BMTRDW8,,,
+BMTW8S4,BMTW8S4,,,
+BMV1Z44,BMV1Z44,,,
+BMV1ZD3,BMV1ZD3,,,
+BMV2FD6,BMV2FD6,,,
+BMV7CG3,BMV7CG3,,,
+BMVBZD3,BMVBZD3,,,
+BMVLGP2,BMVLGP2,,,
+BMVNDH9,BMVNDH9,,,
+BMVV9R5,BMVV9R5,,,
+BMW4TN9,BMW4TN9,,,
+BMW64P2,BMW64P2,,,
+BMW6894,BMW6894,,,
+BMW72C8,BMW72C8,,,
+BMWHPY1,BMWHPY1,,,
+BMWKK45,BMWKK45,,,
+BMWT6B1,BMWT6B1,,,
+BMX0JN6,BMX0JN6,,,
+BMX6DM1,BMX6DM1,,,
+BMXC0N9,BMXC0N9,,,
+BMXDBQ2,BMXDBQ2,,,
+BMXDS27,BMXDS27,,,
+BMXL9H3,BMXL9H3,,,
+BMXNGZ6,BMXNGZ6,,,
+BMXWYR1,BMXWYR1,,,
+BMXXBD9,BMXXBD9,,,
+BMXYHQ7,BMXYHQ7,,,
+BMXZF55,BMXZF55,,,
+BMY0YX0,BMY0YX0,,,
+BMY60J6,BMY60J6,,,
+BMY7XX4,BMY7XX4,,,
+BMYD3L0,BMYD3L0,,,
+BMYGG87,BMYGG87,,,
+BMYRFN8,BMYRFN8,,,
+BMYRFV6,BMYRFV6,,,
+BMYS5T7,BMYS5T7,,,
+BMYSHK2,BMYSHK2,,,
+BMYTJP4,BMYTJP4,,,
+BMZ2WT7,BMZ2WT7,,,
+BMZ4B74,BMZ4B74,,,
+BMZ4LN0,BMZ4LN0,,,
+BMZ8228,BMZ8228,,,
+BMZ8604,BMZ8604,,,
+BMZM2X1,BMZM2X1,,,
+BMZQY71,BMZQY71,,,
+BN0TQD2,BN0TQD2,,,
+BN0TQF4,BN0TQF4,,,
+BN0TRB7,BN0TRB7,,,
+BN0VNB5,BN0VNB5,,,
+BN0WQK8,BN0WQK8,,,
+BN0ZBP7,BN0ZBP7,,,
+BN13RW9,BN13RW9,,,
+BN13S71,BN13S71,,,
+BN14T59,BN14T59,,,
+BN15WD1,BN15WD1,,,
+BN2QTD2,BN2QTD2,,,
+BN2QTL0,BN2QTL0,,,
+BN2R582,BN2R582,,,
+BN2R7Z3,BN2R7Z3,,,
+BN2RY85,BN2RY85,,,
+BN2T5Q6,BN2T5Q6,,,
+BN2W9T6,BN2W9T6,,,
+BN40158,BN40158,,,
+BN458W9,BN458W9,,,
+BN45Q70,BN45Q70,,,
+BN45WL6,BN45WL6,,,
+BN46048,BN46048,,,
+BN46844,BN46844,,,
+BN47P80,BN47P80,,,
+BN48970,BN48970,,,
+BN48ZR2,BN48ZR2,,,
+BN4G703,BN4G703,,,
+BN4J951,BN4J951,,,
+BN4Q5D2,BN4Q5D2,,,
+BN4RCJ0,BN4RCJ0,,,
+BN65SM7,BN65SM7,,,
+BN6HHQ0,BN6HHQ0,,,
+BN6LX97,BN6LX97,,,
+BN6QSL9,BN6QSL9,,,
+BN6R7F9,BN6R7F9,,,
+BN6RJM0,BN6RJM0,,,
+BN70TG2,BN70TG2,,,
+BN71J76,BN71J76,,,
+BN72WR0,BN72WR0,,,
+BN770G0,BN770G0,,,
+BN7DTZ0,BN7DTZ0,,,
+BN7JWR1,BN7JWR1,,,
+BN7K304,BN7K304,,,
+BN7KCQ3,BN7KCQ3,,,
+BN7Q7R7,BN7Q7R7,,,
+BN7VBP8,BN7VBP8,,,
+BN7ZZ47,BN7ZZ47,,,
+BN89V40,BN89V40,,,
+BN93088,BN93088,,,
+BN941G6,BN941G6,,,
+BN94K69,BN94K69,,,
+BN96366,BN96366,,,
+BNBPMX1,BNBPMX1,,,
+BNBRMS2,BNBRMS2,,,
+BNBV0S0,BNBV0S0,,,
+BNBV240,BNBV240,,,
+BNBV530,BNBV530,,,
+BNBW7R1,BNBW7R1,,,
+BNBY595,BNBY595,,,
+BNC0LQ1,BNC0LQ1,,,
+BNC1BX1,BNC1BX1,,,
+BNC23Q1,BNC23Q1,,,
+BNC2MS6,BNC2MS6,,,
+BND76B1,BND76B1,,,
+BND7X43,BND7X43,,,
+BNDBK99,BNDBK99,,,
+BNDQ9Y2,BNDQ9Y2,,,
+BNDYF15,BNDYF15,,,
+BNFWZS4,BNFWZS4,,,
+BNG47W7,BNG47W7,,,
+BNG7BZ7,BNG7BZ7,,,
+BNGJQZ8,BNGJQZ8,,,
+BNHP503,BNHP503,,,
+BNHTR54,BNHTR54,,,
+BNK9G76,BNK9G76,,,
+BNKCPP6,BNKCPP6,,,
+BNKGY06,BNKGY06,,,
+BNKJ933,BNKJ933,,,
+BNKLRT1,BNKLRT1,,,
+BNKSW31,BNKSW31,,,
+BNKT9M2,BNKT9M2,,,
+BNLYBF3,BNLYBF3,,,
+BNLYJ71,BNLYJ71,,,
+BNLYJ93,BNLYJ93,,,
+BNLYJD7,BNLYJD7,,,
+BNLYJG0,BNLYJG0,,,
+BNLYWQ1,BNLYWQ1,,,
+BNM4XQ7,BNM4XQ7,,,
+BNM5672,BNM5672,,,
+BNM6GH5,BNM6GH5,,,
+BNM9H26,BNM9H26,,,
+BNNJC42,BNNJC42,,,
+BNNLSZ1,BNNLSZ1,,,
+BNNMQS3,BNNMQS3,,,
+BNNNK51,BNNNK51,,,
+BNNPQY8,BNNPQY8,,,
+BNNRMX5,BNNRMX5,,,
+BNNTCT7,BNNTCT7,,,
+BNNTGD9,BNNTGD9,,,
+BNNTGH3,BNNTGH3,,,
+BNNV4W0,BNNV4W0,,,
+BNQ4YF9,BNQ4YF9,,,
+BNQQ6C6,BNQQ6C6,,,
+BNQS7K7,BNQS7K7,,,
+BNR4QY1,BNR4QY1,,,
+BNR5QT9,BNR5QT9,,,
+BNRQKQ7,BNRQKQ7,,,
+BNRQM83,BNRQM83,,,
+BNRR1B2,BNRR1B2,,,
+BNRR231,BNRR231,,,
+BNRRP65,BNRRP65,,,
+BNSNZL7,BNSNZL7,,,
+BNSP0B8,BNSP0B8,,,
+BNSP8K3,BNSP8K3,,,
+BNT8W10,BNT8W10,,,
+BNT8W21,BNT8W21,,,
+BNTBRX6,BNTBRX6,,,
+BNTC8Y7,BNTC8Y7,,,
+BNTCBL5,BNTCBL5,,,
+BNTCCT0,BNTCCT0,,,
+BNTW041,BNTW041,,,
+BNV08M7,BNV08M7,,,
+BNV0DF5,BNV0DF5,,,
+BNV0HC0,BNV0HC0,,,
+BNV0RN1,BNV0RN1,,,
+BNV0RQ4,BNV0RQ4,,,
+BNVVLD2,BNVVLD2,,,
+BNW2543,BNW2543,,,
+BNXK803,BNXK803,,,
+BNXL732,BNXL732,,,
+BNYK9Y3,BNYK9Y3,,,
+BNYKJK9,BNYKJK9,,,
+BNZB1X8,BNZB1X8,,,
+BNZB473,BNZB473,,,
+BNZD2W0,BNZD2W0,,,
+BNZFTG9,BNZFTG9,,,
+BNZHLY7,BNZHLY7,,,
+BNZJHH8,BNZJHH8,,,
+BNZJHY5,BNZJHY5,,,
+BNZJTJ4,BNZJTJ4,,,
+BNZLBS3,BNZLBS3,,,
+BP0B9H7,BP0B9H7,,,
+BP0BQQ5,BP0BQQ5,,,
+BP0TJN7,BP0TJN7,,,
+BP0TJS2,BP0TJS2,,,
+BP0TQC5,BP0TQC5,,,
+BP0WTV4,BP0WTV4,,,
+BP2BRR1,BP2BRR1,,,
+BP2C8W6,BP2C8W6,,,
+BP2P6L0,BP2P6L0,,,
+BP2Q7L0,BP2Q7L0,,,
+BP2Q7W1,BP2Q7W1,,,
+BP2QPJ4,BP2QPJ4,,,
+BP3YM74,BP3YM74,,,
+BP3YM85,BP3YM85,,,
+BP484B3,BP484B3,,,
+BP48CK8,BP48CK8,,,
+BP4GNJ8,BP4GNJ8,,,
+BP4W0C8,BP4W0C8,,,
+BP4XXM2,BP4XXM2,,,
+BP4YTP0,BP4YTP0,,,
+BP5JNQ3,BP5JNQ3,,,
+BP6GZG7,BP6GZG7,,,
+BP7KZP7,BP7KZP7,,,
+BP7L3L2,BP7L3L2,,,
+BP7L561,BP7L561,,,
+BP7L594,BP7L594,,,
+BP7L5C7,BP7L5C7,,,
+BP7L970,BP7L970,,,
+BP81R42,BP81R42,,,
+BP81RK8,BP81RK8,,,
+BP857F5,BP857F5,,,
+BP8FKJ0,BP8FKJ0,,,
+BP8K987,BP8K987,,,
+BP8S8J5,BP8S8J5,,,
+BP8XZL1,BP8XZL1,,,
+BP9N0G0,BP9N0G0,,,
+BP9S504,BP9S504,,,
+BPBJFJ4,BPBJFJ4,,,
+BPBJFM7,BPBJFM7,,,
+BPBJW48,BPBJW48,,,
+BPBLNG3,BPBLNG3,,,
+BPBPCG8,BPBPCG8,,,
+BPBPD09,BPBPD09,,,
+BPBPG77,BPBPG77,,,
+BPBSZJ1,BPBSZJ1,,,
+BPCJ1Q2,BPCJ1Q2,,,
+BPCJW03,BPCJW03,,,
+BPCK358,BPCK358,,,
+BPCPXY2,BPCPXY2,,,
+BPCQZY9,BPCQZY9,,,
+BPDH477,BPDH477,,,
+BPDJN76,BPDJN76,,,
+BPF0BB7,BPF0BB7,,,
+BPF0KH6,BPF0KH6,,,
+BPG4DP6,BPG4DP6,,,
+BPG9931,BPG9931,,,
+BPGKM57,BPGKM57,,,
+BPH0546,BPH0546,,,
+BPJKCW1,BPJKCW1,,,
+BPJM8Q3,BPJM8Q3,,,
+BPK3M63,BPK3M63,,,
+BPK4SX5,BPK4SX5,,,
+BPLJ828,BPLJ828,,,
+BPLJQW4,BPLJQW4,,,
+BPLL4V5,BPLL4V5,,,
+BPLQG36,BPLQG36,,,
+BPLQR66,BPLQR66,,,
+BPLZ7S5,BPLZ7S5,,,
+BPLZLN8,BPLZLN8,,,
+BPMQ8J5,BPMQ8J5,,,
+BPNXSS4,BPNXSS4,,,
+BPQYJV4,BPQYJV4,,,
+BPQYY97,BPQYY97,,,
+BPSJQ05,BPSJQ05,,,
+BPSK9J8,BPSK9J8,,,
+BPSKN52,BPSKN52,,,
+BPW6WD7,BPW6WD7,,,
+BPW6ZP0,BPW6ZP0,,,
+BPW7PC0,BPW7PC0,,,
+BPW7PH5,BPW7PH5,,,
+BPXYZZ3,BPXYZZ3,,,
+BPY03W3,BPY03W3,,,
+BQ0N709,BQ0N709,,,
+BQ0QT80,BQ0QT80,,,
+BQ1L7V3,BQ1L7V3,,,
+BQ1PC32,BQ1PC32,,,
+BQ2JNX0,BQ2JNX0,,,
+BQ3R1Y0,BQ3R1Y0,,,
+BQ5J6B6,BQ5J6B6,,,
+BQ6BQM2,BQ6BQM2,,,
+BQ6C357,BQ6C357,,,
+BQ721R4,BQ721R4,,,
+BQ80NC6,BQ80NC6,,,
+BQB42F1,BQB42F1,,,
+BQB42H3,BQB42H3,,,
+BQB9HM8,BQB9HM8,,,
+BQBBDY8,BQBBDY8,,,
+BQBC846,BQBC846,,,
+BQBCZY5,BQBCZY5,,,
+BQC4R22,BQC4R22,,,
+BQC4YW1,BQC4YW1,,,
+BQC80B4,BQC80B4,,,
+BQD3J33,BQD3J33,,,
+BQFMQ93,BQFMQ93,,,
+BQFN254,BQFN254,,,
+BQH8G33,BQH8G33,,,
+BQHN6C7,BQHN6C7,,,
+BQKX9X6,BQKX9X6,,,
+BQKXDX4,BQKXDX4,,,
+BQLSDH2,BQLSDH2,,,
+BQLSDK5,BQLSDK5,,,
+BQLSDL6,BQLSDL6,,,
+BQMRYT7,BQMRYT7,,,
+BQNKXX2,BQNKXX2,,,
+BQPDJX1,BQPDJX1,,,
+BQQ8816,BQQ8816,,,
+BQQLLW7,BQQLLW7,,,
+BQS2V17,BQS2V17,,,
+BQSB4S2,BQSB4S2,,,
+BQT2053,BQT2053,,,
+BQV0J03,BQV0J03,,,
+BQV3RS6,BQV3RS6,,,
+BQWNKQ4,BQWNKQ4,,,
+BQXJKH2,BQXJKH2,,,
+BQXKDH6,BQXKDH6,,,
+BQXP757,BQXP757,,,
+BR1GTS6,BR1GTS6,,,
+BR1Z682,BR1Z682,,,
+BR3T9B6,BR3T9B6,,,
+BR3YVK4,BR3YVK4,,,
+BR4NQJ4,BR4NQJ4,,,
+BR56603,BR56603,,,
+BR841G5,BR841G5,,,
+BRAZIL,BRAZIL,,,
+BRBCSP4,BRBCSP4,,,
+BRBR2C4,BRBR2C4,,,
+BRC3PL1,BRC3PL1,,,
+BRC45W5,BRC45W5,,,
+BRCFFK6,BRCFFK6,,,
+BRCYYB7,BRCYYB7,,,
+BRDV332,BRDV332,,,
+BRF2GC3,BRF2GC3,,,
+BRF2GD4,BRF2GD4,,,
+BRGCNJ8,BRGCNJ8,,,
+BRJ3GY4,BRJ3GY4,,,
+BRJ8H91,BRJ8H91,,,
+BRJHSC8,BRJHSC8,,,
+BRJHSZ1,BRJHSZ1,,,
+BRJMM32,BRJMM32,,,
+BRJTVC5,BRJTVC5,,,
+BRJX4J5,BRJX4J5,,,
+BRJZSK0,BRJZSK0,,,
+BRK0127,BRK0127,,,
+BRK0149,BRK0149,,,
+BRK1S18,BRK1S18,,,
+BRKFN59,BRKFN59,,,
+BRQPHW8,BRQPHW8,,,
+BRRD6G8,BRRD6G8,,,
+BRS6600,BRS6600,,,
+BRWKTM1,BRWKTM1,,,
+BRWZXQ8,BRWZXQ8,,,
+BRXXTF2,BRXXTF2,,,
+BRXYZ57,BRXYZ57,,,
+BRXYZ91,BRXYZ91,,,
+BRYQ4L1,BRYQ4L1,,,
+BS096W6,BS096W6,,,
+BS2F741,BS2F741,,,
+BS2K7D5,BS2K7D5,,,
+BS3D8K7,BS3D8K7,,,
+BS44H79,BS44H79,,,
+BS49860,BS49860,,,
+BS4CRR3,BS4CRR3,,,
+BS70KN1,BS70KN1,,,
+BS7T2R6,BS7T2R6,,,
+BS7T2S7,BS7T2S7,,,
+BS88BX1,BS88BX1,,,
+BS893G1,BS893G1,,,
+BSB8D21,BSB8D21,,,
+BSBJKP6,BSBJKP6,,,
+BSBMN89,BSBMN89,,,
+BSF0H76,BSF0H76,,,
+BSF1W07,BSF1W07,,,
+BSHT908,BSHT908,,,
+BSHZ3P9,BSHZ3P9,,,
+BSJQPL0,BSJQPL0,,,
+BSKPBC9,BSKPBC9,,,
+BSKPBK7,BSKPBK7,,,
+BSL7HC6,BSL7HC6,,,
+BSLSSX7,BSLSSX7,,,
+BSLSTH8,BSLSTH8,,,
+BSMNX92,BSMNX92,,,
+BSMR3P0,BSMR3P0,,,
+BSNMBW7,BSNMBW7,,,
+BSNMCG8,BSNMCG8,,,
+BSNQ293,BSNQ293,,,
+BSNR2T6,BSNR2T6,,,
+BSNX0D4,BSNX0D4,,,
+BSPRSL8,BSPRSL8,,,
+BSPRWL6,BSPRWL6,,,
+BSPS5M1,BSPS5M1,,,
+BSQNQM2,BSQNQM2,,,
+BSRK699,BSRK699,,,
+BSRK6R7,BSRK6R7,,,
+BSRKCK2,BSRKCK2,,,
+BSS6HY8,BSS6HY8,,,
+BSWVTJ8,BSWVTJ8,,,
+BSWW195,BSWW195,,,
+BSWYNW8,BSWYNW8,,,
+BT06V07,BT06V07,,,
+BT6MM39,BT6MM39,,,
+BT8QHD4,BT8QHD4,,,
+BT8RWQ5,BT8RWQ5,,,
+BT9K6D8,BT9K6D8,,,
+BT9NC28,BT9NC28,,,
+BT9P0M0,BT9P0M0,,,
+BT9TQK2,BT9TQK2,,,
+BTCB1W2,BTCB1W2,,,
+BTCG280,BTCG280,,,
+BTCK798,BTCK798,,,
+BTCK7D2,BTCK7D2,,,
+BTFK8V4,BTFK8V4,,,
+BTJWV40,BTJWV40,,,
+BTJZB05,BTJZB05,,,
+BTPSGQ9,BTPSGQ9,,,
+BTRDLX4,BTRDLX4,,,
+BTTRRD6,BTTRRD6,,,
+BV0LCR0,BV0LCR0,,,
+BV4K5L8,BV4K5L8,,,
+BV6KRV0,BV6KRV0,,,
+BV8TD84,BV8TD84,,,
+BVB3BV2,BVB3BV2,,,
+BVBCV08,BVBCV08,,,
+BVDFZW5,BVDFZW5,,,
+BVDGYR6,BVDGYR6,,,
+BVDGZ39,BVDGZ39,,,
+BVFNZL6,BVFNZL6,,,
+BVG7F06,BVG7F06,,,
+BVV6CY1,BVV6CY1,,,
+BW0FQV1,BW0FQV1,,,
+BW9RTJ7,BW9RTJ7,,,
+BWC6PW6,BWC6PW6,,,
+BWH64F7,BWH64F7,,,
+BWT3JH3,BWT3JH3,,,
+BWX4MD9,BWX4MD9,,,
+BX3SQS1,BX3SQS1,,,
+BX7RSN3,BX7RSN3,,,
+BX8ZSB4,BX8ZSB4,,,
+BXC87C3,BXC87C3,,,
+BXRTX56,BXRTX56,,,
+BY2ZKK0,BY2ZKK0,,,
+BY3H7G0,BY3H7G0,,,
+BY7R2L6,BY7R2L6,,,
+BY7RB53,BY7RB53,,,
+BY7RH33,BY7RH33,,,
+BYLY8H1,BYLY8H1,,,
+BYM4WL2,BYM4WL2,,,
+BYMBW46,BYMBW46,,,
+BYMG199,BYMG199,,,
+BYMMZL7,BYMMZL7,,,
+BYMT0J1,BYMT0J1,,,
+BYMWL19,BYMWL19,,,
+BYMYT66,BYMYT66,,,
+BYN5Z59,BYN5Z59,,,
+BYN7H26,BYN7H26,,,
+BYN87K7,BYN87K7,,,
+BYN8NH6,BYN8NH6,,,
+BYND5T7,BYND5T7,,,
+BYNH8R8,BYNH8R8,,,
+BYNWB63,BYNWB63,,,
+BYP71H7,BYP71H7,,,
+BYP7GF0,BYP7GF0,,,
+BYP80F1,BYP80F1,,,
+BYPBTB9,BYPBTB9,,,
+BYQ44Y5,BYQ44Y5,,,
+BYQ7X92,BYQ7X92,,,
+BYQBFJ8,BYQBFJ8,,,
+BYQBFQ5,BYQBFQ5,,,
+BYQD1J6,BYQD1J6,,,
+BYQLZ65,BYQLZ65,,,
+BYQN8D9,BYQN8D9,,,
+BYQRFY1,BYQRFY1,,,
+BYRGSX7,BYRGSX7,,,
+BYSLHX4,BYSLHX4,,,
+BYSS4X4,BYSS4X4,,,
+BYT4ST5,BYT4ST5,,,
+BYTC1B2,BYTC1B2,,,
+BYTYP72,BYTYP72,,,
+BYVJ8J8,BYVJ8J8,,,
+BYVQJ96,BYVQJ96,,,
+BYVYKX1,BYVYKX1,,,
+BYW6GV6,BYW6GV6,,,
+BYWL5L4,BYWL5L4,,,
+BYWLRV8,BYWLRV8,,,
+BYWPZW7,BYWPZW7,,,
+BYWPZY9,BYWPZY9,,,
+BYX2Z16,BYX2Z16,,,
+BYX38K9,BYX38K9,,,
+BYX60M4,BYX60M4,,,
+BYXB1Y8,BYXB1Y8,,,
+BYXB201,BYXB201,,,
+BYXGN81,BYXGN81,,,
+BYXHTC0,BYXHTC0,,,
+BYXJQG9,BYXJQG9,,,
+BYXR9C0,BYXR9C0,,,
+BYY5Z69,BYY5Z69,,,
+BYY9947,BYY9947,,,
+BYY9FS3,BYY9FS3,,,
+BYYGJZ9,BYYGJZ9,,,
+BYYMYP2,BYYMYP2,,,
+BYZ1PQ6,BYZ1PQ6,,,
+BYZD465,BYZD465,,,
+BYZFPN5,BYZFPN5,,,
+BYZG9Q9,BYZG9Q9,,,
+BYZG9R0,BYZG9R0,,,
+BYZLFM2,BYZLFM2,,,
+BYZLWZ4,BYZLWZ4,,,
+BYZM6C2,BYZM6C2,,,
+BYZR4X4,BYZR4X4,,,
+BZ07DS4,BZ07DS4,,,
+BZ0CTP8,BZ0CTP8,,,
+BZ0G875,BZ0G875,,,
+BZ0P3Z5,BZ0P3Z5,,,
+BZ0QMB7,BZ0QMB7,,,
+BZ0WN34,BZ0WN34,,,
+BZ12TX5,BZ12TX5,,,
+BZ16HK0,BZ16HK0,,,
+BZ1LBM5,BZ1LBM5,,,
+BZ1N455,BZ1N455,,,
+BZ22CY6,BZ22CY6,,,
+BZ2YT30,BZ2YT30,,,
+BZ7PJQ1,BZ7PJQ1,,,
+BZ8FPH3,BZ8FPH3,,,
+BZ8VC58,BZ8VC58,,,
+BZ9NRB4,BZ9NRB4,,,
+BZ9NWS6,BZ9NWS6,,,
+BZB1XF2,BZB1XF2,,,
+BZB2L51,BZB2L51,,,
+BZBZ020,BZBZ020,,,
+BZCFW78,BZCFW78,,,
+CANADA,CANADA,,,
+CHINA,CHINA,,,
+CURRENCY,CURRENCY,,,
+DELEK,DELEK,,,
+DOLEPLC,DOLEPLC,,,
+ENERGY,ENERGY,,,
+ENERSYS,ENERSYS,,,
+EUR,EUR,,,
+EURO,EURO,,,
+FABRINET,FABRINET,,,
+GRAILINC,GRAILINC,,,
+IBEXLTD,IBEXLTD,,,
+IRELAND,IRELAND,,,
+ISRAEL,ISRAEL,,,
+KBHOME,KBHOME,,,
+MEDIA,MEDIA,,,
+OOMAINC,OOMAINC,,,
+PANAMA,PANAMA,,,
+SEDOL,SEDOL,,,
+SOFTWARE,SOFTWARE,,,
+STEPANCO,STEPANCO,,,
+SWEDEN,SWEDEN,,,
+TOBACCO,TOBACCO,,,
+V2XINC,V2XINC,,,
+XPERIINC,XPERIINC,,,
+ZPRR,ZPRR,,,
