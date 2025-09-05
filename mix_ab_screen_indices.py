@@ -913,6 +913,11 @@ def main():
             "[CONFIRMED/local-only] externals missing → rule = (analyst ok) OR (strong local TA) + mcap>0"
         )
 
+    confirmed = df[mask_confirm].copy().sort_values(["rank_score", "market_cap"], ascending=[False, True])
+    save_csv(confirmed[base_cols], "confirmed_STRONGBUY.csv")
+
+    # Log de contrôle
+    print(f"[CONFIRMED] total={len(confirmed)}")
 
     # Pré-signaux
     mask_pre = (
