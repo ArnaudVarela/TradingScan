@@ -1,7 +1,10 @@
-name: Run screener and publish CSV
+name: Build universe, screen, backtest & publish
 
 on:
   workflow_dispatch: {}
+  # optionnel : planifier un run quotidien à 22:15 Paris
+  # schedule:
+  #   - cron: "15 20 * * 1-5"
 
 permissions:
   contents: write
@@ -13,9 +16,13 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
-      DEFAULT_BRANCH: 'main'
+      DEFAULT_BRANCH: main
+      # Exposées à Python (fallback vers secrets, ou vide si non fournis)
+      FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+      ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -33,6 +40,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -40,34 +48,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # ================== UNIVERS (R1000/R2000) ==================
-      - name: Generate universes (R1000/R2000) from iShares
+      # ================== 1) UNIVERS ==================
+      # Produit: raw_universe.csv + universe_in_scope.csv
+      - name: Build filtered universe (<75B & sectors IT/HC/Financials/Industrials)
         run: |
           set -euo pipefail
-          python gen_r2000_from_ishares.py
+          python build_universe.py
 
-          echo "== ROOT =="
-          ls -lah | sed -n '1,200p'
-          for f in russell1000.csv russell2000.csv; do
-            if [ -f "$f" ]; then
-              echo "--- head $f ---"; head -n 5 "$f"
-            else
-              echo "Missing $f (root)"; exit 1
-            fi
-          done
+          echo "== HEAD raw_universe.csv =="
+          head -n 5 raw_universe.csv || (echo "missing raw_universe.csv" && exit 1)
 
-          echo "== dashboard/public =="
-          ls -lah dashboard/public || true
-          for f in russell1000.csv russell2000.csv; do
-            if [ -f "dashboard/public/$f" ]; then
-              echo "--- head $f (public) ---"; head -n 5 "dashboard/public/$f"
-            else
-              echo "WARN: dashboard/public/$f absent (OK si front lit en RAW root)."
-            fi
-          done
+          echo "== HEAD universe_in_scope.csv =="
+          head -n 10 universe_in_scope.csv || (echo "missing universe_in_scope.csv" && exit 1)
 
-      # ================== SECTEURS ==================
-      - name: Build sector catalog (R1K + SPSM)
+      # ================== 2) SECTEURS (pour heatmap/timeline) ==================
+      # Produit: sector_catalog.csv, sector_history.csv, sector_breadth.csv
+      - name: Build sector catalog & history
         run: |
           set -euo pipefail
           python build_sector_catalog.py
@@ -79,20 +75,26 @@ jobs:
             echo "--- head $f ---"; head -n 5 "dashboard/public/$f"
           done
 
-      # ================== SCREENER ==================
-      - name: Run screener
+      # ================== 3) SCREENER (cascade YF→TV→Finnhub / YF→Finnhub→AV) ==================
+      # Produit: candidates_all_ranked.csv, confirmed_STRONGBUY.csv, anticipative_pre_signals.csv,
+      #          event_driven_signals.csv, signals_history.csv
+      - name: Run screener (cascade providers)
         env:
           PYTHONUNBUFFERED: "1"
+          FINNHUB_API_KEY: ${{ env.FINNHUB_API_KEY }}
+          ALPHAVANTAGE_API_KEY: ${{ env.ALPHAVANTAGE_API_KEY }}
         run: |
           set -euo pipefail
           python mix_ab_screen_indices.py
 
-          # fichier critique
-          test -f dashboard/public/confirmed_STRONGBUY.csv || (echo "Missing confirmed_STRONGBUY.csv"; exit 1)
-          echo "--- head confirmed_STRONGBUY.csv ---"
-          head -n 5 dashboard/public/confirmed_STRONGBUY.csv || true
+          # fichiers critiques
+          for f in confirmed_STRONGBUY.csv candidates_all_ranked.csv signals_history.csv; do
+            test -f "dashboard/public/$f" || (echo "Missing dashboard/public/$f"; exit 1)
+            echo "--- head $f ---"; head -n 5 "dashboard/public/$f" || true
+          done
 
-      # ================== BACKTEST ==================
+      # ================== 4) BACKTEST ==================
+      # Produit: backtest_* (trades, summary, equity 1/3/5/10/20d + SPY benchmarks + user)
       - name: Run backtest
         run: |
           set -euo pipefail
@@ -100,10 +102,11 @@ jobs:
 
           echo "== Backtest outputs (dashboard/public) =="
           req=(
-            "backtest_summary.csv"
             "backtest_trades.csv"
+            "backtest_summary.csv"
             "backtest_equity_10d.csv"
             "backtest_benchmark_spy_10d.csv"
+            "backtest_equity_10d_user.csv"
           )
           for f in "${req[@]}"; do
             if [ ! -f "dashboard/public/$f" ]; then
@@ -113,20 +116,25 @@ jobs:
             echo "--- linecount $f ---"; wc -l "dashboard/public/$f" || true
           done
 
-      # ================== FEAR & GREED ==================
-      - name: Update Fear & Greed (alt.me)
-        run: python fetch_alt_fng.py
+      # ================== 5) FEAR & GREED (alternative.me live) ==================
+      # Produit: dashboard/public/fear_greed.json
+      - name: Update Fear & Greed (alt.me live)
+        run: |
+          set -euo pipefail
+          python fetch_alt_fng.py
+          test -f "dashboard/public/fear_greed.json" || (echo "Missing dashboard/public/fear_greed.json"; exit 1)
+          echo "--- fear_greed.json ---"
+          head -c 400 dashboard/public/fear_greed.json; echo
 
-
-      # ================== DIAGNOSTIC GLOBAL ==================
+      # ================== 6) DIAGNOSTIC GLOBAL ==================
       - name: Sanity dump (root + public)
         run: |
           set -euo pipefail
           echo "== ROOT (short) =="; ls -lah | sed -n '1,200p'
           echo "== dashboard/public (short) =="; ls -lah dashboard/public || true
 
-      # ================== COMMIT / PUSH ==================
-      - name: Commit & push CSV updates
+      # ================== 7) COMMIT / PUSH ==================
+      - name: Commit & push CSV/JSON updates
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -136,6 +144,6 @@ jobs:
             echo "No CSV changes to commit."
             exit 0
           fi
-          git commit -m "auto: update CSVs $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          git commit -m "auto: update datasets ($(date -u +'%Y-%m-%dT%H:%M:%SZ'))"
           git pull --rebase origin $DEFAULT_BRANCH
           git push origin HEAD:$DEFAULT_BRANCH
