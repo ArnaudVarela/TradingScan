@@ -14,10 +14,15 @@ from typing import Iterable, Tuple, Dict, List, Optional
 import pandas as pd
 import requests
 import yfinance as yf
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 # ------------ CONFIG ------------
 PUBLIC_DIR = Path("dashboard/public")
 PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
+
+CACHE_DIR = Path("cache")
+CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 MCAP_MAX_USD = 75_000_000_000  # < 75B$
 MIN_ROW_LEN = 1
@@ -43,6 +48,9 @@ YF_INFO_SLEEP = 0.15  # secondes entre appels .info
 AV_KEY = os.getenv("ALPHAVANTAGE_API_KEY", "")
 AV_SLEEP = 12.5       # 5 req/min pour la free tier -> ~12s
 MAX_AV_LOOKUPS = int(os.getenv("MAX_AV_LOOKUPS", "60"))  # ~12 min max si à plein régime
+
+# Forcer l’utilisation du cache si réseau flaky: NASDAQ_FETCH=cache
+NASDAQ_FETCH_MODE = os.getenv("NASDAQ_FETCH", "live").lower()  # "live" | "cache"
 
 UA = {"User-Agent": "Mozilla/5.0"}
 
@@ -80,24 +88,43 @@ def _union(*series: Iterable[str]) -> list[str]:
                 seen.setdefault(n, True)
     return list(seen.keys())
 
-# ------------ HTTP helpers ------------
-def _get(url: str, **kwargs) -> Optional[requests.Response]:
+# ------------ HTTP Session with retries ------------
+def _build_session() -> requests.Session:
+    s = requests.Session()
+    retries = Retry(
+        total=4,
+        connect=3,
+        read=3,
+        backoff_factor=1.2,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=frozenset(["GET"]),
+        raise_on_status=False,
+        respect_retry_after_header=True,
+    )
+    adapter = HTTPAdapter(max_retries=retries, pool_connections=10, pool_maxsize=10)
+    s.mount("http://", adapter)
+    s.mount("https://", adapter)
+    s.headers.update(UA)
+    return s
+
+SESSION = _build_session()
+
+def _get(url: str, timeout=(8, 30)) -> Optional[str]:
     try:
-        r = requests.get(url, headers=UA, timeout=45, **kwargs)
+        r = SESSION.get(url, timeout=timeout)
         r.raise_for_status()
-        return r
+        return r.text
     except Exception as e:
         print(f"[WARN] GET fail {url}: {e}")
         return None
 
-# ------------ scraping wikipedia ------------
+# ------------ wikipedia ------------
 def _wiki_tables(url: str) -> list[pd.DataFrame]:
-    # petit retry
     for attempt in range(3):
-        r = _get(url)
-        if r and r.text:
+        txt = _get(url, timeout=(8, 40))
+        if txt:
             try:
-                return pd.read_html(io.StringIO(r.text))
+                return pd.read_html(io.StringIO(txt))
             except Exception as e:
                 print(f"[WARN] read_html fail ({attempt+1}/3): {e}")
         time.sleep(1.2 * (attempt + 1))
@@ -176,14 +203,12 @@ def get_nasdaq100() -> Tuple[List[str], Dict[str, str]]:
 
 # ------------ NASDAQ Composite (NasdaqTrader) ------------
 def _parse_pipe_file(text: str) -> list[dict]:
-    """Parse un fichier pipe-delimited (NasdaqTrader .txt)."""
     lines = [ln for ln in text.splitlines() if ln and not ln.startswith("#")]
     if not lines:
         return []
     header = [c.strip() for c in lines[0].split("|")]
     rows = []
     for ln in lines[1:]:
-        # Ignore la ligne "File Creation Time: ..."
         if ln.lower().startswith("file creation time"):
             continue
         parts = [p.strip() for p in ln.split("|")]
@@ -192,72 +217,123 @@ def _parse_pipe_file(text: str) -> list[dict]:
         rows.append(dict(zip(header, parts)))
     return rows
 
+def _read_cached(name: str) -> Optional[str]:
+    p = CACHE_DIR / name
+    if p.exists():
+        try:
+            txt = p.read_text(encoding="utf-8", errors="ignore")
+            print(f"[CACHE] loaded {name} ({len(txt)} bytes)")
+            return txt
+        except Exception:
+            return None
+    return None
+
+def _write_cache(name: str, text: str) -> None:
+    try:
+        (CACHE_DIR / name).write_text(text, encoding="utf-8")
+        print(f"[CACHE] saved {name} ({len(text)} bytes)")
+    except Exception as e:
+        print(f"[CACHE][WARN] save failed {name}: {e}")
+
+def _get_text_from_urls(urls: list[str], cache_name: str) -> Optional[str]:
+    # cache-only mode
+    if NASDAQ_FETCH_MODE == "cache":
+        return _read_cached(cache_name)
+
+    # try live with multiple URLs + small backoff between groups
+    for i, u in enumerate(urls, 1):
+        txt = _get(u, timeout=(8, 35))
+        if txt:
+            _write_cache(cache_name, txt)
+            print(f"[SRC] OK {u}")
+            return txt
+        if i % 2 == 0:
+            time.sleep(1.2 * (i // 2))
+    # fallback to cache
+    print("[SRC] fall back to cache")
+    return _read_cached(cache_name)
+
 def get_nasdaq_composite() -> list[str]:
     """
-    Liste des tickers NASDAQ à partir de NasdaqTrader (robuste):
-    - essaie d'abord nasdaqlisted.txt,
-    - puis fallback sur nasdaqtraded.txt (en filtrant Listing Exchange == 'Q').
+    NASDAQ Composite robuste via plusieurs URLs + cache local.
+    - nasdaqlisted (+ variantes /SymbolDirectory/ et /dynamic/SymDir/)
+    - nasdaqtraded (fallback), filtré sur Listing Exchange == 'Q'
     Filtre: Test Issue = 'N', ETF = 'N'.
     """
-    urls = [
+    l_urls = [
+        # variantes HTTPS
+        "https://nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
         "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
-        "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqtraded.txt",  # fallback élargi
+        "https://www.ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+        # variantes HTTP (certains environnements résolvent mieux)
+        "http://nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "http://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+        "http://www.ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
     ]
+    t_urls = [
+        "https://nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt",
+        "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt",
+        "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqtraded.txt",
+        "https://www.ftp.nasdaqtrader.com/SymbolDirectory/nasdaqtraded.txt",
+        "http://nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt",
+        "http://www.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt",
+        "http://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqtraded.txt",
+        "http://www.ftp.nasdaqtrader.com/SymbolDirectory/nasdaqtraded.txt",
+    ]
+
     symbols: list[str] = []
     seen = set()
 
-    for u in urls:
-        r = _get(u)
-        if not r or not r.text:
-            continue
-        rows = _parse_pipe_file(r.text)
-        if not rows:
-            continue
-
-        # Détection nom de colonne du symbole
-        # nasdaqlisted -> "Symbol"
-        # nasdaqtraded -> "NASDAQ Symbol"
-        sym_col = None
-        for cand in ("Symbol", "NASDAQ Symbol"):
-            if rows and cand in rows[0]:
-                sym_col = cand
-                break
-        if sym_col is None:
-            continue
-
-        # Colonnes facultatives
-        test_col = "Test Issue" if "Test Issue" in rows[0] else None
-        etf_col = "ETF" if "ETF" in rows[0] else None
-        exch_col = None
-        for cand in ("Listing Exchange", "Exchange"):
-            if cand in rows[0]:
-                exch_col = cand
-                break
-
-        count_added = 0
-        for row in rows:
-            raw = row.get(sym_col)
-            n = _norm_yf(raw) if raw else None
-            if not n or n in seen:
-                continue
-            # Filtre Test Issue
-            if test_col and str(row.get(test_col, "")).upper() == "Y":
-                continue
-            # Filtre ETF
-            if etf_col and str(row.get(etf_col, "")).upper() == "Y":
-                continue
-            # Si on est sur le fallback "nasdaqtraded", ne garde que l'exchange NASDAQ ('Q')
-            if "nasdaqtraded" in u and exch_col:
-                if str(row.get(exch_col, "")).upper() != "Q":
+    # First: nasdaqlisted
+    txt_listed = _get_text_from_urls(l_urls, "nasdaqlisted.txt")
+    if txt_listed:
+        rows = _parse_pipe_file(txt_listed)
+        sym_col = "Symbol" if rows and "Symbol" in rows[0] else None
+        test_col = "Test Issue" if rows and "Test Issue" in rows[0] else None
+        etf_col  = "ETF" if rows and "ETF" in rows[0] else None
+        added = 0
+        if sym_col:
+            for row in rows:
+                raw = row.get(sym_col)
+                n = _norm_yf(raw) if raw else None
+                if not n or n in seen:
                     continue
-            seen.add(n)
-            symbols.append(n)
+                if test_col and str(row.get(test_col, "")).upper() == "Y":
+                    continue
+                if etf_col and str(row.get(etf_col, "")).upper() == "Y":
+                    continue
+                seen.add(n)
+                symbols.append(n)
+                added += 1
+        print(f"[SRC] nasdaqlisted: +{added} (total {len(symbols)})")
 
-        # Si on a déjà beaucoup de symboles via nasdaqlisted, on peut s'arrêter
-        if "nasdaqlisted" in u and len(symbols) > 1000:
-            print(f"[SRC] nasdaqlisted: {len(symbols)} symbols")
-        if "nasdaqtraded" in u:
-            print(f"[SRC] nasdaqtraded (Q only): +{count_added} (total {len(symbols)})")
+    # Fallback: nasdaqtraded (Q only)
+    txt_traded = _get_text_from_urls(t_urls, "nasdaqtraded.txt")
+    if txt_traded:
+        rows = _parse_pipe_file(txt_traded)
+        sym_col = "NASDAQ Symbol" if rows and "NASDAQ Symbol" in rows[0] else None
+        exch_col = "Listing Exchange" if rows and "Listing Exchange" in rows[0] else ("Exchange" if rows and "Exchange" in rows[0] else None)
+        test_col = "Test Issue" if rows and "Test Issue" in rows[0] else None
+        etf_col  = "ETF" if rows and "ETF" in rows[0] else None
+        added = 0
+        if sym_col:
+            for row in rows:
+                if exch_col and str(row.get(exch_col, "")).upper() != "Q":
+                    continue
+                raw = row.get(sym_col)
+                n = _norm_yf(raw) if raw else None
+                if not n or n in seen:
+                    continue
+                if test_col and str(row.get(test_col, "")).upper() == "Y":
+                    continue
+                if etf_col and str(row.get(etf_col, "")).upper() == "Y":
+                    continue
+                seen.add(n)
+                symbols.append(n)
+                added += 1
+        print(f"[SRC] nasdaqtraded (Q only): +{added} (total {len(symbols)})")
 
     print(f"[SRC] NASDAQ Composite (robust): ~{len(symbols)} tickers")
     return symbols
@@ -384,12 +460,10 @@ def main():
     if not need_fill.empty:
         print(f"[ENRICH] sector for top {len(need_fill)} <75B with empty sector (YF.info -> AlphaVantage)…")
         step = try_fill_sector_with_yfinfo(need_fill, "ticker_yf")
-        # copy back if found
         for col_src, col_dst in [("sector_fill", "sector"), ("industry_fill", "industry")]:
             mask = step[col_src].notna() & step[col_src].astype(str).str.strip().ne("")
             meta_lt75.loc[step.index[mask], col_dst] = step.loc[mask, col_src].values
 
-        # restants -> Alpha Vantage (si clé)
         rest = step[step["sector_fill"].isna() | (step["sector_fill"].astype(str).str.strip() == "")]
         if not rest.empty:
             rest2 = try_fill_sector_with_av(rest, "ticker_yf")
@@ -397,11 +471,11 @@ def main():
             meta_lt75.loc[rest2.index[mask2], "sector"] = rest2.loc[mask2, "av_sector"].values
             meta_lt75.loc[rest2.index[mask2], "industry"] = rest2.loc[mask2, "av_industry"].values
 
-    # 6) Filtre final: sector ∈ {Tech, Financials, Industrials, Health Care} & MCAP < 75B
+    # 6) Filtre final: sectors ∈ {Tech, Financials, Industrials, Health Care} & MCAP < 75B
     sec_norm = meta_lt75["sector"].map(_norm_sector)
     in_scope = meta_lt75[sec_norm.isin(ALLOWED_SECTORS)].copy()
 
-    # tri: liquidité décroissante puis cap croissant (quand dispos)
+    # tri: liquidité décroissante puis cap croissant
     in_scope["mcap_usd"] = pd.to_numeric(in_scope["mcap_usd"], errors="coerce")
     in_scope["avg_dollar_vol"] = pd.to_numeric(in_scope["avg_dollar_vol"], errors="coerce")
     in_scope = in_scope.sort_values(["avg_dollar_vol", "mcap_usd"], ascending=[False, True])
