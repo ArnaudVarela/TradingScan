@@ -1,12 +1,1 @@
-ticker_yf,ticker_tv,price,mcap_usd,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,technical_local,tech_score,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,event_score,bucket
-U,U,,,465892137.8417206,0.6484848484848484,STRONG_BUY,BUY,35.0,information technology,Unknown,STRONG_BUY,1.0,True,True,True,3,20+,0.8418181818181818,3,confirmed
-NET,NET,,,399158864.17755127,0.603030303030303,STRONG_BUY,BUY,39.0,information technology,Unknown,STRONG_BUY,1.0,True,True,True,3,20+,0.8213636363636363,1,confirmed
-MU,MU,,,1973794132.3995209,0.603030303030303,STRONG_BUY,BUY,52.0,information technology,Semiconductors,STRONG_BUY,1.0,True,True,True,3,20+,0.8213636363636363,2,confirmed
-AVGO,AVGO,,,8058000408.635254,0.5575757575757576,STRONG_BUY,BUY,49.0,information technology,Semiconductors,STRONG_BUY,1.0,True,True,True,3,20+,0.8009090909090908,4,confirmed
-SYK,SYK,,,370383939.2041016,0.6484848484848484,STRONG_BUY,BUY,37.0,health care,Health Care Equipment,BUY,0.5,False,True,True,2,20+,0.6668181818181818,0,confirmed
-QCOM,QCOM,,,1169609771.4060974,0.603030303030303,STRONG_BUY,BUY,48.0,information technology,Semiconductors,BUY,0.5,False,True,True,2,20+,0.6463636363636364,0,confirmed
-HCA,HCA,,,412243209.0646362,0.603030303030303,STRONG_BUY,BUY,31.0,health care,Health Care Facilities,BUY,0.5,False,True,True,2,20+,0.6463636363636364,1,confirmed
-PANW,PANW,,,1179647322.54364,0.603030303030303,STRONG_BUY,BUY,60.0,information technology,Systems Software,BUY,0.5,False,True,True,2,20+,0.6463636363636364,1,confirmed
-UAL,UAL,,,464539574.49256897,0.603030303030303,STRONG_BUY,BUY,27.0,industrials,Passenger Airlines,BUY,0.5,False,True,True,2,20+,0.6263636363636363,1,confirmed
-CYBR,CYBR,,,366936627.7453613,0.5575757575757576,STRONG_BUY,BUY,42.0,information technology,SOFTWARE - INFRASTRUCTURE,BUY,0.5,False,True,True,2,20+,0.625909090909091,1,confirmed
-PSTG,PSTG,,,452032527.477417,0.5363636363636364,STRONG_BUY,BUY,27.0,information technology,Unknown,BUY,0.5,False,True,True,2,20+,0.5963636363636364,0,confirmed
+ticker_yf,ticker_tv,price,mcap_usd,dv20,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,technical_local,tech_score,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,event_score,bucket
