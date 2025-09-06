@@ -415,6 +415,39 @@ def main():
 
     save_csv(trades_df, "backtest_trades.csv")
 
+    # === 4.9) Hardening colonnes attendues (évite KeyError si une étape amont a changé)
+def _ensure_backtest_cols(df: pd.DataFrame) -> pd.DataFrame:
+    must_str   = ["date_signal","ticker","sector","bucket","cohort","status","date_exit","notes","source"]
+    must_int   = ["horizon_days","days_elapsed","votes"]
+    must_float = ["entry","exit","ret_pct"]
+    for c in must_str:
+        if c not in df.columns:
+            df[c] = ""
+    for c in must_int:
+        if c not in df.columns:
+            df[c] = pd.Series(dtype="Int64")
+    for c in must_float:
+        if c not in df.columns:
+            df[c] = pd.Series(dtype="float")
+    # défauts intelligents
+    df["status"] = df["status"].replace("", "closed").fillna("closed")
+    # types/numériques
+    for c in must_int:
+        df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
+    for c in must_float:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+    # dates au bon format
+    if "date_signal" in df.columns:
+        df["date_signal"] = pd.to_datetime(df["date_signal"], errors="coerce").dt.strftime("%Y-%m-%d")
+    if "date_exit" in df.columns:
+        # on garde string YYYY-MM-DD (tes exports attendent ça)
+        df["date_exit"] = pd.to_datetime(df["date_exit"], errors="coerce").dt.strftime("%Y-%m-%d")
+    return df
+
+auto_trades = _ensure_backtest_cols(auto_trades)
+user_trades = _ensure_backtest_cols(user_trades)
+
+
     # === 5) Résumé (CLOSED seulement) — sur AUTO uniquement pour coller au graphe auto
     auto_closed = auto_trades[auto_trades["status"] == "closed"].copy()
     summary = (
