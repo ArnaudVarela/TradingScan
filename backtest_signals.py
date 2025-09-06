@@ -90,16 +90,18 @@ def placeholder_outputs_when_empty():
     summary_cols = ["horizon_days","bucket","cohort","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret","generated_at_utc"]
     equity_cols  = ["date","equity","generated_at_utc"]
 
-    save_csv(pd.DataFrame(columns=trades_cols),  "backtest_trades.csv")
-    save_csv(pd.DataFrame(columns=summary_cols), "backtest_summary.csv")
+    save_csv(pd.DataFrame(columns=trades_cols),  "backtest_trades.csv", headers=trades_cols)
+    save_csv(pd.DataFrame(columns=summary_cols), "backtest_summary.csv", headers=summary_cols)
     for h in HORIZONS:
-        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_{h}d.csv")
-        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_benchmark_spy_{h}d.csv")
-        save_csv(pd.DataFrame(columns=["date","model","spy","generated_at_utc"]), f"backtest_equity_{h}d_combo.csv")
-    save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv")
-    save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d_user.csv")  # NEW (Mes Picks)
+        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_{h}d.csv", headers=e
+
+quity_cols)
+        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_benchmark_spy_{h}d.csv", headers=equity_cols)
+        save_csv(pd.DataFrame(columns=["date","model","spy","generated_at_utc"]), f"backtest_equity_{h}d_combo.csv", headers=["date","model","spy","generated_at_utc"])
+    save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv", headers=equity_cols)
+    save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d_user.csv", headers=equity_cols)  # NEW (Mes Picks)
     for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
-        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_10d_{cohort}.csv")
+        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_10d_{cohort}.csv", headers=equity_cols)
 
 # ---------- SPY (robuste à l'index sans nom) ----------
 def compute_spy_benchmark(start_dt, end_dt):
@@ -280,6 +282,34 @@ def add_pillars_and_cohorts(sig: pd.DataFrame) -> pd.DataFrame:
     )
     return s
 
+# ---------- Hardening colonnes attendues ----------
+def _ensure_backtest_cols(df: pd.DataFrame) -> pd.DataFrame:
+    must_str   = ["date_signal","ticker","sector","bucket","cohort","status","date_exit","notes","source"]
+    must_int   = ["horizon_days","days_elapsed","votes"]
+    must_float = ["entry","exit","ret_pct"]
+    for c in must_str:
+        if c not in df.columns:
+            df[c] = ""
+    for c in must_int:
+        if c not in df.columns:
+            df[c] = pd.Series(dtype="Int64")
+    for c in must_float:
+        if c not in df.columns:
+            df[c] = pd.Series(dtype="float")
+    # défauts intelligents
+    df["status"] = df["status"].replace("", "closed").fillna("closed")
+    # types/numériques
+    for c in must_int:
+        df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
+    for c in must_float:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+    # dates au bon format
+    if "date_signal" in df.columns:
+        df["date_signal"] = pd.to_datetime(df["date_signal"], errors="coerce").dt.strftime("%Y-%m-%d")
+    if "date_exit" in df.columns:
+        df["date_exit"] = pd.to_datetime(df["date_exit"], errors="coerce").dt.strftime("%Y-%m-%d")
+    return df
+
 # ---------- Main ----------
 def main():
     # === 1) Charger signaux AUTO ===
@@ -415,38 +445,22 @@ def main():
 
     save_csv(trades_df, "backtest_trades.csv")
 
-    # === 4.9) Hardening colonnes attendues (évite KeyError si une étape amont a changé)
-def _ensure_backtest_cols(df: pd.DataFrame) -> pd.DataFrame:
-    must_str   = ["date_signal","ticker","sector","bucket","cohort","status","date_exit","notes","source"]
-    must_int   = ["horizon_days","days_elapsed","votes"]
-    must_float = ["entry","exit","ret_pct"]
-    for c in must_str:
-        if c not in df.columns:
-            df[c] = ""
-    for c in must_int:
-        if c not in df.columns:
-            df[c] = pd.Series(dtype="Int64")
-    for c in must_float:
-        if c not in df.columns:
-            df[c] = pd.Series(dtype="float")
-    # défauts intelligents
-    df["status"] = df["status"].replace("", "closed").fillna("closed")
-    # types/numériques
-    for c in must_int:
-        df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
-    for c in must_float:
-        df[c] = pd.to_numeric(df[c], errors="coerce")
-    # dates au bon format
-    if "date_signal" in df.columns:
-        df["date_signal"] = pd.to_datetime(df["date_signal"], errors="coerce").dt.strftime("%Y-%m-%d")
-    if "date_exit" in df.columns:
-        # on garde string YYYY-MM-DD (tes exports attendent ça)
-        df["date_exit"] = pd.to_datetime(df["date_exit"], errors="coerce").dt.strftime("%Y-%m-%d")
-    return df
+    # Harmonise les colonnes pour éviter les KeyError en aval
+    if not auto_trades.empty:
+        auto_trades = _ensure_backtest_cols(auto_trades)
+    else:
+        auto_trades = pd.DataFrame(columns=[
+            "date_signal","ticker","sector","bucket","cohort","status","date_exit","notes","source",
+            "horizon_days","days_elapsed","votes","entry","exit","ret_pct"
+        ])
 
-auto_trades = _ensure_backtest_cols(auto_trades)
-user_trades = _ensure_backtest_cols(user_trades)
-
+    if not user_trades.empty:
+        user_trades = _ensure_backtest_cols(user_trades)
+    else:
+        user_trades = pd.DataFrame(columns=[
+            "date_signal","ticker","sector","bucket","cohort","status","date_exit","notes","source",
+            "horizon_days","days_elapsed","votes","entry","exit","ret_pct"
+        ])
 
     # === 5) Résumé (CLOSED seulement) — sur AUTO uniquement pour coller au graphe auto
     auto_closed = auto_trades[auto_trades["status"] == "closed"].copy()
@@ -470,53 +484,53 @@ user_trades = _ensure_backtest_cols(user_trades)
     for h in HORIZONS:
         sub = auto_closed[auto_closed["horizon_days"] == h]
         if sub.empty:
-            save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_{h}d.csv")
-            save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_benchmark_spy_{h}d.csv")
-            save_csv(pd.DataFrame(columns=["date","model","spy"]), f"backtest_equity_{h}d_combo.csv")
+            save_csv(pd.DataFrame(columns=["date","equity","generated_at_utc"]), f"backtest_equity_{h}d.csv", headers=["date","equity","generated_at_utc"])
+            save_csv(pd.DataFrame(columns=["date","equity","generated_at_utc"]), f"backtest_benchmark_spy_{h}d.csv", headers=["date","equity","generated_at_utc"])
+            save_csv(pd.DataFrame(columns=["date","model","spy","generated_at_utc"]), f"backtest_equity_{h}d_combo.csv", headers=["date","model","spy","generated_at_utc"])
             continue
         daily_ret = sub.groupby("date_exit")["ret_pct"].mean().sort_index()
         eq = equity_from_daily_returns(daily_ret)
-        save_csv(eq, f"backtest_equity_{h}d.csv")
+        save_csv(eq, f"backtest_equity_{h}d.csv", headers=["date","equity","generated_at_utc"])
 
         spy = compute_spy_benchmark(eq["date"].min(), eq["date"].max())
-        save_csv(spy, f"backtest_benchmark_spy_{h}d.csv")
+        save_csv(spy, f"backtest_benchmark_spy_{h}d.csv", headers=["date","equity","generated_at_utc"])
 
         combo = (
             eq.rename(columns={"equity": "model"})
               .merge(spy.rename(columns={"equity": "spy"}), on="date", how="inner")
         )
-        save_csv(combo, f"backtest_equity_{h}d_combo.csv")
+        save_csv(combo, f"backtest_equity_{h}d_combo.csv", headers=["date","model","spy","generated_at_utc"])
 
     # === 7) Equity AUTO par COHORTE (10j) ===
     if 10 in HORIZONS:
         for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
             subc = auto_closed[(auto_closed["horizon_days"] == 10) & (auto_closed["cohort"] == cohort)]
             if subc.empty:
-                save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_10d_{cohort}.csv")
+                save_csv(pd.DataFrame(columns=["date","equity","generated_at_utc"]), f"backtest_equity_10d_{cohort}.csv", headers=["date","equity","generated_at_utc"])
                 continue
             daily_ret = subc.groupby("date_exit")["ret_pct"].mean().sort_index()
             eqc = equity_from_daily_returns(daily_ret)
-            save_csv(eqc, f"backtest_equity_10d_{cohort}.csv")
+            save_csv(eqc, f"backtest_equity_10d_{cohort}.csv", headers=["date","equity","generated_at_utc"])
 
     # === 8) Copie de sûreté AUTO (10j) ===
     prefer = 10
     fallback = max(HORIZONS)
     src = f"backtest_equity_{prefer}d.csv" if prefer in HORIZONS else f"backtest_equity_{fallback}d.csv"
     eq10, _ = read_csv_first_available([src, PUBLIC_DIR / src])
-    save_csv(eq10, "backtest_equity_10d.csv")
+    save_csv(eq10, "backtest_equity_10d.csv", headers=["date","equity","generated_at_utc"])
 
     # === 9) Courbe "Mes Picks" (10 jours, CLOSED only) ===
     if 10 in HORIZONS:
         user_closed = user_trades[user_trades["status"] == "closed"].copy()
         user10 = user_closed[user_closed["horizon_days"] == 10]
         if user10.empty:
-            save_csv(pd.DataFrame(columns=["date","equity"]), "backtest_equity_10d_user.csv")
+            save_csv(pd.DataFrame(columns=["date","equity","generated_at_utc"]), "backtest_equity_10d_user.csv", headers=["date","equity","generated_at_utc"])
         else:
             daily_ret_user = user10.groupby("date_exit")["ret_pct"].mean().sort_index()
             eq_user = equity_from_daily_returns(daily_ret_user)
-            save_csv(eq_user, "backtest_equity_10d_user.csv")
+            save_csv(eq_user, "backtest_equity_10d_user.csv", headers=["date","equity","generated_at_utc"])
     else:
-        save_csv(pd.DataFrame(columns=["date","equity"]), "backtest_equity_10d_user.csv")
+        save_csv(pd.DataFrame(columns=["date","equity","generated_at_utc"]), "backtest_equity_10d_user.csv", headers=["date","equity","generated_at_utc"])
 
     # === 10) Stats JSON ===
     stats = {
