@@ -132,8 +132,10 @@ def get_nasdaq100() -> Tuple[List[str], Dict[str,str]]:
     for t in _wiki_tables(url):
         syms, smap = _extract_symbol_and_sector(t)
         if syms:
-            out_syms.extend(syms); out_map.update(smap); break
-    print(f("[SRC] NASDAQ-100: {len(out_syms)} tickers (with sector for {len(out_map)})"))
+            out_syms.extend(syms)
+            out_map.update(smap)
+            break
+    print(f"[SRC] NASDAQ-100: {len(out_syms)} tickers (with sector for {len(out_map)})")
     return out_syms, out_map
 
 # ------------ NASDAQ Composite (NasdaqTrader) ------------
