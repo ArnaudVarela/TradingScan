@@ -1,1 +1,3 @@
-ticker_yf,ticker_tv,price,mcap_usd,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket
+ticker_yf,ticker_tv,price,mcap_usd,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,technical_local,tech_score,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,event_score,bucket
+RKT,RKT,,,398313693.1614113,0.5575757575757576,STRONG_BUY,BUY,14.0,financials,Unknown,NEUTRAL,0.0,False,True,True,2,10–14,0.34424242424242424,4,event
+HUBS,HUBS,,,394129871.8765259,0.1575757575757576,NEUTRAL,BUY,42.0,information technology,Unknown,NEUTRAL,0.0,False,False,True,1,20+,0.27090909090909093,2,event

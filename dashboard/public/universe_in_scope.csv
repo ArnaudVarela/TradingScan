@@ -1,587 +1,680 @@
-ticker_yf,ticker_tv,mcap_usd,avg_dollar_vol,sector
-MMM,MMM,,,Industrials
-AOS,AOS,,,Industrials
-AAON,AAON,,,Industrials
-ABT,ABT,,,Health Care
-ABBV,ABBV,,,Health Care
-ACHC,ACHC,,,Health Care
-ACN,ACN,,,Information Technology
-AYI,AYI,,,Industrials
-ADBE,ADBE,,,Information Technology
-WMS,WMS,,,Industrials
-AMD,AMD,,,Information Technology
-ACM,ACM,,,Industrials
-AMG,AMG,,,Financials
-AFRM,AFRM,,,Information Technology
-AFL,AFL,,,Financials
-AGCO,AGCO,,,Industrials
-A,A,,,Health Care
-AGNC,AGNC,,,Financials
-AL,AL,,,Industrials
-AKAM,AKAM,,,Information Technology
-ALK,ALK,,,Industrials
-ALGN,ALGN,,,Health Care
-ALLE,ALLE,,,Industrials
-ALGM,ALGM,,,Information Technology
-ALSN,ALSN,,,Industrials
-ALL,ALL,,,Financials
-ALLY,ALLY,,,Financials
-ALNY,ALNY,,,Health Care
-DOX,DOX,,,Information Technology
-AMTM,AMTM,,,Industrials
-AAL,AAL,,,Industrials
-AXP,AXP,,,Financials
-AFG,AFG,,,Financials
-AIG,AIG,,,Financials
-AMP,AMP,,,Financials
-AME,AME,,,Industrials
-AMGN,AMGN,,,Health Care
-AMKR,AMKR,,,Information Technology
-APH,APH,,,Information Technology
-ADI,ADI,,,Information Technology
-NLY,NLY,,,Financials
-AON,AON,,,Financials
-APG,APG,,,Industrials
-APLS,APLS,,,Health Care
-APO,APO,,,Financials
-APPF,APPF,,,Information Technology
-AAPL,AAPL,,,Information Technology
-AIT,AIT,,,Industrials
-AMAT,AMAT,,,Information Technology
-APP,APP,,,Information Technology
-ACGL,ACGL,,,Financials
-ARES,ARES,,,Financials
-ANET,ANET,,,Information Technology
-AWI,AWI,,,Industrials
-ARW,ARW,,,Information Technology
-AJG,AJG,,,Financials
-AIZ,AIZ,,,Financials
-AGO,AGO,,,Financials
-ALAB,ALAB,,,Information Technology
-ATI,ATI,,,Industrials
-TEAM,TEAM,,,Information Technology
-AUR,AUR,,,Information Technology
-ADSK,ADSK,,,Information Technology
-ADP,ADP,,,Industrials
-AVTR,AVTR,,,Health Care
-CAR,CAR,,,Industrials
-AVT,AVT,,,Information Technology
-AXS,AXS,,,Financials
-AXON,AXON,,,Industrials
-BAC,BAC,,,Financials
-OZK,OZK,,,Financials
-BAX,BAX,,,Health Care
-BDX,BDX,,,Health Care
-BSY,BSY,,,Information Technology
-BRK-B,BRK.B,,,Financials
-BILL,BILL,,,Information Technology
-BIO,BIO,,,Health Care
-TECH,TECH,,,Health Care
-BIIB,BIIB,,,Health Care
-BMRN,BMRN,,,Health Care
-BLK,BLK,,,Financials
-BX,BX,,,Financials
-XYZ,XYZ,,,Financials
-OWL,OWL,,,Financials
-BK,BK,,,Financials
-BA,BA,,,Industrials
-BOKF,BOKF,,,Financials
-BAH,BAH,,,Industrials
-BSX,BSX,,,Health Care
-BHF,BHF,,,Financials
-BMY,BMY,,,Health Care
-AVGO,AVGO,,,Information Technology
-BR,BR,,,Industrials
-BAM,BAM,,,Financials
-BRO,BRO,,,Financials
-BRKR,BRKR,,,Health Care
-BLDR,BLDR,,,Industrials
-BWXT,BWXT,,,Industrials
-CHRW,CHRW,,,Industrials
-CACI,CACI,,,Industrials
-CDNS,CDNS,,,Information Technology
-COF,COF,,,Financials
-CAH,CAH,,,Health Care
-CSL,CSL,,,Industrials
-CG,CG,,,Financials
-CARR,CARR,,,Industrials
-CAT,CAT,,,Industrials
-CBOE,CBOE,,,Financials
-CCCS,CCCS,,,Information Technology
-CDW,CDW,,,Information Technology
-COR,COR,,,Health Care
-CNC,CNC,,,Health Care
-CERT,CERT,,,Health Care
-CRL,CRL,,,Health Care
-SCHW,SCHW,,,Financials
-CHE,CHE,,,Health Care
-CB,CB,,,Financials
-CIEN,CIEN,,,Information Technology
-CI,CI,,,Health Care
-CINF,CINF,,,Financials
-CTAS,CTAS,,,Industrials
-CRUS,CRUS,,,Information Technology
-CSCO,CSCO,,,Information Technology
-C,C,,,Financials
-CFG,CFG,,,Financials
-CLVT,CLVT,,,Industrials
-CLH,CLH,,,Industrials
-NET,NET,,,Information Technology
-CME,CME,,,Financials
-CNA,CNA,,,Financials
-CNH,CNH,,,Industrials
-CGNX,CGNX,,,Information Technology
-CTSH,CTSH,,,Information Technology
-COHR,COHR,,,Information Technology
-COIN,COIN,,,Financials
-COLB,COLB,,,Financials
-CMA,CMA,,,Financials
-FIX,FIX,,,Industrials
-CBSH,CBSH,,,Financials
-CNXC,CNXC,,,Information Technology
-CFLT,CFLT,,,Information Technology
-COO,COO,,,Health Care
-CPRT,CPRT,,,Industrials
-CORT,CORT,,,Health Care
-CNM,CNM,,,Industrials
-GLW,GLW,,,Information Technology
-CPAY,CPAY,,,Financials
-CR,CR,,,Industrials
-CXT,CXT,,,Industrials
-CACC,CACC,,,Financials
-CRWD,CRWD,,,Information Technology
-CSX,CSX,,,Industrials
-CMI,CMI,,,Industrials
-CW,CW,,,Industrials
-CVS,CVS,,,Health Care
-DHR,DHR,,,Health Care
-DDOG,DDOG,,,Information Technology
-DVA,DVA,,,Health Care
-DAY,DAY,,,Industrials
-DE,DE,,,Industrials
-DAL,DAL,,,Industrials
-DELL,DELL,,,Information Technology
-XRAY,XRAY,,,Health Care
-DXCM,DXCM,,,Health Care
-DOCU,DOCU,,,Information Technology
-DLB,DLB,,,Information Technology
-DCI,DCI,,,Industrials
-DV,DV,,,Information Technology
-DOV,DOV,,,Industrials
-DOCS,DOCS,,,Health Care
-DBX,DBX,,,Information Technology
-DNB,DNB,,,Industrials
-DXC,DXC,,,Information Technology
-DT,DT,,,Information Technology
-EWBC,EWBC,,,Financials
-ETN,ETN,,,Industrials
-EW,EW,,,Health Care
-ELAN,ELAN,,,Health Care
-ESTC,ESTC,,,Information Technology
-ELV,ELV,,,Health Care
-EME,EME,,,Industrials
-EMR,EMR,,,Industrials
-EHC,EHC,,,Health Care
-ENPH,ENPH,,,Information Technology
-ENTG,ENTG,,,Information Technology
-NVST,NVST,,,Health Care
-EPAM,EPAM,,,Information Technology
-EFX,EFX,,,Industrials
-EQH,EQH,,,Financials
-ESAB,ESAB,,,Industrials
-EEFT,EEFT,,,Financials
-EVR,EVR,,,Financials
-EG,EG,,,Financials
-ECG,ECG,,,Industrials
-EXAS,EXAS,,,Health Care
-EXEL,EXEL,,,Health Care
-EXLS,EXLS,,,Industrials
-EXPD,EXPD,,,Industrials
-FFIV,FFIV,,,Information Technology
-FDS,FDS,,,Financials
-FICO,FICO,,,Information Technology
-FAST,FAST,,,Industrials
-FDX,FDX,,,Industrials
-FERG,FERG,,,Industrials
-FNF,FNF,,,Financials
-FIS,FIS,,,Financials
-FITB,FITB,,,Financials
-FAF,FAF,,,Financials
-FCNCA,FCNCA,,,Financials
-FHB,FHB,,,Financials
-FHN,FHN,,,Financials
-FSLR,FSLR,,,Information Technology
-FI,FI,,,Financials
-FLEX,FLEX,,,Information Technology
-FLS,FLS,,,Industrials
-FNB,FNB,,,Financials
-FTNT,FTNT,,,Information Technology
-FTV,FTV,,,Industrials
-FBIN,FBIN,,,Industrials
-BEN,BEN,,,Financials
-FRHC,FRHC,,,Financials
-CFR,CFR,,,Financials
-FTAI,FTAI,,,Industrials
-FCN,FCN,,,Industrials
-IT,IT,,,Information Technology
-GTES,GTES,,,Industrials
-GE,GE,,,Industrials
-GEHC,GEHC,,,Health Care
-GEV,GEV,,,Industrials
-GEN,GEN,,,Information Technology
-GNRC,GNRC,,,Industrials
-GD,GD,,,Industrials
-G,G,,,Information Technology
-GILD,GILD,,,Health Care
-GTLB,GTLB,,,Information Technology
-GPN,GPN,,,Financials
-GFS,GFS,,,Information Technology
-GLOB,GLOB,,,Information Technology
-GL,GL,,,Financials
-GMED,GMED,,,Health Care
-GDDY,GDDY,,,Information Technology
-GS,GS,,,Financials
-GGG,GGG,,,Industrials
-GWRE,GWRE,,,Information Technology
-GXO,GXO,,,Industrials
-HALO,HALO,,,Health Care
-HLNE,HLNE,,,Financials
-THG,THG,,,Financials
-HIG,HIG,,,Financials
-HAYW,HAYW,,,Industrials
-HCA,HCA,,,Health Care
-HEI-A,HEI.A,,,Industrials
-HEI,HEI,,,Industrials
-JKHY,JKHY,,,Financials
-HPE,HPE,,,Information Technology
-HXL,HXL,,,Industrials
-HOLX,HOLX,,,Health Care
-HON,HON,,,Industrials
-HLI,HLI,,,Financials
-HWM,HWM,,,Industrials
-HPQ,HPQ,,,Information Technology
-HUBB,HUBB,,,Industrials
-HUBS,HUBS,,,Information Technology
-HUM,HUM,,,Health Care
-HBAN,HBAN,,,Financials
-HII,HII,,,Industrials
-IBM,IBM,,,Information Technology
-IEX,IEX,,,Industrials
-IDXX,IDXX,,,Health Care
-ITW,ITW,,,Industrials
-ILMN,ILMN,,,Health Care
-INCY,INCY,,,Health Care
-INFA,INFA,,,Information Technology
-IR,IR,,,Industrials
-INGM,INGM,,,Information Technology
-INSM,INSM,,,Health Care
-INSP,INSP,,,Health Care
-PODD,PODD,,,Health Care
-INTC,INTC,,,Information Technology
-IBKR,IBKR,,,Financials
-ICE,ICE,,,Financials
-INTU,INTU,,,Information Technology
-ISRG,ISRG,,,Health Care
-IVZ,IVZ,,,Financials
-IONS,IONS,,,Health Care
-IPGP,IPGP,,,Information Technology
-IQV,IQV,,,Health Care
-ITT,ITT,,,Industrials
-JBL,JBL,,,Information Technology
-J,J,,,Industrials
-JHG,JHG,,,Financials
-JAZZ,JAZZ,,,Health Care
-JBHT,JBHT,,,Industrials
-JEF,JEF,,,Financials
-JNJ,JNJ,,,Health Care
-JCI,JCI,,,Industrials
-JPM,JPM,,,Financials
-KRMN,KRMN,,,Industrials
-KBR,KBR,,,Industrials
-KMPR,KMPR,,,Financials
-KEY,KEY,,,Financials
-KEYS,KEYS,,,Information Technology
-KNSL,KNSL,,,Financials
-KEX,KEX,,,Industrials
-KKR,KKR,,,Financials
-KLAC,KLAC,,,Information Technology
-KNX,KNX,,,Industrials
-KD,KD,,,Information Technology
-LHX,LHX,,,Industrials
-LH,LH,,,Health Care
-LRCX,LRCX,,,Information Technology
-LSTR,LSTR,,,Industrials
-LSCC,LSCC,,,Information Technology
-LAZ,LAZ,,,Financials
-LDOS,LDOS,,,Industrials
-LII,LII,,,Industrials
-DRS,DRS,,,Industrials
-LLY,LLY,,,Health Care
-LECO,LECO,,,Industrials
-LNC,LNC,,,Financials
-LFUS,LFUS,,,Information Technology
-LOAR,LOAR,,,Industrials
-LMT,LMT,,,Industrials
-L,L,,,Financials
-LPLA,LPLA,,,Financials
-LITE,LITE,,,Information Technology
-LYFT,LYFT,,,Industrials
-MTB,MTB,,,Financials
-MTSI,MTSI,,,Information Technology
-MANH,MANH,,,Information Technology
-MAN,MAN,,,Industrials
-MKL,MKL,,,Financials
-MKTX,MKTX,,,Financials
-MMC,MMC,,,Financials
-MRVL,MRVL,,,Information Technology
-MAS,MAS,,,Industrials
-MASI,MASI,,,Health Care
-MTZ,MTZ,,,Industrials
-MA,MA,,,Financials
-MCK,MCK,,,Health Care
-MEDP,MEDP,,,Health Care
-MDT,MDT,,,Health Care
-MRK,MRK,,,Health Care
-MET,MET,,,Financials
-MTD,MTD,,,Health Care
-MTG,MTG,,,Financials
-MCHP,MCHP,,,Information Technology
-MU,MU,,,Information Technology
-MSFT,MSFT,,,Information Technology
-MSTR,MSTR,,,Information Technology
-MIDD,MIDD,,,Industrials
-MKSI,MKSI,,,Information Technology
-MRNA,MRNA,,,Health Care
-MOH,MOH,,,Health Care
-MDB,MDB,,,Information Technology
-MPWR,MPWR,,,Information Technology
-MCO,MCO,,,Financials
-MS,MS,,,Financials
-MORN,MORN,,,Financials
-MSI,MSI,,,Information Technology
-COOP,COOP,,,Financials
-MSA,MSA,,,Industrials
-MSM,MSM,,,Industrials
-MSCI,MSCI,,,Financials
-MLI,MLI,,,Industrials
-NDAQ,NDAQ,,,Financials
-NTRA,NTRA,,,Health Care
-NCNO,NCNO,,,Information Technology
-NTAP,NTAP,,,Information Technology
-NBIX,NBIX,,,Health Care
-NDSN,NDSN,,,Industrials
-NSC,NSC,,,Industrials
-NTRS,NTRS,,,Financials
-NOC,NOC,,,Industrials
-NU,NU,,,Financials
-NTNX,NTNX,,,Information Technology
-NVT,NVT,,,Industrials
-NVDA,NVDA,,,Information Technology
-OKTA,OKTA,,,Information Technology
-ODFL,ODFL,,,Industrials
-ORI,ORI,,,Financials
-ON,ON,,,Information Technology
-OMF,OMF,,,Financials
-ONTO,ONTO,,,Information Technology
-ORCL,ORCL,,,Information Technology
-OGN,OGN,,,Health Care
-OSK,OSK,,,Industrials
-OTIS,OTIS,,,Industrials
-OC,OC,,,Industrials
-PCAR,PCAR,,,Industrials
-PLTR,PLTR,,,Information Technology
-PANW,PANW,,,Information Technology
-PH,PH,,,Industrials
-PSN,PSN,,,Industrials
-PAYX,PAYX,,,Industrials
-PAYC,PAYC,,,Industrials
-PCTY,PCTY,,,Information Technology
-PYPL,PYPL,,,Financials
-PEGA,PEGA,,,Information Technology
-PNR,PNR,,,Industrials
-PEN,PEN,,,Health Care
-PRGO,PRGO,,,Health Care
-PFE,PFE,,,Health Care
-PNFP,PNFP,,,Financials
-PNC,PNC,,,Financials
-BPOP,BPOP,,,Financials
-TROW,TROW,,,Financials
-PRI,PRI,,,Financials
-PFG,PFG,,,Financials
-PCOR,PCOR,,,Information Technology
-PGR,PGR,,,Financials
-PB,PB,,,Financials
-PRU,PRU,,,Financials
-PTC,PTC,,,Information Technology
-PSTG,PSTG,,,Information Technology
-QGEN,QGEN,,,Health Care
-QRVO,QRVO,,,Information Technology
-QCOM,QCOM,,,Information Technology
-PWR,PWR,,,Industrials
-DGX,DGX,,,Health Care
-QXO,QXO,,,Industrials
-RAL,RAL,,,Information Technology
-RJF,RJF,,,Financials
-RBA,RBA,,,Industrials
-RBC,RBC,,,Industrials
-RRX,RRX,,,Industrials
-REGN,REGN,,,Health Care
-RF,RF,,,Financials
-RGA,RGA,,,Financials
-RNR,RNR,,,Financials
-RGEN,RGEN,,,Health Care
-RSG,RSG,,,Industrials
-RMD,RMD,,,Health Care
-RVMD,RVMD,,,Health Care
-RVTY,RVTY,,,Health Care
-RNG,RNG,,,Information Technology
-RITM,RITM,,,Financials
-RLI,RLI,,,Financials
-RHI,RHI,,,Industrials
-HOOD,HOOD,,,Financials
-RKT,RKT,,,Financials
-RKLB,RKLB,,,Industrials
-ROK,ROK,,,Industrials
-ROIV,ROIV,,,Health Care
-ROL,ROL,,,Industrials
-ROP,ROP,,,Information Technology
-RPRX,RPRX,,,Health Care
-RTX,RTX,,,Industrials
-RBRK,RBRK,,,Information Technology
-RYAN,RYAN,,,Financials
-R,R,,,Industrials
-SPGI,SPGI,,,Financials
-SAIA,SAIA,,,Industrials
-SAIL,SAIL,,,Information Technology
-SAIC,SAIC,,,Industrials
-CRM,CRM,,,Information Technology
-SLM,SLM,,,Financials
-IOT,IOT,,,Information Technology
-SNDK,SNDK,,,Information Technology
-SRPT,SRPT,,,Health Care
-HSIC,HSIC,,,Health Care
-SNDR,SNDR,,,Industrials
-SEIC,SEIC,,,Financials
-ST,ST,,,Industrials
-S,S,,,Information Technology
-NOW,NOW,,,Information Technology
-FOUR,FOUR,,,Information Technology
-SSD,SSD,,,Industrials
-SITE,SITE,,,Industrials
-SWKS,SWKS,,,Information Technology
-SNA,SNA,,,Industrials
-SNOW,SNOW,,,Information Technology
-SOFI,SOFI,,,Financials
-SOLV,SOLV,,,Health Care
-SHC,SHC,,,Health Care
-SSB,SSB,,,Financials
-LUV,LUV,,,Industrials
-SPR,SPR,,,Industrials
-SSNC,SSNC,,,Information Technology
-SARO,SARO,,,Industrials
-SWK,SWK,,,Industrials
-STWD,STWD,,,Financials
-STT,STT,,,Financials
-STE,STE,,,Health Care
-SF,SF,,,Financials
-SYK,SYK,,,Health Care
-SMMT,SMMT,,,Health Care
-SMCI,SMCI,,,Information Technology
-SYF,SYF,,,Financials
-SNPS,SNPS,,,Information Technology
-SNV,SNV,,,Financials
-SNX,SNX,,,Information Technology
-TDY,TDY,,,Information Technology
-TFX,TFX,,,Health Care
-TEM,TEM,,,Health Care
-THC,THC,,,Health Care
-TDC,TDC,,,Information Technology
-TER,TER,,,Information Technology
-TTEK,TTEK,,,Industrials
-TXN,TXN,,,Information Technology
-TXT,TXT,,,Industrials
-TMO,TMO,,,Health Care
-TFSL,TFSL,,,Financials
-TKR,TKR,,,Industrials
-TOST,TOST,,,Information Technology
-TTC,TTC,,,Industrials
-TPG,TPG,,,Financials
-TW,TW,,,Financials
-TT,TT,,,Industrials
-TDG,TDG,,,Industrials
-TRU,TRU,,,Industrials
-TRV,TRV,,,Financials
-TREX,TREX,,,Industrials
-TRMB,TRMB,,,Information Technology
-TFC,TFC,,,Financials
-TWLO,TWLO,,,Information Technology
-TYL,TYL,,,Information Technology
-UHAL,UHAL,,,Industrials
-UHAL-B,UHAL.B,,,Industrials
-USB,USB,,,Financials
-UBER,UBER,,,Industrials
-UI,UI,,,Information Technology
-PATH,PATH,,,Information Technology
-RARE,RARE,,,Health Care
-UNP,UNP,,,Industrials
-UAL,UAL,,,Industrials
-UPS,UPS,,,Industrials
-URI,URI,,,Industrials
-UTHR,UTHR,,,Health Care
-UWMC,UWMC,,,Financials
-UNH,UNH,,,Health Care
-U,U,,,Information Technology
-OLED,OLED,,,Information Technology
-UHS,UHS,,,Health Care
-UNM,UNM,,,Financials
-VMI,VMI,,,Industrials
-VEEV,VEEV,,,Health Care
-VLTO,VLTO,,,Industrials
-VRSN,VRSN,,,Information Technology
-VRSK,VRSK,,,Industrials
-VRTX,VRTX,,,Health Care
-VRT,VRT,,,Industrials
-VTRS,VTRS,,,Health Care
-VKTX,VKTX,,,Health Care
-VIRT,VIRT,,,Financials
-V,V,,,Financials
-VNT,VNT,,,Information Technology
-VOYA,VOYA,,,Financials
-WRB,WRB,,,Financials
-GWW,GWW,,,Industrials
-WAB,WAB,,,Industrials
-WM,WM,,,Industrials
-WAT,WAT,,,Health Care
-WSO,WSO,,,Industrials
-WBS,WBS,,,Financials
-WFC,WFC,,,Financials
-WCC,WCC,,,Industrials
-WST,WST,,,Health Care
-WAL,WAL,,,Financials
-WDC,WDC,,,Information Technology
-WU,WU,,,Information Technology
-WEX,WEX,,,Financials
-WTM,WTM,,,Financials
-WTW,WTW,,,Financials
-WSC,WSC,,,Industrials
-WTFC,WTFC,,,Financials
-WWD,WWD,,,Industrials
-WDAY,WDAY,,,Information Technology
-XP,XP,,,Financials
-XPO,XPO,,,Industrials
-XYL,XYL,,,Industrials
-ZBRA,ZBRA,,,Information Technology
-ZBH,ZBH,,,Health Care
-ZION,ZION,,,Financials
-ZTS,ZTS,,,Health Care
-ZM,ZM,,,Information Technology
-ZS,ZS,,,Information Technology
-ERIE,ERIE,,,Financials
-NXPI,NXPI,,,Information Technology
-STX,STX,,,Information Technology
-TEL,TEL,,,Information Technology
-ARM,ARM,,,Information Technology
-ASML,ASML,,,Information Technology
-AZN,AZN,,,Health Care
-SHOP,SHOP,,,Information Technology
-TRI,TRI,,,Industrials
+ticker_yf,ticker_tv,mcap_usd,avg_dollar_vol,sector,industry
+NVDA,NVDA,,35590182403.25104,information technology,Semiconductors
+PLTR,PLTR,,11334848676.313934,information technology,Internet Services & Infrastructure
+MSFT,MSFT,,10840927054.256287,information technology,Systems Software
+AAPL,AAPL,,10494915454.731293,information technology,"Technology Hardware, Storage & Peripherals"
+AVGO,AVGO,,8058000408.635254,information technology,Semiconductors
+AMD,AMD,,6861696979.938507,information technology,Semiconductors
+MSTR,MSTR,,3722223914.744873,information technology,Application Software
+UNH,UNH,,3557503844.090576,health care,Managed Health Care
+HOOD,HOOD,,3511864903.890381,financials,Unknown
+CRM,CRM,,2836105589.372864,information technology,Application Software
+SNOW,SNOW,,2630104150.252075,information technology,Unknown
+LLY,LLY,,2598423688.8183594,health care,Pharmaceuticals
+APP,APP,,2597305403.4313965,information technology,Application Software
+CRWV,CRWV,,2437276966.3604736,information technology,SOFTWARE - INFRASTRUCTURE
+ORCL,ORCL,,2385572999.3440247,information technology,Application Software
+COIN,COIN,,2382263080.562134,financials,Unknown
+BRK-B,BRK.B,,2251843861.3345337,financials,Multi-Sector Holdings
+INTC,INTC,,2139932557.735405,information technology,Semiconductors
+JPM,JPM,,2101449628.796997,financials,Diversified Banks
+MRVL,MRVL,,2037735848.0018234,information technology,Semiconductors
+MU,MU,,1973794132.3995209,information technology,Semiconductors
+BAC,BAC,,1967337993.1966782,financials,Diversified Banks
+SOFI,SOFI,,1886571463.045082,financials,Unknown
+CRWD,CRWD,,1827423158.597412,information technology,Application Software
+V,V,,1815835982.463379,financials,Transaction & Payment Processing Services
+MDB,MDB,,1783688705.3356934,information technology,Systems Software
+GEV,GEV,,1769979739.956665,industrials,Industrial Machinery & Supplies & Components
+INTU,INTU,,1639202629.6142578,information technology,Application Software
+NOW,NOW,,1473104201.5979004,information technology,Systems Software
+UBER,UBER,,1389065383.8213348,industrials,Passenger Ground Transportation
+JNJ,JNJ,,1383961260.8850098,health care,Pharmaceuticals
+BA,BA,,1378579565.5036926,industrials,Aerospace & Defense
+MA,MA,,1375995767.3028564,financials,Transaction & Payment Processing Services
+TXN,TXN,,1265757028.4077454,information technology,Semiconductors
+C,C,,1240681769.95018,financials,Diversified Banks
+ADBE,ADBE,,1233790552.5808716,information technology,Application Software
+GS,GS,,1231196849.87854,financials,Investment Banking & Brokerage
+AFRM,AFRM,,1208122943.009262,information technology,Unknown
+GE,GE,,1182648689.2617798,industrials,Aerospace & Defense
+PANW,PANW,,1179647322.5436401,information technology,Systems Software
+ISRG,ISRG,,1170217575.697937,health care,Health Care Equipment
+QCOM,QCOM,,1169609771.4060974,information technology,Semiconductors
+CSCO,CSCO,,1153705689.0129852,information technology,Communications Equipment
+WFC,WFC,,1099831117.8085327,financials,Diversified Banks
+RKLB,RKLB,,1090240934.0830612,industrials,Aerospace & Defense
+AMAT,AMAT,,1071720992.4662781,information technology,Semiconductor Materials & Equipment
+UNP,UNP,,1050653112.0472717,industrials,Rail Transportation
+MRK,MRK,,1029669828.4398651,health care,Pharmaceuticals
+IBKR,IBKR,,1023893937.157402,financials,Investment Banking & Brokerage
+ANET,ANET,,1022173282.46521,information technology,Communications Equipment
+DELL,DELL,,989601609.9823761,information technology,"Technology Hardware, Storage & Peripherals"
+SMCI,SMCI,,987491101.2115097,information technology,"Technology Hardware, Storage & Peripherals"
+CAT,CAT,,982415946.882019,industrials,Construction Machinery & Heavy Transportation Equipment
+AAL,AAL,,975943477.6441097,industrials,Passenger Airlines
+LRCX,LRCX,,970403236.1627197,information technology,Semiconductor Materials & Equipment
+CSX,CSX,,951983673.6671448,industrials,Rail Transportation
+PFE,PFE,,938455661.4073563,health care,Pharmaceuticals
+WDAY,WDAY,,930409190.151825,information technology,Application Software
+ADI,ADI,,928442444.8339844,information technology,Semiconductors
+MARA,MARA,,927942729.5263004,financials,CAPITAL MARKETS
+SOUN,SOUN,,902652742.84482,information technology,SOFTWARE - APPLICATION
+IBM,IBM,,879790549.236145,information technology,IT Consulting & Other Services
+IREN,IREN,,872606519.3514252,financials,CAPITAL MARKETS
+ABBV,ABBV,,853318395.1293945,health care,Pharmaceuticals
+ACN,ACN,,851120294.1459656,information technology,IT Consulting & Other Services
+SCHW,SCHW,,839026845.6156158,financials,Investment Banking & Brokerage
+AXP,AXP,,829966343.8500977,financials,Consumer Finance
+ALAB,ALAB,,806030203.7060547,information technology,Semiconductors
+APH,APH,,794679108.786087,information technology,Electronic Components
+CRDO,CRDO,,774898826.7921448,information technology,SEMICONDUCTORS
+KLAC,KLAC,,771623244.3536377,information technology,Semiconductor Materials & Equipment
+VRT,VRT,,765910289.3208313,industrials,Unknown
+NU,NU,,746959158.6181259,financials,Unknown
+WDC,WDC,,745953876.5237427,information technology,"Technology Hardware, Storage & Peripherals"
+HON,HON,,695455313.525238,industrials,Industrial Conglomerates
+COF,COF,,691909199.9215698,financials,Consumer Finance
+UPS,UPS,,687685029.0575409,industrials,Air Freight & Logistics
+LMT,LMT,,681385525.7086182,industrials,Aerospace & Defense
+ADSK,ADSK,,679725830.8044434,information technology,Application Software
+TEM,TEM,,675790514.6368408,health care,Unknown
+TMO,TMO,,660792378.1420898,health care,Life Sciences Tools & Services
+MS,MS,,655321285.5212402,financials,Investment Banking & Brokerage
+ETN,ETN,,654159135.5050659,industrials,Electrical Components & Equipment
+DDOG,DDOG,,647802643.0149841,information technology,Application Software
+PYPL,PYPL,,638870745.4049683,financials,Transaction & Payment Processing Services
+BSX,BSX,,637996774.8753357,health care,Health Care Equipment
+RGTI,RGTI,,635000320.9248161,information technology,COMPUTER HARDWARE
+ELV,ELV,,632710429.3939209,health care,Managed Health Care
+NSC,NSC,,630689000.4754639,industrials,Rail Transportation
+ABT,ABT,,630118876.2231445,health care,Health Care Equipment
+SNPS,SNPS,,627092427.4688721,information technology,Application Software
+HPE,HPE,,617429834.3632507,information technology,"Technology Hardware, Storage & Peripherals"
+DE,DE,,616460556.0775757,industrials,Agricultural & Farm Machinery
+ZS,ZS,,613357317.4362183,information technology,Application Software
+OKTA,OKTA,,609062875.7462311,information technology,Application Software
+PGR,PGR,,597669558.7850952,financials,Property & Casualty Insurance
+MCHP,MCHP,,596416985.9740448,information technology,Semiconductors
+LITE,LITE,,591766127.5614929,information technology,Unknown
+DHR,DHR,,579803063.9361572,health care,Life Sciences Tools & Services
+REGN,REGN,,574354755.9417725,health care,Biotechnology
+SPGI,SPGI,,573992402.5268555,financials,Financial Exchanges & Data
+VRTX,VRTX,,572795055.2822876,health care,Biotechnology
+MCK,MCK,,554136917.4279785,health care,Health Care Distributors
+GILD,GILD,,553354294.5288849,health care,Biotechnology
+RTX,RTX,,553157912.0043945,industrials,Aerospace & Defense
+AMGN,AMGN,,549187399.3301392,health care,Biotechnology
+RIOT,RIOT,,543932966.6777515,financials,CAPITAL MARKETS
+FI,FI,,542406379.5755005,financials,Transaction & Payment Processing Services
+CME,CME,,538360313.3779907,financials,Financial Exchanges & Data
+TT,TT,,535760267.39501953,industrials,Building Products
+FICO,FICO,,518444521.54663086,information technology,Application Software
+URI,URI,,512865474.01672363,industrials,Trading Companies & Distributors
+MDT,MDT,,511489741.4592743,health care,Health Care Equipment
+BX,BX,,508202763.6457825,financials,Asset Management & Custody Banks
+KEY,KEY,,507358351.7256737,financials,Regional Banks
+VEEV,VEEV,,506115824.95544434,health care,Unknown
+RF,RF,,500573312.5361252,financials,Regional Banks
+FTNT,FTNT,,495502991.4339447,information technology,Systems Software
+GLW,GLW,,486157218.1347656,information technology,Electronic Components
+BLK,BLK,,483641486.6064453,financials,Asset Management & Custody Banks
+HBAN,HBAN,,482981172.7804947,financials,Regional Banks
+APO,APO,,480112873.1401062,financials,Asset Management & Custody Banks
+XYZ,XYZ,,471248082.151947,financials,Transaction & Payment Processing Services
+JCI,JCI,,466700598.01490784,industrials,Building Products
+FSLR,FSLR,,466606617.67318726,information technology,Semiconductors
+U,U,,465892137.8417206,information technology,Unknown
+BMY,BMY,,465839919.4687271,health care,Health Care Distributors
+UAL,UAL,,464539574.49256897,industrials,Passenger Airlines
+CTAS,CTAS,,464106602.92800903,industrials,Diversified Support Services
+PH,PH,,462428944.5751953,industrials,Industrial Machinery & Supplies & Components
+ADP,ADP,,459490816.9177246,industrials,Human Resource & Employment Services
+PSTG,PSTG,,452032527.477417,information technology,Unknown
+MSI,MSI,,448402198.1390381,information technology,Communications Equipment
+CI,CI,,445923328.5064697,health care,Managed Health Care
+CB,CB,,445883335.6719971,financials,Property & Casualty Insurance
+ICE,ICE,,441767379.8913574,financials,Financial Exchanges & Data
+TDG,TDG,,440485889.4042969,industrials,Aerospace & Defense
+USB,USB,,439954389.7084427,financials,Diversified Banks
+ALNY,ALNY,,435144086.3687134,health care,Unknown
+UPST,UPST,,432728663.8646698,financials,CREDIT SERVICES
+AJG,AJG,,428715822.1029663,financials,Insurance Brokers
+CVS,CVS,,421367355.00190735,health care,Health Care Services
+KKR,KKR,,415896716.05285645,financials,Asset Management & Custody Banks
+UTHR,UTHR,,415646453.092041,health care,Biotechnology
+ZM,ZM,,414931949.66438293,information technology,Application Software
+TER,TER,,413055458.45329285,information technology,Semiconductor Materials & Equipment
+HCA,HCA,,412243209.06463623,health care,Health Care Facilities
+MMM,MMM,,411167277.903595,industrials,Industrial Conglomerates
+TEAM,TEAM,,409439808.5725403,information technology,Application Software
+CDNS,CDNS,,409088192.53204346,information technology,Application Software
+HUM,HUM,,405544814.6130371,health care,Managed Health Care
+COHR,COHR,,405496478.04878235,information technology,Electronic Components
+FUTU,FUTU,,405192733.6265564,financials,CAPITAL MARKETS
+HWM,HWM,,400032531.9871521,industrials,Aerospace & Defense
+NET,NET,,399158864.17755127,information technology,Unknown
+DAL,DAL,,398569459.40753937,industrials,Passenger Airlines
+RKT,RKT,,398313693.1614113,financials,Unknown
+MMC,MMC,,396038511.12609863,financials,Insurance Brokers
+HUBS,HUBS,,394129871.8765259,information technology,Unknown
+MPWR,MPWR,,382842201.02111816,information technology,Semiconductors
+EMR,EMR,,378449239.19052124,industrials,Electrical Components & Equipment
+AON,AON,,375768291.87194824,financials,Insurance Brokers
+CARR,CARR,,371892258.51890564,industrials,Building Products
+FDX,FDX,,371190664.94659424,industrials,Air Freight & Logistics
+CIEN,CIEN,,370584300.70098877,information technology,Communications Equipment
+SYK,SYK,,370383939.20410156,health care,Health Care Equipment
+APLD,APLD,,368262262.17427254,information technology,INFORMATION TECHNOLOGY SERVICES
+CYBR,CYBR,,366936627.7453613,information technology,SOFTWARE - INFRASTRUCTURE
+DXCM,DXCM,,366621621.2613678,health care,Health Care Equipment
+COR,COR,,361934366.8951416,health care,Health Care Distributors
+ROP,ROP,,360646710.4675293,industrials,Industrial Conglomerates
+ON,ON,,360585844.85679626,information technology,Semiconductors
+CPRT,CPRT,,358622380.30197144,industrials,Diversified Support Services
+WULF,WULF,,357627013.2727146,financials,CAPITAL MARKETS
+TFC,TFC,,356811308.011322,financials,Regional Banks
+LYFT,LYFT,,354926417.91311264,industrials,Passenger Ground Transportation
+NOC,NOC,,352814688.20617676,industrials,Aerospace & Defense
+TOST,TOST,,345629305.62610626,information technology,Transaction & Payment Processing Services
+CAH,CAH,,344608765.62789917,health care,Health Care Distributors
+WM,WM,,343077417.7384949,industrials,Environmental & Facilities Services
+PNC,PNC,,338435101.1920166,financials,Regional Banks
+INSM,INSM,,337121267.13516235,health care,Biotechnology
+AXON,AXON,,337039735.7739258,industrials,Aerospace & Defense
+GTLB,GTLB,,336404325.85098267,information technology,Unknown
+BDX,BDX,,333571375.3552246,health care,Health Care Equipment
+TRV,TRV,,332039648.9135742,financials,Property & Casualty Insurance
+CNC,CNC,,330784247.79153824,health care,Managed Health Care
+FERG,FERG,,327663529.27719116,industrials,Industrial Machinery & Supplies & Components
+AIG,AIG,,320650379.2411041,financials,Property & Casualty Insurance
+HPQ,HPQ,,319350763.9302635,information technology,"Technology Hardware, Storage & Peripherals"
+MSCI,MSCI,,317750413.58032227,financials,Financial Exchanges & Data
+ZTS,ZTS,,316278425.6062317,health care,Pharmaceuticals
+GWW,GWW,,315135529.0600586,industrials,Industrial Machinery & Supplies & Components
+PWR,PWR,,311821858.107605,industrials,Construction & Engineering
+IT,IT,,305810575.72906494,information technology,IT Consulting & Other Services
+COO,COO,,305103977.2137451,health care,Health Care Supplies
+RMD,RMD,,303598835.54107666,health care,Health Care Equipment
+ODFL,ODFL,,302526353.40423584,industrials,Cargo Ground Transportation
+MCO,MCO,,301673263.4136963,financials,Financial Exchanges & Data
+NTNX,NTNX,,300232950.53718567,information technology,Unknown
+BK,BK,,295878169.4817352,financials,Asset Management & Custody Banks
+MRNA,MRNA,,294945818.77010345,health care,Biotechnology
+BLDR,BLDR,,293224916.18408203,industrials,Building Products
+ARGX,ARGX,,292797545.20751953,health care,BIOTECHNOLOGY
+IOT,IOT,,292489191.52168274,information technology,Systems Software
+NTAP,NTAP,,291132601.31744385,information technology,"Technology Hardware, Storage & Peripherals"
+AFL,AFL,,290628807.36724854,financials,Life & Health Insurance
+LHX,LHX,,290134814.2184448,industrials,Aerospace & Defense
+BILL,BILL,,289404905.46390533,information technology,Unknown
+JBL,JBL,,288288003.36624146,information technology,Electronic Manufacturing Services
+FCNCA,FCNCA,,277468463.2434082,financials,Unknown
+ROK,ROK,,276673793.52783203,industrials,Electrical Components & Equipment
+CMI,CMI,,274650382.8652954,industrials,Industrial Machinery & Supplies & Components
+ELAN,ELAN,,273795713.7202263,health care,Unknown
+FAST,FAST,,273691692.46932983,industrials,Building Products
+PAYX,PAYX,,273605437.1586609,industrials,Human Resource & Employment Services
+FIX,FIX,,272223945.58410645,industrials,Construction & Engineering
+EW,EW,,272061914.74983215,health care,Health Care Equipment
+OTIS,OTIS,,271676157.0931244,industrials,Industrial Machinery & Supplies & Components
+GD,GD,,268882146.4868164,industrials,Aerospace & Defense
+DOCU,DOCU,,266540811.58172607,information technology,Application Software
+MOH,MOH,,265413501.24725342,health care,Managed Health Care
+A,A,,264325340.08590698,health care,Health Care Equipment
+FHN,FHN,,263239149.14758682,financials,Regional Banks
+CIFR,CIFR,,263059674.84113693,financials,CAPITAL MARKETS
+ESTC,ESTC,,259988901.01913452,information technology,Unknown
+TWLO,TWLO,,254214053.02894592,information technology,Unknown
+IDXX,IDXX,,251872496.88415527,health care,Health Care Equipment
+CTSH,CTSH,,251367070.9651947,information technology,IT Consulting & Other Services
+ARES,ARES,,250690606.2211609,financials,Unknown
+VRSK,VRSK,,248991762.34375,industrials,Research & Consulting Services
+LPLA,LPLA,,248476604.45159912,financials,Unknown
+IONS,IONS,,243322325.88947296,health care,Unknown
+MET,MET,,242410876.5724945,financials,Life & Health Insurance
+ONDS,ONDS,,240631321.86075687,information technology,COMMUNICATION EQUIPMENT
+MNDY,MNDY,,240476415.8128357,information technology,SOFTWARE - APPLICATION
+NDAQ,NDAQ,,234615742.12501526,financials,Financial Exchanges & Data
+ENPH,ENPH,,233934127.1863556,information technology,Electronic Components
+ALL,ALL,,233781706.48376465,financials,Property & Casualty Insurance
+IQV,IQV,,232665512.99331665,health care,Life Sciences Tools & Services
+FIS,FIS,,232639806.8131256,financials,Transaction & Payment Processing Services
+CBOE,CBOE,,230864518.1803894,financials,Financial Exchanges & Data
+GDDY,GDDY,,230154839.44473267,information technology,Unknown
+ENTG,ENTG,,229982952.8832245,information technology,Unknown
+PCAR,PCAR,,229692247.46910095,industrials,Construction Machinery & Heavy Transportation Equipment
+RSG,RSG,,222856331.94900513,industrials,Environmental & Facilities Services
+ITW,ITW,,221571028.14849854,industrials,Industrial Machinery & Supplies & Components
+EFX,EFX,,221533019.66064453,industrials,Research & Consulting Services
+LUV,LUV,,221154785.08951187,industrials,Passenger Airlines
+SNDK,SNDK,,221019509.63481903,information technology,"Technology Hardware, Storage & Peripherals"
+AMP,AMP,,216218195.25634766,financials,Asset Management & Custody Banks
+GWRE,GWRE,,214962474.1896057,information technology,Unknown
+BIIB,BIIB,,214262941.59866333,health care,Biotechnology
+LII,LII,,214174967.39746094,industrials,Building Products
+CHRW,CHRW,,211934796.87660217,industrials,Air Freight & Logistics
+AGNC,AGNC,,210732634.3728161,financials,Unknown
+SYF,SYF,,210568013.3557129,financials,Consumer Finance
+COLB,COLB,,209505981.93567276,financials,Regional Banks
+EME,EME,,207514630.02685547,industrials,Construction & Engineering
+TW,TW,,206115180.37223816,financials,Unknown
+BRO,BRO,,205115517.40974426,financials,Insurance Brokers
+RBRK,RBRK,,202519766.21246338,information technology,Unknown
+GEHC,GEHC,,201462323.19023132,health care,Health Care Equipment
+CDW,CDW,,198279365.8985901,information technology,Technology Distributors
+AME,AME,,197166785.43182373,industrials,Electrical Components & Equipment
+AL,AL,,197055832.40898132,industrials,Unknown
+STT,STT,,195946106.8070984,financials,Asset Management & Custody Banks
+FLEX,FLEX,,192093276.31595612,information technology,Electronic Manufacturing Services
+WAB,WAB,,186225049.30496216,industrials,Construction Machinery & Heavy Transportation Equipment
+CFG,CFG,,186057593.75144958,financials,Regional Banks
+AVTR,AVTR,,185666632.41768837,health care,Unknown
+IR,IR,,185665761.3786316,industrials,Industrial Machinery & Supplies & Components
+VRSN,VRSN,,184251046.87408447,information technology,Internet Services & Infrastructure
+SAIA,SAIA,,182922454.44763184,industrials,Unknown
+PODD,PODD,,182498730.5178833,health care,Unknown
+HIG,HIG,,182008210.77941895,financials,Property & Casualty Insurance
+TROW,TROW,,181526349.56611633,financials,Asset Management & Custody Banks
+HUBB,HUBB,,181453480.571225,industrials,Industrial Machinery & Supplies & Components
+MTB,MTB,,179573370.51086426,financials,Regional Banks
+QXO,QXO,,178964820.24896622,industrials,Unknown
+BRKR,BRKR,,178586519.4939804,health care,Health Care Equipment
+FITB,FITB,,176706749.05017853,financials,Regional Banks
+THC,THC,,175099436.85897827,health care,Health Care Facilities
+GPN,GPN,,174790655.96710205,financials,Transaction & Payment Processing Services
+HEI,HEI,,174575506.56829834,industrials,Aerospace & Defense
+S,S,,174494014.8435402,information technology,Unknown
+PRU,PRU,,174256747.01332092,financials,Life & Health Insurance
+BWXT,BWXT,,173216399.637146,industrials,Unknown
+FTAI,FTAI,,173080873.4225464,industrials,Unknown
+BR,BR,,172917212.3564148,industrials,Data Processing & Outsourced Services
+XPO,XPO,,171409839.22714233,industrials,Cargo Ground Transportation
+SWK,SWK,,171361451.62223816,industrials,Industrial Machinery & Supplies & Components
+CFLT,CFLT,,171129075.1163864,information technology,Unknown
+BAX,BAX,,170039372.39902496,health care,Health Care Equipment
+SRPT,SRPT,,166472992.23295212,health care,Unknown
+VKTX,VKTX,,166247909.79631424,health care,Biotechnology
+JBHT,JBHT,,165887902.2314453,industrials,Cargo Ground Transportation
+ALGN,ALGN,,165448038.830719,health care,Health Care Supplies
+WAT,WAT,,164833264.6914673,health care,Health Care Distributors
+FTV,FTV,,163802155.46813965,industrials,Industrial Machinery & Supplies & Components
+SWKS,SWKS,,163318961.095047,information technology,Semiconductors
+COOP,COOP,,162251740.53848267,financials,Commercial & Residential Mortgage Finance
+DAY,DAY,,161197208.4993744,industrials,Human Resource & Employment Services
+PATH,PATH,,160695238.23290825,information technology,Unknown
+TYL,TYL,,160253235.0604248,information technology,Application Software
+CG,CG,,160066246.5399933,financials,Unknown
+OC,OC,,159961130.95367432,industrials,Building Products
+ACGL,ACGL,,159865369.5803833,financials,Reinsurance
+HALO,HALO,,159222445.08735657,health care,Biotechnology
+KEYS,KEYS,,159076787.70706177,information technology,Electronic Equipment & Instruments
+UI,UI,,157012353.6276245,information technology,Unknown
+MTD,MTD,,156439818.74023438,health care,Life Sciences Tools & Services
+DT,DT,,155931197.44617462,information technology,Unknown
+XYL,XYL,,155788214.20578003,industrials,Industrial Machinery & Supplies & Components
+MTZ,MTZ,,155086457.988739,industrials,Construction & Engineering
+BAH,BAH,,154425605.51460266,industrials,Unknown
+PTC,PTC,,153953260.36453247,information technology,Application Software
+FNB,FNB,,152831156.38809204,financials,Regional Banks
+WTW,WTW,,152564144.3423462,financials,Insurance Brokers
+EQH,EQH,,151976449.71588135,financials,Unknown
+NTRA,NTRA,,151697538.73138428,health care,Unknown
+ALK,ALK,,149384267.2411728,industrials,Passenger Airlines
+LSCC,LSCC,,149022807.8540039,information technology,Semiconductors
+DOV,DOV,,148040159.66461182,industrials,Industrial Machinery & Supplies & Components
+EXAS,EXAS,,146952557.3348999,health care,Unknown
+MAS,MAS,,146814552.6132202,industrials,Building Products
+RPRX,RPRX,,146313600.88760376,health care,Unknown
+INCY,INCY,,145662095.64727783,health care,Biotechnology
+FDS,FDS,,143065336.09039307,financials,Financial Exchanges & Data
+NLY,NLY,,142646350.74378967,financials,Unknown
+OWL,OWL,,142092432.69536972,financials,Unknown
+NVT,NVT,,142008368.78715515,industrials,Unknown
+EXPD,EXPD,,141723285.35346985,industrials,Air Freight & Logistics
+ZBRA,ZBRA,,141392690.1422119,information technology,Electronic Equipment & Instruments
+GNRC,GNRC,,141374011.52816772,industrials,Electrical Components & Equipment
+WCC,WCC,,141092357.50564575,industrials,Unknown
+PEN,PEN,,140908238.81744385,health care,Health Care Equipment
+RJF,RJF,,139098994.72686768,financials,Investment Banking & Brokerage
+PAYC,PAYC,,138308841.93588257,information technology,Application Software
+XP,XP,,137710240.8533287,financials,Investment Banking & Brokerage
+ATI,ATI,,137628539.0258789,industrials,Aerospace & Defense
+MEDP,MEDP,,137476430.36193848,health care,Unknown
+TRU,TRU,,137393757.27722168,industrials,Unknown
+ILMN,ILMN,,136779444.23545837,health care,Life Sciences Tools & Services
+DGX,DGX,,136388251.81518555,health care,Health Care Services
+AKAM,AKAM,,134198814.37644958,information technology,Internet Services & Infrastructure
+FFIV,FFIV,,134055935.92956543,information technology,Communications Equipment
+CAR,CAR,,132717386.0760498,industrials,Passenger Ground Transportation
+CMA,CMA,,132418099.43382263,financials,Diversified Banks
+ALLE,ALLE,,131561905.84823608,industrials,Building Products
+TDY,TDY,,130290366.24572754,industrials,Aerospace & Defense
+BAM,BAM,,130223548.40919495,financials,Asset Management & Custody Banks
+UHS,UHS,,129553567.89260864,health care,Health Care Facilities
+CSL,CSL,,129023056.68579102,industrials,Industrial Conglomerates
+EVR,EVR,,127878687.56256104,financials,Investment Banking & Brokerage
+ACM,ACM,,127489266.0848999,industrials,Construction & Engineering
+EPAM,EPAM,,127302495.97686768,information technology,IT Consulting & Other Services
+MKTX,MKTX,,126524440.87265015,financials,Financial Exchanges & Data
+CNH,CNH,,126364226.30498886,industrials,Unknown
+WST,WST,,125114742.88421631,health care,Health Care Supplies
+PNR,PNR,,124366709.45976257,industrials,Industrial Machinery & Supplies & Components
+NTRS,NTRS,,124062514.30236816,financials,Asset Management & Custody Banks
+QRVO,QRVO,,123848037.81639099,information technology,Semiconductors
+WSO,WSO,,123749915.90026855,industrials,Trading Companies & Distributors
+TRMB,TRMB,,120821617.82745361,information technology,Electronic Equipment & Instruments
+ZBH,ZBH,,119957767.55119324,health care,Health Care Equipment
+GEN,GEN,,118790496.30311966,information technology,Application Software
+LDOS,LDOS,,118288061.33453369,industrials,Diversified Support Services
+TECH,TECH,,117468170.27484894,health care,Life Sciences Tools & Services
+MIDD,MIDD,,116730594.93423462,industrials,Industrial Machinery & Supplies & Components
+IEX,IEX,,116373835.33355713,industrials,Industrial Machinery & Supplies & Components
+CRL,CRL,,116289040.2420044,health care,Life Sciences Tools & Services
+STE,STE,,116120550.19607544,health care,Health Care Equipment
+AAOI,AAOI,,115355114.986763,information technology,Communication Equipment
+RVTY,RVTY,,114248058.95606995,health care,Health Care Equipment
+STRL,STRL,,113292904.2199707,industrials,Engineering & Construction
+NBIX,NBIX,,113284096.38961792,health care,Biotechnology
+JKHY,JKHY,,111833071.69662476,financials,Transaction & Payment Processing Services
+FOUR,FOUR,,109903050.3087616,information technology,Unknown
+WWD,WWD,,109782506.34796143,industrials,Electrical Components & Equipment
+TIGR,TIGR,,109285576.19976997,financials,Capital Markets
+UNM,UNM,,109226531.48956299,financials,Life & Health Insurance
+KNX,KNX,,108932877.7256012,industrials,Cargo Ground Transportation
+WMS,WMS,,108320254.02435303,industrials,Unknown
+HII,HII,,108287993.68103027,industrials,Aerospace & Defense
+PCOR,PCOR,,107944570.728302,information technology,Unknown
+LH,LH,,107755614.2364502,health care,Health Care Services
+PNFP,PNFP,,106930954.41070557,financials,Regional Banks
+ALLY,ALLY,,106831901.36989594,financials,Unknown
+MLYS,MLYS,,106124193.70976448,health care,Biotechnology
+INFA,INFA,,104915548.626194,information technology,Unknown
+CACI,CACI,,104638251.07391357,industrials,Diversified Support Services
+MTSI,MTSI,,104613948.51737976,information technology,Semiconductors
+CPAY,CPAY,,104581338.66271973,financials,Transaction & Payment Processing Services
+RRX,RRX,,104030253.10668945,industrials,Electrical Components & Equipment
+CNM,CNM,,103867471.78749084,industrials,Trading Companies & Distributors
+HSIC,HSIC,,103199913.74900818,health care,Health Care Distributors
+TMDX,TMDX,,102865463.07289124,health care,Medical Devices
+ONC,ONC,,102766548.01116943,health care,Biotechnology
+PI,PI,,102500130.61920166,information technology,Semiconductors
+NICE,NICE,,102322311.27243042,information technology,Software - Application
+BNTX,BNTX,,101759329.20448303,health care,Biotechnology
+TLRY,TLRY,,101222488.62340808,health care,Drug Manufacturers - Specialty & Generic
+NUKK,NUKK,,101060727.59549141,information technology,Software - Application
+DVA,DVA,,100785327.54974365,health care,Health Care Facilities
+WRB,WRB,,100750861.12937927,financials,Property & Casualty Insurance
+EG,EG,,100667460.21453857,financials,Reinsurance
+MANH,MANH,,99904233.65386963,information technology,Unknown
+RMBS,RMBS,,99051073.86039734,information technology,Semiconductors
+BSY,BSY,,98781781.38748169,information technology,Unknown
+ABVX,ABVX,,97868715.4927826,health care,Biotechnology
+BMRN,BMRN,,97650179.77050781,health care,Unknown
+JAZZ,JAZZ,,97349610.15014648,health care,Pharmaceuticals
+TPG,TPG,,97330004.5759201,financials,Unknown
+CW,CW,,97178964.22668457,industrials,Aerospace & Defense
+ONTO,ONTO,,97023177.15927124,information technology,Semiconductor Materials & Equipment
+J,J,,96664300.37109375,industrials,Construction & Engineering
+APG,APG,,96267497.3267746,industrials,Construction & Engineering
+HOLX,HOLX,,96112603.31466675,health care,Health Care Equipment
+RBA,RBA,,95197347.1672821,industrials,Unknown
+TREX,TREX,,95144245.31375885,industrials,Building Products
+AUR,AUR,,94600166.58427715,information technology,Unknown
+THAR,THAR,,94103583.54945421,health care,Biotechnology
+SNV,SNV,,94067722.10876465,financials,Regional Banks
+JBLU,JBLU,,94067098.39362621,industrials,Airlines
+AIZ,AIZ,,93830509.5513916,financials,Multi-line Insurance
+TXT,TXT,,92990701.89659119,industrials,Aerospace & Defense
+SSNC,SSNC,,92972856.3456726,information technology,Unknown
+EXEL,EXEL,,92846558.46485138,health care,Biotechnology
+VLTO,VLTO,,92135464.26994324,industrials,Unknown
+COMM,COMM,,92001726.40227318,information technology,Communication Equipment
+VRNT,VRNT,,91980470.41610718,information technology,Software - Infrastructure
+CRSP,CRSP,,90701246.95770264,health care,Biotechnology
+BEN,BEN,,90578621.05709076,financials,Asset Management & Custody Banks
+GLOB,GLOB,,90508179.82032776,information technology,Unknown
+WAL,WAL,,90435110.78102112,financials,Unknown
+KEX,KEX,,90393698.0909729,industrials,Marine Transportation
+MORN,MORN,,89589077.63748169,financials,Unknown
+NCNO,NCNO,,89576185.27608871,information technology,Unknown
+IDCC,IDCC,,88704739.9874878,information technology,Software - Application
+MKSI,MKSI,,88695837.30201721,information technology,Semiconductor Materials & Equipment
+RGEN,RGEN,,88477388.99925232,health care,Biotechnology
+PFG,PFG,,88318143.77662659,financials,Life & Health Insurance
+TTC,TTC,,88263041.95007324,industrials,Agricultural & Farm Machinery
+RNR,RNR,,87836909.740448,financials,Reinsurance
+SITM,SITM,,87825014.43908691,information technology,Semiconductors
+VMI,VMI,,87817713.15856934,industrials,Industrial Machinery & Supplies & Components
+EOSE,EOSE,,87500405.93616009,industrials,Electrical Equipment & Parts
+JEF,JEF,,87412591.2450409,financials,Multi-Sector Holdings
+EHC,EHC,,87208637.18856812,health care,Health Care Facilities
+TTMI,TTMI,,86921974.92977142,information technology,Electronic Components
+FBIN,FBIN,,86416599.5664978,industrials,Building Products
+CHE,CHE,,85813108.3670044,health care,Health Care Services
+MASI,MASI,,85443169.04022217,health care,Health Care Equipment
+CWD,CWD,,85178967.61734724,financials,Asset Management
+CGNX,CGNX,,83967491.8276596,information technology,Electronic Equipment & Instruments
+AGCO,AGCO,,83787211.71737671,industrials,Agricultural & Farm Machinery
+VLY,VLY,,83777101.44254684,financials,Banks - Regional
+HLI,HLI,,83641360.79315186,financials,Unknown
+CRMD,CRMD,,83533314.92358208,health care,Biotechnology
+EWBC,EWBC,,83225500.92704773,financials,Regional Banks
+SERV,SERV,,82926540.7852745,industrials,Specialty Industrial Machinery
+ALSN,ALSN,,82911925.98602295,industrials,Unknown
+ROL,ROL,,82787450.90667725,industrials,Environmental & Facilities Services
+INSP,INSP,,82578572.1963501,health care,Unknown
+OLED,OLED,,82474370.53115845,information technology,Semiconductors
+SSB,SSB,,82471477.54127502,financials,Regional Banks
+SEZL,SEZL,,81792647.76100159,financials,Credit Services
+SMMT,SMMT,,81378863.94800186,health care,Unknown
+PCTY,PCTY,,81335943.80401611,information technology,Application Software
+KNSL,KNSL,,81277226.86401367,financials,Unknown
+PSN,PSN,,81188510.23048401,industrials,Aerospace & Defense
+DBX,DBX,,80962060.42236328,information technology,Unknown
+BIO,BIO,,80462560.77819824,health care,Life Sciences Tools & Services
+BPOP,BPOP,,80338073.674469,financials,Unknown
+VRNS,VRNS,,80276900.82344055,information technology,Software - Infrastructure
+DOX,DOX,,80186167.5605011,information technology,Unknown
+QGEN,QGEN,,80098975.8386612,health care,Unknown
+FLS,FLS,,79752777.14771271,industrials,Industrial Machinery & Supplies & Components
+SNX,SNX,,79633488.90411377,information technology,Technology Distributors
+TTEK,TTEK,,79470684.97840881,industrials,Environmental & Facilities Services
+OSK,OSK,,79098763.4815979,industrials,Construction Machinery & Heavy Transportation Equipment
+IVZ,IVZ,,79031936.85966492,financials,Asset Management & Custody Banks
+DAVE,DAVE,,79029766.18041992,information technology,Software - Application
+CLH,CLH,,79026613.54034424,industrials,Environmental & Facilities Services
+STSS,STSS,,79025421.30558491,health care,Medical Instruments & Supplies
+ROIV,ROIV,,78960119.3781662,health care,Unknown
+PB,PB,,78945869.71458435,financials,Regional Banks
+ASND,ASND,,78183068.01330566,health care,Biotechnology
+AOS,AOS,,77769784.49569702,industrials,Building Products
+WGS,WGS,,77583836.32949829,health care,Diagnostics & Research
+ARWR,ARWR,,77553918.59167099,health care,Biotechnology
+ERIC,ERIC,,77517939.52361584,information technology,Communication Equipment
+AVT,AVT,,77386383.99341583,information technology,Technology Distributors
+G,G,,77373469.77184296,information technology,IT Consulting & Other Services
+MKL,MKL,,77206070.12207031,financials,Unknown
+NDSN,NDSN,,76466485.99655151,industrials,Industrial Machinery & Supplies & Components
+KRMN,KRMN,,76297806.93386078,industrials,Unknown
+VTRS,VTRS,,75946339.81254578,health care,Pharmaceuticals
+NNE,NNE,,75806508.4504509,industrials,Specialty Industrial Machinery
+SF,SF,,75744146.66618347,financials,Investment Banking & Brokerage
+DOCS,DOCS,,75482841.59332275,health care,Unknown
+ITRI,ITRI,,75042986.52519226,information technology,Scientific & Technical Instruments
+BRZE,BRZE,,75028632.23344803,information technology,Software - Application
+SITE,SITE,,74041723.09280396,industrials,Unknown
+DCI,DCI,,73622503.76991272,industrials,Industrial Machinery & Supplies & Components
+GFS,GFS,,73563186.83101654,information technology,Unknown
+ZION,ZION,,73540459.72553253,financials,Regional Banks
+RVMD,RVMD,,73366955.8203125,health care,Unknown
+EEFT,EEFT,,73308613.18237305,financials,Transaction & Payment Processing Services
+NEON,NEON,,72870741.32069588,information technology,Electronic Components
+L,L,,72578018.79974365,financials,Multi-line Insurance
+AYI,AYI,,72168945.50354004,industrials,Electrical Components & Equipment
+NVTS,NVTS,,71897549.15280342,information technology,Semiconductors
+WU,WU,,71856749.52503204,information technology,Data Processing & Outsourced Services
+LOAR,LOAR,,71775365.54214478,industrials,Aerospace & Defense
+SANM,SANM,,71363104.88235474,information technology,Electronic Components
+TFX,TFX,,71190829.10766602,health care,Health Care Equipment
+AXSM,AXSM,,70769010.37239075,health care,Biotechnology
+GDS,GDS,,70618498.37245941,information technology,Information Technology Services
+SLNO,SLNO,,70608519.55291748,health care,Biotechnology
+FROG,FROG,,70390037.49637604,information technology,Software - Application
+AEHR,AEHR,,70174689.47483063,information technology,Semiconductor Equipment & Materials
+KD,KD,,69690977.28233337,information technology,IT Consulting & Other Services
+APPF,APPF,,69099763.50128174,information technology,Application Software
+LNC,LNC,,68535319.3258667,financials,Multi-line Insurance
+SYM,SYM,,68404263.7007904,industrials,Specialty Industrial Machinery
+AIHS,AIHS,,68250193.25920105,industrials,Rental & Leasing Services
+SAIC,SAIC,,68224380.31402588,industrials,Diversified Support Services
+SNA,SNA,,68205855.60119629,industrials,Industrial Machinery & Supplies & Components
+TGTX,TGTX,,67756611.79016113,health care,Biotechnology
+IRTC,IRTC,,67652697.05581665,health care,Medical Devices
+MIRM,MIRM,,67180638.49884033,health care,Biotechnology
+CBSH,CBSH,,67173417.00878143,financials,Regional Banks
+WBS,WBS,,67128088.28281403,financials,Regional Banks
+INOD,INOD,,67009006.634521484,information technology,Information Technology Services
+RXRX,RXRX,,66697140.8813858,health care,Biotechnology
+ARCC,ARCC,,66280710.74415207,financials,Asset Management
+RELY,RELY,,65686265.11255264,information technology,Software - Infrastructure
+AWI,AWI,,65603363.17077637,industrials,Unknown
+VOYA,VOYA,,65542750.20210266,financials,Multi-Sector Holdings
+STNE,STNE,,64989114.76427078,information technology,Software - Infrastructure
+LQDA,LQDA,,64791708.35727692,health care,Biotechnology
+RBC,RBC,,64687244.00085449,industrials,Unknown
+ONB,ONB,,64602908.1089592,financials,Banks - Regional
+HIVE,HIVE,,64504014.59101915,financials,Capital Markets
+DSGX,DSGX,,64479115.44204712,information technology,Software - Application
+STI,STI,,64318112.911129,industrials,Electrical Equipment & Parts
+LNTH,LNTH,,64287536.62849426,health care,Drug Manufacturers - Specialty & Generic
+SOLV,SOLV,,63788927.197265625,health care,Health Care Equipment
+PTCT,PTCT,,63779931.70864105,health care,Biotechnology
+UMBF,UMBF,,63613840.50071716,financials,Banks - Regional
+RHI,RHI,,63494109.220962524,industrials,Human Resource & Employment Services
+AAON,AAON,,63410415.09399414,industrials,Building Products
+ETHZ,ETHZ,,63186035.77216864,health care,Biotechnology
+GL,GL,,63025748.79318237,financials,Life & Health Insurance
+ENVX,ENVX,,62946691.47665024,industrials,Electrical Equipment & Parts
+FNF,FNF,,62778397.14050293,financials,Unknown
+OUST,OUST,,62438407.31212616,information technology,Electronic Components
+HEI-A,HEI.A,,62270996.20025635,industrials,Aerospace & Defense
+CR,CR,,62049575.44342041,industrials,Industrial Machinery & Supplies & Components
+RITM,RITM,,61849220.17162323,financials,Unknown
+ENSG,ENSG,,61785228.71734619,health care,Medical Care Facilities
+PLUG,PLUG,,61438240.39154172,industrials,Electrical Equipment & Parts
+PSIX,PSIX,,61433105.72013855,industrials,Specialty Industrial Machinery
+ALLR,ALLR,,61156163.2467252,health care,Biotechnology
+LECO,LECO,,61044419.98031616,industrials,Industrial Machinery & Supplies & Components
+CINF,CINF,,60892889.78790283,financials,Property & Casualty Insurance
+RYAN,RYAN,,60891603.888435364,financials,Unknown
+MLI,MLI,,60619702.20275879,industrials,Industrial Machinery & Supplies & Components
+GMED,GMED,,60099821.96720123,health care,Health Care Equipment
+CACC,CACC,,60072212.90313721,financials,Unknown
+WTFC,WTFC,,59939923.62213135,financials,Regional Banks
+POWL,POWL,,59435709.89776611,industrials,Electrical Equipment & Parts
+WAY,WAY,,59128900.106925964,health care,Health Information Services
+ARRY,ARRY,,58599976.45070076,information technology,Solar
+RYTM,RYTM,,58385915.11604309,health care,Biotechnology
+PTGX,PTGX,,58308552.645721436,health care,Biotechnology
+ESLT,ESLT,,58136631.25854492,industrials,Aerospace & Defense
+RYAAY,RYAAY,,58033505.80379486,industrials,Airlines
+CFR,CFR,,57908521.03713989,financials,Regional Banks
+KBR,KBR,,57411601.58527374,industrials,Diversified Support Services
+SRRK,SRRK,,57403702.179107666,health care,Biotechnology
+ACMR,ACMR,,57372670.82481384,information technology,Semiconductor Equipment & Materials
+AFG,AFG,,57290728.41888428,financials,Multi-line Insurance
+VNET,VNET,,57029984.675626755,information technology,Information Technology Services
+LIF,LIF,,56930522.69943237,information technology,Software - Application
+PEGA,PEGA,,56624626.48750305,information technology,Unknown
+WEX,WEX,,56618702.823028564,financials,Transaction & Payment Processing Services
+ARW,ARW,,56238842.74932861,information technology,Technology Distributors
+RNG,RNG,,56113722.85829544,information technology,Unknown
+HLNE,HLNE,,55799332.08862305,financials,Unknown
+OTEX,OTEX,,55366146.27277374,information technology,Software - Application
+CHYM,CHYM,,54923986.378269196,information technology,Software - Application
+SEIC,SEIC,,54893530.665512085,financials,Asset Management & Custody Banks
+CRUS,CRUS,,54773496.63284302,information technology,Semiconductors
+DFDV,DFDV,,54753049.871931076,information technology,Software - Infrastructure
+AIT,AIT,,54526702.85247803,industrials,Trading Companies & Distributors
+ADMA,ADMA,,54464976.85544968,health care,Biotechnology
+TKR,TKR,,54437748.6177063,industrials,Industrial Machinery & Supplies & Components
+NVAX,NVAX,,54323642.50706196,health care,Biotechnology
+RGA,RGA,,54297219.2250061,financials,Reinsurance
+SLM,SLM,,53695849.74184036,financials,Consumer Finance
+ACHC,ACHC,,53682703.10552597,health care,Health Care Facilities
+APLS,APLS,,53168591.253910065,health care,Biotechnology
+RAL,RAL,,52945145.549583435,information technology,Unknown
+AXS,AXS,,51950457.62504578,financials,Unknown
+OMF,OMF,,51811752.72403717,financials,Unknown
+LSTR,LSTR,,51671729.14413452,industrials,Cargo Ground Transportation
+HXL,HXL,,50877452.243881226,industrials,Aerospace & Defense
+WSC,WSC,,49961870.13158798,industrials,Unknown
+CCCS,CCCS,,49939821.217250824,information technology,Unknown
+LAZ,LAZ,,49868649.51911926,financials,Unknown
+GTES,GTES,,49700096.69740677,industrials,Unknown
+R,R,,48819223.37265015,industrials,Cargo Ground Transportation
+GGG,GGG,,48677396.59515381,industrials,Industrial Machinery & Supplies & Components
+STWD,STWD,,48167592.85610199,financials,Unknown
+WTM,WTM,,47904946.67114258,financials,Unknown
+LFUS,LFUS,,47760282.26119995,information technology,Electronic Components
+EXLS,EXLS,,47326604.25437927,industrials,Data Processing & Outsourced Services
+JHG,JHG,,47186217.49328613,financials,Asset Management & Custody Banks
+CORT,CORT,,46924035.60882568,health care,Pharmaceuticals
+ALGM,ALGM,,46122129.91897583,information technology,Unknown
+ITT,ITT,,46068740.38116455,industrials,Industrial Machinery & Supplies & Components
+GXO,GXO,,45688075.14842987,industrials,Air Freight & Logistics
+PRI,PRI,,45330310.88531494,financials,Life & Health Insurance
+ORI,ORI,,44462750.8127594,financials,Property & Casualty Insurance
+UWMC,UWMC,,42771160.410552025,financials,Unknown
+MSM,MSM,,42600066.47186279,industrials,Trading Companies & Distributors
+SSD,SSD,,42282469.57672119,industrials,Building Products
+VIRT,VIRT,,42109386.72779083,financials,Unknown
+OZK,OZK,,42037350.31719208,financials,Regional Banks
+SARO,SARO,,41828952.78961182,industrials,Aerospace & Defense
+AMKR,AMKR,,41810153.31821442,information technology,Semiconductors
+SAIL,SAIL,,41711230.53230286,information technology,Application Software
+ESAB,ESAB,,41558240.40740967,industrials,Industrial Machinery & Supplies & Components
+AMG,AMG,,41406403.57498169,financials,Asset Management & Custody Banks
+RARE,RARE,,41359864.74487305,health care,Unknown
+ST,ST,,40802576.16628647,industrials,Unknown
+FCN,FCN,,40561886.20498657,industrials,Research & Consulting Services
+MTG,MTG,,40260519.57731247,financials,Reinsurance
+SHC,SHC,,39177473.16758156,health care,Unknown
+SPR,SPR,,38353021.273002625,industrials,Unknown
+KMPR,KMPR,,38070266.7124176,financials,Multi-line Insurance
+DLB,DLB,,37653666.400527954,information technology,Unknown
+XRAY,XRAY,,37605523.18311691,health care,Health Care Supplies
+DRS,DRS,,36483233.283958435,industrials,Aerospace & Defense
+FAF,FAF,,36439406.04988098,financials,Property & Casualty Insurance
+VNT,VNT,,35851494.268836975,information technology,Electronic Equipment & Instruments
+OGN,OGN,,35489745.49986839,health care,Pharmaceuticals
+PRGO,PRGO,,35322850.63499451,health care,Pharmaceuticals
+HAYW,HAYW,,33959709.02021408,industrials,Unknown
+NVST,NVST,,33812370.044116974,health care,Health Care Supplies
+THG,THG,,33125564.83291626,financials,Property & Casualty Insurance
+CNXC,CNXC,,32695222.467918396,information technology,Data Processing & Outsourced Services
+ECG,ECG,,32250434.626235962,industrials,Construction & Engineering
+MSA,MSA,,32062453.06121826,industrials,Office Services & Supplies
+RLI,RLI,,31282461.44454956,financials,Unknown
+MAN,MAN,,30593639.89086151,industrials,Human Resource & Employment Services
+AMTM,AMTM,,30550191.285972595,industrials,Diversified Support Services
+DV,DV,,30171559.85039711,information technology,Unknown
+BHF,BHF,,29878696.591186523,financials,Life & Health Insurance
+FHB,FHB,,27970077.3859787,financials,Regional Banks
+CXT,CXT,,26273513.285560608,industrials,Industrial Machinery & Supplies & Components
+AGO,AGO,,25910406.135559082,financials,Unknown
+DXC,DXC,,21840697.406015396,information technology,IT Consulting & Other Services
+BOKF,BOKF,,21657148.484954834,financials,Unknown
+SNDR,SNDR,,21212757.54901886,industrials,Unknown
+IPGP,IPGP,,19798892.915496826,information technology,Electronic Manufacturing Services
+CNA,CNA,,17634439.148521423,financials,Unknown
+CLVT,CLVT,,17467409.322872162,industrials,Unknown
+TDC,TDC,,17402017.427253723,information technology,IT Consulting & Other Services
+FRHC,FRHC,,17089580.21118164,financials,Unknown
+UHAL-B,UHAL.B,,16390418.317939376,industrials,Unknown
+CERT,CERT,,12449988.422327042,health care,Unknown
+UHAL,UHAL,,7596077.883796692,industrials,Unknown
+TFSL,TFSL,,5979142.956285477,financials,Unknown
+INGM,INGM,,4464873.110656738,information technology,Technology Distributors
+DNB,DNB,,,industrials,Unknown

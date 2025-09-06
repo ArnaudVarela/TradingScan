@@ -1,121 +1,181 @@
-date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
-2025-09-05,ABT,HEALTHCARE,confirmed,STRONG_BUY,BUY
-2025-09-05,AGNC,REAL ESTATE,confirmed,STRONG_BUY,BUY
-2025-09-05,ALK,INDUSTRIALS,confirmed,STRONG_BUY,BUY
-2025-09-05,NLY,Unknown,confirmed,STRONG_BUY,BUY
-2025-09-05,ALLY,Unknown,confirmed,STRONG_BUY,BUY
-2025-09-05,ANET,Unknown,confirmed,STRONG_BUY,BUY
-2025-09-05,AME,Unknown,confirmed,STRONG_BUY,BUY
-2025-09-05,AOS,INDUSTRIALS,confirmed,STRONG_BUY,BUY
-2025-09-05,WMS,INDUSTRIALS,confirmed,STRONG_BUY,BUY
-2025-09-05,AYI,INDUSTRIALS,confirmed,STRONG_BUY,BUY
-2025-09-05,ARW,Unknown,pre_signal,STRONG_BUY,SELL
-2025-09-05,BLDR,Unknown,pre_signal,STRONG_BUY,
-2025-09-05,CSL,Unknown,pre_signal,STRONG_BUY,
-2025-09-05,AVGO,Unknown,pre_signal,STRONG_BUY,
-2025-09-05,CRL,Unknown,pre_signal,STRONG_BUY,
-2025-09-05,BIO,Unknown,pre_signal,STRONG_BUY,
-2025-09-05,A,HEALTHCARE,pre_signal,BUY,BUY
-2025-09-05,AXP,Unknown,pre_signal,BUY,BUY
-2025-09-05,AAPL,Unknown,pre_signal,BUY,BUY
-2025-09-05,ALLE,INDUSTRIALS,pre_signal,BUY,BUY
-2025-09-05,AKAM,TECHNOLOGY,pre_signal,BUY,BUY
-2025-09-05,AFRM,TECHNOLOGY,pre_signal,BUY,BUY
-2025-09-05,ACM,INDUSTRIALS,pre_signal,BUY,BUY
-2025-09-05,AMKR,Unknown,pre_signal,BUY,BUY
-2025-09-05,ALNY,Unknown,pre_signal,BUY,BUY
-2025-09-05,AWI,Unknown,pre_signal,BUY,BUY
-2025-09-05,APPF,Unknown,pre_signal,BUY,BUY
-2025-09-05,AFG,Unknown,pre_signal,BUY,BUY
-2025-09-05,APLS,Unknown,pre_signal,BUY,BUY
-2025-09-05,ADI,Unknown,pre_signal,BUY,BUY
-2025-09-05,ALAB,Unknown,pre_signal,BUY,BUY
-2025-09-05,ATI,Unknown,pre_signal,BUY,BUY
-2025-09-05,AIT,Unknown,pre_signal,BUY,BUY
-2025-09-05,MMM,INDUSTRIALS,pre_signal,BUY,BUY
-2025-09-05,APH,Unknown,pre_signal,BUY,BUY
-2025-09-05,AL,INDUSTRIALS,pre_signal,BUY,BUY
-2025-09-05,APP,Unknown,pre_signal,BUY,BUY
-2025-09-05,ABBV,HEALTHCARE,pre_signal,BUY,BUY
-2025-09-05,AMG,FINANCIAL SERVICES,pre_signal,BUY,BUY
-2025-09-05,AAL,Unknown,pre_signal,BUY,BUY
-2025-09-05,AFL,FINANCIAL SERVICES,pre_signal,BUY,BUY
-2025-09-05,AON,Unknown,other,NEUTRAL,BUY
-2025-09-05,ALSN,CONSUMER CYCLICAL,pre_signal,BUY,BUY
-2025-09-05,AGCO,INDUSTRIALS,other,NEUTRAL,BUY
-2025-09-05,ACHC,HEALTHCARE,other,NEUTRAL,BUY
-2025-09-05,ACGL,Unknown,other,NEUTRAL,BUY
-2025-09-05,AIZ,Unknown,other,NEUTRAL,BUY
-2025-09-05,ALL,Unknown,other,NEUTRAL,BUY
-2025-09-05,ADSK,Unknown,pre_signal,BUY,
-2025-09-05,ACN,TECHNOLOGY,other,NEUTRAL,BUY
-2025-09-05,BILL,Unknown,pre_signal,BUY,
-2025-09-05,BIIB,Unknown,pre_signal,BUY,
-2025-09-05,ALGM,TECHNOLOGY,other,NEUTRAL,BUY
-2025-09-05,APG,Unknown,other,NEUTRAL,BUY
-2025-09-05,CIEN,Unknown,pre_signal,BUY,
-2025-09-05,CI,Unknown,pre_signal,BUY,
-2025-09-05,AVTR,Unknown,pre_signal,BUY,
-2025-09-05,AMAT,Unknown,other,SELL,BUY
-2025-09-05,BSX,Unknown,pre_signal,BUY,
-2025-09-05,BRK-B,Unknown,pre_signal,BUY,
-2025-09-05,ARES,Unknown,other,SELL,BUY
-2025-09-05,CAT,Unknown,pre_signal,BUY,
-2025-09-05,AVT,Unknown,pre_signal,BUY,
-2025-09-05,CCCS,Unknown,pre_signal,BUY,
-2025-09-05,AMD,TECHNOLOGY,other,SELL,BUY
-2025-09-05,BOKF,Unknown,pre_signal,BUY,
-2025-09-05,AMGN,Unknown,other,SELL,BUY
-2025-09-05,CDNS,Unknown,pre_signal,BUY,
-2025-09-05,AGO,Unknown,other,SELL,BUY
-2025-09-05,AMTM,Unknown,other,SELL,BUY
-2025-09-05,OZK,Unknown,pre_signal,BUY,
-2025-09-05,ALGN,HEALTHCARE,other,SELL,BUY
-2025-09-05,AJG,Unknown,other,SELL,BUY
-2025-09-05,DOX,Unknown,other,SELL,BUY
-2025-09-05,ADBE,TECHNOLOGY,other,SELL,BUY
-2025-09-05,COF,Unknown,pre_signal,BUY,
-2025-09-05,BAC,Unknown,pre_signal,BUY,
-2025-09-05,AAON,INDUSTRIALS,other,SELL,BUY
-2025-09-05,BX,Unknown,pre_signal,BUY,
-2025-09-05,CHE,Unknown,pre_signal,BUY,
-2025-09-05,BDX,Unknown,other,NEUTRAL,
-2025-09-05,TECH,Unknown,other,NEUTRAL,
-2025-09-05,BK,Unknown,other,NEUTRAL,
-2025-09-05,CHRW,Unknown,other,NEUTRAL,
-2025-09-05,CINF,Unknown,other,NEUTRAL,
-2025-09-05,COR,Unknown,other,NEUTRAL,
-2025-09-05,CDW,Unknown,other,NEUTRAL,
-2025-09-05,CB,Unknown,other,NEUTRAL,
-2025-09-05,BSY,Unknown,other,NEUTRAL,
-2025-09-05,AMP,Unknown,other,STRONG_SELL,BUY
-2025-09-05,CG,Unknown,other,NEUTRAL,
-2025-09-05,APO,Unknown,other,STRONG_SELL,BUY
-2025-09-05,BAX,Unknown,other,NEUTRAL,
-2025-09-05,BR,Unknown,other,NEUTRAL,
-2025-09-05,BA,Unknown,other,NEUTRAL,
-2025-09-05,CBOE,Unknown,other,,
-2025-09-05,BWXT,Unknown,other,NEUTRAL,
-2025-09-05,AIG,Unknown,other,STRONG_SELL,BUY
-2025-09-05,CNC,Unknown,other,NEUTRAL,
-2025-09-05,CAR,Unknown,other,NEUTRAL,
-2025-09-05,TEAM,Unknown,other,NEUTRAL,
-2025-09-05,CACI,Unknown,other,NEUTRAL,
-2025-09-05,XYZ,Unknown,other,NEUTRAL,
-2025-09-05,AXS,Unknown,other,NEUTRAL,
-2025-09-05,BLK,Unknown,other,NEUTRAL,
-2025-09-05,CARR,Unknown,other,NEUTRAL,
-2025-09-05,BAM,Unknown,other,NEUTRAL,
-2025-09-05,AXON,Unknown,other,SELL,
-2025-09-05,CAH,Unknown,other,SELL,
-2025-09-05,BMY,Unknown,other,SELL,
-2025-09-05,SCHW,Unknown,other,SELL,
-2025-09-05,BRKR,Unknown,other,SELL,
-2025-09-05,AUR,Unknown,other,SELL,
-2025-09-05,CERT,Unknown,other,SELL,
-2025-09-05,BRO,Unknown,other,SELL,
-2025-09-05,BMRN,Unknown,other,SELL,
-2025-09-05,OWL,Unknown,other,STRONG_SELL,
-2025-09-05,BAH,Unknown,other,STRONG_SELL,
-2025-09-05,ADP,Unknown,other,STRONG_SELL,
-2025-09-05,BHF,Unknown,other,STRONG_SELL,
+date,ticker_yf,sector,bucket,tv_reco,analyst_bucket,technical_local
+2025-09-06,U,information technology,confirmed,STRONG_BUY,BUY,STRONG_BUY
+2025-09-06,NET,information technology,confirmed,STRONG_BUY,BUY,STRONG_BUY
+2025-09-06,MU,information technology,confirmed,STRONG_BUY,BUY,STRONG_BUY
+2025-09-06,AVGO,information technology,confirmed,STRONG_BUY,BUY,STRONG_BUY
+2025-09-06,COHR,information technology,pre_signal,BUY,BUY,STRONG_BUY
+2025-09-06,MSI,information technology,pre_signal,BUY,BUY,STRONG_BUY
+2025-09-06,GE,industrials,pre_signal,BUY,BUY,STRONG_BUY
+2025-09-06,SYK,health care,confirmed,STRONG_BUY,BUY,BUY
+2025-09-06,QCOM,information technology,confirmed,STRONG_BUY,BUY,BUY
+2025-09-06,HCA,health care,confirmed,STRONG_BUY,BUY,BUY
+2025-09-06,PANW,information technology,confirmed,STRONG_BUY,BUY,BUY
+2025-09-06,UAL,industrials,confirmed,STRONG_BUY,BUY,BUY
+2025-09-06,CYBR,information technology,confirmed,STRONG_BUY,BUY,BUY
+2025-09-06,CRDO,information technology,pre_signal,STRONG_BUY,,STRONG_BUY
+2025-09-06,TEM,health care,pre_signal,STRONG_BUY,,STRONG_BUY
+2025-09-06,ABT,health care,pre_signal,STRONG_BUY,,STRONG_BUY
+2025-09-06,PSTG,information technology,confirmed,STRONG_BUY,BUY,BUY
+2025-09-06,SNOW,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,URI,industrials,pre_signal,STRONG_BUY,,STRONG_BUY
+2025-09-06,ZM,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,AAPL,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,MDB,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,ADSK,information technology,pre_signal,BUY,,STRONG_BUY
+2025-09-06,LYFT,industrials,pre_signal,BUY,BUY,BUY
+2025-09-06,HPE,information technology,pre_signal,BUY,,STRONG_BUY
+2025-09-06,CI,health care,pre_signal,BUY,BUY,BUY
+2025-09-06,TFC,financials,pre_signal,BUY,BUY,BUY
+2025-09-06,AFRM,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,CVS,health care,pre_signal,BUY,BUY,BUY
+2025-09-06,UTHR,health care,pre_signal,BUY,BUY,BUY
+2025-09-06,USB,financials,pre_signal,BUY,BUY,BUY
+2025-09-06,CIEN,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,TER,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,HUM,health care,pre_signal,BUY,BUY,BUY
+2025-09-06,UNH,health care,pre_signal,BUY,BUY,BUY
+2025-09-06,HBAN,financials,pre_signal,BUY,BUY,BUY
+2025-09-06,ADI,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,BAC,financials,pre_signal,BUY,BUY,BUY
+2025-09-06,APP,information technology,pre_signal,BUY,BUY,BUY
+2025-09-06,GLW,information technology,pre_signal,STRONG_BUY,,BUY
+2025-09-06,LITE,information technology,pre_signal,STRONG_BUY,,BUY
+2025-09-06,CB,financials,other,NEUTRAL,BUY,BUY
+2025-09-06,LRCX,information technology,other,STRONG_BUY,BUY,NEUTRAL
+2025-09-06,PH,industrials,other,STRONG_BUY,BUY,NEUTRAL
+2025-09-06,ANET,information technology,other,STRONG_BUY,BUY,NEUTRAL
+2025-09-06,FSLR,information technology,other,STRONG_BUY,BUY,NEUTRAL
+2025-09-06,BRK-B,financials,pre_signal,BUY,BUY,BUY
+2025-09-06,WDC,information technology,pre_signal,STRONG_BUY,,BUY
+2025-09-06,LMT,industrials,pre_signal,STRONG_BUY,,BUY
+2025-09-06,WDAY,information technology,other,NEUTRAL,BUY,BUY
+2025-09-06,IREN,financials,pre_signal,BUY,,BUY
+2025-09-06,DAL,industrials,other,BUY,BUY,NEUTRAL
+2025-09-06,MPWR,information technology,other,BUY,BUY,NEUTRAL
+2025-09-06,AXP,financials,pre_signal,BUY,,BUY
+2025-09-06,CAT,industrials,other,BUY,BUY,NEUTRAL
+2025-09-06,ALNY,health care,other,BUY,BUY,NEUTRAL
+2025-09-06,JNJ,health care,other,BUY,BUY,NEUTRAL
+2025-09-06,SOFI,financials,other,BUY,BUY,NEUTRAL
+2025-09-06,CDNS,information technology,other,BUY,BUY,NEUTRAL
+2025-09-06,HWM,industrials,other,BUY,BUY,NEUTRAL
+2025-09-06,RF,financials,pre_signal,BUY,,BUY
+2025-09-06,JPM,financials,other,NEUTRAL,BUY,BUY
+2025-09-06,RKT,financials,event,STRONG_BUY,BUY,NEUTRAL
+2025-09-06,INTC,information technology,other,BUY,SELL,NEUTRAL
+2025-09-06,RIOT,financials,pre_signal,BUY,,BUY
+2025-09-06,NU,financials,pre_signal,BUY,,BUY
+2025-09-06,DXCM,health care,other,BUY,BUY,NEUTRAL
+2025-09-06,WULF,financials,other,BUY,BUY,NEUTRAL
+2025-09-06,RKLB,industrials,other,BUY,BUY,NEUTRAL
+2025-09-06,MRK,health care,other,BUY,BUY,NEUTRAL
+2025-09-06,GS,financials,other,BUY,BUY,NEUTRAL
+2025-09-06,FUTU,financials,other,BUY,BUY,NEUTRAL
+2025-09-06,KEY,financials,pre_signal,BUY,,BUY
+2025-09-06,CPRT,industrials,other,NEUTRAL,BUY,BUY
+2025-09-06,COF,financials,pre_signal,BUY,,BUY
+2025-09-06,MMM,industrials,other,BUY,BUY,NEUTRAL
+2025-09-06,HUBS,information technology,event,NEUTRAL,BUY,NEUTRAL
+2025-09-06,AAL,industrials,other,BUY,BUY,NEUTRAL
+2025-09-06,C,financials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,AON,financials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,ORCL,information technology,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,EMR,industrials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,NOW,information technology,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,KLAC,information technology,other,STRONG_BUY,,NEUTRAL
+2025-09-06,DDOG,information technology,other,BUY,,NEUTRAL
+2025-09-06,COR,health care,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,CRM,information technology,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,SOUN,information technology,other,BUY,,NEUTRAL
+2025-09-06,TMO,health care,other,BUY,,NEUTRAL
+2025-09-06,BA,industrials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,FICO,information technology,other,NEUTRAL,,BUY
+2025-09-06,NOC,industrials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,MA,financials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,BSX,health care,other,BUY,,
+2025-09-06,MDT,health care,other,BUY,,NEUTRAL
+2025-09-06,PFE,health care,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,UPST,financials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,TEAM,information technology,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,JCI,industrials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,XYZ,financials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,ALAB,information technology,other,BUY,,NEUTRAL
+2025-09-06,APH,information technology,other,BUY,,NEUTRAL
+2025-09-06,INTU,information technology,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,CARR,industrials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,CRWD,information technology,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,GILD,health care,other,BUY,,NEUTRAL
+2025-09-06,ABBV,health care,other,BUY,,NEUTRAL
+2025-09-06,BX,financials,other,BUY,,NEUTRAL
+2025-09-06,HOOD,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,WFC,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,ZS,information technology,other,BUY,,NEUTRAL
+2025-09-06,GEV,industrials,other,SELL,BUY,NEUTRAL
+2025-09-06,DELL,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,LLY,health care,other,SELL,BUY,NEUTRAL
+2025-09-06,BLK,financials,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,AMAT,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,COIN,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,BMY,health care,other,SELL,BUY,NEUTRAL
+2025-09-06,MS,financials,other,NEUTRAL,,NEUTRAL
+2025-09-06,RTX,industrials,other,NEUTRAL,,NEUTRAL
+2025-09-06,ON,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,FDX,industrials,other,SELL,BUY,NEUTRAL
+2025-09-06,NVDA,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,AMD,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,UBER,industrials,other,SELL,BUY,NEUTRAL
+2025-09-06,KKR,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,APLD,information technology,other,NEUTRAL,BUY,NEUTRAL
+2025-09-06,SMCI,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,ICE,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,IBM,information technology,other,NEUTRAL,,NEUTRAL
+2025-09-06,ISRG,health care,other,SELL,BUY,NEUTRAL
+2025-09-06,V,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,PLTR,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,CSCO,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,CAH,health care,other,SELL,BUY,NEUTRAL
+2025-09-06,MRVL,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,CSX,industrials,other,SELL,BUY,NEUTRAL
+2025-09-06,MCHP,information technology,other,NEUTRAL,,NEUTRAL
+2025-09-06,MSFT,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,CRWV,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,ADBE,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,AJG,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,ELV,health care,other,NEUTRAL,,NEUTRAL
+2025-09-06,TOST,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,ETN,industrials,other,NEUTRAL,,NEUTRAL
+2025-09-06,REGN,health care,other,NEUTRAL,,NEUTRAL
+2025-09-06,TXN,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,OKTA,information technology,other,NEUTRAL,,NEUTRAL
+2025-09-06,FTNT,information technology,other,NEUTRAL,,NEUTRAL
+2025-09-06,SNPS,information technology,other,NEUTRAL,,NEUTRAL
+2025-09-06,RGTI,information technology,other,NEUTRAL,,NEUTRAL
+2025-09-06,CTAS,industrials,other,SELL,BUY,NEUTRAL
+2025-09-06,VEEV,health care,other,NEUTRAL,,NEUTRAL
+2025-09-06,SPGI,financials,other,NEUTRAL,,NEUTRAL
+2025-09-06,MMC,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,TDG,industrials,other,SELL,BUY,NEUTRAL
+2025-09-06,ROP,industrials,other,SELL,BUY,NEUTRAL
+2025-09-06,NSC,industrials,other,NEUTRAL,,NEUTRAL
+2025-09-06,IBKR,financials,other,SELL,BUY,NEUTRAL
+2025-09-06,MSTR,information technology,other,SELL,BUY,NEUTRAL
+2025-09-06,UNP,industrials,other,STRONG_SELL,BUY,NEUTRAL
+2025-09-06,ACN,information technology,other,NEUTRAL,,NEUTRAL
+2025-09-06,MCK,health care,other,NEUTRAL,,NEUTRAL
+2025-09-06,VRTX,health care,other,SELL,,NEUTRAL
+2025-09-06,VRT,industrials,other,SELL,,NEUTRAL
+2025-09-06,APO,financials,other,STRONG_SELL,BUY,NEUTRAL
+2025-09-06,MARA,financials,other,STRONG_SELL,BUY,NEUTRAL
+2025-09-06,UPS,industrials,other,SELL,,NEUTRAL
+2025-09-06,TT,industrials,other,SELL,,NEUTRAL
+2025-09-06,DHR,health care,other,SELL,,NEUTRAL
+2025-09-06,SCHW,financials,other,SELL,,NEUTRAL
+2025-09-06,ADP,industrials,other,STRONG_SELL,BUY,NEUTRAL
+2025-09-06,AMGN,health care,other,SELL,,NEUTRAL
+2025-09-06,DE,industrials,other,SELL,,NEUTRAL
+2025-09-06,PYPL,financials,other,SELL,,NEUTRAL
+2025-09-06,CME,financials,other,SELL,,NEUTRAL
+2025-09-06,FI,financials,other,SELL,,NEUTRAL
+2025-09-06,HON,industrials,other,SELL,,NEUTRAL
+2025-09-06,PGR,financials,other,STRONG_SELL,,NEUTRAL
+2025-09-06,WM,industrials,other,STRONG_SELL,,NEUTRAL

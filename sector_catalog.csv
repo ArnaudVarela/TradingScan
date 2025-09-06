@@ -1,587 +1,680 @@
 ticker,sector,industry
-MMM,Industrials,Industrial Conglomerates
-AOS,Industrials,Building Products
-AAON,Industrials,Building Products
-ABT,Health Care,Health Care Equipment
-ABBV,Health Care,Pharmaceuticals
-ACHC,Health Care,Health Care Facilities
-ACN,Information Technology,IT Consulting & Other Services
-AYI,Industrials,Electrical Components & Equipment
-ADBE,Information Technology,Application Software
-WMS,Industrials,Unknown
-AMD,Information Technology,Semiconductors
-ACM,Industrials,Construction & Engineering
-AMG,Financials,Asset Management & Custody Banks
-AFRM,Information Technology,Unknown
-AFL,Financials,Life & Health Insurance
-AGCO,Industrials,Agricultural & Farm Machinery
-A,Health Care,Health Care Equipment
-AGNC,Financials,Unknown
-AL,Industrials,Unknown
-AKAM,Information Technology,Internet Services & Infrastructure
-ALK,Industrials,Passenger Airlines
-ALGN,Health Care,Health Care Supplies
-ALLE,Industrials,Building Products
-ALGM,Information Technology,Unknown
-ALSN,Industrials,Unknown
-ALL,Financials,Property & Casualty Insurance
-ALLY,Financials,Unknown
-ALNY,Health Care,Unknown
-DOX,Information Technology,Unknown
-AMTM,Industrials,Diversified Support Services
-AAL,Industrials,Passenger Airlines
-AXP,Financials,Consumer Finance
-AFG,Financials,Multi-line Insurance
-AIG,Financials,Property & Casualty Insurance
-AMP,Financials,Asset Management & Custody Banks
-AME,Industrials,Electrical Components & Equipment
-AMGN,Health Care,Biotechnology
-AMKR,Information Technology,Semiconductors
-APH,Information Technology,Electronic Components
-ADI,Information Technology,Semiconductors
-NLY,Financials,Unknown
-AON,Financials,Insurance Brokers
-APG,Industrials,Construction & Engineering
-APLS,Health Care,Biotechnology
-APO,Financials,Asset Management & Custody Banks
-APPF,Information Technology,Application Software
-AAPL,Information Technology,"Technology Hardware, Storage & Peripherals"
-AIT,Industrials,Trading Companies & Distributors
-AMAT,Information Technology,Semiconductor Materials & Equipment
-APP,Information Technology,Application Software
-ACGL,Financials,Reinsurance
-ARES,Financials,Unknown
-ANET,Information Technology,Communications Equipment
-AWI,Industrials,Unknown
-ARW,Information Technology,Technology Distributors
-AJG,Financials,Insurance Brokers
-AIZ,Financials,Multi-line Insurance
-AGO,Financials,Unknown
-ALAB,Information Technology,Semiconductors
-ATI,Industrials,Aerospace & Defense
-TEAM,Information Technology,Application Software
-AUR,Information Technology,Unknown
-ADSK,Information Technology,Application Software
-ADP,Industrials,Human Resource & Employment Services
-AVTR,Health Care,Unknown
-CAR,Industrials,Passenger Ground Transportation
-AVT,Information Technology,Technology Distributors
-AXS,Financials,Unknown
-AXON,Industrials,Aerospace & Defense
-BAC,Financials,Diversified Banks
-OZK,Financials,Regional Banks
-BAX,Health Care,Health Care Equipment
-BDX,Health Care,Health Care Equipment
-BSY,Information Technology,Unknown
-BRK-B,Financials,Multi-Sector Holdings
-BILL,Information Technology,Unknown
-BIO,Health Care,Life Sciences Tools & Services
-TECH,Health Care,Life Sciences Tools & Services
-BIIB,Health Care,Biotechnology
-BMRN,Health Care,Unknown
-BLK,Financials,Asset Management & Custody Banks
-BX,Financials,Asset Management & Custody Banks
-XYZ,Financials,Transaction & Payment Processing Services
-OWL,Financials,Unknown
-BK,Financials,Asset Management & Custody Banks
-BA,Industrials,Aerospace & Defense
-BOKF,Financials,Unknown
-BAH,Industrials,Unknown
-BSX,Health Care,Health Care Equipment
-BHF,Financials,Life & Health Insurance
-BMY,Health Care,Health Care Distributors
-AVGO,Information Technology,Semiconductors
-BR,Industrials,Data Processing & Outsourced Services
-BAM,Financials,Asset Management & Custody Banks
-BRO,Financials,Insurance Brokers
-BRKR,Health Care,Health Care Equipment
-BLDR,Industrials,Building Products
-BWXT,Industrials,Unknown
-CHRW,Industrials,Air Freight & Logistics
-CACI,Industrials,Diversified Support Services
-CDNS,Information Technology,Application Software
-COF,Financials,Consumer Finance
-CAH,Health Care,Health Care Distributors
-CSL,Industrials,Industrial Conglomerates
-CG,Financials,Unknown
-CARR,Industrials,Building Products
-CAT,Industrials,Construction Machinery & Heavy Transportation Equipment
-CBOE,Financials,Financial Exchanges & Data
-CCCS,Information Technology,Unknown
-CDW,Information Technology,Technology Distributors
-COR,Health Care,Health Care Distributors
-CNC,Health Care,Managed Health Care
-CERT,Health Care,Unknown
-CRL,Health Care,Life Sciences Tools & Services
-SCHW,Financials,Investment Banking & Brokerage
-CHE,Health Care,Health Care Services
-CB,Financials,Property & Casualty Insurance
-CIEN,Information Technology,Communications Equipment
-CI,Health Care,Managed Health Care
-CINF,Financials,Property & Casualty Insurance
-CTAS,Industrials,Diversified Support Services
-CRUS,Information Technology,Semiconductors
-CSCO,Information Technology,Communications Equipment
-C,Financials,Diversified Banks
-CFG,Financials,Regional Banks
-CLVT,Industrials,Unknown
-CLH,Industrials,Environmental & Facilities Services
-NET,Information Technology,Unknown
-CME,Financials,Financial Exchanges & Data
-CNA,Financials,Unknown
-CNH,Industrials,Unknown
-CGNX,Information Technology,Electronic Equipment & Instruments
-CTSH,Information Technology,IT Consulting & Other Services
-COHR,Information Technology,Electronic Components
-COIN,Financials,Unknown
-COLB,Financials,Regional Banks
-CMA,Financials,Diversified Banks
-FIX,Industrials,Construction & Engineering
-CBSH,Financials,Regional Banks
-CNXC,Information Technology,Data Processing & Outsourced Services
-CFLT,Information Technology,Unknown
-COO,Health Care,Health Care Supplies
-CPRT,Industrials,Diversified Support Services
-CORT,Health Care,Pharmaceuticals
-CNM,Industrials,Trading Companies & Distributors
-GLW,Information Technology,Electronic Components
-CPAY,Financials,Transaction & Payment Processing Services
-CR,Industrials,Industrial Machinery & Supplies & Components
-CXT,Industrials,Industrial Machinery & Supplies & Components
-CACC,Financials,Unknown
-CRWD,Information Technology,Application Software
-CSX,Industrials,Rail Transportation
-CMI,Industrials,Industrial Machinery & Supplies & Components
-CW,Industrials,Aerospace & Defense
-CVS,Health Care,Health Care Services
-DHR,Health Care,Life Sciences Tools & Services
-DDOG,Information Technology,Application Software
-DVA,Health Care,Health Care Facilities
-DAY,Industrials,Human Resource & Employment Services
-DE,Industrials,Agricultural & Farm Machinery
-DAL,Industrials,Passenger Airlines
-DELL,Information Technology,"Technology Hardware, Storage & Peripherals"
-XRAY,Health Care,Health Care Supplies
-DXCM,Health Care,Health Care Equipment
-DOCU,Information Technology,Application Software
-DLB,Information Technology,Unknown
-DCI,Industrials,Industrial Machinery & Supplies & Components
-DV,Information Technology,Unknown
-DOV,Industrials,Industrial Machinery & Supplies & Components
-DOCS,Health Care,Unknown
-DBX,Information Technology,Unknown
-DNB,Industrials,Unknown
-DXC,Information Technology,IT Consulting & Other Services
-DT,Information Technology,Unknown
-EWBC,Financials,Regional Banks
-ETN,Industrials,Electrical Components & Equipment
-EW,Health Care,Health Care Equipment
-ELAN,Health Care,Unknown
-ESTC,Information Technology,Unknown
-ELV,Health Care,Managed Health Care
-EME,Industrials,Construction & Engineering
-EMR,Industrials,Electrical Components & Equipment
-EHC,Health Care,Health Care Facilities
-ENPH,Information Technology,Electronic Components
-ENTG,Information Technology,Unknown
-NVST,Health Care,Health Care Supplies
-EPAM,Information Technology,IT Consulting & Other Services
-EFX,Industrials,Research & Consulting Services
-EQH,Financials,Unknown
-ESAB,Industrials,Industrial Machinery & Supplies & Components
-EEFT,Financials,Transaction & Payment Processing Services
-EVR,Financials,Investment Banking & Brokerage
-EG,Financials,Reinsurance
-ECG,Industrials,Construction & Engineering
-EXAS,Health Care,Unknown
-EXEL,Health Care,Biotechnology
-EXLS,Industrials,Data Processing & Outsourced Services
-EXPD,Industrials,Air Freight & Logistics
-FFIV,Information Technology,Communications Equipment
-FDS,Financials,Financial Exchanges & Data
-FICO,Information Technology,Application Software
-FAST,Industrials,Building Products
-FDX,Industrials,Air Freight & Logistics
-FERG,Industrials,Industrial Machinery & Supplies & Components
-FNF,Financials,Unknown
-FIS,Financials,Transaction & Payment Processing Services
-FITB,Financials,Regional Banks
-FAF,Financials,Property & Casualty Insurance
-FCNCA,Financials,Unknown
-FHB,Financials,Regional Banks
-FHN,Financials,Regional Banks
-FSLR,Information Technology,Semiconductors
-FI,Financials,Transaction & Payment Processing Services
-FLEX,Information Technology,Electronic Manufacturing Services
-FLS,Industrials,Industrial Machinery & Supplies & Components
-FNB,Financials,Regional Banks
-FTNT,Information Technology,Systems Software
-FTV,Industrials,Industrial Machinery & Supplies & Components
-FBIN,Industrials,Building Products
-BEN,Financials,Asset Management & Custody Banks
-FRHC,Financials,Unknown
-CFR,Financials,Regional Banks
-FTAI,Industrials,Unknown
-FCN,Industrials,Research & Consulting Services
-IT,Information Technology,IT Consulting & Other Services
-GTES,Industrials,Unknown
-GE,Industrials,Aerospace & Defense
-GEHC,Health Care,Health Care Equipment
-GEV,Industrials,Industrial Machinery & Supplies & Components
-GEN,Information Technology,Application Software
-GNRC,Industrials,Electrical Components & Equipment
-GD,Industrials,Aerospace & Defense
-G,Information Technology,IT Consulting & Other Services
-GILD,Health Care,Biotechnology
-GTLB,Information Technology,Unknown
-GPN,Financials,Transaction & Payment Processing Services
-GFS,Information Technology,Unknown
-GLOB,Information Technology,Unknown
-GL,Financials,Life & Health Insurance
-GMED,Health Care,Health Care Equipment
-GDDY,Information Technology,Unknown
-GS,Financials,Investment Banking & Brokerage
-GGG,Industrials,Industrial Machinery & Supplies & Components
-GWRE,Information Technology,Unknown
-GXO,Industrials,Air Freight & Logistics
-HALO,Health Care,Biotechnology
-HLNE,Financials,Unknown
-THG,Financials,Property & Casualty Insurance
-HIG,Financials,Property & Casualty Insurance
-HAYW,Industrials,Unknown
-HCA,Health Care,Health Care Facilities
-HEI-A,Industrials,Aerospace & Defense
-HEI,Industrials,Aerospace & Defense
-JKHY,Financials,Transaction & Payment Processing Services
-HPE,Information Technology,"Technology Hardware, Storage & Peripherals"
-HXL,Industrials,Aerospace & Defense
-HOLX,Health Care,Health Care Equipment
-HON,Industrials,Industrial Conglomerates
-HLI,Financials,Unknown
-HWM,Industrials,Aerospace & Defense
-HPQ,Information Technology,"Technology Hardware, Storage & Peripherals"
-HUBB,Industrials,Industrial Machinery & Supplies & Components
-HUBS,Information Technology,Unknown
-HUM,Health Care,Managed Health Care
-HBAN,Financials,Regional Banks
-HII,Industrials,Aerospace & Defense
-IBM,Information Technology,IT Consulting & Other Services
-IEX,Industrials,Industrial Machinery & Supplies & Components
-IDXX,Health Care,Health Care Equipment
-ITW,Industrials,Industrial Machinery & Supplies & Components
-ILMN,Health Care,Life Sciences Tools & Services
-INCY,Health Care,Biotechnology
-INFA,Information Technology,Unknown
-IR,Industrials,Industrial Machinery & Supplies & Components
-INGM,Information Technology,Technology Distributors
-INSM,Health Care,Biotechnology
-INSP,Health Care,Unknown
-PODD,Health Care,Unknown
-INTC,Information Technology,Semiconductors
-IBKR,Financials,Investment Banking & Brokerage
-ICE,Financials,Financial Exchanges & Data
-INTU,Information Technology,Application Software
-ISRG,Health Care,Health Care Equipment
-IVZ,Financials,Asset Management & Custody Banks
-IONS,Health Care,Unknown
-IPGP,Information Technology,Electronic Manufacturing Services
-IQV,Health Care,Life Sciences Tools & Services
-ITT,Industrials,Industrial Machinery & Supplies & Components
-JBL,Information Technology,Electronic Manufacturing Services
-J,Industrials,Construction & Engineering
-JHG,Financials,Asset Management & Custody Banks
-JAZZ,Health Care,Pharmaceuticals
-JBHT,Industrials,Cargo Ground Transportation
-JEF,Financials,Multi-Sector Holdings
-JNJ,Health Care,Pharmaceuticals
-JCI,Industrials,Building Products
-JPM,Financials,Diversified Banks
-KRMN,Industrials,Unknown
-KBR,Industrials,Diversified Support Services
-KMPR,Financials,Multi-line Insurance
-KEY,Financials,Regional Banks
-KEYS,Information Technology,Electronic Equipment & Instruments
-KNSL,Financials,Unknown
-KEX,Industrials,Marine Transportation
-KKR,Financials,Asset Management & Custody Banks
-KLAC,Information Technology,Semiconductor Materials & Equipment
-KNX,Industrials,Cargo Ground Transportation
-KD,Information Technology,IT Consulting & Other Services
-LHX,Industrials,Aerospace & Defense
-LH,Health Care,Health Care Services
-LRCX,Information Technology,Semiconductor Materials & Equipment
-LSTR,Industrials,Cargo Ground Transportation
-LSCC,Information Technology,Semiconductors
-LAZ,Financials,Unknown
-LDOS,Industrials,Diversified Support Services
-LII,Industrials,Building Products
-DRS,Industrials,Aerospace & Defense
-LLY,Health Care,Pharmaceuticals
-LECO,Industrials,Industrial Machinery & Supplies & Components
-LNC,Financials,Multi-line Insurance
-LFUS,Information Technology,Electronic Components
-LOAR,Industrials,Aerospace & Defense
-LMT,Industrials,Aerospace & Defense
-L,Financials,Multi-line Insurance
-LPLA,Financials,Unknown
-LITE,Information Technology,Unknown
-LYFT,Industrials,Passenger Ground Transportation
-MTB,Financials,Regional Banks
-MTSI,Information Technology,Semiconductors
-MANH,Information Technology,Unknown
-MAN,Industrials,Human Resource & Employment Services
-MKL,Financials,Unknown
-MKTX,Financials,Financial Exchanges & Data
-MMC,Financials,Insurance Brokers
-MRVL,Information Technology,Semiconductors
-MAS,Industrials,Building Products
-MASI,Health Care,Health Care Equipment
-MTZ,Industrials,Construction & Engineering
-MA,Financials,Transaction & Payment Processing Services
-MCK,Health Care,Health Care Distributors
-MEDP,Health Care,Unknown
-MDT,Health Care,Health Care Equipment
-MRK,Health Care,Pharmaceuticals
-MET,Financials,Life & Health Insurance
-MTD,Health Care,Life Sciences Tools & Services
-MTG,Financials,Reinsurance
-MCHP,Information Technology,Semiconductors
-MU,Information Technology,Semiconductors
-MSFT,Information Technology,Systems Software
-MSTR,Information Technology,Application Software
-MIDD,Industrials,Industrial Machinery & Supplies & Components
-MKSI,Information Technology,Semiconductor Materials & Equipment
-MRNA,Health Care,Biotechnology
-MOH,Health Care,Managed Health Care
-MDB,Information Technology,Systems Software
-MPWR,Information Technology,Semiconductors
-MCO,Financials,Financial Exchanges & Data
-MS,Financials,Investment Banking & Brokerage
-MORN,Financials,Unknown
-MSI,Information Technology,Communications Equipment
-COOP,Financials,Commercial & Residential Mortgage Finance
-MSA,Industrials,Office Services & Supplies
-MSM,Industrials,Trading Companies & Distributors
-MSCI,Financials,Financial Exchanges & Data
-MLI,Industrials,Industrial Machinery & Supplies & Components
-NDAQ,Financials,Financial Exchanges & Data
-NTRA,Health Care,Unknown
-NCNO,Information Technology,Unknown
-NTAP,Information Technology,"Technology Hardware, Storage & Peripherals"
-NBIX,Health Care,Biotechnology
-NDSN,Industrials,Industrial Machinery & Supplies & Components
-NSC,Industrials,Rail Transportation
-NTRS,Financials,Asset Management & Custody Banks
-NOC,Industrials,Aerospace & Defense
-NU,Financials,Unknown
-NTNX,Information Technology,Unknown
-NVT,Industrials,Unknown
-NVDA,Information Technology,Semiconductors
-OKTA,Information Technology,Application Software
-ODFL,Industrials,Cargo Ground Transportation
-ORI,Financials,Property & Casualty Insurance
-ON,Information Technology,Semiconductors
-OMF,Financials,Unknown
-ONTO,Information Technology,Semiconductor Materials & Equipment
-ORCL,Information Technology,Application Software
-OGN,Health Care,Pharmaceuticals
-OSK,Industrials,Construction Machinery & Heavy Transportation Equipment
-OTIS,Industrials,Industrial Machinery & Supplies & Components
-OC,Industrials,Building Products
-PCAR,Industrials,Construction Machinery & Heavy Transportation Equipment
-PLTR,Information Technology,Internet Services & Infrastructure
-PANW,Information Technology,Systems Software
-PH,Industrials,Industrial Machinery & Supplies & Components
-PSN,Industrials,Aerospace & Defense
-PAYX,Industrials,Human Resource & Employment Services
-PAYC,Information Technology,Application Software
-PCTY,Information Technology,Application Software
-PYPL,Financials,Transaction & Payment Processing Services
-PEGA,Information Technology,Unknown
-PNR,Industrials,Industrial Machinery & Supplies & Components
-PEN,Health Care,Health Care Equipment
-PRGO,Health Care,Pharmaceuticals
-PFE,Health Care,Pharmaceuticals
-PNFP,Financials,Regional Banks
-PNC,Financials,Regional Banks
-BPOP,Financials,Unknown
-TROW,Financials,Asset Management & Custody Banks
-PRI,Financials,Life & Health Insurance
-PFG,Financials,Life & Health Insurance
-PCOR,Information Technology,Unknown
-PGR,Financials,Property & Casualty Insurance
-PB,Financials,Regional Banks
-PRU,Financials,Life & Health Insurance
-PTC,Information Technology,Application Software
-PSTG,Information Technology,Unknown
-QGEN,Health Care,Unknown
-QRVO,Information Technology,Semiconductors
-QCOM,Information Technology,Semiconductors
-PWR,Industrials,Construction & Engineering
-DGX,Health Care,Health Care Services
-QXO,Industrials,Unknown
-RAL,Information Technology,Unknown
-RJF,Financials,Investment Banking & Brokerage
-RBA,Industrials,Unknown
-RBC,Industrials,Unknown
-RRX,Industrials,Electrical Components & Equipment
-REGN,Health Care,Biotechnology
-RF,Financials,Regional Banks
-RGA,Financials,Reinsurance
-RNR,Financials,Reinsurance
-RGEN,Health Care,Biotechnology
-RSG,Industrials,Environmental & Facilities Services
-RMD,Health Care,Health Care Equipment
-RVMD,Health Care,Unknown
-RVTY,Health Care,Health Care Equipment
-RNG,Information Technology,Unknown
-RITM,Financials,Unknown
-RLI,Financials,Unknown
-RHI,Industrials,Human Resource & Employment Services
-HOOD,Financials,Unknown
-RKT,Financials,Unknown
-RKLB,Industrials,Aerospace & Defense
-ROK,Industrials,Electrical Components & Equipment
-ROIV,Health Care,Unknown
-ROL,Industrials,Environmental & Facilities Services
-ROP,Industrials,Industrial Conglomerates
-RPRX,Health Care,Unknown
-RTX,Industrials,Aerospace & Defense
-RBRK,Information Technology,Unknown
-RYAN,Financials,Unknown
-R,Industrials,Cargo Ground Transportation
-SPGI,Financials,Financial Exchanges & Data
-SAIA,Industrials,Unknown
-SAIL,Information Technology,Application Software
-SAIC,Industrials,Diversified Support Services
-CRM,Information Technology,Application Software
-SLM,Financials,Consumer Finance
-IOT,Information Technology,Systems Software
-SNDK,Information Technology,"Technology Hardware, Storage & Peripherals"
-SRPT,Health Care,Unknown
-HSIC,Health Care,Health Care Distributors
-SNDR,Industrials,Unknown
-SEIC,Financials,Asset Management & Custody Banks
-ST,Industrials,Unknown
-S,Information Technology,Unknown
-NOW,Information Technology,Systems Software
-FOUR,Information Technology,Unknown
-SSD,Industrials,Building Products
-SITE,Industrials,Unknown
-SWKS,Information Technology,Semiconductors
-SNA,Industrials,Industrial Machinery & Supplies & Components
-SNOW,Information Technology,Unknown
-SOFI,Financials,Unknown
-SOLV,Health Care,Health Care Equipment
-SHC,Health Care,Unknown
-SSB,Financials,Regional Banks
-LUV,Industrials,Passenger Airlines
-SPR,Industrials,Unknown
-SSNC,Information Technology,Unknown
-SARO,Industrials,Aerospace & Defense
-SWK,Industrials,Industrial Machinery & Supplies & Components
-STWD,Financials,Unknown
-STT,Financials,Asset Management & Custody Banks
-STE,Health Care,Health Care Equipment
-SF,Financials,Investment Banking & Brokerage
-SYK,Health Care,Health Care Equipment
-SMMT,Health Care,Unknown
-SMCI,Information Technology,"Technology Hardware, Storage & Peripherals"
-SYF,Financials,Consumer Finance
-SNPS,Information Technology,Application Software
-SNV,Financials,Regional Banks
-SNX,Information Technology,Technology Distributors
-TDY,Industrials,Aerospace & Defense
-TFX,Health Care,Health Care Equipment
-TEM,Health Care,Unknown
-THC,Health Care,Health Care Facilities
-TDC,Information Technology,IT Consulting & Other Services
-TER,Information Technology,Semiconductor Materials & Equipment
-TTEK,Industrials,Environmental & Facilities Services
-TXN,Information Technology,Semiconductors
-TXT,Industrials,Aerospace & Defense
-TMO,Health Care,Life Sciences Tools & Services
-TFSL,Financials,Unknown
-TKR,Industrials,Industrial Machinery & Supplies & Components
-TOST,Information Technology,Transaction & Payment Processing Services
-TTC,Industrials,Agricultural & Farm Machinery
-TPG,Financials,Unknown
-TW,Financials,Unknown
-TT,Industrials,Building Products
-TDG,Industrials,Aerospace & Defense
-TRU,Industrials,Unknown
-TRV,Financials,Property & Casualty Insurance
-TREX,Industrials,Building Products
-TRMB,Information Technology,Electronic Equipment & Instruments
-TFC,Financials,Regional Banks
-TWLO,Information Technology,Unknown
-TYL,Information Technology,Application Software
-UHAL,Industrials,Unknown
-UHAL-B,Industrials,Unknown
-USB,Financials,Diversified Banks
-UBER,Industrials,Passenger Ground Transportation
-UI,Information Technology,Unknown
-PATH,Information Technology,Unknown
-RARE,Health Care,Unknown
-UNP,Industrials,Rail Transportation
-UAL,Industrials,Passenger Airlines
-UPS,Industrials,Air Freight & Logistics
-URI,Industrials,Trading Companies & Distributors
-UTHR,Health Care,Biotechnology
-UWMC,Financials,Unknown
-UNH,Health Care,Managed Health Care
-U,Information Technology,Unknown
-OLED,Information Technology,Semiconductors
-UHS,Health Care,Health Care Facilities
-UNM,Financials,Life & Health Insurance
-VMI,Industrials,Industrial Machinery & Supplies & Components
-VEEV,Health Care,Unknown
-VLTO,Industrials,Unknown
-VRSN,Information Technology,Internet Services & Infrastructure
-VRSK,Industrials,Research & Consulting Services
-VRTX,Health Care,Biotechnology
-VRT,Industrials,Unknown
-VTRS,Health Care,Pharmaceuticals
-VKTX,Health Care,Biotechnology
-VIRT,Financials,Unknown
-V,Financials,Transaction & Payment Processing Services
-VNT,Information Technology,Electronic Equipment & Instruments
-VOYA,Financials,Multi-Sector Holdings
-WRB,Financials,Property & Casualty Insurance
-GWW,Industrials,Industrial Machinery & Supplies & Components
-WAB,Industrials,Construction Machinery & Heavy Transportation Equipment
-WM,Industrials,Environmental & Facilities Services
-WAT,Health Care,Health Care Distributors
-WSO,Industrials,Trading Companies & Distributors
-WBS,Financials,Regional Banks
-WFC,Financials,Diversified Banks
-WCC,Industrials,Unknown
-WST,Health Care,Health Care Supplies
-WAL,Financials,Unknown
-WDC,Information Technology,"Technology Hardware, Storage & Peripherals"
-WU,Information Technology,Data Processing & Outsourced Services
-WEX,Financials,Transaction & Payment Processing Services
-WTM,Financials,Unknown
-WTW,Financials,Insurance Brokers
-WSC,Industrials,Unknown
-WTFC,Financials,Regional Banks
-WWD,Industrials,Electrical Components & Equipment
-WDAY,Information Technology,Application Software
-XP,Financials,Investment Banking & Brokerage
-XPO,Industrials,Cargo Ground Transportation
-XYL,Industrials,Industrial Machinery & Supplies & Components
-ZBRA,Information Technology,Electronic Equipment & Instruments
-ZBH,Health Care,Health Care Equipment
-ZION,Financials,Regional Banks
-ZTS,Health Care,Pharmaceuticals
-ZM,Information Technology,Application Software
-ZS,Information Technology,Application Software
-ERIE,nan,Unknown
-NXPI,nan,Unknown
-STX,nan,Unknown
-TEL,nan,Unknown
-ARM,nan,Unknown
-ASML,nan,Unknown
-AZN,nan,Unknown
-SHOP,nan,Unknown
-TRI,nan,Unknown
+NVDA,information technology,Semiconductors
+PLTR,information technology,Internet Services & Infrastructure
+MSFT,information technology,Systems Software
+AAPL,information technology,"Technology Hardware, Storage & Peripherals"
+AVGO,information technology,Semiconductors
+AMD,information technology,Semiconductors
+MSTR,information technology,Application Software
+UNH,health care,Managed Health Care
+HOOD,financials,Unknown
+CRM,information technology,Application Software
+SNOW,information technology,Unknown
+LLY,health care,Pharmaceuticals
+APP,information technology,Application Software
+CRWV,nan,
+ORCL,information technology,Application Software
+COIN,financials,Unknown
+BRK-B,financials,Multi-Sector Holdings
+INTC,information technology,Semiconductors
+JPM,financials,Diversified Banks
+MRVL,information technology,Semiconductors
+MU,information technology,Semiconductors
+BAC,financials,Diversified Banks
+SOFI,financials,Unknown
+CRWD,information technology,Application Software
+V,financials,Transaction & Payment Processing Services
+MDB,information technology,Systems Software
+GEV,industrials,Industrial Machinery & Supplies & Components
+INTU,information technology,Application Software
+NOW,information technology,Systems Software
+UBER,industrials,Passenger Ground Transportation
+JNJ,health care,Pharmaceuticals
+BA,industrials,Aerospace & Defense
+MA,financials,Transaction & Payment Processing Services
+TXN,information technology,Semiconductors
+C,financials,Diversified Banks
+ADBE,information technology,Application Software
+GS,financials,Investment Banking & Brokerage
+AFRM,information technology,Unknown
+GE,industrials,Aerospace & Defense
+PANW,information technology,Systems Software
+ISRG,health care,Health Care Equipment
+QCOM,information technology,Semiconductors
+CSCO,information technology,Communications Equipment
+WFC,financials,Diversified Banks
+RKLB,industrials,Aerospace & Defense
+AMAT,information technology,Semiconductor Materials & Equipment
+UNP,industrials,Rail Transportation
+MRK,health care,Pharmaceuticals
+IBKR,financials,Investment Banking & Brokerage
+ANET,information technology,Communications Equipment
+DELL,information technology,"Technology Hardware, Storage & Peripherals"
+SMCI,information technology,"Technology Hardware, Storage & Peripherals"
+CAT,industrials,Construction Machinery & Heavy Transportation Equipment
+AAL,industrials,Passenger Airlines
+LRCX,information technology,Semiconductor Materials & Equipment
+CSX,industrials,Rail Transportation
+PFE,health care,Pharmaceuticals
+WDAY,information technology,Application Software
+ADI,information technology,Semiconductors
+MARA,nan,
+SOUN,nan,
+IBM,information technology,IT Consulting & Other Services
+IREN,nan,
+ABBV,health care,Pharmaceuticals
+ACN,information technology,IT Consulting & Other Services
+SCHW,financials,Investment Banking & Brokerage
+AXP,financials,Consumer Finance
+ALAB,information technology,Semiconductors
+APH,information technology,Electronic Components
+CRDO,nan,
+KLAC,information technology,Semiconductor Materials & Equipment
+VRT,industrials,Unknown
+NU,financials,Unknown
+WDC,information technology,"Technology Hardware, Storage & Peripherals"
+HON,industrials,Industrial Conglomerates
+COF,financials,Consumer Finance
+UPS,industrials,Air Freight & Logistics
+LMT,industrials,Aerospace & Defense
+ADSK,information technology,Application Software
+TEM,health care,Unknown
+TMO,health care,Life Sciences Tools & Services
+MS,financials,Investment Banking & Brokerage
+ETN,industrials,Electrical Components & Equipment
+DDOG,information technology,Application Software
+PYPL,financials,Transaction & Payment Processing Services
+BSX,health care,Health Care Equipment
+RGTI,nan,
+ELV,health care,Managed Health Care
+NSC,industrials,Rail Transportation
+ABT,health care,Health Care Equipment
+SNPS,information technology,Application Software
+HPE,information technology,"Technology Hardware, Storage & Peripherals"
+DE,industrials,Agricultural & Farm Machinery
+ZS,information technology,Application Software
+OKTA,information technology,Application Software
+PGR,financials,Property & Casualty Insurance
+MCHP,information technology,Semiconductors
+LITE,information technology,Unknown
+DHR,health care,Life Sciences Tools & Services
+REGN,health care,Biotechnology
+SPGI,financials,Financial Exchanges & Data
+VRTX,health care,Biotechnology
+MCK,health care,Health Care Distributors
+GILD,health care,Biotechnology
+RTX,industrials,Aerospace & Defense
+AMGN,health care,Biotechnology
+RIOT,nan,
+FI,financials,Transaction & Payment Processing Services
+CME,financials,Financial Exchanges & Data
+TT,industrials,Building Products
+FICO,information technology,Application Software
+URI,industrials,Trading Companies & Distributors
+MDT,health care,Health Care Equipment
+BX,financials,Asset Management & Custody Banks
+KEY,financials,Regional Banks
+VEEV,health care,Unknown
+RF,financials,Regional Banks
+FTNT,information technology,Systems Software
+GLW,information technology,Electronic Components
+BLK,financials,Asset Management & Custody Banks
+HBAN,financials,Regional Banks
+APO,financials,Asset Management & Custody Banks
+XYZ,financials,Transaction & Payment Processing Services
+JCI,industrials,Building Products
+FSLR,information technology,Semiconductors
+U,information technology,Unknown
+BMY,health care,Health Care Distributors
+UAL,industrials,Passenger Airlines
+CTAS,industrials,Diversified Support Services
+PH,industrials,Industrial Machinery & Supplies & Components
+ADP,industrials,Human Resource & Employment Services
+PSTG,information technology,Unknown
+MSI,information technology,Communications Equipment
+CI,health care,Managed Health Care
+CB,financials,Property & Casualty Insurance
+ICE,financials,Financial Exchanges & Data
+TDG,industrials,Aerospace & Defense
+USB,financials,Diversified Banks
+ALNY,health care,Unknown
+UPST,nan,
+AJG,financials,Insurance Brokers
+CVS,health care,Health Care Services
+KKR,financials,Asset Management & Custody Banks
+UTHR,health care,Biotechnology
+ZM,information technology,Application Software
+TER,information technology,Semiconductor Materials & Equipment
+HCA,health care,Health Care Facilities
+MMM,industrials,Industrial Conglomerates
+TEAM,information technology,Application Software
+CDNS,information technology,Application Software
+HUM,health care,Managed Health Care
+COHR,information technology,Electronic Components
+FUTU,nan,
+HWM,industrials,Aerospace & Defense
+NET,information technology,Unknown
+DAL,industrials,Passenger Airlines
+RKT,financials,Unknown
+MMC,financials,Insurance Brokers
+HUBS,information technology,Unknown
+MPWR,information technology,Semiconductors
+EMR,industrials,Electrical Components & Equipment
+AON,financials,Insurance Brokers
+CARR,industrials,Building Products
+FDX,industrials,Air Freight & Logistics
+CIEN,information technology,Communications Equipment
+SYK,health care,Health Care Equipment
+APLD,nan,
+CYBR,nan,
+DXCM,health care,Health Care Equipment
+COR,health care,Health Care Distributors
+ROP,industrials,Industrial Conglomerates
+ON,information technology,Semiconductors
+CPRT,industrials,Diversified Support Services
+WULF,nan,
+TFC,financials,Regional Banks
+LYFT,industrials,Passenger Ground Transportation
+NOC,industrials,Aerospace & Defense
+TOST,information technology,Transaction & Payment Processing Services
+CAH,health care,Health Care Distributors
+WM,industrials,Environmental & Facilities Services
+PNC,financials,Regional Banks
+INSM,health care,Biotechnology
+AXON,industrials,Aerospace & Defense
+GTLB,information technology,Unknown
+BDX,health care,Health Care Equipment
+TRV,financials,Property & Casualty Insurance
+CNC,health care,Managed Health Care
+FERG,industrials,Industrial Machinery & Supplies & Components
+AIG,financials,Property & Casualty Insurance
+HPQ,information technology,"Technology Hardware, Storage & Peripherals"
+MSCI,financials,Financial Exchanges & Data
+ZTS,health care,Pharmaceuticals
+GWW,industrials,Industrial Machinery & Supplies & Components
+PWR,industrials,Construction & Engineering
+IT,information technology,IT Consulting & Other Services
+COO,health care,Health Care Supplies
+RMD,health care,Health Care Equipment
+ODFL,industrials,Cargo Ground Transportation
+MCO,financials,Financial Exchanges & Data
+NTNX,information technology,Unknown
+BK,financials,Asset Management & Custody Banks
+MRNA,health care,Biotechnology
+BLDR,industrials,Building Products
+ARGX,nan,
+IOT,information technology,Systems Software
+NTAP,information technology,"Technology Hardware, Storage & Peripherals"
+AFL,financials,Life & Health Insurance
+LHX,industrials,Aerospace & Defense
+BILL,information technology,Unknown
+JBL,information technology,Electronic Manufacturing Services
+FCNCA,financials,Unknown
+ROK,industrials,Electrical Components & Equipment
+CMI,industrials,Industrial Machinery & Supplies & Components
+ELAN,health care,Unknown
+FAST,industrials,Building Products
+PAYX,industrials,Human Resource & Employment Services
+FIX,industrials,Construction & Engineering
+EW,health care,Health Care Equipment
+OTIS,industrials,Industrial Machinery & Supplies & Components
+GD,industrials,Aerospace & Defense
+DOCU,information technology,Application Software
+MOH,health care,Managed Health Care
+A,health care,Health Care Equipment
+FHN,financials,Regional Banks
+CIFR,nan,
+ESTC,information technology,Unknown
+TWLO,information technology,Unknown
+IDXX,health care,Health Care Equipment
+CTSH,information technology,IT Consulting & Other Services
+ARES,financials,Unknown
+VRSK,industrials,Research & Consulting Services
+LPLA,financials,Unknown
+IONS,health care,Unknown
+MET,financials,Life & Health Insurance
+ONDS,nan,
+MNDY,nan,
+NDAQ,financials,Financial Exchanges & Data
+ENPH,information technology,Electronic Components
+ALL,financials,Property & Casualty Insurance
+IQV,health care,Life Sciences Tools & Services
+FIS,financials,Transaction & Payment Processing Services
+CBOE,financials,Financial Exchanges & Data
+GDDY,information technology,Unknown
+ENTG,information technology,Unknown
+PCAR,industrials,Construction Machinery & Heavy Transportation Equipment
+RSG,industrials,Environmental & Facilities Services
+ITW,industrials,Industrial Machinery & Supplies & Components
+EFX,industrials,Research & Consulting Services
+LUV,industrials,Passenger Airlines
+SNDK,information technology,"Technology Hardware, Storage & Peripherals"
+AMP,financials,Asset Management & Custody Banks
+GWRE,information technology,Unknown
+BIIB,health care,Biotechnology
+LII,industrials,Building Products
+CHRW,industrials,Air Freight & Logistics
+AGNC,financials,Unknown
+SYF,financials,Consumer Finance
+COLB,financials,Regional Banks
+EME,industrials,Construction & Engineering
+TW,financials,Unknown
+BRO,financials,Insurance Brokers
+RBRK,information technology,Unknown
+GEHC,health care,Health Care Equipment
+CDW,information technology,Technology Distributors
+AME,industrials,Electrical Components & Equipment
+AL,industrials,Unknown
+STT,financials,Asset Management & Custody Banks
+FLEX,information technology,Electronic Manufacturing Services
+WAB,industrials,Construction Machinery & Heavy Transportation Equipment
+CFG,financials,Regional Banks
+AVTR,health care,Unknown
+IR,industrials,Industrial Machinery & Supplies & Components
+VRSN,information technology,Internet Services & Infrastructure
+SAIA,industrials,Unknown
+PODD,health care,Unknown
+HIG,financials,Property & Casualty Insurance
+TROW,financials,Asset Management & Custody Banks
+HUBB,industrials,Industrial Machinery & Supplies & Components
+MTB,financials,Regional Banks
+QXO,industrials,Unknown
+BRKR,health care,Health Care Equipment
+FITB,financials,Regional Banks
+THC,health care,Health Care Facilities
+GPN,financials,Transaction & Payment Processing Services
+HEI,industrials,Aerospace & Defense
+S,information technology,Unknown
+PRU,financials,Life & Health Insurance
+BWXT,industrials,Unknown
+FTAI,industrials,Unknown
+BR,industrials,Data Processing & Outsourced Services
+XPO,industrials,Cargo Ground Transportation
+SWK,industrials,Industrial Machinery & Supplies & Components
+CFLT,information technology,Unknown
+BAX,health care,Health Care Equipment
+SRPT,health care,Unknown
+VKTX,health care,Biotechnology
+JBHT,industrials,Cargo Ground Transportation
+ALGN,health care,Health Care Supplies
+WAT,health care,Health Care Distributors
+FTV,industrials,Industrial Machinery & Supplies & Components
+SWKS,information technology,Semiconductors
+COOP,financials,Commercial & Residential Mortgage Finance
+DAY,industrials,Human Resource & Employment Services
+PATH,information technology,Unknown
+TYL,information technology,Application Software
+CG,financials,Unknown
+OC,industrials,Building Products
+ACGL,financials,Reinsurance
+HALO,health care,Biotechnology
+KEYS,information technology,Electronic Equipment & Instruments
+UI,information technology,Unknown
+MTD,health care,Life Sciences Tools & Services
+DT,information technology,Unknown
+XYL,industrials,Industrial Machinery & Supplies & Components
+MTZ,industrials,Construction & Engineering
+BAH,industrials,Unknown
+PTC,information technology,Application Software
+FNB,financials,Regional Banks
+WTW,financials,Insurance Brokers
+EQH,financials,Unknown
+NTRA,health care,Unknown
+ALK,industrials,Passenger Airlines
+LSCC,information technology,Semiconductors
+DOV,industrials,Industrial Machinery & Supplies & Components
+EXAS,health care,Unknown
+MAS,industrials,Building Products
+RPRX,health care,Unknown
+INCY,health care,Biotechnology
+FDS,financials,Financial Exchanges & Data
+NLY,financials,Unknown
+OWL,financials,Unknown
+NVT,industrials,Unknown
+EXPD,industrials,Air Freight & Logistics
+ZBRA,information technology,Electronic Equipment & Instruments
+GNRC,industrials,Electrical Components & Equipment
+WCC,industrials,Unknown
+PEN,health care,Health Care Equipment
+RJF,financials,Investment Banking & Brokerage
+PAYC,information technology,Application Software
+XP,financials,Investment Banking & Brokerage
+ATI,industrials,Aerospace & Defense
+MEDP,health care,Unknown
+TRU,industrials,Unknown
+ILMN,health care,Life Sciences Tools & Services
+DGX,health care,Health Care Services
+AKAM,information technology,Internet Services & Infrastructure
+FFIV,information technology,Communications Equipment
+CAR,industrials,Passenger Ground Transportation
+CMA,financials,Diversified Banks
+ALLE,industrials,Building Products
+TDY,industrials,Aerospace & Defense
+BAM,financials,Asset Management & Custody Banks
+UHS,health care,Health Care Facilities
+CSL,industrials,Industrial Conglomerates
+EVR,financials,Investment Banking & Brokerage
+ACM,industrials,Construction & Engineering
+EPAM,information technology,IT Consulting & Other Services
+MKTX,financials,Financial Exchanges & Data
+CNH,industrials,Unknown
+WST,health care,Health Care Supplies
+PNR,industrials,Industrial Machinery & Supplies & Components
+NTRS,financials,Asset Management & Custody Banks
+QRVO,information technology,Semiconductors
+WSO,industrials,Trading Companies & Distributors
+TRMB,information technology,Electronic Equipment & Instruments
+ZBH,health care,Health Care Equipment
+GEN,information technology,Application Software
+LDOS,industrials,Diversified Support Services
+TECH,health care,Life Sciences Tools & Services
+MIDD,industrials,Industrial Machinery & Supplies & Components
+IEX,industrials,Industrial Machinery & Supplies & Components
+CRL,health care,Life Sciences Tools & Services
+STE,health care,Health Care Equipment
+AAOI,nan,
+RVTY,health care,Health Care Equipment
+STRL,nan,
+NBIX,health care,Biotechnology
+JKHY,financials,Transaction & Payment Processing Services
+FOUR,information technology,Unknown
+WWD,industrials,Electrical Components & Equipment
+TIGR,nan,
+UNM,financials,Life & Health Insurance
+KNX,industrials,Cargo Ground Transportation
+WMS,industrials,Unknown
+HII,industrials,Aerospace & Defense
+PCOR,information technology,Unknown
+LH,health care,Health Care Services
+PNFP,financials,Regional Banks
+ALLY,financials,Unknown
+MLYS,nan,
+INFA,information technology,Unknown
+CACI,industrials,Diversified Support Services
+MTSI,information technology,Semiconductors
+CPAY,financials,Transaction & Payment Processing Services
+RRX,industrials,Electrical Components & Equipment
+CNM,industrials,Trading Companies & Distributors
+HSIC,health care,Health Care Distributors
+TMDX,nan,
+ONC,nan,
+PI,nan,
+NICE,nan,
+BNTX,nan,
+TLRY,nan,
+NUKK,nan,
+DVA,health care,Health Care Facilities
+WRB,financials,Property & Casualty Insurance
+EG,financials,Reinsurance
+MANH,information technology,Unknown
+RMBS,nan,
+BSY,information technology,Unknown
+ABVX,nan,
+BMRN,health care,Unknown
+JAZZ,health care,Pharmaceuticals
+TPG,financials,Unknown
+CW,industrials,Aerospace & Defense
+ONTO,information technology,Semiconductor Materials & Equipment
+J,industrials,Construction & Engineering
+APG,industrials,Construction & Engineering
+HOLX,health care,Health Care Equipment
+RBA,industrials,Unknown
+TREX,industrials,Building Products
+AUR,information technology,Unknown
+THAR,nan,
+SNV,financials,Regional Banks
+JBLU,nan,
+AIZ,financials,Multi-line Insurance
+TXT,industrials,Aerospace & Defense
+SSNC,information technology,Unknown
+EXEL,health care,Biotechnology
+VLTO,industrials,Unknown
+COMM,nan,
+VRNT,nan,
+CRSP,nan,
+BEN,financials,Asset Management & Custody Banks
+GLOB,information technology,Unknown
+WAL,financials,Unknown
+KEX,industrials,Marine Transportation
+MORN,financials,Unknown
+NCNO,information technology,Unknown
+IDCC,nan,
+MKSI,information technology,Semiconductor Materials & Equipment
+RGEN,health care,Biotechnology
+PFG,financials,Life & Health Insurance
+TTC,industrials,Agricultural & Farm Machinery
+RNR,financials,Reinsurance
+SITM,nan,
+VMI,industrials,Industrial Machinery & Supplies & Components
+EOSE,nan,
+JEF,financials,Multi-Sector Holdings
+EHC,health care,Health Care Facilities
+TTMI,nan,
+FBIN,industrials,Building Products
+CHE,health care,Health Care Services
+MASI,health care,Health Care Equipment
+CWD,nan,
+CGNX,information technology,Electronic Equipment & Instruments
+AGCO,industrials,Agricultural & Farm Machinery
+VLY,nan,
+HLI,financials,Unknown
+CRMD,nan,
+EWBC,financials,Regional Banks
+SERV,nan,
+ALSN,industrials,Unknown
+ROL,industrials,Environmental & Facilities Services
+INSP,health care,Unknown
+OLED,information technology,Semiconductors
+SSB,financials,Regional Banks
+SEZL,nan,
+SMMT,health care,Unknown
+PCTY,information technology,Application Software
+KNSL,financials,Unknown
+PSN,industrials,Aerospace & Defense
+DBX,information technology,Unknown
+BIO,health care,Life Sciences Tools & Services
+BPOP,financials,Unknown
+VRNS,nan,
+DOX,information technology,Unknown
+QGEN,health care,Unknown
+FLS,industrials,Industrial Machinery & Supplies & Components
+SNX,information technology,Technology Distributors
+TTEK,industrials,Environmental & Facilities Services
+OSK,industrials,Construction Machinery & Heavy Transportation Equipment
+IVZ,financials,Asset Management & Custody Banks
+DAVE,nan,
+CLH,industrials,Environmental & Facilities Services
+STSS,nan,
+ROIV,health care,Unknown
+PB,financials,Regional Banks
+ASND,nan,
+AOS,industrials,Building Products
+WGS,nan,
+ARWR,nan,
+ERIC,nan,
+AVT,information technology,Technology Distributors
+G,information technology,IT Consulting & Other Services
+MKL,financials,Unknown
+NDSN,industrials,Industrial Machinery & Supplies & Components
+KRMN,industrials,Unknown
+VTRS,health care,Pharmaceuticals
+NNE,nan,
+SF,financials,Investment Banking & Brokerage
+DOCS,health care,Unknown
+ITRI,nan,
+BRZE,nan,
+SITE,industrials,Unknown
+DCI,industrials,Industrial Machinery & Supplies & Components
+GFS,information technology,Unknown
+ZION,financials,Regional Banks
+RVMD,health care,Unknown
+EEFT,financials,Transaction & Payment Processing Services
+NEON,nan,
+L,financials,Multi-line Insurance
+AYI,industrials,Electrical Components & Equipment
+NVTS,nan,
+WU,information technology,Data Processing & Outsourced Services
+LOAR,industrials,Aerospace & Defense
+SANM,nan,
+TFX,health care,Health Care Equipment
+AXSM,nan,
+GDS,nan,
+SLNO,nan,
+FROG,nan,
+AEHR,nan,
+KD,information technology,IT Consulting & Other Services
+APPF,information technology,Application Software
+LNC,financials,Multi-line Insurance
+SYM,nan,
+AIHS,nan,
+SAIC,industrials,Diversified Support Services
+SNA,industrials,Industrial Machinery & Supplies & Components
+TGTX,nan,
+IRTC,nan,
+MIRM,nan,
+CBSH,financials,Regional Banks
+WBS,financials,Regional Banks
+INOD,nan,
+RXRX,nan,
+ARCC,nan,
+RELY,nan,
+AWI,industrials,Unknown
+VOYA,financials,Multi-Sector Holdings
+STNE,nan,
+LQDA,nan,
+RBC,industrials,Unknown
+ONB,nan,
+HIVE,nan,
+DSGX,nan,
+STI,nan,
+LNTH,nan,
+SOLV,health care,Health Care Equipment
+PTCT,nan,
+UMBF,nan,
+RHI,industrials,Human Resource & Employment Services
+AAON,industrials,Building Products
+ETHZ,nan,
+GL,financials,Life & Health Insurance
+ENVX,nan,
+FNF,financials,Unknown
+OUST,nan,
+HEI-A,industrials,Aerospace & Defense
+CR,industrials,Industrial Machinery & Supplies & Components
+RITM,financials,Unknown
+ENSG,nan,
+PLUG,nan,
+PSIX,nan,
+ALLR,nan,
+LECO,industrials,Industrial Machinery & Supplies & Components
+CINF,financials,Property & Casualty Insurance
+RYAN,financials,Unknown
+MLI,industrials,Industrial Machinery & Supplies & Components
+GMED,health care,Health Care Equipment
+CACC,financials,Unknown
+WTFC,financials,Regional Banks
+POWL,nan,
+WAY,nan,
+ARRY,nan,
+RYTM,nan,
+PTGX,nan,
+ESLT,nan,
+RYAAY,nan,
+CFR,financials,Regional Banks
+KBR,industrials,Diversified Support Services
+SRRK,nan,
+ACMR,nan,
+AFG,financials,Multi-line Insurance
+VNET,nan,
+LIF,nan,
+PEGA,information technology,Unknown
+WEX,financials,Transaction & Payment Processing Services
+ARW,information technology,Technology Distributors
+RNG,information technology,Unknown
+HLNE,financials,Unknown
+OTEX,nan,
+CHYM,nan,
+SEIC,financials,Asset Management & Custody Banks
+CRUS,information technology,Semiconductors
+DFDV,nan,
+AIT,industrials,Trading Companies & Distributors
+ADMA,nan,
+TKR,industrials,Industrial Machinery & Supplies & Components
+NVAX,nan,
+RGA,financials,Reinsurance
+SLM,financials,Consumer Finance
+ACHC,health care,Health Care Facilities
+APLS,health care,Biotechnology
+RAL,information technology,Unknown
+AXS,financials,Unknown
+OMF,financials,Unknown
+LSTR,industrials,Cargo Ground Transportation
+HXL,industrials,Aerospace & Defense
+WSC,industrials,Unknown
+CCCS,information technology,Unknown
+LAZ,financials,Unknown
+GTES,industrials,Unknown
+R,industrials,Cargo Ground Transportation
+GGG,industrials,Industrial Machinery & Supplies & Components
+STWD,financials,Unknown
+WTM,financials,Unknown
+LFUS,information technology,Electronic Components
+EXLS,industrials,Data Processing & Outsourced Services
+JHG,financials,Asset Management & Custody Banks
+CORT,health care,Pharmaceuticals
+ALGM,information technology,Unknown
+ITT,industrials,Industrial Machinery & Supplies & Components
+GXO,industrials,Air Freight & Logistics
+PRI,financials,Life & Health Insurance
+ORI,financials,Property & Casualty Insurance
+UWMC,financials,Unknown
+MSM,industrials,Trading Companies & Distributors
+SSD,industrials,Building Products
+VIRT,financials,Unknown
+OZK,financials,Regional Banks
+SARO,industrials,Aerospace & Defense
+AMKR,information technology,Semiconductors
+SAIL,information technology,Application Software
+ESAB,industrials,Industrial Machinery & Supplies & Components
+AMG,financials,Asset Management & Custody Banks
+RARE,health care,Unknown
+ST,industrials,Unknown
+FCN,industrials,Research & Consulting Services
+MTG,financials,Reinsurance
+SHC,health care,Unknown
+SPR,industrials,Unknown
+KMPR,financials,Multi-line Insurance
+DLB,information technology,Unknown
+XRAY,health care,Health Care Supplies
+DRS,industrials,Aerospace & Defense
+FAF,financials,Property & Casualty Insurance
+VNT,information technology,Electronic Equipment & Instruments
+OGN,health care,Pharmaceuticals
+PRGO,health care,Pharmaceuticals
+HAYW,industrials,Unknown
+NVST,health care,Health Care Supplies
+THG,financials,Property & Casualty Insurance
+CNXC,information technology,Data Processing & Outsourced Services
+ECG,industrials,Construction & Engineering
+MSA,industrials,Office Services & Supplies
+RLI,financials,Unknown
+MAN,industrials,Human Resource & Employment Services
+AMTM,industrials,Diversified Support Services
+DV,information technology,Unknown
+BHF,financials,Life & Health Insurance
+FHB,financials,Regional Banks
+CXT,industrials,Industrial Machinery & Supplies & Components
+AGO,financials,Unknown
+DXC,information technology,IT Consulting & Other Services
+BOKF,financials,Unknown
+SNDR,industrials,Unknown
+IPGP,information technology,Electronic Manufacturing Services
+CNA,financials,Unknown
+CLVT,industrials,Unknown
+TDC,information technology,IT Consulting & Other Services
+FRHC,financials,Unknown
+UHAL-B,industrials,Unknown
+CERT,health care,Unknown
+UHAL,industrials,Unknown
+TFSL,financials,Unknown
+INGM,information technology,Technology Distributors
+DNB,industrials,Unknown
