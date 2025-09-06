@@ -1,7 +1,4 @@
-# build_sector_catalog.py
-# Construit un catalogue secteurs/industries normalisé (fallback si universe_in_scope est vide)
-# Sorties: sector_catalog.csv, sector_history.csv, sector_breadth.csv
-
+# build_sector_catalog.py — v1.2
 import io, os, re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,8 +19,8 @@ def _save(df: pd.DataFrame, name: str):
 
 def _norm_ticker(x: str) -> str:
     if x is None: return ""
-    x = str(x).strip().upper()
-    x = re.sub(r"\s+","",x).replace(".","-")
+    x = str(x).strip().upper().replace(".","-")
+    x = re.sub(r"\s+","",x)
     return x
 
 _SECTOR_NORM = {
@@ -66,87 +63,45 @@ def from_wikipedia_r1k() -> pd.DataFrame:
         elif "sector" in cl and "sub" not in cl: colmap["sector"] = c
         elif ("sub" in cl and "industry" in cl) or ("gics" in cl and "industry" in cl): colmap.setdefault("industry", c)
 
-    out_cols = [k for k in ["ticker","sector","industry"] if k in colmap]
-    df = best.rename(columns={v:k for k,v in colmap.items()})[out_cols].copy()
-
-    if "ticker" in df.columns:
-        df["ticker"] = df["ticker"].map(_norm_ticker)
-        df = df[df["ticker"] != ""]
-        df = df[df["ticker"].str.match(r"^[A-Z0-9\-\.]+$")]
-
-    for c in ["sector","industry"]:
-        if c in df.columns: df[c] = df[c].fillna("").astype(str).str.strip()
-        else: df[c] = ""
-
+    df = best.rename(columns={v:k for k,v in colmap.items()})[[*colmap]].copy()
+    for c in ["ticker","sector","industry"]:
+        if c not in df.columns: df[c] = ""
+    df["ticker"] = df["ticker"].map(_norm_ticker)
+    df = df[df["ticker"] != ""].drop_duplicates("ticker")
     df["sector"] = df["sector"].map(_norm_sector)
     df.loc[df["industry"]=="", "industry"] = "Unknown"
     print(f"[CAT] R1K mapping: {len(df)}")
     return df[["ticker","sector","industry"]]
 
-def from_spdr_spsm() -> pd.DataFrame:
-    # best-effort, on ne casse pas le run si indispo
-    try:
-        r = requests.get(SPDR_SPSM_XLSX, headers=UA, timeout=60); r.raise_for_status()
-        xls = pd.ExcelFile(io.BytesIO(r.content))
-    except Exception as e:
-        print(f"[WARN] SPSM fetch failed: {e}")
-        return pd.DataFrame(columns=["ticker","sector","industry"])
-    sh = next((s for s in xls.sheet_names if "holding" in s.lower()), xls.sheet_names[0])
-    df = pd.read_excel(xls, sheet_name=sh)
-
-    cols = {str(c).lower(): c for c in df.columns}
-    tick = cols.get("ticker") or cols.get("ticker symbol:") or cols.get("symbol") or cols.get("isin")
-    sec  = cols.get("sector") or cols.get("gics sector") or cols.get("economic sector")
-    sub  = cols.get("industry") or cols.get("sub-industry") or cols.get("gics sub-industry")
-
-    if tick is None: return pd.DataFrame(columns=["ticker","sector","industry"])
-
-    out = pd.DataFrame()
-    out["ticker"] = df[tick].map(_norm_ticker)
-    out["sector"] = df[sec].astype(str).str.strip() if sec in df.columns else ""
-    out["industry"] = df[sub].astype(str).str.strip() if sub in df.columns else ""
-    out = out[out["ticker"] != ""].drop_duplicates(subset=["ticker"], keep="first")
-    out["sector"] = out["sector"].map(_norm_sector)
-    out.loc[out["industry"]=="", "industry"] = "Unknown"
-    print(f"[CAT] SPSM mapping: {len(out)}")
-    return out[["ticker","sector","industry"]]
-
 def load_universe() -> pd.DataFrame:
-    # on préfère in_scope; sinon fallback raw_universe
     cand = ["universe_in_scope.csv", "raw_universe.csv", "universe_today.csv"]
     for p in cand:
         if os.path.exists(p):
             u = pd.read_csv(p); print(f"[UNI] {p}: {len(u)} rows")
-            out = u.rename(columns={"ticker":"ticker_yf"}) if "ticker" in u.columns else u
-            if "ticker_yf" in out.columns: out["ticker"] = out["ticker_yf"].map(_norm_ticker)
-            elif "Ticker" in out.columns:  out["ticker"] = out["Ticker"].map(_norm_ticker)
-            else: out["ticker"] = out.iloc[:,0].map(_norm_ticker)
-            out = out[out["ticker"] != ""].drop_duplicates(subset=["ticker"], keep="first")
-            return out[["ticker"]]
+            if "ticker_yf" in u.columns: u["ticker"] = u["ticker_yf"].map(_norm_ticker)
+            elif "ticker" in u.columns:  u["ticker"] = u["ticker"].map(_norm_ticker)
+            else: u["ticker"] = u.iloc[:,0].map(_norm_ticker)
+            u = u[u["ticker"] != ""].drop_duplicates("ticker")
+            return u[["ticker"]]
     raise SystemExit("❌ universe files not found")
 
 def main():
-    uni  = load_universe()     # tickers présents dans l’univers
+    uni  = load_universe()
     r1k  = from_wikipedia_r1k()
-    spsm = from_spdr_spsm()
-
-    cat = pd.concat([r1k, spsm], ignore_index=True)
-    cat = cat.sort_values(["ticker"]).drop_duplicates(subset=["ticker"], keep="first")
-    print(f"[CAT] merged map unique: {len(cat)}")
+    cat = r1k.sort_values("ticker").drop_duplicates("ticker")
 
     merged = uni.merge(cat, on="ticker", how="left")
-    if "sector" not in merged.columns:   merged["sector"]   = "Unknown"
-    if "industry" not in merged.columns: merged["industry"] = "Unknown"
-
-    merged["sector"]   = merged["sector"].map(_norm_sector)
+    for c in ("sector","industry"):
+        if c not in merged.columns: merged[c] = "Unknown"
+    merged["sector"] = merged["sector"].map(_norm_sector)
     merged.loc[merged["industry"]=="", "industry"] = "Unknown"
 
-    catalog = merged[["ticker","sector","industry"]].drop_duplicates(subset=["ticker"], keep="first")
+    catalog = merged[["ticker","sector","industry"]].drop_duplicates("ticker")
     _save(catalog, "sector_catalog.csv")
 
-    history = catalog.copy()
-    history.insert(0, "date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
-    _save(history, "sector_history.csv")
+    hist = catalog.copy()
+    hist.insert(0, "date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+    _save(hist, "sector_history.csv")
 
     breadth = catalog.groupby("sector", dropna=False).size().reset_index(name="count").sort_values("count", ascending=False)
     _save(breadth, "sector_breadth.csv")
