@@ -1,14 +1,10 @@
 # build_universe.py
 # Univers: R1000 + S&P500 + NASDAQ-100 + NASDAQ Composite (robuste multi-URL + cache)
-# Enrichissement: Yahoo (mcap, liquidité) avec cache local TTL
-# Filtre final: MCAP < 75B & secteur ∈ {IT, Financials, Industrials, Health Care}
-# Bonus: merge sector_catalog (si dispo) avant filtre pour augmenter la couverture secteur
+# Enrichissement: Yahoo (mcap, liquidité). Si fast_info est vide, on remplit la liquidité par batch OHLC (yf.download).
+# Filtre final: MCAP < 75B (fallback auto si MCAP manquante) & secteur ∈ {IT, Financials, Industrials, Health Care}
 # Sorties: raw_universe.csv, universe_in_scope.csv, universe_today.csv (racine + dashboard/public)
 
-import io
-import os
-import re
-import time
+import io, os, re, time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Iterable, Tuple, Dict, List, Optional
@@ -26,34 +22,25 @@ CACHE_DIR  = Path("cache");            CACHE_DIR.mkdir(parents=True, exist_ok=Tr
 MCAP_MAX_USD = 75_000_000_000  # < 75B$
 MIN_ROW_LEN = 1
 
-# Inclure NASDAQ Composite (grand univers NASDAQ)
 USE_NASDAQ_COMPOSITE = True
 
-# Secteurs cibles (normalisés GICS-like en minuscule)
-TARGET_SECTORS = {
-    "information technology", "financials", "industrials", "health care"
-}
+TARGET_SECTORS = {"information technology", "financials", "industrials", "health care"}
 
-# Enrichissement du secteur pour un SOUS-ENSEMBLE via yfinance.info/AV (optionnel, conservé)
 TOP_LIQ_FOR_SECTOR_ENRICH = int(os.getenv("TOP_LIQ_FOR_SECTOR_ENRICH", "180"))
 YF_INFO_SLEEP = 0.15
 AV_KEY = os.getenv("ALPHAVANTAGE_API_KEY", "")
 AV_SLEEP = 12.5
 MAX_AV_LOOKUPS = int(os.getenv("MAX_AV_LOOKUPS", "60"))
 
-# Yahoo fast_info cache
 YF_FAST_CACHE_PATH = CACHE_DIR / "yf_fast_info.csv"
 YF_CACHE_TTL_DAYS  = int(os.getenv("YF_CACHE_TTL_DAYS", "2"))
 
-# Comportement MCAP manquant: "exclude" (défaut) | "include"
-MCAP_NAN_POLICY = os.getenv("MCAP_NAN_POLICY", "exclude").lower()
+# MCAP policy par défaut: on exclut les NaN, mais on a un fallback auto si la couverture est trop faible
+MCAP_NAN_POLICY_DEFAULT = os.getenv("MCAP_NAN_POLICY", "exclude").lower()
 
-# NASDAQ fetch: "live" | "cache"
 NASDAQ_FETCH_MODE = os.getenv("NASDAQ_FETCH", "live").lower()
-
 UA = {"User-Agent": "Mozilla/5.0"}
 
-# ------------ IO helpers ------------
 def _save(df: pd.DataFrame, name: str):
     if df is None: df = pd.DataFrame()
     df.to_csv(name, index=False)
@@ -61,11 +48,10 @@ def _save(df: pd.DataFrame, name: str):
     df.to_csv(PUBLIC_DIR / name, index=False)
     print(f"[OK] wrote {name}: {len(df)} rows")
 
-# ------------ symbol helpers ------------
 def _norm_yf(t: str) -> Optional[str]:
     if not isinstance(t, str): return None
     t = t.strip().upper()
-    if not t or t in {"N/A", "-", "—"}: return None
+    if not t or t in {"N/A","-","—"}: return None
     t = t.replace(".", "-")
     t = re.sub(r"[^A-Z0-9\-]", "", t)
     return t or None
@@ -81,39 +67,34 @@ def _union(*series: Iterable[str]) -> list[str]:
             if n: seen.setdefault(n, True)
     return list(seen.keys())
 
-# ------------ HTTP Session with retries ------------
 def _build_session() -> requests.Session:
     s = requests.Session()
-    retries = Retry(
-        total=4, connect=3, read=3, backoff_factor=1.2,
-        status_forcelist=(429,500,502,503,504),
-        allowed_methods=frozenset(["GET"]),
-        raise_on_status=False, respect_retry_after_header=True
-    )
+    retries = Retry(total=4, connect=3, read=3, backoff_factor=1.2,
+                    status_forcelist=(429,500,502,503,504),
+                    allowed_methods=frozenset(["GET"]),
+                    raise_on_status=False, respect_retry_after_header=True)
     adapter = HTTPAdapter(max_retries=retries, pool_connections=10, pool_maxsize=10)
     s.mount("http://", adapter); s.mount("https://", adapter)
     s.headers.update(UA)
     return s
 
 SESSION = _build_session()
-
 def _get(url: str, timeout=(8, 30)) -> Optional[str]:
     try:
         r = SESSION.get(url, timeout=timeout); r.raise_for_status(); return r.text
     except Exception as e:
         print(f"[WARN] GET fail {url}: {e}"); return None
 
-# ------------ wikipedia ------------
 def _wiki_tables(url: str) -> list[pd.DataFrame]:
     for attempt in range(3):
         txt = _get(url, timeout=(8, 40))
         if txt:
             try: return pd.read_html(io.StringIO(txt))
             except Exception as e: print(f"[WARN] read_html fail ({attempt+1}/3): {e}")
-        time.sleep(1.2 * (attempt + 1))
+        time.sleep(1.2*(attempt+1))
     return []
 
-def _extract_symbol_and_sector(df: pd.DataFrame) -> Tuple[List[str], Dict[str, str]]:
+def _extract_symbol_and_sector(df: pd.DataFrame) -> Tuple[List[str], Dict[str,str]]:
     cols_lower = [str(c).lower() for c in df.columns]
     sym_idx = next((i for i,c in enumerate(cols_lower) if ("symbol" in c or "ticker" in c)), None)
     sec_idx = next((i for i,c in enumerate(cols_lower) if ("sector" in c and "sub" not in c)), None)
@@ -130,10 +111,11 @@ def _extract_symbol_and_sector(df: pd.DataFrame) -> Tuple[List[str], Dict[str, s
                 if pd.notna(sec): sector_map[yf_sym] = str(sec).strip()
         return syms, sector_map
     for s in df[sym_col].dropna().astype(str).tolist():
-        yf_sym = _norm_yf(s);  syms.append(yf_sym) if yf_sym else None
+        yf_sym = _norm_yf(s)
+        if yf_sym: syms.append(yf_sym)
     return syms, sector_map
 
-def get_sp500() -> Tuple[List[str], Dict[str, str]]:
+def get_sp500() -> Tuple[List[str], Dict[str,str]]:
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     out_syms, out_map = [], {}
     for t in _wiki_tables(url):
@@ -142,7 +124,7 @@ def get_sp500() -> Tuple[List[str], Dict[str, str]]:
     print(f"[SRC] S&P500: {len(out_syms)} tickers (with sector for {len(out_map)})")
     return out_syms, out_map
 
-def get_r1000() -> Tuple[List[str], Dict[str, str]]:
+def get_r1000() -> Tuple[List[str], Dict[str,str]]:
     url = "https://en.wikipedia.org/wiki/Russell_1000_Index"
     out_syms, out_map = [], {}
     for t in _wiki_tables(url):
@@ -151,7 +133,7 @@ def get_r1000() -> Tuple[List[str], Dict[str, str]]:
     print(f"[SRC] R1000: {len(out_syms)} tickers (with sector for {len(out_map)})")
     return out_syms, out_map
 
-def get_nasdaq100() -> Tuple[List[str], Dict[str, str]]:
+def get_nasdaq100() -> Tuple[List[str], Dict[str,str]]:
     url = "https://en.wikipedia.org/wiki/NASDAQ-100"
     out_syms, out_map = [], {}
     for t in _wiki_tables(url):
@@ -160,7 +142,6 @@ def get_nasdaq100() -> Tuple[List[str], Dict[str, str]]:
     print(f"[SRC] NASDAQ-100: {len(out_syms)} tickers (with sector for {len(out_map)})")
     return out_syms, out_map
 
-# ------------ NASDAQ Composite (multi-URLs + cache) ------------
 def _parse_pipe_file(text: str) -> list[dict]:
     lines = [ln for ln in text.splitlines() if ln and not ln.startswith("#")]
     if not lines: return []
@@ -190,13 +171,12 @@ def _write_cache(name: str, text: str) -> None:
         print(f"[CACHE][WARN] save failed {name}: {e}")
 
 def _get_text_from_urls(urls: list[str], cache_name: str) -> Optional[str]:
-    if NASDAQ_FETCH_MODE == "cache":
-        return _read_cached(cache_name)
+    if NASDAQ_FETCH_MODE == "cache": return _read_cached(cache_name)
     for i, u in enumerate(urls, 1):
         txt = _get(u, timeout=(8, 35))
         if txt:
             _write_cache(cache_name, txt); print(f"[SRC] OK {u}"); return txt
-        if i % 2 == 0: time.sleep(1.2 * (i // 2))
+        if i % 2 == 0: time.sleep(1.2*(i//2))
     print("[SRC] fall back to cache"); return _read_cached(cache_name)
 
 def get_nasdaq_composite() -> list[str]:
@@ -233,8 +213,8 @@ def get_nasdaq_composite() -> list[str]:
             for row in rows:
                 raw = row.get(sym_col); n = _norm_yf(raw) if raw else None
                 if not n or n in seen: continue
-                if test_col and str(row.get(test_col, "")).upper() == "Y": continue
-                if etf_col  and str(row.get(etf_col,  "")).upper() == "Y": continue
+                if test_col and str(row.get(test_col,"")).upper()=="Y": continue
+                if etf_col  and str(row.get(etf_col,"")).upper()=="Y": continue
                 seen.add(n); symbols.append(n); added += 1
         print(f"[SRC] nasdaqlisted: +{added} (total {len(symbols)})")
 
@@ -248,18 +228,18 @@ def get_nasdaq_composite() -> list[str]:
         added = 0
         if sym_col:
             for row in rows:
-                if exch_col and str(row.get(exch_col, "")).upper() != "Q": continue
+                if exch_col and str(row.get(exch_col,"")).upper() != "Q": continue
                 raw = row.get(sym_col); n = _norm_yf(raw) if raw else None
                 if not n or n in seen: continue
-                if test_col and str(row.get(test_col, "")).upper() == "Y": continue
-                if etf_col  and str(row.get(etf_col,  "")).upper() == "Y": continue
+                if test_col and str(row.get(test_col,"")).upper()=="Y": continue
+                if etf_col  and str(row.get(etf_col,"")).upper()=="Y": continue
                 seen.add(n); symbols.append(n); added += 1
         print(f"[SRC] nasdaqtraded (Q only): +{added} (total {len(symbols)})")
 
     print(f"[SRC] NASDAQ Composite (robust): ~{len(symbols)} tickers")
     return symbols
 
-# ------------ Yahoo fast_info cache ------------
+# ---- Yahoo fast_info cache ----
 def _load_yf_cache() -> pd.DataFrame:
     if not YF_FAST_CACHE_PATH.exists():
         return pd.DataFrame(columns=["ticker_yf","market_cap","last_price","ten_day_avg_vol","asof"])
@@ -282,29 +262,23 @@ def _cache_is_fresh(ts: pd.Timestamp) -> bool:
     if pd.isna(ts): return False
     return (pd.Timestamp.now(tz=timezone.utc) - ts.tz_localize(None)) <= timedelta(days=YF_CACHE_TTL_DAYS)
 
-# ------------ Sector normalization ------------
+# ---- Sector normalization ----
 _SECTOR_NORM_MAP = {
-    # tech
-    "technology":"information technology", "tech":"information technology",
-    "information technology":"information technology", "information technology services":"information technology",
-    # financials
-    "financial":"financials", "financial services":"financials", "finance":"financials",
-    # industrials
-    "industrial":"industrials",
-    # health care
-    "healthcare":"health care", "health services":"health care", "health care":"health care",
+    "technology":"information technology","tech":"information technology",
+    "information technology":"information technology","information technology services":"information technology",
+    "financial":"financials","financial services":"financials","finance":"financials","financials":"financials",
+    "industrial":"industrials","industrials":"industrials",
+    "healthcare":"health care","health services":"health care","health care":"health care",
 }
-
 def _norm_sector(s: str) -> str:
     k = str(s or "").strip().lower()
     return _SECTOR_NORM_MAP.get(k, k)
 
-# ------------ Enrichissements Yahoo ------------
+# ---- Enrichissements Yahoo ----
 def enrich_with_yf(tickers: list[str]) -> pd.DataFrame:
     cache = _load_yf_cache()
     cache_idx = {str(s).upper(): i for i, s in enumerate(cache.get("ticker_yf", []))}
-    rows = []
-    to_fetch = []
+    rows, to_fetch = [], []
     for t in tickers:
         u = str(t).upper()
         i = cache_idx.get(u, None)
@@ -333,13 +307,51 @@ def enrich_with_yf(tickers: list[str]) -> pd.DataFrame:
 
     if fetched:
         cache = pd.concat([cache, pd.DataFrame(fetched)], ignore_index=True)
-        # dedup keep latest
         cache = cache.sort_values("asof").drop_duplicates(subset=["ticker_yf"], keep="last")
         _save_yf_cache(cache)
 
     return pd.DataFrame(rows)
 
-# ------------ Sector fill (optionnel ciblé) ------------
+def fill_liquidity_with_history(meta: pd.DataFrame, batch_size: int = 100) -> pd.DataFrame:
+    """Complète avg_dollar_vol via yf.download sur 15 jours, moyenne des 10 derniers (Close*Volume)."""
+    mets = meta.copy()
+    missing = mets[mets["avg_dollar_vol"].isna()]["ticker_yf"].tolist()
+    if not missing:
+        return mets
+    print(f"[LIQ] filling liquidity via history for {len(missing)} tickers…")
+    liq_map: Dict[str, float] = {}
+    for i in range(0, len(missing), batch_size):
+        chunk = [s for s in missing[i:i+batch_size] if isinstance(s, str)]
+        if not chunk: continue
+        try:
+            df = yf.download(tickers=chunk, period="15d", interval="1d",
+                             auto_adjust=True, group_by="ticker", threads=True, progress=False)
+            if isinstance(df.columns, pd.MultiIndex):
+                for sym in chunk:
+                    try:
+                        sub = df[sym][["Close","Volume"]].dropna()
+                        if len(sub) >= 10:
+                            dv = (sub["Close"] * sub["Volume"]).tail(10).mean()
+                            if pd.notna(dv): liq_map[sym] = float(dv)
+                    except Exception:
+                        pass
+            else:
+                try:
+                    sub = df[["Close","Volume"]].dropna()
+                    if len(sub) >= 10:
+                        dv = (sub["Close"]*sub["Volume"]).tail(10).mean()
+                        if pd.notna(dv): liq_map[chunk[0]] = float(dv)
+                except Exception:
+                    pass
+        except Exception as e:
+            print(f"[LIQ] batch exception: {e}")
+        time.sleep(0.4)
+    if liq_map:
+        idx = mets["ticker_yf"].map(liq_map.get)
+        mets.loc[idx.notna().index, "avg_dollar_vol"] = mets["ticker_yf"].map(liq_map)
+    print(f"[LIQ] filled: {len(liq_map)}")
+    return mets
+
 def try_fill_sector_with_yfinfo(df: pd.DataFrame, ticker_col="ticker_yf") -> pd.DataFrame:
     df = df.copy(); sec = []; ind = []
     for i, sym in enumerate(df[ticker_col].tolist(), 1):
@@ -371,7 +383,6 @@ def try_fill_sector_with_av(df: pd.DataFrame, ticker_col="ticker_yf") -> pd.Data
         time.sleep(AV_SLEEP)
     df["av_sector"] = sec; df["av_industry"] = ind; return df
 
-# ------------ MAIN ------------
 def main():
     # 1) Sources
     r1_syms, r1_sec = get_r1000()
@@ -383,31 +394,35 @@ def main():
     if len(universe) < MIN_ROW_LEN: raise SystemExit("❌ universe empty")
     print(f"[UNION] unique tickers before YF: {len(universe)}")
 
-    # 2) Yahoo fast (cap/liquidité) + cache
+    # 2) fast_info (cap/liquidité) + cache
     meta = enrich_with_yf(universe)
+
+    # 2.b Liquidity fallback via history si fast_info n'a rien donné
+    if meta["avg_dollar_vol"].isna().mean() > 0.8:
+        meta = fill_liquidity_with_history(meta, batch_size=100)
+
     meta["ticker_tv"] = meta["ticker_yf"].map(_yf_to_tv)
 
-    # 3) Mapping secteurs connus (R1K/SPX/NDX depuis Wikipédia)
-    sector_map: Dict[str, str] = {}
+    # 3) Secteurs connus (Wiki)
+    sector_map: Dict[str,str] = {}
     sector_map.update({k:_norm_sector(v) for k,v in r1_sec.items()})
     sector_map.update({k:_norm_sector(v) for k,v in sp_sec.items()})
     sector_map.update({k:_norm_sector(v) for k,v in nd_sec.items()})
     meta["sector"]   = meta["ticker_yf"].map(lambda t: sector_map.get(t, ""))
     meta["industry"] = ""
 
-    # 3.b (Nouveau) merge sector_catalog si présent (augmente couverture avant filtre)
+    # 3.b Merge sector_catalog si présent
     try:
         if Path("sector_catalog.csv").exists():
             cat = pd.read_csv("sector_catalog.csv")
-            tickcol = next((c for c in cat.columns if c.lower() in {"ticker","ticker_yf","symbol"}), None)
-            if tickcol:
-                cat = cat.rename(columns={tickcol:"ticker_yf"})
+            tcol = next((c for c in cat.columns if c.lower() in {"ticker","ticker_yf","symbol"}), None)
+            if tcol:
+                cat = cat.rename(columns={tcol:"ticker_yf"})
                 for c in ("sector","industry"):
                     if c not in cat.columns: cat[c] = ""
                 cat["sector"] = cat["sector"].map(_norm_sector)
                 cat = cat[["ticker_yf","sector","industry"]].drop_duplicates("ticker_yf")
                 meta = meta.merge(cat, on="ticker_yf", how="left", suffixes=("", "_cat"))
-                # coalesce sector/industry
                 for c in ("sector","industry"):
                     mc = f"{c}_cat"
                     meta[c] = meta[c].where(meta[mc].isna() | (meta[mc].astype(str).str.strip()==""), meta[mc])
@@ -420,15 +435,20 @@ def main():
     raw = meta[raw_cols].copy()
     _save(raw, "raw_universe.csv")
 
-    # 4) Pré-filtre MCAP < 75B (exclure NaN par défaut)
+    # 4) Filtre MCAP < 75B (+ fallback auto)
+    policy = MCAP_NAN_POLICY_DEFAULT
     mcap_num = pd.to_numeric(raw["mcap_usd"], errors="coerce")
-    if MCAP_NAN_POLICY == "include":
-        mcap_cmp = mcap_num.fillna(0)
-        meta_lt75 = raw[mcap_cmp < MCAP_MAX_USD].copy()
-    else:
+    mcap_cov = float(mcap_num.notna().mean())
+    if policy == "exclude":
         meta_lt75 = raw[mcap_num.notna() & (mcap_num < MCAP_MAX_USD)].copy()
+    else:
+        meta_lt75 = raw[mcap_num.fillna(0) < MCAP_MAX_USD].copy()
 
-    # 5) Complément secteur ciblé (optionnel) sur top liquide dont secteur vide
+    if (len(meta_lt75) == 0) or (mcap_cov < 0.05):
+        print(f"[WARN] MCAP coverage {mcap_cov:.1%} or empty filter → fallback INCLUDE NaN")
+        meta_lt75 = raw[mcap_num.fillna(0) < MCAP_MAX_USD].copy()
+
+    # 5) Complément secteur ciblé (optionnel) pour secteurs vides, top liquide
     meta_lt75["avg_dollar_vol"] = pd.to_numeric(meta_lt75["avg_dollar_vol"], errors="coerce")
     need_fill = meta_lt75[meta_lt75["sector"].astype(str).str.strip().eq("")].copy()
     need_fill = need_fill.sort_values("avg_dollar_vol", ascending=False).head(TOP_LIQ_FOR_SECTOR_ENRICH)
@@ -446,19 +466,17 @@ def main():
             meta_lt75.loc[rest2.index[mask2], "sector"] = rest2.loc[mask2, "av_sector"].values
             meta_lt75.loc[rest2.index[mask2], "industry"] = rest2.loc[mask2, "av_industry"].values
 
-    # 6) Filtre final secteur + normalisation
+    # 6) Filtre final secteur
     meta_lt75["sector"] = meta_lt75["sector"].map(_norm_sector)
     in_scope = meta_lt75[meta_lt75["sector"].isin(TARGET_SECTORS)].copy()
 
-    # tri: liquidité décroissante puis cap croissant
+    # 7) Tri & sorties
     in_scope["mcap_usd"] = pd.to_numeric(in_scope["mcap_usd"], errors="coerce")
     in_scope["avg_dollar_vol"] = pd.to_numeric(in_scope["avg_dollar_vol"], errors="coerce")
     in_scope = in_scope.sort_values(["avg_dollar_vol","mcap_usd"], ascending=[False, True])
 
-    # 7) Sorties
     _save(in_scope, "universe_in_scope.csv")
     _save(in_scope.rename(columns={"ticker_yf":"ticker_yf"}), "universe_today.csv")
-
     print(f"[FILTER] sectors ∈ (IT/Fin/Ind/HC) & mcap < 75B: {len(in_scope)}/{len(raw)} (raw), {len(in_scope)}/{len(meta_lt75)} (<75B)")
     print("[DONE] build_universe complete.")
 
