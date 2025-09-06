@@ -1,4 +1,4 @@
-# build_universe.py — v2.1 (faster, sector-first, scoped liquidity)
+# build_universe.py — v2.2 (tz fix, faster, sector-first, scoped liquidity)
 # Univers: R1000 + S&P500 + NASDAQ-100 + NASDAQ Composite (multi-URL + cache)
 # Enrichissement rapide: Yahoo fast_info (peut manquer MCAP/prix).
 # Optimisation: on filtre SECTEURS d'abord, puis on ne comble la liquidité (dv) que pour cet in-scope.
@@ -246,7 +246,8 @@ def _load_yf_cache() -> pd.DataFrame:
     try:
         df = pd.read_csv(YF_FAST_CACHE_PATH)
         if "asof" in df.columns:
-            df["asof"] = pd.to_datetime(df["asof"], errors="coerce")
+            # IMPORTANT: rendre 'asof' tz-aware UTC
+            df["asof"] = pd.to_datetime(df["asof"], errors="coerce", utc=True)
         return df
     except Exception:
         return pd.DataFrame(columns=["ticker_yf","market_cap","last_price","ten_day_avg_vol","asof"])
@@ -258,9 +259,15 @@ def _save_yf_cache(df: pd.DataFrame):
     except Exception as e:
         print(f"[CACHE][WARN] could not save yf_fast_info: {e}")
 
-def _cache_is_fresh(ts: pd.Timestamp) -> bool:
+def _cache_is_fresh(ts) -> bool:
+    """ts peut être string/naive/aware → on convertit en UTC-aware et on compare."""
     if pd.isna(ts): return False
-    return (pd.Timestamp.now(tz=timezone.utc) - ts.tz_localize(None)) <= timedelta(days=YF_CACHE_TTL_DAYS)
+    try:
+        tsv = pd.to_datetime(ts, utc=True)  # tz-aware UTC
+    except Exception:
+        return False
+    now = pd.Timestamp.now(tz=timezone.utc)
+    return (now - tsv) <= timedelta(days=YF_CACHE_TTL_DAYS)
 
 # ------------ Sector normalization ------------
 _SECTOR_NORM_MAP = {
@@ -461,5 +468,6 @@ def main():
     _save(in_scope, "universe_in_scope.csv")
     _save(in_scope.rename(columns={"ticker_yf":"ticker_yf"}), "universe_today.csv")
     print(f"[DONE] build_universe complete. in_scope={len(in_scope)}")
+
 if __name__ == "__main__":
     main()
