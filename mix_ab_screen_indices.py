@@ -7,7 +7,7 @@ import json
 import time
 import math
 from pathlib import Path
-from typing import Iterable, Dict, List, Tuple
+from typing import Dict, List, Tuple
 
 import pandas as pd
 import requests
@@ -40,6 +40,9 @@ FINNHUB_KEY = os.getenv("FINNHUB_API_KEY", "")
 ALPHAV_KEY  = os.getenv("ALPHAVANTAGE_API_KEY", "")
 
 # --------- Helpers ---------
+def _is_nan(x) -> bool:
+    return isinstance(x, float) and math.isnan(x)
+
 def _yf_symbol_to_tv(sym: str) -> str:
     # BRK-B -> BRK.B  ;  XYZ -> XYZ
     return (sym or "").replace("-", ".")
@@ -61,9 +64,11 @@ def _label_from_tv_score(score: float | None) -> str | None:
     if score <= -0.2: return "SELL"
     return "NEUTRAL"
 
-def _bucket_from_analyst(label: str | None) -> str | None:
-    if not label: return None
-    u = label.upper().replace(" ", "_")
+def _bucket_from_analyst(label) -> str | None:
+    """Robuste aux None/NaN/float."""
+    if label is None or _is_nan(label):
+        return None
+    u = str(label).upper().strip().replace(" ", "_")
     if u in {"BUY","STRONG_BUY","OUTPERFORM","OVERWEIGHT"}: return "BUY"
     if u in {"SELL","STRONG_SELL","UNDERPERFORM","UNDERWEIGHT"}: return "SELL"
     if u in {"HOLD","NEUTRAL"}: return "HOLD"
@@ -235,7 +240,7 @@ def main():
     cand["price"] = prices
 
     # 4.2 TradingView (batch)
-    syms_tv = [ _yf_symbol_to_tv(s) for s in cand["ticker_yf"] ]
+    syms_tv = [_yf_symbol_to_tv(s) for s in cand["ticker_yf"]]
     tv_out: Dict[str, Dict] = {}
     for i in range(0, len(syms_tv), TV_BATCH):
         chunk = [s for s in syms_tv[i:i+TV_BATCH] if s]
@@ -244,8 +249,8 @@ def main():
         part = tv_scan_batch(chunk)
         tv_out.update(part)
         time.sleep(SLEEP_BETWEEN_CALLS)
-    cand["tv_score"] = [ tv_out.get(_yf_symbol_to_tv(s),{}).get("tv_score") for s in cand["ticker_yf"] ]
-    cand["tv_reco"]  = [ tv_out.get(_yf_symbol_to_tv(s),{}).get("tv_reco")  for s in cand["ticker_yf"] ]
+    cand["tv_score"] = [tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_score") for s in cand["ticker_yf"]]
+    cand["tv_reco"]  = [tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_reco")  for s in cand["ticker_yf"]]
 
     # 4.3 Finnhub (analystes)
     an_bucket, an_votes = [], []
@@ -271,61 +276,60 @@ def main():
             sec, ind = alphav_overview(row["ticker_yf"])
             sec_f.append(sec); ind_f.append(ind)
             time.sleep(SLEEP_BETWEEN_CALLS)
-        # remplace si non-null
         for i, (sec, ind) in enumerate(zip(sec_f, ind_f)):
             if isinstance(sec, str) and sec.strip():
                 cand.loc[cand.index[i], "sector"] = sec
             if isinstance(ind, str) and ind.strip():
                 cand.loc[cand.index[i], "industry"] = ind
 
-    # 5) Construire l’enrichissement à merger dans la base (évite duplicates sur sector/industry)
+    # 5) Construire l’enrichissement à merger dans la base
     enrich_cols = [
         "ticker_yf",
         "price", "tv_score", "tv_reco",
         "analyst_bucket", "analyst_votes",
-        # sector/industry présents dans cand (potentiellement corrigés) — on les passera en suffixe et coalescera
         "sector", "industry",
     ]
     enrich_df = cand[enrich_cols].copy()
 
-    # 6) Merge enrichissement -> base avec coalescence propre (PATCH anti 'sector_x' collisions)
+    # 6) Merge enrichissement -> base + coalescence (évite collisions suffixes)
     base = base.merge(
         enrich_df,
         on="ticker_yf",
         how="left",
         suffixes=("", "_cand"),
     )
-
-    # Coalesce sector/industry: préfère valeur cand quand dispo
     for col in ("sector", "industry"):
         rcol = f"{col}_cand"
         if rcol in base.columns:
             base[col] = base[col].where(base[rcol].isna() | (base[rcol].astype(str).str.strip() == ""), base[rcol])
             base.drop(columns=[rcol], inplace=True)
 
-    # 7) Pillars & score (sur toute la base ; TopN mieux remplis)
-    def is_strong_tv(v):
-        return str(v or "").upper() == "STRONG_BUY"
-    def is_bull_an(v):
+    # 7) Pillars & score (NaN-safe)
+    def is_strong_tv(v) -> bool:
+        if v is None or _is_nan(v):
+            return False
+        return str(v).upper().strip() == "STRONG_BUY"
+
+    def is_bull_an(v) -> bool:
         return _bucket_from_analyst(v) == "BUY"
 
-    base["p_tv"]   = base["tv_reco"].map(is_strong_tv)
-    base["p_an"]   = base["analyst_bucket"].map(is_bull_an)
-    # pour l’instant p_tech = p_tv (si tu ajoutes une tech locale plus tard, remplace ici)
-    base["p_tech"] = base["p_tv"]
+    base["p_tv"]   = base.get("tv_reco", pd.Series(index=base.index)).map(is_strong_tv)
+    base["p_an"]   = base.get("analyst_bucket", pd.Series(index=base.index)).map(is_bull_an)
+    base["p_tech"] = base["p_tv"]  # placeholder tant qu’on n’a pas de tech locale
 
     base["pillars_met"] = base[["p_tech","p_tv","p_an"]].fillna(False).sum(axis=1)
+
     votes = pd.to_numeric(base.get("analyst_votes", pd.Series(index=base.index)), errors="coerce")
     base["votes_bin"] = pd.cut(votes.fillna(-1), bins=[-1,9,14,19,999], labels=["≤9","10–14","15–19","20+"])
 
     s_tv = pd.to_numeric(base.get("tv_score", 0), errors="coerce").fillna(0)
-    s_p  = base["pillars_met"].fillna(0)
+    s_p  = pd.to_numeric(base["pillars_met"], errors="coerce").fillna(0)
     s_v  = votes.fillna(0).clip(lower=0, upper=30) / 30.0
     base["rank_score"] = (s_tv * 0.6) + (s_p * 0.3) + (s_v * 0.1)
 
     # 8) Buckets
-    tv_up = base["tv_reco"].astype(str).str.upper()
-    an_up = base["analyst_bucket"].astype(str).map(lambda x: (_bucket_from_analyst(x) or ""))
+    tv_up = base.get("tv_reco", pd.Series(index=base.index)).astype(str).str.upper()
+    an_up = base.get("analyst_bucket", pd.Series(index=base.index)).map(lambda x: (_bucket_from_analyst(x) or ""))
 
     cond_confirmed = tv_up.eq("STRONG_BUY") & (an_up == "BUY")
     cond_pre       = tv_up.isin(["STRONG_BUY","BUY"]) & (~cond_confirmed)
@@ -346,7 +350,6 @@ def main():
         "p_tech","p_tv","p_an","pillars_met","votes_bin",
         "rank_score","bucket"
     ]
-    # assure les colonnes manquantes
     for c in export_cols:
         if c not in base.columns:
             base[c] = None
@@ -374,7 +377,7 @@ def main():
     # 12) Couverture / Diagnostics
     cov = {
         "universe": int(len(base)),
-        "topN_enriched": int(len(cand)),
+        "topN_enriched": int(len(cand_all)),  # note: cand_all est la table finale triée
         "tv_reco_filled": int(cand_all["tv_reco"].notna().sum()),
         "finnhub_filled": int(cand_all["analyst_bucket"].notna().sum()),
         "sector_known": int((cand_all["sector"].astype(str) != "Unknown").sum()),
