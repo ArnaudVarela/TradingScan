@@ -1,58 +1,64 @@
 # build_universe.py
-# Construit un univers unique à partir de plusieurs indices publics,
-# enrichit avec market cap & liquidité (Yahoo), associe SECTOR (Wikipedia),
-# filtre MCAP < 75B$ + secteur (IT/HC/Financials/Industrials),
-# puis écrit raw_universe.csv, universe_in_scope.csv, universe_today.csv
-# (en racine + dashboard/public/).
+# Construit un univers à partir de R1000 / S&P500 / NASDAQ-100 (+ option NASDAQ Composite),
+# enrichit avec Yahoo (mcap/liquidité), tente de remplir sector/industry
+# pour un sous-ensemble prioritaire (top liquidité < 75B) via yfinance.info puis Alpha Vantage,
+# filtre final: MCAP < 75B & sector=Information Technology (tolère "Technology"),
+# écrit raw_universe.csv, universe_in_scope.csv, universe_today.csv (root + dashboard/public/).
 
 import io
 import os
 import re
 import time
 from pathlib import Path
-from typing import Iterable, Tuple, Dict, List
+from typing import Iterable, Tuple, Dict, List, Optional
 
 import pandas as pd
 import requests
 import yfinance as yf
 
+# ------------ CONFIG ------------
 PUBLIC_DIR = Path("dashboard/public")
 PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 
 MCAP_MAX_USD = 75_000_000_000  # < 75B$
 MIN_ROW_LEN = 1
 
-# Secteurs “autorisés” (on tolère quelques variantes fréquentes)
-SECTORS_IN = {
-    "Information Technology", "Technology",
-    "Health Care", "Healthcare",
-    "Financials",
-    "Industrials",
+# Activer l’apport NASDAQ Composite (beaucoup de tickers)
+USE_NASDAQ_COMPOSITE = True
+
+# Ciblage IT (tolérance libellés)
+IT_LABELS = {
+    "Information Technology", "Technology", "Tech", "Information technology"
 }
+
+# Enrichissement du secteur pour un SOUS-ENSEMBLE (évite des runs trop longs)
+TOP_LIQ_FOR_SECTOR_ENRICH = int(os.getenv("TOP_LIQ_FOR_SECTOR_ENRICH", "180"))  # top N par liquidité < 75B
+YF_INFO_SLEEP = 0.15  # seconds entre appels .info (léger throttling)
+AV_KEY = os.getenv("ALPHAVANTAGE_API_KEY", "")
+AV_SLEEP = 12.5       # 5 req/min pour la free tier -> ~12s
+MAX_AV_LOOKUPS = int(os.getenv("MAX_AV_LOOKUPS", "60"))  # ~12 min max si à plein régime
 
 UA = {"User-Agent": "Mozilla/5.0"}
 
+# ------------ IO helpers ------------
 def _save(df: pd.DataFrame, name: str):
     if df is None:
         df = pd.DataFrame()
-    # racine
     df.to_csv(name, index=False)
-    # public
     (PUBLIC_DIR / name).parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(PUBLIC_DIR / name, index=False)
     print(f"[OK] wrote {name}: {len(df)} rows")
 
-def _norm_yf(t: str) -> str | None:
+# ------------ symbol helpers ------------
+def _norm_yf(t: str) -> Optional[str]:
     if not isinstance(t, str): return None
     t = t.strip().upper()
     if not t or t in {"N/A", "-", "—"}: return None
-    # BRK.B (TV/Wiki) → BRK-B (Yahoo)
-    t = t.replace(".", "-")
+    t = t.replace(".", "-")             # BRK.B -> BRK-B (Yahoo)
     t = re.sub(r"[^A-Z0-9\-]", "", t)
     return t or None
 
 def _yf_to_tv(t: str) -> str:
-    # BRK-B (Yahoo) → BRK.B (TradingView)
     return (t or "").replace("-", ".")
 
 def _union(*series: Iterable[str]) -> list[str]:
@@ -63,38 +69,26 @@ def _union(*series: Iterable[str]) -> list[str]:
             if n: seen.setdefault(n, True)
     return list(seen.keys())
 
+# ------------ scraping wikipedia ------------
 def _wiki_tables(url: str) -> list[pd.DataFrame]:
     r = requests.get(url, headers=UA, timeout=45)
     r.raise_for_status()
-    # Wrap dans StringIO pour éviter le FutureWarning
     return pd.read_html(io.StringIO(r.text))
 
 def _extract_symbol_and_sector(df: pd.DataFrame) -> Tuple[List[str], Dict[str, str]]:
-    """
-    Essaie de trouver les colonnes 'symbol/ticker' et 'sector' (ou GICS Sector).
-    Retourne (liste_tickers, mapping{ticker->sector})
-    """
     cols_lower = [str(c).lower() for c in df.columns]
-    sym_idx = None
-    sec_idx = None
-
+    sym_idx, sec_idx = None, None
     for i, c in enumerate(cols_lower):
         if "symbol" in c or "ticker" in c:
-            sym_idx = i
-            break
+            sym_idx = i; break
     for i, c in enumerate(cols_lower):
         if "sector" in c and "sub" not in c:
-            sec_idx = i
-            break
+            sec_idx = i; break
 
-    syms = []
-    sector_map = {}
-    if sym_idx is None:
-        return syms, sector_map
+    syms, sector_map = [], {}
+    if sym_idx is None: return syms, sector_map
 
     sym_col = df.columns[sym_idx]
-    syms_raw = df[sym_col].dropna().astype(str).tolist()
-
     if sec_idx is not None:
         sec_col = df.columns[sec_idx]
         for _, row in df.iterrows():
@@ -107,11 +101,9 @@ def _extract_symbol_and_sector(df: pd.DataFrame) -> Tuple[List[str], Dict[str, s
                     sector_map[yf_sym] = str(sec).strip()
         return syms, sector_map
 
-    # pas de secteur dans cette table
-    for s in syms_raw:
+    for s in df[sym_col].dropna().astype(str).tolist():
         yf_sym = _norm_yf(s)
-        if yf_sym:
-            syms.append(yf_sym)
+        if yf_sym: syms.append(yf_sym)
     return syms, sector_map
 
 def get_sp500() -> Tuple[List[str], Dict[str,str]]:
@@ -120,9 +112,7 @@ def get_sp500() -> Tuple[List[str], Dict[str,str]]:
     for t in _wiki_tables(url):
         syms, smap = _extract_symbol_and_sector(t)
         if syms:
-            out_syms.extend(syms)
-            out_map.update(smap)
-            break
+            out_syms.extend(syms); out_map.update(smap); break
     print(f"[SRC] S&P500: {len(out_syms)} tickers (with sector for {len(out_map)})")
     return out_syms, out_map
 
@@ -132,9 +122,7 @@ def get_r1000() -> Tuple[List[str], Dict[str,str]]:
     for t in _wiki_tables(url):
         syms, smap = _extract_symbol_and_sector(t)
         if syms:
-            out_syms.extend(syms)
-            out_map.update(smap)
-            break
+            out_syms.extend(syms); out_map.update(smap); break
     print(f"[SRC] R1000: {len(out_syms)} tickers (with sector for {len(out_map)})")
     return out_syms, out_map
 
@@ -144,28 +132,43 @@ def get_nasdaq100() -> Tuple[List[str], Dict[str,str]]:
     for t in _wiki_tables(url):
         syms, smap = _extract_symbol_and_sector(t)
         if syms:
-            out_syms.extend(syms)
-            out_map.update(smap)
-            break
-    print(f"[SRC] NASDAQ-100: {len(out_syms)} tickers (with sector for {len(out_map)})")
+            out_syms.extend(syms); out_map.update(smap); break
+    print(f("[SRC] NASDAQ-100: {len(out_syms)} tickers (with sector for {len(out_map)})"))
     return out_syms, out_map
 
-def get_r2000_from_csv(path="russell2000.csv") -> List[str]:
-    if not os.path.exists(path):
-        print("[SRC] R2000: missing russell2000.csv → skip")
-        return []
-    try:
-        df = pd.read_csv(path)
-        col = "Ticker" if "Ticker" in df.columns else df.columns[0]
-        vals = [s for s in df[col].dropna().astype(str).tolist() if _norm_yf(s)]
-        print(f"[SRC] R2000(csv): {len(vals)} tickers")
-        return vals
-    except Exception as e:
-        print(f"[SRC] R2000(csv) error: {e} → skip")
-        return []
+# ------------ NASDAQ Composite (NasdaqTrader) ------------
+def get_nasdaq_composite() -> list[str]:
+    """
+    Liste les tickers NASDAQ (NCM/NGS/NQX) depuis NasdaqTrader.
+    NB: pas de secteur ici -> on enrichira plus tard (yfinance.info / Alpha Vantage).
+    """
+    urls = [
+        "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+        # "https://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt",  # utile pour NYSE/AMEX si besoin
+    ]
+    syms: list[str] = []
+    for u in urls:
+        try:
+            r = requests.get(u, headers=UA, timeout=45)
+            r.raise_for_status()
+            lines = [ln for ln in r.text.splitlines() if ln and not ln.startswith("#")]
+            cols = [c.strip() for c in lines[0].split("|")]
+            sym_idx = cols.index("Symbol") if "Symbol" in cols else None
+            if sym_idx is None: continue
+            for ln in lines[1:]:
+                parts = ln.split("|")
+                if len(parts) <= sym_idx: continue
+                raw = parts[sym_idx].strip()
+                n = _norm_yf(raw)
+                if n: syms.append(n)
+        except Exception:
+            pass
+    uniq = list(dict.fromkeys(syms).keys())
+    print(f"[SRC] NASDAQ Composite: ~{len(uniq)} tickers")
+    return uniq
 
+# ------------ Yahoo enrich (mcap/liquidité) ------------
 def enrich_with_yf(tickers: list[str]) -> pd.DataFrame:
-    # yfinance fast_info : market_cap, last_price, ten_day_average_volume
     rows = []
     for i, t in enumerate(tickers, 1):
         try:
@@ -180,60 +183,129 @@ def enrich_with_yf(tickers: list[str]) -> pd.DataFrame:
             rows.append({"ticker_yf": t, "mcap_usd": mcap, "avg_dollar_vol": avg_dollar})
         except Exception:
             rows.append({"ticker_yf": t, "mcap_usd": None, "avg_dollar_vol": None})
-        if i % 100 == 0:
+        if i % 120 == 0:
             print(f"[YF] {i}/{len(tickers)} enriched…")
-            time.sleep(1.0)
+            time.sleep(0.8)
     return pd.DataFrame(rows)
 
+# ------------ Sector fill (yfinance.info -> Alpha Vantage) ------------
+def try_fill_sector_with_yfinfo(df: pd.DataFrame, ticker_col="ticker_yf") -> pd.DataFrame:
+    df = df.copy()
+    sec = []
+    ind = []
+    for i, sym in enumerate(df[ticker_col].tolist(), 1):
+        s, it = None, None
+        try:
+            info = yf.Ticker(sym).info  # peut être lent mais on limite au Top N
+            s = info.get("sector")
+            it = info.get("industry")
+        except Exception:
+            pass
+        sec.append(s); ind.append(it)
+        if i % 25 == 0:
+            print(f"[YF.info] {i}/{len(df)}")
+        time.sleep(YF_INFO_SLEEP)
+    df["sector_fill"] = sec
+    df["industry_fill"] = ind
+    return df
+
+def try_fill_sector_with_av(df: pd.DataFrame, ticker_col="ticker_yf") -> pd.DataFrame:
+    if not AV_KEY or df.empty:
+        df["av_sector"] = None
+        df["av_industry"] = None
+        return df
+
+    sec, ind = [], []
+    done = 0
+    for i, sym in enumerate(df[ticker_col].tolist(), 1):
+        if done >= MAX_AV_LOOKUPS:
+            sec.append(None); ind.append(None); continue
+        try:
+            url = "https://www.alphavantage.co/query"
+            params = {"function":"OVERVIEW","symbol":sym,"apikey":AV_KEY}
+            r = requests.get(url, params=params, timeout=30)
+            if r.status_code == 200:
+                j = r.json()
+                sec.append(j.get("Sector"))
+                ind.append(j.get("Industry"))
+                done += 1
+            else:
+                sec.append(None); ind.append(None)
+        except Exception:
+            sec.append(None); ind.append(None)
+        time.sleep(AV_SLEEP)  # respecter la rate-limit
+    df["av_sector"] = sec
+    df["av_industry"] = ind
+    return df
+
+# ------------ MAIN ------------
 def main():
     # 1) Sources
     r1_syms, r1_sec = get_r1000()
     sp_syms, sp_sec = get_sp500()
     nd_syms, nd_sec = get_nasdaq100()
-    r2_syms         = get_r2000_from_csv()  # pas de secteur
+    comp_syms = get_nasdaq_composite() if USE_NASDAQ_COMPOSITE else []
+    # (R2000 possible si tu souhaites, mais ici on vise NASDAQ riche)
+    # r2_syms = get_r2000_from_csv()
 
-    # 2) Union (normalisée Yahoo)
-    universe = _union(r1_syms, sp_syms, nd_syms, r2_syms)
+    universe = _union(r1_syms, sp_syms, nd_syms, comp_syms)
     if len(universe) < MIN_ROW_LEN:
         raise SystemExit("❌ universe empty")
     print(f"[UNION] unique tickers before YF: {len(universe)}")
 
-    # 3) Enrichissement Yahoo (cap/liquidité)
+    # 2) Yahoo fast (cap/liquidité)
     meta = enrich_with_yf(universe)
-
-    # 4) Ajout du sector via mapping Wikipedia (R1000/S&P500/NASDAQ-100)
-    sector_map = {}
-    sector_map.update(r1_sec)
-    sector_map.update(sp_sec)
-    sector_map.update(nd_sec)
-
     meta["ticker_tv"] = meta["ticker_yf"].map(_yf_to_tv)
-    meta["sector"]    = meta["ticker_yf"].map(lambda t: sector_map.get(t, ""))
 
-    # 5) Sauvegarde RAW (avant filtre)
-    raw_cols = ["ticker_yf","ticker_tv","mcap_usd","avg_dollar_vol","sector"]
+    # 3) Mapping secteurs connus (R1K/SPX/NDX depuis Wikipédia)
+    sector_map = {}
+    sector_map.update(r1_sec); sector_map.update(sp_sec); sector_map.update(nd_sec)
+    meta["sector"]   = meta["ticker_yf"].map(lambda t: sector_map.get(t, ""))
+    meta["industry"] = ""  # sera éventuellement rempli plus bas
+
+    # RAW avant filtre
+    raw_cols = ["ticker_yf","ticker_tv","mcap_usd","avg_dollar_vol","sector","industry"]
     raw = meta[raw_cols].copy()
     _save(raw, "raw_universe.csv")
 
-    # 6) Filtre MCAP + Secteurs
+    # 4) Pré-filtre MCAP < 75B
     mcap_num = pd.to_numeric(raw["mcap_usd"], errors="coerce").fillna(0)
-    sec_norm = raw["sector"].astype(str).str.strip()
+    meta_lt75 = raw[mcap_num < MCAP_MAX_USD].copy()
 
-    in_scope = raw[
-        (mcap_num < MCAP_MAX_USD) &
-        (sec_norm.isin(SECTORS_IN))
-    ].copy()
+    # 5) On complète le SECTEUR uniquement pour un petit sous-ensemble:
+    #    top liquidité (avg_dollar_vol) parmi <75B ET secteur manquant
+    meta_lt75["avg_dollar_vol"] = pd.to_numeric(meta_lt75["avg_dollar_vol"], errors="coerce")
+    need_fill = meta_lt75[meta_lt75["sector"].astype(str).str.strip().eq("")].copy()
+    need_fill = need_fill.sort_values("avg_dollar_vol", ascending=False).head(TOP_LIQ_FOR_SECTOR_ENRICH)
 
-    # tri simple (liquidité décroissante, puis cap croissant)
-    in_scope["avg_dollar_vol"] = pd.to_numeric(in_scope["avg_dollar_vol"], errors="coerce")
+    if not need_fill.empty:
+        print(f"[ENRICH] sector for top {len(need_fill)} <75B with empty sector (YF.info -> AlphaVantage)…")
+        step = try_fill_sector_with_yfinfo(need_fill, "ticker_yf")
+        # copy back if found
+        for col_src, col_dst in [("sector_fill","sector"), ("industry_fill","industry")]:
+            mask = step[col_src].notna() & step[col_src].astype(str).str.strip().ne("")
+            meta_lt75.loc[step.index[mask], col_dst] = step.loc[mask, col_src].values
+
+        # restants -> Alpha Vantage (si clé)
+        rest = step[step["sector_fill"].isna() | (step["sector_fill"].astype(str).str.strip()=="")]
+        if not rest.empty:
+            rest2 = try_fill_sector_with_av(rest, "ticker_yf")
+            mask2 = rest2["av_sector"].notna() & rest2["av_sector"].astype(str).str.strip().ne("")
+            meta_lt75.loc[rest2.index[mask2], "sector"] = rest2.loc[mask2, "av_sector"].values
+            meta_lt75.loc[rest2.index[mask2], "industry"] = rest2.loc[mask2, "av_industry"].values
+
+    # 6) Filtre final: sector = IT & MCAP < 75B
+    sec_norm = meta_lt75["sector"].astype(str).str.strip()
+    in_scope = meta_lt75[sec_norm.isin(IT_LABELS)].copy()
+
+    # tri simple (liquidité décroissante puis cap croissant)
     in_scope = in_scope.sort_values(["avg_dollar_vol","mcap_usd"], ascending=[False, True])
 
-    # 7) Sauvegardes attendues par le workflow
+    # 7) Sorties
     _save(in_scope, "universe_in_scope.csv")
-    # compat historique (ton ancien front lisait universe_today.csv)
-    _save(in_scope.rename(columns={"ticker_yf":"ticker_yf", "sector":"sector"}), "universe_today.csv")
+    _save(in_scope.rename(columns={"ticker_yf":"ticker_yf"}), "universe_today.csv")
 
-    print(f"[FILTER] mcap < 75B & sector in {sorted(SECTORS_IN)}: {len(in_scope)}/{len(raw)}")
+    print(f"[FILTER] IT & mcap < 75B: {len(in_scope)}/{len(raw)} (raw), {len(in_scope)}/{len(meta_lt75)} (<75B)")
     print("[DONE] build_universe complete.")
 
 if __name__ == "__main__":
