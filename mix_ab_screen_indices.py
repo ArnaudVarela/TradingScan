@@ -1,10 +1,6 @@
 # mix_ab_screen_indices.py
-# Build a compact, fully-enriched screening set and publish rich CSVs for the dashboard.
-# Ajouts majeurs:
-# - Pilier technique local (SMA50/200, RSI14, MACD) via batch OHLC
-# - Détection "event-driven" (gap-up, volume spike, breakout 20j)
-# - TradingView: inclut AMEX + déduplication (garde le meilleur score)
-# - Buckets stricts + exports Top10 confirmed / Top50 pre-signal / Top100 event
+# Screener: fallback si l’univers in_scope est vide → raw_universe + catalog secteurs
+# Ajouts majeurs précédents: pilier technique local (SMA/RSI/MACD), events, TV AMEX, score & buckets stricts
 
 import os, sys, json, time, math
 from datetime import datetime, timezone
@@ -15,7 +11,6 @@ import pandas as pd
 import requests
 import yfinance as yf
 
-# --------- Paths / IO ---------
 PUBLIC_DIR = Path("dashboard/public"); PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 
 def _save(df: pd.DataFrame, name: str, also_public: bool = True):
@@ -30,8 +25,7 @@ def _read_csv_required(p: str) -> pd.DataFrame:
         print(f"❌ Missing required file: {p}"); sys.exit(2)
     return pd.read_csv(p)
 
-# --------- Config ---------
-TOP_N = int(os.getenv("SCREEN_TOPN", "180"))   # élargi pour couvrir Top100 events
+TOP_N = int(os.getenv("SCREEN_TOPN", "180"))
 TV_BATCH = 80
 REQ_TIMEOUT = 20
 SLEEP_BETWEEN_CALLS = 0.25
@@ -39,11 +33,11 @@ SLEEP_BETWEEN_CALLS = 0.25
 FINNHUB_KEY = os.getenv("FINNHUB_API_KEY", "")
 ALPHAV_KEY  = os.getenv("ALPHAVANTAGE_API_KEY", "")
 
-# Buckets thresholds
-MIN_LIQ_CONFIRMED   = float(os.getenv("MIN_LIQ_CONFIRM_USD", "5000000"))  # $5M/j
-MIN_ANALYST_VOTES   = int(os.getenv("MIN_ANALYST_VOTES", "10"))
+MIN_LIQ_CONFIRMED = float(os.getenv("MIN_LIQ_CONFIRM_USD", "5000000"))
+MIN_ANALYST_VOTES = int(os.getenv("MIN_ANALYST_VOTES", "10"))
 
-# --------- Helpers ---------
+TARGET_SECTORS = {"information technology","financials","industrials","health care"}
+
 def _is_nan(x) -> bool:
     return isinstance(x, float) and math.isnan(x)
 
@@ -66,34 +60,28 @@ def _label_from_tv_score(score: float | None) -> str | None:
 
 def _bucket_from_analyst(label) -> str | None:
     if label is None or _is_nan(label): return None
-    u = str(label).upper().strip().replace(" ", "_")
+    u = str(label).upper().strip().replace(" ","_")
     if u in {"BUY","STRONG_BUY","OUTPERFORM","OVERWEIGHT"}: return "BUY"
     if u in {"SELL","STRONG_SELL","UNDERPERFORM","UNDERWEIGHT"}: return "SELL"
     if u in {"HOLD","NEUTRAL"}: return "HOLD"
     return "HOLD"
 
-# --------- TradingView batch scan (AMEX + dédup) ---------
 def tv_scan_batch(symbols_tv: List[str]) -> Dict[str, Dict]:
     out: Dict[str, Dict] = {}
     if not symbols_tv: return out
-
     url = "https://scanner.tradingview.com/america/scan"
     payload = {
-        "symbols": {
-            "tickers": [f"NASDAQ:{s}" for s in symbols_tv] + [f"NYSE:{s}" for s in symbols_tv] + [f"AMEX:{s}" for s in symbols_tv],
-            "query": {"types": []}
-        },
-        "columns": ["Recommend.All"]
+        "symbols":{"tickers":[f"NASDAQ:{s}" for s in symbols_tv] + [f"NYSE:{s}" for s in symbols_tv] + [f"AMEX:{s}" for s in symbols_tv],"query":{"types":[]}},
+        "columns":["Recommend.All"]
     }
-
     try:
         r = requests.post(url, json=payload, timeout=REQ_TIMEOUT)
         if r.status_code != 200:
             print(f"[TV] HTTP {r.status_code} -> skip batch"); return out
         data = r.json()
         for row in data.get("data", []):
-            sym = row.get("s", ""); base = sym.split(":")[-1]
-            vals = row.get("d", []); tv_score = _safe_num(vals[0]) if vals else None
+            sym = row.get("s",""); base = sym.split(":")[-1]
+            vals = row.get("d",[]); tv_score = _safe_num(vals[0]) if vals else None
             tv_reco = _label_from_tv_score(tv_score)
             if not base: continue
             prev = out.get(base)
@@ -104,7 +92,6 @@ def tv_scan_batch(symbols_tv: List[str]) -> Dict[str, Dict]:
         print(f"[TV] exception: {e}")
     return out
 
-# --------- Finnhub (analystes) ---------
 def finnhub_analyst(symbol_yf: str) -> Tuple[str | None, int | None]:
     if not FINNHUB_KEY: return (None, None)
     try:
@@ -123,19 +110,16 @@ def finnhub_analyst(symbol_yf: str) -> Tuple[str | None, int | None]:
     except Exception:
         return (None, None)
 
-# --------- Alpha Vantage OVERVIEW (fallback secteur/industrie) ---------
 def alphav_overview(symbol_yf: str) -> Tuple[str | None, str | None]:
     if not ALPHAV_KEY: return (None, None)
     try:
-        url = "https://www.alphavantage.co/query"
-        params = {"function":"OVERVIEW","symbol":symbol_yf,"apikey":ALPHAV_KEY}
+        url = "https://www.alphavantage.co/query"; params = {"function":"OVERVIEW","symbol":symbol_yf,"apikey":ALPHAV_KEY}
         r = requests.get(url, params=params, timeout=REQ_TIMEOUT)
         if r.status_code != 200: return (None, None)
         j = r.json(); return (j.get("Sector") or None, j.get("Industry") or None)
     except Exception:
         return (None, None)
 
-# --------- Yahoo price (léger) ---------
 def yf_price_fast(symbol_yf: str) -> float | None:
     try:
         y = yf.Ticker(symbol_yf); fi = getattr(y, "fast_info", None) or {}
@@ -143,7 +127,6 @@ def yf_price_fast(symbol_yf: str) -> float | None:
     except Exception:
         return None
 
-# --------- Technicals batch (SMA/RSI/MACD + Events) ---------
 def _compute_rsi(series: pd.Series, period: int = 14) -> pd.Series:
     delta = series.diff()
     up = delta.clip(lower=0.0); down = (-delta).clip(lower=0.0)
@@ -154,7 +137,6 @@ def _compute_rsi(series: pd.Series, period: int = 14) -> pd.Series:
     return rsi
 
 def _compute_one_ta(df: pd.DataFrame) -> dict:
-    # df with columns: Open, High, Low, Close, Volume
     if df is None or df.empty or len(df) < 50:
         return {"technical_local": None, "tech_score": None, "event_score": 0}
     c = df["Close"].astype(float); v = df["Volume"].astype(float)
@@ -175,15 +157,12 @@ def _compute_one_ta(df: pd.DataFrame) -> dict:
     label = "STRONG_BUY" if strong else ("BUY" if buy else "NEUTRAL")
     tech_score = 1.0 if label == "STRONG_BUY" else (0.5 if label == "BUY" else 0.0)
 
-    # Events: gap-up, volume spike, breakout 20d, big % day
     event_score = 0
     if len(c) >= 21:
         pct1d = (c.iloc[-1] / c.iloc[-2] - 1.0)
         vol_ratio = (v.iloc[-1] / max(1.0, v.tail(20).mean())) if v.tail(20).mean() else 0.0
         breakout20 = c.iloc[-1] >= c.tail(20).max()
-        gap_up = None
-        if "Open" in df.columns:
-            gap_up = (df["Open"].iloc[-1] / c.iloc[-2] - 1.0)
+        gap_up = (df["Open"].iloc[-1] / c.iloc[-2] - 1.0) if "Open" in df.columns else None
         event_score += int(pct1d >= 0.05) + int(vol_ratio >= 1.8) + int(breakout20) + int(gap_up is not None and gap_up >= 0.03)
 
     return {"technical_local": label, "tech_score": tech_score, "event_score": event_score}
@@ -194,10 +173,7 @@ def compute_technicals_batch(symbols_yf: List[str], batch_size: int = 120) -> Di
         chunk = [s for s in symbols_yf[i:i+batch_size] if s]
         if not chunk: continue
         try:
-            df = yf.download(
-                tickers=chunk, period="1y", interval="1d",
-                auto_adjust=True, group_by="ticker", threads=True, progress=False
-            )
+            df = yf.download(tickers=chunk, period="1y", interval="1d", auto_adjust=True, group_by="ticker", threads=True, progress=False)
             if isinstance(df.columns, pd.MultiIndex):
                 for sym in chunk:
                     try:
@@ -206,7 +182,6 @@ def compute_technicals_batch(symbols_yf: List[str], batch_size: int = 120) -> Di
                     except Exception:
                         out[sym] = {"technical_local": None, "tech_score": None, "event_score": 0}
             else:
-                # single symbol path
                 try:
                     sub = df[["Open","High","Low","Close","Volume"]].dropna()
                     out[chunk[0]] = _compute_one_ta(sub)
@@ -218,49 +193,33 @@ def compute_technicals_batch(symbols_yf: List[str], batch_size: int = 120) -> Di
     print(f"[TA] computed: {len(out)}/{len(symbols_yf)}")
     return out
 
-# --------- Main pipeline ---------
+def _load_universe() -> pd.DataFrame:
+    if Path("universe_in_scope.csv").exists():
+        u = pd.read_csv("universe_in_scope.csv")
+        if len(u) > 0:
+            print(f"[UNI] in-scope: {len(u)}"); return u
+        print("[UNI] in-scope empty → fallback raw_universe.csv")
+    if Path("raw_universe.csv").exists():
+        u = pd.read_csv("raw_universe.csv")
+        print(f"[UNI] raw_universe: {len(u)}"); return u
+    print("❌ No universe files"); sys.exit(2)
+
 def main():
-    # 1) Univers filtré (déjà <75B + secteurs) construit en amont
-    base = _read_csv_required("universe_in_scope.csv")
-    if "ticker_yf" not in base.columns:
-        raise SystemExit("❌ universe_in_scope.csv must contain 'ticker_yf'")
+    base = _load_universe()
+    # Merge catalog + filtre secteurs si fallback raw
+    if "sector" not in base.columns or base["sector"].astype(str).str.strip().eq("").all():
+        if Path("sector_catalog.csv").exists():
+            cat = pd.read_csv("sector_catalog.csv").rename(columns={"ticker":"ticker_yf"})
+            base = base.merge(cat[["ticker_yf","sector","industry"]], on="ticker_yf", how="left")
+    base["sector"] = base.get("sector","Unknown").fillna("Unknown").astype(str).str.lower()
+    base = base[base["sector"].isin(TARGET_SECTORS)].copy()
 
-    # 2) Mapping secteurs/industries
-    cat = _read_csv_required("sector_catalog.csv")
-    def pickcol(df, names):
-        for n in names:
-            if n in df.columns: return n
-            for c in df.columns:
-                if c.lower() == n.lower(): return c
-        return None
-    tcol = pickcol(cat, ["ticker", "ticker_yf", "symbol"])
-    scol = pickcol(cat, ["sector", "gics sector", "gics_sector"])
-    icol = pickcol(cat, ["industry", "gics sub-industry", "gics_sub_industry", "sub_industry"])
-    if tcol is None:
-        print("[CAT] WARNING: no ticker column in sector_catalog.csv"); cat = pd.DataFrame(columns=["ticker_yf","sector","industry"])
-    else:
-        rename_map = {tcol:"ticker_yf"}; 
-        if scol is not None: rename_map[scol] = "sector"
-        if icol is not None: rename_map[icol] = "industry"
-        cat = cat.rename(columns=rename_map)
-        if "sector" not in cat.columns:   cat["sector"]   = "Unknown"
-        if "industry" not in cat.columns: cat["industry"] = "Unknown"
-        cat = cat[["ticker_yf","sector","industry"]].drop_duplicates("ticker_yf")
-
-    base = base.merge(cat, on="ticker_yf", how="left")
-    if "sector" not in base.columns:   base["sector"]   = "Unknown"
-    if "industry" not in base.columns: base["industry"] = "Unknown"
-    base["sector"] = base["sector"].fillna("Unknown"); base["industry"] = base["industry"].fillna("Unknown")
-
-    # 3) tri liquidité + TopN
-    base["avg_dollar_vol"] = pd.to_numeric(base.get("avg_dollar_vol", None), errors="coerce")
-    base_sorted = base.sort_values("avg_dollar_vol", ascending=False, na_position="last").reset_index(drop=True)
-    cand = base_sorted.head(TOP_N).copy()
-
+    base["avg_dollar_vol"] = pd.to_numeric(base.get("avg_dollar_vol"), errors="coerce")
+    base = base.sort_values("avg_dollar_vol", ascending=False, na_position="last").reset_index(drop=True)
+    cand = base.head(TOP_N).copy()
     print(f"[UNI] in-scope: {len(base)}  |  TopN to enrich: {len(cand)}")
 
-    # 4) Enrichissement cascade (Top N)
-    # 4.1 Prix (Yahoo)
+    # Prix
     prices = []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         prices.append(yf_price_fast(sym))
@@ -268,19 +227,18 @@ def main():
         time.sleep(SLEEP_BETWEEN_CALLS/2)
     cand["price"] = prices
 
-    # 4.2 TradingView (batch) + AMEX + best-of
-    syms_tv = [_yf_symbol_to_tv(s) for s in cand["ticker_yf"]]
+    # TV
+    syms_tv = [ _yf_symbol_to_tv(s) for s in cand["ticker_yf"] ]
     tv_out: Dict[str, Dict] = {}
     for i in range(0, len(syms_tv), TV_BATCH):
         chunk = [s for s in syms_tv[i:i+TV_BATCH] if s]
         if not chunk: continue
-        part = tv_scan_batch(chunk)
-        tv_out.update(part)
+        tv_out.update(tv_scan_batch(chunk))
         time.sleep(SLEEP_BETWEEN_CALLS)
-    cand["tv_score"] = [tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_score") for s in cand["ticker_yf"]]
-    cand["tv_reco"]  = [tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_reco")  for s in cand["ticker_yf"]]
+    cand["tv_score"] = [ tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_score") for s in cand["ticker_yf"] ]
+    cand["tv_reco"]  = [ tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_reco")  for s in cand["ticker_yf"] ]
 
-    # 4.3 Finnhub (analystes)
+    # Analystes
     an_bucket, an_votes = [], []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         b, v = finnhub_analyst(sym); an_bucket.append(b); an_votes.append(v)
@@ -289,117 +247,84 @@ def main():
     cand["analyst_bucket"] = an_bucket
     cand["analyst_votes"]  = an_votes
 
-    # 4.4 Fallback Alpha Vantage pour sector/industry si Unknown
-    if ALPHAV_KEY:
-        miss = (cand["sector"].astype(str).str.strip().eq("Unknown")).sum()
-        if miss: print(f"[AV] trying sector/industry for ~{miss} unknown…")
-        sec_f, ind_f = [], []
-        for _, row in cand.iterrows():
-            if str(row["sector"]).strip() != "Unknown":
-                sec_f.append(None); ind_f.append(None); continue
-            sec, ind = alphav_overview(row["ticker_yf"])
-            sec_f.append(sec); ind_f.append(ind); time.sleep(SLEEP_BETWEEN_CALLS)
-        for i, (sec, ind) in enumerate(zip(sec_f, ind_f)):
-            if isinstance(sec, str) and sec.strip(): cand.loc[cand.index[i], "sector"] = sec
-            if isinstance(ind, str) and ind.strip(): cand.loc[cand.index[i], "industry"] = ind
+    # Fallback sector/industry si Unknown (best-effort)
+    if Path("sector_catalog.csv").exists():
+        cat = pd.read_csv("sector_catalog.csv").rename(columns={"ticker":"ticker_yf"})
+        cand = cand.merge(cat[["ticker_yf","sector","industry"]], on="ticker_yf", how="left", suffixes=("", "_cat"))
+        for c in ("sector","industry"):
+            mc = f"{c}_cat"
+            cand[c] = cand[c].where(cand[mc].isna() | (cand[mc].astype(str).str.strip()==""), cand[mc])
+            if mc in cand.columns: cand.drop(columns=[mc], inplace=True)
+    cand["sector"] = cand.get("sector","Unknown").fillna("Unknown")
 
-    # 4.5 Pilier technique local + Events (batch OHLC)
+    # Techniques & events
     ta_map = compute_technicals_batch(cand["ticker_yf"].tolist(), batch_size=100)
-    cand["technical_local"] = [ta_map.get(s, {}).get("technical_local") for s in cand["ticker_yf"]]
-    cand["tech_score"]      = [ta_map.get(s, {}).get("tech_score") for s in cand["ticker_yf"]]
-    cand["event_score"]     = [ta_map.get(s, {}).get("event_score") for s in cand["ticker_yf"]]
+    cand["technical_local"] = [ta_map.get(s,{}).get("technical_local") for s in cand["ticker_yf"]]
+    cand["tech_score"]      = [ta_map.get(s,{}).get("tech_score") for s in cand["ticker_yf"]]
+    cand["event_score"]     = [ta_map.get(s,{}).get("event_score") for s in cand["ticker_yf"]]
 
-    # 5) Merge enrichissement -> base
-    enrich_cols = ["ticker_yf","price","tv_score","tv_reco","analyst_bucket","analyst_votes",
-                   "sector","industry","technical_local","tech_score","event_score"]
-    enrich_df = cand[enrich_cols].copy()
-    base = base.merge(enrich_df, on="ticker_yf", how="left", suffixes=("", "_cand"))
-    for col in ("sector","industry","technical_local","tech_score","event_score"):
-        rcol = f"{col}_cand"
-        if rcol in base.columns:
-            base[col] = base[col].where(base[rcol].isna() | (base[rcol].astype(str).str.strip()==""), base[rcol])
-            base.drop(columns=[rcol], inplace=True)
+    # Score & buckets
+    def is_strong_tv(v) -> bool:   return (str(v).upper().strip()=="STRONG_BUY") if v is not None and not _is_nan(v) else False
+    def is_bull_an(v) -> bool:     return _bucket_from_analyst(v) == "BUY"
+    def is_strong_tech(v) -> bool: return (str(v).upper().strip()=="STRONG_BUY") if v is not None and not _is_nan(v) else False
 
-    # 6) Pillars & score
-    def is_strong_tv(v) -> bool:
-        return (str(v).upper().strip() == "STRONG_BUY") if v is not None and not _is_nan(v) else False
-    def is_bull_an(v) -> bool:
-        return _bucket_from_analyst(v) == "BUY"
-    def is_strong_tech(v) -> bool:
-        return (str(v).upper().strip() == "STRONG_BUY") if v is not None and not _is_nan(v) else False
+    votes = pd.to_numeric(cand.get("analyst_votes", 0), errors="coerce")
+    cand["p_tv"]   = cand.get("tv_reco", pd.Series(index=cand.index)).map(is_strong_tv)
+    cand["p_an"]   = cand.get("analyst_bucket", pd.Series(index=cand.index)).map(is_bull_an)
+    cand["p_tech"] = cand.get("technical_local", pd.Series(index=cand.index)).map(is_strong_tech)
+    cand["pillars_met"] = cand[["p_tech","p_tv","p_an"]].fillna(False).sum(axis=1)
+    cand["votes_bin"] = pd.cut(votes.fillna(-1), bins=[-1,9,14,19,999], labels=["≤9","10–14","15–19","20+"])
 
-    base["p_tv"]   = base.get("tv_reco", pd.Series(index=base.index)).map(is_strong_tv)
-    base["p_an"]   = base.get("analyst_bucket", pd.Series(index=base.index)).map(is_bull_an)
-    base["p_tech"] = base.get("technical_local", pd.Series(index=base.index)).map(is_strong_tech)
-    base["pillars_met"] = base[["p_tech","p_tv","p_an"]].fillna(False).sum(axis=1)
+    tv  = pd.to_numeric(cand.get("tv_score", 0), errors="coerce").fillna(0)
+    tech= pd.to_numeric(cand.get("tech_score", 0), errors="coerce").fillna(0)
+    v_n = votes.fillna(0).clip(lower=0, upper=30) / 30.0
+    cand["rank_score"] = (tv*0.45) + (tech*0.35) + (v_n*0.20)
 
-    votes = pd.to_numeric(base.get("analyst_votes", pd.Series(index=base.index)), errors="coerce")
-    base["votes_bin"] = pd.cut(votes.fillna(-1), bins=[-1,9,14,19,999], labels=["≤9","10–14","15–19","20+"])
-
-    tv = pd.to_numeric(base.get("tv_score", 0), errors="coerce").fillna(0)           # [-1..+1]
-    tech = pd.to_numeric(base.get("tech_score", 0), errors="coerce").fillna(0)       # [0, 0.5, 1]
-    v_norm = votes.fillna(0).clip(lower=0, upper=30) / 30.0                          # [0..1]
-    base["rank_score"] = (tv * 0.45) + (tech * 0.35) + (v_norm * 0.20)
-
-    # 7) Buckets stricts
-    tv_up = base.get("tv_reco", pd.Series(index=base.index)).astype(str).str.upper()
-    an_up = base.get("analyst_bucket", pd.Series(index=base.index)).map(lambda x: (_bucket_from_analyst(x) or ""))
-    tech_up = base.get("technical_local", pd.Series(index=base.index)).astype(str).str.upper()
-    liq_ok  = pd.to_numeric(base.get("avg_dollar_vol", 0), errors="coerce").fillna(0) >= MIN_LIQ_CONFIRMED
+    liq_ok  = pd.to_numeric(cand.get("avg_dollar_vol", 0), errors="coerce").fillna(0) >= MIN_LIQ_CONFIRMED
     votes_ok = votes.fillna(0) >= MIN_ANALYST_VOTES
+    tv_up   = cand.get("tv_reco", pd.Series(index=cand.index)).astype(str).str.upper()
+    an_up   = cand.get("analyst_bucket", pd.Series(index=cand.index)).map(lambda x: (_bucket_from_analyst(x) or ""))
+    tech_up = cand.get("technical_local", pd.Series(index=cand.index)).astype(str).str.upper()
 
     cond_confirmed = tv_up.eq("STRONG_BUY") & (an_up == "BUY") & tech_up.isin(["STRONG_BUY","BUY"]) & liq_ok & votes_ok
     cond_pre       = tv_up.isin(["STRONG_BUY","BUY"]) & tech_up.isin(["STRONG_BUY","BUY"]) & (~cond_confirmed)
 
-    base["bucket"] = "other"
-    base.loc[cond_pre, "bucket"] = "pre_signal"
-    base.loc[cond_confirmed, "bucket"] = "confirmed"
+    cand["bucket"] = "other"
+    cand.loc[cond_pre, "bucket"] = "pre_signal"
+    cand.loc[cond_confirmed, "bucket"] = "confirmed"
+    event_mask = (pd.to_numeric(cand.get("event_score", 0), errors="coerce").fillna(0) >= 2) & (~cond_pre) & (~cond_confirmed)
+    cand.loc[event_mask, "bucket"] = cand.loc[event_mask, "bucket"].where(cand.loc[event_mask, "bucket"]!="other", "event")
 
-    # 8) Events: à partir du event_score (>=2), hors confirmed/pre
-    event_mask = (pd.to_numeric(base.get("event_score", 0), errors="coerce").fillna(0) >= 2) & (~cond_pre) & (~cond_confirmed)
-    base.loc[event_mask, "bucket"] = base.loc[event_mask, "bucket"].where(base.loc[event_mask, "bucket"]!="other", "event")
+    if "ticker_tv" not in cand.columns:
+        cand["ticker_tv"] = cand["ticker_yf"].map(_yf_symbol_to_tv)
 
-    # 9) Compléter ticker_tv si absent
-    if "ticker_tv" not in base.columns:
-        base["ticker_tv"] = base["ticker_yf"].map(_yf_symbol_to_tv)
-
-    # 10) Exports
-    export_cols = [
-        "ticker_yf","ticker_tv","price","mcap_usd","avg_dollar_vol",
-        "tv_score","tv_reco","analyst_bucket","analyst_votes",
-        "sector","industry","technical_local","tech_score",
-        "p_tech","p_tv","p_an","pillars_met","votes_bin",
-        "rank_score","event_score","bucket"
-    ]
+    export_cols = ["ticker_yf","ticker_tv","price","mcap_usd","avg_dollar_vol",
+                   "tv_score","tv_reco","analyst_bucket","analyst_votes",
+                   "sector","industry","technical_local","tech_score",
+                   "p_tech","p_tv","p_an","pillars_met","votes_bin",
+                   "rank_score","event_score","bucket"]
     for c in export_cols:
-        if c not in base.columns: base[c] = None
+        if c not in cand.columns: cand[c] = None
 
-    cand_all = base[export_cols].copy().sort_values("rank_score", ascending=False).reset_index(drop=True)
+    cand_all = cand[export_cols].copy().sort_values("rank_score", ascending=False).reset_index(drop=True)
     _save(cand_all, "candidates_all_ranked.csv")
 
-    confirmed = cand_all[cand_all["bucket"] == "confirmed"].copy().sort_values("rank_score", ascending=False)
-    pre       = cand_all[cand_all["bucket"] == "pre_signal"].copy().sort_values("rank_score", ascending=False)
-    events    = cand_all[cand_all["bucket"] == "event"].copy().sort_values(["event_score","rank_score","avg_dollar_vol"], ascending=[False,False,False])
-
-    # Tops exacts
-    top10_confirmed = confirmed.head(10).copy()
-    top50_pre       = pre.head(50).copy()
-    top100_event    = events.head(100).copy()
+    confirmed = cand_all[cand_all["bucket"]=="confirmed"].copy().sort_values("rank_score", ascending=False)
+    pre       = cand_all[cand_all["bucket"]=="pre_signal"].copy().sort_values("rank_score", ascending=False)
+    events    = cand_all[cand_all["bucket"]=="event"].copy().sort_values(["event_score","rank_score","avg_dollar_vol"], ascending=[False,False,False])
 
     _save(confirmed, "confirmed_STRONGBUY.csv")
     _save(pre, "anticipative_pre_signals.csv")
     _save(events, "event_driven_signals.csv")
-    _save(top10_confirmed, "top10_confirmed.csv")
-    _save(top50_pre, "top50_pre.csv")
-    _save(top100_event, "top100_event.csv")
+    _save(confirmed.head(10), "top10_confirmed.csv")
+    _save(pre.head(50), "top50_pre.csv")
+    _save(events.head(100), "top100_event.csv")
 
-    # 11) signals_history (pour backtest) — inclut le pilier technique
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     sig_hist = cand_all[["ticker_yf","sector","bucket","tv_reco","analyst_bucket","technical_local"]].copy()
     sig_hist.insert(0, "date", today)
     _save(sig_hist, "signals_history.csv")
 
-    # 12) Couverture / Diagnostics
     cov = {
         "universe": int(len(base)),
         "topN_enriched": int(len(cand_all)),
