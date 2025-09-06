@@ -1,1 +1,11 @@
-ticker_yf,ticker_tv,price,mcap_usd,dv20,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,technical_local,tech_score,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,event_score,bucket
+ticker_yf,ticker_tv,price,mcap_usd_final,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket
+SYK,SYK,,149982.9806330369,426969846.499176,0.6484848484848484,STRONG_BUY,BUY,37.0,Health Care,Unknown,True,True,True,3,20+,1.3890909090909092,confirmed
+QCOM,QCOM,,172467.35866156363,1083798077.9722595,0.603030303030303,STRONG_BUY,BUY,48.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+MU,MU,,147019.46879772117,2220763336.0175323,0.603030303030303,STRONG_BUY,BUY,52.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+NET,NET,,74724.91222323076,425351242.2789765,0.603030303030303,STRONG_BUY,BUY,39.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+ASML,ASML,,251053.688045,993335096.4694214,0.603030303030303,STRONG_BUY,BUY,41.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+PANW,PANW,,130074.29791803447,1736438596.093216,0.603030303030303,STRONG_BUY,BUY,60.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+AVGO,AVGO,,1575145.5435937315,6627403939.134827,0.5575757575757576,STRONG_BUY,BUY,49.0,Information Technology,Unknown,True,True,True,3,20+,1.3345454545454545,confirmed
+GLW,GLW,,60982.6829850636,386012825.3914642,0.603030303030303,STRONG_BUY,BUY,19.0,Information Technology,Unknown,True,True,True,3,15–19,1.325151515151515,confirmed
+ANET,ANET,,179543.2225490919,1040315348.0796052,0.5121212121212121,STRONG_BUY,BUY,33.0,Information Technology,Unknown,True,True,True,3,20+,1.3072727272727271,confirmed
+LRCX,LRCX,,130295.67618631678,1132804915.2899551,0.5121212121212121,STRONG_BUY,BUY,38.0,Information Technology,Unknown,True,True,True,3,20+,1.3072727272727271,confirmed

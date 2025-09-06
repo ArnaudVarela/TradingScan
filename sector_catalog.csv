@@ -1,587 +1,680 @@
 ticker,sector,industry
-NVDA,information technology,Semiconductors
-AAPL,information technology,"Technology Hardware, Storage & Peripherals"
-MSFT,information technology,Systems Software
-PLTR,information technology,Internet Services & Infrastructure
-AVGO,information technology,Semiconductors
-AMD,information technology,Semiconductors
-UNH,health care,Managed Health Care
-HOOD,financials,
-MSTR,information technology,Application Software
-CRM,information technology,Application Software
-SNOW,information technology,
-LLY,health care,Pharmaceuticals
-APP,information technology,Application Software
-ORCL,information technology,Application Software
-MRVL,information technology,Semiconductors
-BRK-B,financials,Multi-Sector Holdings
-COIN,financials,
-MDB,information technology,Systems Software
-JPM,financials,Diversified Banks
-MU,information technology,Semiconductors
-CRWD,information technology,Application Software
-BAC,financials,Diversified Banks
-GEV,industrials,Industrial Machinery & Supplies & Components
-SOFI,financials,
-V,financials,Transaction & Payment Processing Services
-NOW,information technology,Systems Software
-INTC,information technology,Semiconductors
-UBER,industrials,Passenger Ground Transportation
-MA,financials,Transaction & Payment Processing Services
-JNJ,health care,Pharmaceuticals
-AFRM,information technology,
-INTU,information technology,Application Software
-BA,industrials,Aerospace & Defense
-TXN,information technology,Semiconductors
-ADBE,information technology,Application Software
-ISRG,health care,Health Care Equipment
-GS,financials,Investment Banking & Brokerage
-QCOM,information technology,Semiconductors
-IBKR,financials,Investment Banking & Brokerage
-C,financials,Diversified Banks
-CSCO,information technology,Communications Equipment
-PANW,information technology,Systems Software
-GE,industrials,Aerospace & Defense
-WFC,financials,Diversified Banks
-DELL,information technology,"Technology Hardware, Storage & Peripherals"
-AMAT,information technology,Semiconductor Materials & Equipment
-RKLB,industrials,Aerospace & Defense
-ANET,information technology,Communications Equipment
-MRK,health care,Pharmaceuticals
-ASML,nan,
-LRCX,information technology,Semiconductor Materials & Equipment
-SMCI,information technology,"Technology Hardware, Storage & Peripherals"
-UNP,industrials,Rail Transportation
-AAL,industrials,Passenger Airlines
-PFE,health care,Pharmaceuticals
-CAT,industrials,Construction Machinery & Heavy Transportation Equipment
-IBM,information technology,IT Consulting & Other Services
-ADI,information technology,Semiconductors
-ACN,information technology,IT Consulting & Other Services
-AXP,financials,Consumer Finance
-ABBV,health care,Pharmaceuticals
-ALAB,information technology,Semiconductors
-APH,information technology,Electronic Components
-SCHW,financials,Investment Banking & Brokerage
-WDC,information technology,"Technology Hardware, Storage & Peripherals"
-KLAC,information technology,Semiconductor Materials & Equipment
-VRT,industrials,
-WDAY,information technology,Application Software
-ADSK,information technology,Application Software
-SHOP,nan,
-NU,financials,
-HON,industrials,Industrial Conglomerates
-ZS,information technology,Application Software
-DDOG,information technology,Application Software
-COF,financials,Consumer Finance
-LMT,industrials,Aerospace & Defense
-UPS,industrials,Air Freight & Logistics
-ETN,industrials,Electrical Components & Equipment
-HPE,information technology,"Technology Hardware, Storage & Peripherals"
-OKTA,information technology,Application Software
-PYPL,financials,Transaction & Payment Processing Services
-SNPS,information technology,Application Software
-DE,industrials,Agricultural & Farm Machinery
-LITE,information technology,
-TMO,health care,Life Sciences Tools & Services
-MS,financials,Investment Banking & Brokerage
-ABT,health care,Health Care Equipment
-ELV,health care,Managed Health Care
-STX,nan,
-BSX,health care,Health Care Equipment
-PGR,financials,Property & Casualty Insurance
-MCHP,information technology,Semiconductors
-VRTX,health care,Biotechnology
-DHR,health care,Life Sciences Tools & Services
-CSX,industrials,Rail Transportation
-SPGI,financials,Financial Exchanges & Data
-AMGN,health care,Biotechnology
-TEM,health care,
-FICO,information technology,Application Software
-CME,financials,Financial Exchanges & Data
-RTX,industrials,Aerospace & Defense
-GILD,health care,Biotechnology
-TT,industrials,Building Products
-VEEV,health care,
-REGN,health care,Biotechnology
-PSTG,information technology,
-NSC,industrials,Rail Transportation
-GLW,information technology,Electronic Components
-MCK,health care,Health Care Distributors
-MDT,health care,Health Care Equipment
-FI,financials,Transaction & Payment Processing Services
-NXPI,nan,
-MSI,information technology,Communications Equipment
-RF,financials,Regional Banks
-APO,financials,Asset Management & Custody Banks
-FTNT,information technology,Systems Software
-ADP,industrials,Human Resource & Employment Services
-HBAN,financials,Regional Banks
-KEY,financials,Regional Banks
-BLK,financials,Asset Management & Custody Banks
-TDG,industrials,Aerospace & Defense
-CI,health care,Managed Health Care
-UTHR,health care,Biotechnology
-URI,industrials,Trading Companies & Distributors
-CB,financials,Property & Casualty Insurance
-UAL,industrials,Passenger Airlines
-BX,financials,Asset Management & Custody Banks
-JCI,industrials,Building Products
-ARM,nan,
-AJG,financials,Insurance Brokers
-PH,industrials,Industrial Machinery & Supplies & Components
-BMY,health care,Health Care Distributors
-TEAM,information technology,Application Software
-MMM,industrials,Industrial Conglomerates
-U,information technology,
-CTAS,industrials,Diversified Support Services
-NET,information technology,
-ICE,financials,Financial Exchanges & Data
-COHR,information technology,Electronic Components
-USB,financials,Diversified Banks
-FSLR,information technology,Semiconductors
-CVS,health care,Health Care Services
-CIEN,information technology,Communications Equipment
-MMC,financials,Insurance Brokers
-HCA,health care,Health Care Facilities
-ALNY,health care,
-CDNS,information technology,Application Software
-HUM,health care,Managed Health Care
-HUBS,information technology,
-KKR,financials,Asset Management & Custody Banks
-XYZ,financials,Transaction & Payment Processing Services
-TER,information technology,Semiconductor Materials & Equipment
-HWM,industrials,Aerospace & Defense
-RKT,financials,
-MPWR,information technology,Semiconductors
-CPRT,industrials,Diversified Support Services
-GTLB,information technology,
-CARR,industrials,Building Products
-EMR,industrials,Electrical Components & Equipment
-DAL,industrials,Passenger Airlines
-SYK,health care,Health Care Equipment
-TOST,information technology,Transaction & Payment Processing Services
-FDX,industrials,Air Freight & Logistics
-ROP,industrials,Industrial Conglomerates
-AON,financials,Insurance Brokers
-TFC,financials,Regional Banks
-NOC,industrials,Aerospace & Defense
-WM,industrials,Environmental & Facilities Services
-DXCM,health care,Health Care Equipment
-INSM,health care,Biotechnology
-AXON,industrials,Aerospace & Defense
-LYFT,industrials,Passenger Ground Transportation
-ON,information technology,Semiconductors
-CAH,health care,Health Care Distributors
-CNC,health care,Managed Health Care
-HPQ,information technology,"Technology Hardware, Storage & Peripherals"
-COO,health care,Health Care Supplies
-BDX,health care,Health Care Equipment
-PNC,financials,Regional Banks
-COR,health care,Health Care Distributors
-AIG,financials,Property & Casualty Insurance
-FERG,industrials,Industrial Machinery & Supplies & Components
-NTNX,information technology,
-MSCI,financials,Financial Exchanges & Data
-TEL,nan,
-TRV,financials,Property & Casualty Insurance
-BILL,information technology,
-RMD,health care,Health Care Equipment
-ELAN,health care,
-GWW,industrials,Industrial Machinery & Supplies & Components
-NTAP,information technology,"Technology Hardware, Storage & Peripherals"
-ZTS,health care,Pharmaceuticals
-LHX,industrials,Aerospace & Defense
-PWR,industrials,Construction & Engineering
-IOT,information technology,Systems Software
-AFL,financials,Life & Health Insurance
-IT,information technology,IT Consulting & Other Services
-ODFL,industrials,Cargo Ground Transportation
-JBL,information technology,Electronic Manufacturing Services
-ESTC,information technology,
-ROK,industrials,Electrical Components & Equipment
-MRNA,health care,Biotechnology
-DOCU,information technology,Application Software
-BK,financials,Asset Management & Custody Banks
-AZN,nan,
-MCO,financials,Financial Exchanges & Data
-ZM,information technology,Application Software
-A,health care,Health Care Equipment
-IONS,health care,
-CMI,industrials,Industrial Machinery & Supplies & Components
-MOH,health care,Managed Health Care
-PAYX,industrials,Human Resource & Employment Services
-FIX,industrials,Construction & Engineering
-FCNCA,financials,
-FAST,industrials,Building Products
-GD,industrials,Aerospace & Defense
-EW,health care,Health Care Equipment
-FHN,financials,Regional Banks
-BLDR,industrials,Building Products
-SNDK,information technology,"Technology Hardware, Storage & Peripherals"
-IDXX,health care,Health Care Equipment
-VRSK,industrials,Research & Consulting Services
-NDAQ,financials,Financial Exchanges & Data
-TWLO,information technology,
-CTSH,information technology,IT Consulting & Other Services
-ARES,financials,
-LPLA,financials,
-GWRE,information technology,
-OTIS,industrials,Industrial Machinery & Supplies & Components
-FIS,financials,Transaction & Payment Processing Services
-MET,financials,Life & Health Insurance
-CBOE,financials,Financial Exchanges & Data
-GDDY,information technology,
-AL,industrials,
-COLB,financials,Regional Banks
-ALL,financials,Property & Casualty Insurance
-BIIB,health care,Biotechnology
-IQV,health care,Life Sciences Tools & Services
-ENTG,information technology,
-RSG,industrials,Environmental & Facilities Services
-EFX,industrials,Research & Consulting Services
-EME,industrials,Construction & Engineering
-AMP,financials,Asset Management & Custody Banks
-CHRW,industrials,Air Freight & Logistics
-ITW,industrials,Industrial Machinery & Supplies & Components
-ENPH,information technology,Electronic Components
-PCAR,industrials,Construction Machinery & Heavy Transportation Equipment
-RBRK,information technology,
-TW,financials,
-AGNC,financials,
-LUV,industrials,Passenger Airlines
-BRKR,health care,Health Care Equipment
-SYF,financials,Consumer Finance
-LII,industrials,Building Products
-BRO,financials,Insurance Brokers
-AME,industrials,Electrical Components & Equipment
-AVTR,health care,
-GEHC,health care,Health Care Equipment
-CDW,information technology,Technology Distributors
-IR,industrials,Industrial Machinery & Supplies & Components
-WAB,industrials,Construction Machinery & Heavy Transportation Equipment
-TROW,financials,Asset Management & Custody Banks
-HUBB,industrials,Industrial Machinery & Supplies & Components
-FLEX,information technology,Electronic Manufacturing Services
-STT,financials,Asset Management & Custody Banks
-VRSN,information technology,Internet Services & Infrastructure
-S,information technology,
-HIG,financials,Property & Casualty Insurance
-PODD,health care,
-MTB,financials,Regional Banks
-CFG,financials,Regional Banks
-CFLT,information technology,
-BR,industrials,Data Processing & Outsourced Services
-PATH,information technology,
-TRI,nan,
-PRU,financials,Life & Health Insurance
-FITB,financials,Regional Banks
-GPN,financials,Transaction & Payment Processing Services
-THC,health care,Health Care Facilities
-HEI,industrials,Aerospace & Defense
-FTAI,industrials,
-BWXT,industrials,
-COOP,financials,Commercial & Residential Mortgage Finance
-WAT,health care,Health Care Distributors
-BAH,industrials,
-ACGL,financials,Reinsurance
-FTV,industrials,Industrial Machinery & Supplies & Components
-SAIA,industrials,
-SWKS,information technology,Semiconductors
-ALGN,health care,Health Care Supplies
-BAX,health care,Health Care Equipment
-MTD,health care,Life Sciences Tools & Services
-HALO,health care,Biotechnology
-TYL,information technology,Application Software
-EXAS,health care,
-MTZ,industrials,Construction & Engineering
-DT,information technology,
-KEYS,information technology,Electronic Equipment & Instruments
-CG,financials,
-OWL,financials,
-SWK,industrials,Industrial Machinery & Supplies & Components
-WTW,financials,Insurance Brokers
-XPO,industrials,Cargo Ground Transportation
-XYL,industrials,Industrial Machinery & Supplies & Components
-QXO,industrials,
-EQH,financials,
-RPRX,health care,
-SRPT,health care,
-LSCC,information technology,Semiconductors
-PTC,information technology,Application Software
-NTRA,health care,
-DOV,industrials,Industrial Machinery & Supplies & Components
-INCY,health care,Biotechnology
-ALK,industrials,Passenger Airlines
-WCC,industrials,
-ATI,industrials,Aerospace & Defense
-EXPD,industrials,Air Freight & Logistics
-JBHT,industrials,Cargo Ground Transportation
-RJF,financials,Investment Banking & Brokerage
-VKTX,health care,Biotechnology
-FFIV,information technology,Communications Equipment
-OC,industrials,Building Products
-ZBRA,information technology,Electronic Equipment & Instruments
-BAM,financials,Asset Management & Custody Banks
-MAS,industrials,Building Products
-TRU,industrials,
-NLY,financials,
-FNB,financials,Regional Banks
-PAYC,information technology,Application Software
-FDS,financials,Financial Exchanges & Data
-GNRC,industrials,Electrical Components & Equipment
-NVT,industrials,
-MEDP,health care,
-XP,financials,Investment Banking & Brokerage
-CSL,industrials,Industrial Conglomerates
-PEN,health care,Health Care Equipment
-ALLE,industrials,Building Products
-DAY,industrials,Human Resource & Employment Services
-TDY,industrials,Aerospace & Defense
-ACM,industrials,Construction & Engineering
-CNH,industrials,
-DGX,health care,Health Care Services
-TRMB,information technology,Electronic Equipment & Instruments
-AKAM,information technology,Internet Services & Infrastructure
-EPAM,information technology,IT Consulting & Other Services
-UHS,health care,Health Care Facilities
-CMA,financials,Diversified Banks
-NTRS,financials,Asset Management & Custody Banks
-WST,health care,Health Care Supplies
-RVTY,health care,Health Care Equipment
-PNR,industrials,Industrial Machinery & Supplies & Components
-WSO,industrials,Trading Companies & Distributors
-UI,information technology,
-ILMN,health care,Life Sciences Tools & Services
-MKTX,financials,Financial Exchanges & Data
-NBIX,health care,Biotechnology
-STE,health care,Health Care Equipment
-LDOS,industrials,Diversified Support Services
-EVR,financials,Investment Banking & Brokerage
-QRVO,information technology,Semiconductors
-GEN,information technology,Application Software
-UNM,financials,Life & Health Insurance
-TECH,health care,Life Sciences Tools & Services
-CAR,industrials,Passenger Ground Transportation
-WWD,industrials,Electrical Components & Equipment
-MIDD,industrials,Industrial Machinery & Supplies & Components
-ZBH,health care,Health Care Equipment
-HII,industrials,Aerospace & Defense
-INFA,information technology,
-IEX,industrials,Industrial Machinery & Supplies & Components
-FOUR,information technology,
-MTSI,information technology,Semiconductors
-JKHY,financials,Transaction & Payment Processing Services
-LH,health care,Health Care Services
-CNM,industrials,Trading Companies & Distributors
-EG,financials,Reinsurance
-CRL,health care,Life Sciences Tools & Services
-BSY,information technology,
-PNFP,financials,Regional Banks
-MANH,information technology,
-DVA,health care,Health Care Facilities
-RRX,industrials,Electrical Components & Equipment
-KNX,industrials,Cargo Ground Transportation
-RBA,industrials,
-KEX,industrials,Marine Transportation
-WRB,financials,Property & Casualty Insurance
-EXEL,health care,Biotechnology
-TXT,industrials,Aerospace & Defense
-HSIC,health care,Health Care Distributors
-AIZ,financials,Multi-line Insurance
-NCNO,information technology,
-J,industrials,Construction & Engineering
-CW,industrials,Aerospace & Defense
-APG,industrials,Construction & Engineering
-PCOR,information technology,
-ONTO,information technology,Semiconductor Materials & Equipment
-ALLY,financials,
-WMS,industrials,
-BMRN,health care,
-CACI,industrials,Diversified Support Services
-HOLX,health care,Health Care Equipment
-SNV,financials,Regional Banks
-TTC,industrials,Agricultural & Farm Machinery
-JAZZ,health care,Pharmaceuticals
-CPAY,financials,Transaction & Payment Processing Services
-JEF,financials,Multi-Sector Holdings
-AUR,information technology,
-VLTO,industrials,
-RNR,financials,Reinsurance
-VMI,industrials,Industrial Machinery & Supplies & Components
-RGEN,health care,Biotechnology
-PFG,financials,Life & Health Insurance
-QGEN,health care,
-BEN,financials,Asset Management & Custody Banks
-MASI,health care,Health Care Equipment
-MKSI,information technology,Semiconductor Materials & Equipment
-AGCO,industrials,Agricultural & Farm Machinery
-CHE,health care,Health Care Services
-TPG,financials,
-GLOB,information technology,
-TTEK,industrials,Environmental & Facilities Services
-INSP,health care,
-OLED,information technology,Semiconductors
-SMMT,health care,
-ROL,industrials,Environmental & Facilities Services
-SSB,financials,Regional Banks
-MORN,financials,
-ROIV,health care,
-DOX,information technology,
-AVT,information technology,Technology Distributors
-ALSN,industrials,
-CGNX,information technology,Electronic Equipment & Instruments
-TREX,industrials,Building Products
-EHC,health care,Health Care Facilities
-HLI,financials,
-PCTY,information technology,Application Software
-CLH,industrials,Environmental & Facilities Services
-EWBC,financials,Regional Banks
-AOS,industrials,Building Products
-DBX,information technology,
-SSNC,information technology,
-PSN,industrials,Aerospace & Defense
-FBIN,industrials,Building Products
-FLS,industrials,Industrial Machinery & Supplies & Components
-OSK,industrials,Construction Machinery & Heavy Transportation Equipment
-KNSL,financials,
-IVZ,financials,Asset Management & Custody Banks
-KRMN,industrials,
-WAL,financials,
-DCI,industrials,Industrial Machinery & Supplies & Components
-RVMD,health care,
-G,information technology,IT Consulting & Other Services
-PB,financials,Regional Banks
-VTRS,health care,Pharmaceuticals
-AYI,industrials,Electrical Components & Equipment
-BPOP,financials,
-SNX,information technology,Technology Distributors
-SAIC,industrials,Diversified Support Services
-MKL,financials,
-GFS,information technology,
-EEFT,financials,Transaction & Payment Processing Services
-TFX,health care,Health Care Equipment
-SF,financials,Investment Banking & Brokerage
-L,financials,Multi-line Insurance
-KD,information technology,IT Consulting & Other Services
-WU,information technology,Data Processing & Outsourced Services
-DOCS,health care,
-ZION,financials,Regional Banks
-VOYA,financials,Multi-Sector Holdings
-SITE,industrials,
-LOAR,industrials,Aerospace & Defense
-FNF,financials,
-SNA,industrials,Industrial Machinery & Supplies & Components
-LNC,financials,Multi-line Insurance
-AWI,industrials,
-CBSH,financials,Regional Banks
-APPF,information technology,Application Software
-WBS,financials,Regional Banks
-NDSN,industrials,Industrial Machinery & Supplies & Components
-SOLV,health care,Health Care Equipment
-RBC,industrials,
-AFG,financials,Multi-line Insurance
-HEI-A,industrials,Aerospace & Defense
-RYAN,financials,
-CR,industrials,Industrial Machinery & Supplies & Components
-RITM,financials,
-MLI,industrials,Industrial Machinery & Supplies & Components
-BIO,health care,Life Sciences Tools & Services
-GMED,health care,Health Care Equipment
-GL,financials,Life & Health Insurance
-LECO,industrials,Industrial Machinery & Supplies & Components
-WTFC,financials,Regional Banks
-CINF,financials,Property & Casualty Insurance
-ARW,information technology,Technology Distributors
-RHI,industrials,Human Resource & Employment Services
-KBR,industrials,Diversified Support Services
-CRUS,information technology,Semiconductors
-RNG,information technology,
-AAON,industrials,Building Products
-ACHC,health care,Health Care Facilities
-SEIC,financials,Asset Management & Custody Banks
-WEX,financials,Transaction & Payment Processing Services
-HLNE,financials,
-PEGA,information technology,
-CFR,financials,Regional Banks
-RGA,financials,Reinsurance
-APLS,health care,Biotechnology
-SLM,financials,Consumer Finance
-HXL,industrials,Aerospace & Defense
-AIT,industrials,Trading Companies & Distributors
-CCCS,information technology,
-AXS,financials,
-CACC,financials,
-LSTR,industrials,Cargo Ground Transportation
-ERIE,nan,
-OMF,financials,
-RAL,information technology,
-GTES,industrials,
-R,industrials,Cargo Ground Transportation
-TKR,industrials,Industrial Machinery & Supplies & Components
-ALGM,information technology,
-WTM,financials,
-EXLS,industrials,Data Processing & Outsourced Services
-PRI,financials,Life & Health Insurance
-GGG,industrials,Industrial Machinery & Supplies & Components
-STWD,financials,
-MSM,industrials,Trading Companies & Distributors
-LFUS,information technology,Electronic Components
-WSC,industrials,
-LAZ,financials,
-JHG,financials,Asset Management & Custody Banks
-ORI,financials,Property & Casualty Insurance
-ITT,industrials,Industrial Machinery & Supplies & Components
-VIRT,financials,
-GXO,industrials,Air Freight & Logistics
-OZK,financials,Regional Banks
-SHC,health care,
-CORT,health care,Pharmaceuticals
-RARE,health care,
-SAIL,information technology,Application Software
-SSD,industrials,Building Products
-MTG,financials,Reinsurance
-AMKR,information technology,Semiconductors
-AMG,financials,Asset Management & Custody Banks
-UWMC,financials,
-SPR,industrials,
-SARO,industrials,Aerospace & Defense
-ESAB,industrials,Industrial Machinery & Supplies & Components
-ST,industrials,
-DLB,information technology,
-XRAY,health care,Health Care Supplies
-FAF,financials,Property & Casualty Insurance
-FCN,industrials,Research & Consulting Services
-VNT,information technology,Electronic Equipment & Instruments
-KMPR,financials,Multi-line Insurance
-OGN,health care,Pharmaceuticals
-NVST,health care,Health Care Supplies
-DRS,industrials,Aerospace & Defense
-THG,financials,Property & Casualty Insurance
-PRGO,health care,Pharmaceuticals
-RLI,financials,
-ECG,industrials,Construction & Engineering
-MSA,industrials,Office Services & Supplies
-HAYW,industrials,
-CNXC,information technology,Data Processing & Outsourced Services
-MAN,industrials,Human Resource & Employment Services
-BHF,financials,Life & Health Insurance
-DV,information technology,
-AMTM,industrials,Diversified Support Services
-FHB,financials,Regional Banks
-CXT,industrials,Industrial Machinery & Supplies & Components
-AGO,financials,
-DXC,information technology,IT Consulting & Other Services
-SNDR,industrials,
-BOKF,financials,
-IPGP,information technology,Electronic Manufacturing Services
-TDC,information technology,IT Consulting & Other Services
-CNA,financials,
-FRHC,financials,
-UHAL-B,industrials,
-CLVT,industrials,
-CERT,health care,
-UHAL,industrials,
-TFSL,financials,
-INGM,information technology,Technology Distributors
-DNB,industrials,
+NVDA,Information Technology,Unknown
+PLTR,Information Technology,Unknown
+AAPL,Information Technology,Unknown
+MSFT,Information Technology,Unknown
+AMD,Information Technology,Unknown
+AVGO,Information Technology,Unknown
+UNH,Health Care,Unknown
+MSTR,Information Technology,Unknown
+HOOD,Financials,Unknown
+LLY,Health Care,Unknown
+INTC,Information Technology,Unknown
+CRWV,nan,Unknown
+COIN,Financials,Unknown
+CRM,Information Technology,Unknown
+APP,Information Technology,Unknown
+ORCL,Information Technology,Unknown
+MU,Information Technology,Unknown
+BRK-B,Financials,Unknown
+JPM,Financials,Unknown
+V,Financials,Unknown
+BAC,Financials,Unknown
+PANW,Information Technology,Unknown
+SNOW,Information Technology,Unknown
+GEV,Industrials,Unknown
+NOW,Information Technology,Unknown
+SOFI,Financials,Unknown
+INTU,Information Technology,Unknown
+MRVL,Information Technology,Unknown
+CSCO,Information Technology,Unknown
+UBER,Industrials,Unknown
+CRWD,Information Technology,Unknown
+BA,Industrials,Unknown
+JNJ,Health Care,Unknown
+AMAT,Information Technology,Unknown
+MA,Financials,Unknown
+C,Financials,Unknown
+ADBE,Information Technology,Unknown
+TXN,Information Technology,Unknown
+GS,Financials,Unknown
+CAT,Industrials,Unknown
+GE,Industrials,Unknown
+MDB,Information Technology,Unknown
+LRCX,Information Technology,Unknown
+SMCI,Information Technology,Unknown
+QCOM,Information Technology,Unknown
+IBM,Information Technology,Unknown
+WFC,Financials,Unknown
+ANET,Information Technology,Unknown
+RKLB,Industrials,Unknown
+ASML,nan,Unknown
+ISRG,Health Care,Unknown
+SOUN,nan,Unknown
+ADI,Information Technology,Unknown
+ACN,Information Technology,Unknown
+UNP,Industrials,Unknown
+MRK,Health Care,Unknown
+PFE,Health Care,Unknown
+SHOP,nan,Unknown
+WDAY,Information Technology,Unknown
+ABBV,Health Care,Unknown
+TEM,Health Care,Unknown
+ALAB,Information Technology,Unknown
+AAL,Industrials,Unknown
+KLAC,Information Technology,Unknown
+CSX,Industrials,Unknown
+TMO,Health Care,Unknown
+SCHW,Financials,Unknown
+DELL,Information Technology,Unknown
+AFRM,Information Technology,Unknown
+VRT,Industrials,Unknown
+NU,Financials,Unknown
+APH,Information Technology,Unknown
+MARA,nan,Unknown
+FTNT,Information Technology,Unknown
+AXP,Financials,Unknown
+DE,Industrials,Unknown
+UPS,Industrials,Unknown
+ETN,Industrials,Unknown
+HON,Industrials,Unknown
+COF,Financials,Unknown
+ABT,Health Care,Unknown
+GILD,Health Care,Unknown
+DDOG,Information Technology,Unknown
+VRTX,Health Care,Unknown
+PGR,Financials,Unknown
+FSLR,Information Technology,Unknown
+MDT,Health Care,Unknown
+MS,Financials,Unknown
+ELV,Health Care,Unknown
+LMT,Industrials,Unknown
+RGTI,nan,Unknown
+PYPL,Financials,Unknown
+IBKR,Financials,Unknown
+IREN,nan,Unknown
+SNPS,Information Technology,Unknown
+BSX,Health Care,Unknown
+DHR,Health Care,Unknown
+CRDO,nan,Unknown
+MCHP,Information Technology,Unknown
+NXPI,nan,Unknown
+BX,Financials,Unknown
+WDC,Information Technology,Unknown
+COHR,Information Technology,Unknown
+TWLO,Information Technology,Unknown
+SPGI,Financials,Unknown
+WULF,nan,Unknown
+REGN,Health Care,Unknown
+MCK,Health Care,Unknown
+XYZ,Financials,Unknown
+RTX,Industrials,Unknown
+ADSK,Information Technology,Unknown
+JCI,Industrials,Unknown
+NSC,Industrials,Unknown
+AMGN,Health Care,Unknown
+LITE,Information Technology,Unknown
+FI,Financials,Unknown
+CME,Financials,Unknown
+BLK,Financials,Unknown
+ARM,nan,Unknown
+ICE,Financials,Unknown
+TEAM,Information Technology,Unknown
+ALNY,Health Care,Unknown
+CYBR,nan,Unknown
+MSI,Information Technology,Unknown
+UAL,Industrials,Unknown
+PH,Industrials,Unknown
+FICO,Information Technology,Unknown
+TT,Industrials,Unknown
+CI,Health Care,Unknown
+TDG,Industrials,Unknown
+HPE,Information Technology,Unknown
+U,Information Technology,Unknown
+ZS,Information Technology,Unknown
+BMY,Health Care,Unknown
+KEY,Financials,Unknown
+CDNS,Information Technology,Unknown
+APO,Financials,Unknown
+MMM,Industrials,Unknown
+STX,nan,Unknown
+URI,Industrials,Unknown
+CB,Financials,Unknown
+HCA,Health Care,Unknown
+UPST,nan,Unknown
+RF,Financials,Unknown
+HUBS,Information Technology,Unknown
+AON,Financials,Unknown
+RIOT,nan,Unknown
+ADP,Industrials,Unknown
+AXON,Industrials,Unknown
+OKTA,Information Technology,Unknown
+HBAN,Financials,Unknown
+SYK,Health Care,Unknown
+CVS,Health Care,Unknown
+NET,Information Technology,Unknown
+FUTU,nan,Unknown
+MPWR,Information Technology,Unknown
+HUM,Health Care,Unknown
+DAL,Industrials,Unknown
+AJG,Financials,Unknown
+BDX,Health Care,Unknown
+CAH,Health Care,Unknown
+KKR,Financials,Unknown
+WM,Industrials,Unknown
+ROP,Industrials,Unknown
+MMC,Financials,Unknown
+APLD,nan,Unknown
+HWM,Industrials,Unknown
+INSM,Health Care,Unknown
+CTAS,Industrials,Unknown
+VEEV,Health Care,Unknown
+COR,Health Care,Unknown
+GLW,Information Technology,Unknown
+USB,Financials,Unknown
+TER,Information Technology,Unknown
+FDX,Industrials,Unknown
+ON,Information Technology,Unknown
+EMR,Industrials,Unknown
+MNDY,nan,Unknown
+NOC,Industrials,Unknown
+ZTS,Health Care,Unknown
+CNC,Health Care,Unknown
+IT,Information Technology,Unknown
+RKT,Financials,Unknown
+CARR,Industrials,Unknown
+PWR,Industrials,Unknown
+TRV,Financials,Unknown
+TOST,Information Technology,Unknown
+ZM,Information Technology,Unknown
+LYFT,Industrials,Unknown
+TEL,nan,Unknown
+TFC,Financials,Unknown
+MSCI,Financials,Unknown
+DXCM,Health Care,Unknown
+GDDY,Information Technology,Unknown
+PNC,Financials,Unknown
+CPRT,Industrials,Unknown
+BK,Financials,Unknown
+UTHR,Health Care,Unknown
+AIG,Financials,Unknown
+OTIS,Industrials,Unknown
+CMI,Industrials,Unknown
+JBL,Information Technology,Unknown
+LHX,Industrials,Unknown
+GWW,Industrials,Unknown
+ROK,Industrials,Unknown
+AZN,nan,Unknown
+EW,Health Care,Unknown
+FERG,Industrials,Unknown
+MCO,Financials,Unknown
+PAYX,Industrials,Unknown
+ODFL,Industrials,Unknown
+RMD,Health Care,Unknown
+FCNCA,Financials,Unknown
+PSTG,Information Technology,Unknown
+ENPH,Information Technology,Unknown
+IDXX,Health Care,Unknown
+BLDR,Industrials,Unknown
+AFL,Financials,Unknown
+VKTX,Health Care,Unknown
+VRSK,Industrials,Unknown
+GD,Industrials,Unknown
+FIX,Industrials,Unknown
+GTLB,Information Technology,Unknown
+FAST,Industrials,Unknown
+ARGX,nan,Unknown
+CIEN,Information Technology,Unknown
+CTSH,Information Technology,Unknown
+HPQ,Information Technology,Unknown
+MOH,Health Care,Unknown
+RUN,nan,Unknown
+LPLA,Financials,Unknown
+FIS,Financials,Unknown
+MRNA,Health Care,Unknown
+NDAQ,Financials,Unknown
+EFX,Industrials,Unknown
+ALL,Financials,Unknown
+ARES,Financials,Unknown
+MET,Financials,Unknown
+NTNX,Information Technology,Unknown
+QUBT,nan,Unknown
+NTAP,Information Technology,Unknown
+BRO,Financials,Unknown
+KTOS,nan,Unknown
+RSG,Industrials,Unknown
+FHN,Financials,Unknown
+CORZ,nan,Unknown
+DAY,Industrials,Unknown
+ITW,Industrials,Unknown
+IQV,Health Care,Unknown
+BILL,Information Technology,Unknown
+IOT,Information Technology,Unknown
+LUV,Industrials,Unknown
+DOCU,Information Technology,Unknown
+CBOE,Financials,Unknown
+ETHZ,nan,Unknown
+LII,Industrials,Unknown
+COO,Health Care,Unknown
+ONDS,nan,Unknown
+AMP,Financials,Unknown
+PCAR,Industrials,Unknown
+TRI,nan,Unknown
+SYF,Financials,Unknown
+GEHC,Health Care,Unknown
+ENTG,Information Technology,Unknown
+VRSN,Information Technology,Unknown
+NTRA,Health Care,Unknown
+GLXY,nan,Unknown
+AME,Industrials,Unknown
+GPN,Financials,Unknown
+PODD,Health Care,Unknown
+BIIB,Health Care,Unknown
+ALGN,Health Care,Unknown
+ESTC,Information Technology,Unknown
+CIFR,nan,Unknown
+FTV,Industrials,Unknown
+A,Health Care,Unknown
+IR,Industrials,Unknown
+ELAN,Health Care,Unknown
+RBRK,Information Technology,Unknown
+BWXT,Industrials,Unknown
+CDW,Information Technology,Unknown
+EME,Industrials,Unknown
+WIX,nan,Unknown
+WAB,Industrials,Unknown
+STT,Financials,Unknown
+CHRW,Industrials,Unknown
+CLSK,nan,Unknown
+SNDK,Information Technology,Unknown
+FLEX,Information Technology,Unknown
+HUBB,Industrials,Unknown
+AVAV,nan,Unknown
+KEYS,Information Technology,Unknown
+CFG,Financials,Unknown
+SRPT,Health Care,Unknown
+HIG,Financials,Unknown
+WTW,Financials,Unknown
+BR,Industrials,Unknown
+GWRE,Information Technology,Unknown
+WAT,Health Care,Unknown
+TW,Financials,Unknown
+MTD,Health Care,Unknown
+ICLR,nan,Unknown
+THC,Health Care,Unknown
+AGNC,Financials,Unknown
+MTB,Financials,Unknown
+ACGL,Financials,Unknown
+BAX,Health Care,Unknown
+QXO,Industrials,Unknown
+PRU,Financials,Unknown
+CFLT,Information Technology,Unknown
+SAIA,Industrials,Unknown
+EQH,Financials,Unknown
+CG,Financials,Unknown
+MDGL,nan,Unknown
+IONS,Health Care,Unknown
+DT,Information Technology,Unknown
+SWKS,Information Technology,Unknown
+BULL,nan,Unknown
+BAH,Industrials,Unknown
+EXAS,Health Care,Unknown
+AKAM,Information Technology,Unknown
+PTC,Information Technology,Unknown
+TYL,Information Technology,Unknown
+FDS,Financials,Unknown
+GNRC,Industrials,Unknown
+NXT,nan,Unknown
+ZBRA,Information Technology,Unknown
+FTAI,Industrials,Unknown
+LSCC,Information Technology,Unknown
+TRU,Industrials,Unknown
+FITB,Financials,Unknown
+GH,nan,Unknown
+DOV,Industrials,Unknown
+AVTR,Health Care,Unknown
+MTZ,Industrials,Unknown
+MEDP,Health Care,Unknown
+COOP,Financials,Unknown
+XPO,Industrials,Unknown
+SWK,Industrials,Unknown
+CHKP,nan,Unknown
+XYL,Industrials,Unknown
+MAS,Industrials,Unknown
+RJF,Financials,Unknown
+TROW,Financials,Unknown
+INCY,Health Care,Unknown
+JBHT,Industrials,Unknown
+NVT,Industrials,Unknown
+HALO,Health Care,Unknown
+CSL,Industrials,Unknown
+TDY,Industrials,Unknown
+FOUR,Information Technology,Unknown
+PAYC,Information Technology,Unknown
+HEI,Industrials,Unknown
+VRNA,nan,Unknown
+CAR,Industrials,Unknown
+OWL,Financials,Unknown
+THAR,nan,Unknown
+DGX,Health Care,Unknown
+JKHY,Financials,Unknown
+ZBH,Health Care,Unknown
+HUT,nan,Unknown
+SEDG,nan,Unknown
+ILMN,Health Care,Unknown
+OC,Industrials,Unknown
+EXPD,Industrials,Unknown
+PATH,Information Technology,Unknown
+FNB,Financials,Unknown
+ATI,Industrials,Unknown
+ALK,Industrials,Unknown
+BRKR,Health Care,Unknown
+FFIV,Information Technology,Unknown
+GLOB,Information Technology,Unknown
+COLB,Financials,Unknown
+ONTO,Information Technology,Unknown
+NLY,Financials,Unknown
+RPRX,Health Care,Unknown
+SNY,nan,Unknown
+CPAY,Financials,Unknown
+GEN,Information Technology,Unknown
+MIDD,Industrials,Unknown
+PGY,nan,Unknown
+PNR,Industrials,Unknown
+TRMB,Information Technology,Unknown
+LDOS,Industrials,Unknown
+CRSP,nan,Unknown
+AAOI,nan,Unknown
+UHS,Health Care,Unknown
+STRL,nan,Unknown
+CNH,Industrials,Unknown
+S,Information Technology,Unknown
+RNA,nan,Unknown
+GRAB,nan,Unknown
+CRL,Health Care,Unknown
+AUR,Information Technology,Unknown
+EPAM,Information Technology,Unknown
+ALLE,Industrials,Unknown
+CW,Industrials,Unknown
+LH,Health Care,Unknown
+NTRS,Financials,Unknown
+WMS,Industrials,Unknown
+WST,Health Care,Unknown
+MKTX,Financials,Unknown
+QRVO,Information Technology,Unknown
+WSO,Industrials,Unknown
+NICE,nan,Unknown
+XP,Financials,Unknown
+CMA,Financials,Unknown
+WCC,Industrials,Unknown
+EVR,Financials,Unknown
+BBIO,nan,Unknown
+ALTS,nan,Unknown
+RBA,Industrials,Unknown
+AL,Industrials,Unknown
+IPDN,nan,Unknown
+IEX,Industrials,Unknown
+SLNO,nan,Unknown
+CYTK,nan,Unknown
+WWD,Industrials,Unknown
+VSAT,nan,Unknown
+WRB,Financials,Unknown
+PEN,Health Care,Unknown
+SMTC,nan,Unknown
+TPG,Financials,Unknown
+AAON,Industrials,Unknown
+HQY,nan,Unknown
+RRX,Industrials,Unknown
+HSIC,Health Care,Unknown
+STE,Health Care,Unknown
+TLRY,nan,Unknown
+SEZL,nan,Unknown
+HOLX,Health Care,Unknown
+PNFP,Financials,Unknown
+TMDX,nan,Unknown
+CACI,Industrials,Unknown
+BAM,Financials,Unknown
+CNM,Industrials,Unknown
+UI,Information Technology,Unknown
+BMRN,Health Care,Unknown
+NBIX,Health Care,Unknown
+RVTY,Health Care,Unknown
+ONC,nan,Unknown
+TREX,Industrials,Unknown
+HII,Industrials,Unknown
+COMM,nan,Unknown
+TECH,Health Care,Unknown
+CVLT,nan,Unknown
+KNX,Industrials,Unknown
+DOCS,Health Care,Unknown
+MANH,Information Technology,Unknown
+TTAN,nan,Unknown
+PCOR,Information Technology,Unknown
+LNTH,nan,Unknown
+ACM,Industrials,Unknown
+MTSI,Information Technology,Unknown
+VLTO,Industrials,Unknown
+MASI,Health Care,Unknown
+ASND,nan,Unknown
+NVMI,nan,Unknown
+ALLY,Financials,Unknown
+TXT,Industrials,Unknown
+SSNC,Information Technology,Unknown
+DVA,Health Care,Unknown
+SOLV,Health Care,Unknown
+EG,Financials,Unknown
+FBIN,Industrials,Unknown
+VTRS,Health Care,Unknown
+UNM,Financials,Unknown
+DBX,Information Technology,Unknown
+MKSI,Information Technology,Unknown
+JBLU,nan,Unknown
+AIZ,Financials,Unknown
+JAZZ,Health Care,Unknown
+JEF,Financials,Unknown
+DAVE,nan,Unknown
+PCTY,Information Technology,Unknown
+INSP,Health Care,Unknown
+EXEL,Health Care,Unknown
+J,Industrials,Unknown
+PFG,Financials,Unknown
+BSY,Information Technology,Unknown
+APG,Industrials,Unknown
+TTMI,nan,Unknown
+EEFT,Financials,Unknown
+NNE,nan,Unknown
+PONY,nan,Unknown
+SPNS,nan,Unknown
+RMBS,nan,Unknown
+APM,nan,Unknown
+SYM,nan,Unknown
+GGAL,nan,Unknown
+ABVX,nan,Unknown
+KNSL,Financials,Unknown
+TSEM,nan,Unknown
+RGEN,Health Care,Unknown
+MORN,Financials,Unknown
+OUST,nan,Unknown
+AMBA,nan,Unknown
+NVTS,nan,Unknown
+VMI,Industrials,Unknown
+RR,nan,Unknown
+CGNX,Information Technology,Unknown
+STRC,nan,Unknown
+WGS,nan,Unknown
+SMMT,Health Care,Unknown
+GDS,nan,Unknown
+BNTX,nan,Unknown
+SITM,nan,Unknown
+EHC,Health Care,Unknown
+KD,Information Technology,Unknown
+NDSN,Industrials,Unknown
+ALSN,Industrials,Unknown
+AGCO,Industrials,Unknown
+SNV,Financials,Unknown
+VRNS,nan,Unknown
+G,Information Technology,Unknown
+TNXP,nan,Unknown
+LOAR,Industrials,Unknown
+PI,nan,Unknown
+WAL,Financials,Unknown
+BEN,Financials,Unknown
+RXRX,nan,Unknown
+IVZ,Financials,Unknown
+GMED,Health Care,Unknown
+LQDA,nan,Unknown
+VLY,nan,Unknown
+APPF,Information Technology,Unknown
+CLH,Industrials,Unknown
+SNX,Information Technology,Unknown
+GFS,Information Technology,Unknown
+RNR,Financials,Unknown
+DOX,Information Technology,Unknown
+FROG,nan,Unknown
+PSN,Industrials,Unknown
+PSIX,nan,Unknown
+MKL,Financials,Unknown
+EOSE,nan,Unknown
+TIGR,nan,Unknown
+KEX,Industrials,Unknown
+CHE,Health Care,Unknown
+HLI,Financials,Unknown
+EWBC,Financials,Unknown
+WU,Information Technology,Unknown
+AOS,Industrials,Unknown
+RVMD,Health Care,Unknown
+ROL,Industrials,Unknown
+STNE,nan,Unknown
+SF,Financials,Unknown
+GL,Financials,Unknown
+SSB,Financials,Unknown
+TTC,Industrials,Unknown
+SITE,Industrials,Unknown
+KRMN,Industrials,Unknown
+OSK,Industrials,Unknown
+OLED,Information Technology,Unknown
+AYI,Industrials,Unknown
+ZION,Financials,Unknown
+FLS,Industrials,Unknown
+SNA,Industrials,Unknown
+TFX,Health Care,Unknown
+INFA,Information Technology,Unknown
+L,Financials,Unknown
+AIT,Industrials,Unknown
+TTEK,Industrials,Unknown
+AWI,Industrials,Unknown
+ROIV,Health Care,Unknown
+FNF,Financials,Unknown
+PB,Financials,Unknown
+LNC,Financials,Unknown
+CINF,Financials,Unknown
+QGEN,Health Care,Unknown
+PEGA,Information Technology,Unknown
+BIO,Health Care,Unknown
+RYAN,Financials,Unknown
+RITM,Financials,Unknown
+RHI,Industrials,Unknown
+RBC,Industrials,Unknown
+BPOP,Financials,Unknown
+MLI,Industrials,Unknown
+LECO,Industrials,Unknown
+WBS,Financials,Unknown
+NCNO,Information Technology,Unknown
+RGA,Financials,Unknown
+APLS,Health Care,Unknown
+VOYA,Financials,Unknown
+KBR,Industrials,Unknown
+CR,Industrials,Unknown
+CFR,Financials,Unknown
+WEX,Financials,Unknown
+SLM,Financials,Unknown
+CCCS,Information Technology,Unknown
+RAL,Information Technology,Unknown
+RNG,Information Technology,Unknown
+DCI,Industrials,Unknown
+CRUS,Information Technology,Unknown
+AFG,Financials,Unknown
+UWMC,Financials,Unknown
+AXS,Financials,Unknown
+HLNE,Financials,Unknown
+ARW,Information Technology,Unknown
+EXLS,Industrials,Unknown
+WSC,Industrials,Unknown
+AVT,Information Technology,Unknown
+CACC,Financials,Unknown
+ACHC,Health Care,Unknown
+SEIC,Financials,Unknown
+GGG,Industrials,Unknown
+HXL,Industrials,Unknown
+SAIC,Industrials,Unknown
+CBSH,Financials,Unknown
+WTM,Financials,Unknown
+ECG,Industrials,Unknown
+HEI-A,Industrials,Unknown
+GXO,Industrials,Unknown
+WTFC,Financials,Unknown
+ERIE,nan,Unknown
+SARO,Industrials,Unknown
+ESAB,Industrials,Unknown
+R,Industrials,Unknown
+STWD,Financials,Unknown
+ITT,Industrials,Unknown
+TKR,Industrials,Unknown
+SSD,Industrials,Unknown
+ORI,Financials,Unknown
+OMF,Financials,Unknown
+JHG,Financials,Unknown
+MTG,Financials,Unknown
+LSTR,Industrials,Unknown
+SAIL,Information Technology,Unknown
+KMPR,Financials,Unknown
+FCN,Industrials,Unknown
+CORT,Health Care,Unknown
+XRAY,Health Care,Unknown
+GTES,Industrials,Unknown
+LAZ,Financials,Unknown
+ALGM,Information Technology,Unknown
+AMKR,Information Technology,Unknown
+PRI,Financials,Unknown
+LFUS,Information Technology,Unknown
+ST,Industrials,Unknown
+RARE,Health Care,Unknown
+OZK,Financials,Unknown
+DRS,Industrials,Unknown
+VNT,Information Technology,Unknown
+VIRT,Financials,Unknown
+HAYW,Industrials,Unknown
+AMG,Financials,Unknown
+MSA,Industrials,Unknown
+PRGO,Health Care,Unknown
+OGN,Health Care,Unknown
+MSM,Industrials,Unknown
+SHC,Health Care,Unknown
+FAF,Financials,Unknown
+NVST,Health Care,Unknown
+DNB,Industrials,Unknown
+AMTM,Industrials,Unknown
+THG,Financials,Unknown
+DLB,Information Technology,Unknown
+DV,Information Technology,Unknown
+SPR,Industrials,Unknown
+CNXC,Information Technology,Unknown
+MAN,Industrials,Unknown
+RLI,Financials,Unknown
+BHF,Financials,Unknown
+AGO,Financials,Unknown
+CXT,Industrials,Unknown
+FHB,Financials,Unknown
+DXC,Information Technology,Unknown
+CNA,Financials,Unknown
+CLVT,Industrials,Unknown
+BOKF,Financials,Unknown
+TDC,Information Technology,Unknown
+UHAL-B,Industrials,Unknown
+FRHC,Financials,Unknown
+SNDR,Industrials,Unknown
+IPGP,Information Technology,Unknown
+CERT,Health Care,Unknown
+UHAL,Industrials,Unknown
+INGM,Information Technology,Unknown
+TFSL,Financials,Unknown
