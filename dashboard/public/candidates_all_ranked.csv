@@ -1,36 +1,44 @@
 ticker_yf,ticker_tv,price,mcap_usd_final,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket
+U,U,,18514.732923310487,460604577.13064194,0.6484848484848484,STRONG_BUY,BUY,35.0,Information Technology,Unknown,True,True,True,3,20+,1.3890909090909092,confirmed
 SYK,SYK,,149982.9806330369,426969846.499176,0.6484848484848484,STRONG_BUY,BUY,37.0,Health Care,Unknown,True,True,True,3,20+,1.3890909090909092,confirmed
-QCOM,QCOM,,172467.35866156363,1083798077.9722595,0.603030303030303,STRONG_BUY,BUY,48.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
 MU,MU,,147019.46879772117,2220763336.0175323,0.603030303030303,STRONG_BUY,BUY,52.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
-NET,NET,,74724.91222323076,425351242.2789765,0.603030303030303,STRONG_BUY,BUY,39.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
 ASML,ASML,,251053.688045,993335096.4694214,0.603030303030303,STRONG_BUY,BUY,41.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+QCOM,QCOM,,172467.35866156363,1083798077.9722595,0.603030303030303,STRONG_BUY,BUY,48.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+NET,NET,,74724.91222323076,425351242.2789765,0.603030303030303,STRONG_BUY,BUY,39.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+HCA,HCA,,98457.44135412811,444221186.4581299,0.603030303030303,STRONG_BUY,BUY,31.0,Health Care,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
 PANW,PANW,,130074.29791803447,1736438596.093216,0.603030303030303,STRONG_BUY,BUY,60.0,Information Technology,Unknown,True,True,True,3,20+,1.3618181818181818,confirmed
+STX,STX,,40017.337932043556,452468783.31985474,0.603030303030303,STRONG_BUY,BUY,29.0,Information Technology,Unknown,True,True,True,3,20+,1.3584848484848484,confirmed
+UAL,UAL,,34506.60425686181,488286318.7242127,0.603030303030303,STRONG_BUY,BUY,27.0,Industrials,Unknown,True,True,True,3,20+,1.3518181818181818,confirmed
 AVGO,AVGO,,1575145.5435937315,6627403939.134827,0.5575757575757576,STRONG_BUY,BUY,49.0,Information Technology,Unknown,True,True,True,3,20+,1.3345454545454545,confirmed
+CYBR,CYBR,,23326.941019784063,492965489.276886,0.5575757575757576,STRONG_BUY,BUY,42.0,Technology,Unknown,True,True,True,3,20+,1.3345454545454545,confirmed
 GLW,GLW,,60982.6829850636,386012825.3914642,0.603030303030303,STRONG_BUY,BUY,19.0,Information Technology,Unknown,True,True,True,3,15–19,1.325151515151515,confirmed
-ANET,ANET,,179543.2225490919,1040315348.0796052,0.5121212121212121,STRONG_BUY,BUY,33.0,Information Technology,Unknown,True,True,True,3,20+,1.3072727272727271,confirmed
 LRCX,LRCX,,130295.67618631678,1132804915.2899551,0.5121212121212121,STRONG_BUY,BUY,38.0,Information Technology,Unknown,True,True,True,3,20+,1.3072727272727271,confirmed
-U,U,,18514739200.0,460604577.13064194,0.6484848484848484,STRONG_BUY,,,Information Technology,Unknown,True,True,False,2,,0.989090909090909,pre_signal
+ANET,ANET,,179543.2225490919,1040315348.0796052,0.5121212121212121,STRONG_BUY,BUY,33.0,Information Technology,Unknown,True,True,True,3,20+,1.3072727272727271,confirmed
+PH,PH,,96096.02261375335,479722219.8730469,0.5121212121212121,STRONG_BUY,BUY,33.0,Industrials,Unknown,True,True,True,3,20+,1.3072727272727271,confirmed
+URI,URI,,62747.493183284816,451114284.4140625,0.5121212121212121,STRONG_BUY,BUY,26.0,Industrials,Unknown,True,True,True,3,20+,1.2939393939393937,confirmed
 LITE,LITE,,10447254528.0,542723714.1992188,0.603030303030303,STRONG_BUY,,,Information Technology,Unknown,True,True,False,2,,0.9618181818181818,pre_signal
-STX,STX,,40017305600.0,452468783.31985474,0.603030303030303,STRONG_BUY,,,Information Technology,Unknown,True,True,False,2,,0.9618181818181818,pre_signal
-UAL,UAL,,34506592256.0,488286318.7242127,0.603030303030303,STRONG_BUY,,,Industrials,Unknown,True,True,False,2,,0.9618181818181818,pre_signal
-CYBR,CYBR,,23326939136.0,492965489.276886,0.5575757575757576,STRONG_BUY,,,Technology,Unknown,True,True,False,2,,0.9345454545454546,pre_signal
-TEM,TEM,,,898195515.0008202,0.5575757575757576,STRONG_BUY,,,Health Care,Unknown,True,True,False,2,,0.9345454545454546,pre_signal
-WDC,WDC,,31930699776.0,584573280.9040451,0.5575757575757576,STRONG_BUY,,,Information Technology,Unknown,True,True,False,2,,0.9345454545454546,pre_signal
 CRDO,CRDO,,24361297920.0,605341135.6187057,0.5575757575757576,STRONG_BUY,,,Technology,Unknown,True,True,False,2,,0.9345454545454546,pre_signal
+TEM,TEM,,13832223744.0,898195515.0008202,0.5575757575757576,STRONG_BUY,,,Health Care,Unknown,True,True,False,2,,0.9345454545454546,pre_signal
+WDC,WDC,,31930699776.0,584573280.9040451,0.5575757575757576,STRONG_BUY,,,Information Technology,Unknown,True,True,False,2,,0.9345454545454546,pre_signal
 FSLR,FSLR,,22000855040.0,672932531.0977936,0.5121212121212121,STRONG_BUY,,,Information Technology,Unknown,True,True,False,2,,0.9072727272727272,pre_signal
-URI,URI,,62747467776.0,451114284.4140625,0.5121212121212121,STRONG_BUY,,,Industrials,Unknown,True,True,False,2,,0.9072727272727272,pre_signal
 SNOW,SNOW,,75266.56987238451,1723785693.0124664,0.49090909090909096,BUY,BUY,57.0,Information Technology,Unknown,False,False,True,1,20+,0.6945454545454545,pre_signal
 AAPL,AAPL,,3557093.013042775,11669588916.483536,0.4454545454545455,BUY,BUY,55.0,Information Technology,Unknown,False,False,True,1,20+,0.6672727272727272,pre_signal
 MDB,MDB,,26419.83616258924,1153101733.1089785,0.4454545454545455,BUY,BUY,43.0,Information Technology,Unknown,False,False,True,1,20+,0.6672727272727272,pre_signal
 MPWR,MPWR,,41467.76551814435,423263173.2485962,0.4666666666666667,BUY,BUY,25.0,Information Technology,Unknown,False,False,True,1,20+,0.6633333333333333,pre_signal
+HPE,HPE,,30863.309939042945,466534704.35959816,0.4666666666666667,BUY,BUY,24.0,Information Technology,Unknown,False,False,True,1,20+,0.6599999999999999,pre_signal
 DAL,DAL,,39947.38122377771,416681299.3560219,0.4454545454545455,BUY,BUY,27.0,Industrials,Unknown,False,False,True,1,20+,0.6572727272727272,pre_signal
 SHOP,SHOP,,190825.357439208,909280845.583954,0.4212121212121212,BUY,BUY,56.0,Information Technology,Unknown,False,False,True,1,20+,0.6527272727272727,pre_signal
+CI,CI,,81495.81205257379,470636972.9917908,0.403030303030303,BUY,BUY,34.0,Health Care,Unknown,False,False,True,1,20+,0.6418181818181817,pre_signal
 TER,TER,,19120.63812021901,383900022.4434662,0.4454545454545455,BUY,BUY,22.0,Information Technology,Unknown,False,False,True,1,20+,0.6406060606060606,pre_signal
 CVS,CVS,,93577.12258393754,426372733.9981079,0.4,BUY,BUY,33.0,Health Care,Unknown,False,False,True,1,20+,0.64,pre_signal
+RF,RF,,24119.095168056792,443419514.7013569,0.3787878787878788,BUY,BUY,32.0,Financials,Unknown,False,False,True,1,20+,0.6272727272727272,pre_signal
 CAT,CAT,,198204.0688183878,1188119919.2800903,0.3787878787878788,BUY,BUY,32.0,Industrials,Unknown,False,False,True,1,20+,0.6272727272727272,pre_signal
+MSI,MSI,,79799.93524720318,488944522.3443604,0.4454545454545455,BUY,BUY,18.0,Information Technology,Unknown,False,False,True,1,15–19,0.6272727272727272,pre_signal
+ALNY,ALNY,,59247.71155494267,493391900.4396057,0.37575757575757573,BUY,BUY,39.0,Health Care,Unknown,False,False,True,1,20+,0.6254545454545454,pre_signal
 SOFI,SOFI,,30345.868466541444,1636215249.1574,0.37575757575757573,BUY,BUY,28.0,Financials,Unknown,False,False,True,1,20+,0.6187878787878788,pre_signal
 JNJ,JNJ,,429719.9040718898,1415990554.57695,0.35454545454545455,BUY,BUY,31.0,Health Care,Unknown,False,False,True,1,20+,0.6127272727272727,pre_signal
 RKLB,RKLB,,22113.825031735356,1005653795.0159836,0.4,BUY,BUY,21.0,Industrials,Unknown,False,False,True,1,20+,0.61,pre_signal
+CDNS,CDNS,,95646.71348916861,456291177.24487305,0.35454545454545455,BUY,BUY,29.0,Information Technology,Unknown,False,False,True,1,20+,0.6093939393939394,pre_signal
 USB,USB,,75942.0467444417,385231537.01698303,0.35454545454545455,BUY,BUY,29.0,Financials,Unknown,False,False,True,1,20+,0.6093939393939394,pre_signal
 HWM,HWM,,71837.11110555333,394709218.6341858,0.3333333333333333,BUY,BUY,30.0,Industrials,Unknown,False,False,True,1,20+,0.6,pre_signal
 INSM,INSM,,30670.481503202092,393637109.4129944,0.35454545454545455,BUY,BUY,26.0,Health Care,Unknown,False,False,True,1,20+,0.5993939393939394,pre_signal
@@ -40,93 +48,98 @@ BRK-B,BRK.B,,1079197.8767169793,2114235756.1914065,0.4,BUY,BUY,11.0,Financials,U
 GE,GE,,296106.46655059163,1158735284.2807007,0.3090909090909091,BUY,BUY,27.0,Industrials,Unknown,False,False,True,1,20+,0.5754545454545454,pre_signal
 UNH,UNH,,285640.4154329702,5258725442.799912,0.2909090909090909,BUY,BUY,32.0,Health Care,Unknown,False,False,True,1,20+,0.5745454545454545,pre_signal
 ADI,ADI,,121547.43314920049,965965640.519638,0.28787878787878785,BUY,BUY,40.0,Information Technology,Unknown,False,False,True,1,20+,0.5727272727272726,pre_signal
+MMM,MMM,,82717.39236402302,453851880.758667,0.31212121212121213,BUY,BUY,23.0,Industrials,Unknown,False,False,True,1,20+,0.563939393939394,pre_signal
 MRK,MRK,,211587.2159034534,932141313.2386016,0.26666666666666666,BUY,BUY,33.0,Health Care,Unknown,False,False,True,1,20+,0.5599999999999999,pre_signal
 BAC,BAC,,368643.775523043,1741096877.8701591,0.26666666666666666,BUY,BUY,30.0,Financials,Unknown,False,False,True,1,20+,0.5599999999999999,pre_signal
 FUTU,FUTU,,29730.113267,424059461.4424896,0.28787878787878785,BUY,BUY,26.0,Financial Services,Unknown,False,False,True,1,20+,0.5593939393939393,pre_signal
-ABBV,ABBV,,375499.617927841,906961665.0214386,0.26363636363636367,BUY,BUY,37.0,Health Care,Unknown,False,False,True,1,20+,0.5581818181818182,pre_signal
 APP,APP,,165823.64484676917,2493985671.5708923,0.26363636363636367,BUY,BUY,30.0,Information Technology,Unknown,False,False,True,1,20+,0.5581818181818182,pre_signal
+ABBV,ABBV,,375499.617927841,906961665.0214386,0.26363636363636367,BUY,BUY,37.0,Health Care,Unknown,False,False,True,1,20+,0.5581818181818182,pre_signal
+KEY,KEY,,20768.011397867023,456539536.1796951,0.26666666666666666,BUY,BUY,27.0,Financials,Unknown,False,False,True,1,20+,0.5499999999999999,pre_signal
 GS,GS,,223471.74237614122,1193244492.937317,0.2424242424242424,BUY,BUY,31.0,Financials,Unknown,False,False,True,1,20+,0.5454545454545454,pre_signal
+ZS,ZS,,43660.18,459972343.7886048,0.22424242424242424,BUY,BUY,56.0,Information Technology,Unknown,False,False,True,1,20+,0.5345454545454545,pre_signal
 C,C,,175621.65045429653,1264838753.374443,0.17575757575757575,NEUTRAL,BUY,28.0,Financials,Unknown,False,False,True,1,20+,0.4987878787878788,other
 HUBS,HUBS,,25689.470286599353,443101395.9690857,0.1575757575757576,NEUTRAL,BUY,42.0,Information Technology,Unknown,False,False,True,1,20+,0.4945454545454545,other
+ARM,ARM,,143473.315475,515404502.91511536,0.1575757575757576,NEUTRAL,BUY,41.0,Information Technology,Unknown,False,False,True,1,20+,0.4945454545454545,other
 AON,AON,,79898.27551527605,442297972.7027893,0.17575757575757575,NEUTRAL,BUY,26.0,Financials,Unknown,False,False,True,1,20+,0.4921212121212121,other
+CB,CB,,110588.70954676793,449440006.2496948,0.13333333333333333,NEUTRAL,BUY,32.0,Financials,Unknown,False,False,True,1,20+,0.48,other
 COR,COR,,56709.27939535475,387050562.922821,0.1575757575757576,NEUTRAL,BUY,22.0,Health Care,Unknown,False,False,True,1,20+,0.4678787878787879,other
 ORCL,ORCL,,653896.3152883743,2480144165.3500366,0.11212121212121212,NEUTRAL,BUY,47.0,Information Technology,Unknown,False,False,True,1,20+,0.4672727272727273,other
 BDX,BDX,,55144.259500507025,410407338.780365,0.17878787878787877,NEUTRAL,BUY,18.0,Health Care,Unknown,False,False,True,1,15–19,0.46727272727272723,other
 NOW,NOW,,190070.40100983356,1650554508.659668,0.09090909090909091,NEUTRAL,BUY,51.0,Information Technology,Unknown,False,False,True,1,20+,0.4545454545454546,other
-EMR,EMR,,74599.1383817641,372902437.9225159,0.09090909090909091,NEUTRAL,BUY,34.0,Industrials,Unknown,False,False,True,1,20+,0.4545454545454546,other
 IBM,IBM,,231510.47904468703,1068746479.0985107,0.11212121212121212,NEUTRAL,BUY,26.0,Information Technology,Unknown,False,False,True,1,20+,0.4539393939393939,other
 WDAY,WDAY,,61711.708063272585,908353504.5711516,0.06666666666666667,NEUTRAL,BUY,48.0,Information Technology,Unknown,False,False,True,1,20+,0.43999999999999995,other
 CRM,CRM,,239726.57141107114,2551685895.414963,0.024242424242424246,NEUTRAL,BUY,58.0,Information Technology,Unknown,False,False,True,1,20+,0.41454545454545455,other
-NOC,NOC,,83160.67815598079,371826638.6566162,0.02121212121212121,NEUTRAL,BUY,27.0,Industrials,Unknown,False,False,True,1,20+,0.40272727272727277,other
+FICO,FICO,,36773.36154879336,473392095.8117676,0.04242424242424242,NEUTRAL,BUY,26.0,Information Technology,Unknown,False,False,True,1,20+,0.4121212121212121,other
 BA,BA,,173621.37655386646,1423621445.624771,0.0,NEUTRAL,BUY,36.0,Industrials,Unknown,False,False,True,1,20+,0.4,other
 MA,MA,,528141.8202781613,1393892857.9058838,-0.024242424242424246,NEUTRAL,BUY,46.0,Financials,Unknown,False,False,True,1,20+,0.3854545454545455,other
 OKTA,OKTA,,16134.237427730128,432138588.07071686,-0.04242424242424242,NEUTRAL,BUY,52.0,Information Technology,Unknown,False,False,True,1,20+,0.3745454545454545,other
 PFE,PFE,,141456.49651326504,912226123.3651448,-0.045454545454545456,NEUTRAL,BUY,30.0,Health Care,Unknown,False,False,True,1,20+,0.3727272727272727,other
 JPM,JPM,,809472.5094444479,2044173084.869537,-0.06666666666666667,NEUTRAL,BUY,30.0,Financials,Unknown,False,False,True,1,20+,0.36,other
 VEEV,VEEV,,44735.4179192591,387328192.73239136,-0.08787878787878788,NEUTRAL,BUY,38.0,Health Care,Unknown,False,False,True,1,20+,0.3472727272727273,other
-IREN,IREN,,7112276992.0,643047493.7144375,0.49090909090909096,BUY,,,Financial Services,Unknown,False,False,False,0,,0.29454545454545455,pre_signal
+TEAM,TEAM,,45234.341923494314,497654799.0164948,-0.08787878787878788,NEUTRAL,BUY,36.0,Information Technology,Unknown,False,False,True,1,20+,0.3472727272727273,other
 ADSK,ADSK,,69516812288.0,554700226.9534302,0.49090909090909096,BUY,,,Information Technology,Unknown,False,False,False,0,,0.29454545454545455,pre_signal
+ACN,ACN,,158796.28214193878,965929285.7048798,-0.17575757575757575,NEUTRAL,BUY,30.0,Information Technology,Unknown,False,False,True,1,20+,0.29454545454545455,other
+IREN,IREN,,7112276992.0,643047493.7144375,0.49090909090909096,BUY,,,Financial Services,Unknown,False,False,False,0,,0.29454545454545455,pre_signal
 INTU,INTU,,187585.57311703239,1545223465.173035,-0.17575757575757575,NEUTRAL,BUY,38.0,Information Technology,Unknown,False,False,True,1,20+,0.29454545454545455,other
 DDOG,DDOG,,47457218560.0,683949601.2382889,0.49090909090909096,BUY,,,Information Technology,Unknown,False,False,False,0,,0.29454545454545455,pre_signal
-ACN,ACN,,158796.28214193878,965929285.7048798,-0.17575757575757575,NEUTRAL,BUY,30.0,Information Technology,Unknown,False,False,True,1,20+,0.29454545454545455,other
 CRWD,CRWD,,104806.39786331877,1448470557.6191711,-0.17575757575757575,NEUTRAL,BUY,61.0,Information Technology,Unknown,False,False,True,1,20+,0.29454545454545455,other
 INTC,INTC,,107192.73,3106121152.8244114,0.3090909090909091,BUY,SELL,51.0,Information Technology,Unknown,False,False,False,0,20+,0.28545454545454546,pre_signal
-HPE,HPE,,31033464832.0,466534704.35959816,0.4666666666666667,BUY,,,Information Technology,Unknown,False,False,False,0,,0.27999999999999997,pre_signal
+BLK,BLK,,179365.69881072827,530934234.4445801,-0.1575757575757576,NEUTRAL,BUY,23.0,Financials,Unknown,False,False,True,1,20+,0.2821212121212121,other
 HOOD,HOOD,,89978.35472460822,4010333747.664871,-0.203030303030303,SELL,BUY,30.0,Financials,Unknown,False,False,True,1,20+,0.2781818181818182,other
 WFC,WFC,,262137.597251188,1064129151.0306548,-0.2,SELL,BUY,29.0,Financials,Unknown,False,False,True,1,20+,0.27666666666666667,other
-COHR,COHR,,15243960320.0,579761064.8122787,0.4454545454545455,BUY,,,Information Technology,Unknown,False,False,False,0,,0.2672727272727273,pre_signal
 WULF,WULF,,3580384256.0,573570419.4047809,0.4454545454545455,BUY,,,Financial Services,Unknown,False,False,False,0,,0.2672727272727273,pre_signal
+COHR,COHR,,15243960320.0,579761064.8122787,0.4454545454545455,BUY,,,Information Technology,Unknown,False,False,False,0,,0.2672727272727273,pre_signal
 AXON,AXON,,57183.41763234051,432770803.5409546,-0.2,SELL,BUY,26.0,Industrials,Unknown,False,False,True,1,20+,0.26666666666666666,other
 GEV,GEV,,158456.1037902149,1679317739.0863037,-0.22424242424242424,SELL,BUY,38.0,Industrials,Unknown,False,False,True,1,20+,0.26545454545454544,other
 LLY,LLY,,688272.8117102807,3758756371.5722656,-0.24545454545454548,SELL,BUY,35.0,Health Care,Unknown,False,False,True,1,20+,0.2527272727272727,other
 KKR,KKR,,120750.28307979529,407150206.7902374,-0.22424242424242424,SELL,BUY,25.0,Financials,Unknown,False,False,True,1,20+,0.24878787878787878,other
+ICE,ICE,,99756.16503246229,515286527.5961304,-0.2212121212121212,SELL,BUY,23.0,Financials,Unknown,False,False,True,1,20+,0.24393939393939396,other
 CAH,CAH,,35713.97623973539,408423382.8144837,-0.2212121212121212,SELL,BUY,22.0,Health Care,Unknown,False,False,True,1,20+,0.2406060606060606,other
-COIN,COIN,,76842.45723024,2773073477.86438,-0.26666666666666666,SELL,BUY,42.0,Financials,Unknown,False,False,True,1,20+,0.24,other
-AFRM,AFRM,,28445526016.0,797210247.9691696,0.4,BUY,,,Information Technology,Unknown,False,False,False,0,,0.24,pre_signal
+BMY,BMY,,95950.44894328588,459386734.5503616,-0.26666666666666666,SELL,BUY,33.0,Health Care,Unknown,False,False,True,1,20+,0.24,other
 AMAT,AMAT,,129653.5597233744,1414876125.0291443,-0.26666666666666666,SELL,BUY,41.0,Information Technology,Unknown,False,False,True,1,20+,0.24,other
+AFRM,AFRM,,28445526016.0,797210247.9691696,0.4,BUY,,,Information Technology,Unknown,False,False,False,0,,0.24,pre_signal
+COIN,COIN,,76842.45723024,2773073477.86438,-0.26666666666666666,SELL,BUY,42.0,Financials,Unknown,False,False,True,1,20+,0.24,other
+TT,TT,,92083.53319576925,472344882.2412109,-0.26666666666666666,SELL,BUY,34.0,Industrials,Unknown,False,False,True,1,20+,0.24,other
 SMCI,SMCI,,24014.58376277356,1127563689.539585,-0.2424242424242424,SELL,BUY,25.0,Information Technology,Unknown,False,False,True,1,20+,0.23787878787878788,other
-ON,ON,,20082.668607025324,375690707.8215599,-0.28787878787878785,SELL,BUY,44.0,Information Technology,Unknown,False,False,True,1,20+,0.2272727272727273,other
 FDX,FDX,,53718.940727707806,380246666.9627381,-0.28787878787878785,SELL,BUY,36.0,Industrials,Unknown,False,False,True,1,20+,0.2272727272727273,other
-RF,RF,,24119085056.0,443419514.7013569,0.3787878787878788,BUY,,,Financials,Unknown,False,False,False,0,,0.22727272727272727,pre_signal
 NVDA,NVDA,,4058585.8838515,31679034365.763245,-0.2909090909090909,SELL,BUY,70.0,Information Technology,Unknown,False,False,True,1,20+,0.22545454545454546,other
 AMD,AMD,,245276.61176233692,8808235340.593948,-0.2909090909090909,SELL,BUY,59.0,Information Technology,Unknown,False,False,True,1,20+,0.22545454545454546,other
 UBER,UBER,,189752.25260389736,1471257624.3314743,-0.2909090909090909,SELL,BUY,61.0,Industrials,Unknown,False,False,True,1,20+,0.22545454545454546,other
-ALNY,ALNY,,59247706112.0,493391900.4396057,0.37575757575757573,BUY,,,Health Care,Unknown,False,False,False,0,,0.22545454545454544,pre_signal
-ZTS,ZTS,,68600.37,368357812.1334076,-0.26666666666666666,SELL,BUY,24.0,Health Care,Unknown,False,False,True,1,20+,0.22,other
 NU,NU,,71228841984.0,781411600.3397226,0.35454545454545455,BUY,,,Financials,Unknown,False,False,False,0,,0.21272727272727274,pre_signal
-V,V,,661247.939348319,1841316832.1409607,-0.3333333333333333,SELL,BUY,44.0,Financials,Unknown,False,False,True,1,20+,0.2,other
 ISRG,ISRG,,167358.3366958073,987212307.3701476,-0.3333333333333333,SELL,BUY,40.0,Health Care,Unknown,False,False,True,1,20+,0.2,other
+V,V,,661247.939348319,1841316832.1409607,-0.3333333333333333,SELL,BUY,44.0,Financials,Unknown,False,False,True,1,20+,0.2,other
+PLTR,PLTR,,363229.6481947778,12881682365.48416,-0.33636363636363636,SELL,BUY,32.0,Information Technology,Unknown,False,False,True,1,20+,0.19818181818181818,other
 ALAB,ALAB,,31781072896.0,888140424.475708,0.3303030303030303,BUY,,,Information Technology,Unknown,False,False,False,0,,0.19818181818181818,pre_signal
 CSCO,CSCO,,264923.8785004256,1500950371.3463593,-0.33636363636363636,SELL,BUY,32.0,Information Technology,Unknown,False,False,True,1,20+,0.19818181818181818,other
-PLTR,PLTR,,363229.6481947778,12881682365.48416,-0.33636363636363636,SELL,BUY,32.0,Information Technology,Unknown,False,False,True,1,20+,0.19818181818181818,other
 AJG,AJG,,76709.75325700916,414954391.8240357,-0.31212121212121213,SELL,BUY,23.0,Financials,Unknown,False,False,True,1,20+,0.1893939393939394,other
 MRVL,MRVL,,54596.79265748339,1506769519.317379,-0.35454545454545455,SELL,BUY,47.0,Information Technology,Unknown,False,False,True,1,20+,0.18727272727272726,other
 MSFT,MSFT,,3679417.4638723955,10862263286.181791,-0.38181818181818183,SELL,BUY,70.0,Information Technology,Unknown,False,False,True,1,20+,0.1709090909090909,other
 CRWV,CRWV,,43526.911729033716,2999730221.2577057,-0.38461538461538464,SELL,BUY,30.0,Technology,Unknown,False,False,True,1,20+,0.1692307692307692,other
-KEY,KEY,,20768088064.0,456539536.1796951,0.26666666666666666,BUY,,,Financials,Unknown,False,False,False,0,,0.16,pre_signal
 ADBE,ADBE,,148033.0782597371,1228548287.652893,-0.4,SELL,BUY,46.0,Information Technology,Unknown,False,False,True,1,20+,0.16,other
-ZS,ZS,,42691846144.0,459972343.7886048,0.22424242424242424,BUY,,,Information Technology,Unknown,False,False,False,0,,0.13454545454545455,pre_signal
+FI,FI,,73412.26404561674,535568658.0767822,-0.4666666666666667,SELL,BUY,42.0,Financials,Unknown,False,False,True,1,20+,0.12000000000000002,other
 TXN,TXN,,170854.16011183785,1202177670.7726288,-0.4666666666666667,SELL,BUY,44.0,Information Technology,Unknown,False,False,True,1,20+,0.12000000000000002,other
 AAL,AAL,,8630562816.0,884740356.2438488,0.2,BUY,,,Industrials,Unknown,False,False,False,0,,0.12,pre_signal
 CTAS,CTAS,,82408.98811394388,390985023.7490845,-0.4454545454545455,SELL,BUY,26.0,Industrials,Unknown,False,False,True,1,20+,0.11939393939393939,other
+CME,CME,,94397.98718984133,533533861.5020752,-0.4242424242424242,SELL,BUY,22.0,Financials,Unknown,False,False,True,1,20+,0.1187878787878788,other
 NXPI,NXPI,,57164558336.0,592037242.7202606,0.17878787878787877,NEUTRAL,,,Information Technology,Unknown,False,False,False,0,,0.10727272727272726,other
 MMC,MMC,,100163.4806194882,400285601.5876007,-0.4666666666666667,SELL,BUY,25.0,Financials,Unknown,False,False,True,1,20+,0.10333333333333336,other
 ROP,ROP,,55791.310882788704,403319892.6400757,-0.4666666666666667,SELL,BUY,24.0,Industrials,Unknown,False,False,True,1,20+,0.10000000000000003,other
 MSTR,MSTR,,95236.84454049567,4064655991.977539,-0.4454545454545455,SELL,BUY,20.0,Information Technology,Unknown,False,False,True,1,20+,0.09939393939393938,other
+TDG,TDG,,71623.4646141543,470021564.0661621,-0.49090909090909096,SELL,BUY,26.0,Industrials,Unknown,False,False,True,1,20+,0.0921212121212121,other
+EMR,EMR,,74599145472.0,372902437.9225159,0.09090909090909091,NEUTRAL,,,Industrials,Unknown,False,False,False,0,,0.05454545454545454,other
 TWLO,TWLO,,16673672192.0,578306094.0916061,0.09090909090909091,NEUTRAL,,,Information Technology,Unknown,False,False,False,0,,0.05454545454545454,other
-UPST,UPST,,6436963840.0,443722574.8586655,0.09090909090909091,NEUTRAL,,,Financial Services,Unknown,False,False,False,0,,0.05454545454545454,other
 MCHP,MCHP,,35575705600.0,592355158.8858032,0.06666666666666667,NEUTRAL,,,Information Technology,Unknown,False,False,False,0,,0.04,other
 UNP,UNP,,130652.59398266523,957135868.3815002,-0.603030303030303,STRONG_SELL,BUY,33.0,Industrials,Unknown,False,False,True,1,20+,0.03818181818181818,other
 WM,WM,,90616.68247257365,405494411.5634918,-0.603030303030303,STRONG_SELL,BUY,32.0,Industrials,Unknown,False,False,True,1,20+,0.03818181818181818,other
-FICO,FICO,,36773429248.0,473392095.8117676,0.04242424242424242,NEUTRAL,,,Information Technology,Unknown,False,False,False,0,,0.025454545454545452,other
+APO,APO,,75692.07746337821,454828908.0777741,-0.603030303030303,STRONG_SELL,BUY,24.0,Financials,Unknown,False,False,True,1,20+,0.018181818181818188,other
 ELV,ELV,,70624829440.0,656842230.1264954,0.024242424242424246,NEUTRAL,,,Health Care,Unknown,False,False,False,0,,0.014545454545454547,other
 ADP,ADP,,119880.61577851535,434979853.7774658,-0.603030303030303,STRONG_SELL,BUY,20.0,Industrials,Unknown,False,False,True,1,20+,0.004848484848484838,other
 GDS,GDS,,,83328405.83953857,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 BNTX,BNTX,,,83143038.44409943,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 SITM,SITM,,,83118219.11613464,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 EHC,EHC,,,83075492.0985794,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
-KD,KD,,,82919587.91324615,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 NDSN,NDSN,,,82907698.1250763,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+KD,KD,,,82919587.91324615,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 WGS,WGS,,,83987435.1348877,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 ALSN,ALSN,,,82844532.78015137,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 AGCO,AGCO,,,82729073.88530731,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
@@ -135,23 +148,22 @@ VRNS,VRNS,,,82273599.21861649,,,,,Technology,Unknown,False,False,False,0,,0.0,ot
 G,G,,,82082571.20441437,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 TNXP,TNXP,,,81746249.68794823,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 SMMT,SMMT,,,83405371.21547699,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
-VMI,VMI,,,84604271.8460083,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-STRC,STRC,,,84305326.9978714,,,,,Technology,Unknown,False,False,False,0,,0.0,other
-SYM,SYM,,,86703147.19223022,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-GGAL,GGAL,,,86627704.87012863,,,,,Financial Services,Unknown,False,False,False,0,,0.0,other
 RR,RR,,,84575460.66812396,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+CGNX,CGNX,,,84495944.9287796,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
+SYM,SYM,,,86703147.19223022,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+NVTS,NVTS,,,84638998.259449,,,,,Technology,Unknown,False,False,False,0,,0.0,other
+GGAL,GGAL,,,86627704.87012863,,,,,Financial Services,Unknown,False,False,False,0,,0.0,other
 ABVX,ABVX,,,86280918.50585938,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 KNSL,KNSL,,,86218700.48721313,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 TSEM,TSEM,,,86161464.58921432,,,,,Technology,Unknown,False,False,False,0,,0.0,other
-CGNX,CGNX,,,84495944.9287796,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 RGEN,RGEN,,,85799646.06376648,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
-MORN,MORN,,,85546923.69483948,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 PI,PI,,,80996434.07821655,,,,,Technology,Unknown,False,False,False,0,,0.0,other
+MORN,MORN,,,85546923.69483948,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 OUST,OUST,,,85236974.62806702,,,,,Technology,Unknown,False,False,False,0,,0.0,other
+VMI,VMI,,,84604271.8460083,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 AMBA,AMBA,,,84708654.55173492,,,,,Technology,Unknown,False,False,False,0,,0.0,other
-NVTS,NVTS,,,84638998.259449,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 LOAR,LOAR,,,81208574.18571472,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-PSIX,PSIX,,,77067427.39772797,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+PSN,PSN,,,77300687.9063797,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 WAL,WAL,,,80992588.77296448,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 BEN,BEN,,,80927168.5571003,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 SSB,SSB,,,73301828.39244843,,,,,Financials,Unknown,False,False,False,0,,0.0,other
@@ -169,8 +181,8 @@ KEX,KEX,,,75933543.91059875,,,,,Industrials,Unknown,False,False,False,0,,0.0,oth
 TIGR,TIGR,,,76512890.68391323,,,,,Financial Services,Unknown,False,False,False,0,,0.0,other
 EOSE,EOSE,,,76525364.05491114,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 MKL,MKL,,,76911321.25610352,,,,,Financials,Unknown,False,False,False,0,,0.0,other
+PSIX,PSIX,,,77067427.39772797,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 RMBS,RMBS,,,87725050.97690582,,,,,Technology,Unknown,False,False,False,0,,0.0,other
-PSN,PSN,,,77300687.9063797,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 FROG,FROG,,,77603053.17804337,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 DOX,DOX,,,78789699.05864716,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 RNR,RNR,,,79075150.10803223,,,,,Financials,Unknown,False,False,False,0,,0.0,other
@@ -186,8 +198,7 @@ RXRX,RXRX,,,80743781.73479557,,,,,Healthcare,Unknown,False,False,False,0,,0.0,ot
 APM,APM,,,87192880.90949953,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 JAZZ,JAZZ,,,92778005.328331,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
 SPNS,SPNS,,,87726946.61420822,,,,,Technology,Unknown,False,False,False,0,,0.0,other
-NBIX,NBIX,,,106705885.4625702,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
-LNTH,LNTH,,,101580007.73349762,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
+BMRN,BMRN,,,106995536.78318024,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
 PCOR,PCOR,,,101854711.83481216,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 TTAN,TTAN,,,102026268.2713318,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 MANH,MANH,,,102124741.84677124,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
@@ -200,8 +211,11 @@ HII,HII,,,104061661.89849854,,,,,Industrials,Unknown,False,False,False,0,,0.0,ot
 TREX,TREX,,,104174468.0155182,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 ONC,ONC,,,105981431.63955688,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 RVTY,RVTY,,,106163253.42056274,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
+NBIX,NBIX,,,106705885.4625702,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
+UI,UI,,,107198666.40686037,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
+ACM,ACM,,,101564591.50001526,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+CNM,CNM,,,107587316.68024065,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 SITE,SITE,,,73215154.66384888,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-MTSI,MTSI,,,101086568.65436554,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 HQY,HQY,,,114078219.0392685,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 RRX,RRX,,,113856598.21899414,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 HSIC,HSIC,,,113534432.0310974,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
@@ -213,12 +227,10 @@ PNFP,PNFP,,,110502852.77736664,,,,,Financials,Unknown,False,False,False,0,,0.0,o
 TMDX,TMDX,,,110080780.61286926,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 CACI,CACI,,,109702951.68563844,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 BAM,BAM,,,108658875.89262009,,,,,Financials,Unknown,False,False,False,0,,0.0,other
-BMRN,BMRN,,,106995536.78318024,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
-CNM,CNM,,,107587316.68024065,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-ACM,ACM,,,101564591.50001526,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-VLTO,VLTO,,,100035003.42830658,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+LNTH,LNTH,,,101580007.73349762,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
+MTSI,MTSI,,,101086568.65436554,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 PONY,PONY,,,87727834.76624966,,,,,Technology,Unknown,False,False,False,0,,0.0,other
-AIZ,AIZ,,,93283584.69566344,,,,,Financials,Unknown,False,False,False,0,,0.0,other
+JBLU,JBLU,,,93788995.3201866,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 NNE,NNE,,,87754754.56895828,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 EEFT,EEFT,,,87780738.86722565,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 TTMI,TTMI,,,88728765.13195038,,,,,Technology,Unknown,False,False,False,0,,0.0,other
@@ -231,10 +243,9 @@ INSP,INSP,,,91611650.2218628,,,,,Health Care,Unknown,False,False,False,0,,0.0,ot
 PCTY,PCTY,,,91808959.98893738,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 DAVE,DAVE,,,92166264.1594696,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 JEF,JEF,,,92190410.32133102,,,,,Financials,Unknown,False,False,False,0,,0.0,other
-UI,UI,,,107198666.40686037,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
-JBLU,JBLU,,,93788995.3201866,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-MASI,MASI,,,100031629.75242616,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
+AIZ,AIZ,,,93283584.69566344,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 MKSI,MKSI,,,93814634.74578856,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
+VLTO,VLTO,,,100035003.42830658,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 DBX,DBX,,,94820512.93483734,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 UNM,UNM,,,95000575.03234863,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 VTRS,VTRS,,,95437098.6298275,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
@@ -247,8 +258,9 @@ TXT,TXT,,,98022492.66166689,,,,,Industrials,Unknown,False,False,False,0,,0.0,oth
 ALLY,ALLY,,,98557291.28746033,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 NVMI,NVMI,,,99343312.43492126,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 ASND,ASND,,,99459281.21421814,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
+MASI,MASI,,,100031629.75242616,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
 TTC,TTC,,,73258818.74256134,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-ECG,ECG,,,50385404.17442322,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+R,R,,,48771528.636779785,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 KRMN,KRMN,,,73203246.22962952,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 OSK,OSK,,,73010619.4317627,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 AMG,AMG,,,37671630.58097839,,,,,Financials,Unknown,False,False,False,0,,0.0,other
@@ -279,7 +291,7 @@ SSD,SSD,,,47454672.307510376,,,,,Industrials,Unknown,False,False,False,0,,0.0,ot
 TKR,TKR,,,48050082.57579804,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 ITT,ITT,,,48459629.13238525,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 STWD,STWD,,,48501419.92115021,,,,,Financials,Unknown,False,False,False,0,,0.0,other
-R,R,,,48771528.636779785,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+TPG,TPG,,,114446062.9696083,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 MSA,MSA,,,37364413.12988281,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 PRGO,PRGO,,,36743777.954063416,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
 OGN,OGN,,,36597063.1957531,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
@@ -350,7 +362,7 @@ WTFC,WTFC,,,49774941.99672699,,,,,Financials,Unknown,False,False,False,0,,0.0,ot
 EXLS,EXLS,,,53820414.32474136,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 GXO,GXO,,,49998761.99951172,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 HEI-A,HEI.A,,,50022340.183410645,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-TPG,TPG,,,114446062.9696083,,,,,Financials,Unknown,False,False,False,0,,0.0,other
+ECG,ECG,,,50385404.17442322,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 WTM,WTM,,,50406496.86584473,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 CBSH,CBSH,,,50579446.82767868,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 SAIC,SAIC,,,51574674.54269409,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
@@ -377,7 +389,7 @@ WEX,WEX,,,58283684.59159851,,,,,Financials,Unknown,False,False,False,0,,0.0,othe
 CFR,CFR,,,58386643.19740296,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 CR,CR,,,58495114.30969238,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 AAON,AAON,,,114443870.84571838,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-SEDG,SEDG,,,137761266.9624424,,,,,Technology,Unknown,False,False,False,0,,0.0,other
+CAR,CAR,,,142298888.29666138,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 SMTC,SMTC,,,114739975.49087524,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 NTNX,NTNX,,,239140988.3809662,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 GLXY,GLXY,,,201020048.2466507,,,,,Financial Services,Unknown,False,False,False,0,,0.0,other
@@ -501,7 +513,7 @@ ODFL,ODFL,,,285191278.57048035,,,,,Industrials,Unknown,False,False,False,0,,0.0,
 GWRE,GWRE,,,172187250.57533264,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 CFG,CFG,,,177268869.17966843,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 TW,TW,,,171918534.7359848,,,,,Financials,Unknown,False,False,False,0,,0.0,other
-HUT,HUT,,,139039847.53079414,,,,,Financial Services,Unknown,False,False,False,0,,0.0,other
+SEDG,SEDG,,,137761266.9624424,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 S,S,,,127485042.20483305,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 CNH,CNH,,,127547239.42734718,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 STRL,STRL,,,127644158.35708618,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
@@ -561,13 +573,13 @@ ALLE,ALLE,,,125896853.86375429,,,,,Industrials,Unknown,False,False,False,0,,0.0,
 EPAM,EPAM,,,125926834.90356444,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 ILMN,ILMN,,,136589765.38791656,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
 ATI,ATI,,,133790127.76763916,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-ZBH,ZBH,,,139978779.3845749,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
+HUT,HUT,,,139039847.53079414,,,,,Financial Services,Unknown,False,False,False,0,,0.0,other
 TRU,TRU,,,154907639.47666168,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 FTAI,FTAI,,,155682523.89556885,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 ZBRA,ZBRA,,,156628988.72802734,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 NXT,NXT,,,157405222.5092125,,,,,Technology,Unknown,False,False,False,0,,0.0,other
 GNRC,GNRC,,,157801588.28575134,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
-JKHY,JKHY,,,140640823.78181458,,,,,Financials,Unknown,False,False,False,0,,0.0,other
+ZBH,ZBH,,,139978779.3845749,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
 TYL,TYL,,,159127652.93670654,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 PTC,PTC,,,159253040.53001404,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
 AKAM,AKAM,,,159271528.2144928,,,,,Information Technology,Unknown,False,False,False,0,,0.0,other
@@ -594,10 +606,10 @@ LSCC,LSCC,,,155578254.4249916,,,,,Information Technology,Unknown,False,False,Fal
 FDS,FDS,,,158123089.23477173,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 FITB,FITB,,,154840687.22549438,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 JBHT,JBHT,,,148990390.58288574,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
+JKHY,JKHY,,,140640823.78181458,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 DGX,DGX,,,141057308.4210205,,,,,Health Care,Unknown,False,False,False,0,,0.0,other
 THAR,THAR,,,141299678.57228816,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 OWL,OWL,,,141838040.12688637,,,,,Financials,Unknown,False,False,False,0,,0.0,other
-CAR,CAR,,,142298888.29666138,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 VRNA,VRNA,,,142554911.8225479,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
 HEI,HEI,,,143233013.8067627,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 GH,GH,,,154148409.4118309,,,,,Healthcare,Unknown,False,False,False,0,,0.0,other
@@ -622,15 +634,15 @@ XYL,XYL,,,149995643.11172485,,,,,Industrials,Unknown,False,False,False,0,,0.0,ot
 MAS,MAS,,,149921049.67948914,,,,,Industrials,Unknown,False,False,False,0,,0.0,other
 RJF,RJF,,,149832655.8592224,,,,,Financials,Unknown,False,False,False,0,,0.0,other
 FTNT,FTNT,,60404748288.0,762172748.6968613,-0.04242424242424242,NEUTRAL,,,Information Technology,Unknown,False,False,False,0,,-0.025454545454545452,other
-RGTI,RGTI,,4894891520.0,648860304.0610933,-0.045454545454545456,NEUTRAL,,,Technology,Unknown,False,False,False,0,,-0.02727272727272727,other
+MNDY,MNDY,,9574660096.0,372440120.4026794,-0.04242424242424242,NEUTRAL,,,Technology,Unknown,False,False,False,0,,-0.025454545454545452,other
 JCI,JCI,,69515321344.0,550285985.2462769,-0.045454545454545456,NEUTRAL,,,Industrials,Unknown,False,False,False,0,,-0.02727272727272727,other
-TEAM,TEAM,,45234421760.0,497654799.0164948,-0.08787878787878788,NEUTRAL,,,Information Technology,Unknown,False,False,False,0,,-0.05272727272727273,other
+RGTI,RGTI,,4894891520.0,648860304.0610933,-0.045454545454545456,NEUTRAL,,,Technology,Unknown,False,False,False,0,,-0.02727272727272727,other
 XYZ,XYZ,,45682225152.0,562239269.9634552,-0.09090909090909091,NEUTRAL,,,Financials,Unknown,False,False,False,0,,-0.05454545454545454,other
 NSC,NSC,,62314323968.0,549545930.5897522,-0.13636363636363635,NEUTRAL,,,Industrials,Unknown,False,False,False,0,,-0.0818181818181818,other
 VRT,VRT,,47351508992.0,791689459.596138,-0.22424242424242424,SELL,,,Industrials,Unknown,False,False,False,0,,-0.13454545454545455,other
 UPS,UPS,,72077352960.0,720441202.286911,-0.26363636363636367,SELL,,,Industrials,Unknown,False,False,False,0,,-0.1581818181818182,other
+ZTS,ZTS,,67948822528.0,368357812.1334076,-0.26666666666666666,SELL,,,Health Care,Unknown,False,False,False,0,,-0.16,other
+ON,ON,,20082669568.0,375690707.8215599,-0.28787878787878785,SELL,,,Information Technology,Unknown,False,False,False,0,,-0.1727272727272727,other
 CSX,CSX,,60645027840.0,830258127.1793747,-0.35757575757575755,SELL,,,Industrials,Unknown,False,False,False,0,,-0.2145454545454545,other
 PYPL,PYPL,,65214103552.0,646369415.0697708,-0.37575757575757573,SELL,,,Financials,Unknown,False,False,False,0,,-0.22545454545454544,other
-FI,FI,,73412239360.0,535568658.0767822,-0.4666666666666667,SELL,,,Financials,Unknown,False,False,False,0,,-0.27999999999999997,other
-TDG,TDG,,71623491584.0,470021564.0661621,-0.49090909090909096,SELL,,,Industrials,Unknown,False,False,False,0,,-0.29454545454545455,other
 MARA,MARA,,5627256832.0,771568087.2201729,-0.5575757575757576,STRONG_SELL,,,Financial Services,Unknown,False,False,False,0,,-0.33454545454545453,other

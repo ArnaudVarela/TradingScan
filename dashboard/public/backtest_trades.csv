@@ -1,3 +1,3 @@
 date_signal,ticker,sector,bucket,cohort,votes,horizon_days,status,days_elapsed,entry,exit,date_exit,ret_pct,notes,source,generated_at_utc
-2025-08-15,AAPL,Unknown,confirmed,P3_confirmed,0,10,closed,10,231.58999633789062,232.13999938964844,2025-08-29,0.23748998681072386,test pick,manual,2025-09-06T22:12:42Z
-2025-08-25,MSFT,Unknown,pre_signal,P2_highconv,0,5,closed,5,504.260009765625,505.1199951171875,2025-09-02,0.17054403183036637,test pick 2,manual,2025-09-06T22:12:42Z
+2025-08-15,AAPL,Unknown,confirmed,P3_confirmed,0,10,closed,10,231.58999633789062,232.13999938964844,2025-08-29,0.23748998681072386,test pick,manual,2025-09-06T23:06:45Z
+2025-08-25,MSFT,Unknown,pre_signal,P2_highconv,0,5,closed,5,504.260009765625,505.1199951171875,2025-09-02,0.17054403183036637,test pick 2,manual,2025-09-06T23:06:45Z

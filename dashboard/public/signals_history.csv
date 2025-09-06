@@ -1,36 +1,44 @@
 date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
+2025-09-06,U,Information Technology,confirmed,STRONG_BUY,BUY
 2025-09-06,SYK,Health Care,confirmed,STRONG_BUY,BUY
-2025-09-06,QCOM,Information Technology,confirmed,STRONG_BUY,BUY
 2025-09-06,MU,Information Technology,confirmed,STRONG_BUY,BUY
-2025-09-06,NET,Information Technology,confirmed,STRONG_BUY,BUY
 2025-09-06,ASML,Information Technology,confirmed,STRONG_BUY,BUY
+2025-09-06,QCOM,Information Technology,confirmed,STRONG_BUY,BUY
+2025-09-06,NET,Information Technology,confirmed,STRONG_BUY,BUY
+2025-09-06,HCA,Health Care,confirmed,STRONG_BUY,BUY
 2025-09-06,PANW,Information Technology,confirmed,STRONG_BUY,BUY
+2025-09-06,STX,Information Technology,confirmed,STRONG_BUY,BUY
+2025-09-06,UAL,Industrials,confirmed,STRONG_BUY,BUY
 2025-09-06,AVGO,Information Technology,confirmed,STRONG_BUY,BUY
+2025-09-06,CYBR,Technology,confirmed,STRONG_BUY,BUY
 2025-09-06,GLW,Information Technology,confirmed,STRONG_BUY,BUY
-2025-09-06,ANET,Information Technology,confirmed,STRONG_BUY,BUY
 2025-09-06,LRCX,Information Technology,confirmed,STRONG_BUY,BUY
-2025-09-06,U,Information Technology,pre_signal,STRONG_BUY,
+2025-09-06,ANET,Information Technology,confirmed,STRONG_BUY,BUY
+2025-09-06,PH,Industrials,confirmed,STRONG_BUY,BUY
+2025-09-06,URI,Industrials,confirmed,STRONG_BUY,BUY
 2025-09-06,LITE,Information Technology,pre_signal,STRONG_BUY,
-2025-09-06,STX,Information Technology,pre_signal,STRONG_BUY,
-2025-09-06,UAL,Industrials,pre_signal,STRONG_BUY,
-2025-09-06,CYBR,Technology,pre_signal,STRONG_BUY,
+2025-09-06,CRDO,Technology,pre_signal,STRONG_BUY,
 2025-09-06,TEM,Health Care,pre_signal,STRONG_BUY,
 2025-09-06,WDC,Information Technology,pre_signal,STRONG_BUY,
-2025-09-06,CRDO,Technology,pre_signal,STRONG_BUY,
 2025-09-06,FSLR,Information Technology,pre_signal,STRONG_BUY,
-2025-09-06,URI,Industrials,pre_signal,STRONG_BUY,
 2025-09-06,SNOW,Information Technology,pre_signal,BUY,BUY
 2025-09-06,AAPL,Information Technology,pre_signal,BUY,BUY
 2025-09-06,MDB,Information Technology,pre_signal,BUY,BUY
 2025-09-06,MPWR,Information Technology,pre_signal,BUY,BUY
+2025-09-06,HPE,Information Technology,pre_signal,BUY,BUY
 2025-09-06,DAL,Industrials,pre_signal,BUY,BUY
 2025-09-06,SHOP,Information Technology,pre_signal,BUY,BUY
+2025-09-06,CI,Health Care,pre_signal,BUY,BUY
 2025-09-06,TER,Information Technology,pre_signal,BUY,BUY
 2025-09-06,CVS,Health Care,pre_signal,BUY,BUY
+2025-09-06,RF,Financials,pre_signal,BUY,BUY
 2025-09-06,CAT,Industrials,pre_signal,BUY,BUY
+2025-09-06,MSI,Information Technology,pre_signal,BUY,BUY
+2025-09-06,ALNY,Health Care,pre_signal,BUY,BUY
 2025-09-06,SOFI,Financials,pre_signal,BUY,BUY
 2025-09-06,JNJ,Health Care,pre_signal,BUY,BUY
 2025-09-06,RKLB,Industrials,pre_signal,BUY,BUY
+2025-09-06,CDNS,Information Technology,pre_signal,BUY,BUY
 2025-09-06,USB,Financials,pre_signal,BUY,BUY
 2025-09-06,HWM,Industrials,pre_signal,BUY,BUY
 2025-09-06,INSM,Health Care,pre_signal,BUY,BUY
@@ -40,93 +48,98 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,GE,Industrials,pre_signal,BUY,BUY
 2025-09-06,UNH,Health Care,pre_signal,BUY,BUY
 2025-09-06,ADI,Information Technology,pre_signal,BUY,BUY
+2025-09-06,MMM,Industrials,pre_signal,BUY,BUY
 2025-09-06,MRK,Health Care,pre_signal,BUY,BUY
 2025-09-06,BAC,Financials,pre_signal,BUY,BUY
 2025-09-06,FUTU,Financial Services,pre_signal,BUY,BUY
-2025-09-06,ABBV,Health Care,pre_signal,BUY,BUY
 2025-09-06,APP,Information Technology,pre_signal,BUY,BUY
+2025-09-06,ABBV,Health Care,pre_signal,BUY,BUY
+2025-09-06,KEY,Financials,pre_signal,BUY,BUY
 2025-09-06,GS,Financials,pre_signal,BUY,BUY
+2025-09-06,ZS,Information Technology,pre_signal,BUY,BUY
 2025-09-06,C,Financials,other,NEUTRAL,BUY
 2025-09-06,HUBS,Information Technology,other,NEUTRAL,BUY
+2025-09-06,ARM,Information Technology,other,NEUTRAL,BUY
 2025-09-06,AON,Financials,other,NEUTRAL,BUY
+2025-09-06,CB,Financials,other,NEUTRAL,BUY
 2025-09-06,COR,Health Care,other,NEUTRAL,BUY
 2025-09-06,ORCL,Information Technology,other,NEUTRAL,BUY
 2025-09-06,BDX,Health Care,other,NEUTRAL,BUY
 2025-09-06,NOW,Information Technology,other,NEUTRAL,BUY
-2025-09-06,EMR,Industrials,other,NEUTRAL,BUY
 2025-09-06,IBM,Information Technology,other,NEUTRAL,BUY
 2025-09-06,WDAY,Information Technology,other,NEUTRAL,BUY
 2025-09-06,CRM,Information Technology,other,NEUTRAL,BUY
-2025-09-06,NOC,Industrials,other,NEUTRAL,BUY
+2025-09-06,FICO,Information Technology,other,NEUTRAL,BUY
 2025-09-06,BA,Industrials,other,NEUTRAL,BUY
 2025-09-06,MA,Financials,other,NEUTRAL,BUY
 2025-09-06,OKTA,Information Technology,other,NEUTRAL,BUY
 2025-09-06,PFE,Health Care,other,NEUTRAL,BUY
 2025-09-06,JPM,Financials,other,NEUTRAL,BUY
 2025-09-06,VEEV,Health Care,other,NEUTRAL,BUY
-2025-09-06,IREN,Financial Services,pre_signal,BUY,
+2025-09-06,TEAM,Information Technology,other,NEUTRAL,BUY
 2025-09-06,ADSK,Information Technology,pre_signal,BUY,
+2025-09-06,ACN,Information Technology,other,NEUTRAL,BUY
+2025-09-06,IREN,Financial Services,pre_signal,BUY,
 2025-09-06,INTU,Information Technology,other,NEUTRAL,BUY
 2025-09-06,DDOG,Information Technology,pre_signal,BUY,
-2025-09-06,ACN,Information Technology,other,NEUTRAL,BUY
 2025-09-06,CRWD,Information Technology,other,NEUTRAL,BUY
 2025-09-06,INTC,Information Technology,pre_signal,BUY,SELL
-2025-09-06,HPE,Information Technology,pre_signal,BUY,
+2025-09-06,BLK,Financials,other,NEUTRAL,BUY
 2025-09-06,HOOD,Financials,other,SELL,BUY
 2025-09-06,WFC,Financials,other,SELL,BUY
-2025-09-06,COHR,Information Technology,pre_signal,BUY,
 2025-09-06,WULF,Financial Services,pre_signal,BUY,
+2025-09-06,COHR,Information Technology,pre_signal,BUY,
 2025-09-06,AXON,Industrials,other,SELL,BUY
 2025-09-06,GEV,Industrials,other,SELL,BUY
 2025-09-06,LLY,Health Care,other,SELL,BUY
 2025-09-06,KKR,Financials,other,SELL,BUY
+2025-09-06,ICE,Financials,other,SELL,BUY
 2025-09-06,CAH,Health Care,other,SELL,BUY
-2025-09-06,COIN,Financials,other,SELL,BUY
-2025-09-06,AFRM,Information Technology,pre_signal,BUY,
+2025-09-06,BMY,Health Care,other,SELL,BUY
 2025-09-06,AMAT,Information Technology,other,SELL,BUY
+2025-09-06,AFRM,Information Technology,pre_signal,BUY,
+2025-09-06,COIN,Financials,other,SELL,BUY
+2025-09-06,TT,Industrials,other,SELL,BUY
 2025-09-06,SMCI,Information Technology,other,SELL,BUY
-2025-09-06,ON,Information Technology,other,SELL,BUY
 2025-09-06,FDX,Industrials,other,SELL,BUY
-2025-09-06,RF,Financials,pre_signal,BUY,
 2025-09-06,NVDA,Information Technology,other,SELL,BUY
 2025-09-06,AMD,Information Technology,other,SELL,BUY
 2025-09-06,UBER,Industrials,other,SELL,BUY
-2025-09-06,ALNY,Health Care,pre_signal,BUY,
-2025-09-06,ZTS,Health Care,other,SELL,BUY
 2025-09-06,NU,Financials,pre_signal,BUY,
-2025-09-06,V,Financials,other,SELL,BUY
 2025-09-06,ISRG,Health Care,other,SELL,BUY
+2025-09-06,V,Financials,other,SELL,BUY
+2025-09-06,PLTR,Information Technology,other,SELL,BUY
 2025-09-06,ALAB,Information Technology,pre_signal,BUY,
 2025-09-06,CSCO,Information Technology,other,SELL,BUY
-2025-09-06,PLTR,Information Technology,other,SELL,BUY
 2025-09-06,AJG,Financials,other,SELL,BUY
 2025-09-06,MRVL,Information Technology,other,SELL,BUY
 2025-09-06,MSFT,Information Technology,other,SELL,BUY
 2025-09-06,CRWV,Technology,other,SELL,BUY
-2025-09-06,KEY,Financials,pre_signal,BUY,
 2025-09-06,ADBE,Information Technology,other,SELL,BUY
-2025-09-06,ZS,Information Technology,pre_signal,BUY,
+2025-09-06,FI,Financials,other,SELL,BUY
 2025-09-06,TXN,Information Technology,other,SELL,BUY
 2025-09-06,AAL,Industrials,pre_signal,BUY,
 2025-09-06,CTAS,Industrials,other,SELL,BUY
+2025-09-06,CME,Financials,other,SELL,BUY
 2025-09-06,NXPI,Information Technology,other,NEUTRAL,
 2025-09-06,MMC,Financials,other,SELL,BUY
 2025-09-06,ROP,Industrials,other,SELL,BUY
 2025-09-06,MSTR,Information Technology,other,SELL,BUY
+2025-09-06,TDG,Industrials,other,SELL,BUY
+2025-09-06,EMR,Industrials,other,NEUTRAL,
 2025-09-06,TWLO,Information Technology,other,NEUTRAL,
-2025-09-06,UPST,Financial Services,other,NEUTRAL,
 2025-09-06,MCHP,Information Technology,other,NEUTRAL,
 2025-09-06,UNP,Industrials,other,STRONG_SELL,BUY
 2025-09-06,WM,Industrials,other,STRONG_SELL,BUY
-2025-09-06,FICO,Information Technology,other,NEUTRAL,
+2025-09-06,APO,Financials,other,STRONG_SELL,BUY
 2025-09-06,ELV,Health Care,other,NEUTRAL,
 2025-09-06,ADP,Industrials,other,STRONG_SELL,BUY
 2025-09-06,GDS,Technology,other,,
 2025-09-06,BNTX,Healthcare,other,,
 2025-09-06,SITM,Technology,other,,
 2025-09-06,EHC,Health Care,other,,
-2025-09-06,KD,Information Technology,other,,
 2025-09-06,NDSN,Industrials,other,,
+2025-09-06,KD,Information Technology,other,,
 2025-09-06,WGS,Healthcare,other,,
 2025-09-06,ALSN,Industrials,other,,
 2025-09-06,AGCO,Industrials,other,,
@@ -135,23 +148,22 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,G,Information Technology,other,,
 2025-09-06,TNXP,Healthcare,other,,
 2025-09-06,SMMT,Health Care,other,,
-2025-09-06,VMI,Industrials,other,,
-2025-09-06,STRC,Technology,other,,
-2025-09-06,SYM,Industrials,other,,
-2025-09-06,GGAL,Financial Services,other,,
 2025-09-06,RR,Industrials,other,,
+2025-09-06,CGNX,Information Technology,other,,
+2025-09-06,SYM,Industrials,other,,
+2025-09-06,NVTS,Technology,other,,
+2025-09-06,GGAL,Financial Services,other,,
 2025-09-06,ABVX,Healthcare,other,,
 2025-09-06,KNSL,Financials,other,,
 2025-09-06,TSEM,Technology,other,,
-2025-09-06,CGNX,Information Technology,other,,
 2025-09-06,RGEN,Health Care,other,,
-2025-09-06,MORN,Financials,other,,
 2025-09-06,PI,Technology,other,,
+2025-09-06,MORN,Financials,other,,
 2025-09-06,OUST,Technology,other,,
+2025-09-06,VMI,Industrials,other,,
 2025-09-06,AMBA,Technology,other,,
-2025-09-06,NVTS,Technology,other,,
 2025-09-06,LOAR,Industrials,other,,
-2025-09-06,PSIX,Industrials,other,,
+2025-09-06,PSN,Industrials,other,,
 2025-09-06,WAL,Financials,other,,
 2025-09-06,BEN,Financials,other,,
 2025-09-06,SSB,Financials,other,,
@@ -169,8 +181,8 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,TIGR,Financial Services,other,,
 2025-09-06,EOSE,Industrials,other,,
 2025-09-06,MKL,Financials,other,,
+2025-09-06,PSIX,Industrials,other,,
 2025-09-06,RMBS,Technology,other,,
-2025-09-06,PSN,Industrials,other,,
 2025-09-06,FROG,Technology,other,,
 2025-09-06,DOX,Information Technology,other,,
 2025-09-06,RNR,Financials,other,,
@@ -186,8 +198,7 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,APM,Healthcare,other,,
 2025-09-06,JAZZ,Health Care,other,,
 2025-09-06,SPNS,Technology,other,,
-2025-09-06,NBIX,Health Care,other,,
-2025-09-06,LNTH,Healthcare,other,,
+2025-09-06,BMRN,Health Care,other,,
 2025-09-06,PCOR,Information Technology,other,,
 2025-09-06,TTAN,Technology,other,,
 2025-09-06,MANH,Information Technology,other,,
@@ -200,8 +211,11 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,TREX,Industrials,other,,
 2025-09-06,ONC,Healthcare,other,,
 2025-09-06,RVTY,Health Care,other,,
+2025-09-06,NBIX,Health Care,other,,
+2025-09-06,UI,Information Technology,other,,
+2025-09-06,ACM,Industrials,other,,
+2025-09-06,CNM,Industrials,other,,
 2025-09-06,SITE,Industrials,other,,
-2025-09-06,MTSI,Information Technology,other,,
 2025-09-06,HQY,Healthcare,other,,
 2025-09-06,RRX,Industrials,other,,
 2025-09-06,HSIC,Health Care,other,,
@@ -213,12 +227,10 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,TMDX,Healthcare,other,,
 2025-09-06,CACI,Industrials,other,,
 2025-09-06,BAM,Financials,other,,
-2025-09-06,BMRN,Health Care,other,,
-2025-09-06,CNM,Industrials,other,,
-2025-09-06,ACM,Industrials,other,,
-2025-09-06,VLTO,Industrials,other,,
+2025-09-06,LNTH,Healthcare,other,,
+2025-09-06,MTSI,Information Technology,other,,
 2025-09-06,PONY,Technology,other,,
-2025-09-06,AIZ,Financials,other,,
+2025-09-06,JBLU,Industrials,other,,
 2025-09-06,NNE,Industrials,other,,
 2025-09-06,EEFT,Financials,other,,
 2025-09-06,TTMI,Technology,other,,
@@ -231,10 +243,9 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,PCTY,Information Technology,other,,
 2025-09-06,DAVE,Technology,other,,
 2025-09-06,JEF,Financials,other,,
-2025-09-06,UI,Information Technology,other,,
-2025-09-06,JBLU,Industrials,other,,
-2025-09-06,MASI,Health Care,other,,
+2025-09-06,AIZ,Financials,other,,
 2025-09-06,MKSI,Information Technology,other,,
+2025-09-06,VLTO,Industrials,other,,
 2025-09-06,DBX,Information Technology,other,,
 2025-09-06,UNM,Financials,other,,
 2025-09-06,VTRS,Health Care,other,,
@@ -247,8 +258,9 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,ALLY,Financials,other,,
 2025-09-06,NVMI,Technology,other,,
 2025-09-06,ASND,Healthcare,other,,
+2025-09-06,MASI,Health Care,other,,
 2025-09-06,TTC,Industrials,other,,
-2025-09-06,ECG,Industrials,other,,
+2025-09-06,R,Industrials,other,,
 2025-09-06,KRMN,Industrials,other,,
 2025-09-06,OSK,Industrials,other,,
 2025-09-06,AMG,Financials,other,,
@@ -279,7 +291,7 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,TKR,Industrials,other,,
 2025-09-06,ITT,Industrials,other,,
 2025-09-06,STWD,Financials,other,,
-2025-09-06,R,Industrials,other,,
+2025-09-06,TPG,Financials,other,,
 2025-09-06,MSA,Industrials,other,,
 2025-09-06,PRGO,Health Care,other,,
 2025-09-06,OGN,Health Care,other,,
@@ -350,7 +362,7 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,EXLS,Industrials,other,,
 2025-09-06,GXO,Industrials,other,,
 2025-09-06,HEI-A,Industrials,other,,
-2025-09-06,TPG,Financials,other,,
+2025-09-06,ECG,Industrials,other,,
 2025-09-06,WTM,Financials,other,,
 2025-09-06,CBSH,Financials,other,,
 2025-09-06,SAIC,Industrials,other,,
@@ -377,7 +389,7 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,CFR,Financials,other,,
 2025-09-06,CR,Industrials,other,,
 2025-09-06,AAON,Industrials,other,,
-2025-09-06,SEDG,Technology,other,,
+2025-09-06,CAR,Industrials,other,,
 2025-09-06,SMTC,Technology,other,,
 2025-09-06,NTNX,Information Technology,other,,
 2025-09-06,GLXY,Financial Services,other,,
@@ -501,7 +513,7 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,GWRE,Information Technology,other,,
 2025-09-06,CFG,Financials,other,,
 2025-09-06,TW,Financials,other,,
-2025-09-06,HUT,Financial Services,other,,
+2025-09-06,SEDG,Technology,other,,
 2025-09-06,S,Information Technology,other,,
 2025-09-06,CNH,Industrials,other,,
 2025-09-06,STRL,Industrials,other,,
@@ -561,13 +573,13 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,EPAM,Information Technology,other,,
 2025-09-06,ILMN,Health Care,other,,
 2025-09-06,ATI,Industrials,other,,
-2025-09-06,ZBH,Health Care,other,,
+2025-09-06,HUT,Financial Services,other,,
 2025-09-06,TRU,Industrials,other,,
 2025-09-06,FTAI,Industrials,other,,
 2025-09-06,ZBRA,Information Technology,other,,
 2025-09-06,NXT,Technology,other,,
 2025-09-06,GNRC,Industrials,other,,
-2025-09-06,JKHY,Financials,other,,
+2025-09-06,ZBH,Health Care,other,,
 2025-09-06,TYL,Information Technology,other,,
 2025-09-06,PTC,Information Technology,other,,
 2025-09-06,AKAM,Information Technology,other,,
@@ -594,10 +606,10 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,FDS,Financials,other,,
 2025-09-06,FITB,Financials,other,,
 2025-09-06,JBHT,Industrials,other,,
+2025-09-06,JKHY,Financials,other,,
 2025-09-06,DGX,Health Care,other,,
 2025-09-06,THAR,Healthcare,other,,
 2025-09-06,OWL,Financials,other,,
-2025-09-06,CAR,Industrials,other,,
 2025-09-06,VRNA,Healthcare,other,,
 2025-09-06,HEI,Industrials,other,,
 2025-09-06,GH,Healthcare,other,,
@@ -622,15 +634,15 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket
 2025-09-06,MAS,Industrials,other,,
 2025-09-06,RJF,Financials,other,,
 2025-09-06,FTNT,Information Technology,other,NEUTRAL,
-2025-09-06,RGTI,Technology,other,NEUTRAL,
+2025-09-06,MNDY,Technology,other,NEUTRAL,
 2025-09-06,JCI,Industrials,other,NEUTRAL,
-2025-09-06,TEAM,Information Technology,other,NEUTRAL,
+2025-09-06,RGTI,Technology,other,NEUTRAL,
 2025-09-06,XYZ,Financials,other,NEUTRAL,
 2025-09-06,NSC,Industrials,other,NEUTRAL,
 2025-09-06,VRT,Industrials,other,SELL,
 2025-09-06,UPS,Industrials,other,SELL,
+2025-09-06,ZTS,Health Care,other,SELL,
+2025-09-06,ON,Information Technology,other,SELL,
 2025-09-06,CSX,Industrials,other,SELL,
 2025-09-06,PYPL,Financials,other,SELL,
-2025-09-06,FI,Financials,other,SELL,
-2025-09-06,TDG,Industrials,other,SELL,
 2025-09-06,MARA,Financial Services,other,STRONG_SELL,
