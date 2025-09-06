@@ -1,18 +1,15 @@
 # build_sector_catalog.py
-# Agrège secteurs/industries: Wikipedia R1K + SPDR SPSM (quand dispo)
-# Normalise les libellés de secteur (GICS-like), garde l'univers complet
-# Sorties: sector_catalog.csv, sector_history.csv (daté), sector_breadth.csv
+# Construit un catalogue secteurs/industries normalisé (fallback si universe_in_scope est vide)
+# Sorties: sector_catalog.csv, sector_history.csv, sector_breadth.csv
 
-import io
-import os
-import re
+import io, os, re
 from datetime import datetime, timezone
 from pathlib import Path
 import pandas as pd
 import requests
 
 PUBLIC_DIR = Path("dashboard/public"); PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
-UA = {"User-Agent": "Mozilla/5.0"}
+UA = {"User-Agent":"Mozilla/5.0"}
 
 WIKI_R1K = "https://en.wikipedia.org/wiki/Russell_1000_Index"
 SPDR_SPSM_XLSX = "https://www.ssga.com/library-content/products/fund-data/etfs/emea/holdings-daily-emea-en-zprr-gy.xlsx"
@@ -26,16 +23,15 @@ def _save(df: pd.DataFrame, name: str):
 def _norm_ticker(x: str) -> str:
     if x is None: return ""
     x = str(x).strip().upper()
-    x = re.sub(r"\s+", "", x).replace(".", "-")
+    x = re.sub(r"\s+","",x).replace(".","-")
     return x
 
-# ---- Sector normalization ----
 _SECTOR_NORM = {
-    "technology":"information technology", "tech":"information technology",
-    "information technology":"information technology", "information technology services":"information technology",
-    "financial":"financials", "financial services":"financials", "finance":"financials", "financials":"financials",
-    "industrial":"industrials", "industrials":"industrials",
-    "healthcare":"health care", "health services":"health care", "health care":"health care",
+    "technology":"information technology","tech":"information technology",
+    "information technology":"information technology","information technology services":"information technology",
+    "financial":"financials","financial services":"financials","finance":"financials","financials":"financials",
+    "industrial":"industrials","industrials":"industrials",
+    "healthcare":"health care","health services":"health care","health care":"health care",
 }
 def _norm_sector(s: str) -> str:
     k = str(s or "").strip().lower()
@@ -88,6 +84,7 @@ def from_wikipedia_r1k() -> pd.DataFrame:
     return df[["ticker","sector","industry"]]
 
 def from_spdr_spsm() -> pd.DataFrame:
+    # best-effort, on ne casse pas le run si indispo
     try:
         r = requests.get(SPDR_SPSM_XLSX, headers=UA, timeout=60); r.raise_for_status()
         xls = pd.ExcelFile(io.BytesIO(r.content))
@@ -115,7 +112,8 @@ def from_spdr_spsm() -> pd.DataFrame:
     return out[["ticker","sector","industry"]]
 
 def load_universe() -> pd.DataFrame:
-    cand = ["universe_in_scope.csv", "universe_today.csv"]
+    # on préfère in_scope; sinon fallback raw_universe
+    cand = ["universe_in_scope.csv", "raw_universe.csv", "universe_today.csv"]
     for p in cand:
         if os.path.exists(p):
             u = pd.read_csv(p); print(f"[UNI] {p}: {len(u)} rows")
@@ -123,14 +121,12 @@ def load_universe() -> pd.DataFrame:
             if "ticker_yf" in out.columns: out["ticker"] = out["ticker_yf"].map(_norm_ticker)
             elif "Ticker" in out.columns:  out["ticker"] = out["Ticker"].map(_norm_ticker)
             else: out["ticker"] = out.iloc[:,0].map(_norm_ticker)
-            if "sector" not in out.columns: out["sector"] = ""
-            out = out[["ticker","sector"] + [c for c in out.columns if c not in {"ticker","sector"}]]
             out = out[out["ticker"] != ""].drop_duplicates(subset=["ticker"], keep="first")
-            return out
-    raise SystemExit("❌ universe_in_scope.csv / universe_today.csv introuvable")
+            return out[["ticker"]]
+    raise SystemExit("❌ universe files not found")
 
 def main():
-    uni  = load_universe()     # ticker, sector (optionnel)
+    uni  = load_universe()     # tickers présents dans l’univers
     r1k  = from_wikipedia_r1k()
     spsm = from_spdr_spsm()
 
@@ -138,18 +134,9 @@ def main():
     cat = cat.sort_values(["ticker"]).drop_duplicates(subset=["ticker"], keep="first")
     print(f"[CAT] merged map unique: {len(cat)}")
 
-    merged = uni.merge(cat, on="ticker", how="left", suffixes=("", "_cat"))
-
-    if "sector_cat" not in merged.columns: merged["sector_cat"] = ""
-    if "industry" not in merged.columns:   merged["industry"]   = ""
-
-    def pick_sector(row):
-        s_cat = str(row.get("sector_cat","")).strip()
-        s_uni = str(row.get("sector","")).strip()
-        return s_cat if s_cat else s_uni
-
-    merged["sector"]   = merged.apply(pick_sector, axis=1)
-    merged["industry"] = merged["industry"].fillna("").astype(str).str.strip()
+    merged = uni.merge(cat, on="ticker", how="left")
+    if "sector" not in merged.columns:   merged["sector"]   = "Unknown"
+    if "industry" not in merged.columns: merged["industry"] = "Unknown"
 
     merged["sector"]   = merged["sector"].map(_norm_sector)
     merged.loc[merged["industry"]=="", "industry"] = "Unknown"
@@ -157,7 +144,6 @@ def main():
     catalog = merged[["ticker","sector","industry"]].drop_duplicates(subset=["ticker"], keep="first")
     _save(catalog, "sector_catalog.csv")
 
-    # history daté (UTC date)
     history = catalog.copy()
     history.insert(0, "date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
     _save(history, "sector_history.csv")
