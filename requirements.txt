@@ -1,6 +1,6 @@
 numpy==1.26.4
 pandas==2.2.2
-pandas-ta @ git+https://github.com/twopirllc/pandas-ta@0.3.14b0
+pandas-ta @ https://github.com/twopirllc/pandas-ta/archive/refs/tags/0.3.14b0.zip
 yfinance>=0.2.40
 tradingview-ta>=3.3.0
 requests
