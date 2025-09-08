@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+import numpy as np
 import pandas as pd
 import requests
 import yfinance as yf
@@ -50,6 +51,11 @@ FINNHUB_KEY = os.getenv("FINNHUB_API_KEY", "")
 ALPHAV_KEY  = os.getenv("ALPHAVANTAGE_API_KEY", "")
 
 MCAP_MAX_USD = 75_000_000_000
+
+# bucket targets (ajuste si besoin pour ~120–160 tickers uniques)
+CONFIRM_TOP = int(os.getenv("SCREEN_CONFIRM_TOP", "40"))
+PRE_TOP     = int(os.getenv("SCREEN_PRE_TOP", "40"))
+EVENT_TOP   = int(os.getenv("SCREEN_EVENT_TOP", "80"))
 
 # --------- helpers ---------
 def _is_nan(x) -> bool:
@@ -210,7 +216,7 @@ def main():
     if "ticker_yf" not in base.columns:
         raise SystemExit("❌ universe_in_scope.csv must contain 'ticker_yf'")
 
-    # 2) Sector catalog merge (keeps everything)
+    # 2) Sector catalog merge (keeps everything) + aliasing robuste
     cat = _read_csv_required("sector_catalog.csv")
 
     def pickcol(df, names):
@@ -231,11 +237,18 @@ def main():
     if "ticker_yf" not in cat.columns:
         raise SystemExit("❌ sector_catalog.csv must have a ticker column (e.g. symbol/ticker_yf)")
 
-    base = base.merge(cat[["ticker_yf","sector","industry"]].drop_duplicates(),
-                      on="ticker_yf", how="left")
+    base = base.merge(
+        cat[["ticker_yf","sector","industry"]].drop_duplicates(),
+        on="ticker_yf", how="left", suffixes=("", "_cat")
+    )
+    # priorité aux valeurs non vides
+    for col in ("sector","industry"):
+        alt = f"{col}_cat"
+        if alt in base.columns:
+            base[col] = base[col].where(base[col].notna() & (base[col].astype(str).str.strip() != ""), base[alt])
+            base.drop(columns=[alt], inplace=True)
 
-
-    # 3) Avg dollar vol (fallback if not present)
+    # 3) Avg dollar vol (fallback si absent)
     if "avg_dollar_vol" not in base.columns or base["avg_dollar_vol"].isna().all():
         syms = base["ticker_yf"].astype(str).tolist()
         print("[YF] computing 20d avg dollar vol…")
@@ -247,7 +260,7 @@ def main():
     cand = base_sorted.head(TOP_N).copy()
     print(f"[UNI] in-scope: {len(base)}  |  TopN to enrich: {len(cand)}")
 
-    # 5) Prices (fast) for cand; fallback via history later if needed
+    # 5) Prices (fast) for cand; fallback via yf.info
     prices = []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         prices.append(yf_price_fast(sym))
@@ -274,57 +287,54 @@ def main():
         m = finnhub_profile_mcap(sym); mcaps.append(m)
         if i % 80 == 0: print(f"[Finnhub] {i}/{len(cand)}")
         time.sleep(SLEEP_BETWEEN_CALLS)
-    cand["analyst_bucket"]  = an_bucket
-    cand["analyst_votes"]   = an_votes
+    cand["analyst_bucket"]   = an_bucket
+    cand["analyst_votes"]    = an_votes
     cand["mcap_usd_finnhub"] = mcaps
 
-    # 8) yfinance.info mcap for cand (fallback)
-    mcap_yf = []
+    # 8) yfinance.info (mcap + price fallback)
+    mcap_yf, yfinfo_price = [], []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         try:
             info = (yf.Ticker(sym).info or {})
             mcap_yf.append(_safe_num(info.get("marketCap")))
+            yfinfo_price.append(_safe_num(info.get("regularMarketPrice")))
         except Exception:
             mcap_yf.append(None)
+            yfinfo_price.append(None)
         time.sleep(SLEEP_BETWEEN_CALLS/2)
     cand["mcap_usd_yfinfo"] = mcap_yf
-
+    # cascade de prix: fast -> info
+    cand["price"] = cand["price"].where(cand["price"].notna(), pd.Series(yfinfo_price, index=cand.index))
+    cand["last"]  = cand["price"]
 
     # 9) Build final enrichment set and merge back to base
     cand["mcap_usd_final"] = cand["mcap_usd_finnhub"].fillna(cand.get("mcap_usd_yfinfo"))
 
-    # S'assurer que sector/industry existent dans cand :
-    for col in ("sector", "industry"):
-        if col not in cand.columns:
-            if col in base.columns:
-                # récupérer depuis base par ticker_yf
-                cand = cand.merge(base[["ticker_yf", col]].drop_duplicates(), on="ticker_yf", how="left")
-            else:
-                cand[col] = None  # colonne vide si vraiment absente partout
+    # garantir sector/industry présents dans cand (via base déjà mergé)
+    for col in ("sector","industry"):
+        if col not in cand.columns or cand[col].isna().any():
+            cand = cand.drop(columns=[c for c in (col,) if c in cand.columns], errors="ignore")
+            cand = cand.merge(base[["ticker_yf", col]].drop_duplicates(), on="ticker_yf", how="left")
 
-    # Colonnes disponibles (tolérant si certaines manquent)
-    wanted = ["ticker_yf","price","tv_score","tv_reco",
+    wanted = ["ticker_yf","price","last","tv_score","tv_reco",
               "analyst_bucket","analyst_votes","mcap_usd_final",
               "sector","industry"]
     enrich_cols = [c for c in wanted if c in cand.columns]
-
     enrich_df = cand[enrich_cols].copy()
 
     base = base.merge(enrich_df, on="ticker_yf", how="left", suffixes=("", "_cand"))
 
     # sécuriser l'existence des colonnes dans base pour la suite
-    for col in ("sector","industry"):
+    for col in ("sector","industry","price","last","tv_score","tv_reco",
+                "analyst_bucket","analyst_votes","mcap_usd_final"):
         rcol = f"{col}_cand"
         if rcol in base.columns:
-            base[col] = base[col].where(base[rcol].isna() | (base[rcol].astype(str).str.strip()==""), base[rcol])
+            base[col] = base[col].where(base[col].notna(), base[rcol])
             base.drop(columns=[rcol], inplace=True)
         elif col not in base.columns:
             base[col] = None
 
-
     # 9-bis) Fill missing market caps across the whole base (not only cand)
-    if "price" not in base.columns:
-        base["price"] = None
     need_mask = base["mcap_usd_final"].isna()
     if need_mask.any():
         mcap_filled = _fill_mcap_for_rows(
@@ -332,19 +342,28 @@ def main():
             base.loc[need_mask, "price"].tolist(),
             sleep=SLEEP_BETWEEN_CALLS/2
         )
-        base.loc[need_mask, "mcap_usd_final"] = mcap_filled
+        # éviter FutureWarning: caster explicitement
+        base.loc[need_mask, "mcap_usd_final"] = pd.Series(mcap_filled, index=base.index[need_mask], dtype="float64")
 
-    # 10) Compute a simple technical pillar from TV (placeholder)
-    def is_strong_tv(v) -> bool:
+    # 10) Pillars (robustes) + alias Tech
+    def is_strong_tv_label(v) -> bool:
         if v is None or _is_nan(v): return False
         return str(v).upper().strip() == "STRONG_BUY"
     def is_bull_an(v) -> bool:
         return _bucket_from_analyst(v) == "BUY"
 
-    base["p_tv"]   = base.get("tv_reco").map(is_strong_tv)
+    base["p_tv"]   = base.get("tv_reco").map(is_strong_tv_label)
     base["p_an"]   = base.get("analyst_bucket").map(is_bull_an)
-    base["p_tech"] = base["p_tv"]  # placeholder until you add your local TA rules
-    base["pillars_met"] = base[["p_tech","p_tv","p_an"]].fillna(False).sum(axis=1)
+
+    # p_tech: à spécialiser si tu as tes règles — par défaut on calque sur TV pour ne pas être vide
+    if "p_tech" not in base.columns or base["p_tech"].isna().all():
+        base["p_tech"] = base["p_tv"].fillna(False)
+
+    # aliases front
+    base["tech"] = base["p_tech"].astype(int)
+    base["Tech"] = base["p_tech"].astype(int)
+
+    base["pillars_met"] = base[["p_tech","p_tv","p_an"]].fillna(False).astype(int).sum(axis=1)
 
     # 11) Ranking
     votes = pd.to_numeric(base.get("analyst_votes"), errors="coerce")
@@ -362,16 +381,28 @@ def main():
     base = base[pd.to_numeric(base["mcap_usd_final"], errors="coerce").notna() &
                 (base["mcap_usd_final"] < MCAP_MAX_USD)].copy()
 
-    # 13) Buckets
-    tv_up = base.get("tv_reco").astype(str).str.upper()
-    an_up = base.get("analyst_bucket").map(lambda x: (_bucket_from_analyst(x) or ""))
-    cond_confirmed = tv_up.eq("STRONG_BUY") & (an_up == "BUY")
-    cond_pre       = tv_up.isin(["STRONG_BUY","BUY"]) & (~cond_confirmed)
-    base["bucket"] = "other"
-    base.loc[cond_pre, "bucket"] = "pre_signal"
-    base.loc[cond_confirmed, "bucket"] = "confirmed"
+    # 13) Buckets exclusifs (pas de doublons)
+    # Règles de base -> confirmed (3/3) ; pre (2/3) ; event (1/3)
+    is_confirmed = base["pillars_met"] >= 3
+    is_pre       = base["pillars_met"] == 2
+    is_event     = base["pillars_met"] == 1
 
-    # 14) Export
+    # tri commun
+    base_sorted2 = base.sort_values("rank_score", ascending=False)
+
+    # vues filtrées avant exclusivité
+    df_conf = base_sorted2[is_confirmed].copy()
+    already = set(df_conf["ticker_yf"])
+    df_pre  = base_sorted2[is_pre & (~base_sorted2["ticker_yf"].isin(already))].copy()
+    already.update(df_pre["ticker_yf"])
+    df_evt  = base_sorted2[is_event & (~base_sorted2["ticker_yf"].isin(already))].copy()
+
+    # bornes
+    df_conf = df_conf.head(CONFIRM_TOP)
+    df_pre  = df_pre.head(PRE_TOP)
+    df_evt  = df_evt.head(EVENT_TOP)
+
+    # 14) Export commun (toutes lignes, puis buckets dédiés)
     if "ticker_tv" not in base.columns:
         base["ticker_tv"] = base["ticker_yf"].map(_yf_symbol_to_tv)
 
@@ -386,26 +417,37 @@ def main():
         "avg_dollar_vol",
         "tv_score","tv_reco","analyst_bucket","analyst_votes",
         "sector","industry",
-        "p_tech","p_tv","p_an","pillars_met","votes_bin",
+        "p_tech","tech","Tech","p_tv","p_an","pillars_met","votes_bin",
         "rank_score","bucket"
     ]
     for c in export_cols:
         if c not in base.columns: base[c] = None
 
+    # bucket global (informative)
+    base["bucket"] = "other"
+    base.loc[base["ticker_yf"].isin(df_evt["ticker_yf"]), "bucket"] = "event"
+    base.loc[base["ticker_yf"].isin(df_pre["ticker_yf"]), "bucket"] = "pre_signal"
+    base.loc[base["ticker_yf"].isin(df_conf["ticker_yf"]), "bucket"] = "confirmed"
+
     cand_all = base[export_cols].copy().sort_values("rank_score", ascending=False).reset_index(drop=True)
     _save(cand_all, "candidates_all_ranked.csv")
 
-    confirmed = cand_all[cand_all["bucket"] == "confirmed"].head(10).copy()
-    pre       = cand_all[cand_all["bucket"] == "pre_signal"].head(50).copy()
-    events    = cand_all.head(100).copy()  # placeholder list for now
+    # exports exclusifs
+    df_conf = df_conf.assign(bucket="confirmed")[export_cols]
+    df_pre  = df_pre.assign(bucket="pre_signal")[export_cols]
+    df_evt  = df_evt.assign(bucket="event")[export_cols]
 
-    _save(confirmed, "confirmed_STRONGBUY.csv")
-    _save(pre, "anticipative_pre_signals.csv")
-    _save(events, "event_driven_signals.csv")
+    _save(df_conf, "confirmed_STRONGBUY.csv")
+    _save(df_pre,  "anticipative_pre_signals.csv")
+    _save(df_evt,  "event_driven_signals.csv")
 
-    # Minimal signals_history for backtest
+    # 15) signals_history avec sector rempli
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    sig_hist = cand_all[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]].copy()
+    sig_hist = pd.concat([
+        df_conf[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]],
+        df_pre[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]],
+        df_evt[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]],
+    ], ignore_index=True).drop_duplicates()
     sig_hist.insert(0, "date", today)
     _save(sig_hist, "signals_history.csv")
 
@@ -415,8 +457,8 @@ def main():
         "finnhub_analyst": int(cand_all["analyst_bucket"].notna().sum()),
         "mcap_final_nonnull": int(cand_all["mcap_usd_final"].notna().sum()),
         "price_nonnull": int(cand_all["price"].notna().sum()),
-        "confirmed_count": int(len(confirmed)),
-        "pre_count": int(len(pre)),
+        "confirmed_count": int(len(df_conf)),
+        "pre_count": int(len(df_pre)),
     }
     print("[COVERAGE]", cov)
 
