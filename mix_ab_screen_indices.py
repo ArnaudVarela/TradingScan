@@ -212,17 +212,28 @@ def main():
 
     # 2) Sector catalog merge (keeps everything)
     cat = _read_csv_required("sector_catalog.csv")
+
     def pickcol(df, names):
         for n in names:
-            if n in df.columns: return n
+            for col in df.columns:
+                if col.lower() == n.lower():
+                    return col
         return None
-    # Try typical columns
-    sec_col = pickcol(cat, ["sector","Sector","GICS Sector","gics_sector"])
-    ind_col = pickcol(cat, ["industry","Industry","GICS Industry","gics_industry"])
-    cat = cat.rename(columns={sec_col: "sector", ind_col: "industry"}) if sec_col or ind_col else cat
-    if "ticker_yf" not in cat.columns and "symbol" in cat.columns:
-        cat = cat.rename(columns={"symbol": "ticker_yf"})
-    base = base.merge(cat[["ticker_yf","sector","industry"]].drop_duplicates(), on="ticker_yf", how="left")
+
+    sec_col = pickcol(cat, ["sector","gics_sector","gics sector"])
+    ind_col = pickcol(cat, ["industry","gics_industry","gics industry"])
+    tic_col = pickcol(cat, ["ticker_yf","symbol","ticker","code"])
+
+    if sec_col: cat = cat.rename(columns={sec_col: "sector"})
+    if ind_col: cat = cat.rename(columns={ind_col: "industry"})
+    if tic_col: cat = cat.rename(columns={tic_col: "ticker_yf"})
+
+    if "ticker_yf" not in cat.columns:
+        raise SystemExit("❌ sector_catalog.csv must have a ticker column (e.g. symbol/ticker_yf)")
+
+    base = base.merge(cat[["ticker_yf","sector","industry"]].drop_duplicates(),
+                      on="ticker_yf", how="left")
+
 
     # 3) Avg dollar vol (fallback if not present)
     if "avg_dollar_vol" not in base.columns or base["avg_dollar_vol"].isna().all():
