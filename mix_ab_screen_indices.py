@@ -381,35 +381,31 @@ def main():
     base = base[pd.to_numeric(base["mcap_usd_final"], errors="coerce").notna() &
                 (base["mcap_usd_final"] < MCAP_MAX_USD)].copy()
 
-    # 13) Buckets exclusifs (pas de doublons)
-    # Règles de base -> confirmed (3/3) ; pre (2/3) ; event (1/3)
-    is_confirmed = base["pillars_met"] >= 3
-    is_pre       = base["pillars_met"] == 2
-    is_event     = base["pillars_met"] == 1
+    # === Préparer toutes les colonnes attendues AVANT la découpe en buckets ===
+    if "ticker_tv" not in base.columns:
+        base["ticker_tv"] = base["ticker_yf"].map(_yf_symbol_to_tv)
+    base["last"] = base.get("price")
+    base["mcap"] = base.get("mcap_usd_final")
 
-    # tri commun
-    base_sorted2 = base.sort_values("rank_score", ascending=False)
+    # 13) Buckets exclusifs (pas de doublons) – masques recalculés sur la DF triée
+    base_sorted2 = base.sort_values("rank_score", ascending=False).copy()
 
-    # vues filtrées avant exclusivité
-    df_conf = base_sorted2[is_confirmed].copy()
+    mask_confirmed = base_sorted2["pillars_met"] >= 3
+    mask_pre       = base_sorted2["pillars_met"] == 2
+    mask_event     = base_sorted2["pillars_met"] == 1
+
+    df_conf = base_sorted2.loc[mask_confirmed].copy()
     already = set(df_conf["ticker_yf"])
-    df_pre  = base_sorted2[is_pre & (~base_sorted2["ticker_yf"].isin(already))].copy()
+    df_pre  = base_sorted2.loc[mask_pre & (~base_sorted2["ticker_yf"].isin(already))].copy()
     already.update(df_pre["ticker_yf"])
-    df_evt  = base_sorted2[is_event & (~base_sorted2["ticker_yf"].isin(already))].copy()
+    df_evt  = base_sorted2.loc[mask_event & (~base_sorted2["ticker_yf"].isin(already))].copy()
 
     # bornes
     df_conf = df_conf.head(CONFIRM_TOP)
     df_pre  = df_pre.head(PRE_TOP)
     df_evt  = df_evt.head(EVENT_TOP)
 
-    # 14) Export commun (toutes lignes, puis buckets dédiés)
-    if "ticker_tv" not in base.columns:
-        base["ticker_tv"] = base["ticker_yf"].map(_yf_symbol_to_tv)
-
-    # Aliases used by the front-end
-    base["last"] = base.get("price")
-    base["mcap"] = base.get("mcap_usd_final")
-
+    # 14) Export – liste de colonnes attendues
     export_cols = [
         "ticker_yf","ticker_tv",
         "price","last",
@@ -420,22 +416,25 @@ def main():
         "p_tech","tech","Tech","p_tv","p_an","pillars_met","votes_bin",
         "rank_score","bucket"
     ]
+    # garantir l’existence de toutes les colonnes dans la base
     for c in export_cols:
-        if c not in base.columns: base[c] = None
+        if c not in base.columns:
+            base[c] = None
 
-    # bucket global (informative)
+    # bucket global (informatif)
     base["bucket"] = "other"
     base.loc[base["ticker_yf"].isin(df_evt["ticker_yf"]), "bucket"] = "event"
     base.loc[base["ticker_yf"].isin(df_pre["ticker_yf"]), "bucket"] = "pre_signal"
     base.loc[base["ticker_yf"].isin(df_conf["ticker_yf"]), "bucket"] = "confirmed"
 
+    # table complète triée pour le front
     cand_all = base[export_cols].copy().sort_values("rank_score", ascending=False).reset_index(drop=True)
     _save(cand_all, "candidates_all_ranked.csv")
 
-    # exports exclusifs
-    df_conf = df_conf.assign(bucket="confirmed")[export_cols]
-    df_pre  = df_pre.assign(bucket="pre_signal")[export_cols]
-    df_evt  = df_evt.assign(bucket="event")[export_cols]
+    # exports exclusifs (reindex pour éviter KeyError si une colonne manque)
+    df_conf = df_conf.assign(bucket="confirmed").reindex(columns=export_cols)
+    df_pre  = df_pre.assign(bucket="pre_signal").reindex(columns=export_cols)
+    df_evt  = df_evt.assign(bucket="event").reindex(columns=export_cols)
 
     _save(df_conf, "confirmed_STRONGBUY.csv")
     _save(df_pre,  "anticipative_pre_signals.csv")
@@ -450,17 +449,6 @@ def main():
     ], ignore_index=True).drop_duplicates()
     sig_hist.insert(0, "date", today)
     _save(sig_hist, "signals_history.csv")
-
-    cov = {
-        "universe": int(len(base)),
-        "tv_reco_filled": int(cand_all["tv_reco"].notna().sum()),
-        "finnhub_analyst": int(cand_all["analyst_bucket"].notna().sum()),
-        "mcap_final_nonnull": int(cand_all["mcap_usd_final"].notna().sum()),
-        "price_nonnull": int(cand_all["price"].notna().sum()),
-        "confirmed_count": int(len(df_conf)),
-        "pre_count": int(len(df_pre)),
-    }
-    print("[COVERAGE]", cov)
 
 if __name__ == "__main__":
     main()
