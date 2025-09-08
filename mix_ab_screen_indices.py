@@ -10,6 +10,7 @@ from typing import Dict, List, Tuple, Optional
 import pandas as pd
 import requests
 import yfinance as yf
+import pandas_ta as ta  # <-- TA lib
 
 from cache_layer import load_map, save_map, set_cached, now_utc_iso
 
@@ -122,7 +123,6 @@ def finnhub_analyst(symbol_yf: str) -> Tuple[Optional[str], Optional[int]]:
 
 def finnhub_profile_mcap(symbol_yf: str) -> Optional[float]:
     if not FINNHUB_KEY: return None
-    # cached
     prof_cache = load_map("finnhub_profile", ttl_hours=24)
     if symbol_yf in prof_cache and "mcap_usd" in prof_cache[symbol_yf]:
         return prof_cache[symbol_yf]["mcap_usd"]
@@ -140,7 +140,6 @@ def finnhub_profile_mcap(symbol_yf: str) -> Optional[float]:
         return None
 
 def yf_price_fast(symbol_yf: str) -> Optional[float]:
-    # cached fast_info.last_price
     fi_cache = load_map("yf_fastinfo", ttl_hours=24)
     rec = fi_cache.get(symbol_yf)
     if rec and rec.get("last_price") is not None:
@@ -161,18 +160,15 @@ def yf_price_fast(symbol_yf: str) -> Optional[float]:
         return None
 
 def yf_avg_dollar_vol(tickers: List[str]) -> Dict[str, float]:
-    """20d avg dollar volume via history. Cached per ticker (dv20)."""
     out: Dict[str, float] = {}
     dv_cache = load_map("dv20_cache", ttl_hours=72)
     to_fetch: List[str] = []
-
     for t in tickers:
         rec = dv_cache.get(t)
         if rec and rec.get("dv20") is not None:
             out[t] = float(rec["dv20"])
         else:
             to_fetch.append(t)
-
     if to_fetch:
         try:
             df = yf.download(tickers=to_fetch, period="3mo", interval="1d",
@@ -189,7 +185,6 @@ def yf_avg_dollar_vol(tickers: List[str]) -> Dict[str, float]:
                     except Exception:
                         pass
             else:
-                # single ticker case
                 sub = df[["Close","Volume"]].dropna()
                 if len(sub) >= 5:
                     dv20 = float((sub.tail(20)["Close"] * sub.tail(20)["Volume"]).mean())
@@ -209,7 +204,6 @@ def _bucket_from_analyst(v: Optional[str]) -> Optional[str]:
     return "HOLD"
 
 def _fill_mcap_for_rows(tickers: List[str], prices: List[Optional[float]], sleep=0.1) -> List[Optional[float]]:
-    """Fill missing market caps (USD) using yfinance.info or sharesOutstanding * price."""
     out: List[Optional[float]] = []
     yf_info_cache = load_map("yf_info_mcap", ttl_hours=24)
     for sym, p in zip(tickers, prices):
@@ -237,14 +231,127 @@ def _fill_mcap_for_rows(tickers: List[str], prices: List[Optional[float]], sleep
     save_map("yf_info_mcap", yf_info_cache)
     return out
 
+# --------- TA: compute p_tech for a list of tickers ---------
+def compute_ta_signals(tickers: List[str]) -> pd.DataFrame:
+    """
+    Retourne un DataFrame index=ticker avec:
+      ['ta_close','ta_sma200','ta_rsi','ta_macdh','ta_adx','ta_dmp','ta_dmn','ta_score','p_tech']
+    Règles (score 0..4):
+      +1 si Close > SMA200
+      +1 si RSI(14) >= 50
+      +1 si MACD histogram > 0
+      +1 si ADX(14) >= 20 et +DI > -DI
+    p_tech = (score >= 3)
+    Cache léger jour par jour pour éviter recalcul dans la même journée.
+    """
+    tickers = [t for t in tickers if isinstance(t, str) and t]
+    if not tickers:
+        return pd.DataFrame(columns=["p_tech"])
+
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    ta_cache = load_map("ta_daily_cache", ttl_hours=24)  # reset tous les ~1j
+    missing: List[str] = []
+    rows: Dict[str, dict] = {}
+
+    # 1) récupérer ce qu'on a déjà en cache
+    for t in tickers:
+        rec = ta_cache.get(t)
+        if rec and rec.get("asof") == today:
+            rows[t] = rec
+        else:
+            missing.append(t)
+
+    # 2) télécharger d'un coup l'historique manquant
+    if missing:
+        try:
+            df = yf.download(
+                tickers=missing, period="6mo", interval="1d",
+                auto_adjust=True, progress=False, group_by="ticker", threads=True
+            )
+            multi = isinstance(df.columns, pd.MultiIndex)
+            for t in missing:
+                try:
+                    if multi:
+                        sub = df[t].dropna()
+                    else:
+                        # single ticker download
+                        sub = df.dropna()
+                    if len(sub) < 60:
+                        # pas assez de data pour SMA200, on fait un fallback moins strict
+                        c = sub["Close"]
+                        rsi = ta.rsi(c, length=14)
+                        macd = ta.macd(c)
+                        macdh = macd["MACDh_12_26_9"].iloc[-1] if macd is not None and not macd.empty else None
+                        rsi_v = float(rsi.iloc[-1]) if rsi is not None and len(rsi) else None
+                        close_v = float(c.iloc[-1]) if len(c) else None
+                        sma200_v = None
+                        adx_v = dmp_v = dmn_v = None
+                    else:
+                        h, l, c = sub["High"], sub["Low"], sub["Close"]
+                        sma200 = ta.sma(c, length=200)
+                        rsi = ta.rsi(c, length=14)
+                        macd = ta.macd(c)
+                        adx = ta.adx(h, l, c, length=14)
+
+                        close_v = float(c.iloc[-1])
+                        sma200_v = float(sma200.iloc[-1]) if sma200 is not None and len(sma200) else None
+                        rsi_v = float(rsi.iloc[-1]) if rsi is not None and len(rsi) else None
+                        macdh = macd["MACDh_12_26_9"].iloc[-1] if macd is not None and not macd.empty else None
+                        adx_v = float(adx["ADX_14"].iloc[-1]) if adx is not None and "ADX_14" in adx.columns else None
+                        dmp_v = float(adx["DMP_14"].iloc[-1]) if adx is not None and "DMP_14" in adx.columns else None
+                        dmn_v = float(adx["DMN_14"].iloc[-1]) if adx is not None and "DMN_14" in adx.columns else None
+
+                    # scoring
+                    sc = 0
+                    if sma200_v is not None and close_v is not None and close_v > sma200_v:
+                        sc += 1
+                    if rsi_v is not None and rsi_v >= 50:
+                        sc += 1
+                    if macdh is not None and macdh > 0:
+                        sc += 1
+                    if (adx_v is not None and adx_v >= 20) and (dmp_v is not None and dmn_v is not None) and (dmp_v > dmn_v):
+                        sc += 1
+
+                    rec = {
+                        "asof": today,
+                        "ta_close": close_v,
+                        "ta_sma200": sma200_v,
+                        "ta_rsi": rsi_v,
+                        "ta_macdh": float(macdh) if macdh is not None else None,
+                        "ta_adx": adx_v,
+                        "ta_dmp": dmp_v,
+                        "ta_dmn": dmn_v,
+                        "ta_score": sc,
+                        "p_tech": bool(sc >= 3),
+                    }
+                    ta_cache[t] = rec
+                    rows[t] = rec
+                except Exception:
+                    # si tout échoue: p_tech False
+                    rows[t] = {"asof": today, "ta_score": 0, "p_tech": False}
+                    ta_cache[t] = rows[t]
+        except Exception:
+            # en cas d'erreur réseau globale, fallback: tout False (grâce au cache prochain run)
+            for t in missing:
+                if t not in rows:
+                    rows[t] = {"asof": today, "ta_score": 0, "p_tech": False}
+                    ta_cache[t] = rows[t]
+
+        save_map("ta_daily_cache", ta_cache)
+
+    # 3) construire le DF
+    out = pd.DataFrame.from_dict(rows, orient="index")
+    out.index.name = "ticker_yf"
+    return out
+
 # --------- Main pipeline ---------
 def main():
-    # 1) Universe (already sector-scoped + roughly <75B, with NaNs preserved)
+    # 1) Universe (déjà sector-scoped dans build_universe + NaNs)
     base = _read_csv_required("universe_in_scope.csv")
     if "ticker_yf" not in base.columns:
         raise SystemExit("❌ universe_in_scope.csv must contain 'ticker_yf'")
 
-    # 2) Sector catalog merge (keeps everything)
+    # 2) Sector catalog merge
     cat = _read_csv_required("sector_catalog.csv")
 
     def pickcol(df, names):
@@ -268,19 +375,19 @@ def main():
     base = base.merge(cat[["ticker_yf","sector","industry"]].drop_duplicates(),
                       on="ticker_yf", how="left")
 
-    # 3) Avg dollar vol (fallback if not present)
+    # 3) Avg dollar vol (fallback si vide)
     if "avg_dollar_vol" not in base.columns or base["avg_dollar_vol"].isna().all():
         syms = base["ticker_yf"].astype(str).tolist()
         print("[YF] computing 20d avg dollar vol…")
         avgd = yf_avg_dollar_vol(syms)
         base["avg_dollar_vol"] = base["ticker_yf"].map(avgd).astype(float)
 
-    # 4) Choose TopN to enrich heavily
+    # 4) TopN par liquidité
     base_sorted = base.sort_values("avg_dollar_vol", ascending=False, na_position="last").reset_index(drop=True)
     cand = base_sorted.head(TOP_N).copy()
     print(f"[UNI] in-scope: {len(base)}  |  TopN to enrich: {len(cand)}")
 
-    # 5) Prices (fast) for cand; cached; fallback via history later if needed
+    # 5) Prices (fast) + cache
     prices = []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         prices.append(yf_price_fast(sym))
@@ -300,7 +407,7 @@ def main():
     cand["tv_score"] = [tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_score") for s in cand["ticker_yf"]]
     cand["tv_reco"]  = [tv_out.get(_yf_symbol_to_tv(s), {}).get("tv_reco")  for s in cand["ticker_yf"]]
 
-    # 7) Finnhub (analyst) + Finnhub (mcap)
+    # 7) Finnhub (analyst) + (mcap)
     an_bucket, an_votes, mcaps = [], [], []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         b, v = finnhub_analyst(sym); an_bucket.append(b); an_votes.append(v)
@@ -311,11 +418,10 @@ def main():
     cand["analyst_votes"]   = an_votes
     cand["mcap_usd_finnhub"] = mcaps
 
-    # 8) yfinance.info mcap for cand (fallback)
+    # 8) yfinance.info mcap (fallback)
     mcap_yf = []
     fi_cache = load_map("yf_fastinfo", ttl_hours=24)
     for i, sym in enumerate(cand["ticker_yf"], 1):
-        # use fast_info.market_cap if present in cache to save one info() call
         val = None
         rec = fi_cache.get(sym)
         if rec and rec.get("market_cap") is not None:
@@ -330,11 +436,10 @@ def main():
         time.sleep(SLEEP_BETWEEN_CALLS/2)
     cand["mcap_usd_yfinfo"] = mcap_yf
 
-    # 9) Build final enrichment set and merge back to base
+    # 9) Merge enrich -> base
     cand["mcap_usd_final"] = pd.to_numeric(cand["mcap_usd_finnhub"], errors="coerce") \
                                 .fillna(pd.to_numeric(cand["mcap_usd_yfinfo"], errors="coerce"))
 
-    # ensure sector/industry exist in cand
     for col in ("sector", "industry"):
         if col not in cand.columns:
             if col in base.columns:
@@ -349,7 +454,6 @@ def main():
     enrich_df = cand[enrich_cols].copy()
     base = base.merge(enrich_df, on="ticker_yf", how="left", suffixes=("", "_cand"))
 
-    # reconcile sector/industry
     for col in ("sector","industry"):
         rcol = f"{col}_cand"
         if rcol in base.columns:
@@ -359,7 +463,7 @@ def main():
         elif col not in base.columns:
             base[col] = None
 
-    # 9-bis) Fill missing market caps across the whole base (not only cand)
+    # 9-bis) fill mcap manquant sur tout le base
     if "price" not in base.columns:
         base["price"] = None
     need_mask = base["mcap_usd_final"].isna()
@@ -371,17 +475,23 @@ def main():
         )
         base.loc[need_mask, "mcap_usd_final"] = pd.to_numeric(pd.Series(mcap_filled), errors="coerce")
 
-    # 10) Tech pillars
+    # === 10) TECH PILLAR via TA (nouveau) ===
+    # On calcule pour TopN (cand) et on mappe sur base; si ticker hors TopN => p_tech False par défaut
+    ta_df = compute_ta_signals(cand["ticker_yf"].astype(str).tolist())
+    # merge pour avoir p_tech + score (optionnel pour debug)
+    base = base.merge(ta_df[["p_tech","ta_score"]].reset_index(), on="ticker_yf", how="left")
+    base["p_tech"] = base["p_tech"].fillna(False)
+
+    # 10bis) autres piliers
     def is_strong_tv(v) -> bool:
         if v is None or _is_nan(v): return False
         return str(v).upper().strip() == "STRONG_BUY"
     def is_bull_an(v) -> bool:
         return _bucket_from_analyst(v) == "BUY"
 
-    base["p_tv"]   = base.get("tv_reco").map(is_strong_tv)
-    base["p_an"]   = base.get("analyst_bucket").map(is_bull_an)
-    # pour l’instant p_tech = p_tv (visible dans CSV/front)
-    base["p_tech"] = base["p_tv"]
+    base["p_tv"] = base.get("tv_reco").map(is_strong_tv)
+    base["p_an"] = base.get("analyst_bucket").map(is_bull_an)
+
     base["pillars_met"] = base[["p_tech","p_tv","p_an"]].fillna(False).sum(axis=1)
 
     # 11) Ranking
@@ -392,7 +502,7 @@ def main():
     s_v  = votes.fillna(0).clip(lower=0, upper=30) / 30.0
     base["rank_score"] = (s_tv * 0.6) + (s_p * 0.3) + (s_v * 0.1)
 
-    # 12) Final MCAP coalescence and enforcement < 75B
+    # 12) MCAP < 75B strict
     base["mcap_usd_final"] = pd.to_numeric(base.get("mcap_usd_final"), errors="coerce") \
                                 .fillna(pd.to_numeric(base.get("mcap_usd"), errors="coerce"))
     base = base[pd.to_numeric(base["mcap_usd_final"], errors="coerce").notna() &
@@ -404,12 +514,10 @@ def main():
 
     is_confirmed = tv_up.eq("STRONG_BUY") & (an_up == "BUY")
     is_pre       = tv_up.isin(["STRONG_BUY","BUY"]) & (~is_confirmed)
-    is_event     = ~is_confirmed & ~is_pre  # placeholder pour exploration
+    is_event     = ~is_confirmed & ~is_pre
 
-    # Tri global par score
     base_sorted2 = base.sort_values("rank_score", ascending=False).reset_index(drop=True)
 
-    # Sélection exclusive : on retire les tickers déjà pris d’une catégorie quand on passe à la suivante
     df_conf = base_sorted2[is_confirmed.reindex(base_sorted2.index, fill_value=False)].copy()
     already = set(df_conf["ticker_yf"])
 
@@ -443,14 +551,13 @@ def main():
     for c in export_cols:
         if c not in base_sorted2.columns: base_sorted2[c] = None
 
-    # Ecriture candidates global
-    cand_all = base_sorted2[export_cols[:-1]].copy()  # sans 'bucket'
+    # Ecriture candidates global (sans 'bucket')
+    cand_all = base_sorted2[export_cols[:-1]].copy()
     _save(cand_all, "candidates_all_ranked.csv")
 
-    # Buckets exclusifs et tailles cibles
+    # Buckets exclusifs et tailles
     conf_out = df_conf.assign(bucket="confirmed")[export_cols].head(10)
     pre_out  = df_pre.assign(bucket="pre_signal")[export_cols].head(50)
-    # event : reste (top 100 uniques au total)
     remaining_for_events = max(0, 100 - len(conf_out) - len(pre_out))
     evt_out = df_evt.assign(bucket="event")[export_cols].head(remaining_for_events)
 
@@ -458,9 +565,8 @@ def main():
     _save(pre_out, "anticipative_pre_signals.csv")
     _save(evt_out, "event_driven_signals.csv")
 
-    # 14) Minimal signals_history pour backtest
+    # 14) Minimal signals_history
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
     sig_hist = pd.concat([conf_out, pre_out, evt_out], ignore_index=True)
     sig_hist = sig_hist[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]].copy()
     sig_hist.insert(0, "date", today)
