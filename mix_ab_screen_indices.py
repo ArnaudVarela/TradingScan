@@ -1,45 +1,20 @@
 # mix_ab_screen_indices.py
 # Build a compact, fully-enriched screening set and publish rich CSVs for the dashboard.
 
-import os, sys, json, time, math
+from __future__ import annotations
+import os, json, time, math
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
-import numpy as np
 import pandas as pd
 import requests
 import yfinance as yf
 
+from cache_layer import load_map, save_map, set_cached, now_utc_iso
+
 PUBLIC_DIR = Path("dashboard/public")
 PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
-
-def _save(df: pd.DataFrame, name: str, also_public: bool = True):
-    """
-    Save to root + optionally to dashboard/public (for Vercel).
-    """
-    try:
-        p = Path(name)
-        df.to_csv(p, index=False)
-        if also_public:
-            q = PUBLIC_DIR / name
-            df.to_csv(q, index=False)
-        print(f"[SAVE] {name} | rows={len(df)} | cols={len(df.columns)}")
-    except Exception as e:
-        print(f"[SAVE] failed for {name}: {e}")
-
-def _read_csv_required(name: str) -> pd.DataFrame:
-    """
-    Read a CSV from either root or PUBLIC_DIR, else die.
-    """
-    for base in (Path("."), PUBLIC_DIR):
-        p = base / name
-        if p.exists():
-            try:
-                return pd.read_csv(p)
-            except Exception:
-                pass
-    raise SystemExit(f"❌ Required file not found or unreadable: {name}")
 
 # --------- Config ---------
 TOP_N = int(os.getenv("SCREEN_TOPN", "180"))   # top by liquidity to enrich heavily
@@ -52,12 +27,29 @@ ALPHAV_KEY  = os.getenv("ALPHAVANTAGE_API_KEY", "")
 
 MCAP_MAX_USD = 75_000_000_000
 
-# bucket targets (ajuste si besoin pour ~120–160 tickers uniques)
-CONFIRM_TOP = int(os.getenv("SCREEN_CONFIRM_TOP", "40"))
-PRE_TOP     = int(os.getenv("SCREEN_PRE_TOP", "40"))
-EVENT_TOP   = int(os.getenv("SCREEN_EVENT_TOP", "80"))
+# --------- I/O helpers ---------
+def _save(df: pd.DataFrame, name: str, also_public: bool = True):
+    try:
+        p = Path(name)
+        df.to_csv(p, index=False)
+        if also_public:
+            q = PUBLIC_DIR / name
+            df.to_csv(q, index=False)
+        print(f"[SAVE] {name} | rows={len(df)} | cols={len(df.columns)}")
+    except Exception as e:
+        print(f"[SAVE] failed for {name}: {e}")
 
-# --------- helpers ---------
+def _read_csv_required(name: str) -> pd.DataFrame:
+    for base in (Path("."), PUBLIC_DIR):
+        p = base / name
+        if p.exists():
+            try:
+                return pd.read_csv(p)
+            except Exception:
+                pass
+    raise SystemExit(f"❌ Required file not found or unreadable: {name}")
+
+# --------- utils ---------
 def _is_nan(x) -> bool:
     return isinstance(x, float) and math.isnan(x)
 
@@ -71,7 +63,7 @@ def _safe_num(v):
     except Exception:
         return None
 
-def _label_from_tv_score(score: float | None) -> str | None:
+def _label_from_tv_score(score: float | None) -> Optional[str]:
     if score is None: return None
     if score >= 0.5:  return "STRONG_BUY"
     if score >= 0.2:  return "BUY"
@@ -80,10 +72,6 @@ def _label_from_tv_score(score: float | None) -> str | None:
     return "NEUTRAL"
 
 def tv_scan_batch(symbols_tv: List[str]) -> Dict[str, Dict]:
-    """
-    Batch query TradingView's public scanner endpoint for a list of base symbols (TV format).
-    Returns { "AAPL": {"tv_score": 0.7, "tv_reco": "STRONG_BUY"}, ... }
-    """
     out: Dict[str, Dict] = {}
     if not symbols_tv: return out
     url = "https://scanner.tradingview.com/america/scan"
@@ -111,14 +99,13 @@ def tv_scan_batch(symbols_tv: List[str]) -> Dict[str, Dict]:
         print(f"[TV] exception: {e}")
     return out
 
-def finnhub_analyst(symbol_yf: str) -> Tuple[str | None, int | None]:
+def finnhub_analyst(symbol_yf: str) -> Tuple[Optional[str], Optional[int]]:
     if not FINNHUB_KEY: return (None, None)
     try:
         url = f"https://finnhub.io/api/v1/stock/recommendation?symbol={symbol_yf}&token={FINNHUB_KEY}"
         r = requests.get(url, timeout=REQ_TIMEOUT)
         if r.status_code != 200: return (None, None)
         arr = r.json()
-        # take most recent
         if not isinstance(arr, list) or not arr: return (None, None)
         rec = arr[0]
         buy  = int(rec.get("buy", 0))
@@ -133,80 +120,121 @@ def finnhub_analyst(symbol_yf: str) -> Tuple[str | None, int | None]:
     except Exception:
         return (None, None)
 
-def finnhub_profile_mcap(symbol_yf: str) -> float | None:
+def finnhub_profile_mcap(symbol_yf: str) -> Optional[float]:
     if not FINNHUB_KEY: return None
+    # cached
+    prof_cache = load_map("finnhub_profile", ttl_hours=24)
+    if symbol_yf in prof_cache and "mcap_usd" in prof_cache[symbol_yf]:
+        return prof_cache[symbol_yf]["mcap_usd"]
     try:
         url = f"https://finnhub.io/api/v1/stock/profile2?symbol={symbol_yf}&token={FINNHUB_KEY}"
         r = requests.get(url, timeout=REQ_TIMEOUT)
         if r.status_code != 200: return None
         data = r.json()
-        return _safe_num(data.get("marketCapitalization")) and float(data.get("marketCapitalization")) * 1_000_000
+        m = _safe_num(data.get("marketCapitalization"))
+        m_usd = float(m) * 1_000_000 if m is not None else None
+        prof_cache[symbol_yf] = {"mcap_usd": m_usd, "cached_at": now_utc_iso()}
+        save_map("finnhub_profile", prof_cache)
+        return m_usd
     except Exception:
         return None
 
-def yf_price_fast(symbol_yf: str) -> float | None:
+def yf_price_fast(symbol_yf: str) -> Optional[float]:
+    # cached fast_info.last_price
+    fi_cache = load_map("yf_fastinfo", ttl_hours=24)
+    rec = fi_cache.get(symbol_yf)
+    if rec and rec.get("last_price") is not None:
+        return _safe_num(rec.get("last_price"))
     try:
         info = yf.Ticker(symbol_yf).fast_info
         p = getattr(info, "last_price", None)
-        return float(p) if p is not None else None
+        lp = float(p) if p is not None else None
+        fi_cache[symbol_yf] = {
+            "last_price": lp,
+            "market_cap": getattr(info, "market_cap", None),
+            "ten_day_average_volume": getattr(info, "ten_day_average_volume", None),
+            "cached_at": now_utc_iso()
+        }
+        save_map("yf_fastinfo", fi_cache)
+        return lp
     except Exception:
         return None
 
 def yf_avg_dollar_vol(tickers: List[str]) -> Dict[str, float]:
-    """
-    20-day avg dollar volume using yfinance history (Close * Volume).
-    """
+    """20d avg dollar volume via history. Cached per ticker (dv20)."""
     out: Dict[str, float] = {}
-    try:
-        df = yf.download(tickers=tickers, period="3mo", interval="1d",
-                         auto_adjust=True, progress=False, group_by="ticker", threads=True)
-        if isinstance(df.columns, pd.MultiIndex):
-            for t in tickers:
-                try:
-                    sub = df[t][["Close","Volume"]].dropna()
-                    if len(sub) >= 5:
-                        tail = sub.tail(20)
-                        out[t] = float((tail["Close"] * tail["Volume"]).mean())
-                except Exception:
-                    pass
+    dv_cache = load_map("dv20_cache", ttl_hours=72)
+    to_fetch: List[str] = []
+
+    for t in tickers:
+        rec = dv_cache.get(t)
+        if rec and rec.get("dv20") is not None:
+            out[t] = float(rec["dv20"])
         else:
-            sub = df[["Close","Volume"]].dropna()
-            if len(sub) >= 5:
-                out[tickers[0]] = float((sub.tail(20)["Close"] * sub.tail(20)["Volume"]).mean())
-    except Exception:
-        pass
+            to_fetch.append(t)
+
+    if to_fetch:
+        try:
+            df = yf.download(tickers=to_fetch, period="3mo", interval="1d",
+                             auto_adjust=True, progress=False, group_by="ticker", threads=True)
+            if isinstance(df.columns, pd.MultiIndex):
+                for t in to_fetch:
+                    try:
+                        sub = df[t][["Close","Volume"]].dropna()
+                        if len(sub) >= 5:
+                            tail = sub.tail(20)
+                            dv20 = float((tail["Close"] * tail["Volume"]).mean())
+                            out[t] = dv20
+                            dv_cache[t] = {"dv20": dv20, "asof": datetime.now(timezone.utc).strftime("%Y-%m-%d")}
+                    except Exception:
+                        pass
+            else:
+                # single ticker case
+                sub = df[["Close","Volume"]].dropna()
+                if len(sub) >= 5:
+                    dv20 = float((sub.tail(20)["Close"] * sub.tail(20)["Volume"]).mean())
+                    t = to_fetch[0]
+                    out[t] = dv20
+                    dv_cache[t] = {"dv20": dv20, "asof": datetime.now(timezone.utc).strftime("%Y-%m-%d")}
+        except Exception:
+            pass
+        save_map("dv20_cache", dv_cache)
     return out
 
-def _bucket_from_analyst(v: str | None) -> str | None:
+def _bucket_from_analyst(v: Optional[str]) -> Optional[str]:
     if not v: return None
     s = str(v).strip().upper()
     if s == "BUY": return "BUY"
     if s == "SELL": return "SELL"
     return "HOLD"
 
-def _fill_mcap_for_rows(tickers: list[str], prices: list[float | None], sleep=0.1) -> list[float | None]:
-    """Fill missing market caps (USD) using yfinance.info or sharesOutstanding * price.
-    Returns a list aligned with the input 'tickers'.
-    """
-    out: list[float | None] = []
+def _fill_mcap_for_rows(tickers: List[str], prices: List[Optional[float]], sleep=0.1) -> List[Optional[float]]:
+    """Fill missing market caps (USD) using yfinance.info or sharesOutstanding * price."""
+    out: List[Optional[float]] = []
+    yf_info_cache = load_map("yf_info_mcap", ttl_hours=24)
     for sym, p in zip(tickers, prices):
         val = None
-        try:
-            info = (yf.Ticker(sym).info or {})
-            val = info.get("marketCap")
-            if val is None:
-                sh = info.get("sharesOutstanding")
-                if sh is not None and p is not None:
-                    try:
-                        val = float(sh) * float(p)
-                    except Exception:
-                        val = None
-            if val is not None:
-                val = float(val)
-        except Exception:
-            pass
+        if sym in yf_info_cache and "mcap" in yf_info_cache[sym]:
+            val = yf_info_cache[sym]["mcap"]
+        else:
+            try:
+                info = (yf.Ticker(sym).info or {})
+                val = info.get("marketCap")
+                if val is None:
+                    sh = info.get("sharesOutstanding")
+                    if sh is not None and p is not None:
+                        try:
+                            val = float(sh) * float(p)
+                        except Exception:
+                            val = None
+                if val is not None:
+                    val = float(val)
+                yf_info_cache[sym] = {"mcap": val, "cached_at": now_utc_iso()}
+            except Exception:
+                pass
+            time.sleep(sleep)
         out.append(val)
-        time.sleep(sleep)
+    save_map("yf_info_mcap", yf_info_cache)
     return out
 
 # --------- Main pipeline ---------
@@ -216,7 +244,7 @@ def main():
     if "ticker_yf" not in base.columns:
         raise SystemExit("❌ universe_in_scope.csv must contain 'ticker_yf'")
 
-    # 2) Sector catalog merge (keeps everything) + aliasing robuste
+    # 2) Sector catalog merge (keeps everything)
     cat = _read_csv_required("sector_catalog.csv")
 
     def pickcol(df, names):
@@ -237,18 +265,10 @@ def main():
     if "ticker_yf" not in cat.columns:
         raise SystemExit("❌ sector_catalog.csv must have a ticker column (e.g. symbol/ticker_yf)")
 
-    base = base.merge(
-        cat[["ticker_yf","sector","industry"]].drop_duplicates(),
-        on="ticker_yf", how="left", suffixes=("", "_cat")
-    )
-    # priorité aux valeurs non vides
-    for col in ("sector","industry"):
-        alt = f"{col}_cat"
-        if alt in base.columns:
-            base[col] = base[col].where(base[col].notna() & (base[col].astype(str).str.strip() != ""), base[alt])
-            base.drop(columns=[alt], inplace=True)
+    base = base.merge(cat[["ticker_yf","sector","industry"]].drop_duplicates(),
+                      on="ticker_yf", how="left")
 
-    # 3) Avg dollar vol (fallback si absent)
+    # 3) Avg dollar vol (fallback if not present)
     if "avg_dollar_vol" not in base.columns or base["avg_dollar_vol"].isna().all():
         syms = base["ticker_yf"].astype(str).tolist()
         print("[YF] computing 20d avg dollar vol…")
@@ -260,7 +280,7 @@ def main():
     cand = base_sorted.head(TOP_N).copy()
     print(f"[UNI] in-scope: {len(base)}  |  TopN to enrich: {len(cand)}")
 
-    # 5) Prices (fast) for cand; fallback via yf.info
+    # 5) Prices (fast) for cand; cached; fallback via history later if needed
     prices = []
     for i, sym in enumerate(cand["ticker_yf"], 1):
         prices.append(yf_price_fast(sym))
@@ -287,54 +307,61 @@ def main():
         m = finnhub_profile_mcap(sym); mcaps.append(m)
         if i % 80 == 0: print(f"[Finnhub] {i}/{len(cand)}")
         time.sleep(SLEEP_BETWEEN_CALLS)
-    cand["analyst_bucket"]   = an_bucket
-    cand["analyst_votes"]    = an_votes
+    cand["analyst_bucket"]  = an_bucket
+    cand["analyst_votes"]   = an_votes
     cand["mcap_usd_finnhub"] = mcaps
 
-    # 8) yfinance.info (mcap + price fallback)
-    mcap_yf, yfinfo_price = [], []
+    # 8) yfinance.info mcap for cand (fallback)
+    mcap_yf = []
+    fi_cache = load_map("yf_fastinfo", ttl_hours=24)
     for i, sym in enumerate(cand["ticker_yf"], 1):
-        try:
-            info = (yf.Ticker(sym).info or {})
-            mcap_yf.append(_safe_num(info.get("marketCap")))
-            yfinfo_price.append(_safe_num(info.get("regularMarketPrice")))
-        except Exception:
-            mcap_yf.append(None)
-            yfinfo_price.append(None)
+        # use fast_info.market_cap if present in cache to save one info() call
+        val = None
+        rec = fi_cache.get(sym)
+        if rec and rec.get("market_cap") is not None:
+            val = _safe_num(rec.get("market_cap"))
+        if val is None:
+            try:
+                info = (yf.Ticker(sym).info or {})
+                val = _safe_num(info.get("marketCap"))
+            except Exception:
+                val = None
+        mcap_yf.append(val)
         time.sleep(SLEEP_BETWEEN_CALLS/2)
     cand["mcap_usd_yfinfo"] = mcap_yf
-    # cascade de prix: fast -> info
-    cand["price"] = cand["price"].where(cand["price"].notna(), pd.Series(yfinfo_price, index=cand.index))
-    cand["last"]  = cand["price"]
 
     # 9) Build final enrichment set and merge back to base
-    cand["mcap_usd_final"] = cand["mcap_usd_finnhub"].fillna(cand.get("mcap_usd_yfinfo"))
+    cand["mcap_usd_final"] = pd.to_numeric(cand["mcap_usd_finnhub"], errors="coerce") \
+                                .fillna(pd.to_numeric(cand["mcap_usd_yfinfo"], errors="coerce"))
 
-    # garantir sector/industry présents dans cand (via base déjà mergé)
-    for col in ("sector","industry"):
-        if col not in cand.columns or cand[col].isna().any():
-            cand = cand.drop(columns=[c for c in (col,) if c in cand.columns], errors="ignore")
-            cand = cand.merge(base[["ticker_yf", col]].drop_duplicates(), on="ticker_yf", how="left")
+    # ensure sector/industry exist in cand
+    for col in ("sector", "industry"):
+        if col not in cand.columns:
+            if col in base.columns:
+                cand = cand.merge(base[["ticker_yf", col]].drop_duplicates(), on="ticker_yf", how="left")
+            else:
+                cand[col] = None
 
-    wanted = ["ticker_yf","price","last","tv_score","tv_reco",
+    wanted = ["ticker_yf","price","tv_score","tv_reco",
               "analyst_bucket","analyst_votes","mcap_usd_final",
-              "sector","industry"]
+              "sector","industry","avg_dollar_vol"]
     enrich_cols = [c for c in wanted if c in cand.columns]
     enrich_df = cand[enrich_cols].copy()
-
     base = base.merge(enrich_df, on="ticker_yf", how="left", suffixes=("", "_cand"))
 
-    # sécuriser l'existence des colonnes dans base pour la suite
-    for col in ("sector","industry","price","last","tv_score","tv_reco",
-                "analyst_bucket","analyst_votes","mcap_usd_final"):
+    # reconcile sector/industry
+    for col in ("sector","industry"):
         rcol = f"{col}_cand"
         if rcol in base.columns:
-            base[col] = base[col].where(base[col].notna(), base[rcol])
+            take = base[rcol].where(base[rcol].astype(str).str.strip() != "", base[col])
+            base[col] = base[col].where(base[col].notna(), take)
             base.drop(columns=[rcol], inplace=True)
         elif col not in base.columns:
             base[col] = None
 
     # 9-bis) Fill missing market caps across the whole base (not only cand)
+    if "price" not in base.columns:
+        base["price"] = None
     need_mask = base["mcap_usd_final"].isna()
     if need_mask.any():
         mcap_filled = _fill_mcap_for_rows(
@@ -342,28 +369,20 @@ def main():
             base.loc[need_mask, "price"].tolist(),
             sleep=SLEEP_BETWEEN_CALLS/2
         )
-        # éviter FutureWarning: caster explicitement
-        base.loc[need_mask, "mcap_usd_final"] = pd.Series(mcap_filled, index=base.index[need_mask], dtype="float64")
+        base.loc[need_mask, "mcap_usd_final"] = pd.to_numeric(pd.Series(mcap_filled), errors="coerce")
 
-    # 10) Pillars (robustes) + alias Tech
-    def is_strong_tv_label(v) -> bool:
+    # 10) Tech pillars
+    def is_strong_tv(v) -> bool:
         if v is None or _is_nan(v): return False
         return str(v).upper().strip() == "STRONG_BUY"
     def is_bull_an(v) -> bool:
         return _bucket_from_analyst(v) == "BUY"
 
-    base["p_tv"]   = base.get("tv_reco").map(is_strong_tv_label)
+    base["p_tv"]   = base.get("tv_reco").map(is_strong_tv)
     base["p_an"]   = base.get("analyst_bucket").map(is_bull_an)
-
-    # p_tech: à spécialiser si tu as tes règles — par défaut on calque sur TV pour ne pas être vide
-    if "p_tech" not in base.columns or base["p_tech"].isna().all():
-        base["p_tech"] = base["p_tv"].fillna(False)
-
-    # aliases front
-    base["tech"] = base["p_tech"].astype(int)
-    base["Tech"] = base["p_tech"].astype(int)
-
-    base["pillars_met"] = base[["p_tech","p_tv","p_an"]].fillna(False).astype(int).sum(axis=1)
+    # pour l’instant p_tech = p_tv (visible dans CSV/front)
+    base["p_tech"] = base["p_tv"]
+    base["pillars_met"] = base[["p_tech","p_tv","p_an"]].fillna(False).sum(axis=1)
 
     # 11) Ranking
     votes = pd.to_numeric(base.get("analyst_votes"), errors="coerce")
@@ -376,36 +395,41 @@ def main():
     # 12) Final MCAP coalescence and enforcement < 75B
     base["mcap_usd_final"] = pd.to_numeric(base.get("mcap_usd_final"), errors="coerce") \
                                 .fillna(pd.to_numeric(base.get("mcap_usd"), errors="coerce"))
-
-    # Exclude rows with unknown mcap (NaN) and enforce strict < 75B
     base = base[pd.to_numeric(base["mcap_usd_final"], errors="coerce").notna() &
                 (base["mcap_usd_final"] < MCAP_MAX_USD)].copy()
 
-    # === Préparer toutes les colonnes attendues AVANT la découpe en buckets ===
-    if "ticker_tv" not in base.columns:
-        base["ticker_tv"] = base["ticker_yf"].map(_yf_symbol_to_tv)
-    base["last"] = base.get("price")
-    base["mcap"] = base.get("mcap_usd_final")
+    # 13) Buckets exclusifs (confirmed > pre_signal > event)
+    tv_up = base.get("tv_reco").astype(str).str.upper()
+    an_up = base.get("analyst_bucket").map(lambda x: (_bucket_from_analyst(x) or ""))
 
-    # 13) Buckets exclusifs (pas de doublons) – masques recalculés sur la DF triée
-    base_sorted2 = base.sort_values("rank_score", ascending=False).copy()
+    is_confirmed = tv_up.eq("STRONG_BUY") & (an_up == "BUY")
+    is_pre       = tv_up.isin(["STRONG_BUY","BUY"]) & (~is_confirmed)
+    is_event     = ~is_confirmed & ~is_pre  # placeholder pour exploration
 
-    mask_confirmed = base_sorted2["pillars_met"] >= 3
-    mask_pre       = base_sorted2["pillars_met"] == 2
-    mask_event     = base_sorted2["pillars_met"] == 1
+    # Tri global par score
+    base_sorted2 = base.sort_values("rank_score", ascending=False).reset_index(drop=True)
 
-    df_conf = base_sorted2.loc[mask_confirmed].copy()
+    # Sélection exclusive : on retire les tickers déjà pris d’une catégorie quand on passe à la suivante
+    df_conf = base_sorted2[is_confirmed.reindex(base_sorted2.index, fill_value=False)].copy()
     already = set(df_conf["ticker_yf"])
-    df_pre  = base_sorted2.loc[mask_pre & (~base_sorted2["ticker_yf"].isin(already))].copy()
+
+    df_pre  = base_sorted2[
+        is_pre.reindex(base_sorted2.index, fill_value=False)
+        & (~base_sorted2["ticker_yf"].isin(already))
+    ].copy()
     already.update(df_pre["ticker_yf"])
-    df_evt  = base_sorted2.loc[mask_event & (~base_sorted2["ticker_yf"].isin(already))].copy()
 
-    # bornes
-    df_conf = df_conf.head(CONFIRM_TOP)
-    df_pre  = df_pre.head(PRE_TOP)
-    df_evt  = df_evt.head(EVENT_TOP)
+    df_evt  = base_sorted2[
+        is_event.reindex(base_sorted2.index, fill_value=False)
+        & (~base_sorted2["ticker_yf"].isin(already))
+    ].copy()
 
-    # 14) Export – liste de colonnes attendues
+    # Aliases + colonnes export
+    base_sorted2["ticker_tv"] = base_sorted2.get("ticker_tv") \
+        if "ticker_tv" in base_sorted2.columns else base_sorted2["ticker_yf"].map(_yf_symbol_to_tv)
+    base_sorted2["last"] = base_sorted2.get("price")
+    base_sorted2["mcap"] = base_sorted2.get("mcap_usd_final")
+
     export_cols = [
         "ticker_yf","ticker_tv",
         "price","last",
@@ -413,42 +437,47 @@ def main():
         "avg_dollar_vol",
         "tv_score","tv_reco","analyst_bucket","analyst_votes",
         "sector","industry",
-        "p_tech","tech","Tech","p_tv","p_an","pillars_met","votes_bin",
+        "p_tech","p_tv","p_an","pillars_met","votes_bin",
         "rank_score","bucket"
     ]
-    # garantir l’existence de toutes les colonnes dans la base
     for c in export_cols:
-        if c not in base.columns:
-            base[c] = None
+        if c not in base_sorted2.columns: base_sorted2[c] = None
 
-    # bucket global (informatif)
-    base["bucket"] = "other"
-    base.loc[base["ticker_yf"].isin(df_evt["ticker_yf"]), "bucket"] = "event"
-    base.loc[base["ticker_yf"].isin(df_pre["ticker_yf"]), "bucket"] = "pre_signal"
-    base.loc[base["ticker_yf"].isin(df_conf["ticker_yf"]), "bucket"] = "confirmed"
-
-    # table complète triée pour le front
-    cand_all = base[export_cols].copy().sort_values("rank_score", ascending=False).reset_index(drop=True)
+    # Ecriture candidates global
+    cand_all = base_sorted2[export_cols[:-1]].copy()  # sans 'bucket'
     _save(cand_all, "candidates_all_ranked.csv")
 
-    # exports exclusifs (reindex pour éviter KeyError si une colonne manque)
-    df_conf = df_conf.assign(bucket="confirmed").reindex(columns=export_cols)
-    df_pre  = df_pre.assign(bucket="pre_signal").reindex(columns=export_cols)
-    df_evt  = df_evt.assign(bucket="event").reindex(columns=export_cols)
+    # Buckets exclusifs et tailles cibles
+    conf_out = df_conf.assign(bucket="confirmed")[export_cols].head(10)
+    pre_out  = df_pre.assign(bucket="pre_signal")[export_cols].head(50)
+    # event : reste (top 100 uniques au total)
+    remaining_for_events = max(0, 100 - len(conf_out) - len(pre_out))
+    evt_out = df_evt.assign(bucket="event")[export_cols].head(remaining_for_events)
 
-    _save(df_conf, "confirmed_STRONGBUY.csv")
-    _save(df_pre,  "anticipative_pre_signals.csv")
-    _save(df_evt,  "event_driven_signals.csv")
+    _save(conf_out, "confirmed_STRONGBUY.csv")
+    _save(pre_out, "anticipative_pre_signals.csv")
+    _save(evt_out, "event_driven_signals.csv")
 
-    # 15) signals_history avec sector rempli
+    # 14) Minimal signals_history pour backtest
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    sig_hist = pd.concat([
-        df_conf[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]],
-        df_pre[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]],
-        df_evt[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]],
-    ], ignore_index=True).drop_duplicates()
+
+    sig_hist = pd.concat([conf_out, pre_out, evt_out], ignore_index=True)
+    sig_hist = sig_hist[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]].copy()
     sig_hist.insert(0, "date", today)
     _save(sig_hist, "signals_history.csv")
+
+    cov = {
+        "universe": int(len(base_sorted2)),
+        "tv_reco_filled": int(cand_all["tv_reco"].notna().sum()),
+        "finnhub_analyst": int(cand_all["analyst_bucket"].notna().sum()),
+        "mcap_final_nonnull": int(cand_all["mcap_usd_final"].notna().sum()),
+        "price_nonnull": int(cand_all["price"].notna().sum()),
+        "confirmed_count": int(len(conf_out)),
+        "pre_count": int(len(pre_out)),
+        "event_count": int(len(evt_out)),
+        "unique_total": int(sig_hist["ticker_yf"].nunique())
+    }
+    print("[COVERAGE]", cov)
 
 if __name__ == "__main__":
     main()
