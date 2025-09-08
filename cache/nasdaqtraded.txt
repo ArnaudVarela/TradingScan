@@ -3859,7 +3859,6 @@ Y|FJUL|FT Vest U.S. Equity Buffer ETF - July|Z| |Y|100|N||FJUL|FJUL|N
 Y|FJUN|FT Vest U.S. Equity Buffer ETF - June|Z| |Y|100|N||FJUN|FJUN|N
 Y|FKU|First Trust United Kingdom AlphaDEX Fund|Q|G|Y|100|N|N||FKU|N
 Y|FKWL|Franklin Wireless Corp. - common stock|Q|S|N|100|N|N||FKWL|N
-Y|FL|Foot Locker, Inc.|N| |N|100|N||FL|FL|N
 Y|FLAG|Global X Funds Global X S&P 500 U.S. Market Leaders Top 50 ETF|P| |Y|100|N||FLAG|FLAG|N
 Y|FLAO|AIM ETF Products Trust AllianzIM U.S. Equity 6 Month Floor5 Apr/Oct ETF|P| |Y|100|N||FLAO|FLAO|N
 Y|FLAU|Franklin FTSE Australia ETF|P| |Y|100|N||FLAU|FLAU|N
@@ -6569,6 +6568,9 @@ Y|MCBS|MetroCity Bankshares, Inc. - Common Stock|Q|Q|N|100|N|N||MCBS|N
 Y|MCD|McDonald's Corporation Common Stock|N| |N|100|N||MCD|MCD|N
 Y|MCDS|JPMorgan Fundamental Data Science Mid Core ETF|Q|G|Y|100|N|N||MCDS|N
 Y|MCFT|MasterCraft Boat Holdings, Inc. - Common Stock|Q|G|N|100|N|N||MCFT|N
+Y|MCGA|Yorkville Acquisition Corp. - Class A Ordinary Share|Q|G|N|100|N|N||MCGA|N
+Y|MCGAU|Yorkville Acquisition Corp. - Unit|Q|G|N|100|N|N||MCGAU|N
+Y|MCGAW|Yorkville Acquisition Corp. - Warrant|Q|G|N|100|N|N||MCGAW|N
 Y|MCH|Matthews International Funds Matthews China Active ETF|P| |Y|100|N||MCH|MCH|N
 Y|MCHB|Mechanics Bancorp - Class A Common Stock|Q|Q|N|100|N|N||MCHB|N
 Y|MCHI|iShares MSCI China ETF|Q|G|Y|100|N|N||MCHI|N
@@ -7848,7 +7850,9 @@ Y|PAGP|Plains GP Holdings, L.P. - Class A Shares representing limited partner in
 Y|PAGS|PagSeguro Digital Ltd. Class A Common Shares|N| |N|100|N||PAGS|PAGS|N
 Y|PAHC|Phibro Animal Health Corporation - Class A Common Stock|Q|G|N|100|N|N||PAHC|N
 Y|PAI|Western Asset Investment Grade Income Fund Inc.|N| |N|100|N||PAI|PAI|N
+Y|PAII|Pyrophyte Acquisition Corp. II Class A Ordinary Shares|N| |N|100|N||PAII|PAII|N
 Y|PAII.U|Pyrophyte Acquisition Corp. II Units, each consisting of one Class A ordinary share and one-half of one redeemable warrant|N| |N|100|N||PAII.U|PAII=|N
+Y|PAII.W|Pyrophyte Acquisition Corp. II Warrants, each whole warrant exercisable for one Class A Ordinary Share at an exercise price of $11.50 per share|N| |N|100|N||PAII.WS|PAII+|N
 Y|PAL|Proficient Auto Logistics, Inc. - Common Stock|Q|Q|N|100|N|N||PAL|N
 Y|PALC|Pacer Lunt Large Cap Multi-Factor Alternator ETF|P| |Y|100|N||PALC|PALC|N
 Y|PALD|Direxion Daily PANW Bear 1X Shares|Q|G|Y|100|N|N||PALD|N
@@ -9321,6 +9325,7 @@ Y|SEMR|SEMrush Holdings, Inc. Class A Common Stock|N| |N|100|N||SEMR|SEMR|N
 Y|SENEA|Seneca Foods Corp. - Class A Common Stock|Q|Q|N|100|N|N||SENEA|N
 Y|SENEB|Seneca Foods Corp. - Class B Common Stock|Q|Q|N|100|N|N||SENEB|N
 Y|SENS|Senseonics Holdings, Inc. Common Stock|A| |N|100|N||SENS|SENS|N
+Y|SEPI|SCM Trust Shelton Equity Premium Income ETF|P| |Y|100|N||SEPI|SEPI|N
 Y|SEPM|First Trust Exchange-Traded Fund VIII FT Vest U.S. Equity Max Buffer ETF - September|Z| |Y|100|N||SEPM|SEPM|N
 Y|SEPN|Septerna, Inc. - Common Stock|Q|G|N|100|N|N||SEPN|N
 Y|SEPP|PGIM S&P 500 Buffer 12 ETF - September|Z| |Y|100|N||SEPP|SEPP|N
@@ -9688,7 +9693,7 @@ Y|SOPA|Society Pass Incorporated - Common Stock|Q|S|N|100|N|N||SOPA|N
 Y|SOPH|SOPHiA GENETICS SA - Ordinary Shares|Q|Q|N|100|N|N||SOPH|N
 Y|SOR|Source Capital, Inc. Cmn Shs of BI|N| |N|100|N||SOR|SOR|N
 Y|SORA|AsiaStrategy - Ordinary Shares|Q|S|N|100|N|N||SORA|N
-Y|SOS|SOS Limited American Depositary Shares, one hundred and fifty (150) Class A Ordinary Shares|N| |N|100|N||SOS|SOS|N
+Y|SOS|SOS Limited Class A Ordinary Shares|N| |N|100|N||SOS|SOS|N
 Y|SOTK|Sono-Tek Corporation - Common Stock|Q|S|N|100|N|N||SOTK|N
 Y|SOUL|Soulpower Acquisition Corporation Class A Ordinary Shares|N| |N|100|N||SOUL|SOUL|N
 Y|SOUL.R|Soulpower Acquisition Corporation Rights, each right entitling the holder to receive one-tenth (1/10) of one Class A Ordinary Share|N| |N|100|N||SOULr|SOUL^|N
@@ -11613,9 +11618,6 @@ Y|YMT|Yimutian Inc. - American Depositary Shares; each representing 25 Class A o
 Y|YNOT|Horizon Digital Frontier ETF|Q|G|Y|100|N|N||YNOT|N
 Y|YOKE|YOKE Core ETF|Q|G|Y|100|N|N||YOKE|N
 Y|YOLO|AdvisorShares Pure Cannabis ETF|P| |Y|100|N||YOLO|YOLO|N
-Y|YORK|Yorkville Acquisition Corp. - Class A Ordinary Share|Q|G|N|100|N|N||YORK|N
-Y|YORKU|Yorkville Acquisition Corp. - Unit|Q|G|N|100|N|N||YORKU|N
-Y|YORKW|Yorkville Acquisition Corp. - Warrant|Q|G|N|100|N|N||YORKW|N
 Y|YORW|The York Water Company - Common Stock|Q|Q|N|100|N|N||YORW|N
 Y|YOU|Clear Secure, Inc. Class A Common Stock|N| |N|100|N||YOU|YOU|N
 Y|YOUL|Youlife Group Inc. - American Depositary Shares|Q|S|N|100|N|N||YOUL|N
@@ -11730,4 +11732,4 @@ Y|ZYBT|Zhengye Biotechnology Holding Limited - Ordinary Shares|Q|S|N|100|N|N||ZY
 Y|ZYME|Zymeworks Inc. - Common Stock|Q|Q|N|100|N|N||ZYME|N
 Y|ZYN|Defiance Daily Target 2x Long PM ETF|Q|G|Y|100|N|N||ZYN|N
 Y|ZYXI|Zynex, Inc. - Common Stock|Q|Q|N|100|N|N||ZYXI|N
-File Creation Time: 0905202521:32|||||
+File Creation Time: 0908202506:01|||||

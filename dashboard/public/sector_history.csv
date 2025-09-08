@@ -1,679 +1,680 @@
 date,ticker,sector,industry
-2025-09-06,NVDA,Information Technology,Unknown
-2025-09-06,PLTR,Information Technology,Unknown
-2025-09-06,AAPL,Information Technology,Unknown
-2025-09-06,MSFT,Information Technology,Unknown
-2025-09-06,AMD,Information Technology,Unknown
-2025-09-06,AVGO,Information Technology,Unknown
-2025-09-06,UNH,Health Care,Unknown
-2025-09-06,MSTR,Information Technology,Unknown
-2025-09-06,HOOD,Financials,Unknown
-2025-09-06,LLY,Health Care,Unknown
-2025-09-06,INTC,Information Technology,Unknown
-2025-09-06,CRWV,nan,Unknown
-2025-09-06,COIN,Financials,Unknown
-2025-09-06,CRM,Information Technology,Unknown
-2025-09-06,APP,Information Technology,Unknown
-2025-09-06,ORCL,Information Technology,Unknown
-2025-09-06,MU,Information Technology,Unknown
-2025-09-06,BRK-B,Financials,Unknown
-2025-09-06,JPM,Financials,Unknown
-2025-09-06,V,Financials,Unknown
-2025-09-06,BAC,Financials,Unknown
-2025-09-06,PANW,Information Technology,Unknown
-2025-09-06,SNOW,Information Technology,Unknown
-2025-09-06,GEV,Industrials,Unknown
-2025-09-06,NOW,Information Technology,Unknown
-2025-09-06,SOFI,Financials,Unknown
-2025-09-06,INTU,Information Technology,Unknown
-2025-09-06,MRVL,Information Technology,Unknown
-2025-09-06,CSCO,Information Technology,Unknown
-2025-09-06,UBER,Industrials,Unknown
-2025-09-06,CRWD,Information Technology,Unknown
-2025-09-06,BA,Industrials,Unknown
-2025-09-06,JNJ,Health Care,Unknown
-2025-09-06,AMAT,Information Technology,Unknown
-2025-09-06,MA,Financials,Unknown
-2025-09-06,C,Financials,Unknown
-2025-09-06,ADBE,Information Technology,Unknown
-2025-09-06,TXN,Information Technology,Unknown
-2025-09-06,GS,Financials,Unknown
-2025-09-06,CAT,Industrials,Unknown
-2025-09-06,GE,Industrials,Unknown
-2025-09-06,MDB,Information Technology,Unknown
-2025-09-06,LRCX,Information Technology,Unknown
-2025-09-06,SMCI,Information Technology,Unknown
-2025-09-06,QCOM,Information Technology,Unknown
-2025-09-06,IBM,Information Technology,Unknown
-2025-09-06,WFC,Financials,Unknown
-2025-09-06,ANET,Information Technology,Unknown
-2025-09-06,RKLB,Industrials,Unknown
-2025-09-06,ASML,nan,Unknown
-2025-09-06,ISRG,Health Care,Unknown
-2025-09-06,SOUN,nan,Unknown
-2025-09-06,ADI,Information Technology,Unknown
-2025-09-06,ACN,Information Technology,Unknown
-2025-09-06,UNP,Industrials,Unknown
-2025-09-06,MRK,Health Care,Unknown
-2025-09-06,PFE,Health Care,Unknown
-2025-09-06,SHOP,nan,Unknown
-2025-09-06,WDAY,Information Technology,Unknown
-2025-09-06,ABBV,Health Care,Unknown
-2025-09-06,TEM,Health Care,Unknown
-2025-09-06,ALAB,Information Technology,Unknown
-2025-09-06,AAL,Industrials,Unknown
-2025-09-06,KLAC,Information Technology,Unknown
-2025-09-06,CSX,Industrials,Unknown
-2025-09-06,TMO,Health Care,Unknown
-2025-09-06,SCHW,Financials,Unknown
-2025-09-06,DELL,Information Technology,Unknown
-2025-09-06,AFRM,Information Technology,Unknown
-2025-09-06,VRT,Industrials,Unknown
-2025-09-06,NU,Financials,Unknown
-2025-09-06,APH,Information Technology,Unknown
-2025-09-06,MARA,nan,Unknown
-2025-09-06,FTNT,Information Technology,Unknown
-2025-09-06,AXP,Financials,Unknown
-2025-09-06,DE,Industrials,Unknown
-2025-09-06,UPS,Industrials,Unknown
-2025-09-06,ETN,Industrials,Unknown
-2025-09-06,HON,Industrials,Unknown
-2025-09-06,COF,Financials,Unknown
-2025-09-06,ABT,Health Care,Unknown
-2025-09-06,GILD,Health Care,Unknown
-2025-09-06,DDOG,Information Technology,Unknown
-2025-09-06,VRTX,Health Care,Unknown
-2025-09-06,PGR,Financials,Unknown
-2025-09-06,FSLR,Information Technology,Unknown
-2025-09-06,MDT,Health Care,Unknown
-2025-09-06,MS,Financials,Unknown
-2025-09-06,ELV,Health Care,Unknown
-2025-09-06,LMT,Industrials,Unknown
-2025-09-06,RGTI,nan,Unknown
-2025-09-06,PYPL,Financials,Unknown
-2025-09-06,IBKR,Financials,Unknown
-2025-09-06,IREN,nan,Unknown
-2025-09-06,SNPS,Information Technology,Unknown
-2025-09-06,BSX,Health Care,Unknown
-2025-09-06,DHR,Health Care,Unknown
-2025-09-06,CRDO,nan,Unknown
-2025-09-06,MCHP,Information Technology,Unknown
-2025-09-06,NXPI,nan,Unknown
-2025-09-06,BX,Financials,Unknown
-2025-09-06,WDC,Information Technology,Unknown
-2025-09-06,COHR,Information Technology,Unknown
-2025-09-06,TWLO,Information Technology,Unknown
-2025-09-06,SPGI,Financials,Unknown
-2025-09-06,WULF,nan,Unknown
-2025-09-06,REGN,Health Care,Unknown
-2025-09-06,MCK,Health Care,Unknown
-2025-09-06,XYZ,Financials,Unknown
-2025-09-06,RTX,Industrials,Unknown
-2025-09-06,ADSK,Information Technology,Unknown
-2025-09-06,JCI,Industrials,Unknown
-2025-09-06,NSC,Industrials,Unknown
-2025-09-06,AMGN,Health Care,Unknown
-2025-09-06,LITE,Information Technology,Unknown
-2025-09-06,FI,Financials,Unknown
-2025-09-06,CME,Financials,Unknown
-2025-09-06,BLK,Financials,Unknown
-2025-09-06,ARM,nan,Unknown
-2025-09-06,ICE,Financials,Unknown
-2025-09-06,TEAM,Information Technology,Unknown
-2025-09-06,ALNY,Health Care,Unknown
-2025-09-06,CYBR,nan,Unknown
-2025-09-06,MSI,Information Technology,Unknown
-2025-09-06,UAL,Industrials,Unknown
-2025-09-06,PH,Industrials,Unknown
-2025-09-06,FICO,Information Technology,Unknown
-2025-09-06,TT,Industrials,Unknown
-2025-09-06,CI,Health Care,Unknown
-2025-09-06,TDG,Industrials,Unknown
-2025-09-06,HPE,Information Technology,Unknown
-2025-09-06,U,Information Technology,Unknown
-2025-09-06,ZS,Information Technology,Unknown
-2025-09-06,BMY,Health Care,Unknown
-2025-09-06,KEY,Financials,Unknown
-2025-09-06,CDNS,Information Technology,Unknown
-2025-09-06,APO,Financials,Unknown
-2025-09-06,MMM,Industrials,Unknown
-2025-09-06,STX,nan,Unknown
-2025-09-06,URI,Industrials,Unknown
-2025-09-06,CB,Financials,Unknown
-2025-09-06,HCA,Health Care,Unknown
-2025-09-06,UPST,nan,Unknown
-2025-09-06,RF,Financials,Unknown
-2025-09-06,HUBS,Information Technology,Unknown
-2025-09-06,AON,Financials,Unknown
-2025-09-06,RIOT,nan,Unknown
-2025-09-06,ADP,Industrials,Unknown
-2025-09-06,AXON,Industrials,Unknown
-2025-09-06,OKTA,Information Technology,Unknown
-2025-09-06,HBAN,Financials,Unknown
-2025-09-06,SYK,Health Care,Unknown
-2025-09-06,CVS,Health Care,Unknown
-2025-09-06,NET,Information Technology,Unknown
-2025-09-06,FUTU,nan,Unknown
-2025-09-06,MPWR,Information Technology,Unknown
-2025-09-06,HUM,Health Care,Unknown
-2025-09-06,DAL,Industrials,Unknown
-2025-09-06,AJG,Financials,Unknown
-2025-09-06,BDX,Health Care,Unknown
-2025-09-06,CAH,Health Care,Unknown
-2025-09-06,KKR,Financials,Unknown
-2025-09-06,WM,Industrials,Unknown
-2025-09-06,ROP,Industrials,Unknown
-2025-09-06,MMC,Financials,Unknown
-2025-09-06,APLD,nan,Unknown
-2025-09-06,HWM,Industrials,Unknown
-2025-09-06,INSM,Health Care,Unknown
-2025-09-06,CTAS,Industrials,Unknown
-2025-09-06,VEEV,Health Care,Unknown
-2025-09-06,COR,Health Care,Unknown
-2025-09-06,GLW,Information Technology,Unknown
-2025-09-06,USB,Financials,Unknown
-2025-09-06,TER,Information Technology,Unknown
-2025-09-06,FDX,Industrials,Unknown
-2025-09-06,ON,Information Technology,Unknown
-2025-09-06,EMR,Industrials,Unknown
-2025-09-06,MNDY,nan,Unknown
-2025-09-06,NOC,Industrials,Unknown
-2025-09-06,ZTS,Health Care,Unknown
-2025-09-06,CNC,Health Care,Unknown
-2025-09-06,IT,Information Technology,Unknown
-2025-09-06,RKT,Financials,Unknown
-2025-09-06,CARR,Industrials,Unknown
-2025-09-06,PWR,Industrials,Unknown
-2025-09-06,TRV,Financials,Unknown
-2025-09-06,TOST,Information Technology,Unknown
-2025-09-06,ZM,Information Technology,Unknown
-2025-09-06,LYFT,Industrials,Unknown
-2025-09-06,TEL,nan,Unknown
-2025-09-06,TFC,Financials,Unknown
-2025-09-06,MSCI,Financials,Unknown
-2025-09-06,DXCM,Health Care,Unknown
-2025-09-06,GDDY,Information Technology,Unknown
-2025-09-06,PNC,Financials,Unknown
-2025-09-06,CPRT,Industrials,Unknown
-2025-09-06,BK,Financials,Unknown
-2025-09-06,UTHR,Health Care,Unknown
-2025-09-06,AIG,Financials,Unknown
-2025-09-06,OTIS,Industrials,Unknown
-2025-09-06,CMI,Industrials,Unknown
-2025-09-06,JBL,Information Technology,Unknown
-2025-09-06,LHX,Industrials,Unknown
-2025-09-06,GWW,Industrials,Unknown
-2025-09-06,ROK,Industrials,Unknown
-2025-09-06,AZN,nan,Unknown
-2025-09-06,EW,Health Care,Unknown
-2025-09-06,FERG,Industrials,Unknown
-2025-09-06,MCO,Financials,Unknown
-2025-09-06,PAYX,Industrials,Unknown
-2025-09-06,ODFL,Industrials,Unknown
-2025-09-06,RMD,Health Care,Unknown
-2025-09-06,FCNCA,Financials,Unknown
-2025-09-06,PSTG,Information Technology,Unknown
-2025-09-06,ENPH,Information Technology,Unknown
-2025-09-06,IDXX,Health Care,Unknown
-2025-09-06,BLDR,Industrials,Unknown
-2025-09-06,AFL,Financials,Unknown
-2025-09-06,VKTX,Health Care,Unknown
-2025-09-06,VRSK,Industrials,Unknown
-2025-09-06,GD,Industrials,Unknown
-2025-09-06,FIX,Industrials,Unknown
-2025-09-06,GTLB,Information Technology,Unknown
-2025-09-06,FAST,Industrials,Unknown
-2025-09-06,ARGX,nan,Unknown
-2025-09-06,CIEN,Information Technology,Unknown
-2025-09-06,CTSH,Information Technology,Unknown
-2025-09-06,HPQ,Information Technology,Unknown
-2025-09-06,MOH,Health Care,Unknown
-2025-09-06,RUN,nan,Unknown
-2025-09-06,LPLA,Financials,Unknown
-2025-09-06,FIS,Financials,Unknown
-2025-09-06,MRNA,Health Care,Unknown
-2025-09-06,NDAQ,Financials,Unknown
-2025-09-06,EFX,Industrials,Unknown
-2025-09-06,ALL,Financials,Unknown
-2025-09-06,ARES,Financials,Unknown
-2025-09-06,MET,Financials,Unknown
-2025-09-06,NTNX,Information Technology,Unknown
-2025-09-06,QUBT,nan,Unknown
-2025-09-06,NTAP,Information Technology,Unknown
-2025-09-06,BRO,Financials,Unknown
-2025-09-06,KTOS,nan,Unknown
-2025-09-06,RSG,Industrials,Unknown
-2025-09-06,FHN,Financials,Unknown
-2025-09-06,CORZ,nan,Unknown
-2025-09-06,DAY,Industrials,Unknown
-2025-09-06,ITW,Industrials,Unknown
-2025-09-06,IQV,Health Care,Unknown
-2025-09-06,BILL,Information Technology,Unknown
-2025-09-06,IOT,Information Technology,Unknown
-2025-09-06,LUV,Industrials,Unknown
-2025-09-06,DOCU,Information Technology,Unknown
-2025-09-06,CBOE,Financials,Unknown
-2025-09-06,ETHZ,nan,Unknown
-2025-09-06,LII,Industrials,Unknown
-2025-09-06,COO,Health Care,Unknown
-2025-09-06,ONDS,nan,Unknown
-2025-09-06,AMP,Financials,Unknown
-2025-09-06,PCAR,Industrials,Unknown
-2025-09-06,TRI,nan,Unknown
-2025-09-06,SYF,Financials,Unknown
-2025-09-06,GEHC,Health Care,Unknown
-2025-09-06,ENTG,Information Technology,Unknown
-2025-09-06,VRSN,Information Technology,Unknown
-2025-09-06,NTRA,Health Care,Unknown
-2025-09-06,GLXY,nan,Unknown
-2025-09-06,AME,Industrials,Unknown
-2025-09-06,GPN,Financials,Unknown
-2025-09-06,PODD,Health Care,Unknown
-2025-09-06,BIIB,Health Care,Unknown
-2025-09-06,ALGN,Health Care,Unknown
-2025-09-06,ESTC,Information Technology,Unknown
-2025-09-06,CIFR,nan,Unknown
-2025-09-06,FTV,Industrials,Unknown
-2025-09-06,A,Health Care,Unknown
-2025-09-06,IR,Industrials,Unknown
-2025-09-06,ELAN,Health Care,Unknown
-2025-09-06,RBRK,Information Technology,Unknown
-2025-09-06,BWXT,Industrials,Unknown
-2025-09-06,CDW,Information Technology,Unknown
-2025-09-06,EME,Industrials,Unknown
-2025-09-06,WIX,nan,Unknown
-2025-09-06,WAB,Industrials,Unknown
-2025-09-06,STT,Financials,Unknown
-2025-09-06,CHRW,Industrials,Unknown
-2025-09-06,CLSK,nan,Unknown
-2025-09-06,SNDK,Information Technology,Unknown
-2025-09-06,FLEX,Information Technology,Unknown
-2025-09-06,HUBB,Industrials,Unknown
-2025-09-06,AVAV,nan,Unknown
-2025-09-06,KEYS,Information Technology,Unknown
-2025-09-06,CFG,Financials,Unknown
-2025-09-06,SRPT,Health Care,Unknown
-2025-09-06,HIG,Financials,Unknown
-2025-09-06,WTW,Financials,Unknown
-2025-09-06,BR,Industrials,Unknown
-2025-09-06,GWRE,Information Technology,Unknown
-2025-09-06,WAT,Health Care,Unknown
-2025-09-06,TW,Financials,Unknown
-2025-09-06,MTD,Health Care,Unknown
-2025-09-06,ICLR,nan,Unknown
-2025-09-06,THC,Health Care,Unknown
-2025-09-06,AGNC,Financials,Unknown
-2025-09-06,MTB,Financials,Unknown
-2025-09-06,ACGL,Financials,Unknown
-2025-09-06,BAX,Health Care,Unknown
-2025-09-06,QXO,Industrials,Unknown
-2025-09-06,PRU,Financials,Unknown
-2025-09-06,CFLT,Information Technology,Unknown
-2025-09-06,SAIA,Industrials,Unknown
-2025-09-06,EQH,Financials,Unknown
-2025-09-06,CG,Financials,Unknown
-2025-09-06,MDGL,nan,Unknown
-2025-09-06,IONS,Health Care,Unknown
-2025-09-06,DT,Information Technology,Unknown
-2025-09-06,SWKS,Information Technology,Unknown
-2025-09-06,BULL,nan,Unknown
-2025-09-06,BAH,Industrials,Unknown
-2025-09-06,EXAS,Health Care,Unknown
-2025-09-06,AKAM,Information Technology,Unknown
-2025-09-06,PTC,Information Technology,Unknown
-2025-09-06,TYL,Information Technology,Unknown
-2025-09-06,FDS,Financials,Unknown
-2025-09-06,GNRC,Industrials,Unknown
-2025-09-06,NXT,nan,Unknown
-2025-09-06,ZBRA,Information Technology,Unknown
-2025-09-06,FTAI,Industrials,Unknown
-2025-09-06,LSCC,Information Technology,Unknown
-2025-09-06,TRU,Industrials,Unknown
-2025-09-06,FITB,Financials,Unknown
-2025-09-06,GH,nan,Unknown
-2025-09-06,DOV,Industrials,Unknown
-2025-09-06,AVTR,Health Care,Unknown
-2025-09-06,MTZ,Industrials,Unknown
-2025-09-06,MEDP,Health Care,Unknown
-2025-09-06,COOP,Financials,Unknown
-2025-09-06,XPO,Industrials,Unknown
-2025-09-06,SWK,Industrials,Unknown
-2025-09-06,CHKP,nan,Unknown
-2025-09-06,XYL,Industrials,Unknown
-2025-09-06,MAS,Industrials,Unknown
-2025-09-06,RJF,Financials,Unknown
-2025-09-06,TROW,Financials,Unknown
-2025-09-06,INCY,Health Care,Unknown
-2025-09-06,JBHT,Industrials,Unknown
-2025-09-06,NVT,Industrials,Unknown
-2025-09-06,HALO,Health Care,Unknown
-2025-09-06,CSL,Industrials,Unknown
-2025-09-06,TDY,Industrials,Unknown
-2025-09-06,FOUR,Information Technology,Unknown
-2025-09-06,PAYC,Information Technology,Unknown
-2025-09-06,HEI,Industrials,Unknown
-2025-09-06,VRNA,nan,Unknown
-2025-09-06,CAR,Industrials,Unknown
-2025-09-06,OWL,Financials,Unknown
-2025-09-06,THAR,nan,Unknown
-2025-09-06,DGX,Health Care,Unknown
-2025-09-06,JKHY,Financials,Unknown
-2025-09-06,ZBH,Health Care,Unknown
-2025-09-06,HUT,nan,Unknown
-2025-09-06,SEDG,nan,Unknown
-2025-09-06,ILMN,Health Care,Unknown
-2025-09-06,OC,Industrials,Unknown
-2025-09-06,EXPD,Industrials,Unknown
-2025-09-06,PATH,Information Technology,Unknown
-2025-09-06,FNB,Financials,Unknown
-2025-09-06,ATI,Industrials,Unknown
-2025-09-06,ALK,Industrials,Unknown
-2025-09-06,BRKR,Health Care,Unknown
-2025-09-06,FFIV,Information Technology,Unknown
-2025-09-06,GLOB,Information Technology,Unknown
-2025-09-06,COLB,Financials,Unknown
-2025-09-06,ONTO,Information Technology,Unknown
-2025-09-06,NLY,Financials,Unknown
-2025-09-06,RPRX,Health Care,Unknown
-2025-09-06,SNY,nan,Unknown
-2025-09-06,CPAY,Financials,Unknown
-2025-09-06,GEN,Information Technology,Unknown
-2025-09-06,MIDD,Industrials,Unknown
-2025-09-06,PGY,nan,Unknown
-2025-09-06,PNR,Industrials,Unknown
-2025-09-06,TRMB,Information Technology,Unknown
-2025-09-06,LDOS,Industrials,Unknown
-2025-09-06,CRSP,nan,Unknown
-2025-09-06,AAOI,nan,Unknown
-2025-09-06,UHS,Health Care,Unknown
-2025-09-06,STRL,nan,Unknown
-2025-09-06,CNH,Industrials,Unknown
-2025-09-06,S,Information Technology,Unknown
-2025-09-06,RNA,nan,Unknown
-2025-09-06,GRAB,nan,Unknown
-2025-09-06,CRL,Health Care,Unknown
-2025-09-06,AUR,Information Technology,Unknown
-2025-09-06,EPAM,Information Technology,Unknown
-2025-09-06,ALLE,Industrials,Unknown
-2025-09-06,CW,Industrials,Unknown
-2025-09-06,LH,Health Care,Unknown
-2025-09-06,NTRS,Financials,Unknown
-2025-09-06,WMS,Industrials,Unknown
-2025-09-06,WST,Health Care,Unknown
-2025-09-06,MKTX,Financials,Unknown
-2025-09-06,QRVO,Information Technology,Unknown
-2025-09-06,WSO,Industrials,Unknown
-2025-09-06,NICE,nan,Unknown
-2025-09-06,XP,Financials,Unknown
-2025-09-06,CMA,Financials,Unknown
-2025-09-06,WCC,Industrials,Unknown
-2025-09-06,EVR,Financials,Unknown
-2025-09-06,BBIO,nan,Unknown
-2025-09-06,ALTS,nan,Unknown
-2025-09-06,RBA,Industrials,Unknown
-2025-09-06,AL,Industrials,Unknown
-2025-09-06,IPDN,nan,Unknown
-2025-09-06,IEX,Industrials,Unknown
-2025-09-06,SLNO,nan,Unknown
-2025-09-06,CYTK,nan,Unknown
-2025-09-06,WWD,Industrials,Unknown
-2025-09-06,VSAT,nan,Unknown
-2025-09-06,WRB,Financials,Unknown
-2025-09-06,PEN,Health Care,Unknown
-2025-09-06,SMTC,nan,Unknown
-2025-09-06,TPG,Financials,Unknown
-2025-09-06,AAON,Industrials,Unknown
-2025-09-06,HQY,nan,Unknown
-2025-09-06,RRX,Industrials,Unknown
-2025-09-06,HSIC,Health Care,Unknown
-2025-09-06,STE,Health Care,Unknown
-2025-09-06,TLRY,nan,Unknown
-2025-09-06,SEZL,nan,Unknown
-2025-09-06,HOLX,Health Care,Unknown
-2025-09-06,PNFP,Financials,Unknown
-2025-09-06,TMDX,nan,Unknown
-2025-09-06,CACI,Industrials,Unknown
-2025-09-06,BAM,Financials,Unknown
-2025-09-06,CNM,Industrials,Unknown
-2025-09-06,UI,Information Technology,Unknown
-2025-09-06,BMRN,Health Care,Unknown
-2025-09-06,NBIX,Health Care,Unknown
-2025-09-06,RVTY,Health Care,Unknown
-2025-09-06,ONC,nan,Unknown
-2025-09-06,TREX,Industrials,Unknown
-2025-09-06,HII,Industrials,Unknown
-2025-09-06,COMM,nan,Unknown
-2025-09-06,TECH,Health Care,Unknown
-2025-09-06,CVLT,nan,Unknown
-2025-09-06,KNX,Industrials,Unknown
-2025-09-06,DOCS,Health Care,Unknown
-2025-09-06,MANH,Information Technology,Unknown
-2025-09-06,TTAN,nan,Unknown
-2025-09-06,PCOR,Information Technology,Unknown
-2025-09-06,LNTH,nan,Unknown
-2025-09-06,ACM,Industrials,Unknown
-2025-09-06,MTSI,Information Technology,Unknown
-2025-09-06,VLTO,Industrials,Unknown
-2025-09-06,MASI,Health Care,Unknown
-2025-09-06,ASND,nan,Unknown
-2025-09-06,NVMI,nan,Unknown
-2025-09-06,ALLY,Financials,Unknown
-2025-09-06,TXT,Industrials,Unknown
-2025-09-06,SSNC,Information Technology,Unknown
-2025-09-06,DVA,Health Care,Unknown
-2025-09-06,SOLV,Health Care,Unknown
-2025-09-06,EG,Financials,Unknown
-2025-09-06,FBIN,Industrials,Unknown
-2025-09-06,VTRS,Health Care,Unknown
-2025-09-06,UNM,Financials,Unknown
-2025-09-06,DBX,Information Technology,Unknown
-2025-09-06,MKSI,Information Technology,Unknown
-2025-09-06,JBLU,nan,Unknown
-2025-09-06,AIZ,Financials,Unknown
-2025-09-06,JAZZ,Health Care,Unknown
-2025-09-06,JEF,Financials,Unknown
-2025-09-06,DAVE,nan,Unknown
-2025-09-06,PCTY,Information Technology,Unknown
-2025-09-06,INSP,Health Care,Unknown
-2025-09-06,EXEL,Health Care,Unknown
-2025-09-06,J,Industrials,Unknown
-2025-09-06,PFG,Financials,Unknown
-2025-09-06,BSY,Information Technology,Unknown
-2025-09-06,APG,Industrials,Unknown
-2025-09-06,TTMI,nan,Unknown
-2025-09-06,EEFT,Financials,Unknown
-2025-09-06,NNE,nan,Unknown
-2025-09-06,PONY,nan,Unknown
-2025-09-06,SPNS,nan,Unknown
-2025-09-06,RMBS,nan,Unknown
-2025-09-06,APM,nan,Unknown
-2025-09-06,SYM,nan,Unknown
-2025-09-06,GGAL,nan,Unknown
-2025-09-06,ABVX,nan,Unknown
-2025-09-06,KNSL,Financials,Unknown
-2025-09-06,TSEM,nan,Unknown
-2025-09-06,RGEN,Health Care,Unknown
-2025-09-06,MORN,Financials,Unknown
-2025-09-06,OUST,nan,Unknown
-2025-09-06,AMBA,nan,Unknown
-2025-09-06,NVTS,nan,Unknown
-2025-09-06,VMI,Industrials,Unknown
-2025-09-06,RR,nan,Unknown
-2025-09-06,CGNX,Information Technology,Unknown
-2025-09-06,WGS,nan,Unknown
-2025-09-06,SMMT,Health Care,Unknown
-2025-09-06,GDS,nan,Unknown
-2025-09-06,BNTX,nan,Unknown
-2025-09-06,SITM,nan,Unknown
-2025-09-06,EHC,Health Care,Unknown
-2025-09-06,KD,Information Technology,Unknown
-2025-09-06,NDSN,Industrials,Unknown
-2025-09-06,ALSN,Industrials,Unknown
-2025-09-06,AGCO,Industrials,Unknown
-2025-09-06,SNV,Financials,Unknown
-2025-09-06,VRNS,nan,Unknown
-2025-09-06,G,Information Technology,Unknown
-2025-09-06,TNXP,nan,Unknown
-2025-09-06,LOAR,Industrials,Unknown
-2025-09-06,PI,nan,Unknown
-2025-09-06,WAL,Financials,Unknown
-2025-09-06,BEN,Financials,Unknown
-2025-09-06,RXRX,nan,Unknown
-2025-09-06,IVZ,Financials,Unknown
-2025-09-06,GMED,Health Care,Unknown
-2025-09-06,LQDA,nan,Unknown
-2025-09-06,VLY,nan,Unknown
-2025-09-06,APPF,Information Technology,Unknown
-2025-09-06,CLH,Industrials,Unknown
-2025-09-06,SNX,Information Technology,Unknown
-2025-09-06,GFS,Information Technology,Unknown
-2025-09-06,RNR,Financials,Unknown
-2025-09-06,DOX,Information Technology,Unknown
-2025-09-06,FROG,nan,Unknown
-2025-09-06,PSN,Industrials,Unknown
-2025-09-06,PSIX,nan,Unknown
-2025-09-06,MKL,Financials,Unknown
-2025-09-06,EOSE,nan,Unknown
-2025-09-06,TIGR,nan,Unknown
-2025-09-06,KEX,Industrials,Unknown
-2025-09-06,CHE,Health Care,Unknown
-2025-09-06,HLI,Financials,Unknown
-2025-09-06,EWBC,Financials,Unknown
-2025-09-06,WU,Information Technology,Unknown
-2025-09-06,AOS,Industrials,Unknown
-2025-09-06,RVMD,Health Care,Unknown
-2025-09-06,ROL,Industrials,Unknown
-2025-09-06,STNE,nan,Unknown
-2025-09-06,SF,Financials,Unknown
-2025-09-06,GL,Financials,Unknown
-2025-09-06,SSB,Financials,Unknown
-2025-09-06,TTC,Industrials,Unknown
-2025-09-06,SITE,Industrials,Unknown
-2025-09-06,KRMN,Industrials,Unknown
-2025-09-06,OSK,Industrials,Unknown
-2025-09-06,OLED,Information Technology,Unknown
-2025-09-06,AYI,Industrials,Unknown
-2025-09-06,ZION,Financials,Unknown
-2025-09-06,FLS,Industrials,Unknown
-2025-09-06,SNA,Industrials,Unknown
-2025-09-06,TFX,Health Care,Unknown
-2025-09-06,INFA,Information Technology,Unknown
-2025-09-06,L,Financials,Unknown
-2025-09-06,AIT,Industrials,Unknown
-2025-09-06,TTEK,Industrials,Unknown
-2025-09-06,AWI,Industrials,Unknown
-2025-09-06,ROIV,Health Care,Unknown
-2025-09-06,FNF,Financials,Unknown
-2025-09-06,PB,Financials,Unknown
-2025-09-06,LNC,Financials,Unknown
-2025-09-06,CINF,Financials,Unknown
-2025-09-06,QGEN,Health Care,Unknown
-2025-09-06,PEGA,Information Technology,Unknown
-2025-09-06,BIO,Health Care,Unknown
-2025-09-06,RYAN,Financials,Unknown
-2025-09-06,RITM,Financials,Unknown
-2025-09-06,RHI,Industrials,Unknown
-2025-09-06,RBC,Industrials,Unknown
-2025-09-06,BPOP,Financials,Unknown
-2025-09-06,MLI,Industrials,Unknown
-2025-09-06,LECO,Industrials,Unknown
-2025-09-06,WBS,Financials,Unknown
-2025-09-06,NCNO,Information Technology,Unknown
-2025-09-06,RGA,Financials,Unknown
-2025-09-06,APLS,Health Care,Unknown
-2025-09-06,VOYA,Financials,Unknown
-2025-09-06,KBR,Industrials,Unknown
-2025-09-06,CR,Industrials,Unknown
-2025-09-06,CFR,Financials,Unknown
-2025-09-06,WEX,Financials,Unknown
-2025-09-06,SLM,Financials,Unknown
-2025-09-06,CCCS,Information Technology,Unknown
-2025-09-06,RAL,Information Technology,Unknown
-2025-09-06,RNG,Information Technology,Unknown
-2025-09-06,DCI,Industrials,Unknown
-2025-09-06,CRUS,Information Technology,Unknown
-2025-09-06,AFG,Financials,Unknown
-2025-09-06,UWMC,Financials,Unknown
-2025-09-06,AXS,Financials,Unknown
-2025-09-06,HLNE,Financials,Unknown
-2025-09-06,ARW,Information Technology,Unknown
-2025-09-06,EXLS,Industrials,Unknown
-2025-09-06,WSC,Industrials,Unknown
-2025-09-06,AVT,Information Technology,Unknown
-2025-09-06,CACC,Financials,Unknown
-2025-09-06,ACHC,Health Care,Unknown
-2025-09-06,SEIC,Financials,Unknown
-2025-09-06,GGG,Industrials,Unknown
-2025-09-06,HXL,Industrials,Unknown
-2025-09-06,SAIC,Industrials,Unknown
-2025-09-06,CBSH,Financials,Unknown
-2025-09-06,WTM,Financials,Unknown
-2025-09-06,ECG,Industrials,Unknown
-2025-09-06,HEI-A,Industrials,Unknown
-2025-09-06,GXO,Industrials,Unknown
-2025-09-06,WTFC,Financials,Unknown
-2025-09-06,ERIE,nan,Unknown
-2025-09-06,SARO,Industrials,Unknown
-2025-09-06,ESAB,Industrials,Unknown
-2025-09-06,R,Industrials,Unknown
-2025-09-06,STWD,Financials,Unknown
-2025-09-06,ITT,Industrials,Unknown
-2025-09-06,TKR,Industrials,Unknown
-2025-09-06,SSD,Industrials,Unknown
-2025-09-06,ORI,Financials,Unknown
-2025-09-06,OMF,Financials,Unknown
-2025-09-06,JHG,Financials,Unknown
-2025-09-06,MTG,Financials,Unknown
-2025-09-06,LSTR,Industrials,Unknown
-2025-09-06,SAIL,Information Technology,Unknown
-2025-09-06,KMPR,Financials,Unknown
-2025-09-06,FCN,Industrials,Unknown
-2025-09-06,CORT,Health Care,Unknown
-2025-09-06,XRAY,Health Care,Unknown
-2025-09-06,GTES,Industrials,Unknown
-2025-09-06,LAZ,Financials,Unknown
-2025-09-06,ALGM,Information Technology,Unknown
-2025-09-06,AMKR,Information Technology,Unknown
-2025-09-06,PRI,Financials,Unknown
-2025-09-06,LFUS,Information Technology,Unknown
-2025-09-06,ST,Industrials,Unknown
-2025-09-06,RARE,Health Care,Unknown
-2025-09-06,OZK,Financials,Unknown
-2025-09-06,DRS,Industrials,Unknown
-2025-09-06,VNT,Information Technology,Unknown
-2025-09-06,VIRT,Financials,Unknown
-2025-09-06,HAYW,Industrials,Unknown
-2025-09-06,AMG,Financials,Unknown
-2025-09-06,MSA,Industrials,Unknown
-2025-09-06,PRGO,Health Care,Unknown
-2025-09-06,OGN,Health Care,Unknown
-2025-09-06,MSM,Industrials,Unknown
-2025-09-06,SHC,Health Care,Unknown
-2025-09-06,FAF,Financials,Unknown
-2025-09-06,NVST,Health Care,Unknown
-2025-09-06,DNB,Industrials,Unknown
-2025-09-06,AMTM,Industrials,Unknown
-2025-09-06,THG,Financials,Unknown
-2025-09-06,DLB,Information Technology,Unknown
-2025-09-06,DV,Information Technology,Unknown
-2025-09-06,SPR,Industrials,Unknown
-2025-09-06,CNXC,Information Technology,Unknown
-2025-09-06,MAN,Industrials,Unknown
-2025-09-06,RLI,Financials,Unknown
-2025-09-06,BHF,Financials,Unknown
-2025-09-06,AGO,Financials,Unknown
-2025-09-06,CXT,Industrials,Unknown
-2025-09-06,FHB,Financials,Unknown
-2025-09-06,DXC,Information Technology,Unknown
-2025-09-06,CNA,Financials,Unknown
-2025-09-06,CLVT,Industrials,Unknown
-2025-09-06,BOKF,Financials,Unknown
-2025-09-06,TDC,Information Technology,Unknown
-2025-09-06,UHAL-B,Industrials,Unknown
-2025-09-06,FRHC,Financials,Unknown
-2025-09-06,SNDR,Industrials,Unknown
-2025-09-06,IPGP,Information Technology,Unknown
-2025-09-06,CERT,Health Care,Unknown
-2025-09-06,UHAL,Industrials,Unknown
-2025-09-06,INGM,Information Technology,Unknown
-2025-09-06,TFSL,Financials,Unknown
+2025-09-08,NVDA,Information Technology,Unknown
+2025-09-08,PLTR,Information Technology,Unknown
+2025-09-08,AAPL,Information Technology,Unknown
+2025-09-08,MSFT,Information Technology,Unknown
+2025-09-08,AMD,Information Technology,Unknown
+2025-09-08,AVGO,Information Technology,Unknown
+2025-09-08,UNH,Health Care,Unknown
+2025-09-08,MSTR,Information Technology,Unknown
+2025-09-08,HOOD,Financials,Unknown
+2025-09-08,LLY,Health Care,Unknown
+2025-09-08,INTC,Information Technology,Unknown
+2025-09-08,CRWV,nan,Unknown
+2025-09-08,COIN,Financials,Unknown
+2025-09-08,CRM,Information Technology,Unknown
+2025-09-08,APP,Information Technology,Unknown
+2025-09-08,ORCL,Information Technology,Unknown
+2025-09-08,MU,Information Technology,Unknown
+2025-09-08,BRK-B,Financials,Unknown
+2025-09-08,JPM,Financials,Unknown
+2025-09-08,V,Financials,Unknown
+2025-09-08,BAC,Financials,Unknown
+2025-09-08,PANW,Information Technology,Unknown
+2025-09-08,SNOW,Information Technology,Unknown
+2025-09-08,GEV,Industrials,Unknown
+2025-09-08,NOW,Information Technology,Unknown
+2025-09-08,SOFI,Financials,Unknown
+2025-09-08,INTU,Information Technology,Unknown
+2025-09-08,MRVL,Information Technology,Unknown
+2025-09-08,CSCO,Information Technology,Unknown
+2025-09-08,UBER,Industrials,Unknown
+2025-09-08,CRWD,Information Technology,Unknown
+2025-09-08,BA,Industrials,Unknown
+2025-09-08,JNJ,Health Care,Unknown
+2025-09-08,AMAT,Information Technology,Unknown
+2025-09-08,MA,Financials,Unknown
+2025-09-08,C,Financials,Unknown
+2025-09-08,ADBE,Information Technology,Unknown
+2025-09-08,TXN,Information Technology,Unknown
+2025-09-08,GS,Financials,Unknown
+2025-09-08,CAT,Industrials,Unknown
+2025-09-08,GE,Industrials,Unknown
+2025-09-08,MDB,Information Technology,Unknown
+2025-09-08,LRCX,Information Technology,Unknown
+2025-09-08,SMCI,Information Technology,Unknown
+2025-09-08,QCOM,Information Technology,Unknown
+2025-09-08,IBM,Information Technology,Unknown
+2025-09-08,WFC,Financials,Unknown
+2025-09-08,ANET,Information Technology,Unknown
+2025-09-08,RKLB,Industrials,Unknown
+2025-09-08,ASML,nan,Unknown
+2025-09-08,ISRG,Health Care,Unknown
+2025-09-08,SOUN,nan,Unknown
+2025-09-08,ADI,Information Technology,Unknown
+2025-09-08,ACN,Information Technology,Unknown
+2025-09-08,UNP,Industrials,Unknown
+2025-09-08,MRK,Health Care,Unknown
+2025-09-08,PFE,Health Care,Unknown
+2025-09-08,SHOP,nan,Unknown
+2025-09-08,WDAY,Information Technology,Unknown
+2025-09-08,ABBV,Health Care,Unknown
+2025-09-08,TEM,Health Care,Unknown
+2025-09-08,ALAB,Information Technology,Unknown
+2025-09-08,AAL,Industrials,Unknown
+2025-09-08,KLAC,Information Technology,Unknown
+2025-09-08,CSX,Industrials,Unknown
+2025-09-08,TMO,Health Care,Unknown
+2025-09-08,SCHW,Financials,Unknown
+2025-09-08,DELL,Information Technology,Unknown
+2025-09-08,AFRM,Information Technology,Unknown
+2025-09-08,VRT,Industrials,Unknown
+2025-09-08,NU,Financials,Unknown
+2025-09-08,APH,Information Technology,Unknown
+2025-09-08,MARA,nan,Unknown
+2025-09-08,FTNT,Information Technology,Unknown
+2025-09-08,AXP,Financials,Unknown
+2025-09-08,DE,Industrials,Unknown
+2025-09-08,UPS,Industrials,Unknown
+2025-09-08,ETN,Industrials,Unknown
+2025-09-08,HON,Industrials,Unknown
+2025-09-08,COF,Financials,Unknown
+2025-09-08,ABT,Health Care,Unknown
+2025-09-08,GILD,Health Care,Unknown
+2025-09-08,DDOG,Information Technology,Unknown
+2025-09-08,VRTX,Health Care,Unknown
+2025-09-08,PGR,Financials,Unknown
+2025-09-08,FSLR,Information Technology,Unknown
+2025-09-08,MDT,Health Care,Unknown
+2025-09-08,MS,Financials,Unknown
+2025-09-08,ELV,Health Care,Unknown
+2025-09-08,LMT,Industrials,Unknown
+2025-09-08,RGTI,nan,Unknown
+2025-09-08,PYPL,Financials,Unknown
+2025-09-08,IBKR,Financials,Unknown
+2025-09-08,IREN,nan,Unknown
+2025-09-08,SNPS,Information Technology,Unknown
+2025-09-08,BSX,Health Care,Unknown
+2025-09-08,DHR,Health Care,Unknown
+2025-09-08,CRDO,nan,Unknown
+2025-09-08,MCHP,Information Technology,Unknown
+2025-09-08,NXPI,nan,Unknown
+2025-09-08,BX,Financials,Unknown
+2025-09-08,WDC,Information Technology,Unknown
+2025-09-08,COHR,Information Technology,Unknown
+2025-09-08,TWLO,Information Technology,Unknown
+2025-09-08,SPGI,Financials,Unknown
+2025-09-08,WULF,nan,Unknown
+2025-09-08,REGN,Health Care,Unknown
+2025-09-08,MCK,Health Care,Unknown
+2025-09-08,XYZ,Financials,Unknown
+2025-09-08,RTX,Industrials,Unknown
+2025-09-08,ADSK,Information Technology,Unknown
+2025-09-08,JCI,Industrials,Unknown
+2025-09-08,NSC,Industrials,Unknown
+2025-09-08,AMGN,Health Care,Unknown
+2025-09-08,LITE,Information Technology,Unknown
+2025-09-08,FI,Financials,Unknown
+2025-09-08,CME,Financials,Unknown
+2025-09-08,BLK,Financials,Unknown
+2025-09-08,ARM,nan,Unknown
+2025-09-08,ICE,Financials,Unknown
+2025-09-08,TEAM,Information Technology,Unknown
+2025-09-08,ALNY,Health Care,Unknown
+2025-09-08,CYBR,nan,Unknown
+2025-09-08,MSI,Information Technology,Unknown
+2025-09-08,UAL,Industrials,Unknown
+2025-09-08,PH,Industrials,Unknown
+2025-09-08,FICO,Information Technology,Unknown
+2025-09-08,TT,Industrials,Unknown
+2025-09-08,CI,Health Care,Unknown
+2025-09-08,TDG,Industrials,Unknown
+2025-09-08,HPE,Information Technology,Unknown
+2025-09-08,U,Information Technology,Unknown
+2025-09-08,ZS,Information Technology,Unknown
+2025-09-08,BMY,Health Care,Unknown
+2025-09-08,KEY,Financials,Unknown
+2025-09-08,CDNS,Information Technology,Unknown
+2025-09-08,APO,Financials,Unknown
+2025-09-08,MMM,Industrials,Unknown
+2025-09-08,STX,nan,Unknown
+2025-09-08,URI,Industrials,Unknown
+2025-09-08,CB,Financials,Unknown
+2025-09-08,HCA,Health Care,Unknown
+2025-09-08,UPST,nan,Unknown
+2025-09-08,RF,Financials,Unknown
+2025-09-08,HUBS,Information Technology,Unknown
+2025-09-08,AON,Financials,Unknown
+2025-09-08,RIOT,nan,Unknown
+2025-09-08,ADP,Industrials,Unknown
+2025-09-08,AXON,Industrials,Unknown
+2025-09-08,OKTA,Information Technology,Unknown
+2025-09-08,HBAN,Financials,Unknown
+2025-09-08,SYK,Health Care,Unknown
+2025-09-08,CVS,Health Care,Unknown
+2025-09-08,NET,Information Technology,Unknown
+2025-09-08,FUTU,nan,Unknown
+2025-09-08,MPWR,Information Technology,Unknown
+2025-09-08,HUM,Health Care,Unknown
+2025-09-08,DAL,Industrials,Unknown
+2025-09-08,AJG,Financials,Unknown
+2025-09-08,BDX,Health Care,Unknown
+2025-09-08,CAH,Health Care,Unknown
+2025-09-08,KKR,Financials,Unknown
+2025-09-08,WM,Industrials,Unknown
+2025-09-08,ROP,Industrials,Unknown
+2025-09-08,MMC,Financials,Unknown
+2025-09-08,APLD,nan,Unknown
+2025-09-08,HWM,Industrials,Unknown
+2025-09-08,INSM,Health Care,Unknown
+2025-09-08,CTAS,Industrials,Unknown
+2025-09-08,VEEV,Health Care,Unknown
+2025-09-08,COR,Health Care,Unknown
+2025-09-08,GLW,Information Technology,Unknown
+2025-09-08,USB,Financials,Unknown
+2025-09-08,TER,Information Technology,Unknown
+2025-09-08,FDX,Industrials,Unknown
+2025-09-08,ON,Information Technology,Unknown
+2025-09-08,EMR,Industrials,Unknown
+2025-09-08,MNDY,nan,Unknown
+2025-09-08,NOC,Industrials,Unknown
+2025-09-08,ZTS,Health Care,Unknown
+2025-09-08,CNC,Health Care,Unknown
+2025-09-08,IT,Information Technology,Unknown
+2025-09-08,RKT,Financials,Unknown
+2025-09-08,CARR,Industrials,Unknown
+2025-09-08,PWR,Industrials,Unknown
+2025-09-08,TRV,Financials,Unknown
+2025-09-08,TOST,Information Technology,Unknown
+2025-09-08,ZM,Information Technology,Unknown
+2025-09-08,LYFT,Industrials,Unknown
+2025-09-08,TEL,nan,Unknown
+2025-09-08,TFC,Financials,Unknown
+2025-09-08,MSCI,Financials,Unknown
+2025-09-08,DXCM,Health Care,Unknown
+2025-09-08,GDDY,Information Technology,Unknown
+2025-09-08,PNC,Financials,Unknown
+2025-09-08,CPRT,Industrials,Unknown
+2025-09-08,BK,Financials,Unknown
+2025-09-08,UTHR,Health Care,Unknown
+2025-09-08,AIG,Financials,Unknown
+2025-09-08,OTIS,Industrials,Unknown
+2025-09-08,CMI,Industrials,Unknown
+2025-09-08,JBL,Information Technology,Unknown
+2025-09-08,LHX,Industrials,Unknown
+2025-09-08,GWW,Industrials,Unknown
+2025-09-08,ROK,Industrials,Unknown
+2025-09-08,AZN,nan,Unknown
+2025-09-08,EW,Health Care,Unknown
+2025-09-08,FERG,Industrials,Unknown
+2025-09-08,MCO,Financials,Unknown
+2025-09-08,PAYX,Industrials,Unknown
+2025-09-08,ODFL,Industrials,Unknown
+2025-09-08,RMD,Health Care,Unknown
+2025-09-08,FCNCA,Financials,Unknown
+2025-09-08,PSTG,Information Technology,Unknown
+2025-09-08,ENPH,Information Technology,Unknown
+2025-09-08,IDXX,Health Care,Unknown
+2025-09-08,BLDR,Industrials,Unknown
+2025-09-08,AFL,Financials,Unknown
+2025-09-08,VKTX,Health Care,Unknown
+2025-09-08,VRSK,Industrials,Unknown
+2025-09-08,GD,Industrials,Unknown
+2025-09-08,FIX,Industrials,Unknown
+2025-09-08,GTLB,Information Technology,Unknown
+2025-09-08,FAST,Industrials,Unknown
+2025-09-08,ARGX,nan,Unknown
+2025-09-08,CIEN,Information Technology,Unknown
+2025-09-08,CTSH,Information Technology,Unknown
+2025-09-08,HPQ,Information Technology,Unknown
+2025-09-08,MOH,Health Care,Unknown
+2025-09-08,RUN,nan,Unknown
+2025-09-08,LPLA,Financials,Unknown
+2025-09-08,FIS,Financials,Unknown
+2025-09-08,MRNA,Health Care,Unknown
+2025-09-08,NDAQ,Financials,Unknown
+2025-09-08,EFX,Industrials,Unknown
+2025-09-08,ALL,Financials,Unknown
+2025-09-08,ARES,Financials,Unknown
+2025-09-08,MET,Financials,Unknown
+2025-09-08,NTNX,Information Technology,Unknown
+2025-09-08,QUBT,nan,Unknown
+2025-09-08,NTAP,Information Technology,Unknown
+2025-09-08,BRO,Financials,Unknown
+2025-09-08,KTOS,nan,Unknown
+2025-09-08,RSG,Industrials,Unknown
+2025-09-08,FHN,Financials,Unknown
+2025-09-08,CORZ,nan,Unknown
+2025-09-08,DAY,Industrials,Unknown
+2025-09-08,ITW,Industrials,Unknown
+2025-09-08,IQV,Health Care,Unknown
+2025-09-08,BILL,Information Technology,Unknown
+2025-09-08,IOT,Information Technology,Unknown
+2025-09-08,LUV,Industrials,Unknown
+2025-09-08,DOCU,Information Technology,Unknown
+2025-09-08,CBOE,Financials,Unknown
+2025-09-08,ETHZ,nan,Unknown
+2025-09-08,LII,Industrials,Unknown
+2025-09-08,COO,Health Care,Unknown
+2025-09-08,ONDS,nan,Unknown
+2025-09-08,AMP,Financials,Unknown
+2025-09-08,PCAR,Industrials,Unknown
+2025-09-08,TRI,nan,Unknown
+2025-09-08,SYF,Financials,Unknown
+2025-09-08,GEHC,Health Care,Unknown
+2025-09-08,ENTG,Information Technology,Unknown
+2025-09-08,VRSN,Information Technology,Unknown
+2025-09-08,NTRA,Health Care,Unknown
+2025-09-08,GLXY,nan,Unknown
+2025-09-08,AME,Industrials,Unknown
+2025-09-08,GPN,Financials,Unknown
+2025-09-08,PODD,Health Care,Unknown
+2025-09-08,BIIB,Health Care,Unknown
+2025-09-08,ALGN,Health Care,Unknown
+2025-09-08,ESTC,Information Technology,Unknown
+2025-09-08,CIFR,nan,Unknown
+2025-09-08,FTV,Industrials,Unknown
+2025-09-08,A,Health Care,Unknown
+2025-09-08,IR,Industrials,Unknown
+2025-09-08,ELAN,Health Care,Unknown
+2025-09-08,RBRK,Information Technology,Unknown
+2025-09-08,BWXT,Industrials,Unknown
+2025-09-08,CDW,Information Technology,Unknown
+2025-09-08,EME,Industrials,Unknown
+2025-09-08,WIX,nan,Unknown
+2025-09-08,WAB,Industrials,Unknown
+2025-09-08,STT,Financials,Unknown
+2025-09-08,CHRW,Industrials,Unknown
+2025-09-08,CLSK,nan,Unknown
+2025-09-08,SNDK,Information Technology,Unknown
+2025-09-08,FLEX,Information Technology,Unknown
+2025-09-08,HUBB,Industrials,Unknown
+2025-09-08,AVAV,nan,Unknown
+2025-09-08,KEYS,Information Technology,Unknown
+2025-09-08,CFG,Financials,Unknown
+2025-09-08,SRPT,Health Care,Unknown
+2025-09-08,HIG,Financials,Unknown
+2025-09-08,WTW,Financials,Unknown
+2025-09-08,BR,Industrials,Unknown
+2025-09-08,GWRE,Information Technology,Unknown
+2025-09-08,WAT,Health Care,Unknown
+2025-09-08,TW,Financials,Unknown
+2025-09-08,MTD,Health Care,Unknown
+2025-09-08,ICLR,nan,Unknown
+2025-09-08,THC,Health Care,Unknown
+2025-09-08,AGNC,Financials,Unknown
+2025-09-08,MTB,Financials,Unknown
+2025-09-08,ACGL,Financials,Unknown
+2025-09-08,BAX,Health Care,Unknown
+2025-09-08,QXO,Industrials,Unknown
+2025-09-08,PRU,Financials,Unknown
+2025-09-08,CFLT,Information Technology,Unknown
+2025-09-08,SAIA,Industrials,Unknown
+2025-09-08,EQH,Financials,Unknown
+2025-09-08,CG,Financials,Unknown
+2025-09-08,MDGL,nan,Unknown
+2025-09-08,IONS,Health Care,Unknown
+2025-09-08,DT,Information Technology,Unknown
+2025-09-08,SWKS,Information Technology,Unknown
+2025-09-08,BULL,nan,Unknown
+2025-09-08,BAH,Industrials,Unknown
+2025-09-08,EXAS,Health Care,Unknown
+2025-09-08,AKAM,Information Technology,Unknown
+2025-09-08,PTC,Information Technology,Unknown
+2025-09-08,TYL,Information Technology,Unknown
+2025-09-08,FDS,Financials,Unknown
+2025-09-08,GNRC,Industrials,Unknown
+2025-09-08,NXT,nan,Unknown
+2025-09-08,ZBRA,Information Technology,Unknown
+2025-09-08,FTAI,Industrials,Unknown
+2025-09-08,LSCC,Information Technology,Unknown
+2025-09-08,TRU,Industrials,Unknown
+2025-09-08,FITB,Financials,Unknown
+2025-09-08,GH,nan,Unknown
+2025-09-08,DOV,Industrials,Unknown
+2025-09-08,AVTR,Health Care,Unknown
+2025-09-08,MTZ,Industrials,Unknown
+2025-09-08,MEDP,Health Care,Unknown
+2025-09-08,COOP,Financials,Unknown
+2025-09-08,XPO,Industrials,Unknown
+2025-09-08,SWK,Industrials,Unknown
+2025-09-08,CHKP,nan,Unknown
+2025-09-08,XYL,Industrials,Unknown
+2025-09-08,MAS,Industrials,Unknown
+2025-09-08,RJF,Financials,Unknown
+2025-09-08,TROW,Financials,Unknown
+2025-09-08,INCY,Health Care,Unknown
+2025-09-08,JBHT,Industrials,Unknown
+2025-09-08,NVT,Industrials,Unknown
+2025-09-08,HALO,Health Care,Unknown
+2025-09-08,CSL,Industrials,Unknown
+2025-09-08,TDY,Industrials,Unknown
+2025-09-08,FOUR,Information Technology,Unknown
+2025-09-08,PAYC,Information Technology,Unknown
+2025-09-08,HEI,Industrials,Unknown
+2025-09-08,VRNA,nan,Unknown
+2025-09-08,CAR,Industrials,Unknown
+2025-09-08,OWL,Financials,Unknown
+2025-09-08,THAR,nan,Unknown
+2025-09-08,DGX,Health Care,Unknown
+2025-09-08,JKHY,Financials,Unknown
+2025-09-08,ZBH,Health Care,Unknown
+2025-09-08,HUT,nan,Unknown
+2025-09-08,SEDG,nan,Unknown
+2025-09-08,ILMN,Health Care,Unknown
+2025-09-08,OC,Industrials,Unknown
+2025-09-08,EXPD,Industrials,Unknown
+2025-09-08,PATH,Information Technology,Unknown
+2025-09-08,FNB,Financials,Unknown
+2025-09-08,ATI,Industrials,Unknown
+2025-09-08,ALK,Industrials,Unknown
+2025-09-08,BRKR,Health Care,Unknown
+2025-09-08,FFIV,Information Technology,Unknown
+2025-09-08,GLOB,Information Technology,Unknown
+2025-09-08,COLB,Financials,Unknown
+2025-09-08,ONTO,Information Technology,Unknown
+2025-09-08,NLY,Financials,Unknown
+2025-09-08,RPRX,Health Care,Unknown
+2025-09-08,SNY,nan,Unknown
+2025-09-08,CPAY,Financials,Unknown
+2025-09-08,GEN,Information Technology,Unknown
+2025-09-08,MIDD,Industrials,Unknown
+2025-09-08,PGY,nan,Unknown
+2025-09-08,PNR,Industrials,Unknown
+2025-09-08,TRMB,Information Technology,Unknown
+2025-09-08,LDOS,Industrials,Unknown
+2025-09-08,CRSP,nan,Unknown
+2025-09-08,AAOI,nan,Unknown
+2025-09-08,UHS,Health Care,Unknown
+2025-09-08,STRL,nan,Unknown
+2025-09-08,CNH,Industrials,Unknown
+2025-09-08,S,Information Technology,Unknown
+2025-09-08,RNA,nan,Unknown
+2025-09-08,GRAB,nan,Unknown
+2025-09-08,CRL,Health Care,Unknown
+2025-09-08,AUR,Information Technology,Unknown
+2025-09-08,EPAM,Information Technology,Unknown
+2025-09-08,ALLE,Industrials,Unknown
+2025-09-08,CW,Industrials,Unknown
+2025-09-08,LH,Health Care,Unknown
+2025-09-08,NTRS,Financials,Unknown
+2025-09-08,WMS,Industrials,Unknown
+2025-09-08,WST,Health Care,Unknown
+2025-09-08,MKTX,Financials,Unknown
+2025-09-08,QRVO,Information Technology,Unknown
+2025-09-08,WSO,Industrials,Unknown
+2025-09-08,NICE,nan,Unknown
+2025-09-08,XP,Financials,Unknown
+2025-09-08,CMA,Financials,Unknown
+2025-09-08,WCC,Industrials,Unknown
+2025-09-08,EVR,Financials,Unknown
+2025-09-08,BBIO,nan,Unknown
+2025-09-08,ALTS,nan,Unknown
+2025-09-08,RBA,Industrials,Unknown
+2025-09-08,AL,Industrials,Unknown
+2025-09-08,IPDN,nan,Unknown
+2025-09-08,IEX,Industrials,Unknown
+2025-09-08,SLNO,nan,Unknown
+2025-09-08,CYTK,nan,Unknown
+2025-09-08,WWD,Industrials,Unknown
+2025-09-08,VSAT,nan,Unknown
+2025-09-08,WRB,Financials,Unknown
+2025-09-08,PEN,Health Care,Unknown
+2025-09-08,SMTC,nan,Unknown
+2025-09-08,TPG,Financials,Unknown
+2025-09-08,AAON,Industrials,Unknown
+2025-09-08,HQY,nan,Unknown
+2025-09-08,RRX,Industrials,Unknown
+2025-09-08,HSIC,Health Care,Unknown
+2025-09-08,STE,Health Care,Unknown
+2025-09-08,TLRY,nan,Unknown
+2025-09-08,SEZL,nan,Unknown
+2025-09-08,HOLX,Health Care,Unknown
+2025-09-08,PNFP,Financials,Unknown
+2025-09-08,TMDX,nan,Unknown
+2025-09-08,CACI,Industrials,Unknown
+2025-09-08,BAM,Financials,Unknown
+2025-09-08,CNM,Industrials,Unknown
+2025-09-08,UI,Information Technology,Unknown
+2025-09-08,BMRN,Health Care,Unknown
+2025-09-08,NBIX,Health Care,Unknown
+2025-09-08,RVTY,Health Care,Unknown
+2025-09-08,ONC,nan,Unknown
+2025-09-08,TREX,Industrials,Unknown
+2025-09-08,HII,Industrials,Unknown
+2025-09-08,COMM,nan,Unknown
+2025-09-08,TECH,Health Care,Unknown
+2025-09-08,CVLT,nan,Unknown
+2025-09-08,KNX,Industrials,Unknown
+2025-09-08,DOCS,Health Care,Unknown
+2025-09-08,MANH,Information Technology,Unknown
+2025-09-08,TTAN,nan,Unknown
+2025-09-08,PCOR,Information Technology,Unknown
+2025-09-08,LNTH,nan,Unknown
+2025-09-08,ACM,Industrials,Unknown
+2025-09-08,MTSI,Information Technology,Unknown
+2025-09-08,VLTO,Industrials,Unknown
+2025-09-08,MASI,Health Care,Unknown
+2025-09-08,ASND,nan,Unknown
+2025-09-08,NVMI,nan,Unknown
+2025-09-08,ALLY,Financials,Unknown
+2025-09-08,TXT,Industrials,Unknown
+2025-09-08,SSNC,Information Technology,Unknown
+2025-09-08,DVA,Health Care,Unknown
+2025-09-08,SOLV,Health Care,Unknown
+2025-09-08,EG,Financials,Unknown
+2025-09-08,FBIN,Industrials,Unknown
+2025-09-08,VTRS,Health Care,Unknown
+2025-09-08,UNM,Financials,Unknown
+2025-09-08,DBX,Information Technology,Unknown
+2025-09-08,MKSI,Information Technology,Unknown
+2025-09-08,JBLU,nan,Unknown
+2025-09-08,AIZ,Financials,Unknown
+2025-09-08,JAZZ,Health Care,Unknown
+2025-09-08,JEF,Financials,Unknown
+2025-09-08,DAVE,nan,Unknown
+2025-09-08,PCTY,Information Technology,Unknown
+2025-09-08,INSP,Health Care,Unknown
+2025-09-08,EXEL,Health Care,Unknown
+2025-09-08,J,Industrials,Unknown
+2025-09-08,PFG,Financials,Unknown
+2025-09-08,BSY,Information Technology,Unknown
+2025-09-08,APG,Industrials,Unknown
+2025-09-08,TTMI,nan,Unknown
+2025-09-08,EEFT,Financials,Unknown
+2025-09-08,NNE,nan,Unknown
+2025-09-08,PONY,nan,Unknown
+2025-09-08,SPNS,nan,Unknown
+2025-09-08,RMBS,nan,Unknown
+2025-09-08,APM,nan,Unknown
+2025-09-08,SYM,nan,Unknown
+2025-09-08,GGAL,nan,Unknown
+2025-09-08,ABVX,nan,Unknown
+2025-09-08,KNSL,Financials,Unknown
+2025-09-08,TSEM,nan,Unknown
+2025-09-08,RGEN,Health Care,Unknown
+2025-09-08,MORN,Financials,Unknown
+2025-09-08,OUST,nan,Unknown
+2025-09-08,AMBA,nan,Unknown
+2025-09-08,NVTS,nan,Unknown
+2025-09-08,VMI,Industrials,Unknown
+2025-09-08,RR,nan,Unknown
+2025-09-08,CGNX,Information Technology,Unknown
+2025-09-08,STRC,nan,Unknown
+2025-09-08,WGS,nan,Unknown
+2025-09-08,SMMT,Health Care,Unknown
+2025-09-08,GDS,nan,Unknown
+2025-09-08,BNTX,nan,Unknown
+2025-09-08,SITM,nan,Unknown
+2025-09-08,EHC,Health Care,Unknown
+2025-09-08,KD,Information Technology,Unknown
+2025-09-08,NDSN,Industrials,Unknown
+2025-09-08,ALSN,Industrials,Unknown
+2025-09-08,AGCO,Industrials,Unknown
+2025-09-08,SNV,Financials,Unknown
+2025-09-08,VRNS,nan,Unknown
+2025-09-08,G,Information Technology,Unknown
+2025-09-08,TNXP,nan,Unknown
+2025-09-08,LOAR,Industrials,Unknown
+2025-09-08,PI,nan,Unknown
+2025-09-08,WAL,Financials,Unknown
+2025-09-08,BEN,Financials,Unknown
+2025-09-08,RXRX,nan,Unknown
+2025-09-08,IVZ,Financials,Unknown
+2025-09-08,GMED,Health Care,Unknown
+2025-09-08,LQDA,nan,Unknown
+2025-09-08,VLY,nan,Unknown
+2025-09-08,APPF,Information Technology,Unknown
+2025-09-08,CLH,Industrials,Unknown
+2025-09-08,SNX,Information Technology,Unknown
+2025-09-08,GFS,Information Technology,Unknown
+2025-09-08,RNR,Financials,Unknown
+2025-09-08,DOX,Information Technology,Unknown
+2025-09-08,FROG,nan,Unknown
+2025-09-08,PSN,Industrials,Unknown
+2025-09-08,PSIX,nan,Unknown
+2025-09-08,MKL,Financials,Unknown
+2025-09-08,EOSE,nan,Unknown
+2025-09-08,TIGR,nan,Unknown
+2025-09-08,KEX,Industrials,Unknown
+2025-09-08,CHE,Health Care,Unknown
+2025-09-08,HLI,Financials,Unknown
+2025-09-08,EWBC,Financials,Unknown
+2025-09-08,WU,Information Technology,Unknown
+2025-09-08,AOS,Industrials,Unknown
+2025-09-08,RVMD,Health Care,Unknown
+2025-09-08,ROL,Industrials,Unknown
+2025-09-08,STNE,nan,Unknown
+2025-09-08,SF,Financials,Unknown
+2025-09-08,GL,Financials,Unknown
+2025-09-08,SSB,Financials,Unknown
+2025-09-08,TTC,Industrials,Unknown
+2025-09-08,SITE,Industrials,Unknown
+2025-09-08,KRMN,Industrials,Unknown
+2025-09-08,OSK,Industrials,Unknown
+2025-09-08,OLED,Information Technology,Unknown
+2025-09-08,AYI,Industrials,Unknown
+2025-09-08,ZION,Financials,Unknown
+2025-09-08,FLS,Industrials,Unknown
+2025-09-08,SNA,Industrials,Unknown
+2025-09-08,TFX,Health Care,Unknown
+2025-09-08,INFA,Information Technology,Unknown
+2025-09-08,L,Financials,Unknown
+2025-09-08,AIT,Industrials,Unknown
+2025-09-08,TTEK,Industrials,Unknown
+2025-09-08,AWI,Industrials,Unknown
+2025-09-08,ROIV,Health Care,Unknown
+2025-09-08,FNF,Financials,Unknown
+2025-09-08,PB,Financials,Unknown
+2025-09-08,LNC,Financials,Unknown
+2025-09-08,CINF,Financials,Unknown
+2025-09-08,QGEN,Health Care,Unknown
+2025-09-08,PEGA,Information Technology,Unknown
+2025-09-08,BIO,Health Care,Unknown
+2025-09-08,RYAN,Financials,Unknown
+2025-09-08,RITM,Financials,Unknown
+2025-09-08,RHI,Industrials,Unknown
+2025-09-08,RBC,Industrials,Unknown
+2025-09-08,BPOP,Financials,Unknown
+2025-09-08,MLI,Industrials,Unknown
+2025-09-08,LECO,Industrials,Unknown
+2025-09-08,WBS,Financials,Unknown
+2025-09-08,NCNO,Information Technology,Unknown
+2025-09-08,RGA,Financials,Unknown
+2025-09-08,APLS,Health Care,Unknown
+2025-09-08,VOYA,Financials,Unknown
+2025-09-08,KBR,Industrials,Unknown
+2025-09-08,CR,Industrials,Unknown
+2025-09-08,CFR,Financials,Unknown
+2025-09-08,WEX,Financials,Unknown
+2025-09-08,SLM,Financials,Unknown
+2025-09-08,CCCS,Information Technology,Unknown
+2025-09-08,RAL,Information Technology,Unknown
+2025-09-08,RNG,Information Technology,Unknown
+2025-09-08,DCI,Industrials,Unknown
+2025-09-08,CRUS,Information Technology,Unknown
+2025-09-08,AFG,Financials,Unknown
+2025-09-08,UWMC,Financials,Unknown
+2025-09-08,AXS,Financials,Unknown
+2025-09-08,HLNE,Financials,Unknown
+2025-09-08,ARW,Information Technology,Unknown
+2025-09-08,EXLS,Industrials,Unknown
+2025-09-08,WSC,Industrials,Unknown
+2025-09-08,AVT,Information Technology,Unknown
+2025-09-08,CACC,Financials,Unknown
+2025-09-08,ACHC,Health Care,Unknown
+2025-09-08,SEIC,Financials,Unknown
+2025-09-08,GGG,Industrials,Unknown
+2025-09-08,HXL,Industrials,Unknown
+2025-09-08,SAIC,Industrials,Unknown
+2025-09-08,CBSH,Financials,Unknown
+2025-09-08,WTM,Financials,Unknown
+2025-09-08,ECG,Industrials,Unknown
+2025-09-08,HEI-A,Industrials,Unknown
+2025-09-08,GXO,Industrials,Unknown
+2025-09-08,WTFC,Financials,Unknown
+2025-09-08,ERIE,nan,Unknown
+2025-09-08,SARO,Industrials,Unknown
+2025-09-08,ESAB,Industrials,Unknown
+2025-09-08,R,Industrials,Unknown
+2025-09-08,STWD,Financials,Unknown
+2025-09-08,ITT,Industrials,Unknown
+2025-09-08,TKR,Industrials,Unknown
+2025-09-08,SSD,Industrials,Unknown
+2025-09-08,ORI,Financials,Unknown
+2025-09-08,OMF,Financials,Unknown
+2025-09-08,JHG,Financials,Unknown
+2025-09-08,MTG,Financials,Unknown
+2025-09-08,LSTR,Industrials,Unknown
+2025-09-08,SAIL,Information Technology,Unknown
+2025-09-08,KMPR,Financials,Unknown
+2025-09-08,FCN,Industrials,Unknown
+2025-09-08,CORT,Health Care,Unknown
+2025-09-08,XRAY,Health Care,Unknown
+2025-09-08,GTES,Industrials,Unknown
+2025-09-08,LAZ,Financials,Unknown
+2025-09-08,ALGM,Information Technology,Unknown
+2025-09-08,AMKR,Information Technology,Unknown
+2025-09-08,PRI,Financials,Unknown
+2025-09-08,LFUS,Information Technology,Unknown
+2025-09-08,ST,Industrials,Unknown
+2025-09-08,RARE,Health Care,Unknown
+2025-09-08,OZK,Financials,Unknown
+2025-09-08,DRS,Industrials,Unknown
+2025-09-08,VNT,Information Technology,Unknown
+2025-09-08,VIRT,Financials,Unknown
+2025-09-08,HAYW,Industrials,Unknown
+2025-09-08,AMG,Financials,Unknown
+2025-09-08,MSA,Industrials,Unknown
+2025-09-08,PRGO,Health Care,Unknown
+2025-09-08,OGN,Health Care,Unknown
+2025-09-08,MSM,Industrials,Unknown
+2025-09-08,SHC,Health Care,Unknown
+2025-09-08,FAF,Financials,Unknown
+2025-09-08,NVST,Health Care,Unknown
+2025-09-08,DNB,Industrials,Unknown
+2025-09-08,AMTM,Industrials,Unknown
+2025-09-08,THG,Financials,Unknown
+2025-09-08,DLB,Information Technology,Unknown
+2025-09-08,DV,Information Technology,Unknown
+2025-09-08,SPR,Industrials,Unknown
+2025-09-08,CNXC,Information Technology,Unknown
+2025-09-08,MAN,Industrials,Unknown
+2025-09-08,RLI,Financials,Unknown
+2025-09-08,BHF,Financials,Unknown
+2025-09-08,AGO,Financials,Unknown
+2025-09-08,CXT,Industrials,Unknown
+2025-09-08,FHB,Financials,Unknown
+2025-09-08,DXC,Information Technology,Unknown
+2025-09-08,CNA,Financials,Unknown
+2025-09-08,CLVT,Industrials,Unknown
+2025-09-08,BOKF,Financials,Unknown
+2025-09-08,TDC,Information Technology,Unknown
+2025-09-08,UHAL-B,Industrials,Unknown
+2025-09-08,FRHC,Financials,Unknown
+2025-09-08,SNDR,Industrials,Unknown
+2025-09-08,IPGP,Information Technology,Unknown
+2025-09-08,CERT,Health Care,Unknown
+2025-09-08,UHAL,Industrials,Unknown
+2025-09-08,INGM,Information Technology,Unknown
+2025-09-08,TFSL,Financials,Unknown
