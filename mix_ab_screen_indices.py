@@ -289,18 +289,38 @@ def main():
         time.sleep(SLEEP_BETWEEN_CALLS/2)
     cand["mcap_usd_yfinfo"] = mcap_yf
 
+
     # 9) Build final enrichment set and merge back to base
     cand["mcap_usd_final"] = cand["mcap_usd_finnhub"].fillna(cand.get("mcap_usd_yfinfo"))
-    enrich_cols = ["ticker_yf","price","tv_score","tv_reco","analyst_bucket","analyst_votes",
-                   "mcap_usd_final","sector","industry"]
+
+    # S'assurer que sector/industry existent dans cand :
+    for col in ("sector", "industry"):
+        if col not in cand.columns:
+            if col in base.columns:
+                # récupérer depuis base par ticker_yf
+                cand = cand.merge(base[["ticker_yf", col]].drop_duplicates(), on="ticker_yf", how="left")
+            else:
+                cand[col] = None  # colonne vide si vraiment absente partout
+
+    # Colonnes disponibles (tolérant si certaines manquent)
+    wanted = ["ticker_yf","price","tv_score","tv_reco",
+              "analyst_bucket","analyst_votes","mcap_usd_final",
+              "sector","industry"]
+    enrich_cols = [c for c in wanted if c in cand.columns]
+
     enrich_df = cand[enrich_cols].copy()
 
     base = base.merge(enrich_df, on="ticker_yf", how="left", suffixes=("", "_cand"))
+
+    # sécuriser l'existence des colonnes dans base pour la suite
     for col in ("sector","industry"):
         rcol = f"{col}_cand"
         if rcol in base.columns:
             base[col] = base[col].where(base[rcol].isna() | (base[rcol].astype(str).str.strip()==""), base[rcol])
             base.drop(columns=[rcol], inplace=True)
+        elif col not in base.columns:
+            base[col] = None
+
 
     # 9-bis) Fill missing market caps across the whole base (not only cand)
     if "price" not in base.columns:
