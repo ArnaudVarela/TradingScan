@@ -1,6 +1,6 @@
 numpy>=2.0,<3
 pandas==2.2.2
-git+https://github.com/xgboosted/pandas-ta-classic.git#egg=pandas_ta
+git+https://github.com/xgboosted/pandas-ta-classic.git 
 yfinance>=0.2.40,<0.3
 tradingview-ta>=3.3.0,<4
 requests>=2.31,<3
