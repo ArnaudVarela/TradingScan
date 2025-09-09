@@ -2,7 +2,7 @@
 # Build a compact, fully-enriched screening set and publish rich CSVs for the dashboard.
 
 from __future__ import annotations
-import os, json, time, math
+import os, json, time, math, re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
@@ -10,7 +10,7 @@ from typing import Dict, List, Tuple, Optional
 import pandas as pd
 import requests
 import yfinance as yf
-from ta_shim import ta
+from ta_shim import ta  # <- shim local qui route vers pandas-ta (classic ou original)
 
 from cache_layer import load_map, save_map, set_cached, now_utc_iso
 
@@ -18,7 +18,7 @@ PUBLIC_DIR = Path("dashboard/public")
 PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 
 # --------- Config ---------
-TOP_N = int(os.getenv("SCREEN_TOPN", "180"))   # top by liquidity to enrich heavily
+TOP_N = int(os.getenv("SCREEN_TOPN", "180"))   # top par liquidité à enrichir fortement
 TV_BATCH = 80
 REQ_TIMEOUT = 20
 SLEEP_BETWEEN_CALLS = 0.25
@@ -27,20 +27,6 @@ FINNHUB_KEY = os.getenv("FINNHUB_API_KEY", "")
 ALPHAV_KEY  = os.getenv("ALPHAVANTAGE_API_KEY", "")
 
 MCAP_MAX_USD = 75_000_000_000
-
-# TA import that works with both the classic fork and the original package
-try:
-    import pandas_ta as ta  # original package (if present)
-except Exception:
-    try:
-        import pandas_ta_classic as ta  # fork's module name
-    except Exception as e:
-        raise ImportError(
-            "Neither 'pandas_ta' nor 'pandas_ta_classic' could be imported. "
-            "Ensure requirements install the classic fork: "
-            "git+https://github.com/xgboosted/pandas-ta-classic.git"
-        ) from e
-
 
 # --------- I/O helpers ---------
 def _save(df: pd.DataFrame, name: str, also_public: bool = True):
@@ -85,6 +71,26 @@ def _label_from_tv_score(score: float | None) -> Optional[str]:
     if score <= -0.5: return "STRONG_SELL"
     if score <= -0.2: return "SELL"
     return "NEUTRAL"
+
+# --- ticker cleaning helpers ---
+_TICKER_RE = re.compile(r'^[A-Z]{1,5}(?:[.-][A-Z]{1,4})?$')  # e.g., AAPL, BRK.B, RDS-A
+_BAD_TOKENS = {
+    "CANADA","USA","US","EUROPE","ASIA","JAPAN","FRANCE","AUSTRALIA",
+    "AMERICAS","GLOBAL","OCEANIA","AFRICA","INDIA","OTHER","METALS","WATER","LIFE","EQUITIES","MAJOR"
+}
+
+def _normalize_ticker(s: str | None) -> str | None:
+    """Normalize + whiteliste des tickers US plausibles; renvoie None si bruit (années, zones géo, etc.)."""
+    if not s or not isinstance(s, str):
+        return None
+    t = s.strip().upper()
+    if t.startswith("$"):
+        t = t[1:]
+    if t in _BAD_TOKENS:
+        return None
+    if t.isdigit():  # années / nombres
+        return None
+    return t if _TICKER_RE.match(t) else None
 
 def tv_scan_batch(symbols_tv: List[str]) -> Dict[str, Dict]:
     out: Dict[str, Dict] = {}
@@ -245,7 +251,7 @@ def _fill_mcap_for_rows(tickers: List[str], prices: List[Optional[float]], sleep
     save_map("yf_info_mcap", yf_info_cache)
     return out
 
-# --------- TA: compute p_tech for a list of tickers ---------
+# --------- TA: compute p_tech pour une liste de tickers ---------
 def compute_ta_signals(tickers: List[str]) -> pd.DataFrame:
     """
     Retourne un DataFrame index=ticker avec:
@@ -364,6 +370,12 @@ def main():
     base = _read_csv_required("universe_in_scope.csv")
     if "ticker_yf" not in base.columns:
         raise SystemExit("❌ universe_in_scope.csv must contain 'ticker_yf'")
+
+    # 1bis) Nettoyage agressif des tickers pour éviter les 404 et "Failed downloads"
+    base["ticker_yf"] = base["ticker_yf"].astype(str).map(_normalize_ticker)
+    base = base.dropna(subset=["ticker_yf"]).copy()
+    base["ticker_yf"] = base["ticker_yf"].astype(str)
+    base = base.drop_duplicates(subset=["ticker_yf"]).reset_index(drop=True)
 
     # 2) Sector catalog merge
     cat = _read_csv_required("sector_catalog.csv")
@@ -489,12 +501,10 @@ def main():
         )
         base.loc[need_mask, "mcap_usd_final"] = pd.to_numeric(pd.Series(mcap_filled), errors="coerce")
 
-    # === 10) TECH PILLAR via TA (nouveau) ===
-    # On calcule pour TopN (cand) et on mappe sur base; si ticker hors TopN => p_tech False par défaut
+    # === 10) TECH PILLAR via TA ===
     ta_df = compute_ta_signals(cand["ticker_yf"].astype(str).tolist())
-    # merge pour avoir p_tech + score (optionnel pour debug)
     base = base.merge(ta_df[["p_tech","ta_score"]].reset_index(), on="ticker_yf", how="left")
-    base["p_tech"] = base["p_tech"].fillna(False)
+    base["p_tech"] = base["p_tech"].fillna(False).astype(bool)
 
     # 10bis) autres piliers
     def is_strong_tv(v) -> bool:
@@ -563,17 +573,23 @@ def main():
         "rank_score","bucket"
     ]
     for c in export_cols:
-        if c not in base_sorted2.columns: base_sorted2[c] = None
+        if c not in base_sorted2.columns:
+            base_sorted2[c] = None
+
+    # réaligner les sous-DF sur les colonnes d'export pour éviter KeyError
+    df_conf = df_conf.reindex(columns=base_sorted2.columns)
+    df_pre  = df_pre.reindex(columns=base_sorted2.columns)
+    df_evt  = df_evt.reindex(columns=base_sorted2.columns)
 
     # Ecriture candidates global (sans 'bucket')
     cand_all = base_sorted2[export_cols[:-1]].copy()
     _save(cand_all, "candidates_all_ranked.csv")
 
     # Buckets exclusifs et tailles
-    conf_out = df_conf.assign(bucket="confirmed")[export_cols].head(10)
-    pre_out  = df_pre.assign(bucket="pre_signal")[export_cols].head(50)
+    conf_out = df_conf.assign(bucket="confirmed").reindex(columns=export_cols).head(10)
+    pre_out  = df_pre.assign(bucket="pre_signal").reindex(columns=export_cols).head(50)
     remaining_for_events = max(0, 100 - len(conf_out) - len(pre_out))
-    evt_out = df_evt.assign(bucket="event")[export_cols].head(remaining_for_events)
+    evt_out = df_evt.assign(bucket="event").reindex(columns=export_cols).head(remaining_for_events)
 
     _save(conf_out, "confirmed_STRONGBUY.csv")
     _save(pre_out, "anticipative_pre_signals.csv")
