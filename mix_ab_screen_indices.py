@@ -32,8 +32,7 @@ import yfinance as yf
 from tradingview_ta import TA_Handler, Interval, Exchange
 import requests
 
-ROOT = Path(".")
-PUB = ROOT / "dashboard" / "public"
+PUB = Path(os.getenv("OUTPUT_DIR", ".")).resolve()
 PUB.mkdir(parents=True, exist_ok=True)
 
 UNIVERSE_CSV = ROOT / "universe_in_scope.csv"  # 1 col: ticker_yf
