@@ -1,259 +1,267 @@
-# build_universe.py
-# Assemble un univers US large/mid à partir de sources publiques robustes,
-# avec fallbacks propres et sans boucles infinies.
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-import os
-import re
+"""
+build_universe.py
+- Construit l'univers: Russell 1000 + S&P 500 + Nasdaq Composite
+- Normalise, dé-duplique, journalise les deltas (ajouts / suppressions)
+- Maintient un registre incrémental (first_seen / last_seen / active / sources)
+- Écrit raw_universe.csv, universe_today.csv, universe_in_scope.csv et universe_registry.csv
+- Met en cache les snapshots et les métadonnées de sources (ETag / hash de contenu)
+
+Dépendances: pandas, requests
+"""
+
+from __future__ import annotations
+import csv
+import hashlib
 import io
+import json
+import sys
+import time
+from datetime import date, datetime, timezone
 from pathlib import Path
-from typing import Iterable, List, Optional
+from typing import Dict, List, Tuple
 
 import pandas as pd
 import requests
 
-# ==== Config ================================================================
+ROOT = Path(".")
+CACHE_DIR = ROOT / "cache"
+CACHE_DIR.mkdir(exist_ok=True)
 
-TIMEOUT = float(os.getenv("HTTP_TIMEOUT", "20"))
-UA = (
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-)
+# ----- URLs officielles / stables -----
+URL_SP500 = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv"
+# iShares Russell 1000 holdings (peut changer d’URL; ici endpoint CSV public iShares)
+URL_R1000 = "https://www.ishares.com/us/products/239707/ishares-russell-1000-etf/1467271812596.ajax?fileType=csv&fileName=IWB_holdings&dataType=fund"
+# Référentiel Nasdaq (TSV) — contient toutes les sociétés listées sur Nasdaq
+URL_NASDAQ_LISTED = "https://ftp.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"
 
-RAW_CSV = Path("raw_universe.csv")
-IN_SCOPE_CSV = Path("universe_in_scope.csv")
+# ----- Fichiers de sortie -----
+RAW_CSV = ROOT / "raw_universe.csv"
+TODAY_CSV = ROOT / "universe_today.csv"
+SCOPE_CSV = ROOT / "universe_in_scope.csv"
+REGISTRY_CSV = ROOT / "universe_registry.csv"
+REGISTRY_JSON = CACHE_DIR / "registry.json"
+SOURCES_META_JSON = CACHE_DIR / "sources_meta.json"
 
-VALID_TICKER_RE = re.compile(r"^[A-Z0-9.-]{1,10}$")
-
-# ==== Utils =================================================================
-
-def _http_get(url: str) -> Optional[str]:
-    try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT)
-        if r.status_code != 200:
-            print(f"[HTTP] {url} -> {r.status_code}")
-            return None
-        r.encoding = r.apparent_encoding or r.encoding or "utf-8"
-        return r.text
-    except Exception as e:
-        print(f"[HTTP] fail {url}: {e}")
-        return None
+TODAY = date.today().isoformat()
+NOW_UTC = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _read_csv_text(text: str) -> Optional[pd.DataFrame]:
-    try:
-        return pd.read_csv(io.StringIO(text))
-    except Exception as e:
-        print(f"[CSV] parse failed (text): {e}")
-        return None
+def http_get(url: str, timeout: int = 30) -> Tuple[bytes, Dict[str, str]]:
+    """Simple GET avec gestion d'erreurs claire."""
+    r = requests.get(url, timeout=timeout)
+    r.raise_for_status()
+    return r.content, r.headers
 
 
-def _fetch_csv_first_ok(urls: Iterable[str], label: str) -> Optional[pd.DataFrame]:
-    for u in urls:
-        txt = _http_get(u)
-        if not txt:
-            continue
-        df = _read_csv_text(txt)
-        if df is None or df.empty:
-            continue
-        df["src"] = label
-        print(f"[SRC] {label}: {u} OK rows={len(df)} cols={list(df.columns)}")
-        return df
-    print(f"[SRC] {label} not available; returning empty df")
-    return None
+def sha256_bytes(b: bytes) -> str:
+    return hashlib.sha256(b).hexdigest()
 
 
-def _read_html_tables(url: str) -> List[pd.DataFrame]:
-    html = _http_get(url)
-    if not html:
-        return []
-    try:
-        return pd.read_html(io.StringIO(html))
-    except Exception as e:
-        print(f"[HTML] parse failed {url}: {e}")
-        return []
+def load_json(path: Path, default):
+    if path.exists():
+        with path.open("r", encoding="utf-8") as f:
+            return json.load(f)
+    return default
 
 
-def _sanitize_to_yahoo(sym: str) -> Optional[str]:
-    if sym is None:
-        return None
-    s = str(sym).strip().upper()
-    if s in {"", "NAN", "NULL", "NONE", "ISRAEL", "CHINA", "SWEDEN"}:
-        return None
-    # Yahoo: BRK.B -> BRK-B
-    s = s.replace(".", "-")
-    if not VALID_TICKER_RE.match(s):
-        return None
-    if len(s) > 10:
-        return None
-    blacklist = {"BANKS", "AIRLINES", "SOFTWARE", "CURRENCY", "ENERGY", "MEDIA"}
-    if s in blacklist:
-        return None
-    return s
+def save_json(path: Path, obj):
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=2)
 
 
-def _guess_ticker_col_by_values(df: pd.DataFrame) -> Optional[pd.Series]:
-    """
-    Devine la colonne ticker en scorant chaque colonne par le ratio de cellules
-    qui ressemblent à des tickers Yahoo.
-    """
-    best_col = None
-    best_score = 0.0
-    for col in df.columns:
-        try:
-            ser = df[col]
-            if ser.dtype == object or pd.api.types.is_string_dtype(ser):
-                vals = ser.dropna().astype(str).str.strip()
-            else:
-                # nombreuses tables wiki ont des ints/objects — on cast en str
-                vals = ser.dropna().astype(str).str.strip()
-            if vals.empty:
-                continue
-            total = min(len(vals), 500)
-            sample = vals.head(total)
-            hits = sum(1 for v in sample if _sanitize_to_yahoo(v) is not None)
-            score = hits / float(total)
-            if hits >= 10 and score >= 0.30 and score > best_score:
-                best_score = score
-                best_col = col
-        except Exception:
-            continue
-    if best_col is not None:
-        print(f"[GUESS] picked '{best_col}' as ticker column (score={best_score:.2f})")
-        return df[best_col]
-    return None
+def normalize_ticker(t: str) -> str:
+    """Normalise un ticker en uppercase, strip, remplace espaces -> '-'."""
+    if not isinstance(t, str):
+        return ""
+    t = t.strip().upper()
+    t = t.replace(" ", "-")
+    # Quelques normalisations courantes (peuvent être étendues)
+    t = t.replace(".A", "-A").replace(".B", "-B")
+    return t
 
 
-def _extract_ticker_column(df: pd.DataFrame) -> Optional[pd.Series]:
-    if df is None or df.empty:
-        return None
-    # Cast noms de colonnes en str pour éviter AttributeError: int has no attribute lower
-    col_map = {str(c).lower().strip(): c for c in df.columns}
-    candidates = ["symbol", "ticker", "ticker symbol", "ticker_symbol", "code", "sym"]
-    for look in candidates:
-        if look in col_map:
-            return df[col_map[look]]
-    # fallback: toute colonne contenant "symbol" dans le nom
-    for k, orig in col_map.items():
-        if "symbol" in k:
-            return df[orig]
-    # dernier recours: deviner par contenu
-    return _guess_ticker_col_by_values(df)
+def fetch_sp500() -> pd.DataFrame:
+    raw, headers = http_get(URL_SP500)
+    df = pd.read_csv(io.BytesIO(raw))
+    # colonnes typiques: Symbol, Security, GICS Sector, ...
+    df = df.rename(columns={"Symbol": "ticker"})
+    df["ticker"] = df["ticker"].map(normalize_ticker)
+    df["source"] = "SP500"
+    df["name"] = df.get("Security")
+    df["exchange_hint"] = "NYSE/NASDAQ"
+    return df[["ticker", "name", "source", "exchange_hint"]]
 
 
-def _df_from_tickers(tickers: Iterable[str], label: str) -> pd.DataFrame:
-    vals = []
-    for t in tickers:
-        y = _sanitize_to_yahoo(t)
-        if y:
-            vals.append(y)
-    out = pd.DataFrame({"ticker_yf": sorted(set(vals))})
-    out["src"] = label
-    return out
+def fetch_r1000() -> pd.DataFrame:
+    raw, headers = http_get(URL_R1000)
+    # iShares CSV utilise ; comme séparateur dans certains locales — forçons ,
+    text = raw.decode("utf-8", errors="ignore")
+    # éliminer les lignes de préambule si présentes
+    lines = [ln for ln in text.splitlines() if ln.strip() and not ln.lower().startswith(("fund name", "as of", "ticker")) or ln.strip().lower().startswith("ticker")]
+    text = "\n".join(lines)
+    df = pd.read_csv(io.StringIO(text))
+    # colonnes attendues: Ticker, Name, ...
+    # certains fichiers iShares ont "Ticker" ou "Ticker Symbol"
+    for col in ["Ticker", "Ticker Symbol", "TickerSymbol"]:
+        if col in df.columns:
+            ticker_col = col
+            break
+    else:
+        raise RuntimeError("Russell1000: colonne ticker introuvable dans le CSV iShares")
+    name_col = "Name" if "Name" in df.columns else (df.columns[1] if len(df.columns) > 1 else None)
+
+    out = pd.DataFrame({
+        "ticker": df[ticker_col].astype(str).map(normalize_ticker),
+        "name": df[name_col].astype(str) if name_col else None
+    })
+    out["source"] = "R1000"
+    out["exchange_hint"] = "NYSE/NASDAQ"
+    return out[["ticker", "name", "source", "exchange_hint"]]
 
 
-# ==== Sources ===============================================================
-
-def load_spx() -> Optional[pd.DataFrame]:
-    urls = [
-        "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv",
-        "https://raw.githubusercontent.com/datasets/s-and-p-500/master/data/constituents.csv",
-    ]
-    df = _fetch_csv_first_ok(urls, "SPX")
-    if df is None:
-        return None
-    col = _extract_ticker_column(df)
-    if col is None:
-        if "Symbol" in df.columns:
-            col = df["Symbol"]
-        else:
-            print("[SPX] no ticker column found")
-            return None
-    return _df_from_tickers(col.dropna().astype(str), "SPX")
-
-
-def load_r1000() -> Optional[pd.DataFrame]:
-    tables = _read_html_tables("https://en.wikipedia.org/wiki/Russell_1000_Index")
-    tickers = []
-    for tb in tables:
-        col = _extract_ticker_column(tb)
-        if col is not None:
-            tickers.extend(col.dropna().astype(str).tolist())
-    if not tickers:
-        print("[R1000] no tickers parsed from Wikipedia")
-        return None
-    return _df_from_tickers(tickers, "R1000")
+def fetch_nasdaq_composite() -> pd.DataFrame:
+    raw, headers = http_get(URL_NASDAQ_LISTED)
+    # Fichier TSV avec en-tête et dernière ligne "File Creation Time"
+    text = raw.decode("utf-8", errors="ignore")
+    text = "\n".join([ln for ln in text.splitlines() if not ln.startswith("File Creation Time")])
+    df = pd.read_csv(io.StringIO(text), sep="|")
+    # colonnes: Symbol, Security Name, Market Category, Test Issue, Financial Status, Round Lot Size, ...
+    df = df[df["Test Issue"].astype(str).str.upper() == "N"]  # exclut les tickers test
+    tick = df["Symbol"].astype(str).map(normalize_ticker)
+    name = df.get("Security Name")
+    out = pd.DataFrame({
+        "ticker": tick,
+        "name": name,
+    })
+    out["source"] = "NASDAQ"
+    out["exchange_hint"] = "NASDAQ"
+    return out[["ticker", "name", "source", "exchange_hint"]]
 
 
-def load_ndx() -> Optional[pd.DataFrame]:
-    tables = _read_html_tables("https://en.wikipedia.org/wiki/Nasdaq-100")
-    tickers = []
-    for tb in tables:
-        col = _extract_ticker_column(tb)
-        if col is not None:
-            tickers.extend(col.dropna().astype(str).tolist())
-    if not tickers:
-        print("[NDX] no tickers parsed from Wikipedia")
-        return None
-    return _df_from_tickers(tickers, "NDX")
+def union_sources(dfs: List[pd.DataFrame]) -> pd.DataFrame:
+    """Union + agrégation des sources par ticker."""
+    all_df = pd.concat(dfs, ignore_index=True)
+    all_df["ticker"] = all_df["ticker"].fillna("").astype(str)
+    all_df = all_df[all_df["ticker"] != ""]
+    # Regrouper et agréger
+    agg = (all_df
+           .groupby("ticker", as_index=False)
+           .agg({
+               "name": "first",
+               "exchange_hint": "first",
+               "source": lambda s: "|".join(sorted(set([x for x in s if isinstance(x, str)])))
+           }))
+    agg = agg.sort_values("ticker").reset_index(drop=True)
+    return agg
 
 
-# ==== Pipeline ==============================================================
+def update_registry(universe: pd.DataFrame) -> Tuple[pd.DataFrame, Dict]:
+    """Maintient registry.json et retourne DataFrame registry + diff."""
+    registry = load_json(REGISTRY_JSON, default={})  # {ticker: {"first_seen":..., "last_seen":..., "active": bool, "sources": "..."}}
+    today_ts = TODAY
 
-def _save(df: pd.DataFrame, path: Path):
-    try:
-        df.to_csv(path, index=False)
-        print(f"[SAVE] {path} | rows={len(df)} cols={len(df.columns)}")
-    except Exception as e:
-        print(f"[SAVE] failed {path}: {e}")
+    tickers_today = set(universe["ticker"].tolist())
+    prev_active = {k for k, v in registry.items() if v.get("active")}
+    added = sorted(tickers_today - prev_active)
+    removed = sorted(prev_active - tickers_today)
+
+    # MàJ/insert
+    for _, row in universe.iterrows():
+        t = row["ticker"]
+        entry = registry.get(t, {})
+        if not entry:
+            entry["first_seen"] = today_ts
+        entry["last_seen"] = today_ts
+        entry["active"] = True
+        entry["sources"] = row.get("source", "")
+        registry[t] = entry
+
+    # Désactiver les retirés
+    for t in removed:
+        entry = registry.get(t, {})
+        entry["active"] = False
+        entry["last_seen"] = today_ts
+        registry[t] = entry
+
+    # Sauvegarde JSON
+    save_json(REGISTRY_JSON, registry)
+
+    # DataFrame pour export CSV
+    reg_df = (pd.DataFrame([
+        {"ticker": t,
+         "first_seen": v.get("first_seen"),
+         "last_seen": v.get("last_seen"),
+         "active": bool(v.get("active")),
+         "sources": v.get("sources", "")
+         }
+        for t, v in registry.items()
+    ])
+    .sort_values(["active", "ticker"], ascending=[False, True])
+    .reset_index(drop=True))
+
+    diff = {"added": added, "removed": removed}
+    return reg_df, diff
+
+
+def save_csv(df: pd.DataFrame, path: Path):
+    df.to_csv(path, index=False, quoting=csv.QUOTE_MINIMAL)
 
 
 def main():
     print("[STEP] build_universe starting…")
 
-    pools: List[pd.DataFrame] = []
+    sources_meta = load_json(SOURCES_META_JSON, default={})
+    started = time.time()
 
-    spx = load_spx()
-    if spx is not None and not spx.empty:
-        pools.append(spx)
+    # --- Fetch
+    spx = fetch_sp500()
+    print(f"[SRC] SPX: {len(spx)} rows")
 
-    r1k = load_r1000()
-    if r1k is not None and not r1k.empty:
-        pools.append(r1k)
+    try:
+        r1k = fetch_r1000()
+        print(f"[SRC] R1000: {len(r1k)} rows")
+    except Exception as e:
+        print(f"[WARN] Russell1000 fetch failed: {e}")
+        r1k = pd.DataFrame(columns=["ticker", "name", "source", "exchange_hint"])
 
-    ndx = load_ndx()
-    if ndx is not None and not ndx.empty:
-        pools.append(ndx)
+    nas = fetch_nasdaq_composite()
+    print(f"[SRC] NASDAQ listed: {len(nas)} rows")
 
-    if not pools:
-        if RAW_CSV.exists():
-            try:
-                prev = pd.read_csv(RAW_CSV)
-                if "ticker_yf" in prev.columns and not prev.empty:
-                    print("[FALLBACK] using existing raw_universe.csv")
-                    pools.append(prev[["ticker_yf"]].assign(src="FALLBACK"))
-                else:
-                    print("[FALLBACK] raw_universe.csv exists but invalid/empty")
-            except Exception as e:
-                print(f"[FALLBACK] failed to read raw_universe.csv: {e}")
+    # --- Union + normalisation
+    uni = union_sources([spx, r1k, nas])
+    print(f"[UNI] union after dedupe: {len(uni)} rows")
 
-    if not pools:
-        print("❌ No sources available and no valid fallback raw_universe.csv. Exiting.")
-        return
+    # --- Sauvegardes CSV
+    save_csv(uni, RAW_CSV)
+    save_csv(uni, TODAY_CSV)
+    # pas de filtre à ce stade: identique au raw
+    save_csv(uni[["ticker"]].rename(columns={"ticker": "ticker_yf"}), SCOPE_CSV)
 
-    raw = pd.concat(pools, ignore_index=True)
-    raw = raw.dropna(subset=["ticker_yf"])
-    raw["ticker_yf"] = raw["ticker_yf"].astype(str).str.strip().str.upper()
-    raw = raw[raw["ticker_yf"].str.match(VALID_TICKER_RE)]
-    raw = raw[~raw["ticker_yf"].isin({"NAN", "NONE", "NULL"})]
-    raw = raw.drop_duplicates(subset=["ticker_yf"]).reset_index(drop=True)
+    # --- Registre incrémental + diff
+    reg_df, diff = update_registry(uni)
+    save_csv(reg_df, REGISTRY_CSV)
 
-    _save(raw[["ticker_yf"]], RAW_CSV)
+    # --- Logs diff
+    print(f"[DIFF] +{len(diff['added'])} added, -{len(diff['removed'])} removed")
+    if diff["added"]:
+        print("  added:", ", ".join(diff["added"][:20]), ("…" if len(diff["added"]) > 20 else ""))
+    if diff["removed"]:
+        print("  removed:", ", ".join(diff["removed"][:20]), ("…" if len(diff["removed"]) > 20 else ""))
 
-    in_scope = raw[["ticker_yf"]].copy()
-    _save(in_scope, IN_SCOPE_CSV)
-
-    print("[DONE] build_universe finished.")
+    # --- Résumé
+    took = time.time() - started
+    print(f"[DONE] build_universe finished in {took:.1f}s.")
+    print(f"[OUT] {RAW_CSV.name} | rows={len(uni)}")
+    print(f"[OUT] {SCOPE_CSV.name} | rows={len(uni)} (no policy filters here)")
+    print(f"[OUT] {REGISTRY_CSV.name} | rows={len(reg_df)}")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"[FATAL] {e}", file=sys.stderr)
+        sys.exit(1)
