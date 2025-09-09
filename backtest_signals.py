@@ -9,7 +9,7 @@ import pandas as pd
 import yfinance as yf
 
 # =================== SORTIES SÛRES (I/O helpers) ============================
-PUBLIC_DIR = Path("dashboard/public")
+PUBLIC_DIR = Path(".")
 PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 
 def _utc_stamp() -> str:
