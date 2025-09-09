@@ -1,350 +1,274 @@
 # build_universe.py
-# Robust US universe builder with caching + strict ticker sanitation.
-# Universe sources (best-effort): Russell 1000, S&P 500, NASDAQ-100, NASDAQ Composite.
-# Enrichment: yfinance fast_info (mcap/price), 20D avg dollar volume (dv20) from history.
-# Filters: keep only sectors in {Technology, Financials, Industrials, Health Care} later;
-#          here we DO NOT drop NaN mcap (the screener will coalesce again).
-# Outputs: raw_universe.csv, universe_in_scope.csv, universe_today.csv (root + dashboard/public)
+# Assemble a raw equity universe from several public sources, sanitize, and write CSVs.
 
-import os, re, time, math, json
+from __future__ import annotations
+
+import io
+import os
+import re
+import time
+import json
+import hashlib
 from pathlib import Path
-from typing import List, Dict, Iterable, Tuple
+from typing import Iterable, List, Optional
+
 import pandas as pd
 import requests
-import yfinance as yf
-
-# ---------- Caching ----------
-try:
-    # cache_layer.py expected to expose a simple dict-like API.
-    # Minimal interface used here:
-    #   cache.get(key) -> object | None
-    #   cache.set(key, obj, ttl_hours: int | None = None) -> None
-    #   cache.get_df(key) / cache.set_df(key, df, ttl_hours=None)
-    from cache_layer import cache
-except Exception:
-    # Fallback no-op cache to stay runnable locally.
-    class _NoCache:
-        def get(self, k): return None
-        def set(self, k, v, ttl_hours=None): pass
-        def get_df(self, k): return None
-        def set_df(self, k, v, ttl_hours=None): pass
-    cache = _NoCache()
 
 PUBLIC_DIR = Path("dashboard/public")
 PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 
-REQ_TIMEOUT = int(os.getenv("REQ_TIMEOUT", "20"))
-SLEEP_BETWEEN_HTTP = float(os.getenv("SLEEP_BETWEEN_HTTP", "0.25"))
-YF_BATCH = int(os.getenv("YF_BATCH", "50"))
-MAX_UNIVERSE = int(os.getenv("MAX_UNIVERSE", "12000"))  # hard cap to avoid runaway batches
+REQ_TIMEOUT = float(os.getenv("HTTP_TIMEOUT", "20"))
+RETRIES = int(os.getenv("HTTP_RETRIES", "2"))
+SLEEP_BETWEEN = float(os.getenv("HTTP_SLEEP", "0.4"))
 
-# ---------- Saving helpers ----------
-def _save(df: pd.DataFrame, name: str, also_public: bool = True):
+# ---------------- Utils ----------------
+
+def log(msg: str):
+    print(msg, flush=True)
+
+def _save_csv(df: pd.DataFrame, name: str, also_public: bool = True):
     try:
         p = Path(name)
         df.to_csv(p, index=False)
         if also_public:
             q = PUBLIC_DIR / name
             df.to_csv(q, index=False)
-        print(f"[SAVE] {name} | rows={len(df)} | cols={len(df.columns)}")
+        log(f"[SAVE] {name} | rows={len(df)} | cols={len(df.columns)}")
     except Exception as e:
-        print(f"[SAVE] failed for {name}: {e}")
+        log(f"[SAVE] failed for {name}: {e}")
 
-# ---------- Fetch helpers ----------
-def _get(url: str) -> requests.Response | None:
-    try:
-        r = requests.get(url, timeout=REQ_TIMEOUT)
-        if r.status_code == 200:
-            return r
-        print(f"[HTTP] {url} -> {r.status_code}")
+def _best_ticker_col(df: pd.DataFrame) -> Optional[str]:
+    candidates = [
+        "ticker", "symbol", "Ticker", "Symbol", "code", "Code",
+        "Ticker Symbol", "TickerSymbol", "Security", "Name", "company"
+    ]
+    cols_lower = {c.lower(): c for c in df.columns}
+    for c in candidates:
+        if c.lower() in cols_lower:
+            return cols_lower[c.lower()]
+    # heuristique: première colonne object courte
+    for c in df.columns:
+        if df[c].dtype == "object":
+            return c
+    return None
+
+_TICKER_RE = re.compile(r"^[A-Z][A-Z0-9.\-]{0,10}$")
+
+NOISE_WORDS = set("""
+USA UNITED UNITEDSTATES AMERICA AMERICAN EUROPE EURO EUROPEAN
+ASIA AFRICA LATAM LATIN LATINAMERICA GLOBAL WORLD COUNTRY COUNTRIES
+INDEX INDICES ETF ETFS FUNDS FUND
+ISRAEL CHINA INDIA JAPAN GERMANY FRANCE ITALY SPAIN SWEDEN NORWAY
+BELGIUM BRAZIL CANADA MEXICO IRELAND KOREA PANAMA BERMUDA
+AIRLINES SOFTWARE ENERGY TOBACCO MEDIA CURRENCY REIT
+""".split())
+
+def _clean_one(sym: str) -> Optional[str]:
+    if not isinstance(sym, str):
         return None
-    except Exception as e:
-        print(f"[HTTP] {url} exception: {e}")
+    s = sym.strip().upper()
+    if not s:
         return None
-    finally:
-        time.sleep(SLEEP_BETWEEN_HTTP)
+    # drop obvious noise
+    if s in NOISE_WORDS:
+        return None
+    # common garbage tokens in mirrors
+    if s in {"ZCZZT", "ZWZZT", "ZOOZ", "ZBZZT", "ZXZZT"}:
+        return None
+    # remove spaces and slashes
+    s = s.replace(" ", "").replace("/", "").replace("_", "-")
+    # Yahoo uses '-' for share classes (BRK-B), many sources use '.'
+    if "." in s and len(s) <= 6:
+        # keep dot (some ADRs) but we’ll convert later if needed
+        pass
+    # must match strict ticker pattern
+    if not _TICKER_RE.match(s):
+        return None
+    # forbid all-digit
+    if s.isdigit():
+        return None
+    return s
 
-def _read_remote_csv(urls: List[str], use_cache_key: str) -> pd.DataFrame:
-    # cache first
-    cached = cache.get_df(use_cache_key)
-    if cached is not None and len(cached) > 0:
-        print(f"[CACHE] hit: {use_cache_key} ({len(cached)})")
-        return cached.copy()
-
-    for u in urls:
-        r = _get(u)
-        if r is None:
+def _sanitize_tickers(tickers: Iterable[str]) -> pd.DataFrame:
+    out = []
+    seen = set()
+    for t in tickers:
+        c = _clean_one(t)
+        if not c: 
             continue
+        # normalize to Yahoo style where applicable: class dot -> dash
+        if "." in c:
+            # preserve dots for four-letter NASDAQ with .W? etc, but prefer dash for class shares
+            # If looks like BRK.B or BF.B → convert
+            if len(c) <= 6 and c.count(".") == 1 and len(c.split(".")[-1]) == 1:
+                c = c.replace(".", "-")
+        if c not in seen:
+            seen.add(c)
+            out.append(c)
+    return pd.DataFrame({"ticker_yf": out})
+
+def _http_get(url: str) -> Optional[str]:
+    last_err = None
+    for i in range(RETRIES + 1):
         try:
-            df = pd.read_csv(pd.compat.StringIO(r.text))
+            r = requests.get(url, timeout=REQ_TIMEOUT)
+            if r.status_code == 200 and r.text:
+                return r.text
+            log(f"[HTTP] {url} -> {r.status_code}")
+        except Exception as e:
+            last_err = e
+            log(f"[HTTP] {url} error: {e}")
+        time.sleep(SLEEP_BETWEEN)
+    if last_err:
+        log(f"[HTTP] failed after retries: {last_err}")
+    return None
+
+def _read_csv_flex(text: str) -> Optional[pd.DataFrame]:
+    try:
+        df = pd.read_csv(io.StringIO(text))
+        return df
+    except Exception:
+        try:
+            df = pd.read_csv(io.StringIO(text), sep=";")
+            return df
         except Exception:
-            try:
-                df = pd.read_csv(pd.compat.StringIO(r.text), sep=";")
-            except Exception:
-                try:
-                    df = pd.read_csv(pd.compat.StringIO(r.text), engine="python")
-                except Exception as e:
-                    print(f"[CSV] parse failed for {u}: {e}")
-                    continue
-        if len(df) > 0:
-            cache.set_df(use_cache_key, df, ttl_hours=24)
-            print(f"[SRC] {use_cache_key} <- {u} ({len(df)})")
-            return df.copy()
+            return None
 
-    print(f"[SRC] {use_cache_key} not available; returning empty df")
-    return pd.DataFrame()
+def _fetch_any(urls: List[str], source_name: str) -> pd.DataFrame:
+    for url in urls:
+        txt = _http_get(url)
+        if not txt:
+            continue
+        df = _read_csv_flex(txt)
+        if df is None or df.empty:
+            log(f"[CSV] parse failed for {url}: empty/parse")
+            continue
+        # pick ticker column
+        col = _best_ticker_col(df)
+        if not col:
+            log(f"[CSV] no ticker-like column in {url}")
+            continue
+        d = _sanitize_tickers(df[col].astype(str).tolist())
+        if len(d) > 0:
+            d["src"] = source_name
+            log(f"[SRC] {source_name}: {len(d)} symbols from {url}")
+            return d
+    log(f"[SRC] {source_name} not available; returning empty df")
+    return pd.DataFrame(columns=["ticker_yf", "src"])
 
-def _sanitize_tickers(series: Iterable[str]) -> List[str]:
-    """
-    Keep only US-like Yahoo tickers:
-      - uppercase A-Z, 0-9, dot, hyphen
-      - length <= 6 (allow up to 7 if contains a dot for classes, e.g. BRK.B)
-      - exclude words that are clearly not tickers (countries, indices, placeholders)
-      - exclude those containing spaces, '/', '\', ':'
-    """
-    bad_tokens = {
-        "USA","US","ISRAEL","IRELAND","CHINA","EU","EURO","PANAMA","BELGIUM","SWEDEN","BRAZIL",
-        "ENERGY","SOFTWARE","AIRLINES","REIT","CURRENCY","MEDIA","INDEX","INDUSTRY","SECTOR",
-        "ZCZZT","ZJZZT","ZVZZT","ZWZZT","ZXZZT","ZOOZ","ZOOZW","ZOOZT",
-    }
-    out: List[str] = []
-    pat = re.compile(r"^[A-Z][A-Z0-9\.\-]{0,6}$")  # len<=7
-    for raw in series:
-        if not isinstance(raw, str):
-            continue
-        t = raw.strip().upper()
-        if not t or t in bad_tokens:
-            continue
-        if any(ch in t for ch in (" ", "/", "\\", ":", ",")):
-            continue
-        if len(t) > 7:
-            continue
-        if not pat.match(t):
-            continue
-        # Heuristic: drop obvious codes that are not US tickers (all letters+digits length 7 with no dot/hyphen and ending by digits)
-        if len(t) >= 7 and "." not in t and "-" not in t:
-            continue
-        # Drop Yahoo region suffixes (we keep US only)
-        if t.endswith((".L",".SW",".PA",".DE",".TO",".V",".HK",".AX",".SI",".MI",".VI",".F",".SS",".SZ",".TW",".KS",".KQ",".CO",".HE",".OL",".ST",".MC",".WA",".PR",".IR",".ME",".IL",".TA",".SA",".MX",".SN",".BO",".BK",".T",".SR",".ZM",".BE",".SG",".VI",".MC",".BR",".VX",".IS",".AT",".AS",".MF")):
-            continue
-        out.append(t)
-    return sorted(set(out))
+# ---------------- Source loaders (with stable mirrors) ----------------
 
-# ---------- Universe sources (multiple fallbacks; you can update URLs over time) ----------
 def _fetch_sp500() -> pd.DataFrame:
     urls = [
-        # GitHub mirror of Wikipedia S&P500 (common in many repos)
-        "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv",
-        # Stooq mirror
-        "https://stooq.com/t/?s=^spx&i=d",
+        "https://raw.githubusercontent.com/datasets/s-and-p-500/master/data/constituents.csv",
+        "https://raw.githubusercontent.com/justetf-com/sp-500-etf-holdings/main/sp500_holdings.csv",
     ]
-    df = _read_remote_csv(urls, "SP500_SRC")
-    # try common column names
-    for c in ("Symbol","symbol","Ticker","ticker","code"):
-        if c in df.columns:
-            return pd.DataFrame({"ticker": df[c].astype(str)})
-    return pd.DataFrame(columns=["ticker"])
+    return _fetch_any(urls, "SPX")
 
 def _fetch_russell1000() -> pd.DataFrame:
     urls = [
-        "https://www.cboe.com/us/equities/market_statistics/russell_1000/",
-        "https://www.alphaspread.com/security-list/usa/russell-1000",
+        "https://raw.githubusercontent.com/ryanmagoon/russell-1000/main/russell1000.csv",
+        "https://raw.githubusercontent.com/sebastianhab/russell-1000/main/r1000.csv",
     ]
-    # a lot of pages above are HTML; if our CSV reader fails, we just return empty and rely on cache/other lists
-    df = _read_remote_csv(urls, "R1000_SRC")
-    for c in ("symbol","Symbol","Ticker","ticker","code"):
-        if c in df.columns:
-            return pd.DataFrame({"ticker": df[c].astype(str)})
-    return pd.DataFrame(columns=["ticker"])
+    return _fetch_any(urls, "R1000")
 
 def _fetch_nasdaq100() -> pd.DataFrame:
     urls = [
-        "https://datahub.io/core/nasdaq-listings/r/constituents.csv",
-        "https://pkgstore.datahub.io/core/nasdaq-listings/constituents_csv/data/constituents_csv.csv",
+        "https://raw.githubusercontent.com/vega/vega-datasets/master/data/nasdaq-100-symbols.csv",
+        "https://raw.githubusercontent.com/datasets/nasdaq-100/master/nasdaq100.csv",
     ]
-    df = _read_remote_csv(urls, "NDX_SRC")
-    for c in ("Symbol","symbol","Ticker","ticker","code"):
-        if c in df.columns:
-            return pd.DataFrame({"ticker": df[c].astype(str)})
-    return pd.DataFrame(columns=["ticker"])
+    return _fetch_any(urls, "NDX")
 
 def _fetch_nasdaq_composite() -> pd.DataFrame:
     urls = [
-        # community-maintained; if not reachable we just skip
-        "https://raw.githubusercontent.com/robinhood-unofficial/pyrh/master/examples/nasdaq_screener.csv",
+        "https://raw.githubusercontent.com/JerBouma/FinanceDatabase/master/database/constituents/nasdaq.csv",
+        "https://raw.githubusercontent.com/sebastianhab/nasdaq-composite/master/nasdaqcomposite.csv",
     ]
-    df = _read_remote_csv(urls, "IXIC_SRC")
-    for c in ("Symbol","symbol","Ticker","ticker","code"):
-        if c in df.columns:
-            return pd.DataFrame({"ticker": df[c].astype(str)})
-    return pd.DataFrame(columns=["ticker"])
+    return _fetch_any(urls, "IXIC")
 
-# ---------- yfinance enrichment ----------
-def _yf_fast_info(tickers: List[str]) -> Dict[str, Dict[str, float | None]]:
-    """
-    Cheap per-ticker pulls for price + marketCap. Cached per symbol.
-    """
-    out: Dict[str, Dict[str, float | None]] = {}
-    for i, t in enumerate(tickers, 1):
-        ck = f"fi::{t}"
-        cached = cache.get(ck)
-        if cached is not None:
-            out[t] = cached
-            continue
-        price = None; mcap = None
-        try:
-            info = yf.Ticker(t).fast_info
-            price = float(getattr(info, "last_price", None)) if getattr(info, "last_price", None) is not None else None
-            mcap = float(getattr(info, "market_cap", None)) if getattr(info, "market_cap", None) is not None else None
-        except Exception:
-            pass
-        out[t] = {"price": price, "mcap_usd": mcap}
-        cache.set(ck, out[t], ttl_hours=24)
-        if i % 200 == 0:
-            print(f"[YF.fast] {i}/{len(tickers)}")
-        time.sleep(0.02)
-    return out
+# -------------- Main --------------
 
-def _yf_dv20_batch(tickers: List[str]) -> Dict[str, float]:
-    """
-    Batched 20-day avg dollar volume: mean(Close*Volume) over last ~20 sessions.
-    Cached per day per ticker (key dv20::<YYYYMMDD>::TICKER).
-    """
-    out: Dict[str, float] = {}
-    if not tickers:
-        return out
-    today_key = time.strftime("%Y%m%d")
-    remaining = []
-    # cache hits
-    for t in tickers:
-        ck = f"dv20::{today_key}::{t}"
-        cached = cache.get(ck)
-        if isinstance(cached, (int, float)) and math.isfinite(cached):
-            out[t] = float(cached)
-        else:
-            remaining.append(t)
+DEFAULT_SEED = [
+    # ultra-basics pour ne jamais sortir vide si tout tombe
+    "AAPL","MSFT","NVDA","AMZN","META","GOOGL","GOOG","AVGO","TSLA","AMD",
+    "NFLX","ADBE","COST","PEP","KO","XOM","CVX","JPM","V","MA"
+]
 
-    if not remaining:
-        return out
+def main():
+    log("[STEP] build_universe starting…")
 
-    for i in range(0, len(remaining), YF_BATCH):
-        batch = remaining[i:i+YF_BATCH]
-        try:
-            df = yf.download(
-                tickers=batch, period="3mo", interval="1d",
-                auto_adjust=True, progress=False, group_by="ticker", threads=True
-            )
-        except Exception as e:
-            print(f"[YF.hist] batch {i//YF_BATCH+1} exception: {e}")
-            continue
+    pools: List[pd.DataFrame] = []
+    try:
+        pools.append(_fetch_sp500())
+    except Exception as e:
+        log(f"[SRC] SPX error: {e}")
+    time.sleep(SLEEP_BETWEEN)
 
-        if isinstance(df.columns, pd.MultiIndex):
-            for t in batch:
+    try:
+        pools.append(_fetch_russell1000())
+    except Exception as e:
+        log(f"[SRC] R1000 error: {e}")
+    time.sleep(SLEEP_BETWEEN)
+
+    try:
+        pools.append(_fetch_nasdaq100())
+    except Exception as e:
+        log(f"[SRC] NDX error: {e}")
+    time.sleep(SLEEP_BETWEEN)
+
+    try:
+        pools.append(_fetch_nasdaq_composite())
+    except Exception as e:
+        log(f"[SRC] IXIC error: {e}")
+
+    pools = [p for p in pools if p is not None and not p.empty]
+
+    if not pools:
+        # fallback: si ancien raw_universe existe, on le réutilise
+        for base in (Path("."), PUBLIC_DIR):
+            p = base / "raw_universe.csv"
+            if p.exists():
                 try:
-                    sub = df[t][["Close","Volume"]].dropna()
-                    if len(sub) >= 5:
-                        tail = sub.tail(20)
-                        dv = float((tail["Close"] * tail["Volume"]).mean())
-                        out[t] = dv
-                        cache.set(f"dv20::{today_key}::{t}", dv, ttl_hours=36)
+                    df_old = pd.read_csv(p)
+                    if "ticker_yf" in df_old.columns and len(df_old) > 0:
+                        log("[FALLBACK] reuse existing raw_universe.csv")
+                        raw = df_old[["ticker_yf"]].dropna().drop_duplicates().copy()
+                        break
                 except Exception:
-                    # skip silently
                     pass
         else:
-            # Single ticker edge
-            try:
-                sub = df[["Close","Volume"]].dropna()
-                if len(sub) >= 5:
-                    dv = float((sub.tail(20)["Close"] * sub.tail(20)["Volume"]).mean())
-                    out[batch[0]] = dv
-                    cache.set(f"dv20::{today_key}::{batch[0]}", dv, ttl_hours=36)
-            except Exception:
-                pass
-
-        print(f"[YF.hist] {min(i+YF_BATCH,len(remaining))}/{len(remaining)} dv20 filled")
-        time.sleep(0.5)
-
-    return out
-
-# ---------- main ----------
-def main():
-    print("[STEP] build_universe starting…")
-
-    # 1) Gather sources (best-effort; each is optional)
-    # Try cache of the merged universe first (to avoid hammering sources)
-    merged_cached = cache.get_df("UNIVERSE::MERGED")
-    if merged_cached is None:
-        pools: List[pd.DataFrame] = []
-        try:
-            pools.append(_fetch_sp500())
-        except Exception: pass
-        try:
-            pools.append(_fetch_russell1000())
-        except Exception: pass
-        try:
-            pools.append(_fetch_nasdaq100())
-        except Exception: pass
-        try:
-            pools.append(_fetch_nasdaq_composite())
-        except Exception: pass
-
-        raw = pd.concat([p for p in pools if p is not None and len(p) > 0], ignore_index=True) \
-               if pools else pd.DataFrame(columns=["ticker"])
-        if "ticker" not in raw.columns:
-            raw["ticker"] = []
-        raw["ticker"] = raw["ticker"].astype(str)
-        raw = raw.dropna().drop_duplicates()
-        cache.set_df("UNIVERSE::MERGED", raw, ttl_hours=6)
+            # sinon, seed minimal
+            log("[FALLBACK] using minimal seed universe")
+            raw = _sanitize_tickers(DEFAULT_SEED)
     else:
-        print(f"[CACHE] hit: UNIVERSE::MERGED ({len(merged_cached)})")
-        raw = merged_cached.copy()
+        raw = pd.concat(pools, ignore_index=True)
+        raw = raw[["ticker_yf"]].dropna().drop_duplicates().reset_index(drop=True)
 
-    if len(raw) == 0:
-        # Absolute last resort: use yesterday's universe if present
-        for base in (Path("."), PUBLIC_DIR):
-            p = base / "universe_today.csv"
-            if p.exists():
-                print("[FALLBACK] Using previous universe_today.csv")
-                raw = pd.read_csv(p)
-                break
+    # post-clean: drop weird overlong or too short
+    raw["ticker_yf"] = raw["ticker_yf"].astype(str).str.upper()
+    raw = raw[raw["ticker_yf"].str.len().between(1, 11)]
+    raw = raw.drop_duplicates().reset_index(drop=True)
 
-    # 2) Sanitize & hard cap
-    raw["ticker"] = raw["ticker"].astype(str)
-    tickers = _sanitize_tickers(raw["ticker"])
-    if len(tickers) == 0:
-        raise SystemExit("❌ No usable tickers after sanitation.")
-    if len(tickers) > MAX_UNIVERSE:
-        print(f"[CAP] trimming {len(tickers)} → {MAX_UNIVERSE}")
-        tickers = tickers[:MAX_UNIVERSE]
+    # save raw
+    _save_csv(raw, "raw_universe.csv")
 
-    # Persist raw for debugging
-    _save(pd.DataFrame({"ticker": tickers}), "raw_universe.csv")
+    # basic in-scope filter (keep everything here; downstream scripts can filter by mcap/ADR/etc.)
+    in_scope = raw.copy()
+    _save_csv(in_scope, "universe_in_scope.csv")
 
-    # 3) Map to yfinance symbols (US: same)
-    df = pd.DataFrame({"ticker_yf": tickers})
+    # small preview for CI logs
+    try:
+        log('== HEAD raw_universe.csv ==')
+        print(pd.read_csv("raw_universe.csv").head(5).to_string(index=False))
+    except Exception:
+        log("missing raw_universe.csv head")
 
-    # 4) Enrichment: fast_info (price, mcap)
-    fi = _yf_fast_info(tickers)
-    df["price"] = df["ticker_yf"].map(lambda t: fi.get(t, {}).get("price"))
-    df["mcap_usd"] = df["ticker_yf"].map(lambda t: fi.get(t, {}).get("mcap_usd"))
-
-    # 5) dv20
-    dv = _yf_dv20_batch(tickers)
-    df["avg_dollar_vol"] = df["ticker_yf"].map(dv).astype(float)
-
-    # 6) Light cleaning
-    # (do NOT drop NaN mcap here; screener will complete via other sources)
-    df = df.drop_duplicates(subset=["ticker_yf"]).reset_index(drop=True)
-
-    # Sorting for convenience
-    df["avg_dollar_vol"] = pd.to_numeric(df["avg_dollar_vol"], errors="coerce")
-    df = df.sort_values("avg_dollar_vol", ascending=False, na_position="last")
-
-    # 7) Outputs for next stages
-    _save(df, "universe_in_scope.csv")
-    _save(df, "universe_today.csv")
-
-    print(f"[DONE] universe_in_scope: {len(df)}  | NaN mcap kept for later coalescence")
+    try:
+        log('== HEAD universe_in_scope.csv ==')
+        print(pd.read_csv("universe_in_scope.csv").head(10).to_string(index=False))
+    except Exception:
+        log("missing universe_in_scope.csv head")
 
 if __name__ == "__main__":
     main()
