@@ -1,2 +1,6 @@
-ticker_yf,ticker_tv,price,last,mcap_usd_final,mcap,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket
-ETSY,,,,12589298688.0,,327302022.87483597,,,,,Consumer Discretionary,Unknown,False,False,False,0,,0.0,confirmed
+ticker_yf,ticker_tv,price,last,mcap_usd_final,mcap,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score
+MU,MU,135.125,135.125,151222439088.0,151222439088.0,2028920540.520926,0.51,STRONG_BUY,Strong Buy,35.0,Information Technology,Unknown,True,True,True,3,20+,1.46
+META,META,760.6099853515625,760.6099853515625,1910758792940.5938,1910758792940.5938,7581005329.282049,0.51,STRONG_BUY,Strong Buy,61.0,Communication Services,Unknown,True,True,True,3,20+,1.46
+AMZN,AMZN,237.15499877929688,237.15499877929688,2529234247824.8438,2529234247824.8438,7726925661.378166,0.51,STRONG_BUY,Strong Buy,61.0,Consumer Discretionary,Unknown,True,True,True,3,20+,1.46
+C,C,97.94499969482422,97.94499969482422,180306946803.9619,180306946803.9619,1247406846.7880447,0.51,STRONG_BUY,Buy,21.0,Financials,Unknown,True,True,True,3,20+,1.26
+NFLX,NFLX,1262.0,1262.0,536256632192.0,536256632192.0,3065221367.917212,0.51,STRONG_BUY,Buy,40.0,Communication Services,Unknown,True,True,True,3,20+,1.26
