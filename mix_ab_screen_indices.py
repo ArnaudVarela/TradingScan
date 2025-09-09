@@ -28,6 +28,20 @@ ALPHAV_KEY  = os.getenv("ALPHAVANTAGE_API_KEY", "")
 
 MCAP_MAX_USD = 75_000_000_000
 
+# TA import that works with both the classic fork and the original package
+try:
+    import pandas_ta as ta  # original package (if present)
+except Exception:
+    try:
+        import pandas_ta_classic as ta  # fork's module name
+    except Exception as e:
+        raise ImportError(
+            "Neither 'pandas_ta' nor 'pandas_ta_classic' could be imported. "
+            "Ensure requirements install the classic fork: "
+            "git+https://github.com/xgboosted/pandas-ta-classic.git"
+        ) from e
+
+
 # --------- I/O helpers ---------
 def _save(df: pd.DataFrame, name: str, also_public: bool = True):
     try:
