@@ -1,1163 +1,5762 @@
 ticker,sector,industry
+-,nan,Unknown
 A,Health Care,Unknown
+AA,Materials,Unknown
+AACB,nan,Unknown
+AACBR,nan,Unknown
+AACBU,nan,Unknown
+AACG,nan,Unknown
+AACI,nan,Unknown
+AACIU,nan,Unknown
+AACIW,nan,Unknown
+AADR,nan,Unknown
+AAL,Industrials,Unknown
+AALG,nan,Unknown
+AAME,nan,Unknown
+AAOI,nan,Unknown
+AAON,Industrials,Unknown
+AAPB,nan,Unknown
+AAPD,nan,Unknown
+AAPG,nan,Unknown
 AAPL,Information Technology,Unknown
+AAPU,nan,Unknown
+AARD,nan,Unknown
+AAUS,nan,Unknown
+AAVM,nan,Unknown
+AAXJ,nan,Unknown
+ABAT,nan,Unknown
 ABBV,Health Care,Unknown
+ABCL,nan,Unknown
+ABCS,nan,Unknown
+ABEO,nan,Unknown
+ABI,nan,Unknown
+ABIG,nan,Unknown
+ABL,nan,Unknown
+ABLLL,nan,Unknown
+ABLV,nan,Unknown
+ABLVW,nan,Unknown
 ABNB,Consumer Discretionary,Unknown
+ABOS,nan,Unknown
+ABP,nan,Unknown
+ABPWW,nan,Unknown
+ABSI,nan,Unknown
 ABT,Health Care,Unknown
+ABTC,nan,Unknown
+ABTS,nan,Unknown
+ABUS,nan,Unknown
+ABVC,nan,Unknown
+ABVE,nan,Unknown
+ABVEW,nan,Unknown
+ABVX,nan,Unknown
+ACAD,nan,Unknown
+ACB,nan,Unknown
+ACDC,nan,Unknown
+ACET,nan,Unknown
+ACFN,nan,Unknown
 ACGL,Financials,Unknown
+ACGLN,nan,Unknown
+ACGLO,nan,Unknown
+ACHC,Health Care,Unknown
+ACHV,nan,Unknown
+ACI,Consumer Staples,Unknown
+ACIC,nan,Unknown
+ACIU,nan,Unknown
+ACIW,nan,Unknown
+ACLS,nan,Unknown
+ACLX,nan,Unknown
+ACM,Industrials,Unknown
+ACMR,nan,Unknown
 ACN,Information Technology,Unknown
+ACNB,nan,Unknown
+ACNT,nan,Unknown
+ACOG,nan,Unknown
+ACON,nan,Unknown
+ACONW,nan,Unknown
+ACRS,nan,Unknown
+ACRV,nan,Unknown
+ACT,nan,Unknown
+ACTG,nan,Unknown
+ACTU,nan,Unknown
+ACWI,nan,Unknown
+ACWX,nan,Unknown
+ACXP,nan,Unknown
+ADAG,nan,Unknown
+ADAM,nan,Unknown
+ADAMG,nan,Unknown
+ADAMH,nan,Unknown
+ADAMI,nan,Unknown
+ADAML,nan,Unknown
+ADAMM,nan,Unknown
+ADAMN,nan,Unknown
+ADAMZ,nan,Unknown
+ADAP,nan,Unknown
 ADBE,Information Technology,Unknown
+ADBG,nan,Unknown
+ADC,Real Estate,Unknown
+ADEA,nan,Unknown
+ADGM,nan,Unknown
 ADI,Information Technology,Unknown
+ADIL,nan,Unknown
 ADM,Consumer Staples,Unknown
+ADMA,nan,Unknown
+ADN,nan,Unknown
+ADNWW,nan,Unknown
 ADP,Industrials,Unknown
+ADPT,nan,Unknown
+ADSE,nan,Unknown
+ADSEW,nan,Unknown
 ADSK,Information Technology,Unknown
+ADT,Consumer Discretionary,Unknown
+ADTN,nan,Unknown
+ADTX,nan,Unknown
+ADUR,nan,Unknown
+ADUS,nan,Unknown
+ADV,nan,Unknown
+ADVB,nan,Unknown
+ADVM,nan,Unknown
+ADVWW,nan,Unknown
+ADXN,nan,Unknown
+AEBI,nan,Unknown
 AEE,Utilities,Unknown
+AEHL,nan,Unknown
+AEHR,nan,Unknown
+AEI,nan,Unknown
+AEIS,nan,Unknown
+AEMD,nan,Unknown
+AENT,nan,Unknown
+AENTW,nan,Unknown
 AEP,Utilities,Unknown
+AERT,nan,Unknown
+AERTW,nan,Unknown
 AES,Utilities,Unknown
+AEVA,nan,Unknown
+AEVAW,nan,Unknown
+AEYE,nan,Unknown
+AFBI,nan,Unknown
+AFCG,nan,Unknown
+AFG,Financials,Unknown
+AFJK,nan,Unknown
+AFJKR,nan,Unknown
+AFJKU,nan,Unknown
 AFL,Financials,Unknown
+AFOS,nan,Unknown
+AFRI,nan,Unknown
+AFRIW,nan,Unknown
+AFRM,Information Technology,Unknown
+AFSC,nan,Unknown
+AFYA,nan,Unknown
+AGAE,nan,Unknown
+AGCO,Industrials,Unknown
+AGEM,nan,Unknown
+AGEN,nan,Unknown
+AGGA,nan,Unknown
+AGH,nan,Unknown
+AGIO,nan,Unknown
+AGIX,nan,Unknown
+AGMH,nan,Unknown
+AGMI,nan,Unknown
+AGNC,Financials,Unknown
+AGNCL,nan,Unknown
+AGNCM,nan,Unknown
+AGNCN,nan,Unknown
+AGNCO,nan,Unknown
+AGNCP,nan,Unknown
+AGNG,nan,Unknown
+AGO,Financials,Unknown
+AGRI,nan,Unknown
+AGYS,nan,Unknown
+AGZD,nan,Unknown
+AHCO,nan,Unknown
+AHG,nan,Unknown
+AIA,nan,Unknown
+AIFD,nan,Unknown
+AIFF,nan,Unknown
+AIFU,nan,Unknown
 AIG,Financials,Unknown
+AIHS,nan,Unknown
+AIIO,nan,Unknown
+AIIOW,nan,Unknown
+AIMD,nan,Unknown
+AIMDW,nan,Unknown
+AIOT,nan,Unknown
+AIP,nan,Unknown
+AIPI,nan,Unknown
+AIPO,nan,Unknown
+AIQ,nan,Unknown
+AIRE,nan,Unknown
+AIRG,nan,Unknown
+AIRJ,nan,Unknown
+AIRJW,nan,Unknown
+AIRL,nan,Unknown
+AIRO,nan,Unknown
+AIRR,nan,Unknown
+AIRS,nan,Unknown
+AIRT,nan,Unknown
+AIRTP,nan,Unknown
+AISP,nan,Unknown
+AISPW,nan,Unknown
+AIT,Industrials,Unknown
+AIXI,nan,Unknown
 AIZ,Financials,Unknown
 AJG,Financials,Unknown
 AKAM,Information Technology,Unknown
+AKAN,nan,Unknown
+AKBA,nan,Unknown
+AKRO,nan,Unknown
+AKTX,nan,Unknown
+AL,Industrials,Unknown
+ALAB,Information Technology,Unknown
+ALAR,nan,Unknown
 ALB,Materials,Unknown
+ALBT,nan,Unknown
+ALCO,nan,Unknown
+ALCY,nan,Unknown
+ALCYU,nan,Unknown
+ALCYW,nan,Unknown
+ALDF,nan,Unknown
+ALDFU,nan,Unknown
+ALDFW,nan,Unknown
+ALDX,nan,Unknown
+ALEC,nan,Unknown
+ALF,nan,Unknown
+ALFUU,nan,Unknown
+ALFUW,nan,Unknown
+ALGM,Information Technology,Unknown
 ALGN,Health Care,Unknown
+ALGS,nan,Unknown
+ALGT,nan,Unknown
+ALHC,nan,Unknown
+ALIL,nan,Unknown
+ALK,Industrials,Unknown
+ALKS,nan,Unknown
+ALKT,nan,Unknown
 ALL,Financials,Unknown
 ALLE,Industrials,Unknown
+ALLO,nan,Unknown
+ALLR,nan,Unknown
+ALLT,nan,Unknown
+ALLW,nan,Unknown
+ALLY,Financials,Unknown
+ALM,nan,Unknown
+ALMS,nan,Unknown
+ALMU,nan,Unknown
+ALNT,nan,Unknown
+ALNY,Health Care,Unknown
+ALOT,nan,Unknown
+ALRM,nan,Unknown
+ALRS,nan,Unknown
+ALSN,Industrials,Unknown
+ALT,nan,Unknown
+ALTI,nan,Unknown
+ALTO,nan,Unknown
+ALTS,nan,Unknown
+ALTY,nan,Unknown
+ALVO,nan,Unknown
+ALVOW,nan,Unknown
+ALXO,nan,Unknown
+ALZN,nan,Unknown
+AM,Energy,Unknown
+AMAL,nan,Unknown
 AMAT,Information Technology,Unknown
+AMBA,nan,Unknown
+AMBR,nan,Unknown
 AMCR,Materials,Unknown
+AMCX,nan,Unknown
 AMD,Information Technology,Unknown
+AMDD,nan,Unknown
+AMDG,nan,Unknown
+AMDL,nan,Unknown
+AMDU,nan,Unknown
 AME,Industrials,Unknown
+AMG,Financials,Unknown
 AMGN,Health Care,Unknown
+AMH,Real Estate,Unknown
+AMID,nan,Unknown
+AMIX,nan,Unknown
+AMKR,Information Technology,Unknown
+AMLX,nan,Unknown
+AMOD,nan,Unknown
+AMODW,nan,Unknown
 AMP,Financials,Unknown
+AMPG,nan,Unknown
+AMPGW,nan,Unknown
+AMPH,nan,Unknown
+AMPL,nan,Unknown
+AMRK,nan,Unknown
+AMRN,nan,Unknown
+AMRX,nan,Unknown
+AMSC,nan,Unknown
+AMSF,nan,Unknown
+AMST,nan,Unknown
 AMT,Real Estate,Unknown
+AMTM,Industrials,Unknown
+AMTX,nan,Unknown
+AMUU,nan,Unknown
+AMWD,nan,Unknown
+AMZD,nan,Unknown
 AMZN,Consumer Discretionary,Unknown
+AMZU,nan,Unknown
+AMZZ,nan,Unknown
+AN,Consumer Discretionary,Unknown
+ANAB,nan,Unknown
+ANDE,nan,Unknown
+ANEB,nan,Unknown
+ANEL,nan,Unknown
 ANET,Information Technology,Unknown
+ANGH,nan,Unknown
+ANGHW,nan,Unknown
+ANGI,nan,Unknown
+ANGL,nan,Unknown
+ANGO,nan,Unknown
+ANIK,nan,Unknown
+ANIP,nan,Unknown
+ANIX,nan,Unknown
+ANL,nan,Unknown
+ANNA,nan,Unknown
+ANNAW,nan,Unknown
+ANNX,nan,Unknown
+ANPA,nan,Unknown
+ANSC,nan,Unknown
+ANSCU,nan,Unknown
+ANSCW,nan,Unknown
+ANTA,nan,Unknown
+ANTE,nan,Unknown
+ANTX,nan,Unknown
+ANY,nan,Unknown
+AOHY,nan,Unknown
 AON,Financials,Unknown
 AOS,Industrials,Unknown
+AOSL,nan,Unknown
+AOTG,nan,Unknown
+AOUT,nan,Unknown
 APA,Energy,Unknown
+APAD,nan,Unknown
+APADR,nan,Unknown
+APADU,nan,Unknown
 APD,Materials,Unknown
+APDN,nan,Unknown
+APED,nan,Unknown
+APEI,nan,Unknown
+APG,Industrials,Unknown
+APGE,nan,Unknown
 APH,Information Technology,Unknown
+API,nan,Unknown
+APLD,nan,Unknown
+APLM,nan,Unknown
+APLMW,nan,Unknown
+APLS,Health Care,Unknown
+APLT,nan,Unknown
+APM,nan,Unknown
 APO,Financials,Unknown
+APOG,nan,Unknown
+APP,Information Technology,Unknown
+APPF,Information Technology,Unknown
+APPN,nan,Unknown
+APPS,nan,Unknown
+APPX,nan,Unknown
+APRE,nan,Unknown
 APTV,Consumer Discretionary,Unknown
+APVO,nan,Unknown
+APWC,nan,Unknown
+APYX,nan,Unknown
+AQB,nan,Unknown
+AQMS,nan,Unknown
+AQST,nan,Unknown
+AQWA,nan,Unknown
+AR,Energy,Unknown
+ARAI,nan,Unknown
+ARAY,nan,Unknown
+ARBB,nan,Unknown
+ARBE,nan,Unknown
+ARBEW,nan,Unknown
+ARBK,nan,Unknown
+ARBKL,nan,Unknown
+ARCB,nan,Unknown
+ARCC,nan,Unknown
+ARCT,nan,Unknown
+ARDX,nan,Unknown
 ARE,Real Estate,Unknown
+AREB,nan,Unknown
+AREBW,nan,Unknown
+AREC,nan,Unknown
+ARES,Financials,Unknown
+ARGX,nan,Unknown
+ARHS,nan,Unknown
+ARKO,nan,Unknown
+ARKOW,nan,Unknown
+ARKR,nan,Unknown
+ARLP,nan,Unknown
+ARM,nan,Unknown
+ARMG,nan,Unknown
+ARMK,Consumer Discretionary,Unknown
+AROW,nan,Unknown
+ARQ,nan,Unknown
+ARQQ,nan,Unknown
+ARQQW,nan,Unknown
+ARQT,nan,Unknown
+ARRY,nan,Unknown
+ARTL,nan,Unknown
+ARTNA,nan,Unknown
+ARTV,nan,Unknown
+ARTW,nan,Unknown
+ARVN,nan,Unknown
+ARVR,nan,Unknown
+ARW,Information Technology,Unknown
+ARWR,nan,Unknown
+AS,Consumer Discretionary,Unknown
+ASBP,nan,Unknown
+ASBPW,nan,Unknown
+ASET,nan,Unknown
+ASH,Materials,Unknown
+ASLE,nan,Unknown
+ASMB,nan,Unknown
+ASMG,nan,Unknown
+ASML,nan,Unknown
+ASND,nan,Unknown
+ASNS,nan,Unknown
+ASO,nan,Unknown
+ASPC,nan,Unknown
+ASPCR,nan,Unknown
+ASPCU,nan,Unknown
+ASPI,nan,Unknown
+ASPS,nan,Unknown
+ASPSW,nan,Unknown
+ASPSZ,nan,Unknown
+ASRT,nan,Unknown
+ASRV,nan,Unknown
+ASST,nan,Unknown
+ASTC,nan,Unknown
+ASTE,nan,Unknown
+ASTH,nan,Unknown
+ASTI,nan,Unknown
+ASTL,nan,Unknown
+ASTLW,nan,Unknown
+ASTS,Communication Services,Unknown
+ASUR,nan,Unknown
+ASYS,nan,Unknown
+ATAI,nan,Unknown
+ATAT,nan,Unknown
+ATEC,nan,Unknown
+ATER,nan,Unknown
+ATEX,nan,Unknown
+ATGL,nan,Unknown
+ATHA,nan,Unknown
+ATHE,nan,Unknown
+ATHR,nan,Unknown
+ATI,Industrials,Unknown
+ATII,nan,Unknown
+ATIIU,nan,Unknown
+ATIIW,nan,Unknown
+ATLC,nan,Unknown
+ATLCL,nan,Unknown
+ATLCP,nan,Unknown
+ATLCZ,nan,Unknown
+ATLN,nan,Unknown
+ATLO,nan,Unknown
+ATLX,nan,Unknown
+ATMC,nan,Unknown
+ATMCR,nan,Unknown
+ATMCU,nan,Unknown
+ATMCW,nan,Unknown
+ATMV,nan,Unknown
+ATMVR,nan,Unknown
+ATMVU,nan,Unknown
+ATNI,nan,Unknown
 ATO,Utilities,Unknown
+ATOM,nan,Unknown
+ATON,nan,Unknown
+ATOS,nan,Unknown
+ATPC,nan,Unknown
+ATR,Materials,Unknown
+ATRA,nan,Unknown
+ATRC,nan,Unknown
+ATRO,nan,Unknown
+ATXG,nan,Unknown
+ATXS,nan,Unknown
+ATYR,nan,Unknown
+AU,Materials,Unknown
+AUBN,nan,Unknown
+AUDC,nan,Unknown
+AUGO,nan,Unknown
+AUID,nan,Unknown
+AUMI,nan,Unknown
+AUPH,nan,Unknown
+AUR,Information Technology,Unknown
+AURA,nan,Unknown
+AUROW,nan,Unknown
+AUTL,nan,Unknown
+AUUD,nan,Unknown
+AUUDW,nan,Unknown
+AVAH,nan,Unknown
+AVAV,nan,Unknown
 AVB,Real Estate,Unknown
+AVBH,nan,Unknown
+AVBP,nan,Unknown
+AVDL,nan,Unknown
+AVDX,nan,Unknown
+AVGB,nan,Unknown
+AVGG,nan,Unknown
 AVGO,Information Technology,Unknown
+AVGU,nan,Unknown
+AVGX,nan,Unknown
+AVIR,nan,Unknown
+AVL,nan,Unknown
+AVNW,nan,Unknown
+AVO,nan,Unknown
+AVPT,nan,Unknown
+AVR,nan,Unknown
+AVS,nan,Unknown
+AVT,Information Technology,Unknown
+AVTR,Health Care,Unknown
+AVTX,nan,Unknown
+AVUQ,nan,Unknown
+AVXC,nan,Unknown
+AVXL,nan,Unknown
 AVY,Materials,Unknown
+AWI,Industrials,Unknown
 AWK,Utilities,Unknown
+AWRE,nan,Unknown
+AXGN,nan,Unknown
+AXIN,nan,Unknown
+AXINR,nan,Unknown
+AXINU,nan,Unknown
 AXON,Industrials,Unknown
 AXP,Financials,Unknown
+AXS,Financials,Unknown
+AXSM,nan,Unknown
+AXTA,Materials,Unknown
+AXTI,nan,Unknown
+AYI,Industrials,Unknown
+AYTU,nan,Unknown
+AZ,nan,Unknown
+AZI,nan,Unknown
+AZN,nan,Unknown
 AZO,Consumer Discretionary,Unknown
+AZTA,nan,Unknown
 BA,Industrials,Unknown
+BABX,nan,Unknown
 BAC,Financials,Unknown
+BACC,nan,Unknown
+BACCR,nan,Unknown
+BACCU,nan,Unknown
+BACQ,nan,Unknown
+BACQR,nan,Unknown
+BACQU,nan,Unknown
+BAER,nan,Unknown
+BAERW,nan,Unknown
+BAFE,nan,Unknown
+BAFN,nan,Unknown
+BAH,Industrials,Unknown
+BAIG,nan,Unknown
 BALL,Materials,Unknown
+BAM,Financials,Unknown
+BAND,nan,Unknown
+BANF,nan,Unknown
+BANFP,nan,Unknown
+BANL,nan,Unknown
+BANR,nan,Unknown
+BANX,nan,Unknown
+BAOS,nan,Unknown
+BASE,nan,Unknown
+BASG,nan,Unknown
+BASV,nan,Unknown
+BATRA,nan,Unknown
+BATRK,nan,Unknown
 BAX,Health Care,Unknown
+BAYA,nan,Unknown
+BAYAR,nan,Unknown
+BAYAU,nan,Unknown
+BBB,nan,Unknown
+BBCP,nan,Unknown
+BBGI,nan,Unknown
+BBH,nan,Unknown
+BBIO,nan,Unknown
+BBLG,nan,Unknown
+BBLGW,nan,Unknown
+BBNX,nan,Unknown
+BBOT,nan,Unknown
+BBSI,nan,Unknown
+BBWI,Consumer Discretionary,Unknown
 BBY,Consumer Discretionary,Unknown
+BC,Consumer Discretionary,Unknown
+BCAB,nan,Unknown
+BCAL,nan,Unknown
+BCAR,nan,Unknown
+BCARU,nan,Unknown
+BCARW,nan,Unknown
+BCAX,nan,Unknown
+BCBP,nan,Unknown
+BCDA,nan,Unknown
+BCG,nan,Unknown
+BCGWW,nan,Unknown
+BCIC,nan,Unknown
+BCLO,nan,Unknown
+BCML,nan,Unknown
+BCPC,nan,Unknown
+BCRX,nan,Unknown
+BCTX,nan,Unknown
+BCTXW,nan,Unknown
+BCTXZ,nan,Unknown
+BCYC,nan,Unknown
+BDGS,nan,Unknown
+BDMD,nan,Unknown
+BDMDW,nan,Unknown
+BDRX,nan,Unknown
+BDSX,nan,Unknown
+BDTX,nan,Unknown
 BDX,Health Care,Unknown
+BEAG,nan,Unknown
+BEAGR,nan,Unknown
+BEAGU,nan,Unknown
+BEAM,nan,Unknown
+BEAT,nan,Unknown
+BEATW,nan,Unknown
+BEEM,nan,Unknown
+BEEP,nan,Unknown
+BEEX,nan,Unknown
+BEEZ,nan,Unknown
+BELFA,nan,Unknown
+BELFB,nan,Unknown
+BELT,nan,Unknown
 BEN,Financials,Unknown
+BENF,nan,Unknown
+BENFW,nan,Unknown
+BEPC,Utilities,Unknown
+BETR,nan,Unknown
+BETRW,nan,Unknown
 BF-B,Consumer Staples,Unknown
+BFA,nan,Unknown
+BFAM,Consumer Discretionary,Unknown
+BFB,nan,Unknown
+BFC,nan,Unknown
+BFIN,nan,Unknown
+BFRG,nan,Unknown
+BFRGW,nan,Unknown
+BFRI,nan,Unknown
+BFRIW,nan,Unknown
+BFST,nan,Unknown
 BG,Consumer Staples,Unknown
+BGC,nan,Unknown
+BGFV,nan,Unknown
+BGL,nan,Unknown
+BGLC,nan,Unknown
+BGLWW,nan,Unknown
+BGM,nan,Unknown
+BGRN,nan,Unknown
+BGRO,nan,Unknown
+BHAT,nan,Unknown
+BHF,Financials,Unknown
+BHFAL,nan,Unknown
+BHFAM,nan,Unknown
+BHFAN,nan,Unknown
+BHFAO,nan,Unknown
+BHFAP,nan,Unknown
+BHRB,nan,Unknown
+BHST,nan,Unknown
+BIAF,nan,Unknown
+BIAFW,nan,Unknown
+BIB,nan,Unknown
+BIDU,nan,Unknown
 BIIB,Health Care,Unknown
+BILI,nan,Unknown
+BILL,Information Technology,Unknown
+BINI,nan,Unknown
+BIO,Health Care,Unknown
+BIOA,nan,Unknown
+BIOX,nan,Unknown
+BIRD,nan,Unknown
+BIRK,Consumer Discretionary,Unknown
+BIS,nan,Unknown
+BITF,nan,Unknown
+BITS,nan,Unknown
+BIVI,nan,Unknown
+BIVIW,nan,Unknown
+BIYA,nan,Unknown
+BJ,Consumer Staples,Unknown
+BJDX,nan,Unknown
+BJK,nan,Unknown
+BJRI,nan,Unknown
 BK,Financials,Unknown
+BKCH,nan,Unknown
+BKHA,nan,Unknown
+BKHAR,nan,Unknown
+BKHAU,nan,Unknown
+BKIV,nan,Unknown
 BKNG,Consumer Discretionary,Unknown
 BKR,Energy,Unknown
+BKWO,nan,Unknown
+BKYI,nan,Unknown
+BL,nan,Unknown
+BLBD,nan,Unknown
+BLBX,nan,Unknown
+BLCN,nan,Unknown
+BLCR,nan,Unknown
+BLD,Consumer Discretionary,Unknown
+BLDP,nan,Unknown
 BLDR,Industrials,Unknown
+BLFS,nan,Unknown
+BLFY,nan,Unknown
+BLIN,nan,Unknown
+BLIV,nan,Unknown
 BLK,Financials,Unknown
+BLKB,nan,Unknown
+BLMN,nan,Unknown
+BLMZ,nan,Unknown
+BLNE,nan,Unknown
+BLNK,nan,Unknown
+BLRX,nan,Unknown
+BLTE,nan,Unknown
+BLUW,nan,Unknown
+BLUWU,nan,Unknown
+BLUWW,nan,Unknown
+BLZE,nan,Unknown
+BMAX,nan,Unknown
+BMBL,nan,Unknown
+BMDL,nan,Unknown
+BMEA,nan,Unknown
+BMGL,nan,Unknown
+BMHL,nan,Unknown
+BMR,nan,Unknown
+BMRA,nan,Unknown
+BMRC,nan,Unknown
+BMRN,Health Care,Unknown
 BMY,Health Care,Unknown
+BNAI,nan,Unknown
+BNAIW,nan,Unknown
+BNC,nan,Unknown
+BNCWW,nan,Unknown
+BND,nan,Unknown
+BNDW,nan,Unknown
+BNDX,nan,Unknown
+BNGO,nan,Unknown
+BNR,nan,Unknown
+BNRG,nan,Unknown
+BNTC,nan,Unknown
+BNTX,nan,Unknown
+BNZI,nan,Unknown
+BNZIW,nan,Unknown
+BODI,nan,Unknown
+BOED,nan,Unknown
+BOEG,nan,Unknown
+BOEU,nan,Unknown
+BOF,nan,Unknown
+BOKF,Financials,Unknown
+BOLD,nan,Unknown
+BOLT,nan,Unknown
+BON,nan,Unknown
+BOOM,nan,Unknown
+BOSC,nan,Unknown
+BOTJ,nan,Unknown
+BOTT,nan,Unknown
+BOTZ,nan,Unknown
+BOWN,nan,Unknown
+BOWNR,nan,Unknown
+BOWNU,nan,Unknown
+BOXL,nan,Unknown
+BPOP,Financials,Unknown
+BPOPM,nan,Unknown
+BPRN,nan,Unknown
+BPYPM,nan,Unknown
+BPYPN,nan,Unknown
+BPYPO,nan,Unknown
+BPYPP,nan,Unknown
 BR,Industrials,Unknown
+BRAG,nan,Unknown
+BRBR,Consumer Staples,Unknown
+BREA,nan,Unknown
+BRFH,nan,Unknown
+BRHY,nan,Unknown
+BRID,nan,Unknown
 BRK-B,Financials,Unknown
+BRKB,nan,Unknown
+BRKD,nan,Unknown
+BRKR,Health Care,Unknown
+BRKRP,nan,Unknown
+BRKU,nan,Unknown
+BRLS,nan,Unknown
+BRLSW,nan,Unknown
+BRLT,nan,Unknown
+BRNS,nan,Unknown
+BRNY,nan,Unknown
 BRO,Financials,Unknown
+BROS,Consumer Discretionary,Unknown
+BRR,nan,Unknown
+BRRR,nan,Unknown
+BRRWU,nan,Unknown
+BRRWW,nan,Unknown
+BRTR,nan,Unknown
+BRTX,nan,Unknown
+BRX,Real Estate,Unknown
+BRY,nan,Unknown
+BRZE,nan,Unknown
+BSAA,nan,Unknown
+BSAAR,nan,Unknown
+BSAAU,nan,Unknown
+BSBK,nan,Unknown
+BSCP,nan,Unknown
+BSCQ,nan,Unknown
+BSCR,nan,Unknown
+BSCS,nan,Unknown
+BSCT,nan,Unknown
+BSCU,nan,Unknown
+BSCV,nan,Unknown
+BSCW,nan,Unknown
+BSCX,nan,Unknown
+BSCY,nan,Unknown
+BSCZ,nan,Unknown
+BSET,nan,Unknown
+BSGM,nan,Unknown
+BSJP,nan,Unknown
+BSJQ,nan,Unknown
+BSJR,nan,Unknown
+BSJS,nan,Unknown
+BSJT,nan,Unknown
+BSJU,nan,Unknown
+BSJV,nan,Unknown
+BSJW,nan,Unknown
+BSJX,nan,Unknown
+BSLK,nan,Unknown
+BSLKW,nan,Unknown
+BSMP,nan,Unknown
+BSMQ,nan,Unknown
+BSMR,nan,Unknown
+BSMS,nan,Unknown
+BSMT,nan,Unknown
+BSMU,nan,Unknown
+BSMV,nan,Unknown
+BSMW,nan,Unknown
+BSMY,nan,Unknown
+BSRR,nan,Unknown
+BSSX,nan,Unknown
+BSVN,nan,Unknown
+BSVO,nan,Unknown
 BSX,Health Care,Unknown
+BSY,Information Technology,Unknown
+BTAI,nan,Unknown
+BTBD,nan,Unknown
+BTBDW,nan,Unknown
+BTBT,nan,Unknown
+BTCS,nan,Unknown
+BTCT,nan,Unknown
+BTDR,nan,Unknown
+BTF,nan,Unknown
+BTFX,nan,Unknown
+BTGD,nan,Unknown
+BTM,nan,Unknown
+BTMD,nan,Unknown
+BTMWW,nan,Unknown
+BTOC,nan,Unknown
+BTOG,nan,Unknown
+BTSG,nan,Unknown
+BTSGU,nan,Unknown
+BUFC,nan,Unknown
+BUFI,nan,Unknown
+BUFM,nan,Unknown
+BUG,nan,Unknown
+BULD,nan,Unknown
+BULG,nan,Unknown
+BULL,nan,Unknown
+BULLW,nan,Unknown
+BULX,nan,Unknown
+BURL,Consumer Discretionary,Unknown
+BUSE,nan,Unknown
+BUSEP,nan,Unknown
+BUUU,nan,Unknown
+BVFL,nan,Unknown
+BVS,nan,Unknown
+BWA,Consumer Discretionary,Unknown
+BWAY,nan,Unknown
+BWB,nan,Unknown
+BWBBP,nan,Unknown
+BWEN,nan,Unknown
+BWFG,nan,Unknown
+BWIN,nan,Unknown
+BWMN,nan,Unknown
+BWXT,Industrials,Unknown
 BX,Financials,Unknown
 BXP,Real Estate,Unknown
+BYD,Consumer Discretionary,Unknown
+BYFC,nan,Unknown
+BYND,nan,Unknown
+BYRN,nan,Unknown
+BYSI,nan,Unknown
+BZ,nan,Unknown
+BZAI,nan,Unknown
+BZAIW,nan,Unknown
+BZFD,nan,Unknown
+BZFDW,nan,Unknown
+BZUN,nan,Unknown
 C,Financials,Unknown
+CA,nan,Unknown
+CAAS,nan,Unknown
+CABA,nan,Unknown
+CAC,nan,Unknown
+CACC,Financials,Unknown
+CACI,Industrials,Unknown
+CADL,nan,Unknown
+CAEP,nan,Unknown
+CAFG,nan,Unknown
 CAG,Consumer Staples,Unknown
 CAH,Health Care,Unknown
+CAI,nan,Unknown
+CAKE,nan,Unknown
+CALC,nan,Unknown
+CALI,nan,Unknown
+CALM,nan,Unknown
+CAMP,nan,Unknown
+CAMT,nan,Unknown
+CAN,nan,Unknown
+CANC,nan,Unknown
+CANQ,nan,Unknown
+CAPN,nan,Unknown
+CAPNR,nan,Unknown
+CAPNU,nan,Unknown
+CAPR,nan,Unknown
+CAPS,nan,Unknown
+CAPT,nan,Unknown
+CAPTW,nan,Unknown
+CAR,Industrials,Unknown
+CARE,nan,Unknown
+CARG,nan,Unknown
+CARL,nan,Unknown
+CARM,nan,Unknown
 CARR,Industrials,Unknown
+CART,Consumer Staples,Unknown
+CARV,nan,Unknown
+CARY,nan,Unknown
+CARZ,nan,Unknown
+CASH,nan,Unknown
+CASI,nan,Unknown
+CASK,nan,Unknown
+CASS,nan,Unknown
+CASY,Consumer Staples,Unknown
 CAT,Industrials,Unknown
+CATH,nan,Unknown
+CATY,nan,Unknown
+CAVA,Consumer Discretionary,Unknown
 CB,Financials,Unknown
+CBAT,nan,Unknown
+CBFV,nan,Unknown
+CBIO,nan,Unknown
+CBLL,nan,Unknown
+CBNK,nan,Unknown
 CBOE,Financials,Unknown
 CBRE,Real Estate,Unknown
+CBRL,nan,Unknown
+CBSH,Financials,Unknown
+CBUS,nan,Unknown
+CCAP,nan,Unknown
+CCB,nan,Unknown
+CCBG,nan,Unknown
+CCCC,nan,Unknown
+CCCS,Information Technology,Unknown
+CCCX,nan,Unknown
+CCCXU,nan,Unknown
+CCCXW,nan,Unknown
+CCD,nan,Unknown
+CCEC,nan,Unknown
+CCEP,nan,Unknown
+CCFE,nan,Unknown
+CCG,nan,Unknown
+CCGWW,nan,Unknown
 CCI,Real Estate,Unknown
+CCII,nan,Unknown
+CCIIU,nan,Unknown
+CCIIW,nan,Unknown
+CCIX,nan,Unknown
+CCIXU,nan,Unknown
+CCIXW,nan,Unknown
+CCK,Materials,Unknown
 CCL,Consumer Discretionary,Unknown
+CCLD,nan,Unknown
+CCLDO,nan,Unknown
+CCNE,nan,Unknown
+CCNEP,nan,Unknown
+CCNR,nan,Unknown
+CCOI,nan,Unknown
+CCRN,nan,Unknown
+CCSB,nan,Unknown
+CCSI,nan,Unknown
+CCSO,nan,Unknown
+CCTG,nan,Unknown
+CDC,nan,Unknown
+CDIO,nan,Unknown
+CDIOW,nan,Unknown
+CDL,nan,Unknown
+CDLX,nan,Unknown
+CDNA,nan,Unknown
 CDNS,Information Technology,Unknown
+CDRO,nan,Unknown
+CDROW,nan,Unknown
+CDT,nan,Unknown
+CDTG,nan,Unknown
+CDTTW,nan,Unknown
+CDTX,nan,Unknown
 CDW,Information Technology,Unknown
+CDXS,nan,Unknown
+CDZI,nan,Unknown
+CDZIP,nan,Unknown
+CE,Materials,Unknown
+CECO,nan,Unknown
+CEFA,nan,Unknown
 CEG,Utilities,Unknown
+CELC,nan,Unknown
+CELH,Consumer Staples,Unknown
+CELU,nan,Unknown
+CELUW,nan,Unknown
+CELZ,nan,Unknown
+CENN,nan,Unknown
+CENT,nan,Unknown
+CENTA,nan,Unknown
+CENX,nan,Unknown
+CEP,nan,Unknown
+CEPF,nan,Unknown
+CEPI,nan,Unknown
+CEPO,nan,Unknown
+CEPT,nan,Unknown
+CERO,nan,Unknown
+CEROW,nan,Unknown
+CERS,nan,Unknown
+CERT,Health Care,Unknown
+CETX,nan,Unknown
+CETY,nan,Unknown
+CEVA,nan,Unknown
 CF,Materials,Unknown
+CFA,nan,Unknown
+CFBK,nan,Unknown
+CFFI,nan,Unknown
+CFFN,nan,Unknown
 CFG,Financials,Unknown
+CFLT,Information Technology,Unknown
+CFO,nan,Unknown
+CFR,Financials,Unknown
+CFSB,nan,Unknown
+CG,Financials,Unknown
+CGABL,nan,Unknown
+CGBD,nan,Unknown
+CGBDL,nan,Unknown
+CGC,nan,Unknown
+CGCT,nan,Unknown
+CGCTU,nan,Unknown
+CGCTW,nan,Unknown
+CGEM,nan,Unknown
+CGEN,nan,Unknown
+CGNT,nan,Unknown
+CGNX,Information Technology,Unknown
+CGO,nan,Unknown
+CGON,nan,Unknown
+CGTL,nan,Unknown
+CGTX,nan,Unknown
+CHA,nan,Unknown
+CHAC,nan,Unknown
+CHACR,nan,Unknown
+CHACU,nan,Unknown
+CHAR,nan,Unknown
+CHARR,nan,Unknown
+CHARU,nan,Unknown
+CHCI,nan,Unknown
+CHCO,nan,Unknown
 CHD,Consumer Staples,Unknown
+CHDN,Consumer Discretionary,Unknown
+CHE,Health Care,Unknown
+CHEF,nan,Unknown
+CHEK,nan,Unknown
+CHGX,nan,Unknown
+CHH,Consumer Discretionary,Unknown
+CHI,nan,Unknown
+CHKP,nan,Unknown
+CHMG,nan,Unknown
+CHNR,nan,Unknown
+CHPG,nan,Unknown
+CHPGR,nan,Unknown
+CHPGU,nan,Unknown
+CHPS,nan,Unknown
+CHR,nan,Unknown
+CHRD,Energy,Unknown
+CHRS,nan,Unknown
 CHRW,Industrials,Unknown
+CHSCL,nan,Unknown
+CHSCM,nan,Unknown
+CHSCN,nan,Unknown
+CHSCO,nan,Unknown
+CHSCP,nan,Unknown
+CHSN,nan,Unknown
 CHTR,Communication Services,Unknown
+CHW,nan,Unknown
+CHWY,Consumer Discretionary,Unknown
+CHY,nan,Unknown
+CHYM,nan,Unknown
 CI,Health Care,Unknown
+CIBR,nan,Unknown
+CIEN,Information Technology,Unknown
+CIFR,nan,Unknown
+CIFRW,nan,Unknown
+CIGI,nan,Unknown
+CIGL,nan,Unknown
+CIIT,nan,Unknown
+CIL,nan,Unknown
 CINF,Financials,Unknown
+CING,nan,Unknown
+CINGW,nan,Unknown
+CISO,nan,Unknown
+CISS,nan,Unknown
+CIVB,nan,Unknown
+CIVI,Energy,Unknown
+CJET,nan,Unknown
+CJMB,nan,Unknown
 CL,Consumer Staples,Unknown
+CLAR,nan,Unknown
+CLBK,nan,Unknown
+CLBT,nan,Unknown
+CLDX,nan,Unknown
+CLF,Materials,Unknown
+CLFD,nan,Unknown
+CLGN,nan,Unknown
+CLH,Industrials,Unknown
+CLIK,nan,Unknown
+CLIR,nan,Unknown
+CLLS,nan,Unknown
+CLMB,nan,Unknown
+CLMT,nan,Unknown
+CLNE,nan,Unknown
+CLNN,nan,Unknown
+CLNNW,nan,Unknown
+CLOA,nan,Unknown
+CLOD,nan,Unknown
+CLOU,nan,Unknown
+CLOV,nan,Unknown
+CLPS,nan,Unknown
+CLPT,nan,Unknown
+CLRB,nan,Unknown
+CLRO,nan,Unknown
+CLSD,nan,Unknown
+CLSK,nan,Unknown
+CLSKW,nan,Unknown
+CLSM,nan,Unknown
+CLST,nan,Unknown
+CLVT,Industrials,Unknown
+CLWT,nan,Unknown
 CLX,Consumer Staples,Unknown
+CLYM,nan,Unknown
+CMA,Financials,Unknown
+CMBM,nan,Unknown
+CMCO,nan,Unknown
 CMCSA,Communication Services,Unknown
+CMCT,nan,Unknown
 CME,Financials,Unknown
 CMG,Consumer Discretionary,Unknown
 CMI,Industrials,Unknown
+CMMB,nan,Unknown
+CMND,nan,Unknown
+CMPO,nan,Unknown
+CMPOW,nan,Unknown
+CMPR,nan,Unknown
+CMPS,nan,Unknown
+CMPX,nan,Unknown
+CMRC,nan,Unknown
 CMS,Utilities,Unknown
-CNC,Health Care,Unknown
-CNP,Utilities,Unknown
-COF,Financials,Unknown
-COIN,Financials,Unknown
-COO,Health Care,Unknown
-COP,Energy,Unknown
-COR,Health Care,Unknown
-COST,Consumer Staples,Unknown
-CPAY,Financials,Unknown
-CPB,Consumer Staples,Unknown
-CPRT,Industrials,Unknown
-CPT,Real Estate,Unknown
-CRL,Health Care,Unknown
-CRM,Information Technology,Unknown
-CRWD,Information Technology,Unknown
-CSCO,Information Technology,Unknown
-CSGP,Real Estate,Unknown
-CSX,Industrials,Unknown
-CTAS,Industrials,Unknown
-CTRA,Energy,Unknown
-CTSH,Information Technology,Unknown
-CTVA,Materials,Unknown
-CVS,Health Care,Unknown
-CVX,Energy,Unknown
-CZR,Consumer Discretionary,Unknown
-D,Utilities,Unknown
-DAL,Industrials,Unknown
-DASH,Consumer Discretionary,Unknown
-DAY,Industrials,Unknown
-DD,Materials,Unknown
-DDOG,Information Technology,Unknown
-DE,Industrials,Unknown
-DECK,Consumer Discretionary,Unknown
-DELL,Information Technology,Unknown
-DG,Consumer Staples,Unknown
-DGX,Health Care,Unknown
-DHI,Consumer Discretionary,Unknown
-DHR,Health Care,Unknown
-DIS,Communication Services,Unknown
-DLR,Real Estate,Unknown
-DLTR,Consumer Staples,Unknown
-DOC,Real Estate,Unknown
-DOV,Industrials,Unknown
-DOW,Materials,Unknown
-DPZ,Consumer Discretionary,Unknown
-DRI,Consumer Discretionary,Unknown
-DTE,Utilities,Unknown
-DUK,Utilities,Unknown
-DVA,Health Care,Unknown
-DVN,Energy,Unknown
-DXCM,Health Care,Unknown
-EA,Communication Services,Unknown
-EBAY,Consumer Discretionary,Unknown
-ECL,Materials,Unknown
-ED,Utilities,Unknown
-EFX,Industrials,Unknown
-EG,Financials,Unknown
-EIX,Utilities,Unknown
-EL,Consumer Staples,Unknown
-ELV,Health Care,Unknown
-EMN,Materials,Unknown
-EMR,Industrials,Unknown
-ENPH,Information Technology,Unknown
-EOG,Energy,Unknown
-EPAM,Information Technology,Unknown
-EQIX,Real Estate,Unknown
-EQR,Real Estate,Unknown
-EQT,Energy,Unknown
-ERIE,nan,Unknown
-ES,Utilities,Unknown
-ESS,Real Estate,Unknown
-ETN,Industrials,Unknown
-ETR,Utilities,Unknown
-EVRG,Utilities,Unknown
-EW,Health Care,Unknown
-EXC,Utilities,Unknown
-EXE,Energy,Unknown
-EXPD,Industrials,Unknown
-EXPE,Consumer Discretionary,Unknown
-EXR,Real Estate,Unknown
-F,Consumer Discretionary,Unknown
-FANG,Energy,Unknown
-FAST,Industrials,Unknown
-FCX,Materials,Unknown
-FDS,Financials,Unknown
-FDX,Industrials,Unknown
-FE,Utilities,Unknown
-FFIV,Information Technology,Unknown
-FI,Financials,Unknown
-FICO,Information Technology,Unknown
-FIS,Financials,Unknown
-FITB,Financials,Unknown
-FOX,Communication Services,Unknown
-FOXA,Communication Services,Unknown
-FRT,Real Estate,Unknown
-FSLR,Information Technology,Unknown
-FTNT,Information Technology,Unknown
-FTV,Industrials,Unknown
-GD,Industrials,Unknown
-GDDY,Information Technology,Unknown
-GE,Industrials,Unknown
-GEHC,Health Care,Unknown
-GEN,Information Technology,Unknown
-GEV,Industrials,Unknown
-GILD,Health Care,Unknown
-GIS,Consumer Staples,Unknown
-GL,Financials,Unknown
-GLW,Information Technology,Unknown
-GM,Consumer Discretionary,Unknown
-GNRC,Industrials,Unknown
-GOOG,Communication Services,Unknown
-GOOGL,Communication Services,Unknown
-GPC,Consumer Discretionary,Unknown
-GPN,Financials,Unknown
-GRMN,Consumer Discretionary,Unknown
-GS,Financials,Unknown
-GWW,Industrials,Unknown
-HAL,Energy,Unknown
-HAS,Consumer Discretionary,Unknown
-HBAN,Financials,Unknown
-HCA,Health Care,Unknown
-HD,Consumer Discretionary,Unknown
-HIG,Financials,Unknown
-HII,Industrials,Unknown
-HLT,Consumer Discretionary,Unknown
-HOLX,Health Care,Unknown
-HON,Industrials,Unknown
-HPE,Information Technology,Unknown
-HPQ,Information Technology,Unknown
-HRL,Consumer Staples,Unknown
-HSIC,Health Care,Unknown
-HST,Real Estate,Unknown
-HSY,Consumer Staples,Unknown
-HUBB,Industrials,Unknown
-HUM,Health Care,Unknown
-HWM,Industrials,Unknown
-IBM,Information Technology,Unknown
-ICE,Financials,Unknown
-IDXX,Health Care,Unknown
-IEX,Industrials,Unknown
-IFF,Materials,Unknown
-INCY,Health Care,Unknown
-INTC,Information Technology,Unknown
-INTU,Information Technology,Unknown
-INVH,Real Estate,Unknown
-IP,Materials,Unknown
-IPG,Communication Services,Unknown
-IQV,Health Care,Unknown
-IR,Industrials,Unknown
-IRM,Real Estate,Unknown
-ISRG,Health Care,Unknown
-IT,Information Technology,Unknown
-ITW,Industrials,Unknown
-IVZ,Financials,Unknown
-J,Industrials,Unknown
-JBHT,Industrials,Unknown
-JBL,Information Technology,Unknown
-JCI,Industrials,Unknown
-JKHY,Financials,Unknown
-JNJ,Health Care,Unknown
-JPM,Financials,Unknown
-K,Consumer Staples,Unknown
-KDP,Consumer Staples,Unknown
-KEY,Financials,Unknown
-KEYS,Information Technology,Unknown
-KHC,Consumer Staples,Unknown
-KIM,Real Estate,Unknown
-KKR,Financials,Unknown
-KLAC,Information Technology,Unknown
-KMB,Consumer Staples,Unknown
-KMI,Energy,Unknown
-KMX,Consumer Discretionary,Unknown
-KO,Consumer Staples,Unknown
-KR,Consumer Staples,Unknown
-KVUE,Consumer Staples,Unknown
-L,Financials,Unknown
-LDOS,Industrials,Unknown
-LEN,Consumer Discretionary,Unknown
-LH,Health Care,Unknown
-LHX,Industrials,Unknown
-LII,Industrials,Unknown
-LIN,Materials,Unknown
-LKQ,Consumer Discretionary,Unknown
-LLY,Health Care,Unknown
-LMT,Industrials,Unknown
-LNT,Utilities,Unknown
-LOW,Consumer Discretionary,Unknown
-LRCX,Information Technology,Unknown
-LULU,Consumer Discretionary,Unknown
-LUV,Industrials,Unknown
-LVS,Consumer Discretionary,Unknown
-LW,Consumer Staples,Unknown
-LYB,Materials,Unknown
-LYV,Communication Services,Unknown
-MA,Financials,Unknown
-MAA,Real Estate,Unknown
-MAR,Consumer Discretionary,Unknown
-MAS,Industrials,Unknown
-MCD,Consumer Discretionary,Unknown
-MCHP,Information Technology,Unknown
-MCK,Health Care,Unknown
-MCO,Financials,Unknown
-MDLZ,Consumer Staples,Unknown
-MDT,Health Care,Unknown
-MET,Financials,Unknown
-META,Communication Services,Unknown
-MGM,Consumer Discretionary,Unknown
-MHK,Consumer Discretionary,Unknown
-MKC,Consumer Staples,Unknown
-MKTX,Financials,Unknown
-MLM,Materials,Unknown
-MMC,Financials,Unknown
-MMM,Industrials,Unknown
-MNST,Consumer Staples,Unknown
-MO,Consumer Staples,Unknown
-MOH,Health Care,Unknown
-MOS,Materials,Unknown
-MPC,Energy,Unknown
-MPWR,Information Technology,Unknown
-MRK,Health Care,Unknown
-MRNA,Health Care,Unknown
-MS,Financials,Unknown
-MSCI,Financials,Unknown
-MSFT,Information Technology,Unknown
-MSI,Information Technology,Unknown
-MTB,Financials,Unknown
-MTCH,Communication Services,Unknown
-MTD,Health Care,Unknown
-MU,Information Technology,Unknown
-NCLH,Consumer Discretionary,Unknown
-NDAQ,Financials,Unknown
-NDSN,Industrials,Unknown
-NEE,Utilities,Unknown
-NEM,Materials,Unknown
-NFLX,Communication Services,Unknown
-NI,Utilities,Unknown
-NKE,Consumer Discretionary,Unknown
-NOC,Industrials,Unknown
-NOW,Information Technology,Unknown
-NRG,Utilities,Unknown
-NSC,Industrials,Unknown
-NTAP,Information Technology,Unknown
-NTRS,Financials,Unknown
-NUE,Materials,Unknown
-NVDA,Information Technology,Unknown
-NVR,Consumer Discretionary,Unknown
-NWS,Communication Services,Unknown
-NWSA,Communication Services,Unknown
-NXPI,nan,Unknown
-O,Real Estate,Unknown
-ODFL,Industrials,Unknown
-OKE,Energy,Unknown
-OMC,Communication Services,Unknown
-ON,Information Technology,Unknown
-ORCL,Information Technology,Unknown
-ORLY,Consumer Discretionary,Unknown
-OTIS,Industrials,Unknown
-OXY,Energy,Unknown
-PANW,Information Technology,Unknown
-PAYC,Information Technology,Unknown
-PAYX,Industrials,Unknown
-PCAR,Industrials,Unknown
-PCG,Utilities,Unknown
-PEG,Utilities,Unknown
-PEP,Consumer Staples,Unknown
-PFE,Health Care,Unknown
-PFG,Financials,Unknown
-PG,Consumer Staples,Unknown
-PGR,Financials,Unknown
-PH,Industrials,Unknown
-PHM,Consumer Discretionary,Unknown
-PKG,Materials,Unknown
-PLD,Real Estate,Unknown
-PLTR,Information Technology,Unknown
-PM,Consumer Staples,Unknown
-PNC,Financials,Unknown
-PNR,Industrials,Unknown
-PNW,Utilities,Unknown
-PODD,Health Care,Unknown
-POOL,Consumer Discretionary,Unknown
-PPG,Materials,Unknown
-PPL,Utilities,Unknown
-PRU,Financials,Unknown
-PSA,Real Estate,Unknown
-PSKY,nan,Unknown
-PSX,Energy,Unknown
-PTC,Information Technology,Unknown
-PWR,Industrials,Unknown
-PYPL,Financials,Unknown
-QCOM,Information Technology,Unknown
-RCL,Consumer Discretionary,Unknown
-REG,Real Estate,Unknown
-REGN,Health Care,Unknown
-RF,Financials,Unknown
-RJF,Financials,Unknown
-RL,Consumer Discretionary,Unknown
-RMD,Health Care,Unknown
-ROK,Industrials,Unknown
-ROL,Industrials,Unknown
-ROP,Industrials,Unknown
-ROST,Consumer Discretionary,Unknown
-RSG,Industrials,Unknown
-RTX,Industrials,Unknown
-RVTY,Health Care,Unknown
-SBAC,Real Estate,Unknown
-SBUX,Consumer Discretionary,Unknown
-SCHW,Financials,Unknown
-SHW,Materials,Unknown
-SJM,Consumer Staples,Unknown
-SLB,Energy,Unknown
-SMCI,Information Technology,Unknown
-SNA,Industrials,Unknown
-SNPS,Information Technology,Unknown
-SO,Utilities,Unknown
-SOLV,Health Care,Unknown
-SPG,Real Estate,Unknown
-SPGI,Financials,Unknown
-SRE,Utilities,Unknown
-STE,Health Care,Unknown
-STLD,Materials,Unknown
-STT,Financials,Unknown
-STX,nan,Unknown
-STZ,Consumer Staples,Unknown
-SW,Materials,Unknown
-SWK,Industrials,Unknown
-SWKS,Information Technology,Unknown
-SYF,Financials,Unknown
-SYK,Health Care,Unknown
-SYY,Consumer Staples,Unknown
-T,Communication Services,Unknown
-TAP,Consumer Staples,Unknown
-TDG,Industrials,Unknown
-TDY,Industrials,Unknown
-TECH,Health Care,Unknown
-TEL,nan,Unknown
-TER,Information Technology,Unknown
-TFC,Financials,Unknown
-TGT,Consumer Staples,Unknown
-TJX,Consumer Discretionary,Unknown
-TKO,Communication Services,Unknown
-TMO,Health Care,Unknown
-TMUS,Communication Services,Unknown
-TPL,Energy,Unknown
-TPR,Consumer Discretionary,Unknown
-TRGP,Energy,Unknown
-TRMB,Information Technology,Unknown
-TROW,Financials,Unknown
-TRV,Financials,Unknown
-TSCO,Consumer Discretionary,Unknown
-TSLA,Consumer Discretionary,Unknown
-TSN,Consumer Staples,Unknown
-TT,Industrials,Unknown
-TTD,Communication Services,Unknown
-TTWO,Communication Services,Unknown
-TXN,Information Technology,Unknown
-TXT,Industrials,Unknown
-TYL,Information Technology,Unknown
-UAL,Industrials,Unknown
-UBER,Industrials,Unknown
-UDR,Real Estate,Unknown
-UHS,Health Care,Unknown
-ULTA,Consumer Discretionary,Unknown
-UNH,Health Care,Unknown
-UNP,Industrials,Unknown
-UPS,Industrials,Unknown
-URI,Industrials,Unknown
-USB,Financials,Unknown
-V,Financials,Unknown
-VICI,Real Estate,Unknown
-VLO,Energy,Unknown
-VLTO,Industrials,Unknown
-VMC,Materials,Unknown
-VRSK,Industrials,Unknown
-VRSN,Information Technology,Unknown
-VRTX,Health Care,Unknown
-VST,Utilities,Unknown
-VTR,Real Estate,Unknown
-VTRS,Health Care,Unknown
-VZ,Communication Services,Unknown
-WAB,Industrials,Unknown
-WAT,Health Care,Unknown
-WBA,nan,Unknown
-WBD,Communication Services,Unknown
-WDAY,Information Technology,Unknown
-WDC,Information Technology,Unknown
-WEC,Utilities,Unknown
-WELL,Real Estate,Unknown
-WFC,Financials,Unknown
-WM,Industrials,Unknown
-WMB,Energy,Unknown
-WMT,Consumer Staples,Unknown
-WRB,Financials,Unknown
-WSM,Consumer Discretionary,Unknown
-WST,Health Care,Unknown
-WTW,Financials,Unknown
-WY,Real Estate,Unknown
-WYNN,Consumer Discretionary,Unknown
-XEL,Utilities,Unknown
-XOM,Energy,Unknown
-XYL,Industrials,Unknown
-XYZ,Financials,Unknown
-YUM,Consumer Discretionary,Unknown
-ZBH,Health Care,Unknown
-ZBRA,Information Technology,Unknown
-ZTS,Health Care,Unknown
-1995,nan,Unknown
-1996,nan,Unknown
-1997,nan,Unknown
-1998,nan,Unknown
-1999,nan,Unknown
-2000,nan,Unknown
-2001,nan,Unknown
-2002,nan,Unknown
-2003,nan,Unknown
-2004,nan,Unknown
-2005,nan,Unknown
-2006,nan,Unknown
-2007,nan,Unknown
-2008,nan,Unknown
-2009,nan,Unknown
-2010,nan,Unknown
-2011,nan,Unknown
-2012,nan,Unknown
-2013,nan,Unknown
-2014,nan,Unknown
-2015,nan,Unknown
-2016,nan,Unknown
-2017,nan,Unknown
-2018,nan,Unknown
-2019,nan,Unknown
-2020,nan,Unknown
-2021,nan,Unknown
-2022,nan,Unknown
-2023,nan,Unknown
-2024,nan,Unknown
-AA,Materials,Unknown
-AAL,Industrials,Unknown
-AAON,Industrials,Unknown
-ACHC,Health Care,Unknown
-ACI,Consumer Staples,Unknown
-ACM,Industrials,Unknown
-ADC,Real Estate,Unknown
-ADT,Consumer Discretionary,Unknown
-AFG,Financials,Unknown
-AFRM,Information Technology,Unknown
-AGCO,Industrials,Unknown
-AGNC,Financials,Unknown
-AGO,Financials,Unknown
-AIT,Industrials,Unknown
-AL,Industrials,Unknown
-ALAB,Information Technology,Unknown
-ALGM,Information Technology,Unknown
-ALK,Industrials,Unknown
-ALLY,Financials,Unknown
-ALNY,Health Care,Unknown
-ALSN,Industrials,Unknown
-AM,Energy,Unknown
-AMG,Financials,Unknown
-AMH,Real Estate,Unknown
-AMKR,Information Technology,Unknown
-AMTM,Industrials,Unknown
-AN,Consumer Discretionary,Unknown
-APG,Industrials,Unknown
-APLS,Health Care,Unknown
-APP,Information Technology,Unknown
-APPF,Information Technology,Unknown
-AR,Energy,Unknown
-ARES,Financials,Unknown
-ARMK,Consumer Discretionary,Unknown
-ARW,Information Technology,Unknown
-AS,Consumer Discretionary,Unknown
-ASH,Materials,Unknown
-ASTS,Communication Services,Unknown
-ATI,Industrials,Unknown
-ATR,Materials,Unknown
-AU,Materials,Unknown
-AUR,Information Technology,Unknown
-AVT,Information Technology,Unknown
-AVTR,Health Care,Unknown
-AWI,Industrials,Unknown
-AXS,Financials,Unknown
-AXTA,Materials,Unknown
-AYI,Industrials,Unknown
-BAH,Industrials,Unknown
-BAM,Financials,Unknown
-BBWI,Consumer Discretionary,Unknown
-BC,Consumer Discretionary,Unknown
-BEPC,Utilities,Unknown
-BF-A,Consumer Staples,Unknown
-BFAM,Consumer Discretionary,Unknown
-BHF,Financials,Unknown
-BILL,Information Technology,Unknown
-BIO,Health Care,Unknown
-BIRK,Consumer Discretionary,Unknown
-BJ,Consumer Staples,Unknown
-BLD,Consumer Discretionary,Unknown
-BMRN,Health Care,Unknown
-BOKF,Financials,Unknown
-BPOP,Financials,Unknown
-BRBR,Consumer Staples,Unknown
-BRKR,Health Care,Unknown
-BROS,Consumer Discretionary,Unknown
-BRX,Real Estate,Unknown
-BSY,Information Technology,Unknown
-BURL,Consumer Discretionary,Unknown
-BWA,Consumer Discretionary,Unknown
-BWXT,Industrials,Unknown
-BYD,Consumer Discretionary,Unknown
-CACC,Financials,Unknown
-CACI,Industrials,Unknown
-CAR,Industrials,Unknown
-CART,Consumer Staples,Unknown
-CASY,Consumer Staples,Unknown
-CAVA,Consumer Discretionary,Unknown
-CBSH,Financials,Unknown
-CCCS,Information Technology,Unknown
-CCK,Materials,Unknown
-CE,Materials,Unknown
-CELH,Consumer Staples,Unknown
-CERT,Health Care,Unknown
-CFLT,Information Technology,Unknown
-CFR,Financials,Unknown
-CG,Financials,Unknown
-CGNX,Information Technology,Unknown
-CHDN,Consumer Discretionary,Unknown
-CHE,Health Care,Unknown
-CHH,Consumer Discretionary,Unknown
-CHRD,Energy,Unknown
-CHWY,Consumer Discretionary,Unknown
-CIEN,Information Technology,Unknown
-CIVI,Energy,Unknown
-CLF,Materials,Unknown
-CLH,Industrials,Unknown
-CLVT,Industrials,Unknown
-CMA,Financials,Unknown
+CMTL,nan,Unknown
 CNA,Financials,Unknown
+CNC,Health Care,Unknown
+CNCK,nan,Unknown
+CNCKW,nan,Unknown
+CNDT,nan,Unknown
+CNET,nan,Unknown
+CNEY,nan,Unknown
+CNFR,nan,Unknown
+CNFRZ,nan,Unknown
 CNH,Industrials,Unknown
 CNM,Industrials,Unknown
+CNOB,nan,Unknown
+CNOBP,nan,Unknown
+CNP,Utilities,Unknown
+CNSP,nan,Unknown
+CNTA,nan,Unknown
+CNTB,nan,Unknown
+CNTX,nan,Unknown
+CNTY,nan,Unknown
+CNVS,nan,Unknown
 CNXC,Information Technology,Unknown
+CNXN,nan,Unknown
+COCH,nan,Unknown
+COCHW,nan,Unknown
+COCO,nan,Unknown
+COCP,nan,Unknown
+CODA,nan,Unknown
+CODX,nan,Unknown
+COEP,nan,Unknown
+COEPW,nan,Unknown
+COF,Financials,Unknown
+COFS,nan,Unknown
+COGT,nan,Unknown
 COHR,Information Technology,Unknown
+COHU,nan,Unknown
+COIG,nan,Unknown
+COIN,Financials,Unknown
 COKE,Consumer Staples,Unknown
+COLA,nan,Unknown
+COLAR,nan,Unknown
+COLAU,nan,Unknown
 COLB,Financials,Unknown
 COLD,Real Estate,Unknown
+COLL,nan,Unknown
 COLM,Consumer Discretionary,Unknown
+COMM,nan,Unknown
+COMT,nan,Unknown
+CONI,nan,Unknown
+CONL,nan,Unknown
+COO,Health Care,Unknown
 COOP,Financials,Unknown
+COOT,nan,Unknown
+COOTW,nan,Unknown
+COP,Energy,Unknown
+COPJ,nan,Unknown
+COPP,nan,Unknown
+COR,Health Care,Unknown
+CORO,nan,Unknown
 CORT,Health Care,Unknown
+CORZ,nan,Unknown
+CORZW,nan,Unknown
+CORZZ,nan,Unknown
+COSM,nan,Unknown
+COST,Consumer Staples,Unknown
 COTY,Consumer Staples,Unknown
+COWG,nan,Unknown
+COWS,nan,Unknown
+COYA,nan,Unknown
+COYY,nan,Unknown
+CPAG,nan,Unknown
+CPAY,Financials,Unknown
+CPB,Consumer Staples,Unknown
+CPBI,nan,Unknown
+CPHC,nan,Unknown
+CPHY,nan,Unknown
+CPIX,nan,Unknown
+CPLS,nan,Unknown
 CPNG,Consumer Discretionary,Unknown
+CPOP,nan,Unknown
+CPRT,Industrials,Unknown
+CPRX,nan,Unknown
+CPSH,nan,Unknown
+CPSS,nan,Unknown
+CPT,Real Estate,Unknown
+CPZ,nan,Unknown
 CR,Industrials,Unknown
+CRAI,nan,Unknown
+CRAQ,nan,Unknown
+CRAQR,nan,Unknown
+CRAQU,nan,Unknown
+CRBP,nan,Unknown
+CRBU,nan,Unknown
+CRCG,nan,Unknown
+CRCT,nan,Unknown
+CRDF,nan,Unknown
+CRDL,nan,Unknown
+CRDO,nan,Unknown
+CRE,nan,Unknown
+CREG,nan,Unknown
+CRESW,nan,Unknown
+CRESY,nan,Unknown
+CREV,nan,Unknown
+CREVW,nan,Unknown
+CREX,nan,Unknown
+CRGO,nan,Unknown
+CRGOW,nan,Unknown
 CRH,Materials,Unknown
+CRIS,nan,Unknown
+CRL,Health Care,Unknown
+CRM,Information Technology,Unknown
+CRMD,nan,Unknown
+CRMG,nan,Unknown
+CRML,nan,Unknown
+CRMLW,nan,Unknown
+CRMT,nan,Unknown
+CRNC,nan,Unknown
+CRNT,nan,Unknown
+CRNX,nan,Unknown
+CRON,nan,Unknown
 CROX,Consumer Discretionary,Unknown
 CRS,Materials,Unknown
+CRSP,nan,Unknown
+CRSR,nan,Unknown
+CRTO,nan,Unknown
 CRUS,Information Technology,Unknown
+CRVL,nan,Unknown
+CRVO,nan,Unknown
+CRVS,nan,Unknown
+CRWD,Information Technology,Unknown
+CRWG,nan,Unknown
+CRWL,nan,Unknown
+CRWS,nan,Unknown
+CRWV,nan,Unknown
+CSAI,nan,Unknown
+CSB,nan,Unknown
+CSBR,nan,Unknown
+CSCL,nan,Unknown
+CSCO,Information Technology,Unknown
+CSCS,nan,Unknown
+CSGP,Real Estate,Unknown
+CSGS,nan,Unknown
+CSIQ,nan,Unknown
 CSL,Industrials,Unknown
+CSPI,nan,Unknown
+CSQ,nan,Unknown
+CSTE,nan,Unknown
+CSTL,nan,Unknown
+CSWC,nan,Unknown
+CSWCZ,nan,Unknown
+CSX,Industrials,Unknown
+CTAS,Industrials,Unknown
+CTBI,nan,Unknown
+CTEC,nan,Unknown
+CTKB,nan,Unknown
+CTLP,nan,Unknown
+CTMX,nan,Unknown
+CTNM,nan,Unknown
+CTNT,nan,Unknown
+CTOR,nan,Unknown
+CTRA,Energy,Unknown
+CTRM,nan,Unknown
+CTRN,nan,Unknown
+CTSH,Information Technology,Unknown
+CTSO,nan,Unknown
+CTVA,Materials,Unknown
+CTW,nan,Unknown
+CTXR,nan,Unknown
+CUB,nan,Unknown
 CUBE,Real Estate,Unknown
+CUBWU,nan,Unknown
+CUBWW,nan,Unknown
+CUE,nan,Unknown
+CUPR,nan,Unknown
+CURI,nan,Unknown
+CURIW,nan,Unknown
+CURR,nan,Unknown
+CURX,nan,Unknown
 CUZ,Real Estate,Unknown
+CV,nan,Unknown
+CVAC,nan,Unknown
+CVBF,nan,Unknown
+CVCO,nan,Unknown
+CVGI,nan,Unknown
+CVGW,nan,Unknown
+CVKD,nan,Unknown
+CVLT,nan,Unknown
 CVNA,Consumer Discretionary,Unknown
+CVNX,nan,Unknown
+CVRX,nan,Unknown
+CVS,Health Care,Unknown
+CVV,nan,Unknown
+CVX,Energy,Unknown
 CW,Industrials,Unknown
+CWBC,nan,Unknown
+CWCO,nan,Unknown
+CWD,nan,Unknown
 CWEN,Utilities,Unknown
-CWEN-A,Utilities,Unknown
+CWENA,nan,Unknown
+CWST,nan,Unknown
+CXAI,nan,Unknown
+CXAIW,nan,Unknown
+CXDO,nan,Unknown
+CXSE,nan,Unknown
 CXT,Industrials,Unknown
+CYBR,nan,Unknown
+CYCC,nan,Unknown
+CYCCP,nan,Unknown
+CYCN,nan,Unknown
+CYCU,nan,Unknown
+CYCUW,nan,Unknown
+CYN,nan,Unknown
+CYRX,nan,Unknown
+CYTK,nan,Unknown
+CZAR,nan,Unknown
+CZFS,nan,Unknown
+CZNC,nan,Unknown
+CZR,Consumer Discretionary,Unknown
+CZWI,nan,Unknown
+D,Utilities,Unknown
+DAAQ,nan,Unknown
+DAAQU,nan,Unknown
+DAAQW,nan,Unknown
+DADS,nan,Unknown
+DAIC,nan,Unknown
+DAICW,nan,Unknown
+DAIO,nan,Unknown
+DAK,nan,Unknown
+DAKT,nan,Unknown
+DAL,Industrials,Unknown
+DALI,nan,Unknown
+DALN,nan,Unknown
+DAPP,nan,Unknown
 DAR,Consumer Staples,Unknown
+DARE,nan,Unknown
+DASH,Consumer Discretionary,Unknown
+DAVE,nan,Unknown
+DAVEW,nan,Unknown
+DAWN,nan,Unknown
+DAX,nan,Unknown
+DAY,Industrials,Unknown
+DBGI,nan,Unknown
+DBVT,nan,Unknown
 DBX,Information Technology,Unknown
+DCBO,nan,Unknown
+DCGO,nan,Unknown
 DCI,Industrials,Unknown
+DCOM,nan,Unknown
+DCOMG,nan,Unknown
+DCOMP,nan,Unknown
+DCTH,nan,Unknown
+DD,Materials,Unknown
+DDI,nan,Unknown
+DDIV,nan,Unknown
+DDOG,Information Technology,Unknown
 DDS,Consumer Discretionary,Unknown
+DE,Industrials,Unknown
+DECK,Consumer Discretionary,Unknown
+DECO,nan,Unknown
+DEFT,nan,Unknown
+DELL,Information Technology,Unknown
+DEMZ,nan,Unknown
+DENN,nan,Unknown
+DERM,nan,Unknown
+DEVS,nan,Unknown
+DFDV,nan,Unknown
+DFGP,nan,Unknown
+DFGX,nan,Unknown
+DFLI,nan,Unknown
+DFLIW,nan,Unknown
+DFSC,nan,Unknown
+DFSCW,nan,Unknown
+DG,Consumer Staples,Unknown
+DGCB,nan,Unknown
+DGICA,nan,Unknown
+DGICB,nan,Unknown
+DGII,nan,Unknown
+DGLO,nan,Unknown
+DGLY,nan,Unknown
+DGNX,nan,Unknown
+DGRE,nan,Unknown
+DGRS,nan,Unknown
+DGRW,nan,Unknown
+DGX,Health Care,Unknown
+DGXX,nan,Unknown
+DH,nan,Unknown
+DHAI,nan,Unknown
+DHAIW,nan,Unknown
+DHC,nan,Unknown
+DHCNI,nan,Unknown
+DHCNL,nan,Unknown
+DHI,Consumer Discretionary,Unknown
+DHIL,nan,Unknown
+DHR,Health Care,Unknown
+DIBS,nan,Unknown
 DINO,Energy,Unknown
+DIOD,nan,Unknown
+DIS,Communication Services,Unknown
+DIVD,nan,Unknown
+DJCO,nan,Unknown
 DJT,Communication Services,Unknown
+DJTWW,nan,Unknown
+DKI,nan,Unknown
 DKNG,Consumer Discretionary,Unknown
+DKNX,nan,Unknown
 DKS,Consumer Discretionary,Unknown
 DLB,Information Technology,Unknown
-DNB,Industrials,Unknown
+DLHC,nan,Unknown
+DLLL,nan,Unknown
+DLO,nan,Unknown
+DLPN,nan,Unknown
+DLR,Real Estate,Unknown
+DLTH,nan,Unknown
+DLTR,Consumer Staples,Unknown
+DLXY,nan,Unknown
+DMAA,nan,Unknown
+DMAAR,nan,Unknown
+DMAAU,nan,Unknown
+DMAC,nan,Unknown
+DMAT,nan,Unknown
+DMLP,nan,Unknown
+DMRC,nan,Unknown
+DMXF,nan,Unknown
+DNLI,nan,Unknown
+DNTH,nan,Unknown
+DNUT,nan,Unknown
+DOC,Real Estate,Unknown
 DOCS,Health Care,Unknown
 DOCU,Information Technology,Unknown
+DOGZ,nan,Unknown
+DOMH,nan,Unknown
+DOMO,nan,Unknown
+DOOO,nan,Unknown
+DORM,nan,Unknown
+DOV,Industrials,Unknown
+DOW,Materials,Unknown
 DOX,Information Technology,Unknown
+DOYU,nan,Unknown
+DPRO,nan,Unknown
+DPZ,Consumer Discretionary,Unknown
+DRCT,nan,Unknown
+DRDB,nan,Unknown
+DRDBU,nan,Unknown
+DRDBW,nan,Unknown
+DRI,Consumer Discretionary,Unknown
+DRIO,nan,Unknown
+DRIV,nan,Unknown
+DRMA,nan,Unknown
+DRMAW,nan,Unknown
+DRRX,nan,Unknown
 DRS,Industrials,Unknown
+DRTS,nan,Unknown
+DRTSW,nan,Unknown
+DRUG,nan,Unknown
+DRVN,nan,Unknown
+DSGN,nan,Unknown
+DSGR,nan,Unknown
+DSGX,nan,Unknown
+DSP,nan,Unknown
+DSWL,nan,Unknown
+DSY,nan,Unknown
+DSYWW,nan,Unknown
 DT,Information Technology,Unknown
+DTCK,nan,Unknown
+DTCR,nan,Unknown
+DTE,Utilities,Unknown
+DTI,nan,Unknown
+DTIL,nan,Unknown
 DTM,Energy,Unknown
+DTSQ,nan,Unknown
+DTSQR,nan,Unknown
+DTSQU,nan,Unknown
+DTSS,nan,Unknown
+DTST,nan,Unknown
+DTSTW,nan,Unknown
+DUK,Utilities,Unknown
+DUKH,nan,Unknown
+DUKX,nan,Unknown
+DUO,nan,Unknown
 DUOL,Consumer Discretionary,Unknown
+DUOT,nan,Unknown
 DV,Information Technology,Unknown
+DVA,Health Care,Unknown
+DVAL,nan,Unknown
+DVAX,nan,Unknown
+DVIN,nan,Unknown
+DVLT,nan,Unknown
+DVLU,nan,Unknown
+DVN,Energy,Unknown
+DVOL,nan,Unknown
+DVQQ,nan,Unknown
+DVRE,nan,Unknown
+DVSP,nan,Unknown
+DVUT,nan,Unknown
+DVXB,nan,Unknown
+DVXC,nan,Unknown
+DVXE,nan,Unknown
+DVXF,nan,Unknown
+DVXK,nan,Unknown
+DVXP,nan,Unknown
+DVXV,nan,Unknown
+DVXY,nan,Unknown
+DVY,nan,Unknown
+DWAS,nan,Unknown
+DWAW,nan,Unknown
+DWSH,nan,Unknown
+DWSN,nan,Unknown
+DWTX,nan,Unknown
+DWUS,nan,Unknown
 DXC,Information Technology,Unknown
+DXCM,Health Care,Unknown
+DXLG,nan,Unknown
+DXPE,nan,Unknown
+DXR,nan,Unknown
+DXST,nan,Unknown
+DYAI,nan,Unknown
+DYCQ,nan,Unknown
+DYCQR,nan,Unknown
+DYCQU,nan,Unknown
+DYFI,nan,Unknown
+DYN,nan,Unknown
+DYTA,nan,Unknown
+EA,Communication Services,Unknown
+EBAY,Consumer Discretionary,Unknown
+EBC,nan,Unknown
+EBI,nan,Unknown
+EBIZ,nan,Unknown
+EBMT,nan,Unknown
+EBON,nan,Unknown
+ECBK,nan,Unknown
+ECDA,nan,Unknown
+ECDAW,nan,Unknown
 ECG,Industrials,Unknown
+ECL,Materials,Unknown
+ECOR,nan,Unknown
+ECOW,nan,Unknown
+ECPG,nan,Unknown
+ECX,nan,Unknown
+ECXWW,nan,Unknown
+ED,Utilities,Unknown
+EDAP,nan,Unknown
+EDBL,nan,Unknown
+EDBLW,nan,Unknown
+EDHL,nan,Unknown
+EDIT,nan,Unknown
+EDRY,nan,Unknown
+EDSA,nan,Unknown
+EDTK,nan,Unknown
+EDUC,nan,Unknown
 EEFT,Financials,Unknown
+EEIQ,nan,Unknown
+EEMA,nan,Unknown
+EFAS,nan,Unknown
+EFOI,nan,Unknown
+EFRA,nan,Unknown
+EFSC,nan,Unknown
+EFSCP,nan,Unknown
+EFSI,nan,Unknown
+EFTY,nan,Unknown
+EFX,Industrials,Unknown
+EG,Financials,Unknown
+EGAN,nan,Unknown
+EGBN,nan,Unknown
+EGGQ,nan,Unknown
+EGHA,nan,Unknown
+EGHAR,nan,Unknown
+EGHAU,nan,Unknown
+EGHT,nan,Unknown
 EGP,Real Estate,Unknown
+EH,nan,Unknown
 EHC,Health Care,Unknown
+EHGO,nan,Unknown
+EHLD,nan,Unknown
+EHLS,nan,Unknown
+EHTH,nan,Unknown
+EIX,Utilities,Unknown
+EJH,nan,Unknown
+EKG,nan,Unknown
+EKSO,nan,Unknown
+EL,Consumer Staples,Unknown
+ELAB,nan,Unknown
 ELAN,Health Care,Unknown
+ELBM,nan,Unknown
+ELDN,nan,Unknown
 ELF,Consumer Staples,Unknown
+ELFY,nan,Unknown
+ELIL,nan,Unknown
+ELIS,nan,Unknown
+ELOG,nan,Unknown
+ELPW,nan,Unknown
 ELS,Real Estate,Unknown
+ELSE,nan,Unknown
+ELTK,nan,Unknown
+ELTX,nan,Unknown
+ELUT,nan,Unknown
+ELV,Health Care,Unknown
+ELVA,nan,Unknown
+ELVN,nan,Unknown
+ELVR,nan,Unknown
+ELWS,nan,Unknown
+EM,nan,Unknown
+EMB,nan,Unknown
+EMBC,nan,Unknown
+EMCB,nan,Unknown
 EME,Industrials,Unknown
+EMEQ,nan,Unknown
+EMIF,nan,Unknown
+EML,nan,Unknown
+EMN,Materials,Unknown
+EMPD,nan,Unknown
+EMPG,nan,Unknown
+EMR,Industrials,Unknown
+EMXC,nan,Unknown
+EMXF,nan,Unknown
+ENDW,nan,Unknown
+ENGN,nan,Unknown
+ENGNW,nan,Unknown
+ENGS,nan,Unknown
+ENLT,nan,Unknown
+ENLV,nan,Unknown
+ENPH,Information Technology,Unknown
+ENSC,nan,Unknown
+ENSG,nan,Unknown
+ENTA,nan,Unknown
 ENTG,Information Technology,Unknown
+ENTO,nan,Unknown
+ENTX,nan,Unknown
+ENVB,nan,Unknown
+ENVX,nan,Unknown
+ENZL,nan,Unknown
+EOG,Energy,Unknown
+EOLS,nan,Unknown
+EOSE,nan,Unknown
+EOSEW,nan,Unknown
+EPAM,Information Technology,Unknown
+EPIX,nan,Unknown
+EPOW,nan,Unknown
 EPR,Real Estate,Unknown
+EPRX,nan,Unknown
+EPSM,nan,Unknown
+EPSN,nan,Unknown
+EPWK,nan,Unknown
+EQ,nan,Unknown
 EQH,Financials,Unknown
+EQIX,Real Estate,Unknown
+EQR,Real Estate,Unknown
+EQRR,nan,Unknown
+EQT,Energy,Unknown
+ERAS,nan,Unknown
+ERET,nan,Unknown
+ERIC,nan,Unknown
+ERIE,nan,Unknown
+ERII,nan,Unknown
+ERNA,nan,Unknown
+ERNZ,nan,Unknown
+ES,Utilities,Unknown
 ESAB,Industrials,Unknown
+ESCA,nan,Unknown
+ESEA,nan,Unknown
+ESGD,nan,Unknown
+ESGE,nan,Unknown
+ESGL,nan,Unknown
+ESGLW,nan,Unknown
+ESGU,nan,Unknown
+ESHA,nan,Unknown
+ESHAR,nan,Unknown
 ESI,Materials,Unknown
+ESLA,nan,Unknown
+ESLAW,nan,Unknown
+ESLT,nan,Unknown
+ESMV,nan,Unknown
+ESN,nan,Unknown
+ESOA,nan,Unknown
+ESPO,nan,Unknown
+ESPR,nan,Unknown
+ESQ,nan,Unknown
+ESS,Real Estate,Unknown
+ESTA,nan,Unknown
 ESTC,Information Technology,Unknown
+ESU5,nan,Unknown
+ETDUSD,nan,Unknown
+ETEC,nan,Unknown
+ETHA,nan,Unknown
+ETHM,nan,Unknown
+ETHMU,nan,Unknown
+ETHMW,nan,Unknown
+ETHZ,nan,Unknown
+ETHZW,nan,Unknown
+ETN,Industrials,Unknown
+ETNB,nan,Unknown
+ETON,nan,Unknown
+ETOR,nan,Unknown
+ETR,Utilities,Unknown
+ETRL,nan,Unknown
+ETS,nan,Unknown
 ETSY,Consumer Discretionary,Unknown
+EU,nan,Unknown
+EUDA,nan,Unknown
+EUDAW,nan,Unknown
+EUFN,nan,Unknown
+EURK,nan,Unknown
+EURKR,nan,Unknown
+EURKU,nan,Unknown
+EVAX,nan,Unknown
+EVCM,nan,Unknown
+EVER,nan,Unknown
+EVGN,nan,Unknown
+EVGO,nan,Unknown
+EVGOW,nan,Unknown
+EVLV,nan,Unknown
+EVLVW,nan,Unknown
+EVMT,nan,Unknown
+EVO,nan,Unknown
+EVOK,nan,Unknown
 EVR,Financials,Unknown
+EVRG,Utilities,Unknown
+EVSD,nan,Unknown
+EVTV,nan,Unknown
+EVYM,nan,Unknown
+EW,Health Care,Unknown
 EWBC,Financials,Unknown
+EWCZ,nan,Unknown
+EWJV,nan,Unknown
+EWTX,nan,Unknown
+EWZS,nan,Unknown
 EXAS,Health Care,Unknown
+EXC,Utilities,Unknown
+EXE,Energy,Unknown
+EXEEL,nan,Unknown
+EXEEW,nan,Unknown
+EXEEZ,nan,Unknown
 EXEL,Health Care,Unknown
+EXFY,nan,Unknown
 EXLS,Industrials,Unknown
+EXOZ,nan,Unknown
 EXP,Materials,Unknown
+EXPD,Industrials,Unknown
+EXPE,Consumer Discretionary,Unknown
+EXPI,nan,Unknown
+EXPO,nan,Unknown
+EXR,Real Estate,Unknown
+EXTR,nan,Unknown
+EXUS,nan,Unknown
+EYE,nan,Unknown
+EYEG,nan,Unknown
+EYPT,nan,Unknown
+EZGO,nan,Unknown
+EZPW,nan,Unknown
+F,Consumer Discretionary,Unknown
+FA,nan,Unknown
+FAAR,nan,Unknown
+FAAS,nan,Unknown
+FAASW,nan,Unknown
+FAB,nan,Unknown
+FACT,nan,Unknown
+FACTU,nan,Unknown
+FACTW,nan,Unknown
+FAD,nan,Unknown
 FAF,Financials,Unknown
+FALN,nan,Unknown
+FAMI,nan,Unknown
+FANG,Energy,Unknown
+FARM,nan,Unknown
+FAST,Industrials,Unknown
+FAT,nan,Unknown
+FATBB,nan,Unknown
+FATBP,nan,Unknown
+FATE,nan,Unknown
+FATN,nan,Unknown
+FAU5,nan,Unknown
+FBGL,nan,Unknown
 FBIN,Industrials,Unknown
+FBIO,nan,Unknown
+FBIOP,nan,Unknown
+FBIZ,nan,Unknown
+FBL,nan,Unknown
+FBLA,nan,Unknown
+FBLG,nan,Unknown
+FBNC,nan,Unknown
+FBOT,nan,Unknown
+FBRX,nan,Unknown
+FBYD,nan,Unknown
+FBYDW,nan,Unknown
+FCA,nan,Unknown
+FCAL,nan,Unknown
+FCAP,nan,Unknown
+FCBC,nan,Unknown
+FCCO,nan,Unknown
+FCEF,nan,Unknown
+FCEL,nan,Unknown
+FCFS,nan,Unknown
+FCHL,nan,Unknown
 FCN,Industrials,Unknown
 FCNCA,Financials,Unknown
+FCNCO,nan,Unknown
+FCNCP,nan,Unknown
+FCTE,nan,Unknown
+FCUV,nan,Unknown
+FCVT,nan,Unknown
+FCX,Materials,Unknown
+FDBC,nan,Unknown
+FDCF,nan,Unknown
+FDFF,nan,Unknown
+FDIF,nan,Unknown
+FDIG,nan,Unknown
+FDIV,nan,Unknown
+FDMT,nan,Unknown
+FDNI,nan,Unknown
+FDS,Financials,Unknown
+FDSB,nan,Unknown
+FDT,nan,Unknown
+FDTS,nan,Unknown
+FDTX,nan,Unknown
+FDUS,nan,Unknown
+FDX,Industrials,Unknown
+FE,Utilities,Unknown
+FEAM,nan,Unknown
+FEAT,nan,Unknown
+FEBO,nan,Unknown
+FEIM,nan,Unknown
+FELE,nan,Unknown
+FEM,nan,Unknown
+FEMB,nan,Unknown
+FEMS,nan,Unknown
+FEMY,nan,Unknown
+FENC,nan,Unknown
+FEP,nan,Unknown
+FEPI,nan,Unknown
+FER,nan,Unknown
+FERA,nan,Unknown
+FERAR,nan,Unknown
+FERAU,nan,Unknown
 FERG,Industrials,Unknown
+FEUZ,nan,Unknown
+FEX,nan,Unknown
+FFAI,nan,Unknown
+FFAIW,nan,Unknown
+FFBC,nan,Unknown
+FFIC,nan,Unknown
+FFIN,nan,Unknown
+FFIV,Information Technology,Unknown
+FFUT,nan,Unknown
+FGBI,nan,Unknown
+FGBIP,nan,Unknown
+FGEN,nan,Unknown
+FGI,nan,Unknown
+FGIWW,nan,Unknown
+FGL,nan,Unknown
+FGM,nan,Unknown
+FGMC,nan,Unknown
+FGMCR,nan,Unknown
+FGMCU,nan,Unknown
+FGNX,nan,Unknown
+FGNXP,nan,Unknown
+FGSI,nan,Unknown
 FHB,Financials,Unknown
 FHN,Financials,Unknown
+FHTX,nan,Unknown
+FI,Financials,Unknown
+FIBK,nan,Unknown
+FICO,Information Technology,Unknown
+FICS,nan,Unknown
+FID,nan,Unknown
+FIEE,nan,Unknown
+FIGX,nan,Unknown
+FIGXU,nan,Unknown
+FIGXW,nan,Unknown
+FINE,nan,Unknown
+FINW,nan,Unknown
+FINX,nan,Unknown
+FIP,nan,Unknown
+FIS,Financials,Unknown
+FISI,nan,Unknown
+FITB,Financials,Unknown
+FITBI,nan,Unknown
+FITBO,nan,Unknown
+FITBP,nan,Unknown
 FIVE,Consumer Discretionary,Unknown
+FIVN,nan,Unknown
+FIVY,nan,Unknown
 FIX,Industrials,Unknown
+FIXD,nan,Unknown
+FIZZ,nan,Unknown
+FJP,nan,Unknown
+FKU,nan,Unknown
+FKWL,nan,Unknown
+FLD,nan,Unknown
+FLDB,nan,Unknown
+FLDDW,nan,Unknown
 FLEX,Information Technology,Unknown
+FLGC,nan,Unknown
+FLGT,nan,Unknown
+FLL,nan,Unknown
+FLN,nan,Unknown
+FLNC,nan,Unknown
+FLNT,nan,Unknown
 FLO,Consumer Staples,Unknown
 FLS,Industrials,Unknown
 FLUT,Consumer Discretionary,Unknown
+FLUX,nan,Unknown
+FLWS,nan,Unknown
+FLX,nan,Unknown
+FLXS,nan,Unknown
+FLY,nan,Unknown
+FLYE,nan,Unknown
+FLYW,nan,Unknown
+FMAO,nan,Unknown
+FMB,nan,Unknown
+FMBH,nan,Unknown
 FMC,Materials,Unknown
+FMED,nan,Unknown
+FMET,nan,Unknown
+FMFC,nan,Unknown
+FMHI,nan,Unknown
+FMNB,nan,Unknown
+FMST,nan,Unknown
+FMSTW,nan,Unknown
+FMTM,nan,Unknown
+FMUB,nan,Unknown
+FMUN,nan,Unknown
 FNB,Financials,Unknown
 FND,Consumer Discretionary,Unknown
 FNF,Financials,Unknown
+FNGR,nan,Unknown
+FNK,nan,Unknown
+FNKO,nan,Unknown
+FNLC,nan,Unknown
+FNWB,nan,Unknown
+FNWD,nan,Unknown
+FNX,nan,Unknown
+FNY,nan,Unknown
+FOLD,nan,Unknown
+FONR,nan,Unknown
+FORA,nan,Unknown
+FORD,nan,Unknown
+FORL,nan,Unknown
+FORLU,nan,Unknown
+FORLW,nan,Unknown
+FORM,nan,Unknown
+FORR,nan,Unknown
+FORTY,nan,Unknown
+FOSL,nan,Unknown
+FOSLL,nan,Unknown
 FOUR,Information Technology,Unknown
+FOX,Communication Services,Unknown
+FOXA,Communication Services,Unknown
+FOXF,nan,Unknown
+FOXX,nan,Unknown
+FOXXW,nan,Unknown
+FPA,nan,Unknown
+FPAY,nan,Unknown
+FPXE,nan,Unknown
+FPXI,nan,Unknown
 FR,Real Estate,Unknown
+FRAF,nan,Unknown
+FRBA,nan,Unknown
+FRD,nan,Unknown
+FRDD,nan,Unknown
+FRDU,nan,Unknown
+FRGT,nan,Unknown
 FRHC,Financials,Unknown
+FRME,nan,Unknown
+FRMEP,nan,Unknown
+FROG,nan,Unknown
+FRPH,nan,Unknown
 FRPT,Consumer Staples,Unknown
+FRSH,nan,Unknown
+FRST,nan,Unknown
+FRSX,nan,Unknown
+FRT,Real Estate,Unknown
+FSBC,nan,Unknown
+FSBW,nan,Unknown
+FSCS,nan,Unknown
+FSEA,nan,Unknown
+FSFG,nan,Unknown
+FSGS,nan,Unknown
+FSHP,nan,Unknown
+FSHPR,nan,Unknown
+FSHPU,nan,Unknown
+FSLR,Information Technology,Unknown
+FSTR,nan,Unknown
+FSUN,nan,Unknown
+FSV,nan,Unknown
+FSZ,nan,Unknown
+FTA,nan,Unknown
+FTAG,nan,Unknown
 FTAI,Industrials,Unknown
+FTAIM,nan,Unknown
+FTAIN,nan,Unknown
+FTC,nan,Unknown
+FTCI,nan,Unknown
+FTCS,nan,Unknown
+FTDR,nan,Unknown
+FTDS,nan,Unknown
+FTEK,nan,Unknown
+FTEL,nan,Unknown
+FTFT,nan,Unknown
+FTGC,nan,Unknown
+FTGS,nan,Unknown
+FTHI,nan,Unknown
+FTHM,nan,Unknown
 FTI,Energy,Unknown
+FTLF,nan,Unknown
+FTNT,Information Technology,Unknown
+FTQI,nan,Unknown
+FTRE,nan,Unknown
+FTRI,nan,Unknown
+FTRK,nan,Unknown
+FTSL,nan,Unknown
+FTSM,nan,Unknown
+FTV,Industrials,Unknown
+FTXG,nan,Unknown
+FTXH,nan,Unknown
+FTXL,nan,Unknown
+FTXN,nan,Unknown
+FTXO,nan,Unknown
+FTXR,nan,Unknown
+FUFU,nan,Unknown
+FUFUW,nan,Unknown
+FULC,nan,Unknown
+FULT,nan,Unknown
+FULTP,nan,Unknown
+FUNC,nan,Unknown
+FUND,nan,Unknown
+FUSB,nan,Unknown
+FUTU,nan,Unknown
+FV,nan,Unknown
+FVC,nan,Unknown
+FVCB,nan,Unknown
+FVN,nan,Unknown
+FVNNR,nan,Unknown
+FVNNU,nan,Unknown
 FWONA,Communication Services,Unknown
 FWONK,Communication Services,Unknown
+FWRD,nan,Unknown
+FWRG,nan,Unknown
+FXNC,nan,Unknown
 FYBR,Communication Services,Unknown
+FYC,nan,Unknown
+FYT,nan,Unknown
+FYX,nan,Unknown
 G,Information Technology,Unknown
+GABC,nan,Unknown
+GAIA,nan,Unknown
+GAIN,nan,Unknown
+GAINI,nan,Unknown
+GAINL,nan,Unknown
+GAINN,nan,Unknown
+GAINZ,nan,Unknown
+GALT,nan,Unknown
+GAMB,nan,Unknown
+GAME,nan,Unknown
+GANX,nan,Unknown
 GAP,Consumer Discretionary,Unknown
+GASS,nan,Unknown
+GAUZ,nan,Unknown
+GBDC,nan,Unknown
+GBFH,nan,Unknown
+GBIO,nan,Unknown
+GBUG,nan,Unknown
+GCBC,nan,Unknown
+GCL,nan,Unknown
+GCLWW,nan,Unknown
+GCMG,nan,Unknown
+GCMGW,nan,Unknown
+GCT,nan,Unknown
+GCTK,nan,Unknown
+GD,Industrials,Unknown
+GDC,nan,Unknown
+GDDY,Information Technology,Unknown
+GDEN,nan,Unknown
+GDEV,nan,Unknown
+GDEVW,nan,Unknown
+GDHG,nan,Unknown
+GDRX,nan,Unknown
+GDS,nan,Unknown
+GDTC,nan,Unknown
+GDYN,nan,Unknown
+GE,Industrials,Unknown
+GECC,nan,Unknown
+GECCH,nan,Unknown
+GECCI,nan,Unknown
+GECCO,nan,Unknown
+GECCZ,nan,Unknown
+GEG,nan,Unknown
+GEGGL,nan,Unknown
+GEHC,Health Care,Unknown
+GELS,nan,Unknown
+GEME,nan,Unknown
+GEN,Information Technology,Unknown
+GENK,nan,Unknown
+GENVR,nan,Unknown
+GEOS,nan,Unknown
+GERN,nan,Unknown
+GEV,Industrials,Unknown
+GEVO,nan,Unknown
+GFAI,nan,Unknown
+GFAIW,nan,Unknown
+GFGF,nan,Unknown
+GFLW,nan,Unknown
 GFS,Information Technology,Unknown
+GGAL,nan,Unknown
 GGG,Industrials,Unknown
+GGLL,nan,Unknown
+GGLS,nan,Unknown
+GGR,nan,Unknown
+GGROW,nan,Unknown
+GH,nan,Unknown
+GHRS,nan,Unknown
+GIBO,nan,Unknown
+GIBOW,nan,Unknown
+GIFI,nan,Unknown
+GIFT,nan,Unknown
+GIG,nan,Unknown
+GIGGU,nan,Unknown
+GIGGW,nan,Unknown
+GIGM,nan,Unknown
+GIII,nan,Unknown
+GILD,Health Care,Unknown
+GILT,nan,Unknown
+GIND,nan,Unknown
+GINX,nan,Unknown
+GIPR,nan,Unknown
+GIPRW,nan,Unknown
+GIS,Consumer Staples,Unknown
+GITS,nan,Unknown
+GKAT,nan,Unknown
+GL,Financials,Unknown
+GLAD,nan,Unknown
+GLADZ,nan,Unknown
+GLBE,nan,Unknown
+GLBS,nan,Unknown
+GLBZ,nan,Unknown
+GLCR,nan,Unknown
+GLDD,nan,Unknown
+GLDI,nan,Unknown
+GLDY,nan,Unknown
+GLE,nan,Unknown
+GLGG,nan,Unknown
 GLIBA,Communication Services,Unknown
 GLIBK,Communication Services,Unknown
+GLMD,nan,Unknown
+GLNG,nan,Unknown
 GLOB,Information Technology,Unknown
+GLOW,nan,Unknown
+GLPG,nan,Unknown
 GLPI,Real Estate,Unknown
+GLRE,nan,Unknown
+GLSI,nan,Unknown
+GLTO,nan,Unknown
+GLUE,nan,Unknown
+GLW,Information Technology,Unknown
+GLXG,nan,Unknown
+GLXY,nan,Unknown
+GM,Consumer Discretionary,Unknown
+GMAB,nan,Unknown
 GME,Consumer Discretionary,Unknown
 GMED,Health Care,Unknown
+GMGI,nan,Unknown
+GMHS,nan,Unknown
+GMM,nan,Unknown
+GNFT,nan,Unknown
+GNLN,nan,Unknown
+GNLX,nan,Unknown
+GNMA,nan,Unknown
+GNOM,nan,Unknown
+GNPX,nan,Unknown
+GNRC,Industrials,Unknown
+GNSS,nan,Unknown
+GNTA,nan,Unknown
 GNTX,Consumer Discretionary,Unknown
+GO,nan,Unknown
+GOCO,nan,Unknown
+GOGO,nan,Unknown
+GOOD,nan,Unknown
+GOODN,nan,Unknown
+GOODO,nan,Unknown
+GOOG,Communication Services,Unknown
+GOOGL,Communication Services,Unknown
+GORV,nan,Unknown
+GOSS,nan,Unknown
+GOVI,nan,Unknown
+GOVX,nan,Unknown
+GOVXW,nan,Unknown
+GP,nan,Unknown
+GPAT,nan,Unknown
+GPATU,nan,Unknown
+GPATW,nan,Unknown
+GPC,Consumer Discretionary,Unknown
+GPCR,nan,Unknown
+GPIQ,nan,Unknown
+GPIX,nan,Unknown
 GPK,Materials,Unknown
+GPN,Financials,Unknown
+GPRE,nan,Unknown
+GPRF,nan,Unknown
+GPRO,nan,Unknown
+GQQQ,nan,Unknown
+GRAB,nan,Unknown
+GRABW,nan,Unknown
+GRAL,nan,Unknown
+GRAN,nan,Unknown
+GRCE,nan,Unknown
+GREE,nan,Unknown
+GREEL,nan,Unknown
+GRFS,nan,Unknown
+GRI,nan,Unknown
+GRID,nan,Unknown
+GRIN,nan,Unknown
+GRMN,Consumer Discretionary,Unknown
+GRNQ,nan,Unknown
+GROW,nan,Unknown
+GRPN,nan,Unknown
+GRRR,nan,Unknown
+GRRRW,nan,Unknown
+GRVY,nan,Unknown
+GRW,nan,Unknown
+GRWG,nan,Unknown
+GS,Financials,Unknown
+GSAT,nan,Unknown
+GSBC,nan,Unknown
+GSHD,nan,Unknown
+GSHR,nan,Unknown
+GSHRU,nan,Unknown
+GSHRW,nan,Unknown
+GSIB,nan,Unknown
+GSIT,nan,Unknown
+GSIW,nan,Unknown
+GSM,nan,Unknown
+GSRFU,nan,Unknown
+GSRT,nan,Unknown
+GSRTR,nan,Unknown
+GSRTU,nan,Unknown
+GSUN,nan,Unknown
+GT,nan,Unknown
+GTBP,nan,Unknown
+GTEC,nan,Unknown
+GTEN,nan,Unknown
+GTENU,nan,Unknown
+GTENW,nan,Unknown
+GTERA,nan,Unknown
+GTERR,nan,Unknown
+GTERU,nan,Unknown
+GTERW,nan,Unknown
 GTES,Industrials,Unknown
+GTI,nan,Unknown
+GTIM,nan,Unknown
 GTLB,Information Technology,Unknown
 GTM,Communication Services,Unknown
+GTR,nan,Unknown
+GTX,nan,Unknown
+GURE,nan,Unknown
+GUTS,nan,Unknown
+GV,nan,Unknown
+GVH,nan,Unknown
+GWAV,nan,Unknown
 GWRE,Information Technology,Unknown
+GWRS,nan,Unknown
+GWW,Industrials,Unknown
+GXAI,nan,Unknown
+GXDW,nan,Unknown
 GXO,Industrials,Unknown
+GYRE,nan,Unknown
+GYRO,nan,Unknown
 H,Consumer Discretionary,Unknown
+HAFC,nan,Unknown
+HAIN,nan,Unknown
+HAL,Energy,Unknown
 HALO,Health Care,Unknown
+HAO,nan,Unknown
+HAS,Consumer Discretionary,Unknown
 HAYW,Industrials,Unknown
+HBAN,Financials,Unknown
+HBANL,nan,Unknown
+HBANM,nan,Unknown
+HBANP,nan,Unknown
+HBCP,nan,Unknown
+HBDC,nan,Unknown
+HBIO,nan,Unknown
+HBNB,nan,Unknown
+HBNC,nan,Unknown
+HBT,nan,Unknown
+HCA,Health Care,Unknown
+HCAI,nan,Unknown
+HCAT,nan,Unknown
+HCHL,nan,Unknown
+HCKT,nan,Unknown
+HCM,nan,Unknown
+HCMAU,nan,Unknown
+HCOW,nan,Unknown
+HCSG,nan,Unknown
+HCTI,nan,Unknown
+HCWB,nan,Unknown
+HD,Consumer Discretionary,Unknown
+HDL,nan,Unknown
+HDSN,nan,Unknown
+HEAL,nan,Unknown
+HECO,nan,Unknown
 HEI,Industrials,Unknown
-HEI-A,Industrials,Unknown
+HEIA,nan,Unknown
+HEJD,nan,Unknown
+HELE,nan,Unknown
+HEPS,nan,Unknown
+HEQQ,nan,Unknown
+HERD,nan,Unknown
+HERO,nan,Unknown
+HERZ,nan,Unknown
+HFBL,nan,Unknown
+HFFG,nan,Unknown
+HFSP,nan,Unknown
+HFWA,nan,Unknown
+HGBL,nan,Unknown
 HHH,Real Estate,Unknown
+HHS,nan,Unknown
+HIDE,nan,Unknown
+HIFS,nan,Unknown
+HIG,Financials,Unknown
+HIHO,nan,Unknown
+HII,Industrials,Unknown
+HIMX,nan,Unknown
+HIMY,nan,Unknown
+HIMZ,nan,Unknown
+HIND,nan,Unknown
+HISF,nan,Unknown
+HIT,nan,Unknown
+HITI,nan,Unknown
+HIVE,nan,Unknown
 HIW,Real Estate,Unknown
+HKIT,nan,Unknown
+HKPD,nan,Unknown
+HLAL,nan,Unknown
 HLI,Financials,Unknown
+HLIT,nan,Unknown
+HLMN,nan,Unknown
 HLNE,Financials,Unknown
+HLP,nan,Unknown
+HLT,Consumer Discretionary,Unknown
+HLVX,nan,Unknown
+HMR,nan,Unknown
+HNDL,nan,Unknown
+HNNA,nan,Unknown
+HNNAZ,nan,Unknown
+HNRG,nan,Unknown
+HNST,nan,Unknown
+HNVR,nan,Unknown
+HOFT,nan,Unknown
 HOG,Consumer Discretionary,Unknown
+HOLO,nan,Unknown
+HOLOW,nan,Unknown
+HOLX,Health Care,Unknown
+HON,Industrials,Unknown
+HOND,nan,Unknown
+HONDU,nan,Unknown
+HONDW,nan,Unknown
+HONE,nan,Unknown
 HOOD,Financials,Unknown
+HOOG,nan,Unknown
+HOOI,nan,Unknown
+HOOX,nan,Unknown
+HOPE,nan,Unknown
+HOTH,nan,Unknown
+HOUR,nan,Unknown
+HOVNP,nan,Unknown
+HOVR,nan,Unknown
+HOVRW,nan,Unknown
+HOWL,nan,Unknown
+HPAI,nan,Unknown
+HPAIW,nan,Unknown
+HPE,Information Technology,Unknown
+HPK,nan,Unknown
+HPQ,Information Technology,Unknown
+HQGO,nan,Unknown
+HQI,nan,Unknown
+HQY,nan,Unknown
 HR,Real Estate,Unknown
 HRB,Consumer Discretionary,Unknown
+HRL,Consumer Staples,Unknown
+HRMY,nan,Unknown
+HROW,nan,Unknown
+HROWL,nan,Unknown
+HROWM,nan,Unknown
+HRTS,nan,Unknown
+HRTX,nan,Unknown
+HRZN,nan,Unknown
+HSAI,nan,Unknown
+HSCS,nan,Unknown
+HSCSW,nan,Unknown
+HSDT,nan,Unknown
+HSIC,Health Care,Unknown
+HSII,nan,Unknown
+HSPO,nan,Unknown
+HSPOR,nan,Unknown
+HSPOU,nan,Unknown
+HSPOW,nan,Unknown
+HSPT,nan,Unknown
+HSPTR,nan,Unknown
+HSPTU,nan,Unknown
+HST,Real Estate,Unknown
+HSTM,nan,Unknown
+HSY,Consumer Staples,Unknown
+HTBK,nan,Unknown
+HTCO,nan,Unknown
+HTCR,nan,Unknown
+HTFL,nan,Unknown
+HTHT,nan,Unknown
+HTLD,nan,Unknown
+HTLM,nan,Unknown
+HTO,nan,Unknown
+HTOO,nan,Unknown
+HTOOW,nan,Unknown
+HTZ,nan,Unknown
+HTZWW,nan,Unknown
+HUBB,Industrials,Unknown
+HUBC,nan,Unknown
+HUBCW,nan,Unknown
+HUBCZ,nan,Unknown
+HUBG,nan,Unknown
 HUBS,Information Technology,Unknown
+HUDI,nan,Unknown
+HUHU,nan,Unknown
+HUIZ,nan,Unknown
+HUM,Health Care,Unknown
+HUMA,nan,Unknown
+HUMAW,nan,Unknown
 HUN,Materials,Unknown
+HURA,nan,Unknown
+HURC,nan,Unknown
+HURN,nan,Unknown
+HUT,nan,Unknown
+HVII,nan,Unknown
+HVIIR,nan,Unknown
+HVIIU,nan,Unknown
+HVMCU,nan,Unknown
+HWAY,nan,Unknown
+HWBK,nan,Unknown
+HWC,nan,Unknown
+HWCPZ,nan,Unknown
+HWH,nan,Unknown
+HWKN,nan,Unknown
+HWM,Industrials,Unknown
+HWSM,nan,Unknown
+HXHX,nan,Unknown
 HXL,Industrials,Unknown
+HYBI,nan,Unknown
+HYDR,nan,Unknown
+HYFM,nan,Unknown
+HYFT,nan,Unknown
+HYLS,nan,Unknown
+HYMC,nan,Unknown
+HYMCL,nan,Unknown
+HYPD,nan,Unknown
+HYPR,nan,Unknown
+HYXF,nan,Unknown
+HYZD,nan,Unknown
 IAC,Communication Services,Unknown
+IART,nan,Unknown
+IAS,nan,Unknown
+IBAC,nan,Unknown
+IBACR,nan,Unknown
+IBAT,nan,Unknown
+IBB,nan,Unknown
+IBBQ,nan,Unknown
+IBCP,nan,Unknown
+IBEX,nan,Unknown
+IBG,nan,Unknown
+IBGA,nan,Unknown
+IBGB,nan,Unknown
+IBGK,nan,Unknown
+IBGL,nan,Unknown
+IBIO,nan,Unknown
+IBIT,nan,Unknown
 IBKR,Financials,Unknown
+IBM,Information Technology,Unknown
+IBOC,nan,Unknown
+IBOT,nan,Unknown
+IBRX,nan,Unknown
+IBTF,nan,Unknown
+IBTG,nan,Unknown
+IBTH,nan,Unknown
+IBTI,nan,Unknown
+IBTJ,nan,Unknown
+IBTK,nan,Unknown
+IBTL,nan,Unknown
+IBTM,nan,Unknown
+IBTO,nan,Unknown
+IBTP,nan,Unknown
+IBTQ,nan,Unknown
+ICCC,nan,Unknown
+ICCM,nan,Unknown
+ICE,Financials,Unknown
+ICFI,nan,Unknown
+ICG,nan,Unknown
+ICHR,nan,Unknown
+ICLN,nan,Unknown
+ICLR,nan,Unknown
+ICMB,nan,Unknown
+ICON,nan,Unknown
+ICOP,nan,Unknown
+ICU,nan,Unknown
+ICUCW,nan,Unknown
+ICUI,nan,Unknown
 IDA,Utilities,Unknown
+IDAI,nan,Unknown
+IDCC,nan,Unknown
+IDEF,nan,Unknown
+IDN,nan,Unknown
+IDXX,Health Care,Unknown
+IDYA,nan,Unknown
+IEF,nan,Unknown
+IEI,nan,Unknown
+IEP,nan,Unknown
+IESC,nan,Unknown
+IEUS,nan,Unknown
+IEX,Industrials,Unknown
+IFBD,nan,Unknown
+IFF,Materials,Unknown
+IFGL,nan,Unknown
+IFLO,nan,Unknown
+IFRX,nan,Unknown
+IFV,nan,Unknown
+IGF,nan,Unknown
+IGIB,nan,Unknown
+IGIC,nan,Unknown
+IGOV,nan,Unknown
+IGSB,nan,Unknown
+IHRT,nan,Unknown
+IHYF,nan,Unknown
+III,nan,Unknown
+IIIV,nan,Unknown
+IINN,nan,Unknown
+IINNW,nan,Unknown
+IJT,nan,Unknown
+IKT,nan,Unknown
+ILAG,nan,Unknown
+ILIT,nan,Unknown
+ILLR,nan,Unknown
+ILLRW,nan,Unknown
 ILMN,Health Care,Unknown
+ILPT,nan,Unknown
+IMA,nan,Unknown
+IMAB,nan,Unknown
+IMCC,nan,Unknown
+IMCR,nan,Unknown
+IMCV,nan,Unknown
+IMDX,nan,Unknown
+IMG,nan,Unknown
+IMKTA,nan,Unknown
+IMMP,nan,Unknown
+IMMR,nan,Unknown
+IMMX,nan,Unknown
+IMNM,nan,Unknown
+IMNN,nan,Unknown
+IMOM,nan,Unknown
+IMOS,nan,Unknown
+IMPP,nan,Unknown
+IMPPP,nan,Unknown
+IMRN,nan,Unknown
+IMRX,nan,Unknown
+IMTE,nan,Unknown
+IMTX,nan,Unknown
+IMUX,nan,Unknown
+IMVT,nan,Unknown
+IMXI,nan,Unknown
+INAB,nan,Unknown
+INAC,nan,Unknown
+INACR,nan,Unknown
+INACU,nan,Unknown
+INBK,nan,Unknown
+INBKZ,nan,Unknown
+INBS,nan,Unknown
+INBX,nan,Unknown
+INCR,nan,Unknown
+INCY,Health Care,Unknown
+INDB,nan,Unknown
+INDH,nan,Unknown
+INDI,nan,Unknown
+INDP,nan,Unknown
+INDV,nan,Unknown
+INDY,nan,Unknown
+INEO,nan,Unknown
 INFA,Information Technology,Unknown
+INFR,nan,Unknown
 INGM,Information Technology,Unknown
+INGN,nan,Unknown
 INGR,Consumer Staples,Unknown
+INHD,nan,Unknown
+INKT,nan,Unknown
+INLF,nan,Unknown
+INM,nan,Unknown
+INMB,nan,Unknown
+INMD,nan,Unknown
+INNV,nan,Unknown
+INO,nan,Unknown
+INOD,nan,Unknown
+INRO,nan,Unknown
+INSE,nan,Unknown
+INSG,nan,Unknown
 INSM,Health Care,Unknown
 INSP,Health Care,Unknown
+INTA,nan,Unknown
+INTC,Information Technology,Unknown
+INTG,nan,Unknown
+INTJ,nan,Unknown
+INTR,nan,Unknown
+INTS,nan,Unknown
+INTU,Information Technology,Unknown
+INTW,nan,Unknown
+INTZ,nan,Unknown
+INV,nan,Unknown
+INVA,nan,Unknown
+INVE,nan,Unknown
+INVH,Real Estate,Unknown
+INVZ,nan,Unknown
+INVZW,nan,Unknown
+IOBT,nan,Unknown
+IONL,nan,Unknown
+IONR,nan,Unknown
 IONS,Health Care,Unknown
+IONX,nan,Unknown
+IONZ,nan,Unknown
+IOSP,nan,Unknown
 IOT,Information Technology,Unknown
+IOTR,nan,Unknown
+IOVA,nan,Unknown
+IP,Materials,Unknown
+IPAR,nan,Unknown
+IPCX,nan,Unknown
+IPCXR,nan,Unknown
+IPCXU,nan,Unknown
+IPDN,nan,Unknown
+IPG,Communication Services,Unknown
 IPGP,Information Technology,Unknown
+IPHA,nan,Unknown
+IPKW,nan,Unknown
+IPM,nan,Unknown
+IPOD,nan,Unknown
+IPODU,nan,Unknown
+IPODW,nan,Unknown
+IPSC,nan,Unknown
+IPW,nan,Unknown
+IPWR,nan,Unknown
+IPX,nan,Unknown
+IQ,nan,Unknown
+IQQQ,nan,Unknown
+IQST,nan,Unknown
+IQV,Health Care,Unknown
+IR,Industrials,Unknown
+IRBT,nan,Unknown
+IRD,nan,Unknown
 IRDM,Communication Services,Unknown
+IREN,nan,Unknown
+IRIX,nan,Unknown
+IRM,Real Estate,Unknown
+IRMD,nan,Unknown
+IROH,nan,Unknown
+IROHR,nan,Unknown
+IROHU,nan,Unknown
+IROHW,nan,Unknown
+IRON,nan,Unknown
+IROQ,nan,Unknown
+IRTC,nan,Unknown
+IRWD,nan,Unknown
+ISBA,nan,Unknown
+ISHG,nan,Unknown
+ISHP,nan,Unknown
+ISPC,nan,Unknown
+ISPO,nan,Unknown
+ISPOW,nan,Unknown
+ISPR,nan,Unknown
+ISRG,Health Care,Unknown
+ISRL,nan,Unknown
+ISRLU,nan,Unknown
+ISRLW,nan,Unknown
+ISSC,nan,Unknown
+ISTB,nan,Unknown
+ISTR,nan,Unknown
+IT,Information Technology,Unknown
+ITIC,nan,Unknown
+ITRI,nan,Unknown
+ITRM,nan,Unknown
+ITRN,nan,Unknown
 ITT,Industrials,Unknown
+ITW,Industrials,Unknown
+IUS,nan,Unknown
+IUSB,nan,Unknown
+IUSG,nan,Unknown
+IUSV,nan,Unknown
+IVA,nan,Unknown
+IVAL,nan,Unknown
+IVDA,nan,Unknown
+IVDAW,nan,Unknown
+IVF,nan,Unknown
+IVP,nan,Unknown
+IVVD,nan,Unknown
+IVZ,Financials,Unknown
+IXHL,nan,Unknown
+IXUS,nan,Unknown
+IZEA,nan,Unknown
+IZM,nan,Unknown
+J,Industrials,Unknown
+JACK,nan,Unknown
+JAGX,nan,Unknown
+JAKK,nan,Unknown
+JAMF,nan,Unknown
+JANX,nan,Unknown
+JAPN,nan,Unknown
 JAZZ,Health Care,Unknown
+JBDI,nan,Unknown
+JBHT,Industrials,Unknown
+JBIO,nan,Unknown
+JBL,Information Technology,Unknown
+JBLU,nan,Unknown
+JBSS,nan,Unknown
+JCAP,nan,Unknown
+JCI,Industrials,Unknown
+JCSE,nan,Unknown
+JCTC,nan,Unknown
+JD,nan,Unknown
+JDOC,nan,Unknown
+JDZG,nan,Unknown
 JEF,Financials,Unknown
+JEM,nan,Unknown
+JEPQ,nan,Unknown
+JFB,nan,Unknown
+JFBR,nan,Unknown
+JFBRW,nan,Unknown
+JFIN,nan,Unknown
+JFU,nan,Unknown
+JG,nan,Unknown
+JGLO,nan,Unknown
+JHAI,nan,Unknown
 JHG,Financials,Unknown
 JHX,Materials,Unknown
+JIVE,nan,Unknown
+JJSF,nan,Unknown
+JKHY,Financials,Unknown
+JL,nan,Unknown
+JLHL,nan,Unknown
 JLL,Real Estate,Unknown
+JMID,nan,Unknown
+JMSB,nan,Unknown
+JNJ,Health Care,Unknown
+JOUT,nan,Unknown
+JOYY,nan,Unknown
+JPEF,nan,Unknown
+JPM,Financials,Unknown
+JPX,nan,Unknown
+JPY,nan,Unknown
+JRSH,nan,Unknown
+JRVR,nan,Unknown
+JSM,nan,Unknown
+JSMD,nan,Unknown
+JSML,nan,Unknown
+JSPR,nan,Unknown
+JSPRW,nan,Unknown
+JTAI,nan,Unknown
+JTEK,nan,Unknown
+JUNS,nan,Unknown
+JVA,nan,Unknown
+JWEL,nan,Unknown
+JXG,nan,Unknown
+JYD,nan,Unknown
+JYNT,nan,Unknown
+JZ,nan,Unknown
+JZXN,nan,Unknown
+K,Consumer Staples,Unknown
+KALA,nan,Unknown
+KALU,nan,Unknown
+KALV,nan,Unknown
+KARO,nan,Unknown
+KAT,nan,Unknown
+KAVL,nan,Unknown
+KBAB,nan,Unknown
 KBR,Industrials,Unknown
+KBSX,nan,Unknown
+KBWB,nan,Unknown
+KBWD,nan,Unknown
+KBWP,nan,Unknown
+KBWR,nan,Unknown
+KBWY,nan,Unknown
+KC,nan,Unknown
+KCHV,nan,Unknown
+KCHVR,nan,Unknown
+KCHVU,nan,Unknown
 KD,Information Technology,Unknown
+KDP,Consumer Staples,Unknown
+KE,nan,Unknown
+KEAT,nan,Unknown
+KELYA,nan,Unknown
+KELYB,nan,Unknown
+KEQU,nan,Unknown
 KEX,Industrials,Unknown
+KEY,Financials,Unknown
+KEYS,Information Technology,Unknown
+KFFB,nan,Unknown
+KFII,nan,Unknown
+KFIIR,nan,Unknown
+KFIIU,nan,Unknown
+KG,nan,Unknown
+KGEI,nan,Unknown
+KHC,Consumer Staples,Unknown
+KIDS,nan,Unknown
+KIDZ,nan,Unknown
+KIDZW,nan,Unknown
+KIM,Real Estate,Unknown
+KINS,nan,Unknown
+KITT,nan,Unknown
+KITTW,nan,Unknown
+KKR,Financials,Unknown
+KLAC,Information Technology,Unknown
+KLIC,nan,Unknown
+KLRS,nan,Unknown
+KLTO,nan,Unknown
+KLTOW,nan,Unknown
+KLTR,nan,Unknown
+KLXE,nan,Unknown
+KMB,Consumer Staples,Unknown
+KMDA,nan,Unknown
+KMI,Energy,Unknown
+KMLI,nan,Unknown
 KMPR,Financials,Unknown
+KMRK,nan,Unknown
+KMTS,nan,Unknown
+KMX,Consumer Discretionary,Unknown
+KNDI,nan,Unknown
+KNGZ,nan,Unknown
+KNSA,nan,Unknown
 KNSL,Financials,Unknown
 KNX,Industrials,Unknown
+KO,Consumer Staples,Unknown
+KOD,nan,Unknown
+KOID,nan,Unknown
+KOPN,nan,Unknown
+KOSS,nan,Unknown
+KOYNU,nan,Unknown
+KPDD,nan,Unknown
+KPLT,nan,Unknown
+KPLTW,nan,Unknown
+KPRX,nan,Unknown
+KPTI,nan,Unknown
+KQQQ,nan,Unknown
+KR,Consumer Staples,Unknown
 KRC,Real Estate,Unknown
+KRKR,nan,Unknown
+KRMA,nan,Unknown
+KRMD,nan,Unknown
 KRMN,Industrials,Unknown
+KRNT,nan,Unknown
+KRNY,nan,Unknown
+KROP,nan,Unknown
+KROS,nan,Unknown
+KRRO,nan,Unknown
+KRT,nan,Unknown
+KRUS,nan,Unknown
+KRYS,nan,Unknown
+KSCP,nan,Unknown
+KSPI,nan,Unknown
+KTCC,nan,Unknown
+KTOS,nan,Unknown
+KTTA,nan,Unknown
+KTTAW,nan,Unknown
+KURA,nan,Unknown
+KVAC,nan,Unknown
+KVACU,nan,Unknown
+KVACW,nan,Unknown
+KVHI,nan,Unknown
+KVUE,Consumer Staples,Unknown
+KWM,nan,Unknown
+KWMWW,nan,Unknown
+KXIN,nan,Unknown
+KYIV,nan,Unknown
+KYIVW,nan,Unknown
+KYMR,nan,Unknown
+KYTX,nan,Unknown
+KZIA,nan,Unknown
+KZR,nan,Unknown
+L,Financials,Unknown
+LAB,nan,Unknown
 LAD,Consumer Discretionary,Unknown
+LAES,nan,Unknown
+LAKE,nan,Unknown
 LAMR,Real Estate,Unknown
+LAND,nan,Unknown
+LANDM,nan,Unknown
+LANDO,nan,Unknown
+LANDP,nan,Unknown
+LARK,nan,Unknown
+LASE,nan,Unknown
+LASR,nan,Unknown
+LAUR,nan,Unknown
+LAWR,nan,Unknown
+LAYS,nan,Unknown
 LAZ,Financials,Unknown
+LAZR,nan,Unknown
+LBGJ,nan,Unknown
 LBRDA,Communication Services,Unknown
 LBRDK,Communication Services,Unknown
+LBRDP,nan,Unknown
 LBTYA,Communication Services,Unknown
+LBTYB,nan,Unknown
 LBTYK,Communication Services,Unknown
+LCCC,nan,Unknown
+LCCCR,nan,Unknown
+LCCCU,nan,Unknown
+LCDL,nan,Unknown
+LCDS,nan,Unknown
+LCFY,nan,Unknown
+LCFYW,nan,Unknown
 LCID,Consumer Discretionary,Unknown
+LCNB,nan,Unknown
+LCUT,nan,Unknown
+LDEM,nan,Unknown
+LDOS,Industrials,Unknown
+LDRX,nan,Unknown
+LDSF,nan,Unknown
+LDWY,nan,Unknown
+LE,nan,Unknown
 LEA,Consumer Discretionary,Unknown
 LECO,Industrials,Unknown
-LEN-B,Consumer Discretionary,Unknown
+LEDS,nan,Unknown
+LEE,nan,Unknown
+LEGH,nan,Unknown
+LEGN,nan,Unknown
+LEGR,nan,Unknown
+LEN,Consumer Discretionary,Unknown
+LENB,nan,Unknown
+LENZ,nan,Unknown
+LESL,nan,Unknown
+LEXI,nan,Unknown
+LEXX,nan,Unknown
+LEXXW,nan,Unknown
+LFCR,nan,Unknown
+LFMD,nan,Unknown
+LFMDP,nan,Unknown
+LFSC,nan,Unknown
+LFST,nan,Unknown
 LFUS,Information Technology,Unknown
+LFVN,nan,Unknown
+LFWD,nan,Unknown
+LGCB,nan,Unknown
+LGCF,nan,Unknown
+LGCL,nan,Unknown
+LGHL,nan,Unknown
+LGIH,nan,Unknown
+LGND,nan,Unknown
+LGO,nan,Unknown
+LGRO,nan,Unknown
+LGVN,nan,Unknown
+LH,Health Care,Unknown
+LHAI,nan,Unknown
+LHSW,nan,Unknown
+LHX,Industrials,Unknown
+LI,nan,Unknown
+LICN,nan,Unknown
+LIDR,nan,Unknown
+LIDRW,nan,Unknown
+LIEN,nan,Unknown
+LIF,nan,Unknown
+LII,Industrials,Unknown
+LILA,nan,Unknown
+LILAK,nan,Unknown
+LIMN,nan,Unknown
+LIMNW,nan,Unknown
+LIN,Materials,Unknown
+LINC,nan,Unknown
+LIND,nan,Unknown
 LINE,Real Estate,Unknown
+LINK,nan,Unknown
+LIQT,nan,Unknown
 LITE,Information Technology,Unknown
+LITM,nan,Unknown
+LITP,nan,Unknown
+LIVE,nan,Unknown
+LIVN,nan,Unknown
+LIVR,nan,Unknown
+LIXT,nan,Unknown
+LIXTW,nan,Unknown
+LKFN,nan,Unknown
+LKQ,Consumer Discretionary,Unknown
+LLY,Health Care,Unknown
 LLYVA,Communication Services,Unknown
 LLYVK,Communication Services,Unknown
+LLYZ,nan,Unknown
+LMAT,nan,Unknown
+LMB,nan,Unknown
+LMBS,nan,Unknown
+LMFA,nan,Unknown
+LMNR,nan,Unknown
+LMT,Industrials,Unknown
+LMTL,nan,Unknown
+LMTS,nan,Unknown
 LNC,Financials,Unknown
 LNG,Energy,Unknown
+LNKB,nan,Unknown
+LNKS,nan,Unknown
+LNSR,nan,Unknown
+LNT,Utilities,Unknown
+LNTH,nan,Unknown
 LNW,Consumer Discretionary,Unknown
+LNZA,nan,Unknown
+LNZAW,nan,Unknown
+LOAN,nan,Unknown
 LOAR,Industrials,Unknown
+LOBO,nan,Unknown
+LOCO,nan,Unknown
+LOGI,nan,Unknown
+LOGO,nan,Unknown
+LOKV,nan,Unknown
+LOKVU,nan,Unknown
+LOKVW,nan,Unknown
+LOOP,nan,Unknown
 LOPE,Consumer Discretionary,Unknown
+LOT,nan,Unknown
+LOTWW,nan,Unknown
+LOVE,nan,Unknown
+LOW,Consumer Discretionary,Unknown
+LPAA,nan,Unknown
+LPAAU,nan,Unknown
+LPAAW,nan,Unknown
+LPBB,nan,Unknown
+LPBBU,nan,Unknown
+LPBBW,nan,Unknown
+LPCN,nan,Unknown
 LPLA,Financials,Unknown
+LPRO,nan,Unknown
+LPSN,nan,Unknown
+LPTH,nan,Unknown
+LPTX,nan,Unknown
 LPX,Materials,Unknown
+LQDA,nan,Unknown
+LQDT,nan,Unknown
+LRCX,Information Technology,Unknown
+LRE,nan,Unknown
+LRGE,nan,Unknown
+LRHC,nan,Unknown
+LRMR,nan,Unknown
+LRND,nan,Unknown
+LSAK,nan,Unknown
+LSB,nan,Unknown
+LSBK,nan,Unknown
+LSBPW,nan,Unknown
 LSCC,Information Technology,Unknown
+LSE,nan,Unknown
+LSH,nan,Unknown
+LSTA,nan,Unknown
 LSTR,Industrials,Unknown
+LTBR,nan,Unknown
+LTRN,nan,Unknown
+LTRX,nan,Unknown
+LTRYW,nan,Unknown
+LUCD,nan,Unknown
+LUCY,nan,Unknown
+LUCYW,nan,Unknown
+LULU,Consumer Discretionary,Unknown
+LUNG,nan,Unknown
+LUNR,nan,Unknown
+LUV,Industrials,Unknown
+LVHD,nan,Unknown
+LVLU,nan,Unknown
+LVO,nan,Unknown
+LVRO,nan,Unknown
+LVROW,nan,Unknown
+LVS,Consumer Discretionary,Unknown
+LVTX,nan,Unknown
+LW,Consumer Staples,Unknown
+LWAC,nan,Unknown
+LWACU,nan,Unknown
+LWACW,nan,Unknown
+LWAY,nan,Unknown
+LWLG,nan,Unknown
+LX,nan,Unknown
+LXEH,nan,Unknown
+LXEO,nan,Unknown
+LXRX,nan,Unknown
+LYB,Materials,Unknown
+LYEL,nan,Unknown
 LYFT,Industrials,Unknown
+LYRA,nan,Unknown
+LYTS,nan,Unknown
+LYV,Communication Services,Unknown
+LZ,nan,Unknown
+LZMH,nan,Unknown
 M,Consumer Discretionary,Unknown
+MA,Financials,Unknown
+MAA,Real Estate,Unknown
+MAAS,nan,Unknown
+MACI,nan,Unknown
+MACIU,nan,Unknown
+MACIW,nan,Unknown
+MAGH,nan,Unknown
+MAMA,nan,Unknown
+MAMK,nan,Unknown
+MAMO,nan,Unknown
 MAN,Industrials,Unknown
 MANH,Information Technology,Unknown
+MAPS,nan,Unknown
+MAPSW,nan,Unknown
+MAR,Consumer Discretionary,Unknown
+MARA,nan,Unknown
+MARPS,nan,Unknown
+MAS,Industrials,Unknown
 MASI,Health Care,Unknown
+MASK,nan,Unknown
+MASS,nan,Unknown
 MAT,Consumer Discretionary,Unknown
+MATH,nan,Unknown
+MATW,nan,Unknown
+MAXI,nan,Unknown
+MAXN,nan,Unknown
+MAYA,nan,Unknown
+MAYAR,nan,Unknown
+MAYAU,nan,Unknown
+MAYS,nan,Unknown
+MAZE,nan,Unknown
+MB,nan,Unknown
+MBAV,nan,Unknown
+MBAVU,nan,Unknown
+MBAVW,nan,Unknown
+MBB,nan,Unknown
+MBBC,nan,Unknown
+MBCN,nan,Unknown
+MBIN,nan,Unknown
+MBINL,nan,Unknown
+MBINM,nan,Unknown
+MBINN,nan,Unknown
+MBIO,nan,Unknown
+MBLY,nan,Unknown
+MBNKO,nan,Unknown
+MBOT,nan,Unknown
+MBRX,nan,Unknown
+MBS,nan,Unknown
+MBUU,nan,Unknown
+MBVIU,nan,Unknown
+MBWM,nan,Unknown
+MBX,nan,Unknown
+MCBS,nan,Unknown
+MCD,Consumer Discretionary,Unknown
+MCDS,nan,Unknown
+MCFT,nan,Unknown
+MCGA,nan,Unknown
+MCGAU,nan,Unknown
+MCGAW,nan,Unknown
+MCHB,nan,Unknown
+MCHI,nan,Unknown
+MCHP,Information Technology,Unknown
+MCHPP,nan,Unknown
+MCHS,nan,Unknown
+MCHX,nan,Unknown
+MCK,Health Care,Unknown
+MCO,Financials,Unknown
+MCRB,nan,Unknown
+MCRI,nan,Unknown
+MCSE,nan,Unknown
+MCTR,nan,Unknown
+MCW,nan,Unknown
+MDAI,nan,Unknown
+MDAIW,nan,Unknown
 MDB,Information Technology,Unknown
+MDBH,nan,Unknown
+MDCX,nan,Unknown
+MDCXW,nan,Unknown
+MDGL,nan,Unknown
+MDIA,nan,Unknown
+MDIV,nan,Unknown
+MDLZ,Consumer Staples,Unknown
+MDRR,nan,Unknown
+MDT,Health Care,Unknown
 MDU,Utilities,Unknown
+MDWD,nan,Unknown
+MDXG,nan,Unknown
+MDXH,nan,Unknown
 MEDP,Health Care,Unknown
+MEDX,nan,Unknown
+MEGL,nan,Unknown
+MEIP,nan,Unknown
+MELI,nan,Unknown
+MEMS,nan,Unknown
+MENS,nan,Unknown
+MEOH,nan,Unknown
+MERC,nan,Unknown
+MESA,nan,Unknown
+MESO,nan,Unknown
+MET,Financials,Unknown
+META,Communication Services,Unknown
+METC,nan,Unknown
+METCB,nan,Unknown
+METCI,nan,Unknown
+METCZ,nan,Unknown
+METD,nan,Unknown
+METU,nan,Unknown
+MFH,nan,Unknown
+MFI,nan,Unknown
+MFIC,nan,Unknown
+MFICL,nan,Unknown
+MFIN,nan,Unknown
+MFLX,nan,Unknown
+MGEE,nan,Unknown
+MGIC,nan,Unknown
+MGIH,nan,Unknown
+MGM,Consumer Discretionary,Unknown
+MGNI,nan,Unknown
+MGNX,nan,Unknown
+MGPI,nan,Unknown
+MGRC,nan,Unknown
+MGRM,nan,Unknown
+MGRT,nan,Unknown
+MGRX,nan,Unknown
+MGTX,nan,Unknown
+MGX,nan,Unknown
+MGYR,nan,Unknown
+MHK,Consumer Discretionary,Unknown
+MHUA,nan,Unknown
 MIDD,Industrials,Unknown
+MIGI,nan,Unknown
+MILN,nan,Unknown
+MIMI,nan,Unknown
+MIND,nan,Unknown
+MIRA,nan,Unknown
+MIRM,nan,Unknown
+MIST,nan,Unknown
+MITK,nan,Unknown
+MJID,nan,Unknown
+MKAM,nan,Unknown
+MKC,Consumer Staples,Unknown
+MKDW,nan,Unknown
+MKDWW,nan,Unknown
 MKL,Financials,Unknown
+MKLYU,nan,Unknown
 MKSI,Information Technology,Unknown
+MKTW,nan,Unknown
+MKTX,Financials,Unknown
+MKZR,nan,Unknown
+MLAB,nan,Unknown
+MLAC,nan,Unknown
+MLACR,nan,Unknown
+MLACU,nan,Unknown
+MLCO,nan,Unknown
+MLEC,nan,Unknown
+MLECW,nan,Unknown
+MLGO,nan,Unknown
 MLI,Industrials,Unknown
+MLKN,nan,Unknown
+MLM,Materials,Unknown
+MLTX,nan,Unknown
+MLYS,nan,Unknown
+MMC,Financials,Unknown
+MMLP,nan,Unknown
+MMM,Industrials,Unknown
+MMSI,nan,Unknown
+MMYT,nan,Unknown
+MNDO,nan,Unknown
+MNDR,nan,Unknown
+MNDY,nan,Unknown
+MNKD,nan,Unknown
+MNMD,nan,Unknown
+MNOV,nan,Unknown
+MNPR,nan,Unknown
+MNRO,nan,Unknown
+MNSB,nan,Unknown
+MNSBP,nan,Unknown
+MNST,Consumer Staples,Unknown
+MNTK,nan,Unknown
+MNTS,nan,Unknown
+MNTSW,nan,Unknown
+MNY,nan,Unknown
+MNYWW,nan,Unknown
+MO,Consumer Staples,Unknown
+MOB,nan,Unknown
+MOBBW,nan,Unknown
+MOBX,nan,Unknown
+MOBXW,nan,Unknown
+MODD,nan,Unknown
+MODL,nan,Unknown
+MOFG,nan,Unknown
+MOGO,nan,Unknown
+MOH,Health Care,Unknown
+MOLN,nan,Unknown
+MOMO,nan,Unknown
+MOOD,nan,Unknown
 MORN,Financials,Unknown
+MOS,Materials,Unknown
+MOVE,nan,Unknown
 MP,Materials,Unknown
+MPAA,nan,Unknown
+MPB,nan,Unknown
+MPC,Energy,Unknown
 MPW,Real Estate,Unknown
+MPWR,Information Technology,Unknown
+MQ,nan,Unknown
+MQQQ,nan,Unknown
+MRAL,nan,Unknown
+MRAM,nan,Unknown
+MRBK,nan,Unknown
+MRCC,nan,Unknown
+MRCY,nan,Unknown
+MREO,nan,Unknown
+MRK,Health Care,Unknown
+MRKR,nan,Unknown
+MRM,nan,Unknown
+MRNA,Health Care,Unknown
+MRNO,nan,Unknown
+MRNOW,nan,Unknown
 MRP,Consumer Discretionary,Unknown
+MRSN,nan,Unknown
+MRTN,nan,Unknown
+MRUS,nan,Unknown
+MRVI,nan,Unknown
 MRVL,Information Technology,Unknown
+MRX,nan,Unknown
+MS,Financials,Unknown
 MSA,Industrials,Unknown
+MSAI,nan,Unknown
+MSAIW,nan,Unknown
+MSBI,nan,Unknown
+MSBIP,nan,Unknown
+MSCI,Financials,Unknown
+MSDD,nan,Unknown
+MSEX,nan,Unknown
+MSFD,nan,Unknown
+MSFL,nan,Unknown
+MSFT,Information Technology,Unknown
+MSFU,nan,Unknown
+MSGM,nan,Unknown
 MSGS,Communication Services,Unknown
+MSGY,nan,Unknown
+MSI,Information Technology,Unknown
 MSM,Industrials,Unknown
+MSPR,nan,Unknown
+MSPRW,nan,Unknown
+MSPRZ,nan,Unknown
+MSS,nan,Unknown
+MST,nan,Unknown
+MSTP,nan,Unknown
 MSTR,Information Technology,Unknown
+MSTX,nan,Unknown
+MSW,nan,Unknown
+MTB,Financials,Unknown
+MTC,nan,Unknown
+MTCH,Communication Services,Unknown
+MTD,Health Care,Unknown
 MTDR,Energy,Unknown
+MTEK,nan,Unknown
+MTEKW,nan,Unknown
+MTEN,nan,Unknown
+MTEX,nan,Unknown
 MTG,Financials,Unknown
+MTLS,nan,Unknown
 MTN,Consumer Discretionary,Unknown
+MTRX,nan,Unknown
 MTSI,Information Technology,Unknown
+MTSR,nan,Unknown
+MTVA,nan,Unknown
 MTZ,Industrials,Unknown
+MU,Information Technology,Unknown
+MUD,nan,Unknown
+MULL,nan,Unknown
+MULT,nan,Unknown
+MURA,nan,Unknown
 MUSA,Consumer Discretionary,Unknown
+MUU,nan,Unknown
+MVBF,nan,Unknown
+MVIS,nan,Unknown
+MVLL,nan,Unknown
+MVST,nan,Unknown
+MVSTW,nan,Unknown
+MWYN,nan,Unknown
+MXCT,nan,Unknown
+MXL,nan,Unknown
+MYCF,nan,Unknown
+MYCG,nan,Unknown
+MYCH,nan,Unknown
+MYCI,nan,Unknown
+MYCJ,nan,Unknown
+MYCK,nan,Unknown
+MYCL,nan,Unknown
+MYCM,nan,Unknown
+MYCN,nan,Unknown
+MYFW,nan,Unknown
+MYGN,nan,Unknown
+MYMF,nan,Unknown
+MYMG,nan,Unknown
+MYMH,nan,Unknown
+MYMI,nan,Unknown
+MYMJ,nan,Unknown
+MYNZ,nan,Unknown
+MYPS,nan,Unknown
+MYPSW,nan,Unknown
+MYRG,nan,Unknown
+MYSE,nan,Unknown
+MYSEW,nan,Unknown
+MYSZ,nan,Unknown
+MZTI,nan,Unknown
+NAAS,nan,Unknown
+NAGE,nan,Unknown
+NAII,nan,Unknown
+NAKA,nan,Unknown
+NAMI,nan,Unknown
+NAMM,nan,Unknown
+NAMMW,nan,Unknown
+NAMS,nan,Unknown
+NAMSW,nan,Unknown
+NAOV,nan,Unknown
+NATH,nan,Unknown
+NATO,nan,Unknown
+NATR,nan,Unknown
+NAUT,nan,Unknown
+NAVI,nan,Unknown
+NB,nan,Unknown
+NBBK,nan,Unknown
+NBIS,nan,Unknown
 NBIX,Health Care,Unknown
+NBN,nan,Unknown
+NBTB,nan,Unknown
+NBTX,nan,Unknown
+NCEW,nan,Unknown
+NCI,nan,Unknown
+NCIQ,nan,Unknown
+NCLH,Consumer Discretionary,Unknown
+NCMI,nan,Unknown
+NCNA,nan,Unknown
 NCNO,Information Technology,Unknown
+NCPB,nan,Unknown
+NCPL,nan,Unknown
+NCPLW,nan,Unknown
+NCRA,nan,Unknown
+NCSM,nan,Unknown
+NCT,nan,Unknown
+NCTY,nan,Unknown
+NDAA,nan,Unknown
+NDAQ,Financials,Unknown
+NDLS,nan,Unknown
+NDRA,nan,Unknown
+NDSN,Industrials,Unknown
+NECB,nan,Unknown
+NEE,Utilities,Unknown
+NEGG,nan,Unknown
+NEM,Materials,Unknown
+NEO,nan,Unknown
+NEOG,nan,Unknown
+NEON,nan,Unknown
+NEOV,nan,Unknown
+NEOVW,nan,Unknown
+NEPH,nan,Unknown
+NERD,nan,Unknown
+NERV,nan,Unknown
+NESR,nan,Unknown
 NET,Information Technology,Unknown
+NETD,nan,Unknown
+NETDU,nan,Unknown
+NETDW,nan,Unknown
 NEU,Materials,Unknown
+NEUP,nan,Unknown
+NEWT,nan,Unknown
+NEWTG,nan,Unknown
+NEWTH,nan,Unknown
+NEWTI,nan,Unknown
+NEWTP,nan,Unknown
+NEWTZ,nan,Unknown
+NEWZ,nan,Unknown
+NEXM,nan,Unknown
+NEXN,nan,Unknown
+NEXT,nan,Unknown
+NFBK,nan,Unknown
+NFE,nan,Unknown
 NFG,Utilities,Unknown
+NFLX,Communication Services,Unknown
+NFTY,nan,Unknown
+NFXL,nan,Unknown
+NFXS,nan,Unknown
+NGNE,nan,Unknown
+NHIC,nan,Unknown
+NHICU,nan,Unknown
+NHICW,nan,Unknown
+NHPAP,nan,Unknown
+NHPBP,nan,Unknown
+NHTC,nan,Unknown
+NI,Utilities,Unknown
+NICE,nan,Unknown
+NIKL,nan,Unknown
+NIOBW,nan,Unknown
+NIPG,nan,Unknown
+NISN,nan,Unknown
+NITO,nan,Unknown
+NIU,nan,Unknown
+NIVF,nan,Unknown
+NIVFW,nan,Unknown
+NIXT,nan,Unknown
+NIXX,nan,Unknown
+NIXXW,nan,Unknown
+NKE,Consumer Discretionary,Unknown
+NKSH,nan,Unknown
+NKTR,nan,Unknown
+NKTX,nan,Unknown
+NLSP,nan,Unknown
+NLSPW,nan,Unknown
 NLY,Financials,Unknown
+NMFC,nan,Unknown
+NMFCZ,nan,Unknown
+NMIH,nan,Unknown
+NMP,nan,Unknown
+NMPAR,nan,Unknown
+NMPAU,nan,Unknown
+NMRA,nan,Unknown
+NMRK,nan,Unknown
+NMTC,nan,Unknown
+NN,nan,Unknown
+NNAVW,nan,Unknown
+NNBR,nan,Unknown
+NNDM,nan,Unknown
+NNE,nan,Unknown
 NNN,Real Estate,Unknown
+NNNN,nan,Unknown
+NNOX,nan,Unknown
+NOC,Industrials,Unknown
+NODK,nan,Unknown
+NOEM,nan,Unknown
+NOEMR,nan,Unknown
+NOEMU,nan,Unknown
+NOEMW,nan,Unknown
+NOTV,nan,Unknown
 NOV,Energy,Unknown
+NOVT,nan,Unknown
+NOW,Information Technology,Unknown
+NOWL,nan,Unknown
+NPAC,nan,Unknown
+NPACU,nan,Unknown
+NPACW,nan,Unknown
+NPCE,nan,Unknown
+NPFI,nan,Unknown
+NRC,nan,Unknown
+NRDS,nan,Unknown
+NRES,nan,Unknown
+NRG,Utilities,Unknown
+NRIM,nan,Unknown
+NRIX,nan,Unknown
+NRSN,nan,Unknown
+NRSNW,nan,Unknown
+NRXP,nan,Unknown
+NRXPW,nan,Unknown
 NSA,Real Estate,Unknown
+NSC,Industrials,Unknown
+NSCR,nan,Unknown
+NSI,nan,Unknown
+NSIT,nan,Unknown
+NSPR,nan,Unknown
+NSSC,nan,Unknown
+NSTS,nan,Unknown
+NSYS,nan,Unknown
+NTAP,Information Technology,Unknown
+NTCL,nan,Unknown
+NTCT,nan,Unknown
+NTES,nan,Unknown
+NTGR,nan,Unknown
+NTHI,nan,Unknown
+NTIC,nan,Unknown
+NTLA,nan,Unknown
 NTNX,Information Technology,Unknown
 NTRA,Health Care,Unknown
+NTRB,nan,Unknown
+NTRBW,nan,Unknown
+NTRP,nan,Unknown
+NTRS,Financials,Unknown
+NTRSO,nan,Unknown
+NTWK,nan,Unknown
+NTWO,nan,Unknown
+NTWOU,nan,Unknown
+NTWOW,nan,Unknown
 NU,Financials,Unknown
+NUAI,nan,Unknown
+NUAIW,nan,Unknown
+NUE,Materials,Unknown
+NUKK,nan,Unknown
+NUKKW,nan,Unknown
+NUSB,nan,Unknown
+NUTR,nan,Unknown
+NUTX,nan,Unknown
+NUVL,nan,Unknown
+NUWE,nan,Unknown
+NVA,nan,Unknown
+NVAWW,nan,Unknown
+NVAX,nan,Unknown
+NVCR,nan,Unknown
+NVCT,nan,Unknown
+NVD,nan,Unknown
+NVDA,Information Technology,Unknown
+NVDD,nan,Unknown
+NVDG,nan,Unknown
+NVDL,nan,Unknown
+NVDS,nan,Unknown
+NVDU,nan,Unknown
+NVEC,nan,Unknown
+NVFY,nan,Unknown
+NVMI,nan,Unknown
+NVNI,nan,Unknown
+NVNIW,nan,Unknown
+NVNO,nan,Unknown
+NVR,Consumer Discretionary,Unknown
 NVST,Health Care,Unknown
 NVT,Industrials,Unknown
+NVTS,nan,Unknown
+NVVE,nan,Unknown
+NVVEW,nan,Unknown
+NVX,nan,Unknown
+NVYY,nan,Unknown
+NWBI,nan,Unknown
+NWE,nan,Unknown
+NWFL,nan,Unknown
+NWGL,nan,Unknown
 NWL,Consumer Discretionary,Unknown
+NWPX,nan,Unknown
+NWS,Communication Services,Unknown
+NWSA,Communication Services,Unknown
+NWTG,nan,Unknown
+NXGL,nan,Unknown
+NXGLW,nan,Unknown
+NXL,nan,Unknown
+NXLIW,nan,Unknown
+NXPI,nan,Unknown
+NXPL,nan,Unknown
+NXPLW,nan,Unknown
 NXST,Communication Services,Unknown
+NXT,nan,Unknown
+NXTC,nan,Unknown
+NXTG,nan,Unknown
+NXTT,nan,Unknown
+NXXT,nan,Unknown
+NYAX,nan,Unknown
 NYT,Communication Services,Unknown
+NYXH,nan,Unknown
+NZAC,nan,Unknown
+NZUS,nan,Unknown
+O,Real Estate,Unknown
+OABI,nan,Unknown
+OABIW,nan,Unknown
+OACC,nan,Unknown
+OACCU,nan,Unknown
+OACCW,nan,Unknown
+OAKU,nan,Unknown
+OAKUR,nan,Unknown
+OAKUU,nan,Unknown
+OAKUW,nan,Unknown
+OBA,nan,Unknown
+OBAWU,nan,Unknown
+OBAWW,nan,Unknown
+OBIL,nan,Unknown
+OBIO,nan,Unknown
+OBLG,nan,Unknown
+OBT,nan,Unknown
 OC,Industrials,Unknown
+OCC,nan,Unknown
+OCCI,nan,Unknown
+OCCIM,nan,Unknown
+OCCIN,nan,Unknown
+OCCIO,nan,Unknown
+OCFC,nan,Unknown
+OCG,nan,Unknown
+OCGN,nan,Unknown
+OCS,nan,Unknown
+OCSAW,nan,Unknown
+OCSL,nan,Unknown
+OCTO,nan,Unknown
+OCUL,nan,Unknown
+ODD,nan,Unknown
+ODDS,nan,Unknown
+ODFL,Industrials,Unknown
+ODP,nan,Unknown
+ODVWZ,nan,Unknown
+ODYS,nan,Unknown
+OESX,nan,Unknown
+OFAL,nan,Unknown
+OFIX,nan,Unknown
+OFLX,nan,Unknown
+OFS,nan,Unknown
+OFSSH,nan,Unknown
+OFSSO,nan,Unknown
 OGE,Utilities,Unknown
+OGI,nan,Unknown
 OGN,Health Care,Unknown
 OHI,Real Estate,Unknown
+OKE,Energy,Unknown
+OKLL,nan,Unknown
 OKTA,Information Technology,Unknown
+OKUR,nan,Unknown
+OKYO,nan,Unknown
+OLB,nan,Unknown
 OLED,Information Technology,Unknown
 OLLI,Consumer Discretionary,Unknown
+OLMA,nan,Unknown
 OLN,Materials,Unknown
+OLPX,nan,Unknown
+OM,nan,Unknown
+OMAB,nan,Unknown
+OMC,Communication Services,Unknown
+OMCC,nan,Unknown
+OMCL,nan,Unknown
+OMDA,nan,Unknown
+OMER,nan,Unknown
+OMEX,nan,Unknown
 OMF,Financials,Unknown
+OMH,nan,Unknown
+OMSE,nan,Unknown
+ON,Information Technology,Unknown
+ONB,nan,Unknown
+ONBPO,nan,Unknown
+ONBPP,nan,Unknown
+ONC,nan,Unknown
+ONCHU,nan,Unknown
+ONCO,nan,Unknown
+ONCY,nan,Unknown
+ONDS,nan,Unknown
+ONEG,nan,Unknown
+ONEQ,nan,Unknown
+ONEW,nan,Unknown
+ONFO,nan,Unknown
+ONFOW,nan,Unknown
+ONMD,nan,Unknown
+ONMDW,nan,Unknown
 ONON,Consumer Discretionary,Unknown
 ONTO,Information Technology,Unknown
+OOQB,nan,Unknown
+OOSB,nan,Unknown
+OP,nan,Unknown
+OPAL,nan,Unknown
+OPBK,nan,Unknown
+OPCH,nan,Unknown
+OPEN,nan,Unknown
+OPI,nan,Unknown
+OPINL,nan,Unknown
+OPK,nan,Unknown
+OPPJ,nan,Unknown
+OPRA,nan,Unknown
+OPRT,nan,Unknown
+OPRX,nan,Unknown
+OPT,nan,Unknown
+OPTX,nan,Unknown
+OPTXW,nan,Unknown
+OPTZ,nan,Unknown
+OPXS,nan,Unknown
+ORCL,Information Technology,Unknown
+ORCX,nan,Unknown
+ORGN,nan,Unknown
+ORGNW,nan,Unknown
+ORGO,nan,Unknown
 ORI,Financials,Unknown
+ORIC,nan,Unknown
+ORIQ,nan,Unknown
+ORIQU,nan,Unknown
+ORIQW,nan,Unknown
+ORIS,nan,Unknown
+ORKA,nan,Unknown
+ORKT,nan,Unknown
+ORLY,Consumer Discretionary,Unknown
+ORMP,nan,Unknown
+ORR,nan,Unknown
+ORRF,nan,Unknown
+OS,nan,Unknown
+OSBC,nan,Unknown
+OSIS,nan,Unknown
 OSK,Industrials,Unknown
+OSPN,nan,Unknown
+OSRH,nan,Unknown
+OSRHW,nan,Unknown
+OSS,nan,Unknown
+OST,nan,Unknown
+OSUR,nan,Unknown
+OSW,nan,Unknown
+OTEX,nan,Unknown
+OTGL,nan,Unknown
+OTIS,Industrials,Unknown
+OTLK,nan,Unknown
+OTLY,nan,Unknown
+OTTR,nan,Unknown
+OUST,nan,Unknown
+OUSTW,nan,Unknown
+OUSTZ,nan,Unknown
+OVBC,nan,Unknown
+OVID,nan,Unknown
+OVLY,nan,Unknown
 OVV,Energy,Unknown
 OWL,Financials,Unknown
+OXBR,nan,Unknown
+OXBRW,nan,Unknown
+OXLC,nan,Unknown
+OXLCG,nan,Unknown
+OXLCI,nan,Unknown
+OXLCL,nan,Unknown
+OXLCN,nan,Unknown
+OXLCO,nan,Unknown
+OXLCP,nan,Unknown
+OXLCZ,nan,Unknown
+OXSQ,nan,Unknown
+OXSQG,nan,Unknown
+OXSQH,nan,Unknown
+OXSQZ,nan,Unknown
+OXY,Energy,Unknown
+OYSE,nan,Unknown
+OYSER,nan,Unknown
+OYSEU,nan,Unknown
+OZEM,nan,Unknown
 OZK,Financials,Unknown
+OZKAP,nan,Unknown
+PAA,nan,Unknown
+PABD,nan,Unknown
+PABU,nan,Unknown
+PACB,nan,Unknown
+PACH,nan,Unknown
+PACHU,nan,Unknown
+PACHW,nan,Unknown
 PAG,Consumer Discretionary,Unknown
+PAGP,nan,Unknown
+PAHC,nan,Unknown
+PAL,nan,Unknown
+PALD,nan,Unknown
+PALI,nan,Unknown
+PALU,nan,Unknown
+PAMT,nan,Unknown
+PANG,nan,Unknown
+PANL,nan,Unknown
+PANW,Information Technology,Unknown
+PASG,nan,Unknown
 PATH,Information Technology,Unknown
+PATK,nan,Unknown
+PATN,nan,Unknown
+PAVM,nan,Unknown
+PAVS,nan,Unknown
+PAX,nan,Unknown
+PAYC,Information Technology,Unknown
+PAYO,nan,Unknown
+PAYS,nan,Unknown
+PAYX,Industrials,Unknown
 PB,Financials,Unknown
+PBBK,nan,Unknown
+PBFS,nan,Unknown
+PBHC,nan,Unknown
+PBM,nan,Unknown
+PBMWW,nan,Unknown
+PBPB,nan,Unknown
+PBQQ,nan,Unknown
+PBYI,nan,Unknown
+PC,nan,Unknown
+PCAP,nan,Unknown
+PCAPU,nan,Unknown
+PCAPW,nan,Unknown
+PCAR,Industrials,Unknown
+PCB,nan,Unknown
+PCG,Utilities,Unknown
+PCH,nan,Unknown
+PCLA,nan,Unknown
+PCMM,nan,Unknown
 PCOR,Information Technology,Unknown
+PCRX,nan,Unknown
+PCSA,nan,Unknown
+PCSC,nan,Unknown
+PCT,nan,Unknown
+PCTTU,nan,Unknown
+PCTTW,nan,Unknown
 PCTY,Information Technology,Unknown
+PCVX,nan,Unknown
+PCYO,nan,Unknown
+PDBA,nan,Unknown
+PDBC,nan,Unknown
+PDD,nan,Unknown
+PDDL,nan,Unknown
+PDEX,nan,Unknown
+PDFS,nan,Unknown
+PDLB,nan,Unknown
+PDP,nan,Unknown
+PDSB,nan,Unknown
+PDYN,nan,Unknown
+PDYNW,nan,Unknown
+PEBK,nan,Unknown
+PEBO,nan,Unknown
+PECO,nan,Unknown
+PEG,Utilities,Unknown
 PEGA,Information Technology,Unknown
+PELI,nan,Unknown
+PELIR,nan,Unknown
+PELIU,nan,Unknown
 PEN,Health Care,Unknown
+PENG,nan,Unknown
 PENN,Consumer Discretionary,Unknown
+PEP,Consumer Staples,Unknown
+PEPG,nan,Unknown
+PEPS,nan,Unknown
+PERI,nan,Unknown
+PESI,nan,Unknown
+PETS,nan,Unknown
+PETZ,nan,Unknown
+PEY,nan,Unknown
+PEZ,nan,Unknown
+PFAI,nan,Unknown
+PFBC,nan,Unknown
+PFE,Health Care,Unknown
+PFF,nan,Unknown
+PFG,Financials,Unknown
 PFGC,Consumer Staples,Unknown
+PFI,nan,Unknown
+PFIS,nan,Unknown
+PFM,nan,Unknown
+PFSA,nan,Unknown
+PFX,nan,Unknown
+PFXNZ,nan,Unknown
+PG,Consumer Staples,Unknown
+PGAC,nan,Unknown
+PGACR,nan,Unknown
+PGACU,nan,Unknown
+PGC,nan,Unknown
+PGEN,nan,Unknown
+PGJ,nan,Unknown
+PGNY,nan,Unknown
+PGR,Financials,Unknown
+PGY,nan,Unknown
+PGYWW,nan,Unknown
+PH,Industrials,Unknown
+PHAR,nan,Unknown
+PHAT,nan,Unknown
+PHH,nan,Unknown
+PHIO,nan,Unknown
+PHLT,nan,Unknown
+PHM,Consumer Discretionary,Unknown
+PHO,nan,Unknown
+PHOE,nan,Unknown
+PHUN,nan,Unknown
+PHVS,nan,Unknown
+PI,nan,Unknown
+PID,nan,Unknown
+PIE,nan,Unknown
+PIII,nan,Unknown
+PIIIW,nan,Unknown
+PINC,nan,Unknown
 PINS,Communication Services,Unknown
+PIO,nan,Unknown
+PIZ,nan,Unknown
 PK,Real Estate,Unknown
+PKBK,nan,Unknown
+PKG,Materials,Unknown
+PKOH,nan,Unknown
+PKW,nan,Unknown
+PLAB,nan,Unknown
+PLAY,nan,Unknown
+PLBC,nan,Unknown
+PLBL,nan,Unknown
+PLBY,nan,Unknown
+PLCE,nan,Unknown
+PLD,Real Estate,Unknown
+PLMK,nan,Unknown
+PLMKU,nan,Unknown
+PLMKW,nan,Unknown
+PLMR,nan,Unknown
 PLNT,Consumer Discretionary,Unknown
+PLPC,nan,Unknown
+PLRX,nan,Unknown
+PLRZ,nan,Unknown
+PLSE,nan,Unknown
+PLT,nan,Unknown
+PLTD,nan,Unknown
+PLTG,nan,Unknown
+PLTK,nan,Unknown
+PLTR,Information Technology,Unknown
+PLTU,nan,Unknown
+PLTZ,nan,Unknown
+PLUG,nan,Unknown
+PLUR,nan,Unknown
+PLUS,nan,Unknown
+PLUT,nan,Unknown
+PLXS,nan,Unknown
+PM,Consumer Staples,Unknown
+PMAX,nan,Unknown
+PMBS,nan,Unknown
+PMCB,nan,Unknown
+PMEC,nan,Unknown
+PMN,nan,Unknown
+PMTR,nan,Unknown
+PMTRU,nan,Unknown
+PMTRW,nan,Unknown
+PMTS,nan,Unknown
+PMVP,nan,Unknown
+PN,nan,Unknown
+PNBK,nan,Unknown
+PNC,Financials,Unknown
 PNFP,Financials,Unknown
+PNFPP,nan,Unknown
+PNQI,nan,Unknown
+PNR,Industrials,Unknown
+PNRG,nan,Unknown
+PNTG,nan,Unknown
+PNW,Utilities,Unknown
+POAI,nan,Unknown
+POCI,nan,Unknown
+PODC,nan,Unknown
+PODD,Health Care,Unknown
+POET,nan,Unknown
+POLA,nan,Unknown
+POLE,nan,Unknown
+POLEU,nan,Unknown
+POLEW,nan,Unknown
+PONY,nan,Unknown
+POOL,Consumer Discretionary,Unknown
 POST,Consumer Staples,Unknown
+POWI,nan,Unknown
+POWL,nan,Unknown
+POWW,nan,Unknown
+POWWP,nan,Unknown
+PPBT,nan,Unknown
 PPC,Consumer Staples,Unknown
+PPCB,nan,Unknown
+PPG,Materials,Unknown
+PPH,nan,Unknown
+PPI,nan,Unknown
+PPIH,nan,Unknown
+PPL,Utilities,Unknown
+PPSI,nan,Unknown
+PPTA,nan,Unknown
+PQAP,nan,Unknown
+PQJA,nan,Unknown
+PQJL,nan,Unknown
+PQOC,nan,Unknown
 PR,Energy,Unknown
+PRAA,nan,Unknown
+PRAX,nan,Unknown
+PRCH,nan,Unknown
+PRCT,nan,Unknown
+PRDO,nan,Unknown
+PRE,nan,Unknown
+PRENW,nan,Unknown
+PRFX,nan,Unknown
+PRFZ,nan,Unknown
 PRGO,Health Care,Unknown
+PRGS,nan,Unknown
 PRI,Financials,Unknown
+PRLD,nan,Unknown
 PRMB,Consumer Staples,Unknown
+PRME,nan,Unknown
+PRN,nan,Unknown
+PROF,nan,Unknown
+PROK,nan,Unknown
+PROP,nan,Unknown
+PROV,nan,Unknown
+PRPH,nan,Unknown
+PRPL,nan,Unknown
+PRPO,nan,Unknown
+PRQR,nan,Unknown
+PRSO,nan,Unknown
+PRTA,nan,Unknown
+PRTC,nan,Unknown
+PRTH,nan,Unknown
+PRTS,nan,Unknown
+PRU,Financials,Unknown
+PRVA,nan,Unknown
+PRZO,nan,Unknown
+PSA,Real Estate,Unknown
+PSC,nan,Unknown
+PSCC,nan,Unknown
+PSCD,nan,Unknown
+PSCE,nan,Unknown
+PSCF,nan,Unknown
+PSCH,nan,Unknown
+PSCI,nan,Unknown
+PSCM,nan,Unknown
+PSCT,nan,Unknown
+PSCU,nan,Unknown
+PSEC,nan,Unknown
+PSET,nan,Unknown
+PSHG,nan,Unknown
+PSIG,nan,Unknown
+PSIX,nan,Unknown
+PSKY,nan,Unknown
+PSL,nan,Unknown
+PSMT,nan,Unknown
 PSN,Industrials,Unknown
+PSNL,nan,Unknown
+PSNY,nan,Unknown
+PSNYW,nan,Unknown
 PSTG,Information Technology,Unknown
+PSTR,nan,Unknown
+PSTV,nan,Unknown
+PSWD,nan,Unknown
+PSX,Energy,Unknown
+PT,nan,Unknown
+PTC,Information Technology,Unknown
+PTCT,nan,Unknown
+PTEN,nan,Unknown
+PTF,nan,Unknown
+PTGX,nan,Unknown
+PTH,nan,Unknown
+PTHL,nan,Unknown
+PTIR,nan,Unknown
+PTIX,nan,Unknown
+PTIXW,nan,Unknown
+PTLE,nan,Unknown
+PTLO,nan,Unknown
+PTNM,nan,Unknown
+PTNQ,nan,Unknown
+PTON,nan,Unknown
+PUBM,nan,Unknown
+PUI,nan,Unknown
+PULM,nan,Unknown
+PVBC,nan,Unknown
 PVH,Consumer Discretionary,Unknown
+PVLA,nan,Unknown
+PWM,nan,Unknown
+PWP,nan,Unknown
+PWR,Industrials,Unknown
+PWRD,nan,Unknown
+PXI,nan,Unknown
+PXLW,nan,Unknown
+PXS,nan,Unknown
+PXSAW,nan,Unknown
+PY,nan,Unknown
+PYPD,nan,Unknown
+PYPG,nan,Unknown
+PYPL,Financials,Unknown
+PYXS,nan,Unknown
+PYZ,nan,Unknown
+PZZA,nan,Unknown
+QABA,nan,Unknown
+QALT,nan,Unknown
+QAT,nan,Unknown
+QB,nan,Unknown
+QBIG,nan,Unknown
+QBUF,nan,Unknown
+QCLN,nan,Unknown
+QCLR,nan,Unknown
+QCMD,nan,Unknown
+QCML,nan,Unknown
+QCMU,nan,Unknown
+QCOM,Information Technology,Unknown
+QCRH,nan,Unknown
+QDEL,nan,Unknown
+QDTY,nan,Unknown
+QETA,nan,Unknown
+QETAR,nan,Unknown
+QETAU,nan,Unknown
+QFIN,nan,Unknown
 QGEN,Health Care,Unknown
+QGRD,nan,Unknown
+QH,nan,Unknown
+QHDG,nan,Unknown
+QIPT,nan,Unknown
+QLGN,nan,Unknown
+QLYS,nan,Unknown
+QMCO,nan,Unknown
+QMID,nan,Unknown
+QMMM,nan,Unknown
+QMOM,nan,Unknown
+QNCX,nan,Unknown
+QNRX,nan,Unknown
+QNST,nan,Unknown
+QNTM,nan,Unknown
+QNXT,nan,Unknown
+QOWZ,nan,Unknown
+QPUX,nan,Unknown
+QQA,nan,Unknown
+QQDN,nan,Unknown
+QQEW,nan,Unknown
+QQHG,nan,Unknown
+QQJG,nan,Unknown
+QQLV,nan,Unknown
+QQMG,nan,Unknown
+QQQ,nan,Unknown
+QQQA,nan,Unknown
+QQQE,nan,Unknown
+QQQG,nan,Unknown
+QQQH,nan,Unknown
+QQQI,nan,Unknown
+QQQJ,nan,Unknown
+QQQM,nan,Unknown
+QQQP,nan,Unknown
+QQQS,nan,Unknown
+QQQT,nan,Unknown
+QQQX,nan,Unknown
+QQQY,nan,Unknown
+QQUP,nan,Unknown
+QQWZ,nan,Unknown
+QQXL,nan,Unknown
+QQXT,nan,Unknown
+QRHC,nan,Unknown
+QRMI,nan,Unknown
 QRVO,Information Technology,Unknown
 QS,Consumer Discretionary,Unknown
+QSEA,nan,Unknown
+QSEAR,nan,Unknown
+QSEAU,nan,Unknown
+QSG,nan,Unknown
+QSI,nan,Unknown
+QSIAW,nan,Unknown
+QSIX,nan,Unknown
+QSML,nan,Unknown
 QSR,Consumer Discretionary,Unknown
+QTEC,nan,Unknown
+QTOP,nan,Unknown
+QTR,nan,Unknown
+QTRX,nan,Unknown
+QTTB,nan,Unknown
+QTUM,nan,Unknown
+QUBT,nan,Unknown
+QUIK,nan,Unknown
+QUMSU,nan,Unknown
+QURE,nan,Unknown
+QVAL,nan,Unknown
+QVCGA,nan,Unknown
+QVCGP,nan,Unknown
 QXO,Industrials,Unknown
+QXQ,nan,Unknown
+QYLD,nan,Unknown
+QYLG,nan,Unknown
 R,Industrials,Unknown
+RAA,nan,Unknown
+RAAQ,nan,Unknown
+RAAQU,nan,Unknown
+RAAQW,nan,Unknown
+RADX,nan,Unknown
+RAIL,nan,Unknown
+RAIN,nan,Unknown
+RAINW,nan,Unknown
 RAL,Information Technology,Unknown
+RAND,nan,Unknown
+RANG,nan,Unknown
+RANGR,nan,Unknown
+RANGU,nan,Unknown
+RANI,nan,Unknown
+RAPP,nan,Unknown
+RAPT,nan,Unknown
 RARE,Health Care,Unknown
+RAVE,nan,Unknown
+RAY,nan,Unknown
+RAYA,nan,Unknown
 RBA,Industrials,Unknown
+RBB,nan,Unknown
+RBBN,nan,Unknown
 RBC,Industrials,Unknown
+RBCAA,nan,Unknown
+RBIL,nan,Unknown
+RBKB,nan,Unknown
 RBLX,Communication Services,Unknown
+RBNE,nan,Unknown
 RBRK,Information Technology,Unknown
+RCAT,nan,Unknown
+RCEL,nan,Unknown
+RCGE,nan,Unknown
+RCKT,nan,Unknown
+RCKTW,nan,Unknown
+RCKY,nan,Unknown
+RCL,Consumer Discretionary,Unknown
+RCMT,nan,Unknown
+RCON,nan,Unknown
+RCT,nan,Unknown
+RDAC,nan,Unknown
+RDACR,nan,Unknown
+RDACU,nan,Unknown
+RDAG,nan,Unknown
+RDAGU,nan,Unknown
+RDAGW,nan,Unknown
+RDCM,nan,Unknown
 RDDT,Communication Services,Unknown
+RDGT,nan,Unknown
+RDHL,nan,Unknown
+RDI,nan,Unknown
+RDIB,nan,Unknown
+RDNT,nan,Unknown
+RDNW,nan,Unknown
+RDTL,nan,Unknown
+RDTY,nan,Unknown
+RDVT,nan,Unknown
+RDVY,nan,Unknown
+RDWR,nan,Unknown
+RDZN,nan,Unknown
+RDZNW,nan,Unknown
+REAI,nan,Unknown
+REAL,nan,Unknown
+REAX,nan,Unknown
+REBN,nan,Unknown
+RECT,nan,Unknown
+REE,nan,Unknown
+REFI,nan,Unknown
+REFR,nan,Unknown
+REG,Real Estate,Unknown
+REGCO,nan,Unknown
+REGCP,nan,Unknown
+REGN,Health Care,Unknown
+REIT,nan,Unknown
+REKR,nan,Unknown
+RELI,nan,Unknown
+RELIW,nan,Unknown
+RELL,nan,Unknown
+RELY,nan,Unknown
+REMG,nan,Unknown
+RENB,nan,Unknown
+RENT,nan,Unknown
+REPL,nan,Unknown
+RETO,nan,Unknown
+REVB,nan,Unknown
+REVBW,nan,Unknown
 REXR,Real Estate,Unknown
 REYN,Consumer Staples,Unknown
+RF,Financials,Unknown
+RFAI,nan,Unknown
+RFAIR,nan,Unknown
+RFAIU,nan,Unknown
+RFDI,nan,Unknown
+RFEM,nan,Unknown
+RFEU,nan,Unknown
+RFIL,nan,Unknown
 RGA,Financials,Unknown
+RGC,nan,Unknown
+RGCO,nan,Unknown
 RGEN,Health Care,Unknown
 RGLD,Materials,Unknown
+RGLO,nan,Unknown
+RGNX,nan,Unknown
+RGP,nan,Unknown
+RGS,nan,Unknown
+RGTI,nan,Unknown
+RGTIW,nan,Unknown
+RGTX,nan,Unknown
 RH,Consumer Discretionary,Unknown
 RHI,Industrials,Unknown
+RHLD,nan,Unknown
+RIBB,nan,Unknown
+RIBBR,nan,Unknown
+RIBBU,nan,Unknown
+RICK,nan,Unknown
+RIFR,nan,Unknown
+RIGL,nan,Unknown
+RILY,nan,Unknown
+RILYG,nan,Unknown
+RILYK,nan,Unknown
+RILYL,nan,Unknown
+RILYN,nan,Unknown
+RILYP,nan,Unknown
+RILYT,nan,Unknown
+RILYZ,nan,Unknown
+RIME,nan,Unknown
+RING,nan,Unknown
+RINT,nan,Unknown
+RIOT,nan,Unknown
 RITM,Financials,Unknown
+RITR,nan,Unknown
 RIVN,Consumer Discretionary,Unknown
+RJF,Financials,Unknown
+RKDA,nan,Unknown
 RKLB,Industrials,Unknown
+RKLX,nan,Unknown
 RKT,Financials,Unknown
+RL,Consumer Discretionary,Unknown
+RLAY,nan,Unknown
 RLI,Financials,Unknown
+RLMD,nan,Unknown
+RLYB,nan,Unknown
+RMBI,nan,Unknown
+RMBS,nan,Unknown
+RMCF,nan,Unknown
+RMCO,nan,Unknown
+RMCOW,nan,Unknown
+RMD,Health Care,Unknown
+RMNI,nan,Unknown
+RMR,nan,Unknown
+RMSG,nan,Unknown
+RMSGW,nan,Unknown
+RMTI,nan,Unknown
+RNA,nan,Unknown
+RNAC,nan,Unknown
+RNAZ,nan,Unknown
+RNEM,nan,Unknown
 RNG,Information Technology,Unknown
+RNIN,nan,Unknown
 RNR,Financials,Unknown
+RNRG,nan,Unknown
+RNTX,nan,Unknown
+RNW,nan,Unknown
+RNWWW,nan,Unknown
+RNXT,nan,Unknown
+ROAD,nan,Unknown
+ROBT,nan,Unknown
+ROCK,nan,Unknown
+ROE,nan,Unknown
 ROIV,Health Care,Unknown
+ROK,Industrials,Unknown
 ROKU,Communication Services,Unknown
+ROL,Industrials,Unknown
+ROMA,nan,Unknown
+ROOT,nan,Unknown
+ROP,Industrials,Unknown
+ROST,Consumer Discretionary,Unknown
+RPAY,nan,Unknown
+RPD,nan,Unknown
+RPID,nan,Unknown
 RPM,Materials,Unknown
 RPRX,Health Care,Unknown
+RPTX,nan,Unknown
+RR,nan,Unknown
+RRBI,nan,Unknown
 RRC,Energy,Unknown
+RRGB,nan,Unknown
+RRR,nan,Unknown
 RRX,Industrials,Unknown
 RS,Materials,Unknown
+RSG,Industrials,Unknown
+RSSS,nan,Unknown
+RSVR,nan,Unknown
+RSVRW,nan,Unknown
+RTAC,nan,Unknown
+RTACU,nan,Unknown
+RTACW,nan,Unknown
+RTH,nan,Unknown
+RTX,Industrials,Unknown
+RTXG,nan,Unknown
+RUBI,nan,Unknown
+RUM,nan,Unknown
+RUMBW,nan,Unknown
+RUN,nan,Unknown
+RUNN,nan,Unknown
+RUSC,nan,Unknown
+RUSHA,nan,Unknown
+RUSHB,nan,Unknown
 RVMD,Health Care,Unknown
+RVMDW,nan,Unknown
+RVNL,nan,Unknown
+RVPH,nan,Unknown
+RVPHW,nan,Unknown
+RVSB,nan,Unknown
+RVSN,nan,Unknown
+RVSNW,nan,Unknown
+RVTY,Health Care,Unknown
+RVYL,nan,Unknown
+RWAY,nan,Unknown
+RWAYL,nan,Unknown
+RWAYZ,nan,Unknown
+RXRX,nan,Unknown
+RXST,nan,Unknown
+RXT,nan,Unknown
+RYAAY,nan,Unknown
 RYAN,Financials,Unknown
+RYET,nan,Unknown
+RYM,nan,Unknown
 RYN,Real Estate,Unknown
+RYOJ,nan,Unknown
+RYTM,nan,Unknown
+RZLT,nan,Unknown
+RZLV,nan,Unknown
+RZLVW,nan,Unknown
 S,Information Technology,Unknown
+SABR,nan,Unknown
+SABS,nan,Unknown
+SABSW,nan,Unknown
+SAFT,nan,Unknown
+SAFX,nan,Unknown
+SAGT,nan,Unknown
 SAIA,Industrials,Unknown
 SAIC,Industrials,Unknown
+SAIH,nan,Unknown
+SAIHW,nan,Unknown
 SAIL,Information Technology,Unknown
 SAM,Consumer Staples,Unknown
+SAMG,nan,Unknown
+SANA,nan,Unknown
+SANG,nan,Unknown
+SANM,nan,Unknown
+SARK,nan,Unknown
 SARO,Industrials,Unknown
+SATL,nan,Unknown
+SATLW,nan,Unknown
+SATS,nan,Unknown
+SAVA,nan,Unknown
+SBAC,Real Estate,Unknown
+SBC,nan,Unknown
+SBCF,nan,Unknown
+SBCWW,nan,Unknown
+SBET,nan,Unknown
+SBFG,nan,Unknown
+SBFM,nan,Unknown
+SBFMW,nan,Unknown
+SBGI,nan,Unknown
+SBLK,nan,Unknown
+SBLX,nan,Unknown
+SBRA,nan,Unknown
+SBUX,Consumer Discretionary,Unknown
+SCAG,nan,Unknown
+SCAGW,nan,Unknown
 SCCO,Materials,Unknown
+SCDS,nan,Unknown
+SCHL,nan,Unknown
+SCHW,Financials,Unknown
 SCI,Consumer Discretionary,Unknown
+SCKT,nan,Unknown
+SCLX,nan,Unknown
+SCLXW,nan,Unknown
+SCNI,nan,Unknown
+SCNX,nan,Unknown
+SCOR,nan,Unknown
+SCPH,nan,Unknown
+SCSC,nan,Unknown
+SCVL,nan,Unknown
+SCWO,nan,Unknown
+SCYX,nan,Unknown
+SCZ,nan,Unknown
+SDA,nan,Unknown
+SDAWW,nan,Unknown
+SDG,nan,Unknown
+SDGR,nan,Unknown
+SDHI,nan,Unknown
+SDHIR,nan,Unknown
+SDHIU,nan,Unknown
+SDM,nan,Unknown
+SDOT,nan,Unknown
+SDSI,nan,Unknown
+SDST,nan,Unknown
+SDSTW,nan,Unknown
+SDTY,nan,Unknown
+SDVY,nan,Unknown
+SEAT,nan,Unknown
+SEATW,nan,Unknown
 SEB,Consumer Staples,Unknown
+SEDG,nan,Unknown
 SEE,Materials,Unknown
+SEED,nan,Unknown
+SEEM,nan,Unknown
+SEER,nan,Unknown
+SEGG,nan,Unknown
 SEIC,Financials,Unknown
+SEIE,nan,Unknown
+SEIS,nan,Unknown
+SELF,nan,Unknown
+SELX,nan,Unknown
+SENEA,nan,Unknown
+SENEB,nan,Unknown
+SEPN,nan,Unknown
+SERA,nan,Unknown
+SERV,nan,Unknown
+SETM,nan,Unknown
+SEVN,nan,Unknown
+SEZL,nan,Unknown
 SF,Financials,Unknown
+SFBC,nan,Unknown
 SFD,Consumer Staples,Unknown
+SFHG,nan,Unknown
+SFIX,nan,Unknown
+SFLO,nan,Unknown
 SFM,Consumer Staples,Unknown
+SFNC,nan,Unknown
+SFST,nan,Unknown
+SFWL,nan,Unknown
+SGA,nan,Unknown
+SGAFT,nan,Unknown
+SGBX,nan,Unknown
+SGC,nan,Unknown
+SGD,nan,Unknown
+SGHT,nan,Unknown
 SGI,Consumer Discretionary,Unknown
+SGLY,nan,Unknown
+SGML,nan,Unknown
+SGMO,nan,Unknown
+SGMT,nan,Unknown
+SGRP,nan,Unknown
+SGRY,nan,Unknown
+SHBI,nan,Unknown
 SHC,Health Care,Unknown
+SHEN,nan,Unknown
+SHFS,nan,Unknown
+SHFSW,nan,Unknown
+SHIM,nan,Unknown
+SHIP,nan,Unknown
+SHLS,nan,Unknown
+SHMD,nan,Unknown
+SHMDW,nan,Unknown
+SHOO,nan,Unknown
+SHOP,nan,Unknown
+SHOT,nan,Unknown
+SHOTW,nan,Unknown
+SHPD,nan,Unknown
+SHPH,nan,Unknown
+SHPU,nan,Unknown
+SHRY,nan,Unknown
+SHV,nan,Unknown
+SHW,Materials,Unknown
+SHY,nan,Unknown
+SIBN,nan,Unknown
+SIDU,nan,Unknown
+SIEB,nan,Unknown
+SIFY,nan,Unknown
+SIGA,nan,Unknown
+SIGI,nan,Unknown
+SIGIP,nan,Unknown
+SILC,nan,Unknown
+SILO,nan,Unknown
+SIMA,nan,Unknown
+SIMAU,nan,Unknown
+SIMAW,nan,Unknown
+SIMO,nan,Unknown
+SINT,nan,Unknown
+SION,nan,Unknown
 SIRI,Communication Services,Unknown
+SISI,nan,Unknown
 SITE,Industrials,Unknown
+SITM,nan,Unknown
+SIXG,nan,Unknown
+SJ,nan,Unknown
+SJCP,nan,Unknown
+SJLD,nan,Unknown
+SJM,Consumer Staples,Unknown
+SKBL,nan,Unknown
+SKIN,nan,Unknown
+SKK,nan,Unknown
+SKOR,nan,Unknown
+SKRE,nan,Unknown
+SKWD,nan,Unknown
 SKX,Consumer Discretionary,Unknown
+SKYE,nan,Unknown
+SKYQ,nan,Unknown
+SKYT,nan,Unknown
+SKYU,nan,Unknown
+SKYW,nan,Unknown
+SKYX,nan,Unknown
+SKYY,nan,Unknown
+SLAB,nan,Unknown
+SLB,Energy,Unknown
+SLDB,nan,Unknown
+SLDE,nan,Unknown
+SLDP,nan,Unknown
+SLDPW,nan,Unknown
+SLE,nan,Unknown
+SLGL,nan,Unknown
 SLGN,Materials,Unknown
 SLM,Financials,Unknown
+SLMBP,nan,Unknown
+SLN,nan,Unknown
+SLNG,nan,Unknown
+SLNH,nan,Unknown
+SLNHP,nan,Unknown
+SLNO,nan,Unknown
+SLP,nan,Unknown
+SLQD,nan,Unknown
+SLRC,nan,Unknown
+SLRX,nan,Unknown
+SLS,nan,Unknown
+SLSN,nan,Unknown
+SLVO,nan,Unknown
+SLVR,nan,Unknown
+SLXN,nan,Unknown
+SLXNW,nan,Unknown
+SMBC,nan,Unknown
+SMCC,nan,Unknown
+SMCF,nan,Unknown
+SMCI,Information Technology,Unknown
+SMCL,nan,Unknown
+SMCO,nan,Unknown
+SMCX,nan,Unknown
+SMCZ,nan,Unknown
 SMG,Materials,Unknown
+SMH,nan,Unknown
+SMHX,nan,Unknown
+SMID,nan,Unknown
+SMLR,nan,Unknown
 SMMT,Health Care,Unknown
+SMPL,nan,Unknown
+SMRI,nan,Unknown
+SMSI,nan,Unknown
+SMST,nan,Unknown
+SMTC,nan,Unknown
+SMTI,nan,Unknown
+SMTK,nan,Unknown
+SMX,nan,Unknown
+SMXT,nan,Unknown
+SMXWW,nan,Unknown
 SN,Consumer Discretionary,Unknown
+SNA,Industrials,Unknown
+SNAL,nan,Unknown
+SNBR,nan,Unknown
+SNCR,nan,Unknown
+SNCY,nan,Unknown
+SND,nan,Unknown
 SNDK,Information Technology,Unknown
+SNDL,nan,Unknown
 SNDR,Industrials,Unknown
+SNDX,nan,Unknown
+SNES,nan,Unknown
+SNEX,nan,Unknown
+SNFCA,nan,Unknown
+SNGX,nan,Unknown
+SNOA,nan,Unknown
 SNOW,Information Technology,Unknown
+SNPS,Information Technology,Unknown
+SNSE,nan,Unknown
+SNSR,nan,Unknown
+SNT,nan,Unknown
+SNTG,nan,Unknown
+SNTI,nan,Unknown
 SNV,Financials,Unknown
+SNWV,nan,Unknown
 SNX,Information Technology,Unknown
+SNY,nan,Unknown
+SNYR,nan,Unknown
+SO,Utilities,Unknown
+SOBR,nan,Unknown
+SOCA,nan,Unknown
+SOCAU,nan,Unknown
+SOCAW,nan,Unknown
+SOCL,nan,Unknown
 SOFI,Financials,Unknown
+SOFX,nan,Unknown
+SOGP,nan,Unknown
+SOHO,nan,Unknown
+SOHOB,nan,Unknown
+SOHON,nan,Unknown
+SOHOO,nan,Unknown
+SOHU,nan,Unknown
+SOLT,nan,Unknown
+SOLV,Health Care,Unknown
+SOLZ,nan,Unknown
 SON,Materials,Unknown
+SOND,nan,Unknown
+SONDW,nan,Unknown
+SONM,nan,Unknown
+SONN,nan,Unknown
+SONO,nan,Unknown
+SOPA,nan,Unknown
+SOPH,nan,Unknown
+SORA,nan,Unknown
+SOTK,nan,Unknown
+SOUN,nan,Unknown
+SOUNW,nan,Unknown
+SOUX,nan,Unknown
+SOWG,nan,Unknown
+SOXQ,nan,Unknown
+SOXX,nan,Unknown
+SPAI,nan,Unknown
+SPAM,nan,Unknown
+SPAQ,nan,Unknown
+SPBC,nan,Unknown
+SPC,nan,Unknown
+SPCB,nan,Unknown
+SPCX,nan,Unknown
+SPCY,nan,Unknown
+SPEG,nan,Unknown
+SPEGR,nan,Unknown
+SPEGU,nan,Unknown
+SPFI,nan,Unknown
+SPG,Real Estate,Unknown
+SPGI,Financials,Unknown
+SPHL,nan,Unknown
+SPKL,nan,Unknown
+SPKLU,nan,Unknown
+SPKLW,nan,Unknown
+SPNS,nan,Unknown
+SPOK,nan,Unknown
 SPOT,Communication Services,Unknown
+SPPL,nan,Unknown
 SPR,Industrials,Unknown
+SPRC,nan,Unknown
+SPRO,nan,Unknown
+SPRX,nan,Unknown
+SPRY,nan,Unknown
+SPSC,nan,Unknown
+SPT,nan,Unknown
+SPTN,nan,Unknown
+SPWH,nan,Unknown
+SPWR,nan,Unknown
+SPWRW,nan,Unknown
+SPXD,nan,Unknown
+SPYQ,nan,Unknown
+SQFT,nan,Unknown
+SQFTP,nan,Unknown
+SQFTW,nan,Unknown
+SQLV,nan,Unknown
+SQQQ,nan,Unknown
+SRAD,nan,Unknown
+SRBK,nan,Unknown
+SRCE,nan,Unknown
+SRDX,nan,Unknown
+SRE,Utilities,Unknown
+SRET,nan,Unknown
 SRPT,Health Care,Unknown
+SRRK,nan,Unknown
+SRTA,nan,Unknown
+SRTAW,nan,Unknown
+SRTS,nan,Unknown
+SRZN,nan,Unknown
+SRZNW,nan,Unknown
 SSB,Financials,Unknown
+SSBI,nan,Unknown
 SSD,Industrials,Unknown
+SSEAU,nan,Unknown
+SSII,nan,Unknown
+SSKN,nan,Unknown
+SSM,nan,Unknown
 SSNC,Information Technology,Unknown
+SSP,nan,Unknown
+SSRM,nan,Unknown
+SSSS,nan,Unknown
+SSSSL,nan,Unknown
+SSTI,nan,Unknown
+SSYS,nan,Unknown
 ST,Industrials,Unknown
+STAA,nan,Unknown
 STAG,Real Estate,Unknown
+STAI,nan,Unknown
+STAK,nan,Unknown
+STBA,nan,Unknown
+STE,Health Care,Unknown
+STEC,nan,Unknown
+STEP,nan,Unknown
+STFS,nan,Unknown
+STGW,nan,Unknown
+STHO,nan,Unknown
+STI,nan,Unknown
+STIM,nan,Unknown
+STKE,nan,Unknown
+STKH,nan,Unknown
+STKL,nan,Unknown
+STKS,nan,Unknown
+STLD,Materials,Unknown
+STNC,nan,Unknown
+STNE,nan,Unknown
+STOK,nan,Unknown
+STRA,nan,Unknown
+STRC,nan,Unknown
+STRD,nan,Unknown
+STRF,nan,Unknown
+STRK,nan,Unknown
+STRL,nan,Unknown
+STRO,nan,Unknown
+STRR,nan,Unknown
+STRRP,nan,Unknown
+STRS,nan,Unknown
+STRT,nan,Unknown
+STRZ,nan,Unknown
+STSS,nan,Unknown
+STSSW,nan,Unknown
+STT,Financials,Unknown
+STTK,nan,Unknown
 STWD,Financials,Unknown
+STX,nan,Unknown
+STZ,Consumer Staples,Unknown
+SUGP,nan,Unknown
 SUI,Real Estate,Unknown
+SUIG,nan,Unknown
+SUNE,nan,Unknown
+SUNS,nan,Unknown
+SUPN,nan,Unknown
+SUPP,nan,Unknown
+SUPX,nan,Unknown
+SURG,nan,Unknown
+SUSB,nan,Unknown
+SUSC,nan,Unknown
+SUSL,nan,Unknown
+SUUN,nan,Unknown
+SVA,nan,Unknown
+SVACU,nan,Unknown
+SVC,nan,Unknown
+SVCC,nan,Unknown
+SVCCU,nan,Unknown
+SVCCW,nan,Unknown
+SVCO,nan,Unknown
+SVII,nan,Unknown
+SVIIR,nan,Unknown
+SVIIU,nan,Unknown
+SVIIW,nan,Unknown
+SVRA,nan,Unknown
+SVRE,nan,Unknown
+SVREW,nan,Unknown
+SW,Materials,Unknown
+SWAG,nan,Unknown
+SWAGW,nan,Unknown
+SWBI,nan,Unknown
+SWIM,nan,Unknown
+SWIN,nan,Unknown
+SWK,Industrials,Unknown
+SWKH,nan,Unknown
+SWKHL,nan,Unknown
+SWKS,Information Technology,Unknown
+SWP,nan,Unknown
+SWVL,nan,Unknown
+SWVLW,nan,Unknown
+SXTC,nan,Unknown
+SXTP,nan,Unknown
+SXTPW,nan,Unknown
+SY,nan,Unknown
+SYBT,nan,Unknown
+SYBX,nan,Unknown
+SYF,Financials,Unknown
+SYK,Health Care,Unknown
+SYM,nan,Unknown
+SYNA,nan,Unknown
+SYPR,nan,Unknown
+SYRE,nan,Unknown
+SYTA,nan,Unknown
+SYTAW,nan,Unknown
+SYY,Consumer Staples,Unknown
+SZZL,nan,Unknown
+SZZLR,nan,Unknown
+SZZLU,nan,Unknown
+T,Communication Services,Unknown
+TACH,nan,Unknown
+TACHU,nan,Unknown
+TACHW,nan,Unknown
+TACO,nan,Unknown
+TACOU,nan,Unknown
+TACOW,nan,Unknown
+TACT,nan,Unknown
+TAIT,nan,Unknown
+TALK,nan,Unknown
+TALKW,nan,Unknown
+TANH,nan,Unknown
+TAOP,nan,Unknown
+TAOX,nan,Unknown
+TAP,Consumer Staples,Unknown
+TARA,nan,Unknown
+TARK,nan,Unknown
+TARS,nan,Unknown
+TASK,nan,Unknown
+TATT,nan,Unknown
+TAVI,nan,Unknown
+TAVIR,nan,Unknown
+TAVIU,nan,Unknown
+TAX,nan,Unknown
+TAXE,nan,Unknown
+TAXI,nan,Unknown
+TAXS,nan,Unknown
+TAXT,nan,Unknown
+TAYD,nan,Unknown
+TBBK,nan,Unknown
+TBCH,nan,Unknown
+TBH,nan,Unknown
+TBHC,nan,Unknown
+TBIL,nan,Unknown
+TBLA,nan,Unknown
+TBLAW,nan,Unknown
+TBLD,nan,Unknown
+TBMC,nan,Unknown
+TBMCR,nan,Unknown
+TBPH,nan,Unknown
+TBRG,nan,Unknown
+TC,nan,Unknown
+TCBI,nan,Unknown
+TCBIO,nan,Unknown
+TCBK,nan,Unknown
+TCBS,nan,Unknown
+TCBX,nan,Unknown
+TCHI,nan,Unknown
+TCMD,nan,Unknown
+TCOM,nan,Unknown
+TCPC,nan,Unknown
+TCRT,nan,Unknown
+TCRX,nan,Unknown
+TCX,nan,Unknown
+TDAC,nan,Unknown
+TDACU,nan,Unknown
+TDACW,nan,Unknown
 TDC,Information Technology,Unknown
+TDG,Industrials,Unknown
+TDI,nan,Unknown
+TDIC,nan,Unknown
+TDIV,nan,Unknown
+TDSB,nan,Unknown
+TDSC,nan,Unknown
+TDTH,nan,Unknown
+TDUP,nan,Unknown
+TDY,Industrials,Unknown
+TEAD,nan,Unknown
 TEAM,Information Technology,Unknown
+TECH,Health Care,Unknown
+TECTP,nan,Unknown
+TECX,nan,Unknown
+TEKX,nan,Unknown
+TEKY,nan,Unknown
+TEL,nan,Unknown
+TELA,nan,Unknown
+TELO,nan,Unknown
 TEM,Health Care,Unknown
+TENB,nan,Unknown
+TENX,nan,Unknown
+TER,Information Technology,Unknown
+TERN,nan,Unknown
+TEXN,nan,Unknown
+TFC,Financials,Unknown
+TFNS,nan,Unknown
 TFSL,Financials,Unknown
 TFX,Health Care,Unknown
+TGHL,nan,Unknown
+TGL,nan,Unknown
+TGT,Consumer Staples,Unknown
+TGTX,nan,Unknown
+TH,nan,Unknown
+THAR,nan,Unknown
 THC,Health Care,Unknown
+THCH,nan,Unknown
+THFF,nan,Unknown
 THG,Financials,Unknown
+THH,nan,Unknown
+THMZ,nan,Unknown
 THO,Consumer Discretionary,Unknown
+THRM,nan,Unknown
+THRY,nan,Unknown
+THTX,nan,Unknown
 TIGO,Communication Services,Unknown
+TIGR,nan,Unknown
+TIL,nan,Unknown
+TILE,nan,Unknown
+TIPT,nan,Unknown
+TIRX,nan,Unknown
+TITN,nan,Unknown
+TIVC,nan,Unknown
+TJX,Consumer Discretionary,Unknown
+TKLF,nan,Unknown
+TKNO,nan,Unknown
+TKO,Communication Services,Unknown
 TKR,Industrials,Unknown
+TLF,nan,Unknown
+TLIH,nan,Unknown
 TLN,Utilities,Unknown
+TLNCU,nan,Unknown
+TLPH,nan,Unknown
+TLRY,nan,Unknown
+TLS,nan,Unknown
+TLSA,nan,Unknown
+TLSI,nan,Unknown
+TLSIW,nan,Unknown
+TLT,nan,Unknown
+TLX,nan,Unknown
+TMB,nan,Unknown
+TMC,nan,Unknown
+TMCI,nan,Unknown
+TMCWW,nan,Unknown
+TMDX,nan,Unknown
+TMED,nan,Unknown
+TMET,nan,Unknown
+TMO,Health Care,Unknown
+TMUS,Communication Services,Unknown
+TMUSI,nan,Unknown
+TMUSL,nan,Unknown
+TMUSZ,nan,Unknown
+TNDM,nan,Unknown
+TNFA,nan,Unknown
+TNGX,nan,Unknown
 TNL,Consumer Discretionary,Unknown
+TNMG,nan,Unknown
+TNON,nan,Unknown
+TNONW,nan,Unknown
+TNXP,nan,Unknown
+TNYA,nan,Unknown
+TOI,nan,Unknown
+TOIIW,nan,Unknown
 TOL,Consumer Discretionary,Unknown
+TOMZ,nan,Unknown
+TONX,nan,Unknown
+TOP,nan,Unknown
+TORO,nan,Unknown
 TOST,Information Technology,Unknown
+TOUR,nan,Unknown
+TOWN,nan,Unknown
+TOYO,nan,Unknown
+TPCS,nan,Unknown
 TPG,Financials,Unknown
+TPGXL,nan,Unknown
+TPL,Energy,Unknown
+TPLS,nan,Unknown
+TPR,Consumer Discretionary,Unknown
+TPST,nan,Unknown
+TQQQ,nan,Unknown
+TQQY,nan,Unknown
+TRAW,nan,Unknown
+TRDA,nan,Unknown
+TREE,nan,Unknown
 TREX,Industrials,Unknown
+TRGP,Energy,Unknown
+TRI,nan,Unknown
+TRIB,nan,Unknown
+TRIN,nan,Unknown
+TRINI,nan,Unknown
+TRINZ,nan,Unknown
+TRIP,nan,Unknown
+TRMB,Information Technology,Unknown
+TRMD,nan,Unknown
+TRMK,nan,Unknown
+TRML,nan,Unknown
+TRNR,nan,Unknown
+TRNS,nan,Unknown
+TRON,nan,Unknown
+TROO,nan,Unknown
+TROW,Financials,Unknown
+TRS,nan,Unknown
+TRSG,nan,Unknown
+TRST,nan,Unknown
 TRU,Industrials,Unknown
+TRUD,nan,Unknown
+TRUE,nan,Unknown
+TRUG,nan,Unknown
+TRUP,nan,Unknown
+TRUT,nan,Unknown
+TRV,Financials,Unknown
+TRVG,nan,Unknown
+TRVI,nan,Unknown
+TSAT,nan,Unknown
+TSBK,nan,Unknown
+TSCO,Consumer Discretionary,Unknown
+TSDD,nan,Unknown
+TSEL,nan,Unknown
+TSEM,nan,Unknown
+TSHA,nan,Unknown
+TSL,nan,Unknown
+TSLA,Consumer Discretionary,Unknown
+TSLG,nan,Unknown
+TSLL,nan,Unknown
+TSLQ,nan,Unknown
+TSLR,nan,Unknown
+TSLS,nan,Unknown
+TSMG,nan,Unknown
+TSMU,nan,Unknown
+TSMX,nan,Unknown
+TSMZ,nan,Unknown
+TSN,Consumer Staples,Unknown
+TSPY,nan,Unknown
+TSSI,nan,Unknown
+TSYY,nan,Unknown
+TT,Industrials,Unknown
+TTAN,nan,Unknown
 TTC,Industrials,Unknown
+TTD,Communication Services,Unknown
+TTEC,nan,Unknown
 TTEK,Industrials,Unknown
+TTEQ,nan,Unknown
+TTGT,nan,Unknown
+TTMI,nan,Unknown
+TTNP,nan,Unknown
+TTSH,nan,Unknown
+TTWO,Communication Services,Unknown
+TUG,nan,Unknown
+TUGN,nan,Unknown
+TUR,nan,Unknown
+TURB,nan,Unknown
+TURF,nan,Unknown
+TURN,nan,Unknown
+TUSK,nan,Unknown
+TVA,nan,Unknown
+TVACU,nan,Unknown
+TVACW,nan,Unknown
+TVAI,nan,Unknown
+TVAIR,nan,Unknown
+TVAIU,nan,Unknown
+TVGN,nan,Unknown
+TVGNW,nan,Unknown
+TVRD,nan,Unknown
+TVTX,nan,Unknown
 TW,Financials,Unknown
+TWFG,nan,Unknown
+TWG,nan,Unknown
+TWIN,nan,Unknown
 TWLO,Information Technology,Unknown
+TWNP,nan,Unknown
+TWST,nan,Unknown
+TXG,nan,Unknown
+TXMD,nan,Unknown
+TXN,Information Technology,Unknown
 TXRH,Consumer Discretionary,Unknown
+TXSS,nan,Unknown
+TXT,Industrials,Unknown
+TXUE,nan,Unknown
+TXUG,nan,Unknown
+TYGO,nan,Unknown
+TYL,Information Technology,Unknown
+TYRA,nan,Unknown
+TZOO,nan,Unknown
+TZUP,nan,Unknown
 U,Information Technology,Unknown
 UA,Consumer Discretionary,Unknown
 UAA,Consumer Discretionary,Unknown
+UAE,nan,Unknown
+UAL,Industrials,Unknown
+UBCP,nan,Unknown
+UBER,Industrials,Unknown
+UBFO,nan,Unknown
+UBND,nan,Unknown
+UBRL,nan,Unknown
+UBSI,nan,Unknown
+UBXG,nan,Unknown
+UCAR,nan,Unknown
+UCL,nan,Unknown
+UCRD,nan,Unknown
+UCTT,nan,Unknown
+UCYB,nan,Unknown
+UDMY,nan,Unknown
+UDR,Real Estate,Unknown
+UEIC,nan,Unknown
+UEVM,nan,Unknown
+UFCS,nan,Unknown
+UFG,nan,Unknown
+UFIV,nan,Unknown
+UFO,nan,Unknown
+UFPI,nan,Unknown
+UFPT,nan,Unknown
+UG,nan,Unknown
 UGI,Utilities,Unknown
+UGRO,nan,Unknown
 UHAL,Industrials,Unknown
-UHAL-B,Industrials,Unknown
+UHALB,nan,Unknown
+UHG,nan,Unknown
+UHGWW,nan,Unknown
+UHS,Health Care,Unknown
 UI,Information Technology,Unknown
+UITB,nan,Unknown
+UIVM,nan,Unknown
+UK,nan,Unknown
+UKOMW,nan,Unknown
+ULBI,nan,Unknown
+ULCC,nan,Unknown
+ULH,nan,Unknown
+ULTA,Consumer Discretionary,Unknown
+ULVM,nan,Unknown
+ULY,nan,Unknown
+UMBF,nan,Unknown
+UMBFO,nan,Unknown
+UMMA,nan,Unknown
+UNB,nan,Unknown
+UNCY,nan,Unknown
+UNH,Health Care,Unknown
+UNHG,nan,Unknown
+UNIT,nan,Unknown
+UNIY,nan,Unknown
 UNM,Financials,Unknown
+UNP,Industrials,Unknown
+UNTY,nan,Unknown
+UOKA,nan,Unknown
+UONE,nan,Unknown
+UONEK,nan,Unknown
+UPB,nan,Unknown
+UPBD,nan,Unknown
+UPC,nan,Unknown
+UPGR,nan,Unknown
+UPLD,nan,Unknown
+UPS,Industrials,Unknown
+UPST,nan,Unknown
+UPWK,nan,Unknown
+UPXI,nan,Unknown
+URBN,nan,Unknown
+URGN,nan,Unknown
+URI,Industrials,Unknown
+URNJ,nan,Unknown
+UROY,nan,Unknown
+USAF,nan,Unknown
+USAR,nan,Unknown
+USARW,nan,Unknown
+USAU,nan,Unknown
+USB,Financials,Unknown
+USCB,nan,Unknown
+USCL,nan,Unknown
+USD,nan,Unknown
+USDX,nan,Unknown
+USEA,nan,Unknown
+USEG,nan,Unknown
 USFD,Consumer Staples,Unknown
+USFI,nan,Unknown
+USGO,nan,Unknown
+USGOW,nan,Unknown
+USIG,nan,Unknown
+USIN,nan,Unknown
+USIO,nan,Unknown
+USLM,nan,Unknown
+USMC,nan,Unknown
+USOI,nan,Unknown
+USOY,nan,Unknown
+USRD,nan,Unknown
+USSH,nan,Unknown
+USTB,nan,Unknown
+USVM,nan,Unknown
+USVN,nan,Unknown
+USXF,nan,Unknown
+UTEN,nan,Unknown
 UTHR,Health Care,Unknown
+UTHY,nan,Unknown
+UTMD,nan,Unknown
+UTRE,nan,Unknown
+UTSI,nan,Unknown
+UTWO,nan,Unknown
+UTWY,nan,Unknown
+UVSP,nan,Unknown
 UWMC,Financials,Unknown
+UXIN,nan,Unknown
+UYLD,nan,Unknown
+UYSC,nan,Unknown
+UYSCR,nan,Unknown
+UYSCU,nan,Unknown
+V,Financials,Unknown
+VABK,nan,Unknown
+VACH,nan,Unknown
+VACHU,nan,Unknown
+VACHW,nan,Unknown
+VALN,nan,Unknown
+VALU,nan,Unknown
+VANI,nan,Unknown
+VBIL,nan,Unknown
+VBIX,nan,Unknown
+VBNK,nan,Unknown
+VBTX,nan,Unknown
+VC,nan,Unknown
+VCEL,nan,Unknown
+VCIC,nan,Unknown
+VCICU,nan,Unknown
+VCICW,nan,Unknown
+VCIG,nan,Unknown
+VCIT,nan,Unknown
+VCLT,nan,Unknown
+VCRB,nan,Unknown
+VCSH,nan,Unknown
+VCTR,nan,Unknown
+VCYT,nan,Unknown
+VECO,nan,Unknown
+VEEA,nan,Unknown
+VEEAW,nan,Unknown
+VEEE,nan,Unknown
 VEEV,Health Care,Unknown
+VELO,nan,Unknown
+VEON,nan,Unknown
+VERA,nan,Unknown
+VERI,nan,Unknown
+VERO,nan,Unknown
+VERU,nan,Unknown
+VERX,nan,Unknown
 VFC,Consumer Discretionary,Unknown
+VFF,nan,Unknown
+VFLO,nan,Unknown
+VFS,nan,Unknown
+VFSWW,nan,Unknown
+VGAS,nan,Unknown
+VGASW,nan,Unknown
+VGIT,nan,Unknown
+VGLT,nan,Unknown
+VGSH,nan,Unknown
+VGSR,nan,Unknown
+VGUS,nan,Unknown
+VIASP,nan,Unknown
+VIAV,nan,Unknown
+VICI,Real Estate,Unknown
+VICR,nan,Unknown
+VIGI,nan,Unknown
 VIK,Consumer Discretionary,Unknown
+VINP,nan,Unknown
+VIOT,nan,Unknown
+VIR,nan,Unknown
+VIRC,nan,Unknown
 VIRT,Financials,Unknown
+VITL,nan,Unknown
+VIVK,nan,Unknown
+VIVS,nan,Unknown
+VIXI,nan,Unknown
 VKTX,Health Care,Unknown
+VLGEA,nan,Unknown
+VLO,Energy,Unknown
+VLTO,Industrials,Unknown
+VLY,nan,Unknown
+VLYPN,nan,Unknown
+VLYPO,nan,Unknown
+VLYPP,nan,Unknown
+VMAR,nan,Unknown
+VMBS,nan,Unknown
+VMC,Materials,Unknown
+VMD,nan,Unknown
+VMEO,nan,Unknown
 VMI,Industrials,Unknown
+VNDA,nan,Unknown
+VNET,nan,Unknown
+VNME,nan,Unknown
+VNMEU,nan,Unknown
+VNMEW,nan,Unknown
 VNO,Real Estate,Unknown
 VNOM,Energy,Unknown
+VNQI,nan,Unknown
 VNT,Information Technology,Unknown
-VOYA,Financials,Unknown
-VRT,Industrials,Unknown
-VVV,Materials,Unknown
-W,Consumer Discretionary,Unknown
-WAL,Financials,Unknown
-WBS,Financials,Unknown
-WCC,Industrials,Unknown
-WEN,Consumer Discretionary,Unknown
-WEX,Financials,Unknown
-WFRD,Energy,Unknown
-WH,Consumer Discretionary,Unknown
-WHR,Consumer Discretionary,Unknown
-WING,Consumer Discretionary,Unknown
-WLK,Materials,Unknown
-WMS,Industrials,Unknown
-WPC,Real Estate,Unknown
-WSC,Industrials,Unknown
-WSO,Industrials,Unknown
-WTFC,Financials,Unknown
-WTM,Financials,Unknown
-WTRG,Utilities,Unknown
-WU,Information Technology,Unknown
-WWD,Industrials,Unknown
-XP,Financials,Unknown
-XPO,Industrials,Unknown
-XRAY,Health Care,Unknown
-YETI,Consumer Discretionary,Unknown
-Z,Real Estate,Unknown
-ZG,Real Estate,Unknown
-ZION,Financials,Unknown
-ZM,Information Technology,Unknown
-ZS,Information Technology,Unknown
-1000,nan,Unknown
-10000,nan,Unknown
-11000,nan,Unknown
-12000,nan,Unknown
-13000,nan,Unknown
-14000,nan,Unknown
-15000,nan,Unknown
-16000,nan,Unknown
-17000,nan,Unknown
-18000,nan,Unknown
-19000,nan,Unknown
-1985,nan,Unknown
-1986,nan,Unknown
-1987,nan,Unknown
-1988,nan,Unknown
-1989,nan,Unknown
-1990,nan,Unknown
-1991,nan,Unknown
-1992,nan,Unknown
-1993,nan,Unknown
-1994,nan,Unknown
-20000,nan,Unknown
-21000,nan,Unknown
-22000,nan,Unknown
-23000,nan,Unknown
-3000,nan,Unknown
-4000,nan,Unknown
-5000,nan,Unknown
-6000,nan,Unknown
-7000,nan,Unknown
-8000,nan,Unknown
-9000,nan,Unknown
-AFRICA,nan,Unknown
-ALXN,nan,Unknown
-AMERICAS,nan,Unknown
-ANSS,nan,Unknown
-ARM,nan,Unknown
-ASIA,nan,Unknown
-ASML,nan,Unknown
-AUSTRALIA,nan,Unknown
-AZN,nan,Unknown
-BATRA,nan,Unknown
-BATRK,nan,Unknown
-BIDU,nan,Unknown
-BMC,nan,Unknown
-CA,nan,Unknown
-CANADA,nan,Unknown
-CCEP,nan,Unknown
-CEPH,nan,Unknown
-CERN,nan,Unknown
-CMCSK,nan,Unknown
-CTRP,nan,Unknown
-CTRX,nan,Unknown
-DISCA,nan,Unknown
-DISH,nan,Unknown
-DTV,nan,Unknown
-ENDP,nan,Unknown
-EQUITIES,nan,Unknown
-EUROPE,nan,Unknown
-FB,nan,Unknown
-FLIR,nan,Unknown
-FMCN,nan,Unknown
-FOSL,nan,Unknown
-FRANCE,nan,Unknown
-FWLT,nan,Unknown
-GLOBAL,nan,Unknown
-GMCR,nan,Unknown
-GOLD,nan,Unknown
-HANS,nan,Unknown
-INDIA,nan,Unknown
-JAPAN,nan,Unknown
-JD,nan,Unknown
-KFT,nan,Unknown
-KRFT,nan,Unknown
-LEAP,nan,Unknown
-LIFE,nan,Unknown
-LILA,nan,Unknown
-LILAK,nan,Unknown
-LMCA,nan,Unknown
-LOGI,nan,Unknown
-MAJOR,nan,Unknown
-MELI,nan,Unknown
-METALS,nan,Unknown
-MXIM,nan,Unknown
-MYL,nan,Unknown
-NTES,nan,Unknown
-NUAN,nan,Unknown
-OCEANIA,nan,Unknown
-OTHER,nan,Unknown
-PCLN,nan,Unknown
-PDD,nan,Unknown
-PPDI,nan,Unknown
-PTON,nan,Unknown
-REGIONAL,nan,Unknown
-RYAAY,nan,Unknown
-SGEN,nan,Unknown
-SHOP,nan,Unknown
-SHPG,nan,Unknown
-SPLK,nan,Unknown
-SRCL,nan,Unknown
-STRZA,nan,Unknown
-TCFCA,nan,Unknown
-TCFCB,nan,Unknown
-TRI,nan,Unknown
-TRIP,nan,Unknown
-UAUA,nan,Unknown
-UK,nan,Unknown
-URBN,nan,Unknown
-US,nan,Unknown
-VIAB,nan,Unknown
-VIP,nan,Unknown
-VMED,nan,Unknown
 VOD,nan,Unknown
-WATER,nan,Unknown
-WCRX,nan,Unknown
-WFMI,nan,Unknown
-WLTW,nan,Unknown
+VOLT,nan,Unknown
+VONE,nan,Unknown
+VONG,nan,Unknown
+VONV,nan,Unknown
+VOR,nan,Unknown
+VOTE,nan,Unknown
+VOXR,nan,Unknown
+VOYA,Financials,Unknown
+VPLS,nan,Unknown
+VRA,nan,Unknown
+VRAR,nan,Unknown
+VRAX,nan,Unknown
+VRCA,nan,Unknown
+VRDN,nan,Unknown
+VREX,nan,Unknown
+VRIG,nan,Unknown
+VRM,nan,Unknown
+VRME,nan,Unknown
+VRNA,nan,Unknown
+VRNS,nan,Unknown
+VRNT,nan,Unknown
+VRRM,nan,Unknown
+VRSK,Industrials,Unknown
+VRSN,Information Technology,Unknown
+VRT,Industrials,Unknown
+VRTL,nan,Unknown
+VRTX,Health Care,Unknown
+VS,nan,Unknown
+VSA,nan,Unknown
+VSAT,nan,Unknown
+VSDA,nan,Unknown
+VSEC,nan,Unknown
+VSEE,nan,Unknown
+VSEEW,nan,Unknown
+VSME,nan,Unknown
+VSMV,nan,Unknown
+VSSYW,nan,Unknown
+VST,Utilities,Unknown
+VSTA,nan,Unknown
+VSTD,nan,Unknown
+VSTL,nan,Unknown
+VSTM,nan,Unknown
+VTC,nan,Unknown
+VTGN,nan,Unknown
+VTHR,nan,Unknown
+VTIP,nan,Unknown
+VTR,Real Estate,Unknown
+VTRS,Health Care,Unknown
+VTSI,nan,Unknown
+VTVT,nan,Unknown
+VTWG,nan,Unknown
+VTWO,nan,Unknown
+VTWV,nan,Unknown
+VTYX,nan,Unknown
+VUZI,nan,Unknown
+VVOS,nan,Unknown
+VVPR,nan,Unknown
+VVV,Materials,Unknown
+VWAV,nan,Unknown
+VWAVW,nan,Unknown
+VWOB,nan,Unknown
+VXUS,nan,Unknown
+VYGR,nan,Unknown
+VYMI,nan,Unknown
+VYNE,nan,Unknown
+VZ,Communication Services,Unknown
+W,Consumer Discretionary,Unknown
+WAB,Industrials,Unknown
+WABC,nan,Unknown
+WABF,nan,Unknown
+WAFD,nan,Unknown
+WAFDP,nan,Unknown
+WAFU,nan,Unknown
+WAI,nan,Unknown
+WAL,Financials,Unknown
+WALD,nan,Unknown
+WALDW,nan,Unknown
+WASH,nan,Unknown
+WAT,Health Care,Unknown
+WATT,nan,Unknown
+WAVE,nan,Unknown
+WAY,nan,Unknown
+WB,nan,Unknown
+WBA,nan,Unknown
+WBD,Communication Services,Unknown
+WBS,Financials,Unknown
+WBTN,nan,Unknown
+WBUY,nan,Unknown
+WCBR,nan,Unknown
+WCC,Industrials,Unknown
+WCLD,nan,Unknown
+WCT,nan,Unknown
+WDAY,Information Technology,Unknown
+WDC,Information Technology,Unknown
+WDFC,nan,Unknown
+WEC,Utilities,Unknown
+WEEI,nan,Unknown
+WELL,Real Estate,Unknown
+WEN,Consumer Discretionary,Unknown
+WENN,nan,Unknown
+WENNU,nan,Unknown
+WENNW,nan,Unknown
+WERN,nan,Unknown
+WEST,nan,Unknown
+WETH,nan,Unknown
+WETO,nan,Unknown
+WEX,Financials,Unknown
+WEYS,nan,Unknown
+WFC,Financials,Unknown
+WFCF,nan,Unknown
+WFF,nan,Unknown
+WFRD,Energy,Unknown
+WGMI,nan,Unknown
+WGRX,nan,Unknown
+WGS,nan,Unknown
+WGSWW,nan,Unknown
+WH,Consumer Discretionary,Unknown
+WHF,nan,Unknown
+WHFCL,nan,Unknown
+WHLR,nan,Unknown
+WHLRD,nan,Unknown
+WHLRL,nan,Unknown
+WHLRP,nan,Unknown
+WHR,Consumer Discretionary,Unknown
+WHWK,nan,Unknown
+WILC,nan,Unknown
+WIMI,nan,Unknown
+WINA,nan,Unknown
+WING,Consumer Discretionary,Unknown
+WISE,nan,Unknown
+WIX,nan,Unknown
+WKEY,nan,Unknown
+WKHS,nan,Unknown
+WKSP,nan,Unknown
+WLAC,nan,Unknown
+WLACU,nan,Unknown
+WLACW,nan,Unknown
+WLDN,nan,Unknown
+WLDS,nan,Unknown
+WLDSW,nan,Unknown
+WLFC,nan,Unknown
+WLK,Materials,Unknown
+WM,Industrials,Unknown
+WMB,Energy,Unknown
+WMG,nan,Unknown
+WMS,Industrials,Unknown
+WMT,Consumer Staples,Unknown
+WNEB,nan,Unknown
+WNW,nan,Unknown
+WOK,nan,Unknown
+WOOD,nan,Unknown
+WOOF,nan,Unknown
+WORX,nan,Unknown
+WPC,Real Estate,Unknown
+WPRT,nan,Unknown
+WRAP,nan,Unknown
+WRB,Financials,Unknown
+WRD,nan,Unknown
+WRLD,nan,Unknown
+WRND,nan,Unknown
+WSBC,nan,Unknown
+WSBCP,nan,Unknown
+WSBF,nan,Unknown
+WSBK,nan,Unknown
+WSC,Industrials,Unknown
+WSFS,nan,Unknown
+WSM,Consumer Discretionary,Unknown
+WSML,nan,Unknown
+WSO,Industrials,Unknown
+WST,Health Care,Unknown
+WTBA,nan,Unknown
+WTBN,nan,Unknown
+WTF,nan,Unknown
+WTFC,Financials,Unknown
+WTFCN,nan,Unknown
+WTG,nan,Unknown
+WTGUR,nan,Unknown
+WTGUU,nan,Unknown
+WTIP,nan,Unknown
+WTM,Financials,Unknown
+WTMU,nan,Unknown
+WTMY,nan,Unknown
+WTO,nan,Unknown
+WTRG,Utilities,Unknown
+WTW,Financials,Unknown
+WU,Information Technology,Unknown
+WULF,nan,Unknown
+WVE,nan,Unknown
+WVVI,nan,Unknown
+WVVIP,nan,Unknown
+WW,nan,Unknown
+WWD,Industrials,Unknown
+WXM,nan,Unknown
+WY,Real Estate,Unknown
+WYFI,nan,Unknown
+WYHG,nan,Unknown
+WYNN,Consumer Discretionary,Unknown
+XAGE,nan,Unknown
+XAGEW,nan,Unknown
+XAIR,nan,Unknown
+XAIX,nan,Unknown
+XBIL,nan,Unknown
+XBIO,nan,Unknown
+XBIT,nan,Unknown
+XBP,nan,Unknown
+XBPEW,nan,Unknown
+XBTY,nan,Unknown
+XCH,nan,Unknown
+XCNY,nan,Unknown
+XCUR,nan,Unknown
+XEL,Utilities,Unknown
+XELB,nan,Unknown
+XENE,nan,Unknown
+XERS,nan,Unknown
+XFIX,nan,Unknown
+XFOR,nan,Unknown
+XGN,nan,Unknown
+XHG,nan,Unknown
+XHLD,nan,Unknown
+XLO,nan,Unknown
+XMAG,nan,Unknown
+XMTR,nan,Unknown
+XNCR,nan,Unknown
+XNET,nan,Unknown
+XOM,Energy,Unknown
+XOMA,nan,Unknown
+XOMAO,nan,Unknown
+XOMAP,nan,Unknown
+XOMX,nan,Unknown
+XOMZ,nan,Unknown
+XOS,nan,Unknown
+XOSWW,nan,Unknown
+XOVR,nan,Unknown
+XP,Financials,Unknown
+XPEL,nan,Unknown
+XPO,Industrials,Unknown
+XPON,nan,Unknown
+XRAY,Health Care,Unknown
+XRPI,nan,Unknown
+XRPT,nan,Unknown
+XRTX,nan,Unknown
+XRX,nan,Unknown
+XT,nan,Unknown
+XTIA,nan,Unknown
+XTKG,nan,Unknown
+XTLB,nan,Unknown
+XTSLA,nan,Unknown
+XWEL,nan,Unknown
+XXII,nan,Unknown
+XYL,Industrials,Unknown
+XYZ,Financials,Unknown
+XYZG,nan,Unknown
+YAAS,nan,Unknown
+YB,nan,Unknown
+YDES,nan,Unknown
+YDESW,nan,Unknown
+YETI,Consumer Discretionary,Unknown
+YGMZ,nan,Unknown
+YHC,nan,Unknown
+YHGJ,nan,Unknown
+YHNA,nan,Unknown
+YHNAR,nan,Unknown
+YHNAU,nan,Unknown
+YI,nan,Unknown
+YIBO,nan,Unknown
+YJ,nan,Unknown
+YLDE,nan,Unknown
+YMAB,nan,Unknown
+YMAT,nan,Unknown
+YMT,nan,Unknown
+YNOT,nan,Unknown
+YOKE,nan,Unknown
+YORW,nan,Unknown
+YOUL,nan,Unknown
+YQ,nan,Unknown
+YQQQ,nan,Unknown
+YSPY,nan,Unknown
+YSXT,nan,Unknown
+YTRA,nan,Unknown
+YUM,Consumer Discretionary,Unknown
+YXT,nan,Unknown
+YYAI,nan,Unknown
+YYGH,nan,Unknown
+Z,Real Estate,Unknown
+ZAP,nan,Unknown
+ZAZZT,nan,Unknown
+ZBAI,nan,Unknown
+ZBAO,nan,Unknown
+ZBH,Health Care,Unknown
+ZBIO,nan,Unknown
+ZBRA,Information Technology,Unknown
+ZBZZT,nan,Unknown
+ZCMD,nan,Unknown
+ZCZZT,nan,Unknown
+ZD,nan,Unknown
+ZDAI,nan,Unknown
+ZENA,nan,Unknown
+ZENV,nan,Unknown
+ZEO,nan,Unknown
+ZEOWW,nan,Unknown
+ZEUS,nan,Unknown
+ZFZZT,nan,Unknown
+ZG,Real Estate,Unknown
+ZGM,nan,Unknown
+ZIMV,nan,Unknown
+ZION,Financials,Unknown
+ZIONP,nan,Unknown
+ZIPP,nan,Unknown
+ZJK,nan,Unknown
+ZJYL,nan,Unknown
+ZJZZT,nan,Unknown
+ZKIN,nan,Unknown
+ZLAB,nan,Unknown
+ZM,Information Technology,Unknown
+ZNB,nan,Unknown
+ZNTL,nan,Unknown
+ZOOZ,nan,Unknown
+ZOOZW,nan,Unknown
+ZS,Information Technology,Unknown
+ZSPC,nan,Unknown
+ZTEK,nan,Unknown
+ZTEN,nan,Unknown
+ZTOP,nan,Unknown
+ZTRE,nan,Unknown
+ZTS,Health Care,Unknown
+ZTWO,nan,Unknown
+ZUMZ,nan,Unknown
+ZURA,nan,Unknown
+ZVRA,nan,Unknown
+ZVZZT,nan,Unknown
+ZWZZT,nan,Unknown
+ZXYZ-A,nan,Unknown
+ZXZZT,nan,Unknown
+ZYBT,nan,Unknown
+ZYME,nan,Unknown
+ZYN,nan,Unknown
+ZYXI,nan,Unknown
