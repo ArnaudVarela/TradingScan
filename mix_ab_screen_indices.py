@@ -10,7 +10,7 @@ from typing import Dict, List, Tuple, Optional
 import pandas as pd
 import requests
 import yfinance as yf
-import pandas_ta as ta  # <-- TA lib
+from ta_shim import ta
 
 from cache_layer import load_map, save_map, set_cached, now_utc_iso
 
