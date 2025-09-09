@@ -2,266 +2,190 @@
 # -*- coding: utf-8 -*-
 
 """
-build_universe.py
-- Construit l'univers: Russell 1000 + S&P 500 + Nasdaq Composite
-- Normalise, dé-duplique, journalise les deltas (ajouts / suppressions)
-- Maintient un registre incrémental (first_seen / last_seen / active / sources)
-- Écrit raw_universe.csv, universe_today.csv, universe_in_scope.csv et universe_registry.csv
-- Met en cache les snapshots et les métadonnées de sources (ETag / hash de contenu)
+build_universe.py (robuste)
+- SP500 via datasets repo (stable)
+- Russell 1000 via iShares IWB holdings (fallbacks)
+- Nasdaq (composite-ish) via plusieurs miroirs nasdaqtrader
+- Tolérant aux erreurs: retries + fallback + union/dedup
+- Met en cache les tickers précédents et écrit raw_universe.csv + universe_in_scope.csv
 
-Dépendances: pandas, requests
+AUCUN filtre secteur / mcap ici (le filtre mcap < 75B est appliqué dans mix_ab_screen_indices.py).
 """
 
 from __future__ import annotations
-import csv
-import hashlib
-import io
-import json
-import sys
-import time
-from datetime import date, datetime, timezone
+import os, io, time, csv
 from pathlib import Path
-from typing import Dict, List, Tuple
-
-import pandas as pd
+from typing import List, Set, Tuple
 import requests
+import pandas as pd
 
 ROOT = Path(".")
-CACHE_DIR = ROOT / "cache"
-CACHE_DIR.mkdir(exist_ok=True)
+PUB = ROOT / "dashboard" / "public"
+PUB.mkdir(parents=True, exist_ok=True)
 
-# ----- URLs officielles / stables -----
-URL_SP500 = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv"
-# iShares Russell 1000 holdings (peut changer d’URL; ici endpoint CSV public iShares)
-URL_R1000 = "https://www.ishares.com/us/products/239707/ishares-russell-1000-etf/1467271812596.ajax?fileType=csv&fileName=IWB_holdings&dataType=fund"
-# Référentiel Nasdaq (TSV) — contient toutes les sociétés listées sur Nasdaq
-URL_NASDAQ_LISTED = "https://ftp.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"
+RAW = ROOT / "raw_universe.csv"
+SCOPE = ROOT / "universe_in_scope.csv"
+CACHE_PREV = PUB / "universe_today.csv"   # pour comparer/delta si tu veux
+TIMEOUT = 30
+HDRS = {
+    "User-Agent": "Mozilla/5.0 (universe-builder; +https://github.com/)",
+    "Accept": "text/csv,application/json,*/*;q=0.8",
+    "Connection": "close",
+}
 
-# ----- Fichiers de sortie -----
-RAW_CSV = ROOT / "raw_universe.csv"
-TODAY_CSV = ROOT / "universe_today.csv"
-SCOPE_CSV = ROOT / "universe_in_scope.csv"
-REGISTRY_CSV = ROOT / "universe_registry.csv"
-REGISTRY_JSON = CACHE_DIR / "registry.json"
-SOURCES_META_JSON = CACHE_DIR / "sources_meta.json"
+def log(msg: str): print(msg, flush=True)
 
-TODAY = date.today().isoformat()
-NOW_UTC = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+def http_get(url: str, tries: int = 3, sleep: float = 1.5) -> requests.Response | None:
+    last = None
+    for k in range(tries):
+        try:
+            r = requests.get(url, headers=HDRS, timeout=TIMEOUT)
+            r.raise_for_status()
+            return r
+        except Exception as e:
+            last = e
+            time.sleep(sleep * (k + 1))
+    log(f"[WARN] GET failed for {url}: {last}")
+    return None
 
-
-def http_get(url: str, timeout: int = 30) -> Tuple[bytes, Dict[str, str]]:
-    """Simple GET avec gestion d'erreurs claire."""
-    r = requests.get(url, timeout=timeout)
-    r.raise_for_status()
-    return r.content, r.headers
-
-
-def sha256_bytes(b: bytes) -> str:
-    return hashlib.sha256(b).hexdigest()
-
-
-def load_json(path: Path, default):
-    if path.exists():
-        with path.open("r", encoding="utf-8") as f:
-            return json.load(f)
-    return default
-
-
-def save_json(path: Path, obj):
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(obj, f, ensure_ascii=False, indent=2)
-
-
-def normalize_ticker(t: str) -> str:
-    """Normalise un ticker en uppercase, strip, remplace espaces -> '-'."""
-    if not isinstance(t, str):
-        return ""
-    t = t.strip().upper()
-    t = t.replace(" ", "-")
-    # Quelques normalisations courantes (peuvent être étendues)
-    t = t.replace(".A", "-A").replace(".B", "-B")
-    return t
-
-
-def fetch_sp500() -> pd.DataFrame:
-    raw, headers = http_get(URL_SP500)
-    df = pd.read_csv(io.BytesIO(raw))
-    # colonnes typiques: Symbol, Security, GICS Sector, ...
-    df = df.rename(columns={"Symbol": "ticker"})
-    df["ticker"] = df["ticker"].map(normalize_ticker)
-    df["source"] = "SP500"
-    df["name"] = df.get("Security")
-    df["exchange_hint"] = "NYSE/NASDAQ"
-    return df[["ticker", "name", "source", "exchange_hint"]]
-
-
-def fetch_r1000() -> pd.DataFrame:
-    raw, headers = http_get(URL_R1000)
-    # iShares CSV utilise ; comme séparateur dans certains locales — forçons ,
-    text = raw.decode("utf-8", errors="ignore")
-    # éliminer les lignes de préambule si présentes
-    lines = [ln for ln in text.splitlines() if ln.strip() and not ln.lower().startswith(("fund name", "as of", "ticker")) or ln.strip().lower().startswith("ticker")]
-    text = "\n".join(lines)
-    df = pd.read_csv(io.StringIO(text))
-    # colonnes attendues: Ticker, Name, ...
-    # certains fichiers iShares ont "Ticker" ou "Ticker Symbol"
-    for col in ["Ticker", "Ticker Symbol", "TickerSymbol"]:
-        if col in df.columns:
-            ticker_col = col
-            break
-    else:
-        raise RuntimeError("Russell1000: colonne ticker introuvable dans le CSV iShares")
-    name_col = "Name" if "Name" in df.columns else (df.columns[1] if len(df.columns) > 1 else None)
-
-    out = pd.DataFrame({
-        "ticker": df[ticker_col].astype(str).map(normalize_ticker),
-        "name": df[name_col].astype(str) if name_col else None
-    })
-    out["source"] = "R1000"
-    out["exchange_hint"] = "NYSE/NASDAQ"
-    return out[["ticker", "name", "source", "exchange_hint"]]
-
-
-def fetch_nasdaq_composite() -> pd.DataFrame:
-    raw, headers = http_get(URL_NASDAQ_LISTED)
-    # Fichier TSV avec en-tête et dernière ligne "File Creation Time"
-    text = raw.decode("utf-8", errors="ignore")
-    text = "\n".join([ln for ln in text.splitlines() if not ln.startswith("File Creation Time")])
-    df = pd.read_csv(io.StringIO(text), sep="|")
-    # colonnes: Symbol, Security Name, Market Category, Test Issue, Financial Status, Round Lot Size, ...
-    df = df[df["Test Issue"].astype(str).str.upper() == "N"]  # exclut les tickers test
-    tick = df["Symbol"].astype(str).map(normalize_ticker)
-    name = df.get("Security Name")
-    out = pd.DataFrame({
-        "ticker": tick,
-        "name": name,
-    })
-    out["source"] = "NASDAQ"
-    out["exchange_hint"] = "NASDAQ"
-    return out[["ticker", "name", "source", "exchange_hint"]]
-
-
-def union_sources(dfs: List[pd.DataFrame]) -> pd.DataFrame:
-    """Union + agrégation des sources par ticker."""
-    all_df = pd.concat(dfs, ignore_index=True)
-    all_df["ticker"] = all_df["ticker"].fillna("").astype(str)
-    all_df = all_df[all_df["ticker"] != ""]
-    # Regrouper et agréger
-    agg = (all_df
-           .groupby("ticker", as_index=False)
-           .agg({
-               "name": "first",
-               "exchange_hint": "first",
-               "source": lambda s: "|".join(sorted(set([x for x in s if isinstance(x, str)])))
-           }))
-    agg = agg.sort_values("ticker").reset_index(drop=True)
-    return agg
-
-
-def update_registry(universe: pd.DataFrame) -> Tuple[pd.DataFrame, Dict]:
-    """Maintient registry.json et retourne DataFrame registry + diff."""
-    registry = load_json(REGISTRY_JSON, default={})  # {ticker: {"first_seen":..., "last_seen":..., "active": bool, "sources": "..."}}
-    today_ts = TODAY
-
-    tickers_today = set(universe["ticker"].tolist())
-    prev_active = {k for k, v in registry.items() if v.get("active")}
-    added = sorted(tickers_today - prev_active)
-    removed = sorted(prev_active - tickers_today)
-
-    # MàJ/insert
-    for _, row in universe.iterrows():
-        t = row["ticker"]
-        entry = registry.get(t, {})
-        if not entry:
-            entry["first_seen"] = today_ts
-        entry["last_seen"] = today_ts
-        entry["active"] = True
-        entry["sources"] = row.get("source", "")
-        registry[t] = entry
-
-    # Désactiver les retirés
-    for t in removed:
-        entry = registry.get(t, {})
-        entry["active"] = False
-        entry["last_seen"] = today_ts
-        registry[t] = entry
-
-    # Sauvegarde JSON
-    save_json(REGISTRY_JSON, registry)
-
-    # DataFrame pour export CSV
-    reg_df = (pd.DataFrame([
-        {"ticker": t,
-         "first_seen": v.get("first_seen"),
-         "last_seen": v.get("last_seen"),
-         "active": bool(v.get("active")),
-         "sources": v.get("sources", "")
-         }
-        for t, v in registry.items()
-    ])
-    .sort_values(["active", "ticker"], ascending=[False, True])
-    .reset_index(drop=True))
-
-    diff = {"added": added, "removed": removed}
-    return reg_df, diff
-
-
-def save_csv(df: pd.DataFrame, path: Path):
-    df.to_csv(path, index=False, quoting=csv.QUOTE_MINIMAL)
-
-
-def main():
-    print("[STEP] build_universe starting…")
-
-    sources_meta = load_json(SOURCES_META_JSON, default={})
-    started = time.time()
-
-    # --- Fetch
-    spx = fetch_sp500()
-    print(f"[SRC] SPX: {len(spx)} rows")
-
+# ---------- SP500
+def fetch_sp500() -> Set[str]:
+    # Dataset public et stable
+    url = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv"
+    r = http_get(url)
+    if not r: return set()
     try:
-        r1k = fetch_r1000()
-        print(f"[SRC] R1000: {len(r1k)} rows")
+        df = pd.read_csv(io.StringIO(r.text))
+        col = "Symbol" if "Symbol" in df.columns else df.columns[0]
+        syms = df[col].astype(str).str.upper().str.strip().tolist()
+        return set([s for s in syms if s and s.isascii()])
     except Exception as e:
-        print(f"[WARN] Russell1000 fetch failed: {e}")
-        r1k = pd.DataFrame(columns=["ticker", "name", "source", "exchange_hint"])
+        log(f"[WARN] SP500 parse failed: {e}")
+        return set()
 
-    nas = fetch_nasdaq_composite()
-    print(f"[SRC] NASDAQ listed: {len(nas)} rows")
+# ---------- Russell 1000 (via iShares IWB)
+def fetch_russell1000() -> Set[str]:
+    urls = [
+        # CSV holdings IWB (généralement propre)
+        "https://www.ishares.com/us/products/239707/ishares-russell-1000-etf/1467271812596.ajax?fileType=csv&fileName=IWB_holdings&dataType=fund",
+        # mirroir (parfois identique)
+        "https://www.ishares.com/us/products/239707/ishares-russell-1000-etf?switchLocale=y&siteEntryPassthrough=true",
+    ]
+    for url in urls:
+        r = http_get(url)
+        if not r:
+            continue
+        txt = r.text
+        # Certains CSV iShares commencent par un bloc méta: on saute jusqu'à la ligne qui contient 'Ticker'
+        lines = [ln for ln in txt.splitlines() if ln.strip()]
+        # trouve l’index de l’en-tête
+        idx = None
+        for i, ln in enumerate(lines[:50]):
+            if "Ticker" in ln and "Name" in ln:
+                idx = i
+                break
+        if idx is None:
+            # parfois iShares renvoie HTML si protection; on essaie quand même un parse tolérant
+            try:
+                df = pd.read_csv(io.StringIO(txt), engine="python", on_bad_lines="skip")
+            except Exception:
+                continue
+        else:
+            df = pd.read_csv(io.StringIO("\n".join(lines[idx:])), engine="python", on_bad_lines="skip")
+        # Col possibles: Ticker / Holdings Ticker
+        col = None
+        for c in df.columns:
+            if str(c).lower() in ("ticker", "holdings ticker", "holding ticker"):
+                col = c; break
+        if col is None:
+            # essaie de détecter la colonne ticker
+            for c in df.columns:
+                if "ticker" in str(c).lower():
+                    col = c; break
+        if col is None:
+            log("[WARN] R1000: no ticker column detected")
+            continue
+        syms = (
+            df[col]
+            .dropna()
+            .astype(str)
+            .str.replace(".","-", regex=False)   # parfois des formats bizarres
+            .str.upper().str.strip()
+            .tolist()
+        )
+        syms = [s for s in syms if s and s.isascii()]
+        if syms:
+            return set(syms)
+    log("[WARN] Russell1000 fetch failed (iShares).")
+    return set()
 
-    # --- Union + normalisation
-    uni = union_sources([spx, r1k, nas])
-    print(f"[UNI] union after dedupe: {len(uni)} rows")
+# ---------- Nasdaq listed (mêmes tickers que composite ± ETFs), multi-miroirs
+def fetch_nasdaq() -> Set[str]:
+    mirrors = [
+        "https://ftp.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "https://nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+        "https://old.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+    ]
+    for url in mirrors:
+        r = http_get(url)
+        if not r:
+            continue
+        txt = r.text
+        # Ce fichier est un '|' séparé avec une ligne "File Creation Time" à la fin.
+        try:
+            df = pd.read_csv(io.StringIO(txt), sep="|")
+        except Exception:
+            # parse tolérant
+            df = pd.read_csv(io.StringIO(txt), sep="|", engine="python", on_bad_lines="skip")
+        # filtre lignes méta
+        if "Symbol" not in df.columns:
+            # essaye de renommer si 1ère colonne = symbol
+            df.rename(columns={df.columns[0]: "Symbol"}, inplace=True)
+        df = df[df["Symbol"].notna()]
+        syms = df["Symbol"].astype(str).str.upper().str.strip().tolist()
+        syms = [s for s in syms if s and s.isascii() and s not in ("TEST","SYMBOL")]
+        # virer la dernière ligne méta si présente
+        syms = [s for s in syms if "FILE CREATION TIME" not in s]
+        if syms:
+            return set(syms)
+    log("[WARN] Nasdaq fetch failed (all mirrors).")
+    return set()
 
-    # --- Sauvegardes CSV
-    save_csv(uni, RAW_CSV)
-    save_csv(uni, TODAY_CSV)
-    # pas de filtre à ce stade: identique au raw
-    save_csv(uni[["ticker"]].rename(columns={"ticker": "ticker_yf"}), SCOPE_CSV)
+# ---------- main
+def main():
+    log("[STEP] build_universe starting…")
 
-    # --- Registre incrémental + diff
-    reg_df, diff = update_registry(uni)
-    save_csv(reg_df, REGISTRY_CSV)
+    spx = fetch_sp500()
+    log(f"[SRC] SPX: {len(spx)} rows")
 
-    # --- Logs diff
-    print(f"[DIFF] +{len(diff['added'])} added, -{len(diff['removed'])} removed")
-    if diff["added"]:
-        print("  added:", ", ".join(diff["added"][:20]), ("…" if len(diff["added"]) > 20 else ""))
-    if diff["removed"]:
-        print("  removed:", ", ".join(diff["removed"][:20]), ("…" if len(diff["removed"]) > 20 else ""))
+    r1k = fetch_russell1000()
+    log(f"[SRC] R1000 (iShares/IWB): {len(r1k)} rows")
 
-    # --- Résumé
-    took = time.time() - started
-    print(f"[DONE] build_universe finished in {took:.1f}s.")
-    print(f"[OUT] {RAW_CSV.name} | rows={len(uni)}")
-    print(f"[OUT] {SCOPE_CSV.name} | rows={len(uni)} (no policy filters here)")
-    print(f"[OUT] {REGISTRY_CSV.name} | rows={len(reg_df)}")
+    nas = fetch_nasdaq()
+    log(f"[SRC] Nasdaq listed: {len(nas)} rows")
 
+    # Union + dédup
+    uni: Set[str] = set()
+    uni |= spx
+    uni |= r1k
+    uni |= nas
+
+    # Nettoyages simples
+    uni = {s.replace("/", "-").replace(".", "-").strip().upper() for s in uni if s}
+    # remove obvious bads
+    bad = {"N/A", "NA", "NONE"}
+    uni = {s for s in uni if s not in bad}
+
+    tickers = sorted(uni)
+    log(f"[SAVE] raw_universe.csv | rows={len(tickers)}")
+    pd.DataFrame({"ticker_yf": tickers}).to_csv(RAW, index=False)
+
+    # Pas de filtre mcap ici — on garde la même liste pour l’étape suivante
+    pd.DataFrame({"ticker_yf": tickers}).to_csv(SCOPE, index=False)
+    # Copie dans public pour debug/trace (optionnel)
+    pd.DataFrame({"ticker_yf": tickers}).to_csv(PUB / "universe_today.csv", index=False)
+
+    log("[DONE] build_universe finished.")
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        print(f"[FATAL] {e}", file=sys.stderr)
-        sys.exit(1)
+    main()
