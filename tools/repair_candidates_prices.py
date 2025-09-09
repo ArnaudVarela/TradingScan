@@ -19,7 +19,7 @@ from typing import Dict, List, Optional
 import pandas as pd
 import yfinance as yf
 
-PUBLIC_DIR = os.path.join("dashboard", "public")
+PUBLIC_DIR = Path(".")
 
 # -------------------------- yfinance helpers -------------------------- #
 
