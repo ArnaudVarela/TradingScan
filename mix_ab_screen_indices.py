@@ -41,8 +41,16 @@ def _log(msg: str):
     print(msg, flush=True)
 
 def safe_float(x) -> Optional[float]:
+    import numpy as np
+    import pandas as pd
     try:
-        if x is None or (isinstance(x, float) and math.isnan(x)): 
+        if isinstance(x, pd.Series):
+            if x.empty:
+                return None
+            x = x.iloc[0]
+        if isinstance(x, np.generic):
+            x = x.item()
+        if x is None or (isinstance(x, float) and math.isnan(x)):
             return None
         return float(x)
     except Exception:
@@ -159,7 +167,13 @@ def avg_dollar_vol(df: Optional[pd.DataFrame], lookback: int = AVG_DOLLAR_VOL_LO
     if df is None or len(df) < lookback:
         return None
     sub = df.iloc[-lookback:]
-    return float((sub["close"] * sub["volume"]).mean())
+    prod = (pd.to_numeric(sub["close"], errors="coerce") * pd.to_numeric(sub["volume"], errors="coerce"))
+    val = prod.mean()
+    # val peut être numpy scalar
+    try:
+        return float(val.item())
+    except Exception:
+        return float(val) if pd.notna(val) else None
 
 # ========================================================= SEC companyfacts cache light
 
