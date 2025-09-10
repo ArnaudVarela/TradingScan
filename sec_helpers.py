@@ -402,3 +402,16 @@ def sec_proxy_mcap_from_price_shares(price: float | None, shares_out: float | No
         return float(price) * float(shares_out)
     except Exception:
         return None
+
+# === à AJOUTER en bas de sec_helpers.py ===
+
+def _sec_get_json(url: str):
+    # compat rétro avec l'ancien mix_ab_screen_indices.py
+    return _download_json(url)
+
+def sec_companyfacts(cik: str):
+    try:
+        return _download_companyfacts(cik)
+    except Exception:
+        return None
+
