@@ -115,17 +115,58 @@ def fetch_ohlcv_yf(ticker: str, period_days: int = OHLCV_WINDOW_DAYS) -> Optiona
     path = ohlcv_cache_path(ticker)
     df = None
 
+    def _sanitize(df_in: pd.DataFrame) -> pd.DataFrame:
+        if df_in is None or df_in.empty:
+            return df_in
+        out = df_in.copy()
+
+        # Aplatir et supprimer colonnes dupliquées
+        if isinstance(out.columns, pd.MultiIndex):
+            out.columns = ["|".join(map(str, t)) for t in out.columns]
+        out.columns = [str(c) for c in out.columns]
+        out = out.loc[:, ~pd.Index(out.columns).duplicated(keep="last")]
+
+        # Renommer si besoin (cas cache ancien)
+        rename_map = {
+            "Open": "open", "High": "high", "Low": "low", "Close": "close", "Volume": "volume",
+            "Adj Close": "adj_close"
+        }
+        for k, v in rename_map.items():
+            if k in out.columns and v not in out.columns:
+                out = out.rename(columns={k: v})
+
+        # Garder seulement les colonnes OHLCV si présentes
+        keep = [c for c in ["open","high","low","close","volume"] if c in out.columns]
+        out = out[keep] if keep else out
+
+        # Index → datetime
+        out.index = pd.to_datetime(out.index, errors="coerce")
+
+        # Forcer en numérique, même si df[c] est un DataFrame (ex: colonnes dupli)
+        for c in ["open","high","low","close","volume"]:
+            if c not in out.columns:
+                continue
+            col = out[c]
+            if isinstance(col, pd.DataFrame):
+                col = col.iloc[:, 0]  # on garde la dernière/unique colonne utile
+            col = pd.to_numeric(pd.Series(col.to_numpy().reshape(-1)), errors="coerce")
+            out[c] = col.to_numpy()
+
+        # Drop lignes sans close/volume
+        if "close" in out.columns and "volume" in out.columns:
+            out = out.dropna(subset=["close", "volume"])
+
+        return out
+
+    # 1) Lire cache si dispo
     if path.exists():
         try:
             df = pd.read_parquet(path)
-            # sécurité colonnes
-            for need in ["open", "high", "low", "close", "volume"]:
-                if need not in df.columns:
-                    df = None
-                    break
+            df = _sanitize(df)
         except Exception:
             df = None
 
+    # 2) Décider si on refetch
     need_fetch = True
     if df is not None and len(df) >= 50:
         try:
@@ -136,6 +177,7 @@ def fetch_ohlcv_yf(ticker: str, period_days: int = OHLCV_WINDOW_DAYS) -> Optiona
         except Exception:
             need_fetch = True
 
+    # 3) Fetch YF si nécessaire
     if need_fetch:
         try:
             period = f"{max(period_days, 120)}d"
@@ -148,17 +190,24 @@ def fetch_ohlcv_yf(ticker: str, period_days: int = OHLCV_WINDOW_DAYS) -> Optiona
                 threads=False,
             )
             if yf_df is None or yf_df.empty:
+                # si on a un cache utilisable, on le renvoie
                 return df
             yf_df = yf_df.rename(
                 columns={"Open":"open","High":"high","Low":"low","Close":"close","Volume":"volume"}
-            )[["open","high","low","close","volume"]].dropna()
+            )
+            # certaines installations YF remontent aussi "Adj Close"
+            yf_df = yf_df[["open","high","low","close","volume"]]
             yf_df.index = pd.to_datetime(yf_df.index, errors="coerce")
+            yf_df = _sanitize(yf_df)
+
             _write_cache_parquet(yf_df, path)
             df = yf_df
         except Exception as e:
             _log(f"[YF] fetch failed {ticker}: {e}")
-            # on renvoie le cache existant si dispo
+            # On retombe sur le cache si présent
             return df
+
+    return df
 
     # types sûrs
     if df is not None and not df.empty:
