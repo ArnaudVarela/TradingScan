@@ -2,7 +2,7 @@
 import requests, time
 
 SEC_HEADERS = {
-    "User-Agent": "TradingScanBot/0.1 (arnaud@example.com; research project, GitHub: yourrepo)",
+    "User-Agent": "TradingScanBot/0.1 (arnaud.varela@gmail.com; research project, GitHub: TradingScan)",
     "Accept-Encoding": "gzip, deflate",
     "Host": "data.sec.gov"
 }
