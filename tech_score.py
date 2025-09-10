@@ -1,8 +1,51 @@
-# tech_score.py
+# tech_score.py  — version sans dépendance externe
 from __future__ import annotations
+import numpy as np
 import pandas as pd
-import pandas_ta as ta
 from typing import Tuple
+
+# ---- indicateurs basiques (pure pandas)
+
+def ema(s: pd.Series, length: int) -> pd.Series:
+    return s.ewm(span=length, adjust=False).mean()
+
+def rsi(close: pd.Series, length: int = 14) -> pd.Series:
+    delta = close.diff()
+    up = delta.clip(lower=0.0)
+    down = -delta.clip(upper=0.0)
+    roll_up = ema(up, length)
+    roll_down = ema(down, length)
+    rs = roll_up / roll_down.replace(0, np.nan)
+    return 100 - (100 / (1 + rs))
+
+def macd(close: pd.Series, fast: int = 12, slow: int = 26, signal: int = 9):
+    macd_line = ema(close, fast) - ema(close, slow)
+    signal_line = ema(macd_line, signal)
+    hist = macd_line - signal_line
+    return macd_line.rename(f"MACD_{fast}_{slow}_{signal}"), \
+           hist.rename(f"MACDh_{fast}_{slow}_{signal}"), \
+           signal_line.rename(f"MACDs_{fast}_{slow}_{signal}")
+
+def adx(high: pd.Series, low: pd.Series, close: pd.Series, length: int = 14) -> pd.Series:
+    # Wilder's ADX
+    up_move = high.diff()
+    down_move = -low.diff()
+    plus_dm = np.where((up_move > down_move) & (up_move > 0), up_move, 0.0)
+    minus_dm = np.where((down_move > up_move) & (down_move > 0), down_move, 0.0)
+
+    tr1 = (high - low).abs()
+    tr2 = (high - close.shift(1)).abs()
+    tr3 = (low  - close.shift(1)).abs()
+    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+
+    atr = tr.ewm(alpha=1/length, adjust=False).mean()
+    plus_di  = 100 * pd.Series(plus_dm, index=high.index).ewm(alpha=1/length, adjust=False).mean() / atr
+    minus_di = 100 * pd.Series(minus_dm, index=high.index).ewm(alpha=1/length, adjust=False).mean() / atr
+    dx = ( (plus_di - minus_di).abs() / (plus_di + minus_di).replace(0, np.nan) ) * 100
+    adx = dx.ewm(alpha=1/length, adjust=False).mean()
+    return adx.rename(f"ADX_{length}")
+
+# ---- pipeline “features + label”
 
 def compute_tech_features(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -10,36 +53,36 @@ def compute_tech_features(df: pd.DataFrame) -> pd.DataFrame:
     retourne df avec colonnes techniques
     """
     out = df.copy()
-    out["rsi"] = ta.rsi(out["close"], length=14)
-    macd = ta.macd(out["close"])  # MACD_12_26_9, MACDh_12_26_9, MACDs_12_26_9
-    out = pd.concat([out, macd], axis=1)
-    out["ema20"] = ta.ema(out["close"], length=20)
-    out["ema50"] = ta.ema(out["close"], length=50)
-    adx = ta.adx(out["high"], out["low"], out["close"], length=14)
-    if isinstance(adx, pd.DataFrame) and "ADX_14" in adx.columns:
-        out["adx"] = adx["ADX_14"]
-    else:
-        out["adx"] = None
+    out["rsi"] = rsi(out["close"], 14)
+    m, h, s = macd(out["close"], 12, 26, 9)
+    out = pd.concat([out, m, h, s], axis=1)
+    out["ema20"] = ema(out["close"], 20)
+    out["ema50"] = ema(out["close"], 50)
+    out["adx"] = adx(out["high"], out["low"], out["close"], 14)
     return out
 
 def tech_label_from_features(df_feat: pd.DataFrame) -> Tuple[str, float]:
-    last = df_feat.dropna().iloc[-1] if len(df_feat.dropna()) else df_feat.iloc[-1]
+    # utilise la dernière ligne non-nan si possible
+    dff = df_feat.dropna()
+    last = dff.iloc[-1] if len(dff) else df_feat.iloc[-1]
 
-    rsi = last.get("rsi")
-    macd = last.get("MACD_12_26_9")
-    macds = last.get("MACDs_12_26_9")
-    ema20 = last.get("ema20")
-    ema50 = last.get("ema50")
-    adx = last.get("adx")
-    close = last.get("close")
+    rsi_v  = last.get("rsi")
+    macd_v = last.get("MACD_12_26_9")
+    macds  = last.get("MACDs_12_26_9")
+    ema20  = last.get("ema20")
+    ema50  = last.get("ema50")
+    adx_v  = last.get("ADX_14")
+    close  = last.get("close")
 
-    # signaux
-    s_rsi = 1.0 if (rsi is not None and rsi >= 55) else (0.5 if (rsi is not None and rsi >= 50) else 0.0)
-    s_macd = 1.0 if (macd is not None and macds is not None and macd > macds > 0) else (0.5 if (macd is not None and macds is not None and macd > macds) else 0.0)
-    s_trend = 1.0 if (ema20 is not None and ema50 is not None and close is not None and (ema20 > ema50 and close > ema20)) else (0.5 if (ema20 is not None and ema50 is not None and ema20 > ema50) else 0.0)
-    s_adx = 1.0 if (adx is not None and adx >= 20) else 0.0
+    def nz(x):  # non-zero / non-null helper
+        return (x is not None) and not (isinstance(x, float) and np.isnan(x))
 
-    score = (s_rsi + s_macd + s_trend + s_adx) / 4.0
+    s_rsi = 1.0 if (nz(rsi_v) and rsi_v >= 55) else (0.5 if (nz(rsi_v) and rsi_v >= 50) else 0.0)
+    s_macd = 1.0 if (nz(macd_v) and nz(macds) and macd_v > macds > 0) else (0.5 if (nz(macd_v) and nz(macds) and macd_v > macds) else 0.0)
+    s_trend = 1.0 if (nz(ema20) and nz(ema50) and nz(close) and (ema20 > ema50 and close > ema20)) else (0.5 if (nz(ema20) and nz(ema50) and ema20 > ema50) else 0.0)
+    s_adx = 1.0 if (nz(adx_v) and adx_v >= 20) else 0.0
+
+    score = float((s_rsi + s_macd + s_trend + s_adx) / 4.0)
 
     if score >= 0.70:
         label = "STRONG_BUY"
@@ -49,4 +92,4 @@ def tech_label_from_features(df_feat: pd.DataFrame) -> Tuple[str, float]:
         label = "HOLD"
     else:
         label = "SELL"
-    return label, float(score)
+    return label, score
