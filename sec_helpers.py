@@ -1,252 +1,404 @@
 # sec_helpers.py
+# -----------------------------------------------------------------------------
+# Utilitaires SEC robustes avec cache + fallbacks.
+# - sec_ticker_map()  -> dict[str, dict]: map TICKER -> {cik, title, exchange?}
+# - sec_latest_shares_outstanding(cik) -> float|None : dernières "CommonStockSharesOutstanding"
+#
+# Respecte la recommandation SEC d'User-Agent + email de contact :
+#   export SEC_CONTACT="ton.email@domaine.tld"
+# (ou définis SEC_CONTACT dans les "env" GitHub Actions).
+# -----------------------------------------------------------------------------
+
 from __future__ import annotations
-import json, os, time, pathlib, typing as t
-from datetime import datetime
+
+import json
+import os
+import time
+import typing as t
+from pathlib import Path
+
 import requests
 
-# =========================
-# Config
-# =========================
-SEC_CONTACT = os.getenv("SEC_CONTACT", "you@example.com")  # set a real email in CI
-UA = f"TradingScanBot/0.1 ({SEC_CONTACT}; research POC)"
-HEADERS = {
-    "User-Agent": UA,
-    "Accept-Encoding": "gzip, deflate",
-    "Connection": "keep-alive",
-}
-TIMEOUT = 20
-RETRY_DELAYS = [2, 5, 10]  # seconds
-CACHE_DIR = pathlib.Path("cache")
+# ------------------------- Config & chemins cache -----------------------------
+
+CACHE_DIR = Path("cache")
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
-# Ticker directory
-TICKERS_CACHE = CACHE_DIR / "sec_company_tickers.json"
-TICKERS_TTL_DAYS = 3
-SEC_TICKERS_URL = "https://data.sec.gov/api/xbrl/company_tickers.json"
+# Fichiers cache
+TICKERS_CACHE = CACHE_DIR / "sec_company_tickers.json"   # cache de l'annuaire tickers
+FACTS_CACHE_DIR = CACHE_DIR / "sec_companyfacts"         # 1 fichier par CIK
+FACTS_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+# TTL (jours)
+TICKERS_TTL_DAYS = 7         # annuaire tickers : hebdo suffit
+FACTS_TTL_DAYS = 3           # facts : plus fréquent
+
+# URLs officielles / alternatives
+SEC_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
+SEC_TICKERS_ALTS = [
+    # Alternative officielle (structure proche, groupé par exchange)
+    "https://www.sec.gov/files/company_tickers_exchange.json",
+]
 SEC_TICKERS_FALLBACKS = [
+    # miroirs communautaires (à utiliser en dernier recours)
     "https://raw.githubusercontent.com/secdatabase/sec-files/master/company_tickers.json",
     "https://raw.githubusercontent.com/davidtaoarw/edgar-company-tickers/master/company_tickers.json",
 ]
 
-# Company facts (per CIK) cache
-FACTS_DIR = CACHE_DIR / "sec_company_facts"
-FACTS_DIR.mkdir(parents=True, exist_ok=True)
-FACTS_TTL_DAYS = 7
-FACTS_URL_TMPL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json"
+# API companyfacts
+SEC_COMPANYFACTS_URL_TMPL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik_pad}.json"
 
-_session: requests.Session | None = None
+# Respect rate limiting SEC (gentle)
+REQ_SLEEP_SEC = 0.20
 
-def _session_get() -> requests.Session:
-    global _session
-    if _session is None:
-        s = requests.Session()
-        s.headers.update(HEADERS)
-        _session = s
-    return _session
+# ------------------------- Helpers généraux ----------------------------------
 
-def _is_fresh(path: pathlib.Path, ttl_days: int) -> bool:
+def _sec_headers() -> dict:
+    """
+    Entêtes HTTP conformes aux guidelines SEC:
+      - User-Agent avec contact
+      - Accept/encoding
+    """
+    contact = os.environ.get("SEC_CONTACT", "").strip()
+    if contact:
+        ua = f"TradingScan/1.0 (contact: {contact})"
+    else:
+        # Mieux vaut quand même fournir quelque chose d'explicite
+        ua = "TradingScan/1.0 (contact: arnaud.varela@gmail.com)"
+    return {
+        "User-Agent": ua,
+        "Accept": "application/json,text/plain,*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "keep-alive",
+        # La SEC n'exige pas de Referer, mais certains proxies peuvent l'apprécier
+        "Referer": "https://www.sec.gov/",
+    }
+
+
+def _is_fresh(path: Path, ttl_days: int) -> bool:
     if not path.exists():
         return False
-    try:
-        age = (datetime.utcnow() - datetime.utcfromtimestamp(path.stat().st_mtime)).days
-        return age <= ttl_days
-    except Exception:
-        return False
+    age_sec = time.time() - path.stat().st_mtime
+    return age_sec < (ttl_days * 86400)
+
+
+def _get_with_retries(url: str, timeout: float = 30.0, retries: int = 3) -> requests.Response:
+    last_err: Exception | None = None
+    for i in range(retries):
+        try:
+            r = requests.get(url, headers=_sec_headers(), timeout=timeout)
+            if r.status_code == 429:
+                # Trop de requêtes — attendre un peu plus
+                time.sleep(0.6 + i * 0.4)
+                continue
+            r.raise_for_status()
+            return r
+        except Exception as e:
+            last_err = e
+            # petit backoff progressif
+            time.sleep(0.4 + i * 0.6)
+    # si toutes les tentatives échouent
+    if last_err:
+        raise last_err
+    raise RuntimeError(f"Failed to GET {url} for unknown reasons")
+
 
 def _download_json(url: str) -> t.Any:
-    s = _session_get()
-    last_exc = None
-    for delay in [0] + RETRY_DELAYS:
-        if delay:
-            time.sleep(delay)
-        try:
-            r = s.get(url, timeout=TIMEOUT)
-            time.sleep(0.2)  # be gentle with EDGAR
-            r.raise_for_status()
-            return r.json()
-        except Exception as e:
-            last_exc = e
-    raise last_exc
-
-# =========================
-# Ticker directory (ticker -> {cik,title})
-# =========================
-def _load_ticker_dir() -> t.Any:
-    # cache hit?
-    if _is_fresh(TICKERS_CACHE, TICKERS_TTL_DAYS):
-        with open(TICKERS_CACHE, "r", encoding="utf-8") as f:
-            return json.load(f)
-
-    # fetch primary
-    data = None
+    r = _get_with_retries(url)
+    time.sleep(REQ_SLEEP_SEC)  # courtoisie
+    # Certaines sources de fallback livrent déjà du JSON propre
+    # D'autres livrent du texte à parser
     try:
-        data = _download_json(SEC_TICKERS_URL)
-    except Exception:
-        # fallbacks
-        for fb in SEC_TICKERS_FALLBACKS:
-            try:
-                data = _download_json(fb)
-                break
-            except Exception:
-                pass
-        if data is None:
-            raise  # bubble up the primary error
+        return r.json()
+    except ValueError:
+        return json.loads(r.text)
 
+
+# ------------------------- Chargement annuaire tickers -----------------------
+
+def _normalize_ticker(t: str) -> str:
+    """
+    Normalisation douce des tickers pour mapping :
+      - upper
+      - trim
+      - version avec '.' <-> '-' traitée au lookup
+    """
+    return (t or "").strip().upper()
+
+
+def _save_json(path: Path, data: t.Any) -> None:
     try:
-        with open(TICKERS_CACHE, "w", encoding="utf-8") as f:
+        with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f)
     except Exception:
+        # ne jamais faire planter le run pour un échec d'écriture cache
         pass
-    return data
 
-def sec_ticker_map() -> dict[str, dict]:
+
+def _load_json(path: Path) -> t.Any:
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _load_ticker_dir() -> t.Any:
     """
-    Returns {'AAPL': {'cik': 320193, 'title': 'Apple Inc.'}, ...}
+    Charge l'annuaire des tickers depuis les sources officielles SEC (puis fallbacks).
+    - Utilise cache frais si dispo,
+    - Si tout échoue, tente le cache même périmé,
+    - Sinon propage la dernière erreur.
     """
-    raw = _load_ticker_dir()
-    entries = raw.values() if isinstance(raw, dict) else raw
-    out: dict[str, dict] = {}
-    for row in entries:
+    if _is_fresh(TICKERS_CACHE, TICKERS_TTL_DAYS):
         try:
-            tkr = str(row.get("ticker", "")).strip().upper()
-            if not tkr:
-                continue
-            cik = row.get("cik_str")
-            cik = int(cik) if cik not in (None, "") else None
-            title = row.get("title") or ""
-            out[tkr] = {"cik": cik, "title": title}
+            return _load_json(TICKERS_CACHE)
         except Exception:
-            continue
-    return out
+            # on refetch
+            pass
 
-# =========================
-# Company facts per CIK (to derive latest shares outstanding)
-# =========================
-def _cik10(cik: int | str) -> str:
-    """Pad CIK to 10 digits as required by EDGAR companyfacts endpoint."""
-    c = int(str(cik).strip())
-    return f"{c:010d}"
-
-def _facts_cache_path(cik10: str) -> pathlib.Path:
-    return FACTS_DIR / f"{cik10}.json"
-
-def _load_company_facts(cik: int | str) -> dict:
-    cik10 = _cik10(cik)
-    p = _facts_cache_path(cik10)
-    if _is_fresh(p, FACTS_TTL_DAYS):
+    sources = [SEC_TICKERS_URL, *SEC_TICKERS_ALTS, *SEC_TICKERS_FALLBACKS]
+    last_err: Exception | None = None
+    for url in sources:
         try:
-            with open(p, "r", encoding="utf-8") as f:
-                return json.load(f)
+            data = _download_json(url)
+            _save_json(TICKERS_CACHE, data)
+            return data
+        except Exception as e:
+            last_err = e
+            continue
+
+    # toutes les sources échouent : tentons un cache obsolète
+    if TICKERS_CACHE.exists():
+        try:
+            return _load_json(TICKERS_CACHE)
         except Exception:
             pass
 
-    url = FACTS_URL_TMPL.format(cik=cik10)
+    if last_err:
+        raise last_err
+    raise RuntimeError("SEC ticker directory unavailable and no cache on disk")
+
+
+def _parse_ticker_dir(raw: t.Any) -> dict[str, dict]:
+    """
+    Uniformise la structure de l'annuaire SEC vers :
+      map[ticker] = { 'cik': '##########', 'title': 'Company Name', 'exchange': 'NYSE/Nasdaq/...' }
+    Les différents fichiers (company_tickers.json vs *_exchange.json vs fallbacks) ont des schémas proches.
+    """
+    result: dict[str, dict] = {}
+
+    # Cas 1: format officiel "company_tickers.json" (dict indexé par '0','1',... avec objets)
+    # Exemple d'item: {"cik_str": 320193, "ticker": "AAPL", "title": "Apple Inc."}
+    if isinstance(raw, dict) and raw and all(k.isdigit() for k in raw.keys()):
+        for _, obj in raw.items():
+            try:
+                ticker = _normalize_ticker(obj.get("ticker", ""))
+                if not ticker:
+                    continue
+                cik = str(obj.get("cik_str", "")).zfill(10)
+                title = obj.get("title", "") or ""
+                # Pas d'exchange direct dans ce format
+                result[ticker] = {"cik": cik, "title": title, "exchange": obj.get("exchange") or ""}
+            except Exception:
+                continue
+        return result
+
+    # Cas 2: format "company_tickers_exchange.json": dict par exchange -> liste d'obj
+    # Exemple: {"nasdaq": [{"cik_str":..., "ticker":"AAPL", "title":"Apple Inc."}, ...], "nyse": [...], ...}
+    if isinstance(raw, dict) and any(isinstance(v, list) for v in raw.values()):
+        for exch, arr in raw.items():
+            if not isinstance(arr, list):
+                continue
+            for obj in arr:
+                try:
+                    ticker = _normalize_ticker(obj.get("ticker", ""))
+                    if not ticker:
+                        continue
+                    cik = str(obj.get("cik_str", "")).zfill(10)
+                    title = obj.get("title", "") or ""
+                    result[ticker] = {"cik": cik, "title": title, "exchange": exch.upper()}
+                except Exception:
+                    continue
+        if result:
+            return result
+
+    # Cas 3: fallbacks divers — tenter quelques heuristiques
+    # 3a) liste d'objets [{"cik_str":..., "ticker":"...", "title":"..."}]
+    if isinstance(raw, list) and raw and isinstance(raw[0], dict):
+        for obj in raw:
+            try:
+                ticker = _normalize_ticker(obj.get("ticker", ""))
+                if not ticker:
+                    continue
+                cik_val = obj.get("cik_str") or obj.get("cik") or obj.get("CIK") or ""
+                cik = str(cik_val).zfill(10) if cik_val else ""
+                title = obj.get("title") or obj.get("name") or obj.get("company") or ""
+                exch = obj.get("exchange") or ""
+                result[ticker] = {"cik": cik, "title": title, "exchange": exch}
+            except Exception:
+                continue
+        if result:
+            return result
+
+    # 3b) dict déjà map[ticker]->obj
+    if isinstance(raw, dict):
+        for k, obj in raw.items():
+            try:
+                ticker = _normalize_ticker(k)
+                if not ticker:
+                    continue
+                if isinstance(obj, dict):
+                    cik_val = obj.get("cik_str") or obj.get("cik") or obj.get("CIK") or ""
+                    cik = str(cik_val).zfill(10) if cik_val else ""
+                    title = obj.get("title") or obj.get("name") or obj.get("company") or ""
+                    exch = obj.get("exchange") or ""
+                else:
+                    cik = ""
+                    title = str(obj)
+                    exch = ""
+                result[ticker] = {"cik": cik, "title": title, "exchange": exch}
+            except Exception:
+                continue
+        if result:
+            return result
+
+    # si on arrive ici, impossible d'interpréter — on renvoie vide
+    return result
+
+
+def _with_ticker_variants(map_by_ticker: dict[str, dict]) -> dict[str, dict]:
+    """
+    Ajoute des variantes '.' <-> '-' pour maximiser les hits (ex: BRK.B vs BRK-B).
+    """
+    extra: dict[str, dict] = {}
+    for tk, meta in map_by_ticker.items():
+        if "." in tk:
+            extra[tk.replace(".", "-")] = meta
+        if "-" in tk:
+            extra[tk.replace("-", ".")] = meta
+    map_by_ticker.update(extra)
+    return map_by_ticker
+
+
+def sec_ticker_map() -> dict[str, dict]:
+    """
+    Renvoie un mapping TICKER -> {cik, title, exchange}
+    (cache + fallbacks + variantes tickers).
+    """
+    raw = _load_ticker_dir()
+    mp = _parse_ticker_dir(raw)
+    mp = _with_ticker_variants(mp)
+    return mp
+
+
+# ------------------------- Company Facts & actions en circulation ------------
+
+def _facts_cache_path(cik: str) -> Path:
+    cik_pad = str(cik).zfill(10)
+    return FACTS_CACHE_DIR / f"facts_{cik_pad}.json"
+
+
+def _download_companyfacts(cik: str) -> t.Any:
+    """
+    Télécharge les "companyfacts" pour un CIK donné, avec cache et retries.
+    """
+    cik_pad = str(cik).zfill(10)
+    cache_path = _facts_cache_path(cik_pad)
+
+    if _is_fresh(cache_path, FACTS_TTL_DAYS):
+        try:
+            return _load_json(cache_path)
+        except Exception:
+            pass
+
+    url = SEC_COMPANYFACTS_URL_TMPL.format(cik_pad=cik_pad)
     data = _download_json(url)
-    try:
-        with open(p, "w", encoding="utf-8") as f:
-            json.dump(data, f)
-    except Exception:
-        pass
+    _save_json(cache_path, data)
     return data
 
-def _parse_iso_date(s: str | None) -> datetime | None:
-    if not s:
+
+def _latest_unit_value(series_entry: dict, unit_key: str) -> float | None:
+    """
+    Extrait la dernière valeur disponible (par date) dans la série 'units[unit_key]'.
+    Chaque point a la forme {'val': ..., 'fy': ..., 'fp': ..., 'form': '10-K/10-Q', 'end': 'YYYY-MM-DD', ...}
+    """
+    units = (series_entry or {}).get("units", {})
+    datapoints = units.get(unit_key)
+    if not isinstance(datapoints, list) or not datapoints:
         return None
-    for fmt in ("%Y-%m-%d", "%Y-%m", "%Y"):
-        try:
-            return datetime.strptime(s, fmt)
-        except Exception:
-            continue
-    return None
 
-def _latest_value_from_series(series: list[dict]) -> float | None:
-    """
-    Given a list of facts (each with e.g. 'end', 'val'), return the most recent non-null val.
-    """
-    best_dt = None
-    best_val = None
-    for it in series:
-        if "val" not in it:
-            continue
-        # prefer 'end' date; fall back to 'filed'
-        dt = _parse_iso_date(it.get("end")) or _parse_iso_date(it.get("filed"))
-        if dt is None:
-            continue
-        try:
-            val = float(it["val"])
-        except Exception:
-            continue
-        if (best_dt is None) or (dt > best_dt):
-            best_dt, best_val = dt, val
-    return best_val
+    # trier par date 'end' (et fallback sur 'filed' si présent)
+    def _key(dp):
+        # format 'YYYY-MM-DD', sinon fallback string
+        return dp.get("end") or dp.get("filed") or ""
 
-def _latest_shares_from_facts(facts_json: dict) -> float | None:
-    """
-    Try several common us-gaap tags, prefer units 'shares'.
-    """
-    if not facts_json:
-        return None
-    facts = (facts_json.get("facts") or {}).get("us-gaap") or {}
-
-    # Priority order of tags that commonly carry share counts
-    CANDIDATE_TAGS = [
-        "CommonStockSharesOutstanding",
-        "EntityCommonStockSharesOutstanding",
-        "SharesOutstanding",
-        "WeightedAverageNumberOfSharesOutstandingBasic",
-        "WeightedAverageNumberOfDilutedSharesOutstanding",
-        "WeightedAverageNumberOfSharesOutstandingDiluted",
-    ]
-
-    for tag in CANDIDATE_TAGS:
-        node = facts.get(tag)
-        if not node:
-            continue
-        units = node.get("units") or {}
-        # first try "shares" unit (best), then any other unit as fallback
-        candidates = []
-        if "shares" in units:
-            candidates = units["shares"]
-        else:
-            # sometimes it shows as "pure" or other; try the first available unit
-            # but avoid obvious non-share units like "USD" etc.
-            for unit, series in units.items():
-                if "share" in unit.lower() or unit.lower() in ("pure",):
-                    candidates = series
-                    break
-            if not candidates:
-                # as last resort, just take first unit series
-                for series in units.values():
-                    candidates = series
-                    break
-        val = _latest_value_from_series(candidates)
-        if val is not None and val > 0:
+    datapoints_sorted = sorted(datapoints, key=_key)
+    for dp in reversed(datapoints_sorted):
+        val = dp.get("val")
+        if isinstance(val, (int, float)) and val is not None:
             return float(val)
     return None
 
-def sec_latest_shares_outstanding(symbol_or_cik: str | int) -> float | None:
-    """
-    Returns the latest shares outstanding (float) from SEC Company Facts,
-    or None if unavailable.
-    Accepts either a ticker (str) or a CIK (int/str).
-    """
-    cik: int | None = None
-    if isinstance(symbol_or_cik, (int,)) or str(symbol_or_cik).isdigit():
-        cik = int(symbol_or_cik)
-    else:
-        tkr = str(symbol_or_cik).strip().upper()
-        m = sec_ticker_map()
-        meta = m.get(tkr)
-        if not meta or not meta.get("cik"):
-            return None
-        cik = int(meta["cik"])
 
+def sec_latest_shares_outstanding(cik: str) -> float | None:
+    """
+    Renvoie la dernière valeur (float) des actions en circulation d'une société (CIK),
+    en cherchant dans les companyfacts plusieurs clés fréquentes :
+      - "CommonStockSharesOutstanding" (classique)
+      - "CommonSharesOutstanding" (variation)
+      - "WeightedAverageNumberOfSharesOutstandingBasic" (fallback proxy)
+    Les unités à tester en priorité: 'shares' puis d'autres si nécessaire.
+    """
     try:
-        facts = _load_company_facts(cik)
+        facts = _download_companyfacts(cik)
     except Exception:
+        # si on a un cache périmé, tenter la lecture brute (mieux que rien)
+        cache_path = _facts_cache_path(cik)
+        if cache_path.exists():
+            try:
+                return _latest_shares_from_facts(_load_json(cache_path))
+            except Exception:
+                return None
         return None
 
+    return _latest_shares_from_facts(facts)
+
+
+def _latest_shares_from_facts(facts: dict) -> float | None:
+    if not isinstance(facts, dict):
+        return None
+    # branche US-GAAP généralement
+    facts_usgaap = (facts.get("facts") or {}).get("us-gaap") or {}
+
+    # clés candidates
+    KEYS = [
+        "CommonStockSharesOutstanding",
+        "CommonSharesOutstanding",
+        "WeightedAverageNumberOfSharesOutstandingBasic",
+        "WeightedAverageNumberOfDilutedSharesOutstanding",
+    ]
+
+    # unités candidates par ordre de préférence
+    UNITS = ["shares", "SHARES", "pure"]
+
+    for key in KEYS:
+        entry = facts_usgaap.get(key)
+        if not entry:
+            continue
+        for unit in UNITS:
+            val = _latest_unit_value(entry, unit)
+            if val is not None and val > 0:
+                return float(val)
+    return None
+
+
+# ------------------------- Convenience : mcap proxy (optionnel) --------------
+
+def sec_proxy_mcap_from_price_shares(price: float | None, shares_out: float | None) -> float | None:
+    """
+    Calcul simple de market cap si on a un prix (yfinance) + actions en circulation (SEC).
+    """
+    if price is None or shares_out is None:
+        return None
     try:
-        return _latest_shares_from_facts(facts)
+        return float(price) * float(shares_out)
     except Exception:
         return None
