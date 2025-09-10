@@ -1,387 +1,395 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-"""
-mix_ab_screen_indices.py
-Enrichit l'univers, filtre mcap < 75B, score & bucketise selon 3 piliers:
-- Tech  : SMA50>SMA200 & Close>SMA50
-- TV    : tradingview_ta summary (BUY / STRONG_BUY / NEUTRAL / SELL)
-- Analyst: Finnhub consensus -> BUY / STRONG_BUY / HOLD / SELL
-
-Sorties:
-- dashboard/public/candidates_all_ranked.csv
-- dashboard/public/confirmed_STRONGBUY.csv
-- dashboard/public/anticipative_pre_signals.csv
-- dashboard/public/event_driven_signals.csv
-- dashboard/public/signals_history.csv (append journalier)
-"""
-
+# mix_ab_screen_indices.py
+# Remplace complètement l'ancien script.
 from __future__ import annotations
-import os
-import time
-import math
-import csv
-import sys
-from datetime import date, datetime, timezone, timedelta
+import os, sys, math, json, time
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Optional, Dict, Any, List, Tuple
 
 import pandas as pd
 import numpy as np
 import yfinance as yf
-from tradingview_ta import TA_Handler, Interval, Exchange
-import requests
 
-PUB = Path(os.getenv("OUTPUT_DIR", ".")).resolve()
-PUB.mkdir(parents=True, exist_ok=True)
+from sec_helpers import sec_ticker_map, sec_latest_shares_outstanding
+from tech_score import compute_tech_features, tech_label_from_features
+from analyst_proxy import analyst_label_from_fundamentals
 
-UNIVERSE_CSV = ROOT / "universe_in_scope.csv"  # 1 col: ticker_yf
-SECTOR_CATALOG = ROOT / "sector_catalog.csv"   # optionnel (pour sector/industry)
+ROOT = Path(__file__).parent
+CACHE_DIR = ROOT / "cache"
+CACHE_DIR.mkdir(exist_ok=True)
 
-TODAY = date.today().isoformat()
-NOW_UTC = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+OUT_DIR = ROOT   # <<< sorties à la racine du repo
+UNIVERSE_CSV = ROOT / "universe_in_scope.csv"     # fourni par build_universe.py
+SECTOR_CATALOG = ROOT / "sector_catalog.csv"      # mapping ticker->sector/industry (si dispo)
 
-FINNHUB_API_KEY = os.getenv("FINNHUB_API_KEY", "")
-FINNHUB_BASE = "https://finnhub.io/api/v1"
+# Params
+MCAP_CAP = 75e9                    # filtre < 75B
+MIN_PRICE_FOR_SCORE = 0.5          # ignorer penny stocks pour certains signaux
+OHLCV_WINDOW_DAYS = 240            # fenêtre pour indicateurs/avg$vol
+AVG_DOLLAR_VOL_LOOKBACK = 20       # 20 jours
+YF_CHUNK_DAYS = 365                # pour cache/rafraîchissement
+YF_TIMEOUT = 15
 
-# ---------- util
-def _log(msg: str): print(msg, flush=True)
+# --------------------------------------------------------------------- utils
 
-def safe_float(x, default=np.nan):
+def _log(msg: str):
+    print(msg, flush=True)
+
+def safe_float(x) -> Optional[float]:
     try:
-        if x is None: return default
-        v = float(x)
-        if math.isfinite(v):
-            return v
+        if x is None or (isinstance(x, float) and math.isnan(x)): return None
+        return float(x)
     except Exception:
-        pass
-    return default
+        return None
 
-def votes_bin(n: Optional[float]) -> str:
-    if pd.isna(n): return ""
-    n = int(n)
-    if n >= 60: return "60+"
-    if n >= 40: return "40+"
-    if n >= 30: return "30+"
-    if n >= 20: return "20+"
-    if n >= 10: return "10+"
-    if n >= 5:  return "5+"
-    if n > 0:   return "1+"
-    return "0"
-
-# ---------- data sources
-def yf_fast_block(tickers: List[str]) -> pd.DataFrame:
-    """
-    Batch yfinance for price, mcap, fast info, and 20d avg $ volume.
-    """
-    _log("[YF] computing 20d avg dollar vol…")
-    # history for avg $ vol
-    hist = yf.download(
-        tickers=tickers,
-        period="3mo", interval="1d", group_by="ticker", auto_adjust=False, progress=False, threads=True
-    )
-    out_rows = []
-    for t in tickers:
-        price = np.nan
-        avg_dv = np.nan
-        try:
-            # price: last Close from history if available
-            if isinstance(hist.columns, pd.MultiIndex):
-                h = hist[t]
-            else:
-                h = hist
-            if not h.empty:
-                last_close = safe_float(h["Close"].dropna().iloc[-1])
-                price = last_close
-                avg_dv = (h["Close"] * h["Volume"]).dropna().tail(20).mean()
-        except Exception:
-            pass
-
-        out_rows.append({"ticker_yf": t, "price": price, "avg_dollar_vol": avg_dv})
-
-    df_hist = pd.DataFrame(out_rows).set_index("ticker_yf")
-
-    # fast info for market cap (and a fallback lastPrice)
-    infos = []
-    for t in tickers:
-        try:
-            ticker = yf.Ticker(t)
-            fi = getattr(ticker, "fast_info", None)
-            last = np.nan
-            mcap = np.nan
-            if fi:
-                last = safe_float(getattr(fi, "last_price", None))
-                mcap = safe_float(getattr(fi, "market_cap", None))
-            # fallback to info (slower) if needed
-            if (pd.isna(mcap) or mcap == 0) or (pd.isna(last) and pd.isna(df_hist.loc[t, "price"])):
-                info = ticker.info or {}
-                mcap2 = safe_float(info.get("marketCap"))
-                last2 = safe_float(info.get("currentPrice", info.get("regularMarketPrice")))
-                if not pd.isna(mcap2): mcap = mcap2
-                if pd.isna(df_hist.loc[t, "price"]) and not pd.isna(last2): 
-                    df_hist.loc[t, "price"] = last2
-            infos.append({"ticker_yf": t, "mcap_usd_final": mcap})
-        except Exception:
-            infos.append({"ticker_yf": t, "mcap_usd_final": np.nan})
-
-    df_info = pd.DataFrame(infos).set_index("ticker_yf")
-    merged = df_hist.join(df_info, how="outer").reset_index()
-    return merged
-
-def tv_fetch_summary(ticker: str) -> Tuple[Optional[float], Optional[str]]:
-    """
-    TradingView summary score in [0,1] and label (BUY/STRONG_BUY/NEUTRAL/SELL).
-    We try common exchanges; library infers many symbols.
-    """
+def read_sector_catalog() -> Dict[str, Dict[str,str]]:
+    if not SECTOR_CATALOG.exists():
+        return {}
     try:
-        handler = TA_Handler(
-            symbol=ticker,
-            screener="america",
-            exchange="NASDAQ" if not ticker.endswith(".NY") else "NYSE",
-            interval=Interval.INTERVAL_1_DAY
-        )
-        s = handler.get_analysis().summary  # dict: BUY/SELL/NEUTRAL counts & RECOMMENDATION
-        # score: map to 0..1
-        rec = (s.get("RECOMMENDATION") or "").upper()
-        buy = safe_float(s.get("BUY"), 0.0)
-        sell = safe_float(s.get("SELL"), 0.0)
-        neu = safe_float(s.get("NEUTRAL"), 0.0)
-        tot = buy + sell + neu
-        tv_score = (buy - sell) / tot if tot > 0 else 0.0
-        # squash to 0..1 scale
-        tv_norm = (tv_score + 1) / 2
-        label = "NEUTRAL"
-        if rec in ("STRONG_BUY", "BUY", "SELL", "STRONG_SELL", "NEUTRAL"):
-            label = rec
-        return float(tv_norm), label
+        df = pd.read_csv(SECTOR_CATALOG)
+        res = {}
+        for _, r in df.iterrows():
+            t = str(r.get("ticker") or r.get("ticker_yf") or "").upper()
+            if not t: continue
+            res[t] = {
+                "sector": r.get("sector") if pd.notna(r.get("sector")) else "Unknown",
+                "industry": r.get("industry") if pd.notna(r.get("industry")) else "Unknown",
+            }
+        return res
+    except Exception as e:
+        _log(f"[WARN] sector_catalog read failed: {e}")
+        return {}
+
+# ------------------------------ OHLCV cache (Parquet)
+
+def ohlcv_cache_path(t: str) -> Path:
+    return CACHE_DIR / f"ohlcv_{t}.parquet"
+
+def fetch_ohlcv_yf(ticker: str, period_days: int = OHLCV_WINDOW_DAYS) -> Optional[pd.DataFrame]:
+    """
+    Télécharge OHLCV (daily) via yfinance, cache parquet.
+    Retourne df indexé datetime avec colonnes: open, high, low, close, volume
+    """
+    path = ohlcv_cache_path(ticker)
+    df = None
+    if path.exists():
+        try:
+            df = pd.read_parquet(path)
+        except Exception:
+            df = None
+
+    need_fetch = True
+    if df is not None and len(df) >= 50:
+        # Si dernier point < 2 jours, réutilise
+        if (pd.Timestamp.utcnow().tz_localize("UTC") - df.index[-1].tz_localize("UTC")).days < 2:
+            need_fetch = False
+
+    if need_fetch:
+        try:
+            # yfinance period form: '300d' etc.
+            period = f"{max(period_days, 120)}d"
+            yf_df = yf.download(
+                ticker,
+                period=period,
+                interval="1d",
+                auto_adjust=False,
+                progress=False,
+                threads=False,
+            )
+            if yf_df is None or yf_df.empty:
+                return df
+            yf_df = yf_df.rename(
+                columns={"Open":"open","High":"high","Low":"low","Close":"close","Volume":"volume"}
+            )[["open","high","low","close","volume"]].dropna()
+            # timezone-naive to UTC-naive
+            yf_df.index = pd.to_datetime(yf_df.index)
+            yf_df.to_parquet(path, index=True)
+            df = yf_df
+        except Exception as e:
+            _log(f"[YF] fetch failed {ticker}: {e}")
+            return df
+
+    return df
+
+def last_close(df: pd.DataFrame) -> Optional[float]:
+    if df is None or df.empty:
+        return None
+    return safe_float(df["close"].iloc[-1])
+
+def avg_dollar_vol(df: pd.DataFrame, lookback: int = AVG_DOLLAR_VOL_LOOKBACK) -> Optional[float]:
+    if df is None or len(df) < lookback:
+        return None
+    sub = df.iloc[-lookback:]
+    return float((sub["close"] * sub["volume"]).mean())
+
+# ------------------------------ SEC companyfacts loader (light cache)
+
+FACTS_PATH = CACHE_DIR / "sec_companyfacts_cache.json"
+
+def load_facts_cache():
+    try:
+        with FACTS_PATH.open("r", encoding="utf-8") as f:
+            return json.load(f)
     except Exception:
-        return (np.nan, "")
+        return {"_ts": 0, "data": {}}
 
-def finnhub_consensus(ticker: str) -> Tuple[str, Optional[float]]:
-    """
-    Analyst consensus bucket + number of estimates/votes.
-    We map Finnhub 'recommendation trends' into BUY/STRONG_BUY/HOLD/...
-    """
-    if not FINNHUB_API_KEY:
-        return ("", np.nan)
+def save_facts_cache(data):
+    tmp = FACTS_PATH.with_suffix(".tmp")
+    with tmp.open("w", encoding="utf-8") as f:
+        json.dump(data, f)
+    tmp.replace(FACTS_PATH)
+
+def sec_companyfacts(cik10: str, ttl_hours: float = 48.0) -> Optional[dict]:
+    from sec_helpers import _sec_get_json  # reuse headers
+    cache = load_facts_cache()
+    now = time.time()
+    key = f"CIK{cik10}"
+    rec = cache["data"].get(key)
+    if rec and now - rec.get("_ts", 0) < ttl_hours * 3600:
+        return rec.get("facts")
+
     try:
-        url = f"{FINNHUB_BASE}/stock/recommendation?symbol={ticker}&token={FINNHUB_API_KEY}"
-        r = requests.get(url, timeout=15)
-        r.raise_for_status()
-        data = r.json()
-        if not data:
-            return ("", np.nan)
-        latest = data[0]
-        sb = safe_float(latest.get("strongBuy"), 0)
-        b  = safe_float(latest.get("buy"), 0)
-        h  = safe_float(latest.get("hold"), 0)
-        s  = safe_float(latest.get("sell"), 0)
-        ss = safe_float(latest.get("strongSell"), 0)
-        votes = sb + b + h + s + ss
-        # consensus bucket: majority on strongBuy/buy -> label
-        if sb >= max(b, h, s, ss) and sb >= 1:
-            label = "STRONG_BUY"
-        elif (sb + b) > max(h, s + ss) and (sb + b) >= 1:
-            label = "BUY"
-        elif h >= max(sb + b, s + ss) and h >= 1:
-            label = "HOLD"
-        elif (s + ss) > max(sb + b, h) and (s + ss) >= 1:
-            label = "SELL"
+        facts = _sec_get_json(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik10}.json")
+    except Exception as e:
+        return rec.get("facts") if rec else None
+
+    cache["data"][key] = {"_ts": now, "facts": facts}
+    save_facts_cache(cache)
+    return facts
+
+def _series_from_facts(facts: dict, ns: str, tag: str, prefer_units=("USD","USD/shares")) -> List[float]:
+    try:
+        units = facts["facts"][ns][tag]["units"]
+    except Exception:
+        return []
+    # pick best unit
+    unit_keys = sorted(units.keys(), key=lambda u: 0 if any(p.lower() in u.lower() for p in prefer_units) else 1)
+    arr = []
+    for uk in unit_keys:
+        a = units[uk]
+        # tri chrono
+        a_sorted = sorted(a, key=lambda x: (x.get("fy",0), x.get("fp",""), x.get("end","")))
+        vals = []
+        for obs in a_sorted:
+            v = obs.get("val")
+            try:
+                if v is not None:
+                    vals.append(float(v))
+            except Exception:
+                continue
+        if len(vals) >= 2:
+            arr = vals
+            break
+        elif not arr and len(vals) > 0:
+            arr = vals
+    return arr
+
+# ------------------------------ Pipeline
+
+def ensure_universe() -> pd.DataFrame:
+    if not UNIVERSE_CSV.exists():
+        raise SystemExit(f"[FATAL] {UNIVERSE_CSV} introuvable. Lance d'abord build_universe.py")
+    df = pd.read_csv(UNIVERSE_CSV)
+    col = None
+    for c in ["ticker_yf","ticker","Symbol","symbol"]:
+        if c in df.columns:
+            col = c
+            break
+    if not col:
+        raise SystemExit("[FATAL] universe_in_scope.csv: colonne ticker introuvable")
+    uni = df[[col]].dropna().rename(columns={col:"ticker_yf"})
+    uni["ticker_yf"] = uni["ticker_yf"].astype(str).str.upper().str.strip()
+    uni = uni[uni["ticker_yf"] != ""].drop_duplicates()
+    _log(f"[UNI] in-scope: {len(uni)}")
+    return uni
+
+def compute_rows(uni: pd.DataFrame) -> pd.DataFrame:
+    secmap = sec_ticker_map()
+    sectors = read_sector_catalog()
+
+    rows = []
+    for i, r in uni.iterrows():
+        t = r["ticker_yf"]
+        # 1) prix & vol
+        df = fetch_ohlcv_yf(t)
+        lc = last_close(df)
+        adv = avg_dollar_vol(df) or 0.0
+
+        # 2) TechScore local
+        if df is not None and lc and lc >= MIN_PRICE_FOR_SCORE and len(df) >= 50:
+            feats = compute_tech_features(df)
+            tech_label, tech_score = tech_label_from_features(feats)
         else:
-            label = ""
-        return (label, votes)
-    except Exception:
-        return ("", np.nan)
+            tech_label, tech_score = "HOLD", 0.5
 
-def compute_tech_flags(tickers: List[str]) -> Dict[str, bool]:
-    """
-    Tech pillar: SMA50>SMA200 and Close>SMA50 on Daily.
-    """
-    flags = {}
-    # We already downloaded 3mo. Need more for SMA200
-    hist = yf.download(
-        tickers=tickers, period="1y", interval="1d",
-        group_by="ticker", auto_adjust=False, progress=False, threads=True
-    )
-    for t in tickers:
-        ok = False
-        try:
-            if isinstance(hist.columns, pd.MultiIndex):
-                h = hist[t]
-            else:
-                h = hist
-            close = h["Close"].dropna()
-            if len(close) >= 200:
-                sma50  = close.rolling(50).mean().iloc[-1]
-                sma200 = close.rolling(200).mean().iloc[-1]
-                last   = close.iloc[-1]
-                ok = (last > sma50) and (sma50 > sma200)
-        except Exception:
-            ok = False
-        flags[t] = bool(ok)
-    return flags
+        # 3) SEC Shares + MCAP
+        cik = secmap.get(t)
+        shares = None
+        if cik:
+            shares = sec_latest_shares_outstanding(cik)
+        mcap = (lc * shares) if (lc is not None and shares is not None) else None
 
-# ---------- bucketing / scoring
-def pillar_bools(tech_ok: bool, tv_label: str, an_label: str) -> Tuple[bool, bool, bool]:
-    p_tech = bool(tech_ok)
-    p_tv   = (tv_label.upper() in ("BUY", "STRONG_BUY"))
-    p_an   = (an_label.upper() in ("BUY", "STRONG_BUY"))
-    return p_tech, p_tv, p_an
+        # 4) Fundamentals proxy (Revenue / NI / Margin / EPS)
+        analyst_label, analyst_score, analyst_votes = "HOLD", 0.5, 20
+        if cik:
+            facts = sec_companyfacts(cik)
+            if facts:
+                rev = _series_from_facts(facts, "us-gaap", "RevenueFromContractWithCustomerExcludingAssessedTax", ("USD",))
+                if not rev:
+                    rev = _series_from_facts(facts, "us-gaap", "Revenues", ("USD",))
+                ni  = _series_from_facts(facts, "us-gaap", "NetIncomeLoss", ("USD",))
+                # marge op approx: OperatingIncome / Revenue
+                op  = _series_from_facts(facts, "us-gaap", "OperatingIncomeLoss", ("USD",))
+                op_margin = []
+                if rev and op and len(rev) == len(op):
+                    with np.errstate(divide="ignore", invalid="ignore"):
+                        op_margin = [float(o)/abs(float(r)) if r else np.nan for o, r in zip(op, rev)]
+                        op_margin = [x for x in op_margin if x == x]  # drop NaN
+                eps = _series_from_facts(facts, "us-gaap", "EarningsPerShareDiluted", ("USD/shares","USD"))
+                analyst_label, analyst_score, analyst_votes = analyst_label_from_fundamentals(rev, ni, op_margin, eps)
 
-def assign_bucket(p_tech: bool, p_tv: bool, p_an: bool, tv_label: str, an_label: str) -> str:
-    cnt = int(p_tech) + int(p_tv) + int(p_an)
-    if cnt == 3 and tv_label.upper() == "STRONG_BUY" and an_label.upper() in ("BUY","STRONG_BUY"):
-        return "confirmed"
-    if cnt == 2:
-        return "pre_signal"
-    return "event"
+        # 5) Sector/industry
+        sec = sectors.get(t, {})
+        sector = sec.get("sector", "Unknown")
+        industry = sec.get("industry", "Unknown")
 
-def rank_score(tv_norm: float, cnt: int, votes: Optional[float]) -> float:
-    # 0.5 * TVscore + 0.4 * normalized pillars + 0.1 * votes bucket
-    tv = 0 if pd.isna(tv_norm) else float(tv_norm)
-    pill = cnt / 3.0
-    vb = 0.0
-    if not pd.isna(votes):
-        v = float(votes)
-        if v >= 60: vb = 1.0
-        elif v >= 40: vb = 0.8
-        elif v >= 30: vb = 0.6
-        elif v >= 20: vb = 0.5
-        elif v >= 10: vb = 0.4
-        elif v >= 5: vb = 0.2
-        else: vb = 0.0
-    return round(0.5*tv + 0.4*pill + 0.1*vb, 6)
+        # 6) TV pillar remplacé par “Composite Tech” (= notre label tech)
+        tv_reco = tech_label
+        tv_score = tech_score
 
-# ---------- main
-def main():
-    _log("[UNI] loading scope…")
-    uni = pd.read_csv(UNIVERSE_CSV)
-    tickers = uni["ticker_yf"].dropna().astype(str).str.upper().tolist()
-    tickers = sorted(list(dict.fromkeys(tickers)))
-    _log(f"[UNI] in-scope: {len(tickers)}")
+        # 7) Pillars & bucket
+        # p_tech -> label tech local ; p_tv -> bool (reco favorable) ; p_an -> bool
+        def favorable(label: str) -> bool:
+            return label in ("BUY","STRONG_BUY")
 
-    # sector/industry (optional)
-    sector_map = {}
-    if SECTOR_CATALOG.exists():
-        sc = pd.read_csv(SECTOR_CATALOG)
-        for _, r in sc.iterrows():
-            sector_map[str(r["ticker"]).upper()] = (r.get("sector"), r.get("industry"))
+        p_tech = favorable(tech_label)
+        p_tv   = favorable(tv_reco)
+        p_an   = favorable(analyst_label)
 
-    # --- yfinance block
-    yf_df = yf_fast_block(tickers)
+        pillars_met = sum([p_tech, p_tv, p_an])
 
-    # --- TradingView (bounded, retries)
-    tv_rows = []
-    filled = 0
-    for t in tickers:
-        sc, lab = tv_fetch_summary(t)
-        if lab: filled += 1
-        tv_rows.append({"ticker_yf": t, "tv_score": sc, "tv_reco": lab})
-        # gentle pacing to avoid rate limits
-        time.sleep(0.05)
-    _log(f"[TV] filled {filled}/{len(tickers)}")
+        # votes_bin (cosmétique) en fonction d'analyst_votes
+        if analyst_votes >= 30: votes_bin = "20+"
+        elif analyst_votes >= 20: votes_bin = "10-20"
+        else: votes_bin = "<10"
 
-    tv_df = pd.DataFrame(tv_rows)
+        # bucket rules
+        if pillars_met == 3 and ("STRONG_BUY" in (tech_label, tv_reco, analyst_label)):
+            bucket = "confirmed"
+        elif pillars_met >= 2:
+            bucket = "pre_signal"
+        else:
+            bucket = "event"
 
-    # --- Finnhub analysts
-    an_rows = []
-    filled = 0
-    for t in tickers:
-        lab, votes = finnhub_consensus(t)
-        if lab: filled += 1
-        an_rows.append({"ticker_yf": t, "analyst_bucket": lab, "analyst_votes": votes})
-        time.sleep(0.02)
-    _log(f"[Finnhub] {filled}/{len(tickers)}")
+        # rank score simple: poids piliers + tv_score + analyst_score + log(ADV)
+        adv_weight = math.log(1 + adv) / 20.0  # scale
+        rank_score = float(
+            (pillars_met / 3.0) * 0.6 +
+            (tv_score) * 0.2 +
+            (analyst_score) * 0.1 +
+            min(0.1, adv_weight)
+        )
 
-    # --- Tech pillar
-    tech_flags = compute_tech_flags(tickers)
-    tech_df = pd.DataFrame([{"ticker_yf": t, "p_tech": bool(v)} for t, v in tech_flags.items()])
+        rows.append({
+            "ticker_yf": t,
+            "ticker_tv": t,
+            "price": lc,
+            "last": lc,
+            "mcap_usd_final": mcap,
+            "mcap": mcap,
+            "avg_dollar_vol": adv,
+            "tv_score": tv_score,
+            "tv_reco": tv_reco,
+            "analyst_bucket": analyst_label,
+            "analyst_votes": float(analyst_votes),
+            "sector": sector,
+            "industry": industry,
+            "p_tech": bool(p_tech),
+            "p_tv": bool(p_tv),
+            "p_an": bool(p_an),
+            "pillars_met": int(pillars_met),
+            "votes_bin": votes_bin,
+            "rank_score": rank_score,
+        })
 
-    # --- merge
-    base = (yf_df
-            .merge(tv_df, on="ticker_yf", how="left")
-            .merge(an_df := pd.DataFrame(an_rows), on="ticker_yf", how="left")
-            .merge(tech_df, on="ticker_yf", how="left"))
+    return pd.DataFrame(rows)
 
-    # sector/industry
-    base["sector"] = base["ticker_yf"].map(lambda t: sector_map.get(t, (None, None))[0])
-    base["industry"] = base["ticker_yf"].map(lambda t: sector_map.get(t, (None, None))[1])
+def apply_filters(df: pd.DataFrame) -> pd.DataFrame:
+    # Filtre < 75B si mcap dispo ; sinon on garde (on filtrera plus tard quand mcap dispo)
+    mcap_mask = df["mcap_usd_final"].fillna(-1) < MCAP_CAP
+    return df[mcap_mask | df["mcap_usd_final"].isna()].copy()
 
-    # --- pillars & buckets
-    pts = []
-    buckets = []
-    ranks = []
-    vbins = []
-    for _, r in base.iterrows():
-        p_tech, p_tv, p_an = pillar_bools(bool(r.get("p_tech")), str(r.get("tv_reco") or ""), str(r.get("analyst_bucket") or ""))
-        cnt = int(p_tech) + int(p_tv) + int(p_an)
-        buck = assign_bucket(p_tech, p_tv, p_an, str(r.get("tv_reco") or ""), str(r.get("analyst_bucket") or ""))
-        sc = rank_score(safe_float(r.get("tv_score"), 0.0), cnt, safe_float(r.get("analyst_votes"), np.nan))
-        pts.append((p_tech, p_tv, p_an, cnt))
-        buckets.append(buck)
-        ranks.append(sc)
-        vbins.append(votes_bin(r.get("analyst_votes")))
-
-    base["p_tech"] = [x[0] for x in pts]
-    base["p_tv"]   = [x[1] for x in pts]
-    base["p_an"]   = [x[2] for x in pts]
-    base["pillars_met"] = [x[3] for x in pts]
-    base["bucket"] = buckets
-    base["rank_score"] = ranks
-    base["votes_bin"] = vbins
-
-    # --- ONLY filter: MCAP < 75B
-    base["mcap_usd_final"] = base["mcap_usd_final"].astype(float)
-    pre_filter_rows = len(base)
-    base = base[ (base["mcap_usd_final"].notna()) & (base["mcap_usd_final"] < 75e9) ]
-    _log(f"[FILTER] MCAP<75B: {len(base)}/{pre_filter_rows} kept")
-
-    # price/last
-    base["last"] = base["price"]
-
-    # tidy columns
-    cols = ["ticker_yf","ticker_yf","price","last","mcap_usd_final","mcap","avg_dollar_vol",
-            "tv_score","tv_reco","analyst_bucket","analyst_votes",
-            "sector","industry","p_tech","p_tv","p_an","pillars_met","votes_bin","rank_score","bucket"]
-    base["ticker_tv"] = base["ticker_yf"]
-    base["mcap"] = base["mcap_usd_final"]  # legacy
-    out = base[["ticker_yf","ticker_tv","price","last","mcap_usd_final","mcap","avg_dollar_vol",
-                "tv_score","tv_reco","analyst_bucket","analyst_votes",
-                "sector","industry","p_tech","p_tv","p_an","pillars_met","votes_bin","rank_score","bucket"]].copy()
-
-    # --- save master
+def write_outputs(out: pd.DataFrame):
+    # master trié
     out_sorted = out.sort_values(["rank_score","avg_dollar_vol"], ascending=[False, False]).reset_index(drop=True)
-    out_sorted.to_csv(PUB / "candidates_all_ranked.csv", index=False)
+    out_sorted.to_csv(OUT_DIR / "candidates_all_ranked.csv", index=False)
     _log(f"[SAVE] candidates_all_ranked.csv | rows={len(out_sorted)} | cols={out_sorted.shape[1]}")
 
-    # splits
     confirmed = out_sorted[out_sorted["bucket"]=="confirmed"]
     pre_sig   = out_sorted[out_sorted["bucket"]=="pre_signal"]
     event     = out_sorted[out_sorted["bucket"]=="event"]
 
-    confirmed.to_csv(PUB / "confirmed_STRONGBUY.csv", index=False)
-    pre_sig.to_csv(PUB / "anticipative_pre_signals.csv", index=False)
-    event.to_csv(PUB / "event_driven_signals.csv", index=False)
+    confirmed.to_csv(OUT_DIR / "confirmed_STRONGBUY.csv", index=False)
+    pre_sig.to_csv(OUT_DIR / "anticipative_pre_signals.csv", index=False)
+    event.to_csv(OUT_DIR / "event_driven_signals.csv", index=False)
+
     _log(f"[SAVE] confirmed={len(confirmed)} pre={len(pre_sig)} event={len(event)}")
 
-    # history (append-last 100 unique)
-    hist_path = PUB / "signals_history.csv"
-    today_rows = out_sorted[["ticker_yf","bucket","tv_reco","analyst_bucket","sector"]].copy()
-    today_rows.insert(0, "date", TODAY)
-    if hist_path.exists():
-        hist = pd.read_csv(hist_path)
-        hist = pd.concat([hist, today_rows], ignore_index=True)
-        # keep last 100 rows
-        hist = hist.tail(100)
+def update_signals_history(today: str, out: pd.DataFrame):
+    path = OUT_DIR / "signals_history.csv"
+    cols = ["date","ticker_yf","sector","bucket","tv_reco","analyst_bucket"]
+    new = out[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]].copy()
+    new.insert(0, "date", today)
+    if path.exists():
+        try:
+            old = pd.read_csv(path)
+        except Exception:
+            old = pd.DataFrame(columns=cols)
+        hist = pd.concat([old, new], ignore_index=True)
     else:
-        hist = today_rows
-    hist.to_csv(hist_path, index=False)
-    _log("[SAVE] signals_history.csv updated")
+        hist = new
+    # garde 100 lignes récentes max
+    hist = hist.tail(100)
+    hist.to_csv(path, index=False)
+    _log(f"[SAVE] signals_history.csv | rows={len(hist)}")
+
+def main():
+    _log("[STEP] mix_ab_screen_indices starting…")
+    uni = ensure_universe()
+    base = compute_rows(uni)
+
+    # mcap_final (copie), bucket calc already set, mais on applique filtre <75B
+    base["mcap_usd_final"] = base["mcap_usd_final"]
+    base = apply_filters(base)
+
+    # Re-évaluer buckets après filtre (facultatif, ici on conserve)
+    # (ex: si filtre enlève des gros titres, rien à recalculer pour les autres)
+
+    # fallbacks anti-NaN
+    for c in ["price","last","mcap_usd_final","avg_dollar_vol","tv_score","analyst_votes","rank_score"]:
+        base[c] = base[c].astype(float).where(pd.notna(base[c]), None)
+
+    # bucket string safety
+    base["bucket"] = base["bucket"].fillna("event")
+
+    write_outputs(base)
+
+    # history
+    today = pd.Timestamp.utcnow().date().isoformat()
+    update_signals_history(today, base)
+
+    # couverture
+    unique_total = len(base)
+    coverage = {
+        "universe": len(uni),
+        "price_nonnull": int(base["price"].notna().sum()),
+        "mcap_final_nonnull": int(base["mcap_usd_final"].notna().sum()),
+        "confirmed_count": int((base["bucket"]=="confirmed").sum()),
+        "pre_count": int((base["bucket"]=="pre_signal").sum()),
+        "event_count": int((base["bucket"]=="event").sum()),
+        "unique_total": unique_total,
+    }
+    _log(f"[COVERAGE] {coverage}")
 
 if __name__ == "__main__":
-    pd.set_option('future.no_silent_downcasting', True)
-    try:
-        main()
-    except Exception as e:
-        _log(f"[FATAL] {e}")
-        sys.exit(1)
+    pd.set_option("future.no_silent_downcasting", True)
+    main()
