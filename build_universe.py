@@ -132,15 +132,11 @@ def main():
     r1k = fetch_russell1000()
     log(f"[SRC] R1000 (iShares/IWB): {len(r1k)} rows")
 
-    nas = fetch_nasdaq()
-    log(f"[SRC] Nasdaq listed: {len(nas)} rows")
-
-    # Union + dédup
+      # Union + dédup
     uni: Set[str] = set()
     uni |= spx
     uni |= r1k
-    uni |= nas
-
+    
     # Nettoyages simples
     uni = {s.replace("/", "-").replace(".", "-").strip().upper() for s in uni if s}
     # remove obvious bads
