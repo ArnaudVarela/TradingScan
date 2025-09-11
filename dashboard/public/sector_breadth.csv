@@ -1,5 +1,4 @@
 sector,count
-nan,4758
 Industrials,170
 Financials,154
 Information Technology,144
@@ -11,3 +10,4 @@ Materials,56
 Communication Services,49
 Utilities,40
 Energy,37
+nan,20
