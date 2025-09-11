@@ -120,36 +120,7 @@ def fetch_russell1000() -> Set[str]:
     return set()
 
 # ---------- Nasdaq listed (mêmes tickers que composite ± ETFs), multi-miroirs
-def fetch_nasdaq() -> Set[str]:
-    mirrors = [
-        "https://ftp.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
-        "https://nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
-        "https://old.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
-    ]
-    for url in mirrors:
-        r = http_get(url)
-        if not r:
-            continue
-        txt = r.text
-        # Ce fichier est un '|' séparé avec une ligne "File Creation Time" à la fin.
-        try:
-            df = pd.read_csv(io.StringIO(txt), sep="|")
-        except Exception:
-            # parse tolérant
-            df = pd.read_csv(io.StringIO(txt), sep="|", engine="python", on_bad_lines="skip")
-        # filtre lignes méta
-        if "Symbol" not in df.columns:
-            # essaye de renommer si 1ère colonne = symbol
-            df.rename(columns={df.columns[0]: "Symbol"}, inplace=True)
-        df = df[df["Symbol"].notna()]
-        syms = df["Symbol"].astype(str).str.upper().str.strip().tolist()
-        syms = [s for s in syms if s and s.isascii() and s not in ("TEST","SYMBOL")]
-        # virer la dernière ligne méta si présente
-        syms = [s for s in syms if "FILE CREATION TIME" not in s]
-        if syms:
-            return set(syms)
-    log("[WARN] Nasdaq fetch failed (all mirrors).")
-    return set()
+
 
 # ---------- main
 def main():
