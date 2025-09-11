@@ -81,7 +81,7 @@ date,ticker_yf,sector,bucket,tv_reco,analyst_bucket,ticker_tv,industry,price
 2025-09-09,MSFT,Information Technology,event,,,MSFT,Unknown,498.5
 2025-09-09,NVDA,Information Technology,event,,,NVDA,Unknown,168.72999572753906
 2025-09-09,JKHY,Financials,event,,,JKHY,Unknown,162.24000549316406
-2025-09-09,BEN,Financials,event,,,BEN,Unknown,24.649999618530277
+2025-09-09,BEN,Financials,event,,,BEN,Unknown,24.64999961853028
 2025-09-09,IT,Information Technology,event,,,IT,Unknown,241.8600006103516
 2025-09-09,AWK,Utilities,event,,,AWK,Unknown,139.72000122070312
 2025-09-09,AMP,Financials,event,,,AMP,Unknown,495.7449951171875
