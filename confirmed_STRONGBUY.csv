@@ -1,1 +1,3 @@
-ticker_yf,ticker_tv,price,last,mcap_usd_final,mcap,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket
+ticker_yf,ticker_tv,price,last,mcap_usd_final,mcap,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket,s_trend,s_momo,s_vol,s_volu,s_rs,s_entry,breakout,pullback,squeeze_on,days_to_macd_cross,overextended
+RKT,RKT,21.11000061035156,21.11000061035156,,,419533289.80734444,0.8356,STRONG_BUY,HOLD,,Financials,Unknown,,,,,,0.8356,confirmed,0.94,0.6215,0.4889,0.7485,1.0,0.8,True,False,False,,False
+NET,NET,224.63999938964844,224.63999938964844,,,436413663.73984224,0.8327,STRONG_BUY,HOLD,,Information Technology,Unknown,,,,,,0.8327,confirmed,0.8422,0.884,0.673,0.3806,0.9992,0.8,True,False,False,,False
