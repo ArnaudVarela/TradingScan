@@ -1,8 +1,8 @@
 {
-  "run_ts": "2025-09-12T21:14:30Z",
+  "run_ts": "2025-09-12T21:38:56Z",
   "thresholds": {
-    "confirmed_used": 0.82,
-    "presignal_used": 0.64,
+    "confirmed_used": 1.0,
+    "presignal_used": 0.99,
     "event_used": 0.5
   },
   "liquidity_mins": {
@@ -12,8 +12,8 @@
   "coverage": {
     "universe": 1020,
     "post_filter": 1009,
-    "confirmed_count": 914,
-    "pre_count": 0,
+    "confirmed_count": 213,
+    "pre_count": 701,
     "event_count": 95
   }
 }
