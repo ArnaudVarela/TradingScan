@@ -1,4 +1,6 @@
-# mix_ab_screen_indices.py — Advanced, Adaptive, Sector-neutral, Regime-aware (MCAP OFF, root outputs)
+# mix_ab_screen_indices.py — Advanced, Adaptive, Sector-neutral, Regime-aware
+# MCAP OFF, root outputs, robust cache, run_ts injection, mirroring to dashboard/public
+
 from __future__ import annotations
 
 import os, math, json, time
@@ -18,7 +20,7 @@ CACHE_DIR.mkdir(exist_ok=True)
 UNIVERSE_CSV   = ROOT / "universe_in_scope.csv"   # produit par build_universe.py
 SECTOR_CATALOG = ROOT / "sector_catalog.csv"      # optionnel
 
-OUT_DIR = ROOT  # sorties à la racine (GitHub Pages chez toi)
+OUT_DIR = ROOT  # sorties à la racine (GitHub Pages lit ici chez toi)
 
 # --------- Paramètres (env overridable)
 DISABLE_MCAP = int(os.getenv("DISABLE_MCAP", "1"))  # 1 = pas de SEC, pas de filtre mcap
@@ -48,7 +50,7 @@ MIN_PRESIGNAL_COUNT  = int(os.getenv("MIN_PRESIGNAL_COUNT", "20"))
 
 # Hystérésis légère (collant)
 HYSTERESIS_DAYS = int(os.getenv("HYSTERESIS_DAYS", "3"))
-HYSTERESIS_RELAX = float(os.getenv("HYSTERESIS_RELAX", "0.02"))  # relaxe les seuils si présent dans l’historique récent
+HYSTERESIS_RELAX = float(os.getenv("HYSTERESIS_RELAX", "0.02"))  # relaxe les seuils si présent récemment
 
 # =========================== utils & io ===============================
 
@@ -79,10 +81,12 @@ def _save_csv_cache(ticker: str, df: pd.DataFrame) -> None:
     })
     needed = ["open","high","low","close","volume"]
     for c in needed:
-        if c not in out.columns: return
+        if c not in out.columns:
+            return
         out[c] = pd.to_numeric(out[c], errors="coerce")
     out = out[needed].dropna()
-    if out.empty: return
+    if out.empty:
+        return
     out.index = pd.to_datetime(out.index, errors="coerce")
     out = out[~out.index.isna()].sort_index()
     out.index.name = "date"
@@ -98,14 +102,17 @@ def _save_csv_cache(ticker: str, df: pd.DataFrame) -> None:
 
 def _load_csv_cache(ticker: str) -> Optional[pd.DataFrame]:
     p = _csv_cache_path(ticker)
-    if not p.exists(): return None
+    if not p.exists():
+        return None
     try:
         df = pd.read_csv(p)
-        if df.empty or "date" not in df.columns: return None
+        if df.empty or "date" not in df.columns:
+            return None
         df["date"] = pd.to_datetime(df["date"], errors="coerce")
         df = df.dropna(subset=["date"]).set_index("date").sort_index()
         for c in ["open","high","low","close","volume"]:
-            if c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce")
+            if c in df.columns:
+                df[c] = pd.to_numeric(df[c], errors="coerce")
         df = df[["open","high","low","close","volume"]].dropna()
         return df if not df.empty else None
     except Exception:
@@ -113,7 +120,8 @@ def _load_csv_cache(ticker: str) -> Optional[pd.DataFrame]:
 
 def _cache_is_fresh(ticker: str) -> bool:
     mp = _csv_cache_meta_path(ticker)
-    if not mp.exists(): return False
+    if not mp.exists():
+        return False
     try:
         meta = json.loads(mp.read_text(encoding="utf-8"))
         ts = float(meta.get("ts", 0))
@@ -122,7 +130,8 @@ def _cache_is_fresh(ticker: str) -> bool:
         return False
 
 def _read_sector_catalog() -> Dict[str, Dict[str,str]]:
-    if not SECTOR_CATALOG.exists(): return {}
+    if not SECTOR_CATALOG.exists():
+        return {}
     try:
         df = pd.read_csv(SECTOR_CATALOG)
     except Exception as e:
@@ -131,7 +140,8 @@ def _read_sector_catalog() -> Dict[str, Dict[str,str]]:
     res: Dict[str, Dict[str,str]] = {}
     for _, r in df.iterrows():
         t = str(r.get("ticker") or r.get("ticker_yf") or "").upper().strip()
-        if not t: continue
+        if not t:
+            continue
         res[t] = {
             "sector":   (r.get("sector")   if pd.notna(r.get("sector"))   else "Unknown"),
             "industry": (r.get("industry") if pd.notna(r.get("industry")) else "Unknown"),
@@ -144,8 +154,11 @@ def _ensure_universe() -> pd.DataFrame:
     df = pd.read_csv(UNIVERSE_CSV)
     col = None
     for c in ["ticker_yf","ticker","Symbol","symbol"]:
-        if c in df.columns: col = c; break
-    if not col: raise SystemExit("[FATAL] universe_in_scope.csv: colonne ticker introuvable")
+        if c in df.columns:
+            col = c
+            break
+    if not col:
+        raise SystemExit("[FATAL] universe_in_scope.csv: colonne ticker introuvable")
     uni = pd.DataFrame({"ticker_yf": df[col].astype(str).str.strip().str.upper()})
     uni = uni[uni["ticker_yf"].ne("") & uni["ticker_yf"].ne("-")]
     uni = uni[uni["ticker_yf"].str.match(r"^[A-Z0-9.\-]+$")]
@@ -163,24 +176,29 @@ def _tickers_needing_fetch(tickers: List[str]) -> List[str]:
     return need
 
 def _normalize_yf_df(df: pd.DataFrame) -> Optional[pd.DataFrame]:
-    if df is None or df.empty: return None
-    if isinstance(df.columns, pd.MultiIndex): return df
+    if df is None or df.empty:
+        return None
+    if isinstance(df.columns, pd.MultiIndex):
+        return df  # l’appelant découpera
     df = df.rename(columns={"Open":"open","High":"high","Low":"low","Close":"close","Volume":"volume"})
     keep = [c for c in ["open","high","low","close","volume"] if c in df.columns]
-    if not keep: return None
+    if not keep:
+        return None
     out = df[keep].dropna()
-    if out.empty: return None
+    if out.empty:
+        return None
     out.index = pd.to_datetime(out.index, errors="coerce")
     out = out[~out.index.isna()].sort_index()
     out.index.name = "date"
     return out
 
 def _yf_download_batch(tickers: List[str], period_days: int) -> None:
-    if not tickers: return
-    period = f"{max(period_days, 220)}d"
+    if not tickers:
+        return
+    period = f"{max(period_days, 220)}d"  # >=200 pour EMA200
     try:
         data = yf.download(
-            tickers=tickers,
+            tickers=tickers,                # list, pas string
             period=period,
             interval=YF_INTERVAL,
             auto_adjust=False,
@@ -193,41 +211,51 @@ def _yf_download_batch(tickers: List[str], period_days: int) -> None:
             for t in tickers:
                 sub = None
                 try:
-                    if t in level0: sub = data[t]
+                    if t in level0:
+                        sub = data[t]
                     else:
                         sub = data.xs(t, axis=1, level=1, drop_level=False)
                         fields = ["Open","High","Low","Close","Volume"]
-                        sub = sub.copy(); sub.columns = [c[0] for c in sub.columns]; sub = sub[fields]
-                except Exception: sub=None
-                if sub is None or sub.empty: continue
+                        sub = sub.copy()
+                        sub.columns = [c[0] for c in sub.columns]
+                        sub = sub[fields]
+                except Exception:
+                    sub = None
+                if sub is None or sub.empty:
+                    continue
                 sub = sub.rename(columns={"Open":"open","High":"high","Low":"low","Close":"close","Volume":"volume"})
                 keep = [c for c in ["open","high","low","close","volume"] if c in sub.columns]
                 out = sub[keep].dropna()
                 if not out.empty:
                     out.index = pd.to_datetime(out.index, errors="coerce")
-                    out = out[~out.index.isna()].sort_index(); out.index.name="date"
+                    out = out[~out.index.isna()].sort_index()
+                    out.index.name = "date"
                     _save_csv_cache(t, out)
         else:
             out = _normalize_yf_df(data)
-            if out is not None: _save_csv_cache(tickers[0], out)
+            if out is not None:
+                _save_csv_cache(tickers[0], out)
     except Exception as e:
         _log(f"[YF] batch fetch failed ({len(tickers)}): {e} — fallback per-ticker")
         for t in tickers:
             try:
                 hist = yf.Ticker(t).history(period=period, interval=YF_INTERVAL, auto_adjust=False)
                 out = _normalize_yf_df(hist)
-                if out is not None: _save_csv_cache(t, out)
+                if out is not None:
+                    _save_csv_cache(t, out)
             except Exception:
                 continue
 
 def _ensure_ohlcv_cached(tickers: List[str], period_days: int = OHLCV_WINDOW_DAYS) -> None:
     need = _tickers_needing_fetch(tickers)
-    if not need: return
+    if not need:
+        return
     for i in range(0, len(need), BATCH_SIZE):
         chunk = need[i:i+BATCH_SIZE]
         _log(f"[YF] fetching batch {i//BATCH_SIZE+1}/{math.ceil(len(need)/BATCH_SIZE)} size={len(chunk)}")
         _yf_download_batch(chunk, period_days)
-        if SLEEP_BETWEEN_BATCHES > 0: time.sleep(SLEEP_BETWEEN_BATCHES)
+        if SLEEP_BETWEEN_BATCHES > 0:
+            time.sleep(SLEEP_BETWEEN_BATCHES)
 
 def _get_ohlcv(ticker: str) -> Optional[pd.DataFrame]:
     return _load_csv_cache(ticker)
@@ -246,15 +274,19 @@ def _rsi(close: pd.Series, length: int = 14) -> pd.Series:
     return rsi
 
 def _last_close(df: Optional[pd.DataFrame]) -> Optional[float]:
-    if df is None or df.empty or "close" not in df.columns: return None
+    if df is None or df.empty or "close" not in df.columns:
+        return None
     v = pd.to_numeric(df["close"], errors="coerce").dropna()
     return float(v.iloc[-1]) if len(v) else None
 
 def _avg_dollar_vol(df: Optional[pd.DataFrame], lb: int = AVG_DOLLAR_VOL_LOOKBACK) -> Optional[float]:
-    if df is None or df.empty: return None
-    if "close" not in df.columns or "volume" not in df.columns: return None
+    if df is None or df.empty:
+        return None
+    if "close" not in df.columns or "volume" not in df.columns:
+        return None
     sub = df.tail(lb).copy()
-    if sub.empty: return None
+    if sub.empty:
+        return None
     c = pd.to_numeric(sub["close"], errors="coerce")
     v = pd.to_numeric(sub["volume"], errors="coerce")
     prod = (c * v).dropna()
@@ -262,32 +294,39 @@ def _avg_dollar_vol(df: Optional[pd.DataFrame], lb: int = AVG_DOLLAR_VOL_LOOKBAC
 
 def _pct_rank(x: pd.Series, lookback: int = 126) -> float:
     x = pd.to_numeric(x, errors="coerce").dropna()
-    if len(x) < 3: return 0.5
+    if len(x) < 3:
+        return 0.5
     window = x.tail(lookback)
-    if len(window) < 3: return 0.5
+    if len(window) < 3:
+        return 0.5
     last = float(window.iloc[-1])
     rank = (window <= last).mean()
     return float(max(0.0, min(1.0, rank)))
 
 def _zscore_last(x: pd.Series, lb: int = 63) -> float:
     x = pd.to_numeric(x, errors="coerce")
-    if len(x) < lb: return 0.0
+    if len(x) < lb:
+        return 0.0
     w = x.tail(lb)
-    mu = float(w.mean()); sd = float(w.std(ddof=0)) or 1e-9
+    mu = float(w.mean())
+    sd = float(w.std(ddof=0)) or 1e-9
     return float((w.iloc[-1] - mu) / sd)
 
 def _squash01(v: float, lo: float, hi: float) -> float:
-    if hi == lo: return 0.0
+    if hi == lo:
+        return 0.0
     x = (v - lo) / (hi - lo)
     return float(0.0 if x < 0 else 1.0 if x > 1 else x)
 
 # ====================== Regime & advanced scoring ===================
 
 def _market_regime_factor(mkt: Optional[pd.DataFrame]) -> float:
-    """Renvoie un facteur multiplicatif ~ [0.9 ... 1.05] selon risk-on/off."""
-    if mkt is None or mkt.empty or "close" not in mkt.columns: return 1.0
+    """Renvoie un facteur multiplicatif ~ [0.90 ... 1.05] selon risk-on/off."""
+    if mkt is None or mkt.empty or "close" not in mkt.columns:
+        return 1.0
     c = pd.to_numeric(mkt["close"], errors="coerce").dropna()
-    if len(c) < 200: return 1.0
+    if len(c) < 200:
+        return 1.0
     ema50 = c.ewm(span=50, adjust=False, min_periods=50).mean()
     ema200= c.ewm(span=200,adjust=False, min_periods=200).mean()
     slope50 = (ema50.iloc[-1] - ema50.iloc[-5]) / (abs(ema50.iloc[-5]) + 1e-9)
@@ -300,7 +339,6 @@ def _market_regime_factor(mkt: Optional[pd.DataFrame]) -> float:
     s_dd    = 1.0 - _squash01(dd, 0.05, 0.25)       # drawdown faible = meilleur
 
     base = 0.38*s_trend + 0.22*s_slope + 0.20*s_vol + 0.20*s_dd  # [0..1]
-    # map 0..1 -> 0.90..1.05
     return float(round(0.90 + 0.15*base, 4))
 
 def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, adv_dv: Optional[float]=None) -> dict:
@@ -309,22 +347,27 @@ def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, a
     """
     out = {'score':0.5,'label':'HOLD','s_trend':0,'s_momo':0,'s_vol':0,'s_volu':0,'s_rs':0,'s_entry':0,
            'breakout':False,'pullback':False,'squeeze_on':False,'days_to_macd_cross':None,'overextended':False}
-    if df is None or df.empty: return out
+    if df is None or df.empty:
+        return out
     req = ["open","high","low","close","volume"]
-    if any(c not in df.columns for c in req): return out
-    if len(df) < 200: return out
+    if any(c not in df.columns for c in req):
+        return out
+    if len(df) < 200:
+        return out
 
     d = df.copy()
     c = pd.to_numeric(d["close"], errors="coerce")
     h = pd.to_numeric(d["high"], errors="coerce")
     l = pd.to_numeric(d["low"], errors="coerce")
     v = pd.to_numeric(d["volume"], errors="coerce")
-    if c.isna().any(): c = c.fillna(method="ffill")
+    if c.isna().any():
+        c = c.ffill()
 
     ema20 = c.ewm(span=20, adjust=False, min_periods=20).mean()
     ema50 = c.ewm(span=50, adjust=False, min_periods=50).mean()
     ema200= c.ewm(span=200,adjust=False, min_periods=200).mean()
-    if ema200.isna().all(): return out
+    if ema200.isna().all():
+        return out
 
     e20, e50, e200 = ema20.iloc[-1], ema50.iloc[-1], ema200.iloc[-1]
     slope50 = (ema50.iloc[-1] - ema50.iloc[-5]) / (abs(ema50.iloc[-5]) + 1e-9) if len(ema50)>=5 else 0.0
@@ -359,7 +402,7 @@ def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, a
     # RS vs marché
     s_rs = 0.5
     if mkt is not None and not mkt.empty and "close" in mkt.columns:
-        mclose = pd.to_numeric(mkt["close"], errors="coerce").reindex(c.index).fillna(method="ffill")
+        mclose = pd.to_numeric(mkt["close"], errors="coerce").reindex(c.index).ffill()
         rs_line = (c / (mclose + 1e-9))
         rs_chg20 = float((rs_line.iloc[-1] / (rs_line.iloc[-20] + 1e-9)) - 1) if len(rs_line) >= 21 else 0.0
         rs_chg63 = float((rs_line.iloc[-1] / (rs_line.iloc[-63] + 1e-9)) - 1) if len(rs_line) >= 64 else 0.0
@@ -422,11 +465,11 @@ def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, a
 # =========================== pipeline ==============================
 
 def _apply_sector_neutral_rank(df: pd.DataFrame) -> pd.Series:
-    """Percentile intra-secteur du tv_score (plus robuste aux biais sectoriels)."""
+    """Percentile intra-secteur du tv_score (réduit le biais sectoriel)."""
     df = df.copy()
     df["sector"] = df["sector"].fillna("Unknown")
     ranks = []
-    for sec, g in df.groupby("sector"):
+    for _, g in df.groupby("sector"):
         if "tv_score" in g.columns and len(g):
             r = g["tv_score"].rank(pct=True, method="average")
             ranks.append(r)
@@ -436,12 +479,13 @@ def _apply_sector_neutral_rank(df: pd.DataFrame) -> pd.Series:
     return pd.Series(np.nan, index=df.index)
 
 def _hysteresis_mask(history_path: Path, days: int) -> set:
-    """Renvoie l'ensemble des tickers apparus dans les N derniers jours (confirmed ou pre_signal)."""
+    """Tickers apparus dans les N derniers jours (confirmed ou pre_signal)."""
     keep = set()
-    if not history_path.exists() or days <= 0: return keep
+    if not history_path.exists() or days <= 0:
+        return keep
     try:
         hist = pd.read_csv(history_path)
-        if "date" not in hist.columns or "ticker_yf" not in hist.columns or "bucket" not in hist.columns:
+        if not {"date","ticker_yf","bucket"}.issubset(hist.columns):
             return keep
         hist["date"] = pd.to_datetime(hist["date"], errors="coerce")
         cutoff = pd.Timestamp.utcnow().normalize() - pd.Timedelta(days=days+1)
@@ -455,7 +499,7 @@ def _hysteresis_mask(history_path: Path, days: int) -> set:
 def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
     tickers = uni["ticker_yf"].tolist()
 
-    # 1) OHLCV cache upfront (batch)
+    # 1) OHLCV cache upfront
     _ensure_ohlcv_cached(tickers, OHLCV_WINDOW_DAYS)
 
     # 2) Sector catalog
@@ -478,7 +522,7 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
 
         feats = compute_advanced_score(df, mkt=mkt_df, adv_dv=adv)
 
-        # applique le régime (légèrement) au score absolu
+        # applique le régime au score absolu
         tv_score = float(max(0.0, min(1.0, round(feats['score'] * regime, 4))))
         tv_reco  = ("STRONG_BUY" if tv_score>=0.80 else "BUY" if tv_score>=0.60 else "HOLD" if tv_score>=0.40 else "SELL")
 
@@ -500,7 +544,7 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
             "analyst_votes": np.nan,
             "sector": sector,
             "industry": industry,
-            "rank_score": tv_score,   # provisoire, ajusté plus bas
+            "rank_score": tv_score,   # provisoire
             "s_trend": feats["s_trend"],
             "s_momo": feats["s_momo"],
             "s_vol": feats["s_vol"],
@@ -519,35 +563,28 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
     # Sector-neutral RS percentile + liquidity score
     base["sector_pct"] = _apply_sector_neutral_rank(base).fillna(0.5)
     base["liq_score"]  = base["avg_dollar_vol"].apply(lambda x: _squash01(math.log1p(x or 0.0), math.log1p(5e5), math.log1p(2e7)))
-    # Rank final: score absolu + bonus secteur-neutre + bonus liquidité
+    # Rank final
     base["rank_score"] = (0.65*base["tv_score"] + 0.25*base["sector_pct"] + 0.10*base["liq_score"]).astype(float)
 
     return base
 
 def _adaptive_thresholds(df: pd.DataFrame, hist_keep: set) -> Tuple[float, float]:
-    """
-    Adapte les seuils pour garantir un minimum de confirmed / pre_signal,
-    sans descendre sous des planchers de qualité.
-    """
+    """Adapte les seuils pour garantir un minimum de confirmed / pre_signal, sans descendre sous des planchers."""
     n = len(df)
-    if n == 0: return (CONFIRMED_THRESHOLD_BASE, PRESIGNAL_THRESHOLD_BASE)
+    if n == 0:
+        return (CONFIRMED_THRESHOLD_BASE, PRESIGNAL_THRESHOLD_BASE)
 
     target_conf = max(MIN_CONFIRMED_COUNT, int(TARGET_CONFIRMED_PCT * n))
     target_pre  = max(MIN_PRESIGNAL_COUNT, int(TARGET_PRESIGNAL_PCT * n))
 
-    # candidats confirmed éligibles (non overextended + liquidité)
     elig_conf = df[(~df["overextended"]) & (df["avg_dollar_vol"] >= ADV_CONFIRMED_MIN)]
-    # si on veut exiger breakout OU très haut score
-    # on se sert d'une règle simple pour l'adaptation: couper sur tv_score
     if len(elig_conf):
-        # quantile pour atteindre target_conf si seuil de base trop haut
         q = max(0.0, 1.0 - target_conf/len(elig_conf))
         dyn_cut = float(elig_conf["tv_score"].quantile(q))
         confirmed_thr = max(CONFIRMED_FLOOR, min(CONFIRMED_THRESHOLD_BASE, dyn_cut))
     else:
-        confirmed_thr = CONFIRMED_THRESHOLD_BASE  # pas d'éligibles, pas d'assouplissement
+        confirmed_thr = CONFIRMED_THRESHOLD_BASE
 
-    # Pré-signal (liquidité moindre + triggers)
     elig_pre = df[(~df["overextended"]) & (df["avg_dollar_vol"] >= ADV_PRESIGNAL_MIN)]
     if len(elig_pre):
         qpre = max(0.0, 1.0 - target_pre/len(elig_pre))
@@ -556,7 +593,6 @@ def _adaptive_thresholds(df: pd.DataFrame, hist_keep: set) -> Tuple[float, float
     else:
         presignal_thr = PRESIGNAL_THRESHOLD_BASE
 
-    # Hystérésis: si un ticker est présent récemment, on baisse un peu le seuil
     if len(hist_keep):
         confirmed_thr = max(CONFIRMED_FLOOR, confirmed_thr - HYSTERESIS_RELAX)
         presignal_thr = max(EVENT_THRESHOLD, presignal_thr - HYSTERESIS_RELAX)
@@ -586,9 +622,7 @@ def _assign_buckets(df: pd.DataFrame, confirmed_thr: float, presignal_thr: float
 
 def _apply_filters(df: pd.DataFrame) -> pd.DataFrame:
     out = df.copy()
-    out = out[out["price"].notna()]
-    # évite penny stocks ultra-illiquides (optionnel)
-    # out = out[(out["price"] >= 0.5)]
+    out = out[out["price"].notna()]  # garde prix valides
     return out
 
 def _safe_write_csv(path: Path, df: pd.DataFrame) -> None:
@@ -596,9 +630,26 @@ def _safe_write_csv(path: Path, df: pd.DataFrame) -> None:
     df.to_csv(tmp, index=False)
     Path(tmp).replace(path)
 
+def _mirror_to_public(names: List[str]) -> None:
+    """Copie (atomique) vers dashboard/public si ce dossier existe."""
+    public_dir = ROOT / "dashboard" / "public"
+    if not public_dir.exists():
+        return
+    for name in names:
+        src = OUT_DIR / name
+        dst = public_dir / name
+        if src.exists():
+            tmp = dst.with_suffix(dst.suffix + ".tmp")
+            tmp.write_bytes(src.read_bytes())
+            Path(tmp).replace(dst)
+
 def _write_outputs(out: pd.DataFrame, run_ts: str, diag: dict) -> None:
     out_sorted = out.sort_values(["rank_score","avg_dollar_vol"], ascending=[False, False]).reset_index(drop=True)
-    out_sorted.insert(0, "run_ts", run_ts)  # force un diff Git même si contenu proche
+
+    # Insère run_ts UNE fois (et pas dans les sous-DataFrames ensuite)
+    if "run_ts" not in out_sorted.columns:
+        out_sorted.insert(0, "run_ts", run_ts)
+
     _safe_write_csv(OUT_DIR / "candidates_all_ranked.csv", out_sorted)
     _log(f"[SAVE] candidates_all_ranked.csv | rows={len(out_sorted)} | cols={out_sorted.shape[1]}")
 
@@ -606,15 +657,22 @@ def _write_outputs(out: pd.DataFrame, run_ts: str, diag: dict) -> None:
     pre_sig   = out_sorted[out_sorted["bucket"]=="pre_signal"].copy()
     event     = out_sorted[out_sorted["bucket"]=="event"].copy()
 
-    for df, name in [(confirmed,"confirmed_STRONGBUY.csv"),
-                     (pre_sig,"anticipative_pre_signals.csv"),
-                     (event,"event_driven_signals.csv")]:
-        df.insert(0, "run_ts", run_ts)
-        _safe_write_csv(OUT_DIR / name, df)
+    _safe_write_csv(OUT_DIR / "confirmed_STRONGBUY.csv", confirmed)
+    _safe_write_csv(OUT_DIR / "anticipative_pre_signals.csv", pre_sig)
+    _safe_write_csv(OUT_DIR / "event_driven_signals.csv", event)
 
-    # debug complet + diagnostics
+    # debug & diag
     _safe_write_csv(OUT_DIR / "debug_all_candidates.csv", out_sorted)
     (OUT_DIR / "diagnostics.json").write_text(json.dumps(diag, indent=2), encoding="utf-8")
+
+    _mirror_to_public([
+        "candidates_all_ranked.csv",
+        "confirmed_STRONGBUY.csv",
+        "anticipative_pre_signals.csv",
+        "event_driven_signals.csv",
+        "debug_all_candidates.csv",
+        "diagnostics.json",
+    ])
 
     _log(f"[SAVE] confirmed={len(confirmed)} pre={len(pre_sig)} event={len(event)}")
 
@@ -633,6 +691,7 @@ def _update_signals_history(today: str, out: pd.DataFrame) -> None:
         hist = new
     hist = hist.tail(2000)
     _safe_write_csv(path, hist)
+    _mirror_to_public(["signals_history.csv"])
     _log(f"[SAVE] signals_history.csv | rows={len(hist)}")
 
 def main():
@@ -640,10 +699,9 @@ def main():
     pd.set_option("future.no_silent_downcasting", True)
 
     uni = _ensure_universe()
-    tickers = uni["ticker_yf"].tolist()
 
-    # Pré-cache OHLCV
-    _ensure_ohlcv_cached(tickers, OHLCV_WINDOW_DAYS)
+    # Pré-cache OHLCV (accélère le reste)
+    _ensure_ohlcv_cached(uni["ticker_yf"].tolist(), OHLCV_WINDOW_DAYS)
 
     base = _build_rows(uni)
     base = _apply_filters(base)
@@ -682,7 +740,15 @@ def main():
     _write_outputs(base, run_ts, diag)
     _update_signals_history(today, base)
 
-    _log(f"[COVERAGE] {diag['coverage']}")
+    # Health-check : top 10 confirmed (ticker, score, RS%, ADV)
+    confirmed = base[base["bucket"]=="confirmed"].sort_values(["rank_score","avg_dollar_vol"], ascending=[False, False]).head(10)
+    if not confirmed.empty:
+        _log("[TOP] confirmed (ticker, score, sector_pct, ADV$):")
+        for _, r in confirmed.iterrows():
+            _log(f"  {r['ticker_yf']:<8}  score={r['tv_score']:.3f}  sec%={r['sector_pct']:.2f}  ADV={int(r['avg_dollar_vol'] or 0):,}")
+    else:
+        _log("[TOP] confirmed: (aucun)")
+
     _log(f"[THRESHOLDS] confirmed={confirmed_thr:.3f} pre={presignal_thr:.3f} event={EVENT_THRESHOLD:.3f}")
 
 if __name__ == "__main__":
