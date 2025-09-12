@@ -1,3 +1,1 @@
-horizon_days,bucket,cohort,n_trades,winrate,avg_ret,median_ret,p95_ret,p05_ret,generated_at_utc
-1,event,P0_other,100,31.0,-0.4032907764663576,-0.5080212186859501,2.66892011771233,-2.6731232187402405,2025-09-12T19:12:17Z
-3,event,P0_other,99,58.58585858585859,0.2909427659903374,0.47518703478555135,3.627257100801606,-3.6081025462087144,2025-09-12T19:12:17Z
+horizon_days,bucket,cohort,n_trades,winrate,avg_ret,median_ret,p95_ret,p05_ret
