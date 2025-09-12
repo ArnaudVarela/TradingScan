@@ -1,5 +1,5 @@
 # mix_ab_screen_indices.py — Advanced, Adaptive, Sector-neutral, Regime-aware
-# MCAP OFF, root outputs, robust cache, run_ts injection, mirroring to dashboard/public
+# MCAP display ON (no filtering), robust cache, mirroring to dashboard/public
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ SECTOR_CATALOG = ROOT / "sector_catalog.csv"      # optionnel
 OUT_DIR = ROOT  # sorties à la racine (GitHub Pages lit ici chez toi)
 
 # --------- Paramètres (env overridable)
-DISABLE_MCAP = int(os.getenv("DISABLE_MCAP", "1"))  # 1 = pas de SEC, pas de filtre mcap
+DISABLE_MCAP = int(os.getenv("DISABLE_MCAP", "1"))  # legacy: pas utilisé pour l'affichage ici
 OHLCV_WINDOW_DAYS = int(os.getenv("OHLCV_WINDOW_DAYS", 260))     # >=200 pour EMA200
 AVG_DOLLAR_VOL_LOOKBACK = int(os.getenv("AVG_DOLLAR_VOL_LB", 20))
 CACHE_FRESH_DAYS = int(os.getenv("CACHE_FRESH_DAYS", 2))
@@ -51,6 +51,18 @@ MIN_PRESIGNAL_COUNT  = int(os.getenv("MIN_PRESIGNAL_COUNT", "20"))
 # Hystérésis légère (collant)
 HYSTERESIS_DAYS  = int(os.getenv("HYSTERESIS_DAYS", "3"))
 HYSTERESIS_RELAX = float(os.getenv("HYSTERESIS_RELAX", "0.02"))  # relaxe les seuils si présent récemment
+
+# --- Market cap display (no filtering)
+ENABLE_MCAP_DISPLAY = int(os.getenv("ENABLE_MCAP_DISPLAY", "1"))
+ENABLE_MCAP_DISPLAY_SEC = int(os.getenv("ENABLE_MCAP_DISPLAY_SEC", "0"))  # 1 = autorise fallback SEC (US only)
+MAX_SEC_WORKERS = int(os.getenv("MAX_SEC_WORKERS", "4"))
+
+# SEC helpers (optionnels)
+try:
+    from sec_helpers import sec_ticker_map, sec_latest_shares_outstanding
+except Exception:
+    sec_ticker_map = None
+    sec_latest_shares_outstanding = None
 
 # =========================== utils & io ===============================
 
@@ -147,6 +159,29 @@ def _read_sector_catalog() -> Dict[str, Dict[str,str]]:
             "industry": (r.get("industry") if pd.notna(r.get("industry")) else "Unknown"),
         }
     return res
+
+def _infer_sectors_from_universe() -> Dict[str, Dict[str,str]]:
+    if not UNIVERSE_CSV.exists():
+        return {}
+    try:
+        df = pd.read_csv(UNIVERSE_CSV)
+    except Exception:
+        return {}
+    sec_col = next((c for c in ["sector","Sector","GICS Sector","gics_sector"] if c in df.columns), None)
+    ind_col = next((c for c in ["industry","Industry","GICS Industry","gics_industry"] if c in df.columns), None)
+    tik_col = next((c for c in ["ticker_yf","ticker","Symbol","symbol"] if c in df.columns), None)
+    if not tik_col:
+        return {}
+    out = {}
+    for _, r in df.iterrows():
+        t = str(r[tik_col]).upper().strip()
+        if not t:
+            continue
+        out[t] = {
+            "sector": str(r.get(sec_col, "Unknown")) if sec_col else "Unknown",
+            "industry": str(r.get(ind_col, "Unknown")) if ind_col else "Unknown",
+        }
+    return out
 
 def _ensure_universe() -> pd.DataFrame:
     if not UNIVERSE_CSV.exists():
@@ -318,6 +353,91 @@ def _squash01(v: float, lo: float, hi: float) -> float:
     x = (v - lo) / (hi - lo)
     return float(0.0 if x < 0 else 1.0 if x > 1 else x)
 
+def _tech_label_from_features(feats: dict) -> str:
+    if feats.get("breakout"):
+        return "Breakout"
+    if feats.get("pullback"):
+        return "Pullback on trend"
+    if feats.get("squeeze_on"):
+        return "Squeeze setup"
+    dtc = feats.get("days_to_macd_cross")
+    if dtc is not None and dtc <= 3:
+        return "MACD cross imminent"
+    if feats.get("overextended"):
+        return "Overextended"
+    subs = {k: feats.get(k, 0.0) for k in ("s_trend","s_momo","s_rs")}
+    best = max(subs, key=subs.get)
+    return {"s_trend":"Uptrend","s_momo":"Momentum","s_rs":"RS strong"}[best]
+
+# ====================== FX & MCAP (display) =========================
+
+_FX_CACHE = {}
+
+def _fx_to_usd(currency: str) -> Optional[float]:
+    cur = (currency or "USD").upper()
+    if cur == "USD":
+        return 1.0
+    cached = _FX_CACHE.get(cur)
+    if cached and (_now_ts() - cached[1]) < 3600:
+        return cached[0]
+    pair1 = f"{cur}USD=X"
+    pair2 = f"USD{cur}=X"
+    rate = None
+    for pair in (pair1, pair2):
+        try:
+            hist = yf.download(pair, period="10d", interval="1d", progress=False, threads=False)
+            if not hist.empty and "Close" in hist.columns:
+                px = float(hist["Close"].dropna().iloc[-1])
+                rate = px if pair == pair1 else (1.0 / px)
+                break
+        except Exception:
+            continue
+    if rate:
+        _FX_CACHE[cur] = (rate, _now_ts())
+    return rate
+
+def _infer_mcap_usd(ticker: str, last_price: Optional[float]) -> Optional[float]:
+    """Renvoie une estimation de MCAP en USD (yfinance fast_info > price*shares ; fallback SEC optionnel)."""
+    if not ENABLE_MCAP_DISPLAY:
+        return None
+
+    mcap = None
+    currency = "USD"
+
+    # 1) yfinance fast_info
+    try:
+        fi = yf.Ticker(ticker).fast_info
+        if fi:
+            mcap = fi.get("market_cap") or None
+            currency = (fi.get("currency") or "USD")
+            if mcap is None:
+                shares = fi.get("shares")
+                if last_price is not None and shares:
+                    mcap = float(last_price) * float(shares)
+    except Exception:
+        pass
+
+    # 2) SEC fallback (optionnel, US only)
+    if mcap is None and ENABLE_MCAP_DISPLAY_SEC and last_price is not None and sec_ticker_map and sec_latest_shares_outstanding:
+        try:
+            if not hasattr(_infer_mcap_usd, "_cik_map"):
+                setattr(_infer_mcap_usd, "_cik_map", sec_ticker_map())
+            cik = getattr(_infer_mcap_usd, "_cik_map", {}).get(ticker)
+            if cik:
+                shares = sec_latest_shares_outstanding(cik)
+                if shares and shares > 0:
+                    mcap = float(last_price) * float(shares)
+        except Exception:
+            pass
+
+    # 3) FX → USD
+    if mcap is not None and (currency or "USD").upper() != "USD":
+        fx = _fx_to_usd(currency)
+        if fx:
+            mcap = float(mcap) * float(fx)
+
+    return float(mcap) if mcap is not None else None
+
 # ====================== Regime & advanced scoring ===================
 
 def _market_regime_factor(mkt: Optional[pd.DataFrame]) -> float:
@@ -335,8 +455,8 @@ def _market_regime_factor(mkt: Optional[pd.DataFrame]) -> float:
 
     s_trend = _squash01((ema50.iloc[-1]/(ema200.iloc[-1]+1e-9))-1, -0.03, 0.06)
     s_slope = _squash01(slope50, -0.04, 0.06)
-    s_vol   = 1.0 - _squash01(vol63, 0.015, 0.05)   # volatilité basse = meilleur
-    s_dd    = 1.0 - _squash01(dd, 0.05, 0.25)       # drawdown faible = meilleur
+    s_vol   = 1.0 - _squash01(vol63, 0.015, 0.05)
+    s_dd    = 1.0 - _squash01(dd, 0.05, 0.25)
 
     base = 0.38*s_trend + 0.22*s_slope + 0.20*s_vol + 0.20*s_dd  # [0..1]
     return float(round(0.90 + 0.15*base, 4))
@@ -369,7 +489,6 @@ def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, a
     if ema200.isna().all():
         return out
 
-    e20, e50, e200 = ema20.iloc[-1], ema50.iloc[-1], ema200.iloc[-1]
     slope50 = (ema50.iloc[-1] - ema50.iloc[-5]) / (abs(ema50.iloc[-5]) + 1e-9) if len(ema50)>=5 else 0.0
 
     fast = c.ewm(span=12, adjust=False, min_periods=12).mean()
@@ -440,7 +559,7 @@ def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, a
     if pullback: s_entry = max(s_entry, 0.65)
     s_rs    = float(max(0.0, min(1.0, s_rs)))
 
-    # Score global + boosts ADoucis
+    # Score global + boosts adoucis
     score = (0.28*s_trend + 0.22*s_momo + 0.22*s_rs + 0.14*s_volu + 0.10*s_vol + 0.04*s_entry)
     if breakout: score += 0.02
     if (days_to_cross is not None) and (days_to_cross <= 3): score += 0.02
@@ -502,8 +621,11 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
     # 1) OHLCV cache upfront
     _ensure_ohlcv_cached(tickers, OHLCV_WINDOW_DAYS)
 
-    # 2) Sector catalog
+    # 2) Sector catalog + fallback universe
     sectors = _read_sector_catalog()
+    fallback = _infer_sectors_from_universe()
+    for k, v in fallback.items():
+        sectors.setdefault(k, v)
 
     # 3) Marché (pour RS & régime)
     mkt_df = None
@@ -526,25 +648,39 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
         tv_score = float(max(0.0, min(1.0, round(feats['score'] * regime, 4))))
         tv_reco  = ("STRONG_BUY" if tv_score>=0.80 else "BUY" if tv_score>=0.60 else "HOLD" if tv_score>=0.40 else "SELL")
 
+        # Tech label & piliers (placeholder p_an affiné plus bas)
+        tech_label = _tech_label_from_features(feats)
+        p_tv = tv_score >= 0.60
+        p_tech = (
+            feats["breakout"] or feats["pullback"] or feats["squeeze_on"]
+            or (feats["days_to_macd_cross"] is not None and feats["days_to_macd_cross"] <= 3)
+            or (feats["s_trend"] >= 0.60 and not feats["overextended"])
+        )
+        p_an = (feats["s_rs"] >= 0.60)  # sera renforcé avec sector_pct après coup
+        pillars_met = int(bool(p_tv)) + int(bool(p_tech)) + int(bool(p_an))
+
         secinfo = sectors.get(t, {})
         sector = secinfo.get("sector", "Unknown")
         industry = secinfo.get("industry", "Unknown")
+
+        # MCAP display only
+        mcap_val = _infer_mcap_usd(t, lc)
 
         rows.append({
             "ticker_yf": t,
             "ticker_tv": t,
             "price": lc,
             "last": lc,
-            "mcap_usd_final": np.nan,   # MCAP OFF
-            "mcap": np.nan,
+            "mcap_usd_final": mcap_val,
+            "mcap": mcap_val,                     # utilisé par ta UI
             "avg_dollar_vol": adv,
             "tv_score": tv_score,
             "tv_reco": tv_reco,
             "analyst_bucket": "HOLD",
-            "analyst_votes": np.nan,
+            "analyst_votes": 0,                   # pour afficher "0 votes"
             "sector": sector,
             "industry": industry,
-            "rank_score": tv_score,   # provisoire
+            "rank_score": tv_score,               # provisoire
             "s_trend": feats["s_trend"],
             "s_momo": feats["s_momo"],
             "s_vol": feats["s_vol"],
@@ -556,6 +692,15 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
             "squeeze_on": feats["squeeze_on"],
             "days_to_macd_cross": feats["days_to_macd_cross"],
             "overextended": feats["overextended"],
+
+            # UI helpers
+            "tech_label": tech_label,
+            "tech": tech_label,                   # alias pour la colonne "Tech"
+            "p_tech": bool(p_tech),
+            "p_tv": bool(p_tv),
+            "p_an": bool(p_an),
+            "pillars_met": int(pillars_met),
+            "votes_bin": "0",
         })
 
     base = pd.DataFrame(rows)
@@ -565,6 +710,10 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
     base["liq_score"]  = base["avg_dollar_vol"].apply(lambda x: _squash01(math.log1p(x or 0.0), math.log1p(5e5), math.log1p(2e7)))
     # Rank final
     base["rank_score"] = (0.65*base["tv_score"] + 0.25*base["sector_pct"] + 0.10*base["liq_score"]).astype(float)
+
+    # p_an affiné avec sector_pct, puis recalcul des piliers
+    base["p_an"] = (base["s_rs"] >= 0.60) & (base["sector_pct"] >= 0.70)
+    base["pillars_met"] = base[["p_tv","p_tech","p_an"]].sum(axis=1).astype(int)
 
     return base
 
@@ -627,7 +776,6 @@ def _assign_buckets(df: pd.DataFrame, confirmed_thr: float, presignal_thr: float
             strong_enough = breakout or pullback or (pd.notna(dtc) and dtc is not None and dtc <= 1) or (s >= confirmed_thr + 0.06)
             if strong_enough:
                 return "confirmed"
-            # Borderline haut sans trigger => pré-signal si possible
             if s >= presignal_thr and adv_ok_pre:
                 return "pre_signal"
 
@@ -767,12 +915,14 @@ def main():
     _write_outputs(base, run_ts, diag)
     _update_signals_history(today, base)
 
-    # Health-check : top 10 confirmed (ticker, score, RS%, ADV)
+    # Health-check : top 10 confirmed (ticker, score, RS%, ADV, MCAP)
     confirmed = base[base["bucket"]=="confirmed"].sort_values(["rank_score","avg_dollar_vol"], ascending=[False, False]).head(10)
     if not confirmed.empty:
-        _log("[TOP] confirmed (ticker, score, sector_pct, ADV$):")
+        _log("[TOP] confirmed (ticker, score, sec%, ADV$, MCAP$):")
         for _, r in confirmed.iterrows():
-            _log(f"  {r['ticker_yf']:<8}  score={r['tv_score']:.3f}  sec%={r['sector_pct']:.2f}  ADV={int(r['avg_dollar_vol'] or 0):,}")
+            adv = int(r['avg_dollar_vol'] or 0)
+            mcap = ("{:,}".format(int(r['mcap'])) if pd.notna(r['mcap']) else "—")
+            _log(f"  {r['ticker_yf']:<8}  score={r['tv_score']:.3f}  sec%={r['sector_pct']:.2f}  ADV={adv:,}  MCAP={mcap}")
     else:
         _log("[TOP] confirmed: (aucun)")
 
