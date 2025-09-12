@@ -1,17 +1,13 @@
-# mix_ab_screen_indices.py  —  Drop-in robust patch
+# mix_ab_screen_indices.py — Robust + MCAP OFF (root outputs)
 from __future__ import annotations
 
 import os, math, json, time
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import numpy as np
 import pandas as pd
 import yfinance as yf
-
-# --- Local deps (assumés présents)
-from sec_helpers import sec_ticker_map, sec_latest_shares_outstanding
 
 ROOT = Path(__file__).parent
 CACHE_DIR = ROOT / "cache"
@@ -23,12 +19,12 @@ SECTOR_CATALOG = ROOT / "sector_catalog.csv"      # optionnel
 OUT_DIR = ROOT  # sorties à la racine
 
 # --------- Paramètres (env overridable)
-MCAP_CAP = float(os.getenv("MCAP_CAP", 75e9))                   # filtre strict < 75B
+DISABLE_MCAP = int(os.getenv("DISABLE_MCAP", "1"))  # 1 = pas de SEC/YF cap, pas de filtre mcap
+MCAP_CAP = float(os.getenv("MCAP_CAP", 75e9))       # ignoré si DISABLE_MCAP=1
 OHLCV_WINDOW_DAYS = int(os.getenv("OHLCV_WINDOW_DAYS", 240))    # historique (>=200 pour EMA200)
 AVG_DOLLAR_VOL_LOOKBACK = int(os.getenv("AVG_DOLLAR_VOL_LB", 20))
 CACHE_FRESH_DAYS = int(os.getenv("CACHE_FRESH_DAYS", 2))
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", 60))                   # batch yf
-MAX_SEC_WORKERS = int(os.getenv("MAX_SEC_WORKERS", 8))          # workers pour SEC
 SLEEP_BETWEEN_BATCHES = float(os.getenv("SLEEP_BETWEEN_BATCHES", "0.0"))
 
 YF_INTERVAL = "1d"
@@ -166,8 +162,7 @@ def _normalize_yf_df(df: pd.DataFrame) -> Optional[pd.DataFrame]:
         return None
     # Cas MultiIndex (ticker, field) ou (field, ticker)
     if isinstance(df.columns, pd.MultiIndex):
-        # On laisse l'appelant gérer le split par ticker
-        return df
+        return df  # l’appelant découpera
     # Single index (1 ticker)
     df = df.rename(columns={"Open":"open","High":"high","Low":"low","Close":"close","Volume":"volume"})
     keep = [c for c in ["open","high","low","close","volume"] if c in df.columns]
@@ -187,7 +182,7 @@ def _yf_download_batch(tickers: List[str], period_days: int) -> None:
     period = f"{max(period_days, 220)}d"  # >=200 pour EMA200
     try:
         data = yf.download(
-            tickers=tickers,                # << list, pas string
+            tickers=tickers,                # list, pas string
             period=period,
             interval=YF_INTERVAL,
             auto_adjust=False,
@@ -195,7 +190,7 @@ def _yf_download_batch(tickers: List[str], period_days: int) -> None:
             progress=False,
             threads=YF_THREADS,
         )
-        # MultiIndex (attendu) : level0=ticker OU field
+        # MultiIndex attendu : level0=ticker OU field
         if isinstance(data.columns, pd.MultiIndex):
             level0 = data.columns.get_level_values(0)
             for t in tickers:
@@ -206,10 +201,9 @@ def _yf_download_batch(tickers: List[str], period_days: int) -> None:
                     else:
                         # autre forme (field, ticker)
                         sub = data.xs(t, axis=1, level=1, drop_level=False)
-                        # ramener au format colonnes simples
                         fields = ["Open","High","Low","Close","Volume"]
                         sub = sub.copy()
-                        sub.columns = [c[0] for c in sub.columns]  # garde 'Open' etc.
+                        sub.columns = [c[0] for c in sub.columns]  # 'Open' etc.
                         sub = sub[fields]
                 except Exception:
                     sub = None
@@ -286,8 +280,7 @@ def compute_tech_label(df: pd.DataFrame) -> Tuple[str, float]:
     """
     if df is None or df.empty or "close" not in df.columns:
         return "HOLD", 0.5
-    close = pd.to_numeric(df["close"], errors="coerce")
-    close = close.dropna()
+    close = pd.to_numeric(df["close"], errors="coerce").dropna()
     if len(close) < 200:
         return "HOLD", 0.5
 
@@ -297,10 +290,8 @@ def compute_tech_label(df: pd.DataFrame) -> Tuple[str, float]:
     macd, macds, hist = _macd(close)
     rsi14 = _rsi(close, 14)
 
-    # protège contre NaN finaux
     def last_ok(s: pd.Series) -> Optional[float]:
-        v = pd.to_numeric(s, errors="coerce")
-        v = v.dropna()
+        v = pd.to_numeric(s, errors="coerce").dropna()
         return float(v.iloc[-1]) if len(v) else None
 
     e20, e50, e200 = last_ok(ema20), last_ok(ema50), last_ok(ema200)
@@ -349,34 +340,6 @@ def _avg_dollar_vol(df: Optional[pd.DataFrame], lb: int = AVG_DOLLAR_VOL_LOOKBAC
     prod = (c * v).dropna()
     return float(prod.mean()) if len(prod) else None
 
-# ====================== SEC helpers (mcap) =========================
-
-def _compute_mcap_from_sec(t: str, cik: Optional[str], last_price: Optional[float]) -> Optional[float]:
-    if last_price is None or not cik:
-        return None
-    try:
-        shares = sec_latest_shares_outstanding(cik)
-        if shares is None or float(shares) <= 0:
-            return None
-        return float(last_price * float(shares))
-    except Exception:
-        return None
-
-def _bulk_mcap_from_sec(tickers: List[str], price_map: Dict[str, Optional[float]], cik_map: Dict[str, str]) -> Dict[str, Optional[float]]:
-    out: Dict[str, Optional[float]] = {t: None for t in tickers}
-    with ThreadPoolExecutor(max_workers=MAX_SEC_WORKERS) as ex:
-        futs = {
-            ex.submit(_compute_mcap_from_sec, t, cik_map.get(t), price_map.get(t)): t
-            for t in tickers
-        }
-        for fut in as_completed(futs):
-            t = futs[fut]
-            try:
-                out[t] = fut.result()
-            except Exception:
-                out[t] = None
-    return out
-
 # =========================== pipeline ==============================
 
 def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
@@ -388,19 +351,11 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
     # 2) Sector catalog (optionnel)
     sectors = _read_sector_catalog()
 
-    # 3) SEC map (CIK) — upper-case keys pour cohérence
-    try:
-        cik_map_raw = sec_ticker_map()  # {TICKER: CIK10}
-        cik_map = {str(k).upper(): v for k, v in (cik_map_raw or {}).items()}
-    except Exception as e:
-        _log(f"[WARN] sec_ticker_map failed: {e}")
-        cik_map = {}
-
     rows = []
     price_map: Dict[str, Optional[float]] = {}
     adv_map: Dict[str, Optional[float]]   = {}
 
-    # 4) prix/ADV + tech
+    # 3) prix/ADV + tech
     for t in tickers:
         df = _get_ohlcv(t)
         lc = _last_close(df)
@@ -417,16 +372,14 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
         sector = secinfo.get("sector", "Unknown")
         industry = secinfo.get("industry", "Unknown")
 
-        # placeholders analyst (à brancher plus tard si dispo)
-        analyst_bucket = "HOLD"
-        analyst_votes = 20.0
-        analyst_score = 0.5
+        analyst_bucket = "HOLD"   # placeholders
+        analyst_votes  = 20.0
 
         def favorable(label: str) -> bool:
             return label in ("BUY","STRONG_BUY")
 
         p_tech = favorable(tv_reco)
-        p_tv   = favorable(tv_reco)  # miroir pour garder ta pondération
+        p_tv   = favorable(tv_reco)
         p_an   = favorable(analyst_bucket)
 
         pillars_met = int(p_tech) + int(p_tv) + int(p_an)
@@ -449,8 +402,8 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
             "ticker_tv": t,
             "price": lc,
             "last": lc,
-            "mcap_usd_final": None,  # rempli après
-            "mcap": None,
+            "mcap_usd_final": np.nan,  # MCAP OFF
+            "mcap": np.nan,
             "avg_dollar_vol": adv,
             "tv_score": tv_score,
             "tv_reco": tv_reco,
@@ -469,17 +422,15 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
 
     base = pd.DataFrame(rows)
 
-    # 5) MCAP via SEC (en parallèle, uniquement pour tickers où prix valide)
-    candidates = [t for t in tickers if price_map.get(t) is not None and np.isfinite(price_map.get(t))]
-    mcap_map = _bulk_mcap_from_sec(candidates, price_map, cik_map)
-    base["mcap_usd_final"] = base["ticker_yf"].map(mcap_map)
-    base["mcap"] = base["mcap_usd_final"]
-
+    # 4) MCAP désactivé → rien d'autre à faire
     return base
 
 def _apply_filters(df: pd.DataFrame) -> pd.DataFrame:
-    # Filtre STRICT : mcap non-null & finie & < cap
-    mask = df["mcap_usd_final"].apply(lambda x: isinstance(x, (int,float)) and np.isfinite(x)) & (df["mcap_usd_final"] < MCAP_CAP)
+    if DISABLE_MCAP:
+        return df.copy()
+    # (non utilisé si DISABLE_MCAP=1)
+    m = pd.to_numeric(df["mcap_usd_final"], errors="coerce")
+    mask = m.notna() & np.isfinite(m) & (m < MCAP_CAP)
     return df.loc[mask].copy()
 
 def _safe_write_csv(path: Path, df: pd.DataFrame) -> None:
@@ -525,7 +476,7 @@ def main():
     uni = _ensure_universe()
     tickers = uni["ticker_yf"].tolist()
 
-    # Pré-cache OHLCV (utile aussi si _build_rows relance une fois)
+    # Pré-cache OHLCV
     _ensure_ohlcv_cached(tickers, OHLCV_WINDOW_DAYS)
 
     base = _build_rows(uni)
@@ -536,7 +487,7 @@ def main():
         if c in base.columns:
             base[c] = pd.to_numeric(base[c], errors="coerce")
 
-    # Applique filtre strict mcap
+    # Filtre (no-op si MCAP OFF)
     filtered = _apply_filters(base)
 
     # Sorties
