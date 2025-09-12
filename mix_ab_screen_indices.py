@@ -42,14 +42,14 @@ CONFIRMED_FLOOR           = float(os.getenv("CONFIRMED_FLOOR", "0.76"))   # plan
 ADV_CONFIRMED_MIN         = float(os.getenv("ADV_CONFIRMED_MIN", "500000"))  # $ min confirmed
 ADV_PRESIGNAL_MIN         = float(os.getenv("ADV_PRESIGNAL_MIN", "250000"))  # $ min pre_signal
 
-# Cibles adaptatives (pour éviter “confirmed=0”)
+# Cibles adaptatives (éviter confirmed=0)
 TARGET_CONFIRMED_PCT = float(os.getenv("TARGET_CONFIRMED_PCT", "0.02"))  # ~2% de l’univers
 TARGET_PRESIGNAL_PCT = float(os.getenv("TARGET_PRESIGNAL_PCT", "0.08"))  # ~8%
 MIN_CONFIRMED_COUNT  = int(os.getenv("MIN_CONFIRMED_COUNT", "5"))
 MIN_PRESIGNAL_COUNT  = int(os.getenv("MIN_PRESIGNAL_COUNT", "20"))
 
 # Hystérésis légère (collant)
-HYSTERESIS_DAYS = int(os.getenv("HYSTERESIS_DAYS", "3"))
+HYSTERESIS_DAYS  = int(os.getenv("HYSTERESIS_DAYS", "3"))
 HYSTERESIS_RELAX = float(os.getenv("HYSTERESIS_RELAX", "0.02"))  # relaxe les seuils si présent récemment
 
 # =========================== utils & io ===============================
@@ -440,15 +440,15 @@ def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, a
     if pullback: s_entry = max(s_entry, 0.65)
     s_rs    = float(max(0.0, min(1.0, s_rs)))
 
-    # Score global
+    # Score global + boosts ADoucis
     score = (0.28*s_trend + 0.22*s_momo + 0.22*s_rs + 0.14*s_volu + 0.10*s_vol + 0.04*s_entry)
-    if breakout: score += 0.03
-    if (days_to_cross is not None) and (days_to_cross <= 5): score += 0.03
-    if pullback: score += 0.02
+    if breakout: score += 0.02
+    if (days_to_cross is not None) and (days_to_cross <= 3): score += 0.02
+    if pullback: score += 0.01
     if overextended: score -= 0.04
     score = float(max(0.0, min(1.0, round(score, 4))))
 
-    # Label compat
+    # Label compat (non utilisé pour bucket final)
     if score >= 0.80: label = "STRONG_BUY"
     elif score >= 0.60: label = "BUY"
     elif score >= 0.40: label = "HOLD"
@@ -569,7 +569,10 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
     return base
 
 def _adaptive_thresholds(df: pd.DataFrame, hist_keep: set) -> Tuple[float, float]:
-    """Adapte les seuils pour garantir un minimum de confirmed / pre_signal, sans descendre sous des planchers."""
+    """
+    Adapte les seuils pour approcher les cibles (confirmed ~2%, pre ~8%) SANS descendre
+    sous des planchers de qualité. (corrigé : on relève le seuil si trop de candidats)
+    """
     n = len(df)
     if n == 0:
         return (CONFIRMED_THRESHOLD_BASE, PRESIGNAL_THRESHOLD_BASE)
@@ -578,44 +581,63 @@ def _adaptive_thresholds(df: pd.DataFrame, hist_keep: set) -> Tuple[float, float
     target_pre  = max(MIN_PRESIGNAL_COUNT, int(TARGET_PRESIGNAL_PCT * n))
 
     elig_conf = df[(~df["overextended"]) & (df["avg_dollar_vol"] >= ADV_CONFIRMED_MIN)]
+    elig_pre  = df[(~df["overextended"]) & (df["avg_dollar_vol"] >= ADV_PRESIGNAL_MIN)]
+
+    # Confirmed — seuil = quantile haut (garder ~target_conf au-dessus)
     if len(elig_conf):
-        q = max(0.0, 1.0 - target_conf/len(elig_conf))
-        dyn_cut = float(elig_conf["tv_score"].quantile(q))
-        confirmed_thr = max(CONFIRMED_FLOOR, min(CONFIRMED_THRESHOLD_BASE, dyn_cut))
+        q_conf = max(0.0, 1.0 - target_conf / len(elig_conf))
+        q_conf_score = float(elig_conf["tv_score"].quantile(q_conf))
+        confirmed_thr = max(CONFIRMED_THRESHOLD_BASE, CONFIRMED_FLOOR, q_conf_score)
     else:
         confirmed_thr = CONFIRMED_THRESHOLD_BASE
 
-    elig_pre = df[(~df["overextended"]) & (df["avg_dollar_vol"] >= ADV_PRESIGNAL_MIN)]
+    # Pre-signal — couloir sous confirmed
     if len(elig_pre):
-        qpre = max(0.0, 1.0 - target_pre/len(elig_pre))
-        dyn_pre = float(elig_pre["tv_score"].quantile(qpre))
-        presignal_thr = min(PRESIGNAL_THRESHOLD_BASE, dyn_pre)
+        tot_target = min(len(elig_pre), target_conf + target_pre)
+        q_pre_all  = max(0.0, 1.0 - tot_target / len(elig_pre))
+        q_pre_score = float(elig_pre["tv_score"].quantile(q_pre_all))
+        presignal_thr = max(EVENT_THRESHOLD, min(q_pre_score, confirmed_thr - 0.01))
     else:
-        presignal_thr = PRESIGNAL_THRESHOLD_BASE
+        presignal_thr = max(EVENT_THRESHOLD, min(PRESIGNAL_THRESHOLD_BASE, confirmed_thr - 0.01))
 
+    # Hystérésis douce
     if len(hist_keep):
         confirmed_thr = max(CONFIRMED_FLOOR, confirmed_thr - HYSTERESIS_RELAX)
-        presignal_thr = max(EVENT_THRESHOLD, presignal_thr - HYSTERESIS_RELAX)
+        presignal_thr = max(EVENT_THRESHOLD, min(confirmed_thr - 0.01, presignal_thr - HYSTERESIS_RELAX))
 
-    return (confirmed_thr, presignal_thr)
+    # sécurité
+    presignal_thr = min(presignal_thr, confirmed_thr - 0.01)
+
+    return (float(confirmed_thr), float(presignal_thr))
 
 def _assign_buckets(df: pd.DataFrame, confirmed_thr: float, presignal_thr: float) -> pd.Series:
     def decide(row):
-        s = row["tv_score"] or 0.0
+        s = float(row["tv_score"] or 0.0)
         over = bool(row["overextended"])
         adv  = float(row["avg_dollar_vol"] or 0.0)
         breakout = bool(row["breakout"])
+        pullback = bool(row["pullback"])
         squeeze = bool(row["squeeze_on"])
         dtc = row["days_to_macd_cross"]
         adv_ok_conf = adv >= ADV_CONFIRMED_MIN
         adv_ok_pre  = adv >= ADV_PRESIGNAL_MIN
 
-        if s >= confirmed_thr and not over and adv_ok_conf and (breakout or s >= confirmed_thr + 0.04):
-            return "confirmed"
-        if (presignal_thr <= s < confirmed_thr) and not over and adv_ok_pre:
-            if breakout or squeeze or (pd.notna(dtc) and dtc <= 5):
+        # --- Zone haute : s >= confirmed_thr
+        if s >= confirmed_thr and not over and adv_ok_conf:
+            strong_enough = breakout or pullback or (pd.notna(dtc) and dtc is not None and dtc <= 1) or (s >= confirmed_thr + 0.06)
+            if strong_enough:
+                return "confirmed"
+            # Borderline haut sans trigger => pré-signal si possible
+            if s >= presignal_thr and adv_ok_pre:
                 return "pre_signal"
-        if s >= EVENT_THRESHOLD or squeeze or (pd.notna(dtc) and dtc <= 7):
+
+        # --- Couloir pré-signal : presignal_thr <= s < confirmed_thr
+        if (presignal_thr <= s < confirmed_thr) and not over and adv_ok_pre:
+            if breakout or squeeze or (pd.notna(dtc) and dtc is not None and dtc <= 5) or pullback:
+                return "pre_signal"
+
+        # --- Sinon : event si un minimum de potentiel / setup
+        if s >= EVENT_THRESHOLD or squeeze or (pd.notna(dtc) and dtc is not None and dtc <= 7):
             return "event"
         return "event"
     return df.apply(decide, axis=1)
@@ -646,7 +668,7 @@ def _mirror_to_public(names: List[str]) -> None:
 def _write_outputs(out: pd.DataFrame, run_ts: str, diag: dict) -> None:
     out_sorted = out.sort_values(["rank_score","avg_dollar_vol"], ascending=[False, False]).reset_index(drop=True)
 
-    # Insère run_ts UNE fois (et pas dans les sous-DataFrames ensuite)
+    # Insère run_ts UNE fois
     if "run_ts" not in out_sorted.columns:
         out_sorted.insert(0, "run_ts", run_ts)
 
@@ -700,7 +722,7 @@ def main():
 
     uni = _ensure_universe()
 
-    # Pré-cache OHLCV (accélère le reste)
+    # Pré-cache OHLCV (accélère)
     _ensure_ohlcv_cached(uni["ticker_yf"].tolist(), OHLCV_WINDOW_DAYS)
 
     base = _build_rows(uni)
@@ -709,6 +731,11 @@ def main():
     # Hystérésis & seuils adaptatifs
     hist_keep = _hysteresis_mask(OUT_DIR / "signals_history.csv", HYSTERESIS_DAYS)
     confirmed_thr, presignal_thr = _adaptive_thresholds(base, hist_keep)
+
+    # Sanity pré-attribution (projection brute par score)
+    _est_conf = int((base['tv_score'] >= confirmed_thr).sum())
+    _est_pre  = int(((base['tv_score'] >= presignal_thr) & (base['tv_score'] < confirmed_thr)).sum())
+    _log(f"[ADAPT] thresholds used: confirmed={confirmed_thr:.3f} pre={presignal_thr:.3f} (est. counts: conf≥thr={_est_conf}, pre-range={_est_pre})")
 
     # Buckets
     base["bucket"] = _assign_buckets(base, confirmed_thr, presignal_thr)
