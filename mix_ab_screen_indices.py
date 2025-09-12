@@ -1,4 +1,4 @@
-# mix_ab_screen_indices.py — Robust + MCAP OFF (root outputs)
+# mix_ab_screen_indices.py — Advanced Scoring (MCAP OFF, root outputs)
 from __future__ import annotations
 
 import os, math, json, time
@@ -9,6 +9,8 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 
+# =========================== Paths & Params ===========================
+
 ROOT = Path(__file__).parent
 CACHE_DIR = ROOT / "cache"
 CACHE_DIR.mkdir(exist_ok=True)
@@ -16,11 +18,10 @@ CACHE_DIR.mkdir(exist_ok=True)
 UNIVERSE_CSV   = ROOT / "universe_in_scope.csv"   # produit par build_universe.py
 SECTOR_CATALOG = ROOT / "sector_catalog.csv"      # optionnel
 
-OUT_DIR = ROOT  # sorties à la racine
+OUT_DIR = ROOT  # sorties à la racine (GitHub Pages peut lire ici chez toi)
 
 # --------- Paramètres (env overridable)
 DISABLE_MCAP = int(os.getenv("DISABLE_MCAP", "1"))  # 1 = pas de SEC/YF cap, pas de filtre mcap
-MCAP_CAP = float(os.getenv("MCAP_CAP", 75e9))       # ignoré si DISABLE_MCAP=1
 OHLCV_WINDOW_DAYS = int(os.getenv("OHLCV_WINDOW_DAYS", 240))    # historique (>=200 pour EMA200)
 AVG_DOLLAR_VOL_LOOKBACK = int(os.getenv("AVG_DOLLAR_VOL_LB", 20))
 CACHE_FRESH_DAYS = int(os.getenv("CACHE_FRESH_DAYS", 2))
@@ -30,7 +31,15 @@ SLEEP_BETWEEN_BATCHES = float(os.getenv("SLEEP_BETWEEN_BATCHES", "0.0"))
 YF_INTERVAL = "1d"
 YF_THREADS  = False  # on pilote nos propres batches
 
-# =========================== utils & io ============================
+# Scoring / buckets
+MARKET_TICKER = os.getenv("MARKET_TICKER", "SPY")   # pour RS globale
+CONFIRMED_THRESHOLD  = float(os.getenv("CONFIRMED_THRESHOLD", "0.82"))
+PRESIGNAL_THRESHOLD  = float(os.getenv("PRESIGNAL_THRESHOLD", "0.64"))
+EVENT_THRESHOLD      = float(os.getenv("EVENT_THRESHOLD", "0.50"))
+ADV_CONFIRMED_MIN    = float(os.getenv("ADV_CONFIRMED_MIN", "500000"))   # $ min pour confirmed
+ADV_PRESIGNAL_MIN    = float(os.getenv("ADV_PRESIGNAL_MIN", "250000"))   # $ min pour pre_signal
+
+# =========================== utils & io ===============================
 
 def _log(msg: str) -> None:
     print(msg, flush=True)
@@ -54,7 +63,6 @@ def _save_csv_cache(ticker: str, df: pd.DataFrame) -> None:
     if df is None or df.empty:
         return
     out = df.copy()
-    # Sécurise noms
     out = out.rename(columns={
         "Open":"open","High":"high","Low":"low",
         "Close":"close","Adj Close":"adj_close","Volume":"volume"
@@ -248,7 +256,7 @@ def _ensure_ohlcv_cached(tickers: List[str], period_days: int = OHLCV_WINDOW_DAY
 def _get_ohlcv(ticker: str) -> Optional[pd.DataFrame]:
     return _load_csv_cache(ticker)
 
-# ====================== indicators & scores ========================
+# ====================== Indicators & helpers ========================
 
 def _ema(s: pd.Series, span: int) -> pd.Series:
     s = pd.to_numeric(s, errors="coerce")
@@ -264,62 +272,6 @@ def _rsi(close: pd.Series, length: int = 14) -> pd.Series:
     rs = ma_up / ma_down.replace(0, np.nan)
     rsi = 100 - (100 / (1 + rs))
     return rsi
-
-def _macd(close: pd.Series, fast=12, slow=26, signal=9) -> Tuple[pd.Series,pd.Series,pd.Series]:
-    fast_ema = _ema(close, fast)
-    slow_ema = _ema(close, slow)
-    macd_line = fast_ema - slow_ema
-    signal_line = _ema(macd_line, signal)
-    hist = macd_line - signal_line
-    return macd_line, signal_line, hist
-
-def compute_tech_label(df: pd.DataFrame) -> Tuple[str, float]:
-    """
-    Renvoie (label, score) – STRONG_BUY / BUY / HOLD / SELL
-    Plus strict : exige >=200 barres pour éviter NaN sur EMA200.
-    """
-    if df is None or df.empty or "close" not in df.columns:
-        return "HOLD", 0.5
-    close = pd.to_numeric(df["close"], errors="coerce").dropna()
-    if len(close) < 200:
-        return "HOLD", 0.5
-
-    ema20 = _ema(close, 20)
-    ema50 = _ema(close, 50)
-    ema200 = _ema(close, 200)
-    macd, macds, hist = _macd(close)
-    rsi14 = _rsi(close, 14)
-
-    def last_ok(s: pd.Series) -> Optional[float]:
-        v = pd.to_numeric(s, errors="coerce").dropna()
-        return float(v.iloc[-1]) if len(v) else None
-
-    e20, e50, e200 = last_ok(ema20), last_ok(ema50), last_ok(ema200)
-    macd_l, macd_s, h = last_ok(macd), last_ok(macds), last_ok(hist)
-    rsi_l = last_ok(rsi14)
-
-    if None in (e20, e50, e200, macd_l, macd_s, h, rsi_l):
-        return "HOLD", 0.5
-
-    bull_trend = (e20 > e50 > e200)
-    macd_pos = (macd_l > macd_s) and (h > 0)
-    rsi_ok = 45 <= rsi_l <= 70
-
-    score = 0.0
-    score += 0.45 if bull_trend else 0.0
-    score += 0.35 if macd_pos else 0.0
-    score += 0.20 if rsi_ok else 0.0
-
-    if score >= 0.80:
-        label = "STRONG_BUY"
-    elif score >= 0.60:
-        label = "BUY"
-    elif score >= 0.40:
-        label = "HOLD"
-    else:
-        label = "SELL"
-
-    return label, float(round(score, 4))
 
 def _last_close(df: Optional[pd.DataFrame]) -> Optional[float]:
     if df is None or df.empty or "close" not in df.columns:
@@ -340,6 +292,201 @@ def _avg_dollar_vol(df: Optional[pd.DataFrame], lb: int = AVG_DOLLAR_VOL_LOOKBAC
     prod = (c * v).dropna()
     return float(prod.mean()) if len(prod) else None
 
+def _pct_rank(x: pd.Series, lookback: int = 126) -> float:
+    x = pd.to_numeric(x, errors="coerce").dropna()
+    if len(x) < 3:
+        return 0.5
+    window = x.tail(lookback)
+    if len(window) < 3:
+        return 0.5
+    last = float(window.iloc[-1])
+    rank = (window <= last).mean()
+    return float(max(0.0, min(1.0, rank)))
+
+def _zscore_last(x: pd.Series, lb: int = 63) -> float:
+    x = pd.to_numeric(x, errors="coerce")
+    if len(x) < lb:
+        return 0.0
+    w = x.tail(lb)
+    mu = float(w.mean()); sd = float(w.std(ddof=0)) or 1e-9
+    return float((w.iloc[-1] - mu) / sd)
+
+def _squash01(v: float, lo: float, hi: float) -> float:
+    if hi == lo: return 0.0
+    x = (v - lo) / (hi - lo)
+    return float(0.0 if x < 0 else 1.0 if x > 1 else x)
+
+# ====================== Advanced scoring ===========================
+
+def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, adv_dv: Optional[float]=None) -> dict:
+    """
+    Retourne un dict:
+      {
+        'score': float 0..1,
+        'label': 'STRONG_BUY'|'BUY'|'HOLD'|'SELL',
+        # sous-scores / flags
+        's_trend','s_momo','s_vol','s_volu','s_rs','s_entry',
+        'breakout','pullback','squeeze_on','days_to_macd_cross','overextended'
+      }
+    """
+    out = {'score':0.5,'label':'HOLD','s_trend':0,'s_momo':0,'s_vol':0,'s_volu':0,'s_rs':0,'s_entry':0,
+           'breakout':False,'pullback':False,'squeeze_on':False,'days_to_macd_cross':None,'overextended':False}
+    if df is None or df.empty:
+        return out
+    req = ["open","high","low","close","volume"]
+    if any(c not in df.columns for c in req):
+        return out
+    if len(df) < 200:
+        return out
+
+    d = df.copy()
+    c = pd.to_numeric(d["close"], errors="coerce")
+    h = pd.to_numeric(d["high"], errors="coerce")
+    l = pd.to_numeric(d["low"], errors="coerce")
+    v = pd.to_numeric(d["volume"], errors="coerce")
+    if c.isna().any(): c = c.fillna(method="ffill")
+
+    # EMAs & slopes
+    ema20 = c.ewm(span=20, adjust=False, min_periods=20).mean()
+    ema50 = c.ewm(span=50, adjust=False, min_periods=50).mean()
+    ema200= c.ewm(span=200,adjust=False, min_periods=200).mean()
+    if ema200.isna().all(): return out
+
+    e20, e50, e200 = ema20.iloc[-1], ema50.iloc[-1], ema200.iloc[-1]
+    if len(ema50) >= 5 and not ema50.iloc[-5] == 0:
+        slope50 = (ema50.iloc[-1] - ema50.iloc[-5]) / (abs(ema50.iloc[-5]) + 1e-9)
+    else:
+        slope50 = 0.0
+
+    # MACD / RSI
+    fast = c.ewm(span=12, adjust=False, min_periods=12).mean()
+    slow = c.ewm(span=26, adjust=False, min_periods=26).mean()
+    macd_line = fast - slow
+    macd_sig  = macd_line.ewm(span=9, adjust=False, min_periods=9).mean()
+    macd_hist = macd_line - macd_sig
+    rsi = _rsi(c, 14)
+
+    # BBands / ATR
+    ma20 = c.rolling(20, min_periods=20).mean()
+    sd20 = c.rolling(20, min_periods=20).std(ddof=0)
+    bb_up = ma20 + 2*sd20
+    bb_lo = ma20 - 2*sd20
+    bb_width = (bb_up - bb_lo) / (ma20 + 1e-9)
+    bb_pctile = _pct_rank(bb_width, 126)  # faible => squeeze
+    tr = pd.concat([(h-l), (h-c.shift(1)).abs(), (l-c.shift(1)).abs()], axis=1).max(axis=1)
+    atr14 = tr.rolling(14, min_periods=14).mean()
+    atrp = (atr14 / (c + 1e-9)).fillna(0)
+
+    # Volume / OBV
+    obv = ((np.sign(c.diff().fillna(0)) * v).fillna(0)).cumsum()
+    if len(obv) >= 10 and not abs(obv.iloc[-10]) == 0:
+        obv_slope = (obv.iloc[-1] - obv.iloc[-10]) / (abs(obv.iloc[-10]) + 1e-9)
+    else:
+        obv_slope = 0.0
+    vol20 = v.rolling(20, min_periods=1).mean()
+    vol60 = v.rolling(60, min_periods=1).mean()
+    vol_ratio = float((vol20.iloc[-1] + 1e-9) / (vol60.iloc[-1] + 1e-9))
+    adv_ratio = None
+    if adv_dv is not None and adv_dv > 0:
+        # normalisation douce de la liquidité
+        adv_ratio = _squash01(math.log1p(adv_dv), math.log1p(5e5), math.log1p(2e7))  # 0.5M → 20M+
+
+    # Relative Strength vs marché
+    s_rs = 0.5
+    if mkt is not None and not mkt.empty and "close" in mkt.columns:
+        mclose = pd.to_numeric(mkt["close"], errors="coerce").reindex(c.index).fillna(method="ffill")
+        rs_line = (c / (mclose + 1e-9))
+        rs_chg20 = float((rs_line.iloc[-1] / (rs_line.iloc[-20] + 1e-9)) - 1) if len(rs_line) >= 21 else 0.0
+        rs_chg63 = float((rs_line.iloc[-1] / (rs_line.iloc[-63] + 1e-9)) - 1) if len(rs_line) >= 64 else 0.0
+        # Pctile de la somme des retours → proxy momentum cumulé relatif
+        rs_pctile = _pct_rank(rs_line.pct_change().dropna().cumsum(), 252) if rs_line.notna().sum() > 10 else 0.5
+        s_rs = 0.45*_squash01(rs_chg20, -0.1, 0.1) + 0.35*_squash01(rs_chg63, -0.2, 0.2) + 0.20*rs_pctile
+
+    # Squeeze & entry triggers
+    squeeze_on = (bb_pctile <= 0.25) and (atrp.iloc[-1] < atrp.rolling(63, min_periods=5).median().iloc[-1] if len(atrp) >= 63 else True)
+    days_to_cross = None
+    if len(macd_line) >= 3 and len(macd_sig) >= 3:
+        diff = float((macd_line.iloc[-1] - macd_sig.iloc[-1]))
+        slope = float((macd_line.iloc[-1] - macd_line.iloc[-3]) - (macd_sig.iloc[-1] - macd_sig.iloc[-3])) / 2.0
+        if slope != 0:
+            est = -diff / slope
+            days_to_cross = float(est) if 0 < est < 10 else None
+
+    # Breakout / Pullback
+    hhv20 = c.rolling(20, min_periods=1).max()
+    prev_hhv20 = hhv20.iloc[-2] if len(hhv20) >= 2 else hhv20.iloc[-1]
+    breakout = (c.iloc[-1] > prev_hhv20) and (v.iloc[-1] > 1.3*vol20.iloc[-1])
+    dist_ema20 = float((c.iloc[-1] - e20) / (c.iloc[-1] + 1e-9))
+    rsi_last = float(_rsi(c, 14).iloc[-1]) if len(c) >= 14 else 50.0
+    pullback = (e20 > e50 > e200) and (-0.02 <= dist_ema20 <= 0.01) and (45 <= rsi_last <= 60)
+
+    # Overextension penalty
+    overextended = (len(sd20) > 0 and c.iloc[-1] > ( (ma20.iloc[-1] if not np.isnan(ma20.iloc[-1]) else c.iloc[-1]) + 2*sd20.iloc[-1] + 0.3*(sd20.iloc[-1] or 0) )) or (rsi_last > 75)
+
+    # Sous-scores 0..1
+    s_trend = 0.55*_squash01((e20/e50)-1, 0.0, 0.06) + 0.30*_squash01((e50/e200)-1, 0.0, 0.12) + 0.15*_squash01(slope50, 0.0, 0.06)
+    s_momo  = 0.55*_squash01(_zscore_last(macd_hist, 63), 0.0, 2.5) + 0.45*(1.0 - abs(rsi_last - 60.0)/60.0)
+    s_vol   = 0.6*(1.0 - bb_pctile) + 0.4*(1.0 - _pct_rank(atrp, 126))  # petit = mieux
+    s_volu  = 0.6*_squash01(vol_ratio, 0.8, 1.4) + 0.4*_squash01(obv_slope, 0.0, 0.15)
+    if adv_ratio is not None: s_volu = 0.7*s_volu + 0.3*adv_ratio
+    s_entry = 0.0
+    if breakout: s_entry += 0.8
+    if pullback: s_entry = max(s_entry, 0.65)
+    s_rs    = float(max(0.0, min(1.0, s_rs)))
+
+    # Score global (poids)
+    score = (
+        0.28*s_trend +
+        0.22*s_momo  +
+        0.22*s_rs    +
+        0.14*s_volu  +
+        0.10*s_vol   +
+        0.04*s_entry
+    )
+    # Boosts “proches” / “propre”
+    if breakout: score += 0.03
+    if (days_to_cross is not None) and (days_to_cross <= 5): score += 0.03
+    if pullback: score += 0.02
+    if overextended: score -= 0.04
+
+    score = float(max(0.0, min(1.0, round(score, 4))))
+
+    # Label (technique) basé sur le score (pour compat)
+    if score >= 0.80: label = "STRONG_BUY"
+    elif score >= 0.60: label = "BUY"
+    elif score >= 0.40: label = "HOLD"
+    else: label = "SELL"
+
+    out.update(dict(
+        score=score, label=label, s_trend=float(round(s_trend,4)), s_momo=float(round(s_momo,4)),
+        s_vol=float(round(s_vol,4)), s_volu=float(round(s_volu,4)), s_rs=float(round(s_rs,4)),
+        s_entry=float(round(s_entry,4)), breakout=bool(breakout), pullback=bool(pullback),
+        squeeze_on=bool(squeeze_on), days_to_macd_cross=days_to_cross, overextended=bool(overextended)
+    ))
+    return out
+
+def _bucket_from_score(features: dict, adv_dv: Optional[float]) -> str:
+    s = features.get('score', 0.5)
+    over = features.get('overextended', False)
+    breakout = features.get('breakout', False)
+    squeeze = features.get('squeeze_on', False)
+    dtc = features.get('days_to_macd_cross', None)
+
+    adv_ok_confirmed = (adv_dv or 0.0) >= ADV_CONFIRMED_MIN
+    adv_ok_pre       = (adv_dv or 0.0) >= ADV_PRESIGNAL_MIN
+
+    # Now
+    if s >= CONFIRMED_THRESHOLD and not over and adv_ok_confirmed and (breakout or s >= (CONFIRMED_THRESHOLD + 0.04)):
+        return "confirmed"
+    # Soon
+    if (PRESIGNAL_THRESHOLD <= s < CONFIRMED_THRESHOLD) and not over and adv_ok_pre:
+        if breakout or squeeze or (dtc is not None and dtc <= 5):
+            return "pre_signal"
+    # Watch
+    if s >= EVENT_THRESHOLD or squeeze or (dtc is not None and dtc <= 7):
+        return "event"
+    return "event"
+
 # =========================== pipeline ==============================
 
 def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
@@ -351,87 +498,74 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
     # 2) Sector catalog (optionnel)
     sectors = _read_sector_catalog()
 
-    rows = []
-    price_map: Dict[str, Optional[float]] = {}
-    adv_map: Dict[str, Optional[float]]   = {}
+    # 3) Marché (pour RS)
+    mkt_df = None
+    try:
+        _ensure_ohlcv_cached([MARKET_TICKER], OHLCV_WINDOW_DAYS)
+        mkt_df = _get_ohlcv(MARKET_TICKER)
+    except Exception:
+        mkt_df = None
 
-    # 3) prix/ADV + tech
+    rows = []
+
     for t in tickers:
         df = _get_ohlcv(t)
         lc = _last_close(df)
         adv = _avg_dollar_vol(df) or 0.0
-        price_map[t] = lc
-        adv_map[t] = adv
 
-        if df is not None and lc is not None and len(df) >= 200 and lc >= 0.5:
-            tv_reco, tv_score = compute_tech_label(df)
-        else:
-            tv_reco, tv_score = "HOLD", 0.5
+        feats = compute_advanced_score(df, mkt=mkt_df, adv_dv=adv)
+        tv_reco = feats['label']              # réutilise ta colonne
+        tv_score = feats['score']
+        bucket = _bucket_from_score(feats, adv)
 
         secinfo = sectors.get(t, {})
         sector = secinfo.get("sector", "Unknown")
         industry = secinfo.get("industry", "Unknown")
-
-        analyst_bucket = "HOLD"   # placeholders
-        analyst_votes  = 20.0
-
-        def favorable(label: str) -> bool:
-            return label in ("BUY","STRONG_BUY")
-
-        p_tech = favorable(tv_reco)
-        p_tv   = favorable(tv_reco)
-        p_an   = favorable(analyst_bucket)
-
-        pillars_met = int(p_tech) + int(p_tv) + int(p_an)
-        if pillars_met == 3 and tv_reco == "STRONG_BUY":
-            bucket = "confirmed"
-        elif pillars_met >= 2:
-            bucket = "pre_signal"
-        else:
-            bucket = "event"
-
-        adv_weight = math.log1p(float(max(0.0, adv))) / 20.0
-        rank_score = float(
-            (pillars_met / 3.0) * 0.6 +
-            (tv_score) * 0.3 +
-            min(0.1, adv_weight)
-        )
 
         rows.append({
             "ticker_yf": t,
             "ticker_tv": t,
             "price": lc,
             "last": lc,
-            "mcap_usd_final": np.nan,  # MCAP OFF
+            "mcap_usd_final": np.nan,   # MCAP OFF
             "mcap": np.nan,
             "avg_dollar_vol": adv,
             "tv_score": tv_score,
             "tv_reco": tv_reco,
-            "analyst_bucket": analyst_bucket,
-            "analyst_votes": analyst_votes,
+            "analyst_bucket": "HOLD",   # placeholders non utilisés par le score
+            "analyst_votes": np.nan,
             "sector": sector,
             "industry": industry,
-            "p_tech": bool(p_tech),
-            "p_tv": bool(p_tv),
-            "p_an": bool(p_an),
-            "pillars_met": int(pillars_met),
-            "votes_bin": "10-20",
-            "rank_score": rank_score,
+            "p_tech": None,
+            "p_tv": None,
+            "p_an": None,
+            "pillars_met": None,
+            "votes_bin": None,
+            "rank_score": tv_score,     # aligne tri
             "bucket": bucket,
+            # (bonus) expose sous-scores/flags pour debug/tri UI
+            "s_trend": feats["s_trend"],
+            "s_momo": feats["s_momo"],
+            "s_vol": feats["s_vol"],
+            "s_volu": feats["s_volu"],
+            "s_rs": feats["s_rs"],
+            "s_entry": feats["s_entry"],
+            "breakout": feats["breakout"],
+            "pullback": feats["pullback"],
+            "squeeze_on": feats["squeeze_on"],
+            "days_to_macd_cross": feats["days_to_macd_cross"],
+            "overextended": feats["overextended"],
         })
 
     base = pd.DataFrame(rows)
-
-    # 4) MCAP désactivé → rien d'autre à faire
     return base
 
 def _apply_filters(df: pd.DataFrame) -> pd.DataFrame:
-    if DISABLE_MCAP:
-        return df.copy()
-    # (non utilisé si DISABLE_MCAP=1)
-    m = pd.to_numeric(df["mcap_usd_final"], errors="coerce")
-    mask = m.notna() & np.isfinite(m) & (m < MCAP_CAP)
-    return df.loc[mask].copy()
+    # MCAP OFF → pas de filtre
+    # On peut optionnellement filtrer les penny stocks / données manquantes
+    out = df.copy()
+    out = out[out["price"].notna()]  # garde prix valides
+    return out
 
 def _safe_write_csv(path: Path, df: pd.DataFrame) -> None:
     tmp = path.with_suffix(path.suffix + ".tmp")
@@ -454,8 +588,8 @@ def _write_outputs(out: pd.DataFrame) -> None:
 
 def _update_signals_history(today: str, out: pd.DataFrame) -> None:
     path = OUT_DIR / "signals_history.csv"
-    cols = ["date","ticker_yf","sector","bucket","tv_reco","analyst_bucket"]
-    new = out[["ticker_yf","sector","bucket","tv_reco","analyst_bucket"]].copy()
+    cols = ["date","ticker_yf","sector","bucket","tv_reco","analyst_bucket","tv_score"]
+    new = out[["ticker_yf","sector","bucket","tv_reco","analyst_bucket","tv_score"]].copy()
     new.insert(0, "date", today)
     if path.exists():
         try:
@@ -465,7 +599,7 @@ def _update_signals_history(today: str, out: pd.DataFrame) -> None:
         hist = pd.concat([old, new], ignore_index=True)
     else:
         hist = new
-    hist = hist.tail(100)
+    hist = hist.tail(1000)
     _safe_write_csv(path, hist)
     _log(f"[SAVE] signals_history.csv | rows={len(hist)}")
 
@@ -481,13 +615,13 @@ def main():
 
     base = _build_rows(uni)
 
-    # Types
+    # Types sûrs
     float_cols = ["price","last","mcap_usd_final","avg_dollar_vol","tv_score","analyst_votes","rank_score"]
     for c in float_cols:
         if c in base.columns:
             base[c] = pd.to_numeric(base[c], errors="coerce")
 
-    # Filtre (no-op si MCAP OFF)
+    # Applique filtres de base
     filtered = _apply_filters(base)
 
     # Sorties
@@ -501,7 +635,6 @@ def main():
         "universe": int(len(uni)),
         "post_filter": int(len(filtered)),
         "price_nonnull": int(base["price"].notna().sum()),
-        "mcap_final_nonnull": int(base["mcap_usd_final"].notna().sum()),
         "confirmed_count": int((filtered["bucket"]=="confirmed").sum()),
         "pre_count": int((filtered["bucket"]=="pre_signal").sum()),
         "event_count": int((filtered["bucket"]=="event").sum()),
