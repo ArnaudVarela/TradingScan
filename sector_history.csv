@@ -1,1024 +1,1023 @@
 date,ticker,sector,industry
-2025-09-11,-,nan,Unknown
-2025-09-11,A,Health Care,Unknown
-2025-09-11,AA,Materials,Unknown
-2025-09-11,AAL,Industrials,Unknown
-2025-09-11,AAON,Industrials,Unknown
-2025-09-11,AAPL,Information Technology,Unknown
-2025-09-11,ABBV,Health Care,Unknown
-2025-09-11,ABNB,Consumer Discretionary,Unknown
-2025-09-11,ABT,Health Care,Unknown
-2025-09-11,ACGL,Financials,Unknown
-2025-09-11,ACHC,Health Care,Unknown
-2025-09-11,ACI,Consumer Staples,Unknown
-2025-09-11,ACM,Industrials,Unknown
-2025-09-11,ACN,Information Technology,Unknown
-2025-09-11,ADBE,Information Technology,Unknown
-2025-09-11,ADC,Real Estate,Unknown
-2025-09-11,ADI,Information Technology,Unknown
-2025-09-11,ADM,Consumer Staples,Unknown
-2025-09-11,ADP,Industrials,Unknown
-2025-09-11,ADSK,Information Technology,Unknown
-2025-09-11,ADT,Consumer Discretionary,Unknown
-2025-09-11,AEE,Utilities,Unknown
-2025-09-11,AEP,Utilities,Unknown
-2025-09-11,AES,Utilities,Unknown
-2025-09-11,AFG,Financials,Unknown
-2025-09-11,AFL,Financials,Unknown
-2025-09-11,AFRM,Information Technology,Unknown
-2025-09-11,AGCO,Industrials,Unknown
-2025-09-11,AGNC,Financials,Unknown
-2025-09-11,AGO,Financials,Unknown
-2025-09-11,AIG,Financials,Unknown
-2025-09-11,AIT,Industrials,Unknown
-2025-09-11,AIZ,Financials,Unknown
-2025-09-11,AJG,Financials,Unknown
-2025-09-11,AKAM,Information Technology,Unknown
-2025-09-11,AL,Industrials,Unknown
-2025-09-11,ALAB,Information Technology,Unknown
-2025-09-11,ALB,Materials,Unknown
-2025-09-11,ALGM,Information Technology,Unknown
-2025-09-11,ALGN,Health Care,Unknown
-2025-09-11,ALK,Industrials,Unknown
-2025-09-11,ALL,Financials,Unknown
-2025-09-11,ALLE,Industrials,Unknown
-2025-09-11,ALLY,Financials,Unknown
-2025-09-11,ALNY,Health Care,Unknown
-2025-09-11,ALSN,Industrials,Unknown
-2025-09-11,AM,Energy,Unknown
-2025-09-11,AMAT,Information Technology,Unknown
-2025-09-11,AMCR,Materials,Unknown
-2025-09-11,AMD,Information Technology,Unknown
-2025-09-11,AME,Industrials,Unknown
-2025-09-11,AMG,Financials,Unknown
-2025-09-11,AMGN,Health Care,Unknown
-2025-09-11,AMH,Real Estate,Unknown
-2025-09-11,AMKR,Information Technology,Unknown
-2025-09-11,AMP,Financials,Unknown
-2025-09-11,AMT,Real Estate,Unknown
-2025-09-11,AMTM,Industrials,Unknown
-2025-09-11,AMZN,Consumer Discretionary,Unknown
-2025-09-11,AN,Consumer Discretionary,Unknown
-2025-09-11,ANET,Information Technology,Unknown
-2025-09-11,AON,Financials,Unknown
-2025-09-11,AOS,Industrials,Unknown
-2025-09-11,APA,Energy,Unknown
-2025-09-11,APD,Materials,Unknown
-2025-09-11,APG,Industrials,Unknown
-2025-09-11,APH,Information Technology,Unknown
-2025-09-11,APLS,Health Care,Unknown
-2025-09-11,APO,Financials,Unknown
-2025-09-11,APP,Information Technology,Unknown
-2025-09-11,APPF,Information Technology,Unknown
-2025-09-11,APTV,Consumer Discretionary,Unknown
-2025-09-11,AR,Energy,Unknown
-2025-09-11,ARE,Real Estate,Unknown
-2025-09-11,ARES,Financials,Unknown
-2025-09-11,ARMK,Consumer Discretionary,Unknown
-2025-09-11,ARW,Information Technology,Unknown
-2025-09-11,AS,Consumer Discretionary,Unknown
-2025-09-11,ASH,Materials,Unknown
-2025-09-11,ASTS,Communication Services,Unknown
-2025-09-11,ATI,Industrials,Unknown
-2025-09-11,ATO,Utilities,Unknown
-2025-09-11,ATR,Materials,Unknown
-2025-09-11,AU,Materials,Unknown
-2025-09-11,AUR,Information Technology,Unknown
-2025-09-11,AVB,Real Estate,Unknown
-2025-09-11,AVGO,Information Technology,Unknown
-2025-09-11,AVT,Information Technology,Unknown
-2025-09-11,AVTR,Health Care,Unknown
-2025-09-11,AVY,Materials,Unknown
-2025-09-11,AWI,Industrials,Unknown
-2025-09-11,AWK,Utilities,Unknown
-2025-09-11,AXON,Industrials,Unknown
-2025-09-11,AXP,Financials,Unknown
-2025-09-11,AXS,Financials,Unknown
-2025-09-11,AXTA,Materials,Unknown
-2025-09-11,AYI,Industrials,Unknown
-2025-09-11,AZO,Consumer Discretionary,Unknown
-2025-09-11,BA,Industrials,Unknown
-2025-09-11,BAC,Financials,Unknown
-2025-09-11,BAH,Industrials,Unknown
-2025-09-11,BALL,Materials,Unknown
-2025-09-11,BAM,Financials,Unknown
-2025-09-11,BAX,Health Care,Unknown
-2025-09-11,BBWI,Consumer Discretionary,Unknown
-2025-09-11,BBY,Consumer Discretionary,Unknown
-2025-09-11,BC,Consumer Discretionary,Unknown
-2025-09-11,BDX,Health Care,Unknown
-2025-09-11,BEN,Financials,Unknown
-2025-09-11,BEPC,Utilities,Unknown
-2025-09-11,BF-B,Consumer Staples,Unknown
-2025-09-11,BFA,nan,Unknown
-2025-09-11,BFAM,Consumer Discretionary,Unknown
-2025-09-11,BFB,nan,Unknown
-2025-09-11,BG,Consumer Staples,Unknown
-2025-09-11,BHF,Financials,Unknown
-2025-09-11,BIIB,Health Care,Unknown
-2025-09-11,BILL,Information Technology,Unknown
-2025-09-11,BIO,Health Care,Unknown
-2025-09-11,BIRK,Consumer Discretionary,Unknown
-2025-09-11,BJ,Consumer Staples,Unknown
-2025-09-11,BK,Financials,Unknown
-2025-09-11,BKNG,Consumer Discretionary,Unknown
-2025-09-11,BKR,Energy,Unknown
-2025-09-11,BLD,Consumer Discretionary,Unknown
-2025-09-11,BLDR,Industrials,Unknown
-2025-09-11,BLK,Financials,Unknown
-2025-09-11,BMRN,Health Care,Unknown
-2025-09-11,BMY,Health Care,Unknown
-2025-09-11,BOKF,Financials,Unknown
-2025-09-11,BPOP,Financials,Unknown
-2025-09-11,BR,Industrials,Unknown
-2025-09-11,BRBR,Consumer Staples,Unknown
-2025-09-11,BRK-B,Financials,Unknown
-2025-09-11,BRKB,nan,Unknown
-2025-09-11,BRKR,Health Care,Unknown
-2025-09-11,BRO,Financials,Unknown
-2025-09-11,BROS,Consumer Discretionary,Unknown
-2025-09-11,BRX,Real Estate,Unknown
-2025-09-11,BSX,Health Care,Unknown
-2025-09-11,BSY,Information Technology,Unknown
-2025-09-11,BURL,Consumer Discretionary,Unknown
-2025-09-11,BWA,Consumer Discretionary,Unknown
-2025-09-11,BWXT,Industrials,Unknown
-2025-09-11,BX,Financials,Unknown
-2025-09-11,BXP,Real Estate,Unknown
-2025-09-11,BYD,Consumer Discretionary,Unknown
-2025-09-11,C,Financials,Unknown
-2025-09-11,CACC,Financials,Unknown
-2025-09-11,CACI,Industrials,Unknown
-2025-09-11,CAG,Consumer Staples,Unknown
-2025-09-11,CAH,Health Care,Unknown
-2025-09-11,CAR,Industrials,Unknown
-2025-09-11,CARR,Industrials,Unknown
-2025-09-11,CART,Consumer Staples,Unknown
-2025-09-11,CASY,Consumer Staples,Unknown
-2025-09-11,CAT,Industrials,Unknown
-2025-09-11,CAVA,Consumer Discretionary,Unknown
-2025-09-11,CB,Financials,Unknown
-2025-09-11,CBOE,Financials,Unknown
-2025-09-11,CBRE,Real Estate,Unknown
-2025-09-11,CBSH,Financials,Unknown
-2025-09-11,CCCS,Information Technology,Unknown
-2025-09-11,CCI,Real Estate,Unknown
-2025-09-11,CCK,Materials,Unknown
-2025-09-11,CCL,Consumer Discretionary,Unknown
-2025-09-11,CDNS,Information Technology,Unknown
-2025-09-11,CDW,Information Technology,Unknown
-2025-09-11,CE,Materials,Unknown
-2025-09-11,CEG,Utilities,Unknown
-2025-09-11,CELH,Consumer Staples,Unknown
-2025-09-11,CERT,Health Care,Unknown
-2025-09-11,CF,Materials,Unknown
-2025-09-11,CFG,Financials,Unknown
-2025-09-11,CFLT,Information Technology,Unknown
-2025-09-11,CFR,Financials,Unknown
-2025-09-11,CG,Financials,Unknown
-2025-09-11,CGNX,Information Technology,Unknown
-2025-09-11,CHD,Consumer Staples,Unknown
-2025-09-11,CHDN,Consumer Discretionary,Unknown
-2025-09-11,CHE,Health Care,Unknown
-2025-09-11,CHH,Consumer Discretionary,Unknown
-2025-09-11,CHRD,Energy,Unknown
-2025-09-11,CHRW,Industrials,Unknown
-2025-09-11,CHTR,Communication Services,Unknown
-2025-09-11,CHWY,Consumer Discretionary,Unknown
-2025-09-11,CI,Health Care,Unknown
-2025-09-11,CIEN,Information Technology,Unknown
-2025-09-11,CINF,Financials,Unknown
-2025-09-11,CIVI,Energy,Unknown
-2025-09-11,CL,Consumer Staples,Unknown
-2025-09-11,CLF,Materials,Unknown
-2025-09-11,CLH,Industrials,Unknown
-2025-09-11,CLVT,Industrials,Unknown
-2025-09-11,CLX,Consumer Staples,Unknown
-2025-09-11,CMA,Financials,Unknown
-2025-09-11,CMCSA,Communication Services,Unknown
-2025-09-11,CME,Financials,Unknown
-2025-09-11,CMG,Consumer Discretionary,Unknown
-2025-09-11,CMI,Industrials,Unknown
-2025-09-11,CMS,Utilities,Unknown
-2025-09-11,CNA,Financials,Unknown
-2025-09-11,CNC,Health Care,Unknown
-2025-09-11,CNH,Industrials,Unknown
-2025-09-11,CNM,Industrials,Unknown
-2025-09-11,CNP,Utilities,Unknown
-2025-09-11,CNXC,Information Technology,Unknown
-2025-09-11,COF,Financials,Unknown
-2025-09-11,COHR,Information Technology,Unknown
-2025-09-11,COIN,Financials,Unknown
-2025-09-11,COKE,Consumer Staples,Unknown
-2025-09-11,COLB,Financials,Unknown
-2025-09-11,COLD,Real Estate,Unknown
-2025-09-11,COLM,Consumer Discretionary,Unknown
-2025-09-11,COO,Health Care,Unknown
-2025-09-11,COOP,Financials,Unknown
-2025-09-11,COP,Energy,Unknown
-2025-09-11,COR,Health Care,Unknown
-2025-09-11,CORT,Health Care,Unknown
-2025-09-11,COST,Consumer Staples,Unknown
-2025-09-11,COTY,Consumer Staples,Unknown
-2025-09-11,CPAY,Financials,Unknown
-2025-09-11,CPB,Consumer Staples,Unknown
-2025-09-11,CPNG,Consumer Discretionary,Unknown
-2025-09-11,CPRT,Industrials,Unknown
-2025-09-11,CPT,Real Estate,Unknown
-2025-09-11,CR,Industrials,Unknown
-2025-09-11,CRH,Materials,Unknown
-2025-09-11,CRL,Health Care,Unknown
-2025-09-11,CRM,Information Technology,Unknown
-2025-09-11,CROX,Consumer Discretionary,Unknown
-2025-09-11,CRS,Materials,Unknown
-2025-09-11,CRUS,Information Technology,Unknown
-2025-09-11,CRWD,Information Technology,Unknown
-2025-09-11,CSCO,Information Technology,Unknown
-2025-09-11,CSGP,Real Estate,Unknown
-2025-09-11,CSL,Industrials,Unknown
-2025-09-11,CSX,Industrials,Unknown
-2025-09-11,CTAS,Industrials,Unknown
-2025-09-11,CTRA,Energy,Unknown
-2025-09-11,CTSH,Information Technology,Unknown
-2025-09-11,CTVA,Materials,Unknown
-2025-09-11,CUBE,Real Estate,Unknown
-2025-09-11,CUZ,Real Estate,Unknown
-2025-09-11,CVNA,Consumer Discretionary,Unknown
-2025-09-11,CVS,Health Care,Unknown
-2025-09-11,CVX,Energy,Unknown
-2025-09-11,CW,Industrials,Unknown
-2025-09-11,CWEN,Utilities,Unknown
-2025-09-11,CWENA,nan,Unknown
-2025-09-11,CXT,Industrials,Unknown
-2025-09-11,CZR,Consumer Discretionary,Unknown
-2025-09-11,D,Utilities,Unknown
-2025-09-11,DAL,Industrials,Unknown
-2025-09-11,DAR,Consumer Staples,Unknown
-2025-09-11,DASH,Consumer Discretionary,Unknown
-2025-09-11,DAY,Industrials,Unknown
-2025-09-11,DBX,Information Technology,Unknown
-2025-09-11,DCI,Industrials,Unknown
-2025-09-11,DD,Materials,Unknown
-2025-09-11,DDOG,Information Technology,Unknown
-2025-09-11,DDS,Consumer Discretionary,Unknown
-2025-09-11,DE,Industrials,Unknown
-2025-09-11,DECK,Consumer Discretionary,Unknown
-2025-09-11,DELL,Information Technology,Unknown
-2025-09-11,DG,Consumer Staples,Unknown
-2025-09-11,DGX,Health Care,Unknown
-2025-09-11,DHI,Consumer Discretionary,Unknown
-2025-09-11,DHR,Health Care,Unknown
-2025-09-11,DINO,Energy,Unknown
-2025-09-11,DIS,Communication Services,Unknown
-2025-09-11,DJT,Communication Services,Unknown
-2025-09-11,DKNG,Consumer Discretionary,Unknown
-2025-09-11,DKS,Consumer Discretionary,Unknown
-2025-09-11,DLB,Information Technology,Unknown
-2025-09-11,DLR,Real Estate,Unknown
-2025-09-11,DLTR,Consumer Staples,Unknown
-2025-09-11,DOC,Real Estate,Unknown
-2025-09-11,DOCS,Health Care,Unknown
-2025-09-11,DOCU,Information Technology,Unknown
-2025-09-11,DOV,Industrials,Unknown
-2025-09-11,DOW,Materials,Unknown
-2025-09-11,DOX,Information Technology,Unknown
-2025-09-11,DPZ,Consumer Discretionary,Unknown
-2025-09-11,DRI,Consumer Discretionary,Unknown
-2025-09-11,DRS,Industrials,Unknown
-2025-09-11,DT,Information Technology,Unknown
-2025-09-11,DTE,Utilities,Unknown
-2025-09-11,DTM,Energy,Unknown
-2025-09-11,DUK,Utilities,Unknown
-2025-09-11,DUOL,Consumer Discretionary,Unknown
-2025-09-11,DV,Information Technology,Unknown
-2025-09-11,DVA,Health Care,Unknown
-2025-09-11,DVN,Energy,Unknown
-2025-09-11,DXC,Information Technology,Unknown
-2025-09-11,DXCM,Health Care,Unknown
-2025-09-11,EA,Communication Services,Unknown
-2025-09-11,EBAY,Consumer Discretionary,Unknown
-2025-09-11,ECG,Industrials,Unknown
-2025-09-11,ECL,Materials,Unknown
-2025-09-11,ED,Utilities,Unknown
-2025-09-11,EEFT,Financials,Unknown
-2025-09-11,EFX,Industrials,Unknown
-2025-09-11,EG,Financials,Unknown
-2025-09-11,EGP,Real Estate,Unknown
-2025-09-11,EHC,Health Care,Unknown
-2025-09-11,EIX,Utilities,Unknown
-2025-09-11,EL,Consumer Staples,Unknown
-2025-09-11,ELAN,Health Care,Unknown
-2025-09-11,ELF,Consumer Staples,Unknown
-2025-09-11,ELS,Real Estate,Unknown
-2025-09-11,ELV,Health Care,Unknown
-2025-09-11,EME,Industrials,Unknown
-2025-09-11,EMN,Materials,Unknown
-2025-09-11,EMR,Industrials,Unknown
-2025-09-11,ENPH,Information Technology,Unknown
-2025-09-11,ENTG,Information Technology,Unknown
-2025-09-11,EOG,Energy,Unknown
-2025-09-11,EPAM,Information Technology,Unknown
-2025-09-11,EPR,Real Estate,Unknown
-2025-09-11,EQH,Financials,Unknown
-2025-09-11,EQIX,Real Estate,Unknown
-2025-09-11,EQR,Real Estate,Unknown
-2025-09-11,EQT,Energy,Unknown
-2025-09-11,ERIE,nan,Unknown
-2025-09-11,ES,Utilities,Unknown
-2025-09-11,ESAB,Industrials,Unknown
-2025-09-11,ESI,Materials,Unknown
-2025-09-11,ESS,Real Estate,Unknown
-2025-09-11,ESTC,Information Technology,Unknown
-2025-09-11,ESU5,nan,Unknown
-2025-09-11,ETDUSD,nan,Unknown
-2025-09-11,ETN,Industrials,Unknown
-2025-09-11,ETR,Utilities,Unknown
-2025-09-11,ETSY,Consumer Discretionary,Unknown
-2025-09-11,EVR,Financials,Unknown
-2025-09-11,EVRG,Utilities,Unknown
-2025-09-11,EW,Health Care,Unknown
-2025-09-11,EWBC,Financials,Unknown
-2025-09-11,EXAS,Health Care,Unknown
-2025-09-11,EXC,Utilities,Unknown
-2025-09-11,EXE,Energy,Unknown
-2025-09-11,EXEL,Health Care,Unknown
-2025-09-11,EXLS,Industrials,Unknown
-2025-09-11,EXP,Materials,Unknown
-2025-09-11,EXPD,Industrials,Unknown
-2025-09-11,EXPE,Consumer Discretionary,Unknown
-2025-09-11,EXR,Real Estate,Unknown
-2025-09-11,F,Consumer Discretionary,Unknown
-2025-09-11,FAF,Financials,Unknown
-2025-09-11,FANG,Energy,Unknown
-2025-09-11,FAST,Industrials,Unknown
-2025-09-11,FAU5,nan,Unknown
-2025-09-11,FBIN,Industrials,Unknown
-2025-09-11,FCN,Industrials,Unknown
-2025-09-11,FCNCA,Financials,Unknown
-2025-09-11,FCX,Materials,Unknown
-2025-09-11,FDS,Financials,Unknown
-2025-09-11,FDX,Industrials,Unknown
-2025-09-11,FE,Utilities,Unknown
-2025-09-11,FERG,Industrials,Unknown
-2025-09-11,FFIV,Information Technology,Unknown
-2025-09-11,FHB,Financials,Unknown
-2025-09-11,FHN,Financials,Unknown
-2025-09-11,FI,Financials,Unknown
-2025-09-11,FICO,Information Technology,Unknown
-2025-09-11,FIS,Financials,Unknown
-2025-09-11,FITB,Financials,Unknown
-2025-09-11,FIVE,Consumer Discretionary,Unknown
-2025-09-11,FIX,Industrials,Unknown
-2025-09-11,FLEX,Information Technology,Unknown
-2025-09-11,FLO,Consumer Staples,Unknown
-2025-09-11,FLS,Industrials,Unknown
-2025-09-11,FLUT,Consumer Discretionary,Unknown
-2025-09-11,FMC,Materials,Unknown
-2025-09-11,FNB,Financials,Unknown
-2025-09-11,FND,Consumer Discretionary,Unknown
-2025-09-11,FNF,Financials,Unknown
-2025-09-11,FOUR,Information Technology,Unknown
-2025-09-11,FOX,Communication Services,Unknown
-2025-09-11,FOXA,Communication Services,Unknown
-2025-09-11,FR,Real Estate,Unknown
-2025-09-11,FRHC,Financials,Unknown
-2025-09-11,FRPT,Consumer Staples,Unknown
-2025-09-11,FRT,Real Estate,Unknown
-2025-09-11,FSLR,Information Technology,Unknown
-2025-09-11,FTAI,Industrials,Unknown
-2025-09-11,FTI,Energy,Unknown
-2025-09-11,FTNT,Information Technology,Unknown
-2025-09-11,FTV,Industrials,Unknown
-2025-09-11,FWONA,Communication Services,Unknown
-2025-09-11,FWONK,Communication Services,Unknown
-2025-09-11,FYBR,Communication Services,Unknown
-2025-09-11,G,Information Technology,Unknown
-2025-09-11,GAP,Consumer Discretionary,Unknown
-2025-09-11,GD,Industrials,Unknown
-2025-09-11,GDDY,Information Technology,Unknown
-2025-09-11,GE,Industrials,Unknown
-2025-09-11,GEHC,Health Care,Unknown
-2025-09-11,GEN,Information Technology,Unknown
-2025-09-11,GEV,Industrials,Unknown
-2025-09-11,GFS,Information Technology,Unknown
-2025-09-11,GGG,Industrials,Unknown
-2025-09-11,GILD,Health Care,Unknown
-2025-09-11,GIS,Consumer Staples,Unknown
-2025-09-11,GL,Financials,Unknown
-2025-09-11,GLIBA,Communication Services,Unknown
-2025-09-11,GLIBK,Communication Services,Unknown
-2025-09-11,GLOB,Information Technology,Unknown
-2025-09-11,GLPI,Real Estate,Unknown
-2025-09-11,GLW,Information Technology,Unknown
-2025-09-11,GM,Consumer Discretionary,Unknown
-2025-09-11,GME,Consumer Discretionary,Unknown
-2025-09-11,GMED,Health Care,Unknown
-2025-09-11,GNRC,Industrials,Unknown
-2025-09-11,GNTX,Consumer Discretionary,Unknown
-2025-09-11,GOOG,Communication Services,Unknown
-2025-09-11,GOOGL,Communication Services,Unknown
-2025-09-11,GPC,Consumer Discretionary,Unknown
-2025-09-11,GPK,Materials,Unknown
-2025-09-11,GPN,Financials,Unknown
-2025-09-11,GRMN,Consumer Discretionary,Unknown
-2025-09-11,GS,Financials,Unknown
-2025-09-11,GTES,Industrials,Unknown
-2025-09-11,GTLB,Information Technology,Unknown
-2025-09-11,GTM,Communication Services,Unknown
-2025-09-11,GWRE,Information Technology,Unknown
-2025-09-11,GWW,Industrials,Unknown
-2025-09-11,GXO,Industrials,Unknown
-2025-09-11,H,Consumer Discretionary,Unknown
-2025-09-11,HAL,Energy,Unknown
-2025-09-11,HALO,Health Care,Unknown
-2025-09-11,HAS,Consumer Discretionary,Unknown
-2025-09-11,HAYW,Industrials,Unknown
-2025-09-11,HBAN,Financials,Unknown
-2025-09-11,HCA,Health Care,Unknown
-2025-09-11,HD,Consumer Discretionary,Unknown
-2025-09-11,HEI,Industrials,Unknown
-2025-09-11,HEIA,nan,Unknown
-2025-09-11,HHH,Real Estate,Unknown
-2025-09-11,HIG,Financials,Unknown
-2025-09-11,HII,Industrials,Unknown
-2025-09-11,HIW,Real Estate,Unknown
-2025-09-11,HLI,Financials,Unknown
-2025-09-11,HLNE,Financials,Unknown
-2025-09-11,HLT,Consumer Discretionary,Unknown
-2025-09-11,HOG,Consumer Discretionary,Unknown
-2025-09-11,HOLX,Health Care,Unknown
-2025-09-11,HON,Industrials,Unknown
-2025-09-11,HOOD,Financials,Unknown
-2025-09-11,HPE,Information Technology,Unknown
-2025-09-11,HPQ,Information Technology,Unknown
-2025-09-11,HR,Real Estate,Unknown
-2025-09-11,HRB,Consumer Discretionary,Unknown
-2025-09-11,HRL,Consumer Staples,Unknown
-2025-09-11,HSIC,Health Care,Unknown
-2025-09-11,HST,Real Estate,Unknown
-2025-09-11,HSY,Consumer Staples,Unknown
-2025-09-11,HUBB,Industrials,Unknown
-2025-09-11,HUBS,Information Technology,Unknown
-2025-09-11,HUM,Health Care,Unknown
-2025-09-11,HUN,Materials,Unknown
-2025-09-11,HWM,Industrials,Unknown
-2025-09-11,HXL,Industrials,Unknown
-2025-09-11,IAC,Communication Services,Unknown
-2025-09-11,IBKR,Financials,Unknown
-2025-09-11,IBM,Information Technology,Unknown
-2025-09-11,ICE,Financials,Unknown
-2025-09-11,IDA,Utilities,Unknown
-2025-09-11,IDXX,Health Care,Unknown
-2025-09-11,IEX,Industrials,Unknown
-2025-09-11,IFF,Materials,Unknown
-2025-09-11,ILMN,Health Care,Unknown
-2025-09-11,INCY,Health Care,Unknown
-2025-09-11,INFA,Information Technology,Unknown
-2025-09-11,INGM,Information Technology,Unknown
-2025-09-11,INGR,Consumer Staples,Unknown
-2025-09-11,INSM,Health Care,Unknown
-2025-09-11,INSP,Health Care,Unknown
-2025-09-11,INTC,Information Technology,Unknown
-2025-09-11,INTU,Information Technology,Unknown
-2025-09-11,INVH,Real Estate,Unknown
-2025-09-11,IONS,Health Care,Unknown
-2025-09-11,IOT,Information Technology,Unknown
-2025-09-11,IP,Materials,Unknown
-2025-09-11,IPG,Communication Services,Unknown
-2025-09-11,IPGP,Information Technology,Unknown
-2025-09-11,IQV,Health Care,Unknown
-2025-09-11,IR,Industrials,Unknown
-2025-09-11,IRDM,Communication Services,Unknown
-2025-09-11,IRM,Real Estate,Unknown
-2025-09-11,ISRG,Health Care,Unknown
-2025-09-11,IT,Information Technology,Unknown
-2025-09-11,ITT,Industrials,Unknown
-2025-09-11,ITW,Industrials,Unknown
-2025-09-11,IVZ,Financials,Unknown
-2025-09-11,J,Industrials,Unknown
-2025-09-11,JAZZ,Health Care,Unknown
-2025-09-11,JBHT,Industrials,Unknown
-2025-09-11,JBL,Information Technology,Unknown
-2025-09-11,JCI,Industrials,Unknown
-2025-09-11,JEF,Financials,Unknown
-2025-09-11,JHG,Financials,Unknown
-2025-09-11,JHX,Materials,Unknown
-2025-09-11,JKHY,Financials,Unknown
-2025-09-11,JLL,Real Estate,Unknown
-2025-09-11,JNJ,Health Care,Unknown
-2025-09-11,JPM,Financials,Unknown
-2025-09-11,K,Consumer Staples,Unknown
-2025-09-11,KBR,Industrials,Unknown
-2025-09-11,KD,Information Technology,Unknown
-2025-09-11,KDP,Consumer Staples,Unknown
-2025-09-11,KEX,Industrials,Unknown
-2025-09-11,KEY,Financials,Unknown
-2025-09-11,KEYS,Information Technology,Unknown
-2025-09-11,KHC,Consumer Staples,Unknown
-2025-09-11,KIM,Real Estate,Unknown
-2025-09-11,KKR,Financials,Unknown
-2025-09-11,KLAC,Information Technology,Unknown
-2025-09-11,KMB,Consumer Staples,Unknown
-2025-09-11,KMI,Energy,Unknown
-2025-09-11,KMPR,Financials,Unknown
-2025-09-11,KMX,Consumer Discretionary,Unknown
-2025-09-11,KNSL,Financials,Unknown
-2025-09-11,KNX,Industrials,Unknown
-2025-09-11,KO,Consumer Staples,Unknown
-2025-09-11,KR,Consumer Staples,Unknown
-2025-09-11,KRC,Real Estate,Unknown
-2025-09-11,KRMN,Industrials,Unknown
-2025-09-11,KVUE,Consumer Staples,Unknown
-2025-09-11,L,Financials,Unknown
-2025-09-11,LAD,Consumer Discretionary,Unknown
-2025-09-11,LAMR,Real Estate,Unknown
-2025-09-11,LAZ,Financials,Unknown
-2025-09-11,LBRDA,Communication Services,Unknown
-2025-09-11,LBRDK,Communication Services,Unknown
-2025-09-11,LBTYA,Communication Services,Unknown
-2025-09-11,LBTYK,Communication Services,Unknown
-2025-09-11,LCID,Consumer Discretionary,Unknown
-2025-09-11,LDOS,Industrials,Unknown
-2025-09-11,LEA,Consumer Discretionary,Unknown
-2025-09-11,LECO,Industrials,Unknown
-2025-09-11,LEN,Consumer Discretionary,Unknown
-2025-09-11,LENB,nan,Unknown
-2025-09-11,LFUS,Information Technology,Unknown
-2025-09-11,LH,Health Care,Unknown
-2025-09-11,LHX,Industrials,Unknown
-2025-09-11,LII,Industrials,Unknown
-2025-09-11,LIN,Materials,Unknown
-2025-09-11,LINE,Real Estate,Unknown
-2025-09-11,LITE,Information Technology,Unknown
-2025-09-11,LKQ,Consumer Discretionary,Unknown
-2025-09-11,LLY,Health Care,Unknown
-2025-09-11,LLYVA,Communication Services,Unknown
-2025-09-11,LLYVK,Communication Services,Unknown
-2025-09-11,LMT,Industrials,Unknown
-2025-09-11,LNC,Financials,Unknown
-2025-09-11,LNG,Energy,Unknown
-2025-09-11,LNT,Utilities,Unknown
-2025-09-11,LNW,Consumer Discretionary,Unknown
-2025-09-11,LOAR,Industrials,Unknown
-2025-09-11,LOPE,Consumer Discretionary,Unknown
-2025-09-11,LOW,Consumer Discretionary,Unknown
-2025-09-11,LPLA,Financials,Unknown
-2025-09-11,LPX,Materials,Unknown
-2025-09-11,LRCX,Information Technology,Unknown
-2025-09-11,LSCC,Information Technology,Unknown
-2025-09-11,LSTR,Industrials,Unknown
-2025-09-11,LULU,Consumer Discretionary,Unknown
-2025-09-11,LUV,Industrials,Unknown
-2025-09-11,LVS,Consumer Discretionary,Unknown
-2025-09-11,LW,Consumer Staples,Unknown
-2025-09-11,LYB,Materials,Unknown
-2025-09-11,LYFT,Industrials,Unknown
-2025-09-11,LYV,Communication Services,Unknown
-2025-09-11,M,Consumer Discretionary,Unknown
-2025-09-11,MA,Financials,Unknown
-2025-09-11,MAA,Real Estate,Unknown
-2025-09-11,MAN,Industrials,Unknown
-2025-09-11,MANH,Information Technology,Unknown
-2025-09-11,MAR,Consumer Discretionary,Unknown
-2025-09-11,MAS,Industrials,Unknown
-2025-09-11,MASI,Health Care,Unknown
-2025-09-11,MAT,Consumer Discretionary,Unknown
-2025-09-11,MCD,Consumer Discretionary,Unknown
-2025-09-11,MCHP,Information Technology,Unknown
-2025-09-11,MCK,Health Care,Unknown
-2025-09-11,MCO,Financials,Unknown
-2025-09-11,MDB,Information Technology,Unknown
-2025-09-11,MDLZ,Consumer Staples,Unknown
-2025-09-11,MDT,Health Care,Unknown
-2025-09-11,MDU,Utilities,Unknown
-2025-09-11,MEDP,Health Care,Unknown
-2025-09-11,MET,Financials,Unknown
-2025-09-11,META,Communication Services,Unknown
-2025-09-11,MGM,Consumer Discretionary,Unknown
-2025-09-11,MHK,Consumer Discretionary,Unknown
-2025-09-11,MIDD,Industrials,Unknown
-2025-09-11,MKC,Consumer Staples,Unknown
-2025-09-11,MKL,Financials,Unknown
-2025-09-11,MKSI,Information Technology,Unknown
-2025-09-11,MKTX,Financials,Unknown
-2025-09-11,MLI,Industrials,Unknown
-2025-09-11,MLM,Materials,Unknown
-2025-09-11,MMC,Financials,Unknown
-2025-09-11,MMM,Industrials,Unknown
-2025-09-11,MNST,Consumer Staples,Unknown
-2025-09-11,MO,Consumer Staples,Unknown
-2025-09-11,MOH,Health Care,Unknown
-2025-09-11,MORN,Financials,Unknown
-2025-09-11,MOS,Materials,Unknown
-2025-09-11,MP,Materials,Unknown
-2025-09-11,MPC,Energy,Unknown
-2025-09-11,MPW,Real Estate,Unknown
-2025-09-11,MPWR,Information Technology,Unknown
-2025-09-11,MRK,Health Care,Unknown
-2025-09-11,MRNA,Health Care,Unknown
-2025-09-11,MRP,Consumer Discretionary,Unknown
-2025-09-11,MRVL,Information Technology,Unknown
-2025-09-11,MS,Financials,Unknown
-2025-09-11,MSA,Industrials,Unknown
-2025-09-11,MSCI,Financials,Unknown
-2025-09-11,MSFT,Information Technology,Unknown
-2025-09-11,MSGS,Communication Services,Unknown
-2025-09-11,MSI,Information Technology,Unknown
-2025-09-11,MSM,Industrials,Unknown
-2025-09-11,MSTR,Information Technology,Unknown
-2025-09-11,MTB,Financials,Unknown
-2025-09-11,MTCH,Communication Services,Unknown
-2025-09-11,MTD,Health Care,Unknown
-2025-09-11,MTDR,Energy,Unknown
-2025-09-11,MTG,Financials,Unknown
-2025-09-11,MTN,Consumer Discretionary,Unknown
-2025-09-11,MTSI,Information Technology,Unknown
-2025-09-11,MTZ,Industrials,Unknown
-2025-09-11,MU,Information Technology,Unknown
-2025-09-11,MUSA,Consumer Discretionary,Unknown
-2025-09-11,NBIX,Health Care,Unknown
-2025-09-11,NCLH,Consumer Discretionary,Unknown
-2025-09-11,NCNO,Information Technology,Unknown
-2025-09-11,NDAQ,Financials,Unknown
-2025-09-11,NDSN,Industrials,Unknown
-2025-09-11,NEE,Utilities,Unknown
-2025-09-11,NEM,Materials,Unknown
-2025-09-11,NET,Information Technology,Unknown
-2025-09-11,NEU,Materials,Unknown
-2025-09-11,NFG,Utilities,Unknown
-2025-09-11,NFLX,Communication Services,Unknown
-2025-09-11,NI,Utilities,Unknown
-2025-09-11,NKE,Consumer Discretionary,Unknown
-2025-09-11,NLY,Financials,Unknown
-2025-09-11,NNN,Real Estate,Unknown
-2025-09-11,NOC,Industrials,Unknown
-2025-09-11,NOV,Energy,Unknown
-2025-09-11,NOW,Information Technology,Unknown
-2025-09-11,NRG,Utilities,Unknown
-2025-09-11,NSA,Real Estate,Unknown
-2025-09-11,NSC,Industrials,Unknown
-2025-09-11,NTAP,Information Technology,Unknown
-2025-09-11,NTNX,Information Technology,Unknown
-2025-09-11,NTRA,Health Care,Unknown
-2025-09-11,NTRS,Financials,Unknown
-2025-09-11,NU,Financials,Unknown
-2025-09-11,NUE,Materials,Unknown
-2025-09-11,NVDA,Information Technology,Unknown
-2025-09-11,NVR,Consumer Discretionary,Unknown
-2025-09-11,NVST,Health Care,Unknown
-2025-09-11,NVT,Industrials,Unknown
-2025-09-11,NWL,Consumer Discretionary,Unknown
-2025-09-11,NWS,Communication Services,Unknown
-2025-09-11,NWSA,Communication Services,Unknown
-2025-09-11,NXPI,nan,Unknown
-2025-09-11,NXST,Communication Services,Unknown
-2025-09-11,NYT,Communication Services,Unknown
-2025-09-11,O,Real Estate,Unknown
-2025-09-11,OC,Industrials,Unknown
-2025-09-11,ODFL,Industrials,Unknown
-2025-09-11,OGE,Utilities,Unknown
-2025-09-11,OGN,Health Care,Unknown
-2025-09-11,OHI,Real Estate,Unknown
-2025-09-11,OKE,Energy,Unknown
-2025-09-11,OKTA,Information Technology,Unknown
-2025-09-11,OLED,Information Technology,Unknown
-2025-09-11,OLLI,Consumer Discretionary,Unknown
-2025-09-11,OLN,Materials,Unknown
-2025-09-11,OMC,Communication Services,Unknown
-2025-09-11,OMF,Financials,Unknown
-2025-09-11,ON,Information Technology,Unknown
-2025-09-11,ONON,Consumer Discretionary,Unknown
-2025-09-11,ONTO,Information Technology,Unknown
-2025-09-11,ORCL,Information Technology,Unknown
-2025-09-11,ORI,Financials,Unknown
-2025-09-11,ORLY,Consumer Discretionary,Unknown
-2025-09-11,OSK,Industrials,Unknown
-2025-09-11,OTIS,Industrials,Unknown
-2025-09-11,OVV,Energy,Unknown
-2025-09-11,OWL,Financials,Unknown
-2025-09-11,OXY,Energy,Unknown
-2025-09-11,OZK,Financials,Unknown
-2025-09-11,PAG,Consumer Discretionary,Unknown
-2025-09-11,PANW,Information Technology,Unknown
-2025-09-11,PATH,Information Technology,Unknown
-2025-09-11,PAYC,Information Technology,Unknown
-2025-09-11,PAYX,Industrials,Unknown
-2025-09-11,PB,Financials,Unknown
-2025-09-11,PCAR,Industrials,Unknown
-2025-09-11,PCG,Utilities,Unknown
-2025-09-11,PCOR,Information Technology,Unknown
-2025-09-11,PCTY,Information Technology,Unknown
-2025-09-11,PEG,Utilities,Unknown
-2025-09-11,PEGA,Information Technology,Unknown
-2025-09-11,PEN,Health Care,Unknown
-2025-09-11,PENN,Consumer Discretionary,Unknown
-2025-09-11,PEP,Consumer Staples,Unknown
-2025-09-11,PFE,Health Care,Unknown
-2025-09-11,PFG,Financials,Unknown
-2025-09-11,PFGC,Consumer Staples,Unknown
-2025-09-11,PG,Consumer Staples,Unknown
-2025-09-11,PGR,Financials,Unknown
-2025-09-11,PH,Industrials,Unknown
-2025-09-11,PHM,Consumer Discretionary,Unknown
-2025-09-11,PINS,Communication Services,Unknown
-2025-09-11,PK,Real Estate,Unknown
-2025-09-11,PKG,Materials,Unknown
-2025-09-11,PLD,Real Estate,Unknown
-2025-09-11,PLNT,Consumer Discretionary,Unknown
-2025-09-11,PLTR,Information Technology,Unknown
-2025-09-11,PM,Consumer Staples,Unknown
-2025-09-11,PNC,Financials,Unknown
-2025-09-11,PNFP,Financials,Unknown
-2025-09-11,PNR,Industrials,Unknown
-2025-09-11,PNW,Utilities,Unknown
-2025-09-11,PODD,Health Care,Unknown
-2025-09-11,POOL,Consumer Discretionary,Unknown
-2025-09-11,POST,Consumer Staples,Unknown
-2025-09-11,PPC,Consumer Staples,Unknown
-2025-09-11,PPG,Materials,Unknown
-2025-09-11,PPL,Utilities,Unknown
-2025-09-11,PR,Energy,Unknown
-2025-09-11,PRGO,Health Care,Unknown
-2025-09-11,PRI,Financials,Unknown
-2025-09-11,PRMB,Consumer Staples,Unknown
-2025-09-11,PRU,Financials,Unknown
-2025-09-11,PSA,Real Estate,Unknown
-2025-09-11,PSKY,nan,Unknown
-2025-09-11,PSN,Industrials,Unknown
-2025-09-11,PSTG,Information Technology,Unknown
-2025-09-11,PSX,Energy,Unknown
-2025-09-11,PTC,Information Technology,Unknown
-2025-09-11,PVH,Consumer Discretionary,Unknown
-2025-09-11,PWR,Industrials,Unknown
-2025-09-11,PYPL,Financials,Unknown
-2025-09-11,QCOM,Information Technology,Unknown
-2025-09-11,QGEN,Health Care,Unknown
-2025-09-11,QRVO,Information Technology,Unknown
-2025-09-11,QS,Consumer Discretionary,Unknown
-2025-09-11,QSR,Consumer Discretionary,Unknown
-2025-09-11,QXO,Industrials,Unknown
-2025-09-11,R,Industrials,Unknown
-2025-09-11,RAL,Information Technology,Unknown
-2025-09-11,RARE,Health Care,Unknown
-2025-09-11,RBA,Industrials,Unknown
-2025-09-11,RBC,Industrials,Unknown
-2025-09-11,RBLX,Communication Services,Unknown
-2025-09-11,RBRK,Information Technology,Unknown
-2025-09-11,RCL,Consumer Discretionary,Unknown
-2025-09-11,RDDT,Communication Services,Unknown
-2025-09-11,REG,Real Estate,Unknown
-2025-09-11,REGN,Health Care,Unknown
-2025-09-11,REXR,Real Estate,Unknown
-2025-09-11,REYN,Consumer Staples,Unknown
-2025-09-11,RF,Financials,Unknown
-2025-09-11,RGA,Financials,Unknown
-2025-09-11,RGEN,Health Care,Unknown
-2025-09-11,RGLD,Materials,Unknown
-2025-09-11,RH,Consumer Discretionary,Unknown
-2025-09-11,RHI,Industrials,Unknown
-2025-09-11,RITM,Financials,Unknown
-2025-09-11,RIVN,Consumer Discretionary,Unknown
-2025-09-11,RJF,Financials,Unknown
-2025-09-11,RKLB,Industrials,Unknown
-2025-09-11,RKT,Financials,Unknown
-2025-09-11,RL,Consumer Discretionary,Unknown
-2025-09-11,RLI,Financials,Unknown
-2025-09-11,RMD,Health Care,Unknown
-2025-09-11,RNG,Information Technology,Unknown
-2025-09-11,RNR,Financials,Unknown
-2025-09-11,ROIV,Health Care,Unknown
-2025-09-11,ROK,Industrials,Unknown
-2025-09-11,ROKU,Communication Services,Unknown
-2025-09-11,ROL,Industrials,Unknown
-2025-09-11,ROP,Industrials,Unknown
-2025-09-11,ROST,Consumer Discretionary,Unknown
-2025-09-11,RPM,Materials,Unknown
-2025-09-11,RPRX,Health Care,Unknown
-2025-09-11,RRC,Energy,Unknown
-2025-09-11,RRX,Industrials,Unknown
-2025-09-11,RS,Materials,Unknown
-2025-09-11,RSG,Industrials,Unknown
-2025-09-11,RTX,Industrials,Unknown
-2025-09-11,RVMD,Health Care,Unknown
-2025-09-11,RVTY,Health Care,Unknown
-2025-09-11,RYAN,Financials,Unknown
-2025-09-11,RYN,Real Estate,Unknown
-2025-09-11,S,Information Technology,Unknown
-2025-09-11,SAIA,Industrials,Unknown
-2025-09-11,SAIC,Industrials,Unknown
-2025-09-11,SAIL,Information Technology,Unknown
-2025-09-11,SAM,Consumer Staples,Unknown
-2025-09-11,SARO,Industrials,Unknown
-2025-09-11,SBAC,Real Estate,Unknown
-2025-09-11,SBUX,Consumer Discretionary,Unknown
-2025-09-11,SCCO,Materials,Unknown
-2025-09-11,SCHW,Financials,Unknown
-2025-09-11,SCI,Consumer Discretionary,Unknown
-2025-09-11,SEB,Consumer Staples,Unknown
-2025-09-11,SEE,Materials,Unknown
-2025-09-11,SEIC,Financials,Unknown
-2025-09-11,SF,Financials,Unknown
-2025-09-11,SFD,Consumer Staples,Unknown
-2025-09-11,SFM,Consumer Staples,Unknown
-2025-09-11,SGAFT,nan,Unknown
-2025-09-11,SGI,Consumer Discretionary,Unknown
-2025-09-11,SHC,Health Care,Unknown
-2025-09-11,SHW,Materials,Unknown
-2025-09-11,SIRI,Communication Services,Unknown
-2025-09-11,SITE,Industrials,Unknown
-2025-09-11,SJM,Consumer Staples,Unknown
-2025-09-11,SKX,Consumer Discretionary,Unknown
-2025-09-11,SLB,Energy,Unknown
-2025-09-11,SLGN,Materials,Unknown
-2025-09-11,SLM,Financials,Unknown
-2025-09-11,SMCI,Information Technology,Unknown
-2025-09-11,SMG,Materials,Unknown
-2025-09-11,SMMT,Health Care,Unknown
-2025-09-11,SN,Consumer Discretionary,Unknown
-2025-09-11,SNA,Industrials,Unknown
-2025-09-11,SNDK,Information Technology,Unknown
-2025-09-11,SNDR,Industrials,Unknown
-2025-09-11,SNOW,Information Technology,Unknown
-2025-09-11,SNPS,Information Technology,Unknown
-2025-09-11,SNV,Financials,Unknown
-2025-09-11,SNX,Information Technology,Unknown
-2025-09-11,SO,Utilities,Unknown
-2025-09-11,SOFI,Financials,Unknown
-2025-09-11,SOLV,Health Care,Unknown
-2025-09-11,SON,Materials,Unknown
-2025-09-11,SPG,Real Estate,Unknown
-2025-09-11,SPGI,Financials,Unknown
-2025-09-11,SPOT,Communication Services,Unknown
-2025-09-11,SPR,Industrials,Unknown
-2025-09-11,SRE,Utilities,Unknown
-2025-09-11,SRPT,Health Care,Unknown
-2025-09-11,SSB,Financials,Unknown
-2025-09-11,SSD,Industrials,Unknown
-2025-09-11,SSNC,Information Technology,Unknown
-2025-09-11,ST,Industrials,Unknown
-2025-09-11,STAG,Real Estate,Unknown
-2025-09-11,STE,Health Care,Unknown
-2025-09-11,STLD,Materials,Unknown
-2025-09-11,STT,Financials,Unknown
-2025-09-11,STWD,Financials,Unknown
-2025-09-11,STX,nan,Unknown
-2025-09-11,STZ,Consumer Staples,Unknown
-2025-09-11,SUI,Real Estate,Unknown
-2025-09-11,SW,Materials,Unknown
-2025-09-11,SWK,Industrials,Unknown
-2025-09-11,SWKS,Information Technology,Unknown
-2025-09-11,SYF,Financials,Unknown
-2025-09-11,SYK,Health Care,Unknown
-2025-09-11,SYY,Consumer Staples,Unknown
-2025-09-11,T,Communication Services,Unknown
-2025-09-11,TAP,Consumer Staples,Unknown
-2025-09-11,TDC,Information Technology,Unknown
-2025-09-11,TDG,Industrials,Unknown
-2025-09-11,TDY,Industrials,Unknown
-2025-09-11,TEAM,Information Technology,Unknown
-2025-09-11,TECH,Health Care,Unknown
-2025-09-11,TEL,nan,Unknown
-2025-09-11,TEM,Health Care,Unknown
-2025-09-11,TER,Information Technology,Unknown
-2025-09-11,TFC,Financials,Unknown
-2025-09-11,TFSL,Financials,Unknown
-2025-09-11,TFX,Health Care,Unknown
-2025-09-11,TGT,Consumer Staples,Unknown
-2025-09-11,THC,Health Care,Unknown
-2025-09-11,THG,Financials,Unknown
-2025-09-11,THO,Consumer Discretionary,Unknown
-2025-09-11,TIGO,Communication Services,Unknown
-2025-09-11,TJX,Consumer Discretionary,Unknown
-2025-09-11,TKO,Communication Services,Unknown
-2025-09-11,TKR,Industrials,Unknown
-2025-09-11,TLN,Utilities,Unknown
-2025-09-11,TMO,Health Care,Unknown
-2025-09-11,TMUS,Communication Services,Unknown
-2025-09-11,TNL,Consumer Discretionary,Unknown
-2025-09-11,TOL,Consumer Discretionary,Unknown
-2025-09-11,TOST,Information Technology,Unknown
-2025-09-11,TPG,Financials,Unknown
-2025-09-11,TPL,Energy,Unknown
-2025-09-11,TPR,Consumer Discretionary,Unknown
-2025-09-11,TREX,Industrials,Unknown
-2025-09-11,TRGP,Energy,Unknown
-2025-09-11,TRMB,Information Technology,Unknown
-2025-09-11,TROW,Financials,Unknown
-2025-09-11,TRU,Industrials,Unknown
-2025-09-11,TRV,Financials,Unknown
-2025-09-11,TSCO,Consumer Discretionary,Unknown
-2025-09-11,TSLA,Consumer Discretionary,Unknown
-2025-09-11,TSN,Consumer Staples,Unknown
-2025-09-11,TT,Industrials,Unknown
-2025-09-11,TTC,Industrials,Unknown
-2025-09-11,TTD,Communication Services,Unknown
-2025-09-11,TTEK,Industrials,Unknown
-2025-09-11,TTWO,Communication Services,Unknown
-2025-09-11,TW,Financials,Unknown
-2025-09-11,TWLO,Information Technology,Unknown
-2025-09-11,TXN,Information Technology,Unknown
-2025-09-11,TXRH,Consumer Discretionary,Unknown
-2025-09-11,TXT,Industrials,Unknown
-2025-09-11,TYL,Information Technology,Unknown
-2025-09-11,U,Information Technology,Unknown
-2025-09-11,UA,Consumer Discretionary,Unknown
-2025-09-11,UAA,Consumer Discretionary,Unknown
-2025-09-11,UAL,Industrials,Unknown
-2025-09-11,UBER,Industrials,Unknown
-2025-09-11,UDR,Real Estate,Unknown
-2025-09-11,UGI,Utilities,Unknown
-2025-09-11,UHAL,Industrials,Unknown
-2025-09-11,UHALB,nan,Unknown
-2025-09-11,UHS,Health Care,Unknown
-2025-09-11,UI,Information Technology,Unknown
-2025-09-11,ULTA,Consumer Discretionary,Unknown
-2025-09-11,UNH,Health Care,Unknown
-2025-09-11,UNM,Financials,Unknown
-2025-09-11,UNP,Industrials,Unknown
-2025-09-11,UPS,Industrials,Unknown
-2025-09-11,URI,Industrials,Unknown
-2025-09-11,USB,Financials,Unknown
-2025-09-11,USD,nan,Unknown
-2025-09-11,USFD,Consumer Staples,Unknown
-2025-09-11,UTHR,Health Care,Unknown
-2025-09-11,UWMC,Financials,Unknown
-2025-09-11,V,Financials,Unknown
-2025-09-11,VEEV,Health Care,Unknown
-2025-09-11,VFC,Consumer Discretionary,Unknown
-2025-09-11,VICI,Real Estate,Unknown
-2025-09-11,VIK,Consumer Discretionary,Unknown
-2025-09-11,VIRT,Financials,Unknown
-2025-09-11,VKTX,Health Care,Unknown
-2025-09-11,VLO,Energy,Unknown
-2025-09-11,VLTO,Industrials,Unknown
-2025-09-11,VMC,Materials,Unknown
-2025-09-11,VMI,Industrials,Unknown
-2025-09-11,VNO,Real Estate,Unknown
-2025-09-11,VNOM,Energy,Unknown
-2025-09-11,VNT,Information Technology,Unknown
-2025-09-11,VOYA,Financials,Unknown
-2025-09-11,VRSK,Industrials,Unknown
-2025-09-11,VRSN,Information Technology,Unknown
-2025-09-11,VRT,Industrials,Unknown
-2025-09-11,VRTX,Health Care,Unknown
-2025-09-11,VST,Utilities,Unknown
-2025-09-11,VTR,Real Estate,Unknown
-2025-09-11,VTRS,Health Care,Unknown
-2025-09-11,VVV,Materials,Unknown
-2025-09-11,VZ,Communication Services,Unknown
-2025-09-11,W,Consumer Discretionary,Unknown
-2025-09-11,WAB,Industrials,Unknown
-2025-09-11,WAL,Financials,Unknown
-2025-09-11,WAT,Health Care,Unknown
-2025-09-11,WBA,nan,Unknown
-2025-09-11,WBD,Communication Services,Unknown
-2025-09-11,WBS,Financials,Unknown
-2025-09-11,WCC,Industrials,Unknown
-2025-09-11,WDAY,Information Technology,Unknown
-2025-09-11,WDC,Information Technology,Unknown
-2025-09-11,WEC,Utilities,Unknown
-2025-09-11,WELL,Real Estate,Unknown
-2025-09-11,WEN,Consumer Discretionary,Unknown
-2025-09-11,WEX,Financials,Unknown
-2025-09-11,WFC,Financials,Unknown
-2025-09-11,WFRD,Energy,Unknown
-2025-09-11,WH,Consumer Discretionary,Unknown
-2025-09-11,WHR,Consumer Discretionary,Unknown
-2025-09-11,WING,Consumer Discretionary,Unknown
-2025-09-11,WLK,Materials,Unknown
-2025-09-11,WM,Industrials,Unknown
-2025-09-11,WMB,Energy,Unknown
-2025-09-11,WMS,Industrials,Unknown
-2025-09-11,WMT,Consumer Staples,Unknown
-2025-09-11,WPC,Real Estate,Unknown
-2025-09-11,WRB,Financials,Unknown
-2025-09-11,WSC,Industrials,Unknown
-2025-09-11,WSM,Consumer Discretionary,Unknown
-2025-09-11,WSO,Industrials,Unknown
-2025-09-11,WST,Health Care,Unknown
-2025-09-11,WTFC,Financials,Unknown
-2025-09-11,WTM,Financials,Unknown
-2025-09-11,WTRG,Utilities,Unknown
-2025-09-11,WTW,Financials,Unknown
-2025-09-11,WU,Information Technology,Unknown
-2025-09-11,WWD,Industrials,Unknown
-2025-09-11,WY,Real Estate,Unknown
-2025-09-11,WYNN,Consumer Discretionary,Unknown
-2025-09-11,XEL,Utilities,Unknown
-2025-09-11,XOM,Energy,Unknown
-2025-09-11,XP,Financials,Unknown
-2025-09-11,XPO,Industrials,Unknown
-2025-09-11,XRAY,Health Care,Unknown
-2025-09-11,XTSLA,nan,Unknown
-2025-09-11,XYL,Industrials,Unknown
-2025-09-11,XYZ,Financials,Unknown
-2025-09-11,YETI,Consumer Discretionary,Unknown
-2025-09-11,YUM,Consumer Discretionary,Unknown
-2025-09-11,Z,Real Estate,Unknown
-2025-09-11,ZBH,Health Care,Unknown
-2025-09-11,ZBRA,Information Technology,Unknown
-2025-09-11,ZG,Real Estate,Unknown
-2025-09-11,ZION,Financials,Unknown
-2025-09-11,ZM,Information Technology,Unknown
-2025-09-11,ZS,Information Technology,Unknown
-2025-09-11,ZTS,Health Care,Unknown
+2025-09-12,-,nan,Unknown
+2025-09-12,A,Health Care,Unknown
+2025-09-12,AA,Materials,Unknown
+2025-09-12,AAL,Industrials,Unknown
+2025-09-12,AAON,Industrials,Unknown
+2025-09-12,AAPL,Information Technology,Unknown
+2025-09-12,ABBV,Health Care,Unknown
+2025-09-12,ABNB,Consumer Discretionary,Unknown
+2025-09-12,ABT,Health Care,Unknown
+2025-09-12,ACGL,Financials,Unknown
+2025-09-12,ACHC,Health Care,Unknown
+2025-09-12,ACI,Consumer Staples,Unknown
+2025-09-12,ACM,Industrials,Unknown
+2025-09-12,ACN,Information Technology,Unknown
+2025-09-12,ADBE,Information Technology,Unknown
+2025-09-12,ADC,Real Estate,Unknown
+2025-09-12,ADI,Information Technology,Unknown
+2025-09-12,ADM,Consumer Staples,Unknown
+2025-09-12,ADP,Industrials,Unknown
+2025-09-12,ADSK,Information Technology,Unknown
+2025-09-12,ADT,Consumer Discretionary,Unknown
+2025-09-12,AEE,Utilities,Unknown
+2025-09-12,AEP,Utilities,Unknown
+2025-09-12,AES,Utilities,Unknown
+2025-09-12,AFG,Financials,Unknown
+2025-09-12,AFL,Financials,Unknown
+2025-09-12,AFRM,Information Technology,Unknown
+2025-09-12,AGCO,Industrials,Unknown
+2025-09-12,AGNC,Financials,Unknown
+2025-09-12,AGO,Financials,Unknown
+2025-09-12,AIG,Financials,Unknown
+2025-09-12,AIT,Industrials,Unknown
+2025-09-12,AIZ,Financials,Unknown
+2025-09-12,AJG,Financials,Unknown
+2025-09-12,AKAM,Information Technology,Unknown
+2025-09-12,AL,Industrials,Unknown
+2025-09-12,ALAB,Information Technology,Unknown
+2025-09-12,ALB,Materials,Unknown
+2025-09-12,ALGM,Information Technology,Unknown
+2025-09-12,ALGN,Health Care,Unknown
+2025-09-12,ALK,Industrials,Unknown
+2025-09-12,ALL,Financials,Unknown
+2025-09-12,ALLE,Industrials,Unknown
+2025-09-12,ALLY,Financials,Unknown
+2025-09-12,ALNY,Health Care,Unknown
+2025-09-12,ALSN,Industrials,Unknown
+2025-09-12,AM,Energy,Unknown
+2025-09-12,AMAT,Information Technology,Unknown
+2025-09-12,AMCR,Materials,Unknown
+2025-09-12,AMD,Information Technology,Unknown
+2025-09-12,AME,Industrials,Unknown
+2025-09-12,AMG,Financials,Unknown
+2025-09-12,AMGN,Health Care,Unknown
+2025-09-12,AMH,Real Estate,Unknown
+2025-09-12,AMKR,Information Technology,Unknown
+2025-09-12,AMP,Financials,Unknown
+2025-09-12,AMT,Real Estate,Unknown
+2025-09-12,AMTM,Industrials,Unknown
+2025-09-12,AMZN,Consumer Discretionary,Unknown
+2025-09-12,AN,Consumer Discretionary,Unknown
+2025-09-12,ANET,Information Technology,Unknown
+2025-09-12,AON,Financials,Unknown
+2025-09-12,AOS,Industrials,Unknown
+2025-09-12,APA,Energy,Unknown
+2025-09-12,APD,Materials,Unknown
+2025-09-12,APG,Industrials,Unknown
+2025-09-12,APH,Information Technology,Unknown
+2025-09-12,APLS,Health Care,Unknown
+2025-09-12,APO,Financials,Unknown
+2025-09-12,APP,Information Technology,Unknown
+2025-09-12,APPF,Information Technology,Unknown
+2025-09-12,APTV,Consumer Discretionary,Unknown
+2025-09-12,AR,Energy,Unknown
+2025-09-12,ARE,Real Estate,Unknown
+2025-09-12,ARES,Financials,Unknown
+2025-09-12,ARMK,Consumer Discretionary,Unknown
+2025-09-12,ARW,Information Technology,Unknown
+2025-09-12,AS,Consumer Discretionary,Unknown
+2025-09-12,ASH,Materials,Unknown
+2025-09-12,ASTS,Communication Services,Unknown
+2025-09-12,ATI,Industrials,Unknown
+2025-09-12,ATO,Utilities,Unknown
+2025-09-12,ATR,Materials,Unknown
+2025-09-12,AU,Materials,Unknown
+2025-09-12,AUR,Information Technology,Unknown
+2025-09-12,AVB,Real Estate,Unknown
+2025-09-12,AVGO,Information Technology,Unknown
+2025-09-12,AVT,Information Technology,Unknown
+2025-09-12,AVTR,Health Care,Unknown
+2025-09-12,AVY,Materials,Unknown
+2025-09-12,AWI,Industrials,Unknown
+2025-09-12,AWK,Utilities,Unknown
+2025-09-12,AXON,Industrials,Unknown
+2025-09-12,AXP,Financials,Unknown
+2025-09-12,AXS,Financials,Unknown
+2025-09-12,AXTA,Materials,Unknown
+2025-09-12,AYI,Industrials,Unknown
+2025-09-12,AZO,Consumer Discretionary,Unknown
+2025-09-12,BA,Industrials,Unknown
+2025-09-12,BAC,Financials,Unknown
+2025-09-12,BAH,Industrials,Unknown
+2025-09-12,BALL,Materials,Unknown
+2025-09-12,BAM,Financials,Unknown
+2025-09-12,BAX,Health Care,Unknown
+2025-09-12,BBWI,Consumer Discretionary,Unknown
+2025-09-12,BBY,Consumer Discretionary,Unknown
+2025-09-12,BC,Consumer Discretionary,Unknown
+2025-09-12,BDX,Health Care,Unknown
+2025-09-12,BEN,Financials,Unknown
+2025-09-12,BEPC,Utilities,Unknown
+2025-09-12,BF-B,Consumer Staples,Unknown
+2025-09-12,BFA,nan,Unknown
+2025-09-12,BFAM,Consumer Discretionary,Unknown
+2025-09-12,BFB,nan,Unknown
+2025-09-12,BG,Consumer Staples,Unknown
+2025-09-12,BHF,Financials,Unknown
+2025-09-12,BIIB,Health Care,Unknown
+2025-09-12,BILL,Information Technology,Unknown
+2025-09-12,BIO,Health Care,Unknown
+2025-09-12,BIRK,Consumer Discretionary,Unknown
+2025-09-12,BJ,Consumer Staples,Unknown
+2025-09-12,BK,Financials,Unknown
+2025-09-12,BKNG,Consumer Discretionary,Unknown
+2025-09-12,BKR,Energy,Unknown
+2025-09-12,BLD,Consumer Discretionary,Unknown
+2025-09-12,BLDR,Industrials,Unknown
+2025-09-12,BLK,Financials,Unknown
+2025-09-12,BMRN,Health Care,Unknown
+2025-09-12,BMY,Health Care,Unknown
+2025-09-12,BOKF,Financials,Unknown
+2025-09-12,BPOP,Financials,Unknown
+2025-09-12,BR,Industrials,Unknown
+2025-09-12,BRBR,Consumer Staples,Unknown
+2025-09-12,BRK-B,Financials,Unknown
+2025-09-12,BRKB,nan,Unknown
+2025-09-12,BRKR,Health Care,Unknown
+2025-09-12,BRO,Financials,Unknown
+2025-09-12,BROS,Consumer Discretionary,Unknown
+2025-09-12,BRX,Real Estate,Unknown
+2025-09-12,BSX,Health Care,Unknown
+2025-09-12,BSY,Information Technology,Unknown
+2025-09-12,BURL,Consumer Discretionary,Unknown
+2025-09-12,BWA,Consumer Discretionary,Unknown
+2025-09-12,BWXT,Industrials,Unknown
+2025-09-12,BX,Financials,Unknown
+2025-09-12,BXP,Real Estate,Unknown
+2025-09-12,BYD,Consumer Discretionary,Unknown
+2025-09-12,C,Financials,Unknown
+2025-09-12,CACC,Financials,Unknown
+2025-09-12,CACI,Industrials,Unknown
+2025-09-12,CAG,Consumer Staples,Unknown
+2025-09-12,CAH,Health Care,Unknown
+2025-09-12,CAR,Industrials,Unknown
+2025-09-12,CARR,Industrials,Unknown
+2025-09-12,CART,Consumer Staples,Unknown
+2025-09-12,CASY,Consumer Staples,Unknown
+2025-09-12,CAT,Industrials,Unknown
+2025-09-12,CAVA,Consumer Discretionary,Unknown
+2025-09-12,CB,Financials,Unknown
+2025-09-12,CBOE,Financials,Unknown
+2025-09-12,CBRE,Real Estate,Unknown
+2025-09-12,CBSH,Financials,Unknown
+2025-09-12,CCCS,Information Technology,Unknown
+2025-09-12,CCI,Real Estate,Unknown
+2025-09-12,CCK,Materials,Unknown
+2025-09-12,CCL,Consumer Discretionary,Unknown
+2025-09-12,CDNS,Information Technology,Unknown
+2025-09-12,CDW,Information Technology,Unknown
+2025-09-12,CE,Materials,Unknown
+2025-09-12,CEG,Utilities,Unknown
+2025-09-12,CELH,Consumer Staples,Unknown
+2025-09-12,CERT,Health Care,Unknown
+2025-09-12,CF,Materials,Unknown
+2025-09-12,CFG,Financials,Unknown
+2025-09-12,CFLT,Information Technology,Unknown
+2025-09-12,CFR,Financials,Unknown
+2025-09-12,CG,Financials,Unknown
+2025-09-12,CGNX,Information Technology,Unknown
+2025-09-12,CHD,Consumer Staples,Unknown
+2025-09-12,CHDN,Consumer Discretionary,Unknown
+2025-09-12,CHE,Health Care,Unknown
+2025-09-12,CHH,Consumer Discretionary,Unknown
+2025-09-12,CHRD,Energy,Unknown
+2025-09-12,CHRW,Industrials,Unknown
+2025-09-12,CHTR,Communication Services,Unknown
+2025-09-12,CHWY,Consumer Discretionary,Unknown
+2025-09-12,CI,Health Care,Unknown
+2025-09-12,CIEN,Information Technology,Unknown
+2025-09-12,CINF,Financials,Unknown
+2025-09-12,CIVI,Energy,Unknown
+2025-09-12,CL,Consumer Staples,Unknown
+2025-09-12,CLF,Materials,Unknown
+2025-09-12,CLH,Industrials,Unknown
+2025-09-12,CLVT,Industrials,Unknown
+2025-09-12,CLX,Consumer Staples,Unknown
+2025-09-12,CMA,Financials,Unknown
+2025-09-12,CMCSA,Communication Services,Unknown
+2025-09-12,CME,Financials,Unknown
+2025-09-12,CMG,Consumer Discretionary,Unknown
+2025-09-12,CMI,Industrials,Unknown
+2025-09-12,CMS,Utilities,Unknown
+2025-09-12,CNA,Financials,Unknown
+2025-09-12,CNC,Health Care,Unknown
+2025-09-12,CNH,Industrials,Unknown
+2025-09-12,CNM,Industrials,Unknown
+2025-09-12,CNP,Utilities,Unknown
+2025-09-12,CNXC,Information Technology,Unknown
+2025-09-12,COF,Financials,Unknown
+2025-09-12,COHR,Information Technology,Unknown
+2025-09-12,COIN,Financials,Unknown
+2025-09-12,COKE,Consumer Staples,Unknown
+2025-09-12,COLB,Financials,Unknown
+2025-09-12,COLD,Real Estate,Unknown
+2025-09-12,COLM,Consumer Discretionary,Unknown
+2025-09-12,COO,Health Care,Unknown
+2025-09-12,COOP,Financials,Unknown
+2025-09-12,COP,Energy,Unknown
+2025-09-12,COR,Health Care,Unknown
+2025-09-12,CORT,Health Care,Unknown
+2025-09-12,COST,Consumer Staples,Unknown
+2025-09-12,COTY,Consumer Staples,Unknown
+2025-09-12,CPAY,Financials,Unknown
+2025-09-12,CPB,Consumer Staples,Unknown
+2025-09-12,CPNG,Consumer Discretionary,Unknown
+2025-09-12,CPRT,Industrials,Unknown
+2025-09-12,CPT,Real Estate,Unknown
+2025-09-12,CR,Industrials,Unknown
+2025-09-12,CRH,Materials,Unknown
+2025-09-12,CRL,Health Care,Unknown
+2025-09-12,CRM,Information Technology,Unknown
+2025-09-12,CROX,Consumer Discretionary,Unknown
+2025-09-12,CRS,Materials,Unknown
+2025-09-12,CRUS,Information Technology,Unknown
+2025-09-12,CRWD,Information Technology,Unknown
+2025-09-12,CSCO,Information Technology,Unknown
+2025-09-12,CSGP,Real Estate,Unknown
+2025-09-12,CSL,Industrials,Unknown
+2025-09-12,CSX,Industrials,Unknown
+2025-09-12,CTAS,Industrials,Unknown
+2025-09-12,CTRA,Energy,Unknown
+2025-09-12,CTSH,Information Technology,Unknown
+2025-09-12,CTVA,Materials,Unknown
+2025-09-12,CUBE,Real Estate,Unknown
+2025-09-12,CUZ,Real Estate,Unknown
+2025-09-12,CVNA,Consumer Discretionary,Unknown
+2025-09-12,CVS,Health Care,Unknown
+2025-09-12,CVX,Energy,Unknown
+2025-09-12,CW,Industrials,Unknown
+2025-09-12,CWEN,Utilities,Unknown
+2025-09-12,CWENA,nan,Unknown
+2025-09-12,CXT,Industrials,Unknown
+2025-09-12,CZR,Consumer Discretionary,Unknown
+2025-09-12,D,Utilities,Unknown
+2025-09-12,DAL,Industrials,Unknown
+2025-09-12,DAR,Consumer Staples,Unknown
+2025-09-12,DASH,Consumer Discretionary,Unknown
+2025-09-12,DAY,Industrials,Unknown
+2025-09-12,DBX,Information Technology,Unknown
+2025-09-12,DCI,Industrials,Unknown
+2025-09-12,DD,Materials,Unknown
+2025-09-12,DDOG,Information Technology,Unknown
+2025-09-12,DDS,Consumer Discretionary,Unknown
+2025-09-12,DE,Industrials,Unknown
+2025-09-12,DECK,Consumer Discretionary,Unknown
+2025-09-12,DELL,Information Technology,Unknown
+2025-09-12,DG,Consumer Staples,Unknown
+2025-09-12,DGX,Health Care,Unknown
+2025-09-12,DHI,Consumer Discretionary,Unknown
+2025-09-12,DHR,Health Care,Unknown
+2025-09-12,DINO,Energy,Unknown
+2025-09-12,DIS,Communication Services,Unknown
+2025-09-12,DJT,Communication Services,Unknown
+2025-09-12,DKNG,Consumer Discretionary,Unknown
+2025-09-12,DKS,Consumer Discretionary,Unknown
+2025-09-12,DLB,Information Technology,Unknown
+2025-09-12,DLR,Real Estate,Unknown
+2025-09-12,DLTR,Consumer Staples,Unknown
+2025-09-12,DOC,Real Estate,Unknown
+2025-09-12,DOCS,Health Care,Unknown
+2025-09-12,DOCU,Information Technology,Unknown
+2025-09-12,DOV,Industrials,Unknown
+2025-09-12,DOW,Materials,Unknown
+2025-09-12,DOX,Information Technology,Unknown
+2025-09-12,DPZ,Consumer Discretionary,Unknown
+2025-09-12,DRI,Consumer Discretionary,Unknown
+2025-09-12,DRS,Industrials,Unknown
+2025-09-12,DT,Information Technology,Unknown
+2025-09-12,DTE,Utilities,Unknown
+2025-09-12,DTM,Energy,Unknown
+2025-09-12,DUK,Utilities,Unknown
+2025-09-12,DUOL,Consumer Discretionary,Unknown
+2025-09-12,DV,Information Technology,Unknown
+2025-09-12,DVA,Health Care,Unknown
+2025-09-12,DVN,Energy,Unknown
+2025-09-12,DXC,Information Technology,Unknown
+2025-09-12,DXCM,Health Care,Unknown
+2025-09-12,EA,Communication Services,Unknown
+2025-09-12,EBAY,Consumer Discretionary,Unknown
+2025-09-12,ECG,Industrials,Unknown
+2025-09-12,ECL,Materials,Unknown
+2025-09-12,ED,Utilities,Unknown
+2025-09-12,EEFT,Financials,Unknown
+2025-09-12,EFX,Industrials,Unknown
+2025-09-12,EG,Financials,Unknown
+2025-09-12,EGP,Real Estate,Unknown
+2025-09-12,EHC,Health Care,Unknown
+2025-09-12,EIX,Utilities,Unknown
+2025-09-12,EL,Consumer Staples,Unknown
+2025-09-12,ELAN,Health Care,Unknown
+2025-09-12,ELF,Consumer Staples,Unknown
+2025-09-12,ELS,Real Estate,Unknown
+2025-09-12,ELV,Health Care,Unknown
+2025-09-12,EME,Industrials,Unknown
+2025-09-12,EMN,Materials,Unknown
+2025-09-12,EMR,Industrials,Unknown
+2025-09-12,ENPH,Information Technology,Unknown
+2025-09-12,ENTG,Information Technology,Unknown
+2025-09-12,EOG,Energy,Unknown
+2025-09-12,EPAM,Information Technology,Unknown
+2025-09-12,EPR,Real Estate,Unknown
+2025-09-12,EQH,Financials,Unknown
+2025-09-12,EQIX,Real Estate,Unknown
+2025-09-12,EQR,Real Estate,Unknown
+2025-09-12,EQT,Energy,Unknown
+2025-09-12,ERIE,nan,Unknown
+2025-09-12,ES,Utilities,Unknown
+2025-09-12,ESAB,Industrials,Unknown
+2025-09-12,ESI,Materials,Unknown
+2025-09-12,ESS,Real Estate,Unknown
+2025-09-12,ESTC,Information Technology,Unknown
+2025-09-12,ESU5,nan,Unknown
+2025-09-12,ETDUSD,nan,Unknown
+2025-09-12,ETN,Industrials,Unknown
+2025-09-12,ETR,Utilities,Unknown
+2025-09-12,ETSY,Consumer Discretionary,Unknown
+2025-09-12,EVR,Financials,Unknown
+2025-09-12,EVRG,Utilities,Unknown
+2025-09-12,EW,Health Care,Unknown
+2025-09-12,EWBC,Financials,Unknown
+2025-09-12,EXAS,Health Care,Unknown
+2025-09-12,EXC,Utilities,Unknown
+2025-09-12,EXE,Energy,Unknown
+2025-09-12,EXEL,Health Care,Unknown
+2025-09-12,EXLS,Industrials,Unknown
+2025-09-12,EXP,Materials,Unknown
+2025-09-12,EXPD,Industrials,Unknown
+2025-09-12,EXPE,Consumer Discretionary,Unknown
+2025-09-12,EXR,Real Estate,Unknown
+2025-09-12,F,Consumer Discretionary,Unknown
+2025-09-12,FAF,Financials,Unknown
+2025-09-12,FANG,Energy,Unknown
+2025-09-12,FAST,Industrials,Unknown
+2025-09-12,FAU5,nan,Unknown
+2025-09-12,FBIN,Industrials,Unknown
+2025-09-12,FCN,Industrials,Unknown
+2025-09-12,FCNCA,Financials,Unknown
+2025-09-12,FCX,Materials,Unknown
+2025-09-12,FDS,Financials,Unknown
+2025-09-12,FDX,Industrials,Unknown
+2025-09-12,FE,Utilities,Unknown
+2025-09-12,FERG,Industrials,Unknown
+2025-09-12,FFIV,Information Technology,Unknown
+2025-09-12,FHB,Financials,Unknown
+2025-09-12,FHN,Financials,Unknown
+2025-09-12,FI,Financials,Unknown
+2025-09-12,FICO,Information Technology,Unknown
+2025-09-12,FIS,Financials,Unknown
+2025-09-12,FITB,Financials,Unknown
+2025-09-12,FIVE,Consumer Discretionary,Unknown
+2025-09-12,FIX,Industrials,Unknown
+2025-09-12,FLEX,Information Technology,Unknown
+2025-09-12,FLO,Consumer Staples,Unknown
+2025-09-12,FLS,Industrials,Unknown
+2025-09-12,FLUT,Consumer Discretionary,Unknown
+2025-09-12,FMC,Materials,Unknown
+2025-09-12,FNB,Financials,Unknown
+2025-09-12,FND,Consumer Discretionary,Unknown
+2025-09-12,FNF,Financials,Unknown
+2025-09-12,FOUR,Information Technology,Unknown
+2025-09-12,FOX,Communication Services,Unknown
+2025-09-12,FOXA,Communication Services,Unknown
+2025-09-12,FR,Real Estate,Unknown
+2025-09-12,FRHC,Financials,Unknown
+2025-09-12,FRPT,Consumer Staples,Unknown
+2025-09-12,FRT,Real Estate,Unknown
+2025-09-12,FSLR,Information Technology,Unknown
+2025-09-12,FTAI,Industrials,Unknown
+2025-09-12,FTI,Energy,Unknown
+2025-09-12,FTNT,Information Technology,Unknown
+2025-09-12,FTV,Industrials,Unknown
+2025-09-12,FWONA,Communication Services,Unknown
+2025-09-12,FWONK,Communication Services,Unknown
+2025-09-12,FYBR,Communication Services,Unknown
+2025-09-12,G,Information Technology,Unknown
+2025-09-12,GAP,Consumer Discretionary,Unknown
+2025-09-12,GD,Industrials,Unknown
+2025-09-12,GDDY,Information Technology,Unknown
+2025-09-12,GE,Industrials,Unknown
+2025-09-12,GEHC,Health Care,Unknown
+2025-09-12,GEN,Information Technology,Unknown
+2025-09-12,GEV,Industrials,Unknown
+2025-09-12,GFS,Information Technology,Unknown
+2025-09-12,GGG,Industrials,Unknown
+2025-09-12,GILD,Health Care,Unknown
+2025-09-12,GIS,Consumer Staples,Unknown
+2025-09-12,GL,Financials,Unknown
+2025-09-12,GLIBA,Communication Services,Unknown
+2025-09-12,GLIBK,Communication Services,Unknown
+2025-09-12,GLOB,Information Technology,Unknown
+2025-09-12,GLPI,Real Estate,Unknown
+2025-09-12,GLW,Information Technology,Unknown
+2025-09-12,GM,Consumer Discretionary,Unknown
+2025-09-12,GME,Consumer Discretionary,Unknown
+2025-09-12,GMED,Health Care,Unknown
+2025-09-12,GNRC,Industrials,Unknown
+2025-09-12,GNTX,Consumer Discretionary,Unknown
+2025-09-12,GOOG,Communication Services,Unknown
+2025-09-12,GOOGL,Communication Services,Unknown
+2025-09-12,GPC,Consumer Discretionary,Unknown
+2025-09-12,GPK,Materials,Unknown
+2025-09-12,GPN,Financials,Unknown
+2025-09-12,GRMN,Consumer Discretionary,Unknown
+2025-09-12,GS,Financials,Unknown
+2025-09-12,GTES,Industrials,Unknown
+2025-09-12,GTLB,Information Technology,Unknown
+2025-09-12,GTM,Communication Services,Unknown
+2025-09-12,GWRE,Information Technology,Unknown
+2025-09-12,GWW,Industrials,Unknown
+2025-09-12,GXO,Industrials,Unknown
+2025-09-12,H,Consumer Discretionary,Unknown
+2025-09-12,HAL,Energy,Unknown
+2025-09-12,HALO,Health Care,Unknown
+2025-09-12,HAS,Consumer Discretionary,Unknown
+2025-09-12,HAYW,Industrials,Unknown
+2025-09-12,HBAN,Financials,Unknown
+2025-09-12,HCA,Health Care,Unknown
+2025-09-12,HD,Consumer Discretionary,Unknown
+2025-09-12,HEI,Industrials,Unknown
+2025-09-12,HEIA,nan,Unknown
+2025-09-12,HHH,Real Estate,Unknown
+2025-09-12,HIG,Financials,Unknown
+2025-09-12,HII,Industrials,Unknown
+2025-09-12,HIW,Real Estate,Unknown
+2025-09-12,HLI,Financials,Unknown
+2025-09-12,HLNE,Financials,Unknown
+2025-09-12,HLT,Consumer Discretionary,Unknown
+2025-09-12,HOG,Consumer Discretionary,Unknown
+2025-09-12,HOLX,Health Care,Unknown
+2025-09-12,HON,Industrials,Unknown
+2025-09-12,HOOD,Financials,Unknown
+2025-09-12,HPE,Information Technology,Unknown
+2025-09-12,HPQ,Information Technology,Unknown
+2025-09-12,HR,Real Estate,Unknown
+2025-09-12,HRB,Consumer Discretionary,Unknown
+2025-09-12,HRL,Consumer Staples,Unknown
+2025-09-12,HSIC,Health Care,Unknown
+2025-09-12,HST,Real Estate,Unknown
+2025-09-12,HSY,Consumer Staples,Unknown
+2025-09-12,HUBB,Industrials,Unknown
+2025-09-12,HUBS,Information Technology,Unknown
+2025-09-12,HUM,Health Care,Unknown
+2025-09-12,HUN,Materials,Unknown
+2025-09-12,HWM,Industrials,Unknown
+2025-09-12,HXL,Industrials,Unknown
+2025-09-12,IAC,Communication Services,Unknown
+2025-09-12,IBKR,Financials,Unknown
+2025-09-12,IBM,Information Technology,Unknown
+2025-09-12,ICE,Financials,Unknown
+2025-09-12,IDA,Utilities,Unknown
+2025-09-12,IDXX,Health Care,Unknown
+2025-09-12,IEX,Industrials,Unknown
+2025-09-12,IFF,Materials,Unknown
+2025-09-12,ILMN,Health Care,Unknown
+2025-09-12,INCY,Health Care,Unknown
+2025-09-12,INFA,Information Technology,Unknown
+2025-09-12,INGM,Information Technology,Unknown
+2025-09-12,INGR,Consumer Staples,Unknown
+2025-09-12,INSM,Health Care,Unknown
+2025-09-12,INSP,Health Care,Unknown
+2025-09-12,INTC,Information Technology,Unknown
+2025-09-12,INTU,Information Technology,Unknown
+2025-09-12,INVH,Real Estate,Unknown
+2025-09-12,IONS,Health Care,Unknown
+2025-09-12,IOT,Information Technology,Unknown
+2025-09-12,IP,Materials,Unknown
+2025-09-12,IPG,Communication Services,Unknown
+2025-09-12,IPGP,Information Technology,Unknown
+2025-09-12,IQV,Health Care,Unknown
+2025-09-12,IR,Industrials,Unknown
+2025-09-12,IRDM,Communication Services,Unknown
+2025-09-12,IRM,Real Estate,Unknown
+2025-09-12,ISRG,Health Care,Unknown
+2025-09-12,IT,Information Technology,Unknown
+2025-09-12,ITT,Industrials,Unknown
+2025-09-12,ITW,Industrials,Unknown
+2025-09-12,IVZ,Financials,Unknown
+2025-09-12,J,Industrials,Unknown
+2025-09-12,JAZZ,Health Care,Unknown
+2025-09-12,JBHT,Industrials,Unknown
+2025-09-12,JBL,Information Technology,Unknown
+2025-09-12,JCI,Industrials,Unknown
+2025-09-12,JEF,Financials,Unknown
+2025-09-12,JHG,Financials,Unknown
+2025-09-12,JHX,Materials,Unknown
+2025-09-12,JKHY,Financials,Unknown
+2025-09-12,JLL,Real Estate,Unknown
+2025-09-12,JNJ,Health Care,Unknown
+2025-09-12,JPM,Financials,Unknown
+2025-09-12,K,Consumer Staples,Unknown
+2025-09-12,KBR,Industrials,Unknown
+2025-09-12,KD,Information Technology,Unknown
+2025-09-12,KDP,Consumer Staples,Unknown
+2025-09-12,KEX,Industrials,Unknown
+2025-09-12,KEY,Financials,Unknown
+2025-09-12,KEYS,Information Technology,Unknown
+2025-09-12,KHC,Consumer Staples,Unknown
+2025-09-12,KIM,Real Estate,Unknown
+2025-09-12,KKR,Financials,Unknown
+2025-09-12,KLAC,Information Technology,Unknown
+2025-09-12,KMB,Consumer Staples,Unknown
+2025-09-12,KMI,Energy,Unknown
+2025-09-12,KMPR,Financials,Unknown
+2025-09-12,KMX,Consumer Discretionary,Unknown
+2025-09-12,KNSL,Financials,Unknown
+2025-09-12,KNX,Industrials,Unknown
+2025-09-12,KO,Consumer Staples,Unknown
+2025-09-12,KR,Consumer Staples,Unknown
+2025-09-12,KRC,Real Estate,Unknown
+2025-09-12,KRMN,Industrials,Unknown
+2025-09-12,KVUE,Consumer Staples,Unknown
+2025-09-12,L,Financials,Unknown
+2025-09-12,LAD,Consumer Discretionary,Unknown
+2025-09-12,LAMR,Real Estate,Unknown
+2025-09-12,LAZ,Financials,Unknown
+2025-09-12,LBRDA,Communication Services,Unknown
+2025-09-12,LBRDK,Communication Services,Unknown
+2025-09-12,LBTYA,Communication Services,Unknown
+2025-09-12,LBTYK,Communication Services,Unknown
+2025-09-12,LCID,Consumer Discretionary,Unknown
+2025-09-12,LDOS,Industrials,Unknown
+2025-09-12,LEA,Consumer Discretionary,Unknown
+2025-09-12,LECO,Industrials,Unknown
+2025-09-12,LEN,Consumer Discretionary,Unknown
+2025-09-12,LENB,nan,Unknown
+2025-09-12,LFUS,Information Technology,Unknown
+2025-09-12,LH,Health Care,Unknown
+2025-09-12,LHX,Industrials,Unknown
+2025-09-12,LII,Industrials,Unknown
+2025-09-12,LIN,Materials,Unknown
+2025-09-12,LINE,Real Estate,Unknown
+2025-09-12,LITE,Information Technology,Unknown
+2025-09-12,LKQ,Consumer Discretionary,Unknown
+2025-09-12,LLY,Health Care,Unknown
+2025-09-12,LLYVA,Communication Services,Unknown
+2025-09-12,LLYVK,Communication Services,Unknown
+2025-09-12,LMT,Industrials,Unknown
+2025-09-12,LNC,Financials,Unknown
+2025-09-12,LNG,Energy,Unknown
+2025-09-12,LNT,Utilities,Unknown
+2025-09-12,LNW,Consumer Discretionary,Unknown
+2025-09-12,LOAR,Industrials,Unknown
+2025-09-12,LOPE,Consumer Discretionary,Unknown
+2025-09-12,LOW,Consumer Discretionary,Unknown
+2025-09-12,LPLA,Financials,Unknown
+2025-09-12,LPX,Materials,Unknown
+2025-09-12,LRCX,Information Technology,Unknown
+2025-09-12,LSCC,Information Technology,Unknown
+2025-09-12,LSTR,Industrials,Unknown
+2025-09-12,LULU,Consumer Discretionary,Unknown
+2025-09-12,LUV,Industrials,Unknown
+2025-09-12,LVS,Consumer Discretionary,Unknown
+2025-09-12,LW,Consumer Staples,Unknown
+2025-09-12,LYB,Materials,Unknown
+2025-09-12,LYFT,Industrials,Unknown
+2025-09-12,LYV,Communication Services,Unknown
+2025-09-12,M,Consumer Discretionary,Unknown
+2025-09-12,MA,Financials,Unknown
+2025-09-12,MAA,Real Estate,Unknown
+2025-09-12,MAN,Industrials,Unknown
+2025-09-12,MANH,Information Technology,Unknown
+2025-09-12,MAR,Consumer Discretionary,Unknown
+2025-09-12,MAS,Industrials,Unknown
+2025-09-12,MASI,Health Care,Unknown
+2025-09-12,MAT,Consumer Discretionary,Unknown
+2025-09-12,MCD,Consumer Discretionary,Unknown
+2025-09-12,MCHP,Information Technology,Unknown
+2025-09-12,MCK,Health Care,Unknown
+2025-09-12,MCO,Financials,Unknown
+2025-09-12,MDB,Information Technology,Unknown
+2025-09-12,MDLZ,Consumer Staples,Unknown
+2025-09-12,MDT,Health Care,Unknown
+2025-09-12,MDU,Utilities,Unknown
+2025-09-12,MEDP,Health Care,Unknown
+2025-09-12,MET,Financials,Unknown
+2025-09-12,META,Communication Services,Unknown
+2025-09-12,MGM,Consumer Discretionary,Unknown
+2025-09-12,MHK,Consumer Discretionary,Unknown
+2025-09-12,MIDD,Industrials,Unknown
+2025-09-12,MKC,Consumer Staples,Unknown
+2025-09-12,MKL,Financials,Unknown
+2025-09-12,MKSI,Information Technology,Unknown
+2025-09-12,MKTX,Financials,Unknown
+2025-09-12,MLI,Industrials,Unknown
+2025-09-12,MLM,Materials,Unknown
+2025-09-12,MMC,Financials,Unknown
+2025-09-12,MMM,Industrials,Unknown
+2025-09-12,MNST,Consumer Staples,Unknown
+2025-09-12,MO,Consumer Staples,Unknown
+2025-09-12,MOH,Health Care,Unknown
+2025-09-12,MORN,Financials,Unknown
+2025-09-12,MOS,Materials,Unknown
+2025-09-12,MP,Materials,Unknown
+2025-09-12,MPC,Energy,Unknown
+2025-09-12,MPW,Real Estate,Unknown
+2025-09-12,MPWR,Information Technology,Unknown
+2025-09-12,MRK,Health Care,Unknown
+2025-09-12,MRNA,Health Care,Unknown
+2025-09-12,MRP,Consumer Discretionary,Unknown
+2025-09-12,MRVL,Information Technology,Unknown
+2025-09-12,MS,Financials,Unknown
+2025-09-12,MSA,Industrials,Unknown
+2025-09-12,MSCI,Financials,Unknown
+2025-09-12,MSFT,Information Technology,Unknown
+2025-09-12,MSGS,Communication Services,Unknown
+2025-09-12,MSI,Information Technology,Unknown
+2025-09-12,MSM,Industrials,Unknown
+2025-09-12,MSTR,Information Technology,Unknown
+2025-09-12,MTB,Financials,Unknown
+2025-09-12,MTCH,Communication Services,Unknown
+2025-09-12,MTD,Health Care,Unknown
+2025-09-12,MTDR,Energy,Unknown
+2025-09-12,MTG,Financials,Unknown
+2025-09-12,MTN,Consumer Discretionary,Unknown
+2025-09-12,MTSI,Information Technology,Unknown
+2025-09-12,MTZ,Industrials,Unknown
+2025-09-12,MU,Information Technology,Unknown
+2025-09-12,MUSA,Consumer Discretionary,Unknown
+2025-09-12,NBIX,Health Care,Unknown
+2025-09-12,NCLH,Consumer Discretionary,Unknown
+2025-09-12,NCNO,Information Technology,Unknown
+2025-09-12,NDAQ,Financials,Unknown
+2025-09-12,NDSN,Industrials,Unknown
+2025-09-12,NEE,Utilities,Unknown
+2025-09-12,NEM,Materials,Unknown
+2025-09-12,NET,Information Technology,Unknown
+2025-09-12,NEU,Materials,Unknown
+2025-09-12,NFG,Utilities,Unknown
+2025-09-12,NFLX,Communication Services,Unknown
+2025-09-12,NI,Utilities,Unknown
+2025-09-12,NKE,Consumer Discretionary,Unknown
+2025-09-12,NLY,Financials,Unknown
+2025-09-12,NNN,Real Estate,Unknown
+2025-09-12,NOC,Industrials,Unknown
+2025-09-12,NOV,Energy,Unknown
+2025-09-12,NOW,Information Technology,Unknown
+2025-09-12,NRG,Utilities,Unknown
+2025-09-12,NSA,Real Estate,Unknown
+2025-09-12,NSC,Industrials,Unknown
+2025-09-12,NTAP,Information Technology,Unknown
+2025-09-12,NTNX,Information Technology,Unknown
+2025-09-12,NTRA,Health Care,Unknown
+2025-09-12,NTRS,Financials,Unknown
+2025-09-12,NU,Financials,Unknown
+2025-09-12,NUE,Materials,Unknown
+2025-09-12,NVDA,Information Technology,Unknown
+2025-09-12,NVR,Consumer Discretionary,Unknown
+2025-09-12,NVST,Health Care,Unknown
+2025-09-12,NVT,Industrials,Unknown
+2025-09-12,NWL,Consumer Discretionary,Unknown
+2025-09-12,NWS,Communication Services,Unknown
+2025-09-12,NWSA,Communication Services,Unknown
+2025-09-12,NXPI,nan,Unknown
+2025-09-12,NXST,Communication Services,Unknown
+2025-09-12,NYT,Communication Services,Unknown
+2025-09-12,O,Real Estate,Unknown
+2025-09-12,OC,Industrials,Unknown
+2025-09-12,ODFL,Industrials,Unknown
+2025-09-12,OGE,Utilities,Unknown
+2025-09-12,OGN,Health Care,Unknown
+2025-09-12,OHI,Real Estate,Unknown
+2025-09-12,OKE,Energy,Unknown
+2025-09-12,OKTA,Information Technology,Unknown
+2025-09-12,OLED,Information Technology,Unknown
+2025-09-12,OLLI,Consumer Discretionary,Unknown
+2025-09-12,OLN,Materials,Unknown
+2025-09-12,OMC,Communication Services,Unknown
+2025-09-12,OMF,Financials,Unknown
+2025-09-12,ON,Information Technology,Unknown
+2025-09-12,ONON,Consumer Discretionary,Unknown
+2025-09-12,ONTO,Information Technology,Unknown
+2025-09-12,ORCL,Information Technology,Unknown
+2025-09-12,ORI,Financials,Unknown
+2025-09-12,ORLY,Consumer Discretionary,Unknown
+2025-09-12,OSK,Industrials,Unknown
+2025-09-12,OTIS,Industrials,Unknown
+2025-09-12,OVV,Energy,Unknown
+2025-09-12,OWL,Financials,Unknown
+2025-09-12,OXY,Energy,Unknown
+2025-09-12,OZK,Financials,Unknown
+2025-09-12,PAG,Consumer Discretionary,Unknown
+2025-09-12,PANW,Information Technology,Unknown
+2025-09-12,PATH,Information Technology,Unknown
+2025-09-12,PAYC,Information Technology,Unknown
+2025-09-12,PAYX,Industrials,Unknown
+2025-09-12,PB,Financials,Unknown
+2025-09-12,PCAR,Industrials,Unknown
+2025-09-12,PCG,Utilities,Unknown
+2025-09-12,PCOR,Information Technology,Unknown
+2025-09-12,PCTY,Information Technology,Unknown
+2025-09-12,PEG,Utilities,Unknown
+2025-09-12,PEGA,Information Technology,Unknown
+2025-09-12,PEN,Health Care,Unknown
+2025-09-12,PENN,Consumer Discretionary,Unknown
+2025-09-12,PEP,Consumer Staples,Unknown
+2025-09-12,PFE,Health Care,Unknown
+2025-09-12,PFG,Financials,Unknown
+2025-09-12,PFGC,Consumer Staples,Unknown
+2025-09-12,PG,Consumer Staples,Unknown
+2025-09-12,PGR,Financials,Unknown
+2025-09-12,PH,Industrials,Unknown
+2025-09-12,PHM,Consumer Discretionary,Unknown
+2025-09-12,PINS,Communication Services,Unknown
+2025-09-12,PK,Real Estate,Unknown
+2025-09-12,PKG,Materials,Unknown
+2025-09-12,PLD,Real Estate,Unknown
+2025-09-12,PLNT,Consumer Discretionary,Unknown
+2025-09-12,PLTR,Information Technology,Unknown
+2025-09-12,PM,Consumer Staples,Unknown
+2025-09-12,PNC,Financials,Unknown
+2025-09-12,PNFP,Financials,Unknown
+2025-09-12,PNR,Industrials,Unknown
+2025-09-12,PNW,Utilities,Unknown
+2025-09-12,PODD,Health Care,Unknown
+2025-09-12,POOL,Consumer Discretionary,Unknown
+2025-09-12,POST,Consumer Staples,Unknown
+2025-09-12,PPC,Consumer Staples,Unknown
+2025-09-12,PPG,Materials,Unknown
+2025-09-12,PPL,Utilities,Unknown
+2025-09-12,PR,Energy,Unknown
+2025-09-12,PRGO,Health Care,Unknown
+2025-09-12,PRI,Financials,Unknown
+2025-09-12,PRMB,Consumer Staples,Unknown
+2025-09-12,PRU,Financials,Unknown
+2025-09-12,PSA,Real Estate,Unknown
+2025-09-12,PSKY,nan,Unknown
+2025-09-12,PSN,Industrials,Unknown
+2025-09-12,PSTG,Information Technology,Unknown
+2025-09-12,PSX,Energy,Unknown
+2025-09-12,PTC,Information Technology,Unknown
+2025-09-12,PVH,Consumer Discretionary,Unknown
+2025-09-12,PWR,Industrials,Unknown
+2025-09-12,PYPL,Financials,Unknown
+2025-09-12,QCOM,Information Technology,Unknown
+2025-09-12,QGEN,Health Care,Unknown
+2025-09-12,QRVO,Information Technology,Unknown
+2025-09-12,QS,Consumer Discretionary,Unknown
+2025-09-12,QSR,Consumer Discretionary,Unknown
+2025-09-12,QXO,Industrials,Unknown
+2025-09-12,R,Industrials,Unknown
+2025-09-12,RAL,Information Technology,Unknown
+2025-09-12,RARE,Health Care,Unknown
+2025-09-12,RBA,Industrials,Unknown
+2025-09-12,RBC,Industrials,Unknown
+2025-09-12,RBLX,Communication Services,Unknown
+2025-09-12,RBRK,Information Technology,Unknown
+2025-09-12,RCL,Consumer Discretionary,Unknown
+2025-09-12,RDDT,Communication Services,Unknown
+2025-09-12,REG,Real Estate,Unknown
+2025-09-12,REGN,Health Care,Unknown
+2025-09-12,REXR,Real Estate,Unknown
+2025-09-12,REYN,Consumer Staples,Unknown
+2025-09-12,RF,Financials,Unknown
+2025-09-12,RGA,Financials,Unknown
+2025-09-12,RGEN,Health Care,Unknown
+2025-09-12,RGLD,Materials,Unknown
+2025-09-12,RH,Consumer Discretionary,Unknown
+2025-09-12,RHI,Industrials,Unknown
+2025-09-12,RITM,Financials,Unknown
+2025-09-12,RIVN,Consumer Discretionary,Unknown
+2025-09-12,RJF,Financials,Unknown
+2025-09-12,RKLB,Industrials,Unknown
+2025-09-12,RKT,Financials,Unknown
+2025-09-12,RL,Consumer Discretionary,Unknown
+2025-09-12,RLI,Financials,Unknown
+2025-09-12,RMD,Health Care,Unknown
+2025-09-12,RNG,Information Technology,Unknown
+2025-09-12,RNR,Financials,Unknown
+2025-09-12,ROIV,Health Care,Unknown
+2025-09-12,ROK,Industrials,Unknown
+2025-09-12,ROKU,Communication Services,Unknown
+2025-09-12,ROL,Industrials,Unknown
+2025-09-12,ROP,Industrials,Unknown
+2025-09-12,ROST,Consumer Discretionary,Unknown
+2025-09-12,RPM,Materials,Unknown
+2025-09-12,RPRX,Health Care,Unknown
+2025-09-12,RRC,Energy,Unknown
+2025-09-12,RRX,Industrials,Unknown
+2025-09-12,RS,Materials,Unknown
+2025-09-12,RSG,Industrials,Unknown
+2025-09-12,RTX,Industrials,Unknown
+2025-09-12,RVMD,Health Care,Unknown
+2025-09-12,RVTY,Health Care,Unknown
+2025-09-12,RYAN,Financials,Unknown
+2025-09-12,RYN,Real Estate,Unknown
+2025-09-12,S,Information Technology,Unknown
+2025-09-12,SAIA,Industrials,Unknown
+2025-09-12,SAIC,Industrials,Unknown
+2025-09-12,SAIL,Information Technology,Unknown
+2025-09-12,SAM,Consumer Staples,Unknown
+2025-09-12,SARO,Industrials,Unknown
+2025-09-12,SBAC,Real Estate,Unknown
+2025-09-12,SBUX,Consumer Discretionary,Unknown
+2025-09-12,SCCO,Materials,Unknown
+2025-09-12,SCHW,Financials,Unknown
+2025-09-12,SCI,Consumer Discretionary,Unknown
+2025-09-12,SEB,Consumer Staples,Unknown
+2025-09-12,SEE,Materials,Unknown
+2025-09-12,SEIC,Financials,Unknown
+2025-09-12,SF,Financials,Unknown
+2025-09-12,SFD,Consumer Staples,Unknown
+2025-09-12,SFM,Consumer Staples,Unknown
+2025-09-12,SGAFT,nan,Unknown
+2025-09-12,SGI,Consumer Discretionary,Unknown
+2025-09-12,SHC,Health Care,Unknown
+2025-09-12,SHW,Materials,Unknown
+2025-09-12,SIRI,Communication Services,Unknown
+2025-09-12,SITE,Industrials,Unknown
+2025-09-12,SJM,Consumer Staples,Unknown
+2025-09-12,SLB,Energy,Unknown
+2025-09-12,SLGN,Materials,Unknown
+2025-09-12,SLM,Financials,Unknown
+2025-09-12,SMCI,Information Technology,Unknown
+2025-09-12,SMG,Materials,Unknown
+2025-09-12,SMMT,Health Care,Unknown
+2025-09-12,SN,Consumer Discretionary,Unknown
+2025-09-12,SNA,Industrials,Unknown
+2025-09-12,SNDK,Information Technology,Unknown
+2025-09-12,SNDR,Industrials,Unknown
+2025-09-12,SNOW,Information Technology,Unknown
+2025-09-12,SNPS,Information Technology,Unknown
+2025-09-12,SNV,Financials,Unknown
+2025-09-12,SNX,Information Technology,Unknown
+2025-09-12,SO,Utilities,Unknown
+2025-09-12,SOFI,Financials,Unknown
+2025-09-12,SOLV,Health Care,Unknown
+2025-09-12,SON,Materials,Unknown
+2025-09-12,SPG,Real Estate,Unknown
+2025-09-12,SPGI,Financials,Unknown
+2025-09-12,SPOT,Communication Services,Unknown
+2025-09-12,SPR,Industrials,Unknown
+2025-09-12,SRE,Utilities,Unknown
+2025-09-12,SRPT,Health Care,Unknown
+2025-09-12,SSB,Financials,Unknown
+2025-09-12,SSD,Industrials,Unknown
+2025-09-12,SSNC,Information Technology,Unknown
+2025-09-12,ST,Industrials,Unknown
+2025-09-12,STAG,Real Estate,Unknown
+2025-09-12,STE,Health Care,Unknown
+2025-09-12,STLD,Materials,Unknown
+2025-09-12,STT,Financials,Unknown
+2025-09-12,STWD,Financials,Unknown
+2025-09-12,STX,nan,Unknown
+2025-09-12,STZ,Consumer Staples,Unknown
+2025-09-12,SUI,Real Estate,Unknown
+2025-09-12,SW,Materials,Unknown
+2025-09-12,SWK,Industrials,Unknown
+2025-09-12,SWKS,Information Technology,Unknown
+2025-09-12,SYF,Financials,Unknown
+2025-09-12,SYK,Health Care,Unknown
+2025-09-12,SYY,Consumer Staples,Unknown
+2025-09-12,T,Communication Services,Unknown
+2025-09-12,TAP,Consumer Staples,Unknown
+2025-09-12,TDC,Information Technology,Unknown
+2025-09-12,TDG,Industrials,Unknown
+2025-09-12,TDY,Industrials,Unknown
+2025-09-12,TEAM,Information Technology,Unknown
+2025-09-12,TECH,Health Care,Unknown
+2025-09-12,TEL,nan,Unknown
+2025-09-12,TEM,Health Care,Unknown
+2025-09-12,TER,Information Technology,Unknown
+2025-09-12,TFC,Financials,Unknown
+2025-09-12,TFSL,Financials,Unknown
+2025-09-12,TFX,Health Care,Unknown
+2025-09-12,TGT,Consumer Staples,Unknown
+2025-09-12,THC,Health Care,Unknown
+2025-09-12,THG,Financials,Unknown
+2025-09-12,THO,Consumer Discretionary,Unknown
+2025-09-12,TIGO,Communication Services,Unknown
+2025-09-12,TJX,Consumer Discretionary,Unknown
+2025-09-12,TKO,Communication Services,Unknown
+2025-09-12,TKR,Industrials,Unknown
+2025-09-12,TLN,Utilities,Unknown
+2025-09-12,TMO,Health Care,Unknown
+2025-09-12,TMUS,Communication Services,Unknown
+2025-09-12,TNL,Consumer Discretionary,Unknown
+2025-09-12,TOL,Consumer Discretionary,Unknown
+2025-09-12,TOST,Information Technology,Unknown
+2025-09-12,TPG,Financials,Unknown
+2025-09-12,TPL,Energy,Unknown
+2025-09-12,TPR,Consumer Discretionary,Unknown
+2025-09-12,TREX,Industrials,Unknown
+2025-09-12,TRGP,Energy,Unknown
+2025-09-12,TRMB,Information Technology,Unknown
+2025-09-12,TROW,Financials,Unknown
+2025-09-12,TRU,Industrials,Unknown
+2025-09-12,TRV,Financials,Unknown
+2025-09-12,TSCO,Consumer Discretionary,Unknown
+2025-09-12,TSLA,Consumer Discretionary,Unknown
+2025-09-12,TSN,Consumer Staples,Unknown
+2025-09-12,TT,Industrials,Unknown
+2025-09-12,TTC,Industrials,Unknown
+2025-09-12,TTD,Communication Services,Unknown
+2025-09-12,TTEK,Industrials,Unknown
+2025-09-12,TTWO,Communication Services,Unknown
+2025-09-12,TW,Financials,Unknown
+2025-09-12,TWLO,Information Technology,Unknown
+2025-09-12,TXN,Information Technology,Unknown
+2025-09-12,TXRH,Consumer Discretionary,Unknown
+2025-09-12,TXT,Industrials,Unknown
+2025-09-12,TYL,Information Technology,Unknown
+2025-09-12,U,Information Technology,Unknown
+2025-09-12,UA,Consumer Discretionary,Unknown
+2025-09-12,UAA,Consumer Discretionary,Unknown
+2025-09-12,UAL,Industrials,Unknown
+2025-09-12,UBER,Industrials,Unknown
+2025-09-12,UDR,Real Estate,Unknown
+2025-09-12,UGI,Utilities,Unknown
+2025-09-12,UHAL,Industrials,Unknown
+2025-09-12,UHALB,nan,Unknown
+2025-09-12,UHS,Health Care,Unknown
+2025-09-12,UI,Information Technology,Unknown
+2025-09-12,ULTA,Consumer Discretionary,Unknown
+2025-09-12,UNH,Health Care,Unknown
+2025-09-12,UNM,Financials,Unknown
+2025-09-12,UNP,Industrials,Unknown
+2025-09-12,UPS,Industrials,Unknown
+2025-09-12,URI,Industrials,Unknown
+2025-09-12,USB,Financials,Unknown
+2025-09-12,USD,nan,Unknown
+2025-09-12,USFD,Consumer Staples,Unknown
+2025-09-12,UTHR,Health Care,Unknown
+2025-09-12,UWMC,Financials,Unknown
+2025-09-12,V,Financials,Unknown
+2025-09-12,VEEV,Health Care,Unknown
+2025-09-12,VFC,Consumer Discretionary,Unknown
+2025-09-12,VICI,Real Estate,Unknown
+2025-09-12,VIK,Consumer Discretionary,Unknown
+2025-09-12,VIRT,Financials,Unknown
+2025-09-12,VKTX,Health Care,Unknown
+2025-09-12,VLO,Energy,Unknown
+2025-09-12,VLTO,Industrials,Unknown
+2025-09-12,VMC,Materials,Unknown
+2025-09-12,VMI,Industrials,Unknown
+2025-09-12,VNO,Real Estate,Unknown
+2025-09-12,VNOM,Energy,Unknown
+2025-09-12,VNT,Information Technology,Unknown
+2025-09-12,VOYA,Financials,Unknown
+2025-09-12,VRSK,Industrials,Unknown
+2025-09-12,VRSN,Information Technology,Unknown
+2025-09-12,VRT,Industrials,Unknown
+2025-09-12,VRTX,Health Care,Unknown
+2025-09-12,VST,Utilities,Unknown
+2025-09-12,VTR,Real Estate,Unknown
+2025-09-12,VTRS,Health Care,Unknown
+2025-09-12,VVV,Materials,Unknown
+2025-09-12,VZ,Communication Services,Unknown
+2025-09-12,W,Consumer Discretionary,Unknown
+2025-09-12,WAB,Industrials,Unknown
+2025-09-12,WAL,Financials,Unknown
+2025-09-12,WAT,Health Care,Unknown
+2025-09-12,WBA,nan,Unknown
+2025-09-12,WBD,Communication Services,Unknown
+2025-09-12,WBS,Financials,Unknown
+2025-09-12,WCC,Industrials,Unknown
+2025-09-12,WDAY,Information Technology,Unknown
+2025-09-12,WDC,Information Technology,Unknown
+2025-09-12,WEC,Utilities,Unknown
+2025-09-12,WELL,Real Estate,Unknown
+2025-09-12,WEN,Consumer Discretionary,Unknown
+2025-09-12,WEX,Financials,Unknown
+2025-09-12,WFC,Financials,Unknown
+2025-09-12,WFRD,Energy,Unknown
+2025-09-12,WH,Consumer Discretionary,Unknown
+2025-09-12,WHR,Consumer Discretionary,Unknown
+2025-09-12,WING,Consumer Discretionary,Unknown
+2025-09-12,WLK,Materials,Unknown
+2025-09-12,WM,Industrials,Unknown
+2025-09-12,WMB,Energy,Unknown
+2025-09-12,WMS,Industrials,Unknown
+2025-09-12,WMT,Consumer Staples,Unknown
+2025-09-12,WPC,Real Estate,Unknown
+2025-09-12,WRB,Financials,Unknown
+2025-09-12,WSC,Industrials,Unknown
+2025-09-12,WSM,Consumer Discretionary,Unknown
+2025-09-12,WSO,Industrials,Unknown
+2025-09-12,WST,Health Care,Unknown
+2025-09-12,WTFC,Financials,Unknown
+2025-09-12,WTM,Financials,Unknown
+2025-09-12,WTRG,Utilities,Unknown
+2025-09-12,WTW,Financials,Unknown
+2025-09-12,WU,Information Technology,Unknown
+2025-09-12,WWD,Industrials,Unknown
+2025-09-12,WY,Real Estate,Unknown
+2025-09-12,WYNN,Consumer Discretionary,Unknown
+2025-09-12,XEL,Utilities,Unknown
+2025-09-12,XOM,Energy,Unknown
+2025-09-12,XP,Financials,Unknown
+2025-09-12,XPO,Industrials,Unknown
+2025-09-12,XRAY,Health Care,Unknown
+2025-09-12,XTSLA,nan,Unknown
+2025-09-12,XYL,Industrials,Unknown
+2025-09-12,XYZ,Financials,Unknown
+2025-09-12,YETI,Consumer Discretionary,Unknown
+2025-09-12,YUM,Consumer Discretionary,Unknown
+2025-09-12,Z,Real Estate,Unknown
+2025-09-12,ZBH,Health Care,Unknown
+2025-09-12,ZBRA,Information Technology,Unknown
+2025-09-12,ZG,Real Estate,Unknown
+2025-09-12,ZION,Financials,Unknown
+2025-09-12,ZM,Information Technology,Unknown
+2025-09-12,ZS,Information Technology,Unknown
+2025-09-12,ZTS,Health Care,Unknown
