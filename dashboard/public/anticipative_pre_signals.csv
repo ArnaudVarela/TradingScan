@@ -1,1 +1,1 @@
-ticker_yf,ticker_tv,price,last,mcap_usd_final,mcap,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,p_tech,p_tv,p_an,pillars_met,votes_bin,rank_score,bucket
+run_ts,ticker_yf,ticker_tv,price,last,mcap_usd_final,mcap,avg_dollar_vol,tv_score,tv_reco,analyst_bucket,analyst_votes,sector,industry,rank_score,s_trend,s_momo,s_vol,s_volu,s_rs,s_entry,breakout,pullback,squeeze_on,days_to_macd_cross,overextended,sector_pct,liq_score,bucket

@@ -1,101 +1,2001 @@
-date,ticker_yf,sector,bucket,tv_reco,analyst_bucket,ticker_tv,industry,price
-2025-09-09,THG,Financials,event,,,THG,Unknown,
-2025-09-09,NI,Utilities,event,,,NI,Unknown,40.505001068115234
-2025-09-09,CPAY,Financials,event,,,CPAY,Unknown,311.6849975585937
-2025-09-09,CEG,Utilities,event,,,CEG,Unknown,301.3500061035156
-2025-09-09,LNT,Utilities,event,,,LNT,Unknown,63.89500045776367
-2025-09-09,GEN,Information Technology,event,,,GEN,Unknown,29.575000762939453
-2025-09-09,AMCR,Materials,event,,,AMCR,Unknown,8.1850004196167
-2025-09-09,CDW,Information Technology,event,,,CDW,Unknown,168.5
-2025-09-09,IRM,Real Estate,event,,,IRM,Unknown,93.41000366210938
-2025-09-09,TTC,Industrials,event,,,TTC,Unknown,
-2025-09-09,EXPD,Industrials,event,,,EXPD,Unknown,120.98999786376952
-2025-09-09,NWSA,Communication Services,event,,,NWSA,Unknown,29.405000686645508
-2025-09-09,NRG,Utilities,event,,,NRG,Unknown,149.97999572753906
-2025-09-09,ERIE,Unknown,event,,,ERIE,Unknown,332.7799987792969
-2025-09-09,JBL,Information Technology,event,,,JBL,Unknown,209.57000732421875
-2025-09-09,SSD,Industrials,event,,,SSD,Unknown,
-2025-09-09,UGI,Utilities,event,,,UGI,Unknown,
-2025-09-09,LKQ,Consumer Discretionary,event,,,LKQ,Unknown,32.310001373291016
-2025-09-09,PFE,Health Care,event,,,PFE,Unknown,24.71500015258789
-2025-09-09,CAT,Industrials,event,,,CAT,Unknown,417.4649963378906
-2025-09-09,L,Financials,event,,,L,Unknown,95.80979919433594
-2025-09-09,NWS,Communication Services,event,,,NWS,Unknown,32.689998626708984
-2025-09-09,ALB,Materials,event,,,ALB,Unknown,73.57479858398438
-2025-09-09,MRNA,Health Care,event,,,MRNA,Unknown,24.59499931335449
-2025-09-09,LUV,Industrials,event,,,LUV,Unknown,30.950000762939453
-2025-09-09,ESS,Real Estate,event,,,ESS,Unknown,265.9849853515625
-2025-09-09,PPG,Materials,event,,,PPG,Unknown,108.9000015258789
-2025-09-09,GIS,Consumer Staples,event,,,GIS,Unknown,50.0625
-2025-09-09,ODFL,Industrials,event,,,ODFL,Unknown,148.8699951171875
-2025-09-09,EL,Consumer Staples,event,,,EL,Unknown,88.95999908447266
-2025-09-09,FTNT,Information Technology,event,,,FTNT,Unknown,79.8936996459961
-2025-09-09,ABNB,Consumer Discretionary,event,,,ABNB,Unknown,124.41999816894533
-2025-09-09,MCO,Financials,event,,,MCO,Unknown,504.5849914550781
-2025-09-09,ROK,Industrials,event,,,ROK,Unknown,
-2025-09-09,SBUX,Consumer Discretionary,event,,,SBUX,Unknown,
-2025-09-09,SIRI,Communication Services,event,,,SIRI,Unknown,
-2025-09-09,SNDR,Industrials,event,,,SNDR,Unknown,
-2025-09-09,SOFI,Financials,event,,,SOFI,Unknown,
-2025-09-09,SRPT,Health Care,event,,,SRPT,Unknown,
-2025-09-09,TFX,Health Care,event,,,TFX,Unknown,
-2025-09-09,THO,Consumer Discretionary,event,,,THO,Unknown,
-2025-09-09,TREX,Industrials,event,,,TREX,Unknown,
-2025-09-09,TXRH,Consumer Discretionary,event,,,TXRH,Unknown,
-2025-09-09,UA,Consumer Discretionary,event,,,UA,Unknown,
-2025-09-09,UAA,Consumer Discretionary,event,,,UAA,Unknown,
-2025-09-09,VFC,Consumer Discretionary,event,,,VFC,Unknown,
-2025-09-09,CHD,Consumer Staples,event,,,CHD,Unknown,94.34500122070312
-2025-09-09,KHC,Consumer Staples,event,,,KHC,Unknown,26.72170066833496
-2025-09-09,MMC,Financials,event,,,MMC,Unknown,201.09669494628903
-2025-09-09,SKX,Consumer Discretionary,event,,,SKX,Unknown,
-2025-09-09,BF-B,Unknown,event,,,BF.B,Unknown,27.6200008392334
-2025-09-09,LYB,Materials,event,,,LYB,Unknown,54.060001373291016
-2025-09-09,CME,Financials,event,,,CME,Unknown,262.239990234375
-2025-09-09,RJF,Financials,event,,,RJF,Unknown,
-2025-09-09,CF,Materials,event,,,CF,Unknown,84.79149627685547
-2025-09-09,DOW,Materials,event,,,DOW,Unknown,23.83009910583496
-2025-09-09,LII,Industrials,event,,,LII,Unknown,557.030029296875
-2025-09-09,STAG,Real Estate,event,,,STAG,Unknown,
-2025-09-09,FDS,Financials,event,,,FDS,Unknown,372.9400024414063
-2025-09-09,CTAS,Industrials,event,,,CTAS,Unknown,200.25
-2025-09-09,TKR,Industrials,event,,,TKR,Unknown,
-2025-09-09,PAYC,Information Technology,event,,,PAYC,Unknown,220.1699981689453
-2025-09-09,CBOE,Financials,event,,,CBOE,Unknown,233.13999938964844
-2025-09-09,KVUE,Consumer Staples,event,,,KVUE,Unknown,18.915000915527344
-2025-09-09,AEP,Utilities,event,,,AEP,Unknown,108.05999755859376
-2025-09-09,TDC,Information Technology,event,,,TDC,Unknown,
-2025-09-09,UWMC,Financials,event,,,UWMC,Unknown,
-2025-09-09,MOH,Health Care,event,,,MOH,Unknown,178.61000061035156
-2025-09-09,BAX,Health Care,event,,,BAX,Unknown,24.30500030517578
-2025-09-09,MKC,Consumer Staples,event,,,MKC,Unknown,69.87999725341797
-2025-09-09,ED,Utilities,event,,,ED,Unknown,96.79499816894533
-2025-09-09,PEG,Utilities,event,,,PEG,Unknown,79.86499786376953
-2025-09-09,EXC,Utilities,event,,,EXC,Unknown,43.18000030517578
-2025-09-09,SPR,Industrials,event,,,SPR,Unknown,
-2025-09-09,HSIC,Health Care,event,,,HSIC,Unknown,67.29010009765625
-2025-09-09,OTIS,Industrials,event,,,OTIS,Unknown,87.76499938964844
-2025-09-09,GWW,Industrials,event,,,GWW,Unknown,993.2000122070312
-2025-09-09,PAYX,Industrials,event,,,PAYX,Unknown,134.4250030517578
-2025-09-09,ADP,Industrials,event,,,ADP,Unknown,296.9700012207031
-2025-09-09,MSFT,Information Technology,event,,,MSFT,Unknown,498.5
-2025-09-09,NVDA,Information Technology,event,,,NVDA,Unknown,168.72999572753906
-2025-09-09,JKHY,Financials,event,,,JKHY,Unknown,162.24000549316406
-2025-09-09,BEN,Financials,event,,,BEN,Unknown,24.649999618530277
-2025-09-09,IT,Information Technology,event,,,IT,Unknown,241.8600006103516
-2025-09-09,AWK,Utilities,event,,,AWK,Unknown,139.72000122070312
-2025-09-09,AMP,Financials,event,,,AMP,Unknown,495.7449951171875
-2025-09-09,DVA,Health Care,event,,,DVA,Unknown,134.8800048828125
-2025-09-09,HRL,Consumer Staples,event,,,HRL,Unknown,25.51000022888184
-2025-09-09,UHAL,Industrials,event,,,UHAL,Unknown,
-2025-09-09,UHAL-B,Unknown,event,,,UHAL.B,Unknown,
-2025-09-09,PEP,Consumer Staples,event,,,PEP,Unknown,142.89999389648438
-2025-09-09,TFSL,Financials,event,,,TFSL,Unknown,
-2025-09-09,AMAT,Information Technology,event,,,AMAT,Unknown,163.7100067138672
-2025-09-09,ACN,Information Technology,event,,,ACN,Unknown,249.97999572753903
-2025-09-09,ISRG,Health Care,event,,,ISRG,Unknown,469.5400085449219
-2025-09-09,INTU,Information Technology,event,,,INTU,Unknown,667.7449951171875
-2025-09-09,CSCO,Information Technology,event,,,CSCO,Unknown,67.12460327148438
-2025-09-09,KO,Consumer Staples,event,,,KO,Unknown,67.91000366210938
-2025-09-09,UI,Information Technology,event,,,UI,Unknown,
-2025-09-09,LULU,Consumer Discretionary,event,,,LULU,Unknown,165.7100067138672
+date,ticker_yf,sector,bucket,tv_reco,analyst_bucket,ticker_tv,industry,price,tv_score
+2025-09-12,ADSK,Information Technology,event,HOLD,HOLD,,,,0.5576
+2025-09-12,ADT,Consumer Discretionary,event,HOLD,HOLD,,,,0.4463
+2025-09-12,AEE,Utilities,event,SELL,HOLD,,,,0.3902
+2025-09-12,AEP,Utilities,event,SELL,HOLD,,,,0.2977
+2025-09-12,AES,Utilities,event,SELL,HOLD,,,,0.362
+2025-09-12,AFG,Financials,event,HOLD,HOLD,,,,0.5523
+2025-09-12,AFL,Financials,event,HOLD,HOLD,,,,0.4089
+2025-09-12,AFRM,Information Technology,event,BUY,HOLD,,,,0.761
+2025-09-12,AGCO,Industrials,event,HOLD,HOLD,,,,0.4525
+2025-09-12,AGNC,Financials,event,HOLD,HOLD,,,,0.5369
+2025-09-12,AGO,Financials,event,SELL,HOLD,,,,0.381
+2025-09-12,AIG,Financials,event,SELL,HOLD,,,,0.2316
+2025-09-12,AIT,Industrials,event,HOLD,HOLD,,,,0.4537
+2025-09-12,AIZ,Financials,event,HOLD,HOLD,,,,0.468
+2025-09-12,AJG,Financials,event,SELL,HOLD,,,,0.3294
+2025-09-12,AKAM,Information Technology,event,SELL,HOLD,,,,0.3765
+2025-09-12,AL,Industrials,pre_signal,BUY,HOLD,,,,0.6667
+2025-09-12,ALAB,Information Technology,event,BUY,HOLD,,,,0.7327
+2025-09-12,ALB,Materials,event,SELL,HOLD,,,,0.3438
+2025-09-12,ALGM,Information Technology,event,SELL,HOLD,,,,0.3696
+2025-09-12,ALGN,Health Care,event,SELL,HOLD,,,,0.2156
+2025-09-12,ALK,Industrials,pre_signal,BUY,HOLD,,,,0.7446
+2025-09-12,ALL,Financials,event,SELL,HOLD,,,,0.3299
+2025-09-12,ALLE,Industrials,event,BUY,HOLD,,,,0.6326
+2025-09-12,ALLY,Financials,event,HOLD,HOLD,,,,0.502
+2025-09-12,ALNY,Health Care,pre_signal,BUY,HOLD,,,,0.7119
+2025-09-12,ALSN,Industrials,event,SELL,HOLD,,,,0.3722
+2025-09-12,AM,Energy,event,HOLD,HOLD,,,,0.5066
+2025-09-12,AMAT,Information Technology,event,SELL,HOLD,,,,0.3388
+2025-09-12,AMCR,Materials,event,SELL,HOLD,,,,0.2334
+2025-09-12,AMD,Information Technology,event,HOLD,HOLD,,,,0.4769
+2025-09-12,AME,Industrials,event,SELL,HOLD,,,,0.3904
+2025-09-12,AMG,Financials,pre_signal,BUY,HOLD,,,,0.7115
+2025-09-12,AMGN,Health Care,event,SELL,HOLD,,,,0.278
+2025-09-12,AMH,Real Estate,event,SELL,HOLD,,,,0.2725
+2025-09-12,AMKR,Information Technology,event,BUY,HOLD,,,,0.6363
+2025-09-12,AMP,Financials,event,SELL,HOLD,,,,0.2415
+2025-09-12,AMT,Real Estate,event,SELL,HOLD,,,,0.2413
+2025-09-12,AMTM,Industrials,event,SELL,HOLD,,,,0.3191
+2025-09-12,AMZN,Consumer Discretionary,event,HOLD,HOLD,,,,0.5073
+2025-09-12,AN,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6505
+2025-09-12,ANET,Information Technology,event,BUY,HOLD,,,,0.7721
+2025-09-12,AON,Financials,event,SELL,HOLD,,,,0.3866
+2025-09-12,AOS,Industrials,event,HOLD,HOLD,,,,0.4817
+2025-09-12,APA,Energy,event,HOLD,HOLD,,,,0.5785
+2025-09-12,APD,Materials,event,SELL,HOLD,,,,0.3472
+2025-09-12,APG,Industrials,event,HOLD,HOLD,,,,0.5541
+2025-09-12,APH,Information Technology,event,BUY,HOLD,,,,0.733
+2025-09-12,APLS,Health Care,event,HOLD,HOLD,,,,0.4919
+2025-09-12,APO,Financials,event,SELL,HOLD,,,,0.3133
+2025-09-12,APP,Information Technology,event,BUY,HOLD,,,,0.7576
+2025-09-12,APPF,Information Technology,event,BUY,HOLD,,,,0.6102
+2025-09-12,APTV,Consumer Discretionary,event,BUY,HOLD,,,,0.6405
+2025-09-12,AR,Energy,event,SELL,HOLD,,,,0.3597
+2025-09-12,ARE,Real Estate,event,HOLD,HOLD,,,,0.5192
+2025-09-12,ARES,Financials,event,SELL,HOLD,,,,0.3952
+2025-09-12,ARMK,Consumer Discretionary,event,SELL,HOLD,,,,0.311
+2025-09-12,ARW,Information Technology,event,HOLD,HOLD,,,,0.4316
+2025-09-12,AS,Consumer Discretionary,event,SELL,HOLD,,,,0.3958
+2025-09-12,ASH,Materials,event,SELL,HOLD,,,,0.3461
+2025-09-12,ASTS,Communication Services,event,SELL,HOLD,,,,0.2801
+2025-09-12,ATI,Industrials,event,SELL,HOLD,,,,0.3957
+2025-09-12,ATO,Utilities,event,HOLD,HOLD,,,,0.4421
+2025-09-12,ATR,Materials,event,SELL,HOLD,,,,0.2837
+2025-09-12,AU,Materials,event,BUY,HOLD,,,,0.7437
+2025-09-12,AUR,Information Technology,event,SELL,HOLD,,,,0.2319
+2025-09-12,AVB,Real Estate,event,SELL,HOLD,,,,0.3861
+2025-09-12,AVGO,Information Technology,event,STRONG_BUY,HOLD,,,,0.8273
+2025-09-12,AVT,Information Technology,event,HOLD,HOLD,,,,0.4567
+2025-09-12,AVTR,Health Care,event,SELL,HOLD,,,,0.2735
+2025-09-12,AVY,Materials,event,SELL,HOLD,,,,0.2168
+2025-09-12,AWI,Industrials,event,BUY,HOLD,,,,0.6303
+2025-09-12,AWK,Utilities,event,SELL,HOLD,,,,0.2551
+2025-09-12,AXON,Industrials,event,HOLD,HOLD,,,,0.4237
+2025-09-12,AXP,Financials,event,HOLD,HOLD,,,,0.4962
+2025-09-12,AXS,Financials,event,SELL,HOLD,,,,0.3564
+2025-09-12,AXTA,Materials,event,HOLD,HOLD,,,,0.4387
+2025-09-12,AYI,Industrials,event,HOLD,HOLD,,,,0.5388
+2025-09-12,AZO,Consumer Discretionary,event,BUY,HOLD,,,,0.6273
+2025-09-12,BA,Industrials,event,HOLD,HOLD,,,,0.4017
+2025-09-12,BAC,Financials,event,HOLD,HOLD,,,,0.507
+2025-09-12,BAH,Industrials,event,SELL,HOLD,,,,0.2202
+2025-09-12,BALL,Materials,event,SELL,HOLD,,,,0.2593
+2025-09-12,BAM,Financials,event,SELL,HOLD,,,,0.2312
+2025-09-12,BAX,Health Care,event,SELL,HOLD,,,,0.3054
+2025-09-12,BBWI,Consumer Discretionary,event,SELL,HOLD,,,,0.2687
+2025-09-12,BBY,Consumer Discretionary,event,HOLD,HOLD,,,,0.528
+2025-09-12,BC,Consumer Discretionary,event,HOLD,HOLD,,,,0.5251
+2025-09-12,BDX,Health Care,event,SELL,HOLD,,,,0.3164
+2025-09-12,BEN,Financials,event,HOLD,HOLD,,,,0.4689
+2025-09-12,BEPC,Utilities,event,HOLD,HOLD,,,,0.4688
+2025-09-12,BF-B,Consumer Staples,event,SELL,HOLD,,,,0.1591
+2025-09-12,BFAM,Consumer Discretionary,event,SELL,HOLD,,,,0.2047
+2025-09-12,BG,Consumer Staples,event,SELL,HOLD,,,,0.379
+2025-09-12,BHF,Financials,event,SELL,HOLD,,,,0.3752
+2025-09-12,BIIB,Health Care,event,HOLD,HOLD,,,,0.5078
+2025-09-12,BILL,Information Technology,event,BUY,HOLD,,,,0.6105
+2025-09-12,BIO,Health Care,event,HOLD,HOLD,,,,0.4473
+2025-09-12,BIRK,Consumer Discretionary,event,SELL,HOLD,,,,0.1945
+2025-09-12,BJ,Consumer Staples,event,SELL,HOLD,,,,0.3037
+2025-09-12,BK,Financials,event,HOLD,HOLD,,,,0.5168
+2025-09-12,BKNG,Consumer Discretionary,event,SELL,HOLD,,,,0.3976
+2025-09-12,BKR,Energy,event,HOLD,HOLD,,,,0.5201
+2025-09-12,BLD,Consumer Discretionary,event,BUY,HOLD,,,,0.6163
+2025-09-12,BLDR,Industrials,event,HOLD,HOLD,,,,0.5267
+2025-09-12,BLK,Financials,event,HOLD,HOLD,,,,0.4504
+2025-09-12,BMRN,Health Care,event,SELL,HOLD,,,,0.2179
+2025-09-12,BMY,Health Care,event,SELL,HOLD,,,,0.3271
+2025-09-12,BOKF,Financials,event,HOLD,HOLD,,,,0.4547
+2025-09-12,BPOP,Financials,event,HOLD,HOLD,,,,0.5936
+2025-09-12,BR,Industrials,event,HOLD,HOLD,,,,0.4232
+2025-09-12,BRBR,Consumer Staples,event,SELL,HOLD,,,,0.2739
+2025-09-12,BRK-B,Financials,event,SELL,HOLD,,,,0.3218
+2025-09-12,BRKR,Health Care,event,SELL,HOLD,,,,0.2567
+2025-09-12,BRO,Financials,event,SELL,HOLD,,,,0.2322
+2025-09-12,BROS,Consumer Discretionary,event,HOLD,HOLD,,,,0.4403
+2025-09-12,BRX,Real Estate,event,HOLD,HOLD,,,,0.4242
+2025-09-12,BSX,Health Care,event,SELL,HOLD,,,,0.347
+2025-09-12,BSY,Information Technology,event,HOLD,HOLD,,,,0.4521
+2025-09-12,BURL,Consumer Discretionary,event,HOLD,HOLD,,,,0.5027
+2025-09-12,BWA,Consumer Discretionary,event,BUY,HOLD,,,,0.7147
+2025-09-12,BWXT,Industrials,event,BUY,HOLD,,,,0.6175
+2025-09-12,BX,Financials,event,BUY,HOLD,,,,0.6109
+2025-09-12,BXP,Real Estate,event,HOLD,HOLD,,,,0.4809
+2025-09-12,BYD,Consumer Discretionary,event,HOLD,HOLD,,,,0.5411
+2025-09-12,C,Financials,event,BUY,HOLD,,,,0.6015
+2025-09-12,CACC,Financials,event,HOLD,HOLD,,,,0.4447
+2025-09-12,CACI,Industrials,event,HOLD,HOLD,,,,0.4518
+2025-09-12,CAG,Consumer Staples,event,SELL,HOLD,,,,0.3054
+2025-09-12,CAH,Health Care,event,HOLD,HOLD,,,,0.462
+2025-09-12,CAR,Industrials,event,HOLD,HOLD,,,,0.463
+2025-09-12,CARR,Industrials,event,SELL,HOLD,,,,0.2049
+2025-09-12,CART,Consumer Staples,event,HOLD,HOLD,,,,0.4678
+2025-09-12,CASY,Consumer Staples,event,BUY,HOLD,,,,0.635
+2025-09-12,CAT,Industrials,event,HOLD,HOLD,,,,0.5235
+2025-09-12,CAVA,Consumer Discretionary,event,SELL,HOLD,,,,0.2219
+2025-09-12,CB,Financials,event,SELL,HOLD,,,,0.3566
+2025-09-12,CBOE,Financials,event,SELL,HOLD,,,,0.3942
+2025-09-12,CBRE,Real Estate,pre_signal,BUY,HOLD,,,,0.6411
+2025-09-12,CBSH,Financials,event,SELL,HOLD,,,,0.2554
+2025-09-12,CCCS,Information Technology,event,SELL,HOLD,,,,0.3294
+2025-09-12,CCI,Real Estate,event,SELL,HOLD,,,,0.2358
+2025-09-12,CCK,Materials,event,SELL,HOLD,,,,0.2823
+2025-09-12,CCL,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6535
+2025-09-12,CDNS,Information Technology,event,HOLD,HOLD,,,,0.5206
+2025-09-12,CDW,Information Technology,event,SELL,HOLD,,,,0.3593
+2025-09-12,CE,Materials,event,SELL,HOLD,,,,0.3374
+2025-09-12,CEG,Utilities,event,HOLD,HOLD,,,,0.433
+2025-09-12,CELH,Consumer Staples,event,BUY,HOLD,,,,0.6762
+2025-09-12,CERT,Health Care,event,SELL,HOLD,,,,0.3056
+2025-09-12,CF,Materials,event,SELL,HOLD,,,,0.3517
+2025-09-12,CFG,Financials,event,HOLD,HOLD,,,,0.5681
+2025-09-12,CFLT,Information Technology,event,SELL,HOLD,,,,0.3375
+2025-09-12,CFR,Financials,event,SELL,HOLD,,,,0.3122
+2025-09-12,CG,Financials,event,BUY,HOLD,,,,0.6437
+2025-09-12,CGNX,Information Technology,pre_signal,BUY,HOLD,,,,0.7706
+2025-09-12,CHD,Consumer Staples,event,SELL,HOLD,,,,0.3846
+2025-09-12,CHDN,Consumer Discretionary,event,SELL,HOLD,,,,0.2269
+2025-09-12,CHE,Health Care,event,SELL,HOLD,,,,0.3465
+2025-09-12,CHH,Consumer Discretionary,event,SELL,HOLD,,,,0.1891
+2025-09-12,CHRD,Energy,event,SELL,HOLD,,,,0.3567
+2025-09-12,CHRW,Industrials,pre_signal,BUY,HOLD,,,,0.6713
+2025-09-12,CHTR,Communication Services,event,SELL,HOLD,,,,0.278
+2025-09-12,CHWY,Consumer Discretionary,event,SELL,HOLD,,,,0.2424
+2025-09-12,CI,Health Care,event,SELL,HOLD,,,,0.3781
+2025-09-12,CIEN,Information Technology,event,BUY,HOLD,,,,0.7791
+2025-09-12,CINF,Financials,event,HOLD,HOLD,,,,0.4731
+2025-09-12,CIVI,Energy,event,HOLD,HOLD,,,,0.4026
+2025-09-12,CL,Consumer Staples,event,SELL,HOLD,,,,0.3128
+2025-09-12,CLF,Materials,event,BUY,HOLD,,,,0.7038
+2025-09-12,CLH,Industrials,event,SELL,HOLD,,,,0.3377
+2025-09-12,CLVT,Industrials,event,SELL,HOLD,,,,0.3615
+2025-09-12,CLX,Consumer Staples,event,SELL,HOLD,,,,0.3594
+2025-09-12,CMA,Financials,event,HOLD,HOLD,,,,0.5224
+2025-09-12,CMCSA,Communication Services,event,SELL,HOLD,,,,0.2771
+2025-09-12,CME,Financials,event,SELL,HOLD,,,,0.2621
+2025-09-12,CMG,Consumer Discretionary,event,SELL,HOLD,,,,0.1535
+2025-09-12,CMI,Industrials,event,HOLD,HOLD,,,,0.5623
+2025-09-12,CMS,Utilities,event,SELL,HOLD,,,,0.3597
+2025-09-12,CNA,Financials,event,SELL,HOLD,,,,0.3162
+2025-09-12,CNC,Health Care,event,SELL,HOLD,,,,0.3661
+2025-09-12,CNH,Industrials,event,SELL,HOLD,,,,0.1529
+2025-09-12,CNM,Industrials,event,SELL,HOLD,,,,0.2155
+2025-09-12,CNP,Utilities,event,HOLD,HOLD,,,,0.4324
+2025-09-12,CNXC,Information Technology,event,HOLD,HOLD,,,,0.4351
+2025-09-12,COF,Financials,event,HOLD,HOLD,,,,0.4925
+2025-09-12,COHR,Information Technology,event,BUY,HOLD,,,,0.6992
+2025-09-12,COIN,Financials,event,HOLD,HOLD,,,,0.5025
+2025-09-12,COKE,Consumer Staples,event,HOLD,HOLD,,,,0.4503
+2025-09-12,COLB,Financials,event,HOLD,HOLD,,,,0.5385
+2025-09-12,COLD,Real Estate,event,SELL,HOLD,,,,0.1916
+2025-09-12,COLM,Consumer Discretionary,event,SELL,HOLD,,,,0.3874
+2025-09-12,COO,Health Care,event,SELL,HOLD,,,,0.2787
+2025-09-12,COOP,Financials,pre_signal,STRONG_BUY,HOLD,,,,0.8031
+2025-09-12,COP,Energy,event,SELL,HOLD,,,,0.2882
+2025-09-12,COR,Health Care,event,HOLD,HOLD,,,,0.509
+2025-09-12,CORT,Health Care,event,HOLD,HOLD,,,,0.4477
+2025-09-12,COST,Consumer Staples,event,SELL,HOLD,,,,0.3823
+2025-09-12,COTY,Consumer Staples,event,SELL,HOLD,,,,0.2308
+2025-09-12,CPAY,Financials,event,SELL,HOLD,,,,0.2509
+2025-09-12,CPB,Consumer Staples,event,SELL,HOLD,,,,0.3645
+2025-09-12,CPNG,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.7202
+2025-09-12,CPRT,Industrials,event,SELL,HOLD,,,,0.3302
+2025-09-12,CPT,Real Estate,event,SELL,HOLD,,,,0.3855
+2025-09-12,CR,Industrials,event,HOLD,HOLD,,,,0.4037
+2025-09-12,CRH,Materials,event,HOLD,HOLD,,,,0.5807
+2025-09-12,CRL,Health Care,event,SELL,HOLD,,,,0.3364
+2025-09-12,CRM,Information Technology,event,SELL,HOLD,,,,0.3304
+2025-09-12,CROX,Consumer Discretionary,event,SELL,HOLD,,,,0.2524
+2025-09-12,CRS,Materials,event,HOLD,HOLD,,,,0.4502
+2025-09-12,CRUS,Information Technology,event,HOLD,HOLD,,,,0.4773
+2025-09-12,CRWD,Information Technology,event,HOLD,HOLD,,,,0.4673
+2025-09-12,CSCO,Information Technology,event,HOLD,HOLD,,,,0.4396
+2025-09-12,CSGP,Real Estate,event,SELL,HOLD,,,,0.3702
+2025-09-12,CSL,Industrials,event,SELL,HOLD,,,,0.322
+2025-09-12,CSX,Industrials,event,SELL,HOLD,,,,0.2345
+2025-09-12,CTAS,Industrials,event,SELL,HOLD,,,,0.2276
+2025-09-12,CTRA,Energy,event,SELL,HOLD,,,,0.3042
+2025-09-12,CTSH,Information Technology,event,SELL,HOLD,,,,0.297
+2025-09-12,CTVA,Materials,event,HOLD,HOLD,,,,0.4176
+2025-09-12,CUBE,Real Estate,event,SELL,HOLD,,,,0.3476
+2025-09-12,CUZ,Real Estate,event,SELL,HOLD,,,,0.3891
+2025-09-12,CVNA,Consumer Discretionary,event,HOLD,HOLD,,,,0.5257
+2025-09-12,CVS,Health Care,event,BUY,HOLD,,,,0.6167
+2025-09-12,CVX,Energy,event,HOLD,HOLD,,,,0.4448
+2025-09-12,CW,Industrials,event,BUY,HOLD,,,,0.6519
+2025-09-12,CWEN,Utilities,event,SELL,HOLD,,,,0.2946
+2025-09-12,CXT,Industrials,event,HOLD,HOLD,,,,0.5217
+2025-09-12,CZR,Consumer Discretionary,event,SELL,HOLD,,,,0.2836
+2025-09-12,D,Utilities,event,SELL,HOLD,,,,0.3984
+2025-09-12,DAL,Industrials,event,HOLD,HOLD,,,,0.5833
+2025-09-12,DAR,Consumer Staples,event,SELL,HOLD,,,,0.2637
+2025-09-12,DASH,Consumer Discretionary,event,HOLD,HOLD,,,,0.5964
+2025-09-12,DAY,Industrials,event,HOLD,HOLD,,,,0.5986
+2025-09-12,DBX,Information Technology,event,HOLD,HOLD,,,,0.5434
+2025-09-12,DCI,Industrials,event,HOLD,HOLD,,,,0.5543
+2025-09-12,DD,Materials,event,HOLD,HOLD,,,,0.4284
+2025-09-12,DDOG,Information Technology,event,HOLD,HOLD,,,,0.5048
+2025-09-12,DDS,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.7773
+2025-09-12,DE,Industrials,event,SELL,HOLD,,,,0.3699
+2025-09-12,DECK,Consumer Discretionary,event,HOLD,HOLD,,,,0.4642
+2025-09-12,DELL,Information Technology,event,HOLD,HOLD,,,,0.406
+2025-09-12,DG,Consumer Staples,event,SELL,HOLD,,,,0.3096
+2025-09-12,DGX,Health Care,event,HOLD,HOLD,,,,0.4215
+2025-09-12,DHI,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6859
+2025-09-12,DHR,Health Care,event,SELL,HOLD,,,,0.1659
+2025-09-12,DINO,Energy,pre_signal,BUY,HOLD,,,,0.7098
+2025-09-12,DIS,Communication Services,event,HOLD,HOLD,,,,0.4127
+2025-09-12,DJT,Communication Services,event,SELL,HOLD,,,,0.2571
+2025-09-12,DKNG,Consumer Discretionary,event,HOLD,HOLD,,,,0.5773
+2025-09-12,DKS,Consumer Discretionary,event,HOLD,HOLD,,,,0.5196
+2025-09-12,DLB,Information Technology,event,SELL,HOLD,,,,0.2723
+2025-09-12,DLR,Real Estate,event,HOLD,HOLD,,,,0.4248
+2025-09-12,DLTR,Consumer Staples,event,SELL,HOLD,,,,0.3127
+2025-09-12,DOC,Real Estate,event,SELL,HOLD,,,,0.3868
+2025-09-12,DOCS,Health Care,pre_signal,BUY,HOLD,,,,0.6524
+2025-09-12,DOCU,Information Technology,event,HOLD,HOLD,,,,0.4709
+2025-09-12,DOV,Industrials,event,SELL,HOLD,,,,0.2912
+2025-09-12,DOW,Materials,event,SELL,HOLD,,,,0.317
+2025-09-12,DOX,Information Technology,event,SELL,HOLD,,,,0.258
+2025-09-12,DPZ,Consumer Discretionary,event,SELL,HOLD,,,,0.3318
+2025-09-12,DRI,Consumer Discretionary,event,HOLD,HOLD,,,,0.4578
+2025-09-12,DRS,Industrials,event,SELL,HOLD,,,,0.3921
+2025-09-12,DT,Information Technology,event,SELL,HOLD,,,,0.3322
+2025-09-12,DTE,Utilities,event,SELL,HOLD,,,,0.3681
+2025-09-12,DTM,Energy,event,HOLD,HOLD,,,,0.4744
+2025-09-12,DUK,Utilities,event,SELL,HOLD,,,,0.3978
+2025-09-12,DUOL,Consumer Discretionary,event,SELL,HOLD,,,,0.2693
+2025-09-12,DV,Information Technology,event,SELL,HOLD,,,,0.1576
+2025-09-12,DVA,Health Care,event,SELL,HOLD,,,,0.254
+2025-09-12,DVN,Energy,event,HOLD,HOLD,,,,0.4064
+2025-09-12,DXC,Information Technology,event,SELL,HOLD,,,,0.3655
+2025-09-12,DXCM,Health Care,event,SELL,HOLD,,,,0.3192
+2025-09-12,EA,Communication Services,event,HOLD,HOLD,,,,0.5247
+2025-09-12,EBAY,Consumer Discretionary,event,HOLD,HOLD,,,,0.5331
+2025-09-12,ECG,Industrials,pre_signal,BUY,HOLD,,,,0.6989
+2025-09-12,ECL,Materials,event,SELL,HOLD,,,,0.3839
+2025-09-12,ED,Utilities,event,SELL,HOLD,,,,0.3027
+2025-09-12,EEFT,Financials,event,SELL,HOLD,,,,0.3066
+2025-09-12,EFX,Industrials,event,SELL,HOLD,,,,0.3959
+2025-09-12,EG,Financials,event,SELL,HOLD,,,,0.3619
+2025-09-12,EGP,Real Estate,event,SELL,HOLD,,,,0.2688
+2025-09-12,EHC,Health Care,event,HOLD,HOLD,,,,0.5172
+2025-09-12,EIX,Utilities,event,HOLD,HOLD,,,,0.406
+2025-09-12,EL,Consumer Staples,event,HOLD,HOLD,,,,0.4788
+2025-09-12,ELAN,Health Care,event,BUY,HOLD,,,,0.7068
+2025-09-12,ELF,Consumer Staples,event,BUY,HOLD,,,,0.7388
+2025-09-12,ELS,Real Estate,event,SELL,HOLD,,,,0.3991
+2025-09-12,ELV,Health Care,event,SELL,HOLD,,,,0.3585
+2025-09-12,EME,Industrials,pre_signal,BUY,HOLD,,,,0.6796
+2025-09-12,EMN,Materials,event,SELL,HOLD,,,,0.2859
+2025-09-12,EMR,Industrials,event,HOLD,HOLD,,,,0.4055
+2025-09-12,ENPH,Information Technology,event,SELL,HOLD,,,,0.3562
+2025-09-12,ENTG,Information Technology,event,SELL,HOLD,,,,0.3713
+2025-09-12,EOG,Energy,event,SELL,HOLD,,,,0.2934
+2025-09-12,EPAM,Information Technology,event,SELL,HOLD,,,,0.2322
+2025-09-12,EPR,Real Estate,event,HOLD,HOLD,,,,0.4365
+2025-09-12,EQH,Financials,event,HOLD,HOLD,,,,0.4014
+2025-09-12,EQIX,Real Estate,event,SELL,HOLD,,,,0.3457
+2025-09-12,EQR,Real Estate,event,SELL,HOLD,,,,0.3996
+2025-09-12,EQT,Energy,event,SELL,HOLD,,,,0.2897
+2025-09-12,ERIE,Unknown,event,SELL,HOLD,,,,0.2021
+2025-09-12,ES,Utilities,event,SELL,HOLD,,,,0.3562
+2025-09-12,ESAB,Industrials,event,SELL,HOLD,,,,0.309
+2025-09-12,ESI,Materials,event,HOLD,HOLD,,,,0.5197
+2025-09-12,ESS,Real Estate,event,SELL,HOLD,,,,0.3624
+2025-09-12,ESTC,Information Technology,event,HOLD,HOLD,,,,0.4841
+2025-09-12,ETN,Industrials,event,HOLD,HOLD,,,,0.4283
+2025-09-12,ETR,Utilities,event,HOLD,HOLD,,,,0.4366
+2025-09-12,ETSY,Consumer Discretionary,event,SELL,HOLD,,,,0.3525
+2025-09-12,EVR,Financials,event,BUY,HOLD,,,,0.6873
+2025-09-12,EVRG,Utilities,event,HOLD,HOLD,,,,0.5115
+2025-09-12,EW,Health Care,event,SELL,HOLD,,,,0.3488
+2025-09-12,EWBC,Financials,event,HOLD,HOLD,,,,0.5407
+2025-09-12,EXAS,Health Care,event,HOLD,HOLD,,,,0.53
+2025-09-12,EXC,Utilities,event,SELL,HOLD,,,,0.3314
+2025-09-12,EXE,Energy,event,SELL,HOLD,,,,0.3058
+2025-09-12,EXEL,Health Care,event,SELL,HOLD,,,,0.3816
+2025-09-12,EXLS,Industrials,event,SELL,HOLD,,,,0.3511
+2025-09-12,EXP,Materials,event,HOLD,HOLD,,,,0.4612
+2025-09-12,EXPD,Industrials,event,HOLD,HOLD,,,,0.421
+2025-09-12,EXPE,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6872
+2025-09-12,EXR,Real Estate,event,HOLD,HOLD,,,,0.4248
+2025-09-12,F,Consumer Discretionary,event,HOLD,HOLD,,,,0.4527
+2025-09-12,FAF,Financials,event,HOLD,HOLD,,,,0.4844
+2025-09-12,FANG,Energy,event,SELL,HOLD,,,,0.2273
+2025-09-12,FAST,Industrials,event,HOLD,HOLD,,,,0.4338
+2025-09-12,FBIN,Industrials,event,HOLD,HOLD,,,,0.4447
+2025-09-12,FCN,Industrials,event,SELL,HOLD,,,,0.2669
+2025-09-12,FCNCA,Financials,event,HOLD,HOLD,,,,0.4269
+2025-09-12,FCX,Materials,event,HOLD,HOLD,,,,0.5393
+2025-09-12,FDS,Financials,event,SELL,HOLD,,,,0.3189
+2025-09-12,FDX,Industrials,event,SELL,HOLD,,,,0.3082
+2025-09-12,FE,Utilities,event,HOLD,HOLD,,,,0.4535
+2025-09-12,FERG,Industrials,event,HOLD,HOLD,,,,0.4408
+2025-09-12,FFIV,Information Technology,event,HOLD,HOLD,,,,0.5435
+2025-09-12,FHB,Financials,event,HOLD,HOLD,,,,0.4407
+2025-09-12,FHN,Financials,event,HOLD,HOLD,,,,0.5318
+2025-09-12,FI,Financials,event,SELL,HOLD,,,,0.2821
+2025-09-12,FICO,Information Technology,event,HOLD,HOLD,,,,0.4011
+2025-09-12,FIS,Financials,event,SELL,HOLD,,,,0.2708
+2025-09-12,FITB,Financials,event,HOLD,HOLD,,,,0.4558
+2025-09-12,FIVE,Consumer Discretionary,event,BUY,HOLD,,,,0.6713
+2025-09-12,FIX,Industrials,event,BUY,HOLD,,,,0.7265
+2025-09-12,FLEX,Information Technology,event,BUY,HOLD,,,,0.7351
+2025-09-12,FLO,Consumer Staples,event,SELL,HOLD,,,,0.1532
+2025-09-12,FLS,Industrials,event,HOLD,HOLD,,,,0.5745
+2025-09-12,FLUT,Consumer Discretionary,event,HOLD,HOLD,,,,0.4589
+2025-09-12,FMC,Materials,event,SELL,HOLD,,,,0.3057
+2025-09-12,FNB,Financials,event,HOLD,HOLD,,,,0.5503
+2025-09-12,FND,Consumer Discretionary,event,HOLD,HOLD,,,,0.5533
+2025-09-12,FNF,Financials,event,SELL,HOLD,,,,0.3642
+2025-09-12,FOUR,Information Technology,event,SELL,HOLD,,,,0.2952
+2025-09-12,FOX,Communication Services,event,HOLD,HOLD,,,,0.4528
+2025-09-12,FOXA,Communication Services,event,HOLD,HOLD,,,,0.4571
+2025-09-12,FR,Real Estate,event,HOLD,HOLD,,,,0.4197
+2025-09-12,FRHC,Financials,event,SELL,HOLD,,,,0.3715
+2025-09-12,FRPT,Consumer Staples,event,SELL,HOLD,,,,0.2086
+2025-09-12,FRT,Real Estate,event,HOLD,HOLD,,,,0.4562
+2025-09-12,FSLR,Information Technology,pre_signal,BUY,HOLD,,,,0.6548
+2025-09-12,FTAI,Industrials,event,BUY,HOLD,,,,0.6695
+2025-09-12,FTI,Energy,event,BUY,HOLD,,,,0.7233
+2025-09-12,FTNT,Information Technology,event,SELL,HOLD,,,,0.3773
+2025-09-12,FTV,Industrials,event,HOLD,HOLD,,,,0.4242
+2025-09-12,FWONA,Communication Services,event,HOLD,HOLD,,,,0.4115
+2025-09-12,FWONK,Communication Services,event,HOLD,HOLD,,,,0.445
+2025-09-12,FYBR,Communication Services,event,HOLD,HOLD,,,,0.4307
+2025-09-12,G,Information Technology,event,SELL,HOLD,,,,0.2778
+2025-09-12,GAP,Consumer Discretionary,event,HOLD,HOLD,,,,0.5756
+2025-09-12,GD,Industrials,event,HOLD,HOLD,,,,0.5052
+2025-09-12,GDDY,Information Technology,event,SELL,HOLD,,,,0.3824
+2025-09-12,GE,Industrials,event,HOLD,HOLD,,,,0.5901
+2025-09-12,GEHC,Health Care,event,HOLD,HOLD,,,,0.4518
+2025-09-12,GEN,Information Technology,event,SELL,HOLD,,,,0.2553
+2025-09-12,GEV,Industrials,event,BUY,HOLD,,,,0.6033
+2025-09-12,GFS,Information Technology,event,SELL,HOLD,,,,0.2864
+2025-09-12,GGG,Industrials,event,SELL,HOLD,,,,0.3731
+2025-09-12,GILD,Health Care,event,HOLD,HOLD,,,,0.4642
+2025-09-12,GIS,Consumer Staples,event,SELL,HOLD,,,,0.368
+2025-09-12,GL,Financials,event,HOLD,HOLD,,,,0.5123
+2025-09-12,GLIBA,Communication Services,event,HOLD,HOLD,,,,0.5
+2025-09-12,GLIBK,Communication Services,event,HOLD,HOLD,,,,0.5
+2025-09-12,GLOB,Information Technology,event,SELL,HOLD,,,,0.1821
+2025-09-12,GLPI,Real Estate,event,HOLD,HOLD,,,,0.429
+2025-09-12,GLW,Information Technology,event,BUY,HOLD,,,,0.776
+2025-09-12,GM,Consumer Discretionary,event,HOLD,HOLD,,,,0.5509
+2025-09-12,GME,Consumer Discretionary,event,HOLD,HOLD,,,,0.4091
+2025-09-12,GMED,Health Care,event,SELL,HOLD,,,,0.2909
+2025-09-12,GNRC,Industrials,event,BUY,HOLD,,,,0.6162
+2025-09-12,GNTX,Consumer Discretionary,event,HOLD,HOLD,,,,0.5415
+2025-09-12,GOOG,Communication Services,event,BUY,HOLD,,,,0.7148
+2025-09-12,GOOGL,Communication Services,event,BUY,HOLD,,,,0.7213
+2025-09-12,GPC,Consumer Discretionary,event,HOLD,HOLD,,,,0.5338
+2025-09-12,GPK,Materials,event,SELL,HOLD,,,,0.1852
+2025-09-12,GPN,Financials,event,SELL,HOLD,,,,0.381
+2025-09-12,GRMN,Consumer Discretionary,event,HOLD,HOLD,,,,0.5267
+2025-09-12,GS,Financials,event,HOLD,HOLD,,,,0.5726
+2025-09-12,GTES,Industrials,event,HOLD,HOLD,,,,0.5824
+2025-09-12,GTLB,Information Technology,event,HOLD,HOLD,,,,0.5692
+2025-09-12,GTM,Communication Services,event,BUY,HOLD,,,,0.6295
+2025-09-12,GWRE,Information Technology,event,BUY,HOLD,,,,0.6164
+2025-09-12,GWW,Industrials,event,SELL,HOLD,,,,0.3333
+2025-09-12,GXO,Industrials,event,HOLD,HOLD,,,,0.4732
+2025-09-12,H,Consumer Discretionary,event,HOLD,HOLD,,,,0.4184
+2025-09-12,HAL,Energy,event,SELL,HOLD,,,,0.3348
+2025-09-12,HALO,Health Care,event,BUY,HOLD,,,,0.6402
+2025-09-12,HAS,Consumer Discretionary,event,HOLD,HOLD,,,,0.5322
+2025-09-12,HAYW,Industrials,event,HOLD,HOLD,,,,0.4533
+2025-09-12,HBAN,Financials,event,HOLD,HOLD,,,,0.5254
+2025-09-12,HCA,Health Care,event,HOLD,HOLD,,,,0.5001
+2025-09-12,HD,Consumer Discretionary,event,HOLD,HOLD,,,,0.5332
+2025-09-12,HEI,Industrials,event,HOLD,HOLD,,,,0.478
+2025-09-12,HHH,Real Estate,event,HOLD,HOLD,,,,0.5728
+2025-09-12,HIG,Financials,event,HOLD,HOLD,,,,0.4674
+2025-09-12,HII,Industrials,event,HOLD,HOLD,,,,0.5689
+2025-09-12,HIW,Real Estate,event,HOLD,HOLD,,,,0.4681
+2025-09-12,HLI,Financials,event,HOLD,HOLD,,,,0.5681
+2025-09-12,HLNE,Financials,event,SELL,HOLD,,,,0.3071
+2025-09-12,HLT,Consumer Discretionary,event,HOLD,HOLD,,,,0.4418
+2025-09-12,HOG,Consumer Discretionary,event,BUY,HOLD,,,,0.6175
+2025-09-12,HOLX,Health Care,event,SELL,HOLD,,,,0.3387
+2025-09-12,HON,Industrials,event,SELL,HOLD,,,,0.2563
+2025-09-12,HOOD,Financials,event,BUY,HOLD,,,,0.7665
+2025-09-12,HPE,Information Technology,event,BUY,HOLD,,,,0.6946
+2025-09-12,HPQ,Information Technology,event,HOLD,HOLD,,,,0.486
+2025-09-12,HR,Real Estate,event,HOLD,HOLD,,,,0.5787
+2025-09-12,HRB,Consumer Discretionary,event,HOLD,HOLD,,,,0.4318
+2025-09-12,HRL,Consumer Staples,event,SELL,HOLD,,,,0.2171
+2025-09-12,HSIC,Health Care,event,SELL,HOLD,,,,0.318
+2025-09-12,HST,Real Estate,event,HOLD,HOLD,,,,0.5187
+2025-09-12,HSY,Consumer Staples,event,HOLD,HOLD,,,,0.5361
+2025-09-12,HUBB,Industrials,event,HOLD,HOLD,,,,0.5061
+2025-09-12,HUBS,Information Technology,event,HOLD,HOLD,,,,0.4255
+2025-09-12,HUM,Health Care,event,HOLD,HOLD,,,,0.5025
+2025-09-12,HUN,Materials,event,SELL,HOLD,,,,0.3821
+2025-09-12,HWM,Industrials,event,HOLD,HOLD,,,,0.5844
+2025-09-12,HXL,Industrials,event,HOLD,HOLD,,,,0.4484
+2025-09-12,IAC,Communication Services,event,SELL,HOLD,,,,0.3409
+2025-09-12,IBKR,Financials,pre_signal,BUY,HOLD,,,,0.6786
+2025-09-12,IBM,Information Technology,event,HOLD,HOLD,,,,0.446
+2025-09-12,ICE,Financials,event,SELL,HOLD,,,,0.3211
+2025-09-12,IDA,Utilities,event,HOLD,HOLD,,,,0.5174
+2025-09-12,IDXX,Health Care,event,BUY,HOLD,,,,0.6208
+2025-09-12,IEX,Industrials,event,SELL,HOLD,,,,0.2785
+2025-09-12,IFF,Materials,event,SELL,HOLD,,,,0.2851
+2025-09-12,ILMN,Health Care,event,SELL,HOLD,,,,0.3606
+2025-09-12,INCY,Health Care,pre_signal,BUY,HOLD,,,,0.6494
+2025-09-12,INFA,Information Technology,event,HOLD,HOLD,,,,0.4679
+2025-09-12,INGM,Information Technology,event,HOLD,HOLD,,,,0.4334
+2025-09-12,INGR,Consumer Staples,event,SELL,HOLD,,,,0.3134
+2025-09-12,INSM,Health Care,event,BUY,HOLD,,,,0.6611
+2025-09-12,INSP,Health Care,event,SELL,HOLD,,,,0.2224
+2025-09-12,INTC,Information Technology,event,HOLD,HOLD,,,,0.5583
+2025-09-12,INTU,Information Technology,event,SELL,HOLD,,,,0.3051
+2025-09-12,INVH,Real Estate,event,SELL,HOLD,,,,0.2764
+2025-09-12,IONS,Health Care,event,BUY,HOLD,,,,0.7783
+2025-09-12,IOT,Information Technology,event,HOLD,HOLD,,,,0.417
+2025-09-12,IP,Materials,event,SELL,HOLD,,,,0.2375
+2025-09-12,IPG,Communication Services,event,HOLD,HOLD,,,,0.4017
+2025-09-12,IPGP,Information Technology,event,HOLD,HOLD,,,,0.5614
+2025-09-12,IQV,Health Care,event,HOLD,HOLD,,,,0.4657
+2025-09-12,IR,Industrials,event,SELL,HOLD,,,,0.3267
+2025-09-12,IRDM,Communication Services,event,SELL,HOLD,,,,0.1394
+2025-09-12,IRM,Real Estate,event,HOLD,HOLD,,,,0.4809
+2025-09-12,ISRG,Health Care,event,SELL,HOLD,,,,0.2366
+2025-09-12,IT,Information Technology,event,SELL,HOLD,,,,0.3297
+2025-09-12,ITT,Industrials,event,BUY,HOLD,,,,0.601
+2025-09-12,ITW,Industrials,event,SELL,HOLD,,,,0.375
+2025-09-12,IVZ,Financials,pre_signal,BUY,HOLD,,,,0.6923
+2025-09-12,J,Industrials,event,HOLD,HOLD,,,,0.5063
+2025-09-12,JAZZ,Health Care,event,HOLD,HOLD,,,,0.5545
+2025-09-12,JBHT,Industrials,event,SELL,HOLD,,,,0.2557
+2025-09-12,JBL,Information Technology,event,HOLD,HOLD,,,,0.5013
+2025-09-12,JCI,Industrials,event,HOLD,HOLD,,,,0.5413
+2025-09-12,JEF,Financials,event,HOLD,HOLD,,,,0.5295
+2025-09-12,JHG,Financials,event,HOLD,HOLD,,,,0.5328
+2025-09-12,JHX,Materials,event,SELL,HOLD,,,,0.2198
+2025-09-12,JKHY,Financials,event,HOLD,HOLD,,,,0.4177
+2025-09-12,JLL,Real Estate,pre_signal,BUY,HOLD,,,,0.6828
+2025-09-12,JNJ,Health Care,event,HOLD,HOLD,,,,0.4976
+2025-09-12,JPM,Financials,event,HOLD,HOLD,,,,0.5025
+2025-09-12,K,Consumer Staples,event,SELL,HOLD,,,,0.2447
+2025-09-12,KBR,Industrials,event,SELL,HOLD,,,,0.2672
+2025-09-12,KD,Information Technology,event,SELL,HOLD,,,,0.3953
+2025-09-12,KDP,Consumer Staples,event,SELL,HOLD,,,,0.1417
+2025-09-12,KEX,Industrials,event,SELL,HOLD,,,,0.1599
+2025-09-12,KEY,Financials,event,HOLD,HOLD,,,,0.514
+2025-09-12,KEYS,Information Technology,event,HOLD,HOLD,,,,0.5604
+2025-09-12,KHC,Consumer Staples,event,SELL,HOLD,,,,0.2157
+2025-09-12,KIM,Real Estate,event,SELL,HOLD,,,,0.3935
+2025-09-12,KKR,Financials,event,HOLD,HOLD,,,,0.4158
+2025-09-12,KLAC,Information Technology,event,HOLD,HOLD,,,,0.5833
+2025-09-12,KMB,Consumer Staples,event,SELL,HOLD,,,,0.2568
+2025-09-12,KMI,Energy,event,SELL,HOLD,,,,0.3784
+2025-09-12,KMPR,Financials,event,SELL,HOLD,,,,0.3407
+2025-09-12,KMX,Consumer Discretionary,event,SELL,HOLD,,,,0.3553
+2025-09-12,KNSL,Financials,event,SELL,HOLD,,,,0.223
+2025-09-12,KNX,Industrials,event,SELL,HOLD,,,,0.2555
+2025-09-12,KO,Consumer Staples,event,SELL,HOLD,,,,0.2217
+2025-09-12,KR,Consumer Staples,event,SELL,HOLD,,,,0.2867
+2025-09-12,KRC,Real Estate,event,BUY,HOLD,,,,0.6027
+2025-09-12,KRMN,Industrials,event,HOLD,HOLD,,,,0.5
+2025-09-12,KVUE,Consumer Staples,event,SELL,HOLD,,,,0.1332
+2025-09-12,L,Financials,event,HOLD,HOLD,,,,0.4429
+2025-09-12,LAD,Consumer Discretionary,event,HOLD,HOLD,,,,0.4598
+2025-09-12,LAMR,Real Estate,event,HOLD,HOLD,,,,0.4562
+2025-09-12,LAZ,Financials,event,HOLD,HOLD,,,,0.5525
+2025-09-12,LBRDA,Communication Services,event,SELL,HOLD,,,,0.2843
+2025-09-12,LBRDK,Communication Services,event,SELL,HOLD,,,,0.2731
+2025-09-12,LBTYA,Communication Services,event,HOLD,HOLD,,,,0.4839
+2025-09-12,LBTYK,Communication Services,event,HOLD,HOLD,,,,0.4612
+2025-09-12,LCID,Consumer Discretionary,event,SELL,HOLD,,,,0.205
+2025-09-12,LDOS,Industrials,event,HOLD,HOLD,,,,0.5778
+2025-09-12,LEA,Consumer Discretionary,event,HOLD,HOLD,,,,0.5563
+2025-09-12,LECO,Industrials,event,HOLD,HOLD,,,,0.5741
+2025-09-12,LEN,Consumer Discretionary,event,HOLD,HOLD,,,,0.5778
+2025-09-12,LFUS,Information Technology,event,HOLD,HOLD,,,,0.5809
+2025-09-12,LH,Health Care,event,HOLD,HOLD,,,,0.4869
+2025-09-12,LHX,Industrials,event,HOLD,HOLD,,,,0.5356
+2025-09-12,LII,Industrials,event,SELL,HOLD,,,,0.2896
+2025-09-12,LIN,Materials,event,SELL,HOLD,,,,0.3903
+2025-09-12,LINE,Real Estate,event,HOLD,HOLD,,,,0.4349
+2025-09-12,LITE,Information Technology,event,BUY,HOLD,,,,0.7966
+2025-09-12,LKQ,Consumer Discretionary,event,SELL,HOLD,,,,0.3816
+2025-09-12,LLY,Health Care,event,HOLD,HOLD,,,,0.4226
+2025-09-12,LLYVA,Communication Services,event,BUY,HOLD,,,,0.6228
+2025-09-12,LLYVK,Communication Services,event,BUY,HOLD,,,,0.6372
+2025-09-12,LMT,Industrials,event,SELL,HOLD,,,,0.3609
+2025-09-12,LNC,Financials,event,BUY,HOLD,,,,0.6209
+2025-09-12,LNG,Energy,event,SELL,HOLD,,,,0.3996
+2025-09-12,LNT,Utilities,event,SELL,HOLD,,,,0.3859
+2025-09-12,LNW,Consumer Discretionary,event,SELL,HOLD,,,,0.3462
+2025-09-12,LOAR,Industrials,event,HOLD,HOLD,,,,0.4962
+2025-09-12,LOPE,Consumer Discretionary,event,HOLD,HOLD,,,,0.5864
+2025-09-12,LOW,Consumer Discretionary,event,BUY,HOLD,,,,0.6061
+2025-09-12,LPLA,Financials,event,SELL,HOLD,,,,0.3094
+2025-09-12,LPX,Materials,event,SELL,HOLD,,,,0.3481
+2025-09-12,LRCX,Information Technology,event,BUY,HOLD,,,,0.7592
+2025-09-12,LSCC,Information Technology,pre_signal,BUY,HOLD,,,,0.6729
+2025-09-12,LSTR,Industrials,event,SELL,HOLD,,,,0.33
+2025-09-12,LULU,Consumer Discretionary,event,SELL,HOLD,,,,0.1724
+2025-09-12,LUV,Industrials,event,SELL,HOLD,,,,0.3046
+2025-09-12,LVS,Consumer Discretionary,event,BUY,HOLD,,,,0.6216
+2025-09-12,LW,Consumer Staples,event,SELL,HOLD,,,,0.3622
+2025-09-12,LYB,Materials,event,SELL,HOLD,,,,0.2971
+2025-09-12,LYFT,Industrials,event,BUY,HOLD,,,,0.7338
+2025-09-12,LYV,Communication Services,event,BUY,HOLD,,,,0.6096
+2025-09-12,M,Consumer Discretionary,event,BUY,HOLD,,,,0.693
+2025-09-12,MA,Financials,event,HOLD,HOLD,,,,0.4227
+2025-09-12,MAA,Real Estate,event,SELL,HOLD,,,,0.3662
+2025-09-12,MAN,Industrials,event,SELL,HOLD,,,,0.1931
+2025-09-12,MANH,Information Technology,event,HOLD,HOLD,,,,0.4279
+2025-09-12,MAR,Consumer Discretionary,event,SELL,HOLD,,,,0.2972
+2025-09-12,MAS,Industrials,event,HOLD,HOLD,,,,0.4601
+2025-09-12,MASI,Health Care,event,SELL,HOLD,,,,0.3567
+2025-09-12,MAT,Consumer Discretionary,event,SELL,HOLD,,,,0.2541
+2025-09-12,MCD,Consumer Discretionary,event,HOLD,HOLD,,,,0.4099
+2025-09-12,MCHP,Information Technology,event,SELL,HOLD,,,,0.3477
+2025-09-12,MCK,Health Care,event,HOLD,HOLD,,,,0.4768
+2025-09-12,MCO,Financials,event,HOLD,HOLD,,,,0.4183
+2025-09-12,MDB,Information Technology,event,BUY,HOLD,,,,0.7286
+2025-09-12,MDLZ,Consumer Staples,event,SELL,HOLD,,,,0.3433
+2025-09-12,MDT,Health Care,event,HOLD,HOLD,,,,0.4476
+2025-09-12,MDU,Utilities,event,SELL,HOLD,,,,0.3113
+2025-09-12,MEDP,Health Care,event,BUY,HOLD,,,,0.6953
+2025-09-12,MET,Financials,event,SELL,HOLD,,,,0.326
+2025-09-12,META,Communication Services,event,HOLD,HOLD,,,,0.5001
+2025-09-12,MGM,Consumer Discretionary,event,SELL,HOLD,,,,0.3056
+2025-09-12,MHK,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6451
+2025-09-12,MIDD,Industrials,event,SELL,HOLD,,,,0.3704
+2025-09-12,MKC,Consumer Staples,event,SELL,HOLD,,,,0.2723
+2025-09-12,MKL,Financials,event,SELL,HOLD,,,,0.389
+2025-09-12,MKSI,Information Technology,event,BUY,HOLD,,,,0.6871
+2025-09-12,MKTX,Financials,event,HOLD,HOLD,,,,0.4081
+2025-09-12,MLI,Industrials,pre_signal,BUY,HOLD,,,,0.6577
+2025-09-12,MLM,Materials,event,HOLD,HOLD,,,,0.5772
+2025-09-12,MMC,Financials,event,SELL,HOLD,,,,0.2277
+2025-09-12,MMM,Industrials,event,HOLD,HOLD,,,,0.4381
+2025-09-12,MNST,Consumer Staples,event,HOLD,HOLD,,,,0.433
+2025-09-12,MO,Consumer Staples,event,HOLD,HOLD,,,,0.5496
+2025-09-12,MOH,Health Care,event,SELL,HOLD,,,,0.3922
+2025-09-12,MORN,Financials,event,SELL,HOLD,,,,0.3185
+2025-09-12,MOS,Materials,event,HOLD,HOLD,,,,0.4559
+2025-09-12,MP,Materials,event,HOLD,HOLD,,,,0.5481
+2025-09-12,MPC,Energy,event,HOLD,HOLD,,,,0.5853
+2025-09-12,MPW,Real Estate,event,HOLD,HOLD,,,,0.431
+2025-09-12,MPWR,Information Technology,event,BUY,HOLD,,,,0.6031
+2025-09-12,MRK,Health Care,event,SELL,HOLD,,,,0.3691
+2025-09-12,MRNA,Health Care,event,SELL,HOLD,,,,0.2597
+2025-09-12,MRP,Consumer Discretionary,event,HOLD,HOLD,,,,0.5
+2025-09-12,MRVL,Information Technology,event,SELL,HOLD,,,,0.2292
+2025-09-12,MS,Financials,event,HOLD,HOLD,,,,0.5598
+2025-09-12,MSA,Industrials,event,HOLD,HOLD,,,,0.4081
+2025-09-12,MSCI,Financials,event,SELL,HOLD,,,,0.3554
+2025-09-12,MSFT,Information Technology,event,HOLD,HOLD,,,,0.4312
+2025-09-12,MSGS,Communication Services,event,HOLD,HOLD,,,,0.4964
+2025-09-12,MSI,Information Technology,event,HOLD,HOLD,,,,0.4547
+2025-09-12,MSM,Industrials,event,HOLD,HOLD,,,,0.494
+2025-09-12,MSTR,Information Technology,event,SELL,HOLD,,,,0.2849
+2025-09-12,MTB,Financials,event,HOLD,HOLD,,,,0.4059
+2025-09-12,MTCH,Communication Services,event,HOLD,HOLD,,,,0.5787
+2025-09-12,MTD,Health Care,event,HOLD,HOLD,,,,0.4118
+2025-09-12,MTDR,Energy,event,SELL,HOLD,,,,0.3039
+2025-09-12,MTG,Financials,event,HOLD,HOLD,,,,0.4453
+2025-09-12,MTN,Consumer Discretionary,event,SELL,HOLD,,,,0.1878
+2025-09-12,MTSI,Information Technology,event,HOLD,HOLD,,,,0.4028
+2025-09-12,MTZ,Industrials,event,BUY,HOLD,,,,0.617
+2025-09-12,MU,Information Technology,event,BUY,HOLD,,,,0.7956
+2025-09-12,MUSA,Consumer Discretionary,event,SELL,HOLD,,,,0.3208
+2025-09-12,NBIX,Health Care,event,HOLD,HOLD,,,,0.5878
+2025-09-12,NCLH,Consumer Discretionary,event,BUY,HOLD,,,,0.6431
+2025-09-12,NCNO,Information Technology,event,HOLD,HOLD,,,,0.4433
+2025-09-12,NDAQ,Financials,event,HOLD,HOLD,,,,0.5182
+2025-09-12,NDSN,Industrials,event,HOLD,HOLD,,,,0.4242
+2025-09-12,NEE,Utilities,event,SELL,HOLD,,,,0.2724
+2025-09-12,NEM,Materials,event,BUY,HOLD,,,,0.66
+2025-09-12,NET,Information Technology,confirmed,STRONG_BUY,HOLD,,,,0.8327
+2025-09-12,NEU,Materials,event,BUY,HOLD,,,,0.6548
+2025-09-12,NFG,Utilities,event,HOLD,HOLD,,,,0.4443
+2025-09-12,NFLX,Communication Services,event,HOLD,HOLD,,,,0.4333
+2025-09-12,NI,Utilities,event,SELL,HOLD,,,,0.3509
+2025-09-12,NKE,Consumer Discretionary,event,HOLD,HOLD,,,,0.4018
+2025-09-12,NLY,Financials,event,HOLD,HOLD,,,,0.5547
+2025-09-12,NNN,Real Estate,event,SELL,HOLD,,,,0.3711
+2025-09-12,NOC,Industrials,event,HOLD,HOLD,,,,0.545
+2025-09-12,NOV,Energy,event,SELL,HOLD,,,,0.3726
+2025-09-12,NOW,Information Technology,event,HOLD,HOLD,,,,0.4022
+2025-09-12,NRG,Utilities,event,HOLD,HOLD,,,,0.5369
+2025-09-12,NSA,Real Estate,event,SELL,HOLD,,,,0.372
+2025-09-12,NSC,Industrials,event,HOLD,HOLD,,,,0.4094
+2025-09-12,NTAP,Information Technology,event,BUY,HOLD,,,,0.6389
+2025-09-12,NTNX,Information Technology,event,BUY,HOLD,,,,0.6037
+2025-09-12,NTRA,Health Care,event,HOLD,HOLD,,,,0.5586
+2025-09-12,NTRS,Financials,event,HOLD,HOLD,,,,0.5434
+2025-09-12,NU,Financials,event,BUY,HOLD,,,,0.63
+2025-09-12,NUE,Materials,event,HOLD,HOLD,,,,0.477
+2025-09-12,NVDA,Information Technology,event,HOLD,HOLD,,,,0.5449
+2025-09-12,NVR,Consumer Discretionary,event,HOLD,HOLD,,,,0.49
+2025-09-12,NVST,Health Care,event,HOLD,HOLD,,,,0.5095
+2025-09-12,NVT,Industrials,event,BUY,HOLD,,,,0.6503
+2025-09-12,NWL,Consumer Discretionary,event,HOLD,HOLD,,,,0.5255
+2025-09-12,NWS,Communication Services,event,SELL,HOLD,,,,0.2501
+2025-09-12,NWSA,Communication Services,event,SELL,HOLD,,,,0.3589
+2025-09-12,NXPI,Unknown,event,SELL,HOLD,,,,0.3863
+2025-09-12,NXST,Communication Services,event,HOLD,HOLD,,,,0.5898
+2025-09-12,NYT,Communication Services,event,HOLD,HOLD,,,,0.4383
+2025-09-12,O,Real Estate,event,HOLD,HOLD,,,,0.4503
+2025-09-12,OC,Industrials,event,HOLD,HOLD,,,,0.4374
+2025-09-12,ODFL,Industrials,event,SELL,HOLD,,,,0.295
+2025-09-12,OGE,Utilities,event,SELL,HOLD,,,,0.2794
+2025-09-12,OGN,Health Care,event,HOLD,HOLD,,,,0.4806
+2025-09-12,OHI,Real Estate,event,HOLD,HOLD,,,,0.5151
+2025-09-12,OKE,Energy,event,SELL,HOLD,,,,0.2426
+2025-09-12,OKTA,Information Technology,event,HOLD,HOLD,,,,0.4171
+2025-09-12,OLED,Information Technology,event,SELL,HOLD,,,,0.2847
+2025-09-12,OLLI,Consumer Discretionary,event,HOLD,HOLD,,,,0.5315
+2025-09-12,OLN,Materials,event,BUY,HOLD,,,,0.6574
+2025-09-12,OMC,Communication Services,event,SELL,HOLD,,,,0.3723
+2025-09-12,OMF,Financials,event,HOLD,HOLD,,,,0.5152
+2025-09-12,ON,Information Technology,event,SELL,HOLD,,,,0.2674
+2025-09-12,ONON,Consumer Discretionary,event,SELL,HOLD,,,,0.2961
+2025-09-12,ONTO,Information Technology,event,SELL,HOLD,,,,0.3741
+2025-09-12,ORCL,Information Technology,event,BUY,HOLD,,,,0.7768
+2025-09-12,ORI,Financials,event,HOLD,HOLD,,,,0.4249
+2025-09-12,ORLY,Consumer Discretionary,event,HOLD,HOLD,,,,0.5508
+2025-09-12,OSK,Industrials,event,BUY,HOLD,,,,0.6205
+2025-09-12,OTIS,Industrials,event,SELL,HOLD,,,,0.3872
+2025-09-12,OVV,Energy,event,HOLD,HOLD,,,,0.4262
+2025-09-12,OWL,Financials,event,SELL,HOLD,,,,0.3202
+2025-09-12,OXY,Energy,event,SELL,HOLD,,,,0.3403
+2025-09-12,OZK,Financials,event,HOLD,HOLD,,,,0.4938
+2025-09-12,PAG,Consumer Discretionary,event,HOLD,HOLD,,,,0.5608
+2025-09-12,PANW,Information Technology,event,HOLD,HOLD,,,,0.4856
+2025-09-12,PATH,Information Technology,event,HOLD,HOLD,,,,0.4083
+2025-09-12,PAYC,Information Technology,event,SELL,HOLD,,,,0.3558
+2025-09-12,PAYX,Industrials,event,SELL,HOLD,,,,0.2288
+2025-09-12,PB,Financials,event,SELL,HOLD,,,,0.2912
+2025-09-12,PCAR,Industrials,event,SELL,HOLD,,,,0.3583
+2025-09-12,PCG,Utilities,event,HOLD,HOLD,,,,0.4793
+2025-09-12,PCOR,Information Technology,event,HOLD,HOLD,,,,0.4202
+2025-09-12,PCTY,Information Technology,event,SELL,HOLD,,,,0.2594
+2025-09-12,PEG,Utilities,event,SELL,HOLD,,,,0.2726
+2025-09-12,PEGA,Information Technology,event,BUY,HOLD,,,,0.6267
+2025-09-12,PEN,Health Care,event,HOLD,HOLD,,,,0.5263
+2025-09-12,PENN,Consumer Discretionary,event,HOLD,HOLD,,,,0.5562
+2025-09-12,PEP,Consumer Staples,event,SELL,HOLD,,,,0.2946
+2025-09-12,PFE,Health Care,event,SELL,HOLD,,,,0.325
+2025-09-12,PFG,Financials,event,HOLD,HOLD,,,,0.4578
+2025-09-12,PFGC,Consumer Staples,pre_signal,BUY,HOLD,,,,0.6697
+2025-09-12,PG,Consumer Staples,event,SELL,HOLD,,,,0.3829
+2025-09-12,PGR,Financials,event,SELL,HOLD,,,,0.3223
+2025-09-12,PH,Industrials,event,HOLD,HOLD,,,,0.5497
+2025-09-12,PHM,Consumer Discretionary,event,BUY,HOLD,,,,0.6516
+2025-09-12,PINS,Communication Services,event,SELL,HOLD,,,,0.3314
+2025-09-12,PK,Real Estate,event,HOLD,HOLD,,,,0.4942
+2025-09-12,PKG,Materials,event,HOLD,HOLD,,,,0.4718
+2025-09-12,PLD,Real Estate,event,HOLD,HOLD,,,,0.4721
+2025-09-12,PLNT,Consumer Discretionary,event,SELL,HOLD,,,,0.2965
+2025-09-12,PLTR,Information Technology,event,HOLD,HOLD,,,,0.5291
+2025-09-12,PM,Consumer Staples,event,SELL,HOLD,,,,0.3491
+2025-09-12,PNC,Financials,event,HOLD,HOLD,,,,0.4699
+2025-09-12,PNFP,Financials,event,SELL,HOLD,,,,0.3586
+2025-09-12,PNR,Industrials,event,HOLD,HOLD,,,,0.5332
+2025-09-12,PNW,Utilities,event,SELL,HOLD,,,,0.2415
+2025-09-12,PODD,Health Care,event,BUY,HOLD,,,,0.6143
+2025-09-12,POOL,Consumer Discretionary,event,SELL,HOLD,,,,0.3893
+2025-09-12,POST,Consumer Staples,event,SELL,HOLD,,,,0.1996
+2025-09-12,PPC,Consumer Staples,event,SELL,HOLD,,,,0.28
+2025-09-12,PPG,Materials,event,SELL,HOLD,,,,0.3608
+2025-09-12,PPL,Utilities,event,SELL,HOLD,,,,0.3722
+2025-09-12,PR,Energy,event,SELL,HOLD,,,,0.3425
+2025-09-12,PRGO,Health Care,event,SELL,HOLD,,,,0.2183
+2025-09-12,PRI,Financials,event,SELL,HOLD,,,,0.3998
+2025-09-12,PRMB,Consumer Staples,event,SELL,HOLD,,,,0.2914
+2025-09-12,PRU,Financials,event,SELL,HOLD,,,,0.3455
+2025-09-12,PSA,Real Estate,event,SELL,HOLD,,,,0.3496
+2025-09-12,PSKY,Unknown,event,BUY,HOLD,,,,0.7024
+2025-09-12,PSN,Industrials,event,SELL,HOLD,,,,0.3144
+2025-09-12,PSTG,Information Technology,event,BUY,HOLD,,,,0.7135
+2025-09-12,PSX,Energy,event,HOLD,HOLD,,,,0.5012
+2025-09-12,PTC,Information Technology,event,HOLD,HOLD,,,,0.5318
+2025-09-12,PVH,Consumer Discretionary,event,HOLD,HOLD,,,,0.5048
+2025-09-12,PWR,Industrials,event,HOLD,HOLD,,,,0.5172
+2025-09-12,PYPL,Financials,event,SELL,HOLD,,,,0.2285
+2025-09-12,QCOM,Information Technology,event,SELL,HOLD,,,,0.3998
+2025-09-12,QGEN,Health Care,event,SELL,HOLD,,,,0.2615
+2025-09-12,QRVO,Information Technology,event,SELL,HOLD,,,,0.3961
+2025-09-12,QS,Consumer Discretionary,event,HOLD,HOLD,,,,0.5123
+2025-09-12,QSR,Consumer Discretionary,event,SELL,HOLD,,,,0.2901
+2025-09-12,QXO,Industrials,event,HOLD,HOLD,,,,0.5444
+2025-09-12,R,Industrials,pre_signal,BUY,HOLD,,,,0.6785
+2025-09-12,RAL,Information Technology,event,HOLD,HOLD,,,,0.5
+2025-09-12,RARE,Health Care,event,SELL,HOLD,,,,0.3432
+2025-09-12,RBA,Industrials,event,HOLD,HOLD,,,,0.5562
+2025-09-12,RBC,Industrials,event,SELL,HOLD,,,,0.3746
+2025-09-12,RBLX,Communication Services,event,BUY,HOLD,,,,0.7394
+2025-09-12,RBRK,Information Technology,event,SELL,HOLD,,,,0.2881
+2025-09-12,RCL,Consumer Discretionary,event,BUY,HOLD,,,,0.6294
+2025-09-12,RDDT,Communication Services,pre_signal,BUY,HOLD,,,,0.7146
+2025-09-12,REG,Real Estate,event,SELL,HOLD,,,,0.3623
+2025-09-12,REGN,Health Care,event,SELL,HOLD,,,,0.3272
+2025-09-12,REXR,Real Estate,event,HOLD,HOLD,,,,0.5745
+2025-09-12,REYN,Consumer Staples,event,SELL,HOLD,,,,0.3639
+2025-09-12,RF,Financials,event,BUY,HOLD,,,,0.609
+2025-09-12,RGA,Financials,event,SELL,HOLD,,,,0.3447
+2025-09-12,RGEN,Health Care,event,SELL,HOLD,,,,0.2506
+2025-09-12,RGLD,Materials,event,HOLD,HOLD,,,,0.5441
+2025-09-12,RH,Consumer Discretionary,event,HOLD,HOLD,,,,0.4505
+2025-09-12,RHI,Industrials,event,SELL,HOLD,,,,0.2669
+2025-09-12,RITM,Financials,event,HOLD,HOLD,,,,0.4553
+2025-09-12,RIVN,Consumer Discretionary,event,HOLD,HOLD,,,,0.554
+2025-09-12,RJF,Financials,event,HOLD,HOLD,,,,0.5118
+2025-09-12,RKLB,Industrials,event,BUY,HOLD,,,,0.6798
+2025-09-12,RKT,Financials,confirmed,STRONG_BUY,HOLD,,,,0.8356
+2025-09-12,RL,Consumer Discretionary,event,BUY,HOLD,,,,0.6569
+2025-09-12,RLI,Financials,event,SELL,HOLD,,,,0.252
+2025-09-12,RMD,Health Care,event,HOLD,HOLD,,,,0.4194
+2025-09-12,RNG,Information Technology,event,HOLD,HOLD,,,,0.4842
+2025-09-12,RNR,Financials,event,SELL,HOLD,,,,0.3362
+2025-09-12,ROIV,Health Care,event,BUY,HOLD,,,,0.7209
+2025-09-12,ROK,Industrials,event,HOLD,HOLD,,,,0.4797
+2025-09-12,ROKU,Communication Services,event,BUY,HOLD,,,,0.6363
+2025-09-12,ROL,Industrials,event,HOLD,HOLD,,,,0.4111
+2025-09-12,ROP,Industrials,event,SELL,HOLD,,,,0.2701
+2025-09-12,ROST,Consumer Discretionary,event,HOLD,HOLD,,,,0.4813
+2025-09-12,RPM,Materials,event,HOLD,HOLD,,,,0.4432
+2025-09-12,RPRX,Health Care,event,HOLD,HOLD,,,,0.4321
+2025-09-12,RRC,Energy,event,SELL,HOLD,,,,0.3731
+2025-09-12,RRX,Industrials,event,SELL,HOLD,,,,0.3236
+2025-09-12,RS,Materials,event,SELL,HOLD,,,,0.3142
+2025-09-12,RSG,Industrials,event,SELL,HOLD,,,,0.3238
+2025-09-12,RTX,Industrials,event,HOLD,HOLD,,,,0.5407
+2025-09-12,RVMD,Health Care,event,HOLD,HOLD,,,,0.5783
+2025-09-12,RVTY,Health Care,event,SELL,HOLD,,,,0.1837
+2025-09-12,RYAN,Financials,event,SELL,HOLD,,,,0.1334
+2025-09-12,RYN,Real Estate,event,HOLD,HOLD,,,,0.4199
+2025-09-12,S,Information Technology,event,HOLD,HOLD,,,,0.4207
+2025-09-12,SAIA,Industrials,event,HOLD,HOLD,,,,0.4214
+2025-09-12,SAIC,Industrials,event,SELL,HOLD,,,,0.1749
+2025-09-12,SAIL,Information Technology,event,HOLD,HOLD,,,,0.5
+2025-09-12,SAM,Consumer Staples,event,SELL,HOLD,,,,0.3233
+2025-09-12,SARO,Industrials,event,HOLD,HOLD,,,,0.4011
+2025-09-12,SBAC,Real Estate,event,SELL,HOLD,,,,0.2018
+2025-09-12,SBUX,Consumer Discretionary,event,SELL,HOLD,,,,0.1625
+2025-09-12,SCCO,Materials,event,HOLD,HOLD,,,,0.5005
+2025-09-12,SCHW,Financials,event,HOLD,HOLD,,,,0.427
+2025-09-12,SCI,Consumer Discretionary,event,SELL,HOLD,,,,0.3516
+2025-09-12,SEB,Consumer Staples,event,BUY,HOLD,,,,0.6303
+2025-09-12,SEE,Materials,event,HOLD,HOLD,,,,0.5223
+2025-09-12,SEIC,Financials,event,SELL,HOLD,,,,0.3575
+2025-09-12,SF,Financials,event,HOLD,HOLD,,,,0.5081
+2025-09-12,SFD,Consumer Staples,event,HOLD,HOLD,,,,0.5
+2025-09-12,SFM,Consumer Staples,event,SELL,HOLD,,,,0.2649
+2025-09-12,SGI,Consumer Discretionary,event,BUY,HOLD,,,,0.704
+2025-09-12,SHC,Health Care,pre_signal,BUY,HOLD,,,,0.6699
+2025-09-12,SHW,Materials,event,SELL,HOLD,,,,0.3956
+2025-09-12,SIRI,Communication Services,event,HOLD,HOLD,,,,0.4389
+2025-09-12,SITE,Industrials,event,HOLD,HOLD,,,,0.5031
+2025-09-12,SJM,Consumer Staples,event,SELL,HOLD,,,,0.3749
+2025-09-12,SLB,Energy,event,SELL,HOLD,,,,0.3632
+2025-09-12,SLGN,Materials,event,SELL,HOLD,,,,0.2172
+2025-09-12,SLM,Financials,event,SELL,HOLD,,,,0.2189
+2025-09-12,SMCI,Information Technology,event,SELL,HOLD,,,,0.392
+2025-09-12,SMG,Materials,event,SELL,HOLD,,,,0.3423
+2025-09-12,SMMT,Health Care,event,SELL,HOLD,,,,0.229
+2025-09-12,SN,Consumer Discretionary,event,HOLD,HOLD,,,,0.568
+2025-09-12,SNA,Industrials,event,SELL,HOLD,,,,0.3242
+2025-09-12,SNDK,Information Technology,event,HOLD,HOLD,,,,0.5
+2025-09-12,SNDR,Industrials,event,SELL,HOLD,,,,0.2845
+2025-09-12,SNOW,Information Technology,event,BUY,HOLD,,,,0.6295
+2025-09-12,SNPS,Information Technology,event,SELL,HOLD,,,,0.2013
+2025-09-12,SNV,Financials,event,HOLD,HOLD,,,,0.4454
+2025-09-12,SNX,Information Technology,event,HOLD,HOLD,,,,0.5824
+2025-09-12,SO,Utilities,event,SELL,HOLD,,,,0.3156
+2025-09-12,SOFI,Financials,event,BUY,HOLD,,,,0.6915
+2025-09-12,SOLV,Health Care,event,HOLD,HOLD,,,,0.4621
+2025-09-12,SON,Materials,event,SELL,HOLD,,,,0.374
+2025-09-12,SPG,Real Estate,event,HOLD,HOLD,,,,0.507
+2025-09-12,SPGI,Financials,event,HOLD,HOLD,,,,0.4492
+2025-09-12,SPOT,Communication Services,event,HOLD,HOLD,,,,0.506
+2025-09-12,SPR,Industrials,event,SELL,HOLD,,,,0.3362
+2025-09-12,SRE,Utilities,event,HOLD,HOLD,,,,0.51
+2025-09-12,SRPT,Health Care,event,SELL,HOLD,,,,0.212
+2025-09-12,SSB,Financials,event,HOLD,HOLD,,,,0.4253
+2025-09-12,SSD,Industrials,event,HOLD,HOLD,,,,0.5421
+2025-09-12,SSNC,Information Technology,event,HOLD,HOLD,,,,0.4822
+2025-09-12,ST,Industrials,event,HOLD,HOLD,,,,0.472
+2025-09-12,STAG,Real Estate,event,SELL,HOLD,,,,0.3871
+2025-09-12,STE,Health Care,event,HOLD,HOLD,,,,0.5311
+2025-09-12,STLD,Materials,event,SELL,HOLD,,,,0.394
+2025-09-12,STT,Financials,event,HOLD,HOLD,,,,0.506
+2025-09-12,STWD,Financials,event,HOLD,HOLD,,,,0.4165
+2025-09-12,STX,Unknown,event,BUY,HOLD,,,,0.7556
+2025-09-12,STZ,Consumer Staples,event,SELL,HOLD,,,,0.1253
+2025-09-12,SUI,Real Estate,event,HOLD,HOLD,,,,0.4269
+2025-09-12,SW,Materials,event,SELL,HOLD,,,,0.3273
+2025-09-12,SWK,Industrials,event,HOLD,HOLD,,,,0.5144
+2025-09-12,SWKS,Information Technology,event,SELL,HOLD,,,,0.3677
+2025-09-12,SYF,Financials,event,HOLD,HOLD,,,,0.5881
+2025-09-12,SYK,Health Care,event,SELL,HOLD,,,,0.3563
+2025-09-12,SYY,Consumer Staples,event,HOLD,HOLD,,,,0.4591
+2025-09-12,T,Communication Services,event,HOLD,HOLD,,,,0.4409
+2025-09-12,TAP,Consumer Staples,event,SELL,HOLD,,,,0.2227
+2025-09-12,TDC,Information Technology,event,SELL,HOLD,,,,0.3509
+2025-09-12,TDG,Industrials,event,SELL,HOLD,,,,0.2401
+2025-09-12,TDY,Industrials,event,HOLD,HOLD,,,,0.5289
+2025-09-12,TEAM,Information Technology,event,HOLD,HOLD,,,,0.4053
+2025-09-12,TECH,Health Care,event,SELL,HOLD,,,,0.285
+2025-09-12,TEL,Unknown,pre_signal,BUY,HOLD,,,,0.6622
+2025-09-12,TEM,Health Care,event,BUY,HOLD,,,,0.7832
+2025-09-12,TER,Information Technology,event,BUY,HOLD,,,,0.6047
+2025-09-12,TFC,Financials,event,HOLD,HOLD,,,,0.4464
+2025-09-12,TFSL,Financials,event,SELL,HOLD,,,,0.3514
+2025-09-12,TFX,Health Care,event,HOLD,HOLD,,,,0.4625
+2025-09-12,TGT,Consumer Staples,event,SELL,HOLD,,,,0.2443
+2025-09-12,THC,Health Care,pre_signal,BUY,HOLD,,,,0.7043
+2025-09-12,THG,Financials,event,HOLD,HOLD,,,,0.5526
+2025-09-12,THO,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6567
+2025-09-12,TIGO,Communication Services,event,BUY,HOLD,,,,0.6294
+2025-09-12,TJX,Consumer Discretionary,event,HOLD,HOLD,,,,0.5394
+2025-09-12,TKO,Communication Services,event,BUY,HOLD,,,,0.6583
+2025-09-12,TKR,Industrials,event,HOLD,HOLD,,,,0.4125
+2025-09-12,TLN,Utilities,pre_signal,BUY,HOLD,,,,0.6675
+2025-09-12,TMO,Health Care,event,HOLD,HOLD,,,,0.429
+2025-09-12,TMUS,Communication Services,event,SELL,HOLD,,,,0.285
+2025-09-12,TNL,Consumer Discretionary,event,BUY,HOLD,,,,0.6326
+2025-09-12,TOL,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6872
+2025-09-12,TOST,Information Technology,event,SELL,HOLD,,,,0.3023
+2025-09-12,TPG,Financials,event,HOLD,HOLD,,,,0.4847
+2025-09-12,TPL,Energy,event,SELL,HOLD,,,,0.3756
+2025-09-12,TPR,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6998
+2025-09-12,TREX,Industrials,event,SELL,HOLD,,,,0.2967
+2025-09-12,TRGP,Energy,event,SELL,HOLD,,,,0.2836
+2025-09-12,TRMB,Information Technology,event,HOLD,HOLD,,,,0.4762
+2025-09-12,TROW,Financials,event,SELL,HOLD,,,,0.3901
+2025-09-12,TRU,Industrials,event,HOLD,HOLD,,,,0.43
+2025-09-12,TRV,Financials,event,HOLD,HOLD,,,,0.4558
+2025-09-12,TSCO,Consumer Discretionary,event,HOLD,HOLD,,,,0.4781
+2025-09-12,TSLA,Consumer Discretionary,event,BUY,HOLD,,,,0.6279
+2025-09-12,TSN,Consumer Staples,event,SELL,HOLD,,,,0.2898
+2025-09-12,TT,Industrials,event,SELL,HOLD,,,,0.315
+2025-09-12,TTC,Industrials,event,HOLD,HOLD,,,,0.4585
+2025-09-12,TTD,Communication Services,event,SELL,HOLD,,,,0.2155
+2025-09-12,TTEK,Industrials,event,SELL,HOLD,,,,0.3384
+2025-09-12,TTWO,Communication Services,event,HOLD,HOLD,,,,0.4927
+2025-09-12,TW,Financials,event,SELL,HOLD,,,,0.198
+2025-09-12,TWLO,Information Technology,event,SELL,HOLD,,,,0.389
+2025-09-12,TXN,Information Technology,event,SELL,HOLD,,,,0.2018
+2025-09-12,TXRH,Consumer Discretionary,event,SELL,HOLD,,,,0.2475
+2025-09-12,TXT,Industrials,event,HOLD,HOLD,,,,0.4202
+2025-09-12,TYL,Information Technology,event,SELL,HOLD,,,,0.2804
+2025-09-12,U,Information Technology,pre_signal,BUY,HOLD,,,,0.7652
+2025-09-12,UA,Consumer Discretionary,event,SELL,HOLD,,,,0.3726
+2025-09-12,UAA,Consumer Discretionary,event,SELL,HOLD,,,,0.342
+2025-09-12,UAL,Industrials,pre_signal,BUY,HOLD,,,,0.7846
+2025-09-12,UBER,Industrials,event,HOLD,HOLD,,,,0.5094
+2025-09-12,UDR,Real Estate,event,SELL,HOLD,,,,0.3406
+2025-09-12,UGI,Utilities,event,HOLD,HOLD,,,,0.408
+2025-09-12,UHAL,Industrials,event,SELL,HOLD,,,,0.3434
+2025-09-12,UHS,Health Care,event,HOLD,HOLD,,,,0.4559
+2025-09-12,UI,Information Technology,event,BUY,HOLD,,,,0.7564
+2025-09-12,ULTA,Consumer Discretionary,event,HOLD,HOLD,,,,0.5648
+2025-09-12,UNH,Health Care,event,HOLD,HOLD,,,,0.4727
+2025-09-12,UNM,Financials,event,HOLD,HOLD,,,,0.4183
+2025-09-12,UNP,Industrials,event,SELL,HOLD,,,,0.2364
+2025-09-12,UPS,Industrials,event,SELL,HOLD,,,,0.2316
+2025-09-12,URI,Industrials,pre_signal,BUY,HOLD,,,,0.6609
+2025-09-12,USB,Financials,event,HOLD,HOLD,,,,0.5073
+2025-09-12,USD,Unknown,event,BUY,HOLD,,,,0.7259
+2025-09-12,USFD,Consumer Staples,event,HOLD,HOLD,,,,0.4198
+2025-09-12,UTHR,Health Care,event,BUY,HOLD,,,,0.6773
+2025-09-12,UWMC,Financials,event,BUY,HOLD,,,,0.7109
+2025-09-12,V,Financials,event,SELL,HOLD,,,,0.286
+2025-09-12,VEEV,Health Care,event,HOLD,HOLD,,,,0.5135
+2025-09-12,VFC,Consumer Discretionary,event,BUY,HOLD,,,,0.6226
+2025-09-12,VICI,Real Estate,event,HOLD,HOLD,,,,0.4273
+2025-09-12,VIK,Consumer Discretionary,pre_signal,BUY,HOLD,,,,0.6714
+2025-09-12,VIRT,Financials,event,SELL,HOLD,,,,0.1974
+2025-09-12,VKTX,Health Care,event,SELL,HOLD,,,,0.2497
+2025-09-12,VLO,Energy,pre_signal,BUY,HOLD,,,,0.6463
+2025-09-12,VLTO,Industrials,event,HOLD,HOLD,,,,0.4008
+2025-09-12,VMC,Materials,event,HOLD,HOLD,,,,0.4872
+2025-09-12,VMI,Industrials,event,HOLD,HOLD,,,,0.5426
+2025-09-12,VNO,Real Estate,event,HOLD,HOLD,,,,0.5148
+2025-09-12,VNOM,Energy,event,SELL,HOLD,,,,0.3197
+2025-09-12,VNT,Information Technology,event,HOLD,HOLD,,,,0.5783
+2025-09-12,VOYA,Financials,event,HOLD,HOLD,,,,0.4975
+2025-09-12,VRSK,Industrials,event,SELL,HOLD,,,,0.3689
+2025-09-12,VRSN,Information Technology,event,HOLD,HOLD,,,,0.513
+2025-09-12,VRT,Industrials,event,HOLD,HOLD,,,,0.5554
+2025-09-12,VRTX,Health Care,event,SELL,HOLD,,,,0.3069
+2025-09-12,VST,Utilities,event,BUY,HOLD,,,,0.611
+2025-09-12,VTR,Real Estate,event,HOLD,HOLD,,,,0.4323
+2025-09-12,VTRS,Health Care,event,HOLD,HOLD,,,,0.4194
+2025-09-12,VVV,Materials,event,SELL,HOLD,,,,0.3995
+2025-09-12,VZ,Communication Services,event,SELL,HOLD,,,,0.3799
+2025-09-12,W,Consumer Discretionary,event,STRONG_BUY,HOLD,,,,0.8032
+2025-09-12,WAB,Industrials,event,SELL,HOLD,,,,0.2771
+2025-09-12,WAL,Financials,event,HOLD,HOLD,,,,0.5632
+2025-09-12,WAT,Health Care,event,SELL,HOLD,,,,0.3106
+2025-09-12,WBA,Unknown,event,HOLD,HOLD,,,,0.5233
+2025-09-12,WBD,Communication Services,event,BUY,HOLD,,,,0.7456
+2025-09-12,WBS,Financials,event,HOLD,HOLD,,,,0.5344
+2025-09-12,WCC,Industrials,event,HOLD,HOLD,,,,0.5683
+2025-09-12,WDAY,Information Technology,event,SELL,HOLD,,,,0.3456
+2025-09-12,WDC,Information Technology,event,BUY,HOLD,,,,0.77
+2025-09-12,WEC,Utilities,event,HOLD,HOLD,,,,0.457
+2025-09-12,WELL,Real Estate,event,HOLD,HOLD,,,,0.5314
+2025-09-12,WEN,Consumer Discretionary,event,SELL,HOLD,,,,0.2028
+2025-09-12,WEX,Financials,event,HOLD,HOLD,,,,0.5164
+2025-09-12,WFC,Financials,event,HOLD,HOLD,,,,0.4026
+2025-09-12,WFRD,Energy,event,HOLD,HOLD,,,,0.5307
+2025-09-12,WH,Consumer Discretionary,event,SELL,HOLD,,,,0.3541
+2025-09-12,WHR,Consumer Discretionary,event,SELL,HOLD,,,,0.3797
+2025-09-12,WING,Consumer Discretionary,event,SELL,HOLD,,,,0.1693
+2025-09-12,WLK,Materials,event,HOLD,HOLD,,,,0.4438
+2025-09-12,WM,Industrials,event,SELL,HOLD,,,,0.2411
+2025-09-12,WMB,Energy,event,SELL,HOLD,,,,0.373
+2025-09-12,WMS,Industrials,event,BUY,HOLD,,,,0.6512
+2025-09-12,WMT,Consumer Staples,event,HOLD,HOLD,,,,0.4969
+2025-09-12,WPC,Real Estate,event,HOLD,HOLD,,,,0.4932
+2025-09-12,WRB,Financials,event,HOLD,HOLD,,,,0.4164
+2025-09-12,WSC,Industrials,event,SELL,HOLD,,,,0.2487
+2025-09-12,WSM,Consumer Discretionary,event,HOLD,HOLD,,,,0.5985
+2025-09-12,WSO,Industrials,event,SELL,HOLD,,,,0.2514
+2025-09-12,WST,Health Care,event,HOLD,HOLD,,,,0.5328
+2025-09-12,WTFC,Financials,event,HOLD,HOLD,,,,0.5308
+2025-09-12,WTM,Financials,event,SELL,HOLD,,,,0.2596
+2025-09-12,WTRG,Utilities,event,SELL,HOLD,,,,0.3373
+2025-09-12,WTW,Financials,event,HOLD,HOLD,,,,0.4423
+2025-09-12,WU,Information Technology,event,SELL,HOLD,,,,0.2985
+2025-09-12,WWD,Industrials,event,SELL,HOLD,,,,0.3831
+2025-09-12,WY,Real Estate,event,SELL,HOLD,,,,0.2205
+2025-09-12,WYNN,Consumer Discretionary,event,BUY,HOLD,,,,0.7098
+2025-09-12,XEL,Utilities,event,HOLD,HOLD,,,,0.5183
+2025-09-12,XOM,Energy,event,SELL,HOLD,,,,0.3584
+2025-09-12,XP,Financials,event,HOLD,HOLD,,,,0.4774
+2025-09-12,XPO,Industrials,event,HOLD,HOLD,,,,0.4421
+2025-09-12,XRAY,Health Care,event,SELL,HOLD,,,,0.3025
+2025-09-12,XYL,Industrials,event,HOLD,HOLD,,,,0.462
+2025-09-12,XYZ,Financials,event,HOLD,HOLD,,,,0.411
+2025-09-12,YETI,Consumer Discretionary,event,HOLD,HOLD,,,,0.4947
+2025-09-12,YUM,Consumer Discretionary,event,SELL,HOLD,,,,0.3757
+2025-09-12,Z,Real Estate,event,BUY,HOLD,,,,0.6123
+2025-09-12,ZBH,Health Care,event,HOLD,HOLD,,,,0.4034
+2025-09-12,ZBRA,Information Technology,event,SELL,HOLD,,,,0.3295
+2025-09-12,ZG,Real Estate,event,HOLD,HOLD,,,,0.5974
+2025-09-12,ZION,Financials,event,HOLD,HOLD,,,,0.5384
+2025-09-12,ZM,Information Technology,event,HOLD,HOLD,,,,0.5536
+2025-09-12,ZS,Information Technology,event,HOLD,HOLD,,,,0.467
+2025-09-12,ZTS,Health Care,event,SELL,HOLD,,,,0.2467
+2025-09-12,A,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AA,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AAL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AAON,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AAPL,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ABBV,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,ABNB,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ABT,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ACGL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ACHC,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ACI,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ACM,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ACN,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ADBE,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ADC,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ADI,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ADM,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ADP,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ADSK,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ADT,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AEE,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AEP,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AES,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AFG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AFL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AFRM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AGCO,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AGNC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AGO,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AIG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AIT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AIZ,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AJG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AKAM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ALAB,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,ALB,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ALGM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ALGN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ALK,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ALL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ALLE,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,ALLY,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ALNY,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ALSN,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AM,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMAT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMCR,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMD,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AME,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,AMG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMGN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMH,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMKR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMP,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMT,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMTM,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AMZN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ANET,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,AON,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AOS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,APA,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,APD,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,APG,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,APH,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,APLS,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,APO,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,APP,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,APPF,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,APTV,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AR,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ARE,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ARES,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ARMK,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ARW,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AS,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ASH,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ASTS,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ATI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ATO,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ATR,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AU,Materials,event,STRONG_BUY,,,,,1.0
+2025-09-12,AUR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AVB,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AVGO,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AVT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AVTR,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AVY,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AWI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AWK,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AXON,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AXP,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AXS,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AXTA,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AYI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,AZO,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BA,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BAC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BAH,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BALL,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BAM,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BAX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BBWI,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BBY,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BC,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BDX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BEN,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BEPC,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BF-B,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BFAM,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BG,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BHF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BIIB,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,BILL,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BIO,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BIRK,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BJ,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BK,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BKNG,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BKR,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BLD,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BLDR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BLK,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BMRN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BMY,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BOKF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BPOP,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BRBR,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BRK-B,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BRKR,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BRO,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BROS,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BRX,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BSX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BSY,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BURL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BWA,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BWXT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BX,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,BXP,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,BYD,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,C,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CACC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CACI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CAG,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CAH,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CAR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CARR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CART,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CASY,Consumer Staples,event,STRONG_BUY,,,,,1.0
+2025-09-12,CAT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CAVA,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CB,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,CBOE,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CBRE,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CBSH,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CCCS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CCI,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CCK,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CCL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CDNS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CDW,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CE,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CEG,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CELH,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CERT,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CF,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CFG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CFLT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CFR,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CG,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,CGNX,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CHD,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CHDN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CHE,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CHH,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CHRD,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CHRW,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CHTR,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CHWY,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CI,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CIEN,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,CINF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CIVI,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CL,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CLF,Materials,event,STRONG_BUY,,,,,1.0
+2025-09-12,CLH,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CLVT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CLX,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CMA,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CMCSA,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CME,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CMG,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CMI,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,CMS,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CNA,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CNC,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,CNH,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CNM,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CNP,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CNXC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COHR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COIN,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COKE,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COLB,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COLD,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COLM,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COO,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COOP,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COP,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COR,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CORT,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,COST,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,COTY,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CPAY,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CPB,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CPNG,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CPRT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CPT,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CRH,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CRL,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CRM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CROX,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CRS,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CRUS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CRWD,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CSCO,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CSGP,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CSL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CSX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CTAS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CTRA,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CTSH,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CTVA,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CUBE,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CUZ,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CVNA,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CVS,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CVX,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CW,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,CWEN,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CXT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,CZR,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,D,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DAL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DAR,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DASH,Consumer Discretionary,event,STRONG_BUY,,,,,1.0
+2025-09-12,DAY,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DBX,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DCI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DD,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DDOG,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DDS,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DE,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DECK,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DELL,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DG,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DGX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DHI,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DHR,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DINO,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DIS,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DJT,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DKNG,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DKS,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DLB,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DLR,Real Estate,event,STRONG_BUY,,,,,1.0
+2025-09-12,DLTR,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DOC,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DOCS,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DOCU,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DOV,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DOW,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DOX,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DPZ,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DRI,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DRS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DTE,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DTM,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DUK,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DUOL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DV,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DVA,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DVN,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DXC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,DXCM,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EA,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EBAY,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ECG,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ECL,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ED,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EEFT,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EFX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EGP,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EHC,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EIX,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EL,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ELAN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ELF,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ELS,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ELV,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EME,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EMN,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EMR,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,ENPH,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ENTG,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EOG,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EPAM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EPR,Real Estate,event,STRONG_BUY,,,,,1.0
+2025-09-12,EQH,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EQIX,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EQR,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EQT,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ERIE,Unknown,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ES,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ESAB,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ESI,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ESS,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ESTC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ETN,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ETR,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ETSY,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EVR,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,EVRG,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EW,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EWBC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EXAS,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EXC,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EXE,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EXEL,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EXLS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EXP,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EXPD,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,EXPE,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,EXR,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,F,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FAF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FANG,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FAST,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FBIN,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FCN,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FCNCA,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FCX,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FDS,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FDX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FE,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FERG,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FFIV,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,FHB,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FHN,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FI,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FICO,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FIS,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FITB,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FIVE,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FIX,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,FLEX,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FLO,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FLS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FLUT,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FMC,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FNB,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FND,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FNF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FOUR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FOX,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FOXA,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FR,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FRHC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FRPT,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FRT,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FSLR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FTAI,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,FTI,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FTNT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FTV,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,FWONA,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FWONK,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,FYBR,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,G,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GAP,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GD,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GDDY,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GE,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GEHC,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GEN,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GEV,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GFS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GGG,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GILD,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GIS,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GLIBA,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GLIBK,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GLOB,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GLPI,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GLW,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,GM,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GME,Consumer Discretionary,event,STRONG_BUY,,,,,1.0
+2025-09-12,GMED,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GNRC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GNTX,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GOOG,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,GOOGL,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,GPC,Consumer Discretionary,event,STRONG_BUY,,,,,1.0
+2025-09-12,GPK,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GPN,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GRMN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GS,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,GTES,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GTLB,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GTM,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,GWRE,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GWW,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,GXO,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,H,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HAL,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HALO,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,HAS,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HAYW,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HBAN,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HCA,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HD,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HEI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HHH,Real Estate,event,STRONG_BUY,,,,,1.0
+2025-09-12,HIG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HII,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HIW,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HLI,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,HLNE,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HLT,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HOG,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HOLX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HON,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HOOD,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HPE,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,HPQ,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HR,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HRB,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HRL,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HSIC,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HST,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HSY,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HUBB,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HUBS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HUM,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HUN,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HWM,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,HXL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IAC,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IBKR,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IBM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ICE,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IDA,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IDXX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IEX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IFF,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ILMN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,INCY,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,INFA,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,INGM,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,INGR,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,INSM,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,INSP,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,INTC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,INTU,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,INVH,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IONS,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,IOT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IP,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IPG,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IPGP,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IQV,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IRDM,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IRM,Real Estate,event,STRONG_BUY,,,,,1.0
+2025-09-12,ISRG,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ITT,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,ITW,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,IVZ,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,J,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JAZZ,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JBHT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JBL,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JCI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JEF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JHG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JHX,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JKHY,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JLL,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JNJ,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,JPM,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,K,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KBR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KD,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KDP,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KEX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KEY,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KEYS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KHC,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KIM,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KKR,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KLAC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KMB,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KMI,Energy,event,STRONG_BUY,,,,,1.0
+2025-09-12,KMPR,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KMX,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KNSL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KNX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KO,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KR,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KRC,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KRMN,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,KVUE,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,L,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,LAD,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LAMR,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LAZ,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LBRDA,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LBRDK,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LBTYA,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LBTYK,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LCID,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LDOS,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,LEA,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LECO,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LEN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LFUS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LH,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LHX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LII,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LIN,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LINE,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LITE,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,LKQ,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LLY,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LLYVA,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,LLYVK,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,LMT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LNC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LNG,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LNT,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LNW,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LOAR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LOPE,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LOW,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LPLA,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LPX,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LRCX,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,LSCC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LSTR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LULU,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LUV,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LVS,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LW,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LYB,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LYFT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,LYV,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,M,Consumer Discretionary,event,STRONG_BUY,,,,,1.0
+2025-09-12,MA,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MAA,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MAN,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MANH,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MAR,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MAS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MASI,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MAT,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MCD,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MCHP,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MCK,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,MCO,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MDB,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,MDLZ,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MDT,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MDU,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MEDP,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MET,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,META,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MGM,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MHK,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MIDD,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MKC,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MKL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MKSI,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,MKTX,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MLI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MLM,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MMC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MMM,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MNST,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MO,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MOH,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MORN,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MOS,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MP,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MPC,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MPW,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MPWR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MRK,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MRNA,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MRP,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MRVL,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MS,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,MSA,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MSCI,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MSFT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MSGS,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,MSI,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,MSM,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MSTR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MTB,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MTCH,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MTD,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MTDR,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MTG,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,MTN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MTSI,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MTZ,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,MU,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,MUSA,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NBIX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NCLH,Consumer Discretionary,event,STRONG_BUY,,,,,1.0
+2025-09-12,NCNO,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NDAQ,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NDSN,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NEE,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NEM,Materials,event,STRONG_BUY,,,,,1.0
+2025-09-12,NET,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NEU,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NFG,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NFLX,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NI,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NKE,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NLY,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NNN,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NOC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NOV,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NOW,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NRG,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NSA,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NSC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NTAP,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,NTNX,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,NTRA,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NTRS,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NU,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,NUE,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NVDA,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NVR,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NVST,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NVT,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,NWL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NWS,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NWSA,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NXPI,Unknown,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NXST,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,NYT,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,O,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ODFL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OGE,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OGN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OHI,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OKE,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OKTA,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OLED,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OLLI,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OLN,Materials,event,STRONG_BUY,,,,,1.0
+2025-09-12,OMC,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OMF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ON,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ONON,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ONTO,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ORCL,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,ORI,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ORLY,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OSK,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OTIS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OVV,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OWL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OXY,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,OZK,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PAG,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PANW,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PATH,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PAYC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PAYX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PB,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PCAR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PCG,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PCOR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PCTY,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PEG,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PEGA,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PEN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PENN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PEP,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PFE,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PFG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PFGC,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PG,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PGR,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PH,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PHM,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PINS,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PK,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PKG,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PLD,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PLNT,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PLTR,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PM,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PNC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PNFP,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PNR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PNW,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PODD,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,POOL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,POST,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PPC,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PPG,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PPL,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PR,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PRGO,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PRI,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PRMB,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PRU,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PSA,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PSKY,Unknown,event,STRONG_BUY,,,,,1.0
+2025-09-12,PSN,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PSTG,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,PSX,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PTC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PVH,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PWR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,PYPL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,QCOM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,QGEN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,QRVO,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,QS,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,QSR,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,QXO,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,R,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RAL,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RARE,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RBA,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,RBC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RBLX,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RBRK,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RCL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RDDT,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,REG,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,REGN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,REXR,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,REYN,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RGA,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RGEN,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RGLD,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RH,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RHI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RITM,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RIVN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RJF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RKLB,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RKT,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RLI,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RMD,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RNG,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RNR,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ROIV,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,ROK,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ROKU,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ROL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ROP,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ROST,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RPM,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RPRX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RRC,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RRX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RS,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RSG,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RTX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RVMD,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,RVTY,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RYAN,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,RYN,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,S,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SAIA,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SAIC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SAIL,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SAM,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SARO,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SBAC,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SBUX,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SCCO,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SCHW,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SCI,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SEB,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SEE,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SEIC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SFD,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SFM,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SGI,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SHC,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SHW,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SIRI,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SITE,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SJM,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SLB,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SLGN,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SLM,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SMCI,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SMG,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SMMT,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SNA,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SNDK,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SNDR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SNOW,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SNPS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SNV,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SNX,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SO,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SOFI,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SOLV,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SON,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SPG,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SPGI,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SPOT,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SPR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SRE,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SRPT,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SSB,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SSD,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SSNC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ST,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,STAG,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,STE,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,STLD,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,STT,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,STWD,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,STX,Unknown,event,STRONG_BUY,,,,,1.0
+2025-09-12,STZ,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SUI,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SW,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SWK,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SWKS,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SYF,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SYK,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,SYY,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,T,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TAP,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TDC,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TDG,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TDY,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,TEAM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TECH,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TEL,Unknown,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TEM,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,TER,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TFC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TFSL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TFX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TGT,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,THC,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,THG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,THO,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TIGO,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TJX,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TKO,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,TKR,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TLN,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TMO,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TMUS,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TNL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TOL,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TOST,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TPG,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TPL,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TPR,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TREX,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TRGP,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TRMB,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TROW,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TRU,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TRV,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TSCO,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TSLA,Consumer Discretionary,event,STRONG_BUY,,,,,1.0
+2025-09-12,TSN,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TTC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TTD,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TTEK,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TTWO,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TW,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TWLO,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TXN,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TXRH,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TXT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,TYL,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,U,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UA,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UAA,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UAL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UBER,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UDR,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UGI,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UHAL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UHS,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UI,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,ULTA,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UNH,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,UNM,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UNP,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UPS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,URI,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,USB,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,USD,Unknown,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,USFD,Consumer Staples,event,STRONG_BUY,,,,,1.0
+2025-09-12,UTHR,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,UWMC,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,V,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VEEV,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VFC,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VICI,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VIK,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VIRT,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VKTX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VLO,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VLTO,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VMC,Materials,event,STRONG_BUY,,,,,1.0
+2025-09-12,VMI,Industrials,event,STRONG_BUY,,,,,1.0
+2025-09-12,VNO,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VNOM,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VNT,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VOYA,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VRSK,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VRSN,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,VRT,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VRTX,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VST,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VTR,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VTRS,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,VVV,Materials,event,STRONG_BUY,,,,,1.0
+2025-09-12,VZ,Communication Services,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,W,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WAB,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WAL,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WAT,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WBA,Unknown,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WBD,Communication Services,event,STRONG_BUY,,,,,1.0
+2025-09-12,WBS,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WCC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WDAY,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WDC,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,WEC,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WELL,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WEN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WEX,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WFC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WFRD,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WH,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WHR,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WING,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WLK,Materials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WM,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WMB,Energy,event,STRONG_BUY,,,,,1.0
+2025-09-12,WMS,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WMT,Consumer Staples,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WPC,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WRB,Financials,event,STRONG_BUY,,,,,1.0
+2025-09-12,WSC,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WSM,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WSO,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WST,Health Care,event,STRONG_BUY,,,,,1.0
+2025-09-12,WTFC,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WTM,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WTRG,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WTW,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WU,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WWD,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WY,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,WYNN,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,XEL,Utilities,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,XOM,Energy,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,XP,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,XPO,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,XRAY,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,XYL,Industrials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,XYZ,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,YETI,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,YUM,Consumer Discretionary,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,Z,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ZBH,Health Care,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ZBRA,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ZG,Real Estate,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ZION,Financials,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ZM,Information Technology,confirmed,STRONG_BUY,,,,,1.0
+2025-09-12,ZS,Information Technology,event,STRONG_BUY,,,,,1.0
+2025-09-12,ZTS,Health Care,confirmed,STRONG_BUY,,,,,1.0
