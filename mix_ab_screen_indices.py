@@ -348,10 +348,25 @@ def _zscore_last(x: pd.Series, lb: int = 63) -> float:
     return float((w.iloc[-1] - mu) / sd)
 
 def _squash01(v: float, lo: float, hi: float) -> float:
+    # NaN-safe: une entrée non finie ne doit JAMAIS devenir un signal max
+    # (sinon min(1.0, nan)==1.0 en aval -> bug régime tv_score=1.0 pour tous).
+    if v is None or not math.isfinite(v):
+        return 0.0
     if hi == lo:
         return 0.0
     x = (v - lo) / (hi - lo)
     return float(0.0 if x < 0 else 1.0 if x > 1 else x)
+
+def _clamp01(v: float, ndigits: int = 4) -> float:
+    """Clamp dans [0,1], NaN-safe : NaN/inf -> 0.0 (jamais 1.0). Corrige min(1.0, nan)==1.0."""
+    try:
+        v = float(v)
+    except (TypeError, ValueError):
+        return 0.0
+    if not math.isfinite(v):
+        return 0.0
+    v = round(v, ndigits)
+    return 0.0 if v < 0.0 else 1.0 if v > 1.0 else v
 
 def _tech_label_from_features(feats: dict) -> str:
     if feats.get("breakout"):
@@ -451,7 +466,10 @@ def _market_regime_factor(mkt: Optional[pd.DataFrame]) -> float:
     ema200= c.ewm(span=200,adjust=False, min_periods=200).mean()
     slope50 = (ema50.iloc[-1] - ema50.iloc[-5]) / (abs(ema50.iloc[-5]) + 1e-9)
     vol63   = c.pct_change().rolling(63).std(ddof=0).iloc[-1]
-    dd      = 1.0 - (c.iloc[-1] / c.rolling(252).max().iloc[-1] + 1e-9)
+    # High 52-sem (approx) : min_periods pour rester calculable avec <252 barres,
+    # sinon rolling(252).max()=NaN -> dd=NaN -> régime=NaN (bug tv_score=1.0).
+    roll_max = c.rolling(252, min_periods=100).max().iloc[-1]
+    dd      = 1.0 - (c.iloc[-1] / (roll_max + 1e-9))
 
     s_trend = _squash01((ema50.iloc[-1]/(ema200.iloc[-1]+1e-9))-1, -0.03, 0.06)
     s_slope = _squash01(slope50, -0.04, 0.06)
@@ -459,6 +477,8 @@ def _market_regime_factor(mkt: Optional[pd.DataFrame]) -> float:
     s_dd    = 1.0 - _squash01(dd, 0.05, 0.25)
 
     base = 0.38*s_trend + 0.22*s_slope + 0.20*s_vol + 0.20*s_dd  # [0..1]
+    if not math.isfinite(base):
+        return 1.0  # régime neutre si données insuffisantes (garde-fou)
     return float(round(0.90 + 0.15*base, 4))
 
 def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, adv_dv: Optional[float]=None) -> dict:
@@ -557,7 +577,7 @@ def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, a
     s_entry = 0.0
     if breakout: s_entry += 0.8
     if pullback: s_entry = max(s_entry, 0.65)
-    s_rs    = float(max(0.0, min(1.0, s_rs)))
+    s_rs    = 0.0 if not math.isfinite(s_rs) else float(max(0.0, min(1.0, s_rs)))
 
     # Score global + boosts adoucis
     score = (0.28*s_trend + 0.22*s_momo + 0.22*s_rs + 0.14*s_volu + 0.10*s_vol + 0.04*s_entry)
@@ -565,7 +585,7 @@ def compute_advanced_score(df: pd.DataFrame, mkt: Optional[pd.DataFrame]=None, a
     if (days_to_cross is not None) and (days_to_cross <= 3): score += 0.02
     if pullback: score += 0.01
     if overextended: score -= 0.04
-    score = float(max(0.0, min(1.0, round(score, 4))))
+    score = _clamp01(score)
 
     # Label compat (non utilisé pour bucket final)
     if score >= 0.80: label = "STRONG_BUY"
@@ -645,7 +665,7 @@ def _build_rows(uni: pd.DataFrame) -> pd.DataFrame:
         feats = compute_advanced_score(df, mkt=mkt_df, adv_dv=adv)
 
         # applique le régime au score absolu
-        tv_score = float(max(0.0, min(1.0, round(feats['score'] * regime, 4))))
+        tv_score = _clamp01(feats['score'] * regime)
         tv_reco  = ("STRONG_BUY" if tv_score>=0.80 else "BUY" if tv_score>=0.60 else "HOLD" if tv_score>=0.40 else "SELL")
 
         # Tech label & piliers (placeholder p_an affiné plus bas)

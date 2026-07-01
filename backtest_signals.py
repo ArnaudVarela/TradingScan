@@ -1,5 +1,16 @@
-# backtest_signals.py — version corrigée (syntaxe/indentation, sorties sûres)
-import os, time, json
+# backtest_signals.py — Backtest HONNÊTE (réécriture v2)
+#
+# Modes (env BACKTEST_MODE) :
+#   - "replay"  : walk-forward point-in-time. Régénère les signaux avec le screener CORRIGÉ
+#                 sur l'historique (uniquement données <= date), puis mesure les rendements
+#                 forward. C'est le mode qui donne un VRAI verdict vs SPY.
+#   - "forward" : legacy. Lit signals_history.csv + user_trades.csv et évalue les fenêtres écoulées.
+#
+# Toute la simulation (entrée next-open, frais+slippage, métriques) vit dans backtest_engine.py
+# (pur & testé). Ici : chargement données OHLC + orchestration + écriture des sorties dashboard.
+import os
+import json
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from random import uniform
@@ -8,14 +19,15 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 
+import backtest_engine as E
+
 # =================== SORTIES SÛRES (I/O helpers) ============================
 PUBLIC_DIR = Path(".")
-PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
 
 def _utc_stamp() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-def _add_generated_at(df: pd.DataFrame | None) -> pd.DataFrame | None:
+def _add_generated_at(df):
     if df is None or df.empty:
         return df
     if "generated_at_utc" not in df.columns:
@@ -23,424 +35,277 @@ def _add_generated_at(df: pd.DataFrame | None) -> pd.DataFrame | None:
         df["generated_at_utc"] = _utc_stamp()
     return df
 
-def write_csv_public(df: pd.DataFrame | None, name: str, headers: list[str] | None = None):
-    out = PUBLIC_DIR / name
-    out.parent.mkdir(parents=True, exist_ok=True)
+def _write_csv(df, path: Path, headers=None):
+    path.parent.mkdir(parents=True, exist_ok=True)
     if df is None or getattr(df, "empty", True):
         cols = headers or (list(df.columns) if isinstance(df, pd.DataFrame) else [])
-        pd.DataFrame(columns=cols).to_csv(out, index=False)
-        print(f"[WARN] public {name}: empty -> headers only")
+        pd.DataFrame(columns=cols).to_csv(path, index=False)
+        print(f"[WARN] {path.name}: empty -> headers only")
         return
-    df2 = _add_generated_at(df)
-    df2.to_csv(out, index=False)
-    print(f"[OK] public {name}: {len(df2)} rows")
+    _add_generated_at(df).to_csv(path, index=False)
+    print(f"[OK] {path.name}: {len(df)} rows")
 
-def write_csv_root(df: pd.DataFrame | None, name: str, headers: list[str] | None = None):
-    out = Path(name)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    if df is None or getattr(df, "empty", True):
-        cols = headers or (list(df.columns) if isinstance(df, pd.DataFrame) else [])
-        pd.DataFrame(columns=cols).to_csv(out, index=False)
-        print(f"[WARN] root  {name}: empty -> headers only")
-        return
-    df2 = _add_generated_at(df)
-    df2.to_csv(out, index=False)
-    print(f"[OK] root  {name}: {len(df2)} rows")
-
-def save_csv(df: pd.DataFrame | None, fname: str, also_public: bool = True, headers: list[str] | None = None):
-    write_csv_root(df, fname, headers=headers)
+def save_csv(df, fname: str, also_public: bool = True, headers=None):
+    _write_csv(df, Path(fname), headers=headers)
     if also_public:
-        write_csv_public(df, fname, headers=headers)
-# ==============================================================================
+        _write_csv(df, PUBLIC_DIR / fname, headers=headers)
 
-# ====== CONFIG =================================================================
-HORIZONS = [1, 3, 5, 10, 20]
-FILTER_BUCKET = None
-MAX_TICKERS = None
+# ====== CONFIG (env-overridable, style repo) ===================================
+BACKTEST_MODE = os.getenv("BACKTEST_MODE", "replay")     # replay | forward
+HORIZONS      = E.horizons_from_env()                     # défaut [1,3,5,10,20]
+ENTRY_MODE    = E.entry_mode_from_env()                   # défaut next_open
+COSTS         = E.cost_model_from_env()                   # défaut fee 1bp + slip 5bp / côté
 
-BATCH_SIZE = 80
-CHUNK_SLEEP_RANGE = (2.0, 4.0)
-MAX_RETRIES = 3
-RETRY_BACKOFF_BASE = 3.0
-RETRY_JITTER_MAX = 5.0
+MARKET_TICKER = os.getenv("MARKET_TICKER", "SPY")
+UNIVERSE_CSV  = os.getenv("UNIVERSE_CSV", "universe_in_scope.csv")
+MAX_TICKERS   = int(os.getenv("MAX_TICKERS", "0")) or None  # 0 = illimité
 
+# Replay
+REPLAY_MONTHS = int(os.getenv("REPLAY_MONTHS", "12"))     # fenêtre de test
+REPLAY_STEP   = int(os.getenv("REPLAY_STEP", "5"))        # grille (5 = hebdo)
+WARMUP_YEARS  = float(os.getenv("WARMUP_YEARS", "3"))     # historique total téléchargé
+MIN_HISTORY   = int(os.getenv("MIN_HISTORY", "210"))      # barres min pour scorer (EMA200)
+TARGET_CONFIRMED = float(os.getenv("TARGET_CONFIRMED_PCT", "0.02"))
+TARGET_PRESIGNAL = float(os.getenv("TARGET_PRESIGNAL_PCT", "0.08"))
+
+# yfinance batch
+BATCH_SIZE = int(os.getenv("BATCH_SIZE", "80"))
+CHUNK_SLEEP_RANGE = (float(os.getenv("CHUNK_SLEEP_MIN", "1.0")), float(os.getenv("CHUNK_SLEEP_MAX", "3.0")))
+MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
+RETRY_BACKOFF_BASE = float(os.getenv("RETRY_BACKOFF_BASE", "3.0"))
+RETRY_JITTER_MAX = float(os.getenv("RETRY_JITTER_MAX", "5.0"))
 CURATION_FILES = [PUBLIC_DIR / "user_trades.csv", Path("user_trades.csv")]
 # ===============================================================================
 
-def read_csv_first_available(paths):
-    for p in paths:
-        if os.path.exists(p):
+def load_universe() -> list:
+    for path in [UNIVERSE_CSV, "raw_universe.csv"]:
+        if os.path.exists(path):
             try:
-                return pd.read_csv(p), str(p)
+                df = pd.read_csv(path)
             except Exception:
-                pass
-    return pd.DataFrame(), None
+                continue
+            col = next((c for c in ["ticker_yf", "ticker", "symbol"] if c in df.columns), df.columns[0])
+            tickers = [str(t).strip().upper() for t in df[col].tolist() if str(t).strip() not in ("", "-", "nan")]
+            tickers = list(dict.fromkeys(tickers))
+            if tickers:
+                print(f"[UNIV] {len(tickers)} tickers depuis {path} (colonne {col})")
+                return tickers[:MAX_TICKERS] if MAX_TICKERS else tickers
+    print("[UNIV] aucun univers trouvé.")
+    return []
 
-def placeholder_outputs_when_empty():
-    trades_cols  = ["date_signal","ticker","sector","bucket","cohort","votes","horizon_days","status","days_elapsed","entry","exit","date_exit","ret_pct","notes","source","generated_at_utc"]
-    summary_cols = ["horizon_days","bucket","cohort","n_trades","winrate","avg_ret","median_ret","p95_ret","p05_ret","generated_at_utc"]
-    equity_cols  = ["date","equity","generated_at_utc"]
-
-    save_csv(pd.DataFrame(columns=trades_cols),  "backtest_trades.csv")
-    save_csv(pd.DataFrame(columns=summary_cols), "backtest_summary.csv")
-    for h in HORIZONS:
-        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_{h}d.csv")
-        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_benchmark_spy_{h}d.csv")
-        save_csv(pd.DataFrame(columns=["date","model","spy","generated_at_utc"]), f"backtest_equity_{h}d_combo.csv")
-    save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d.csv")
-    save_csv(pd.DataFrame(columns=equity_cols), "backtest_equity_10d_user.csv")
-    for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
-        save_csv(pd.DataFrame(columns=equity_cols), f"backtest_equity_10d_{cohort}.csv")
-
-def compute_spy_benchmark(start_dt, end_dt):
-    if pd.isna(start_dt) or pd.isna(end_dt):
-        return pd.DataFrame(columns=["date", "equity"])
-
-    start_pad = (pd.to_datetime(start_dt) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
-    end_pad   = (pd.to_datetime(end_dt)   + pd.Timedelta(days=7)).strftime("%Y-%m-%d")
-
+def _ohlc_from_multi(df, ticker):
     try:
-        hist = yf.Ticker("SPY").history(start=start_pad, end=end_pad, interval="1d", auto_adjust=True, actions=False)
+        sub = df[ticker][["Open", "High", "Low", "Close", "Volume"]].copy()
     except Exception:
-        return pd.DataFrame(columns=["date","equity"])
+        return None
+    sub.columns = ["open", "high", "low", "close", "volume"]
+    sub = sub.dropna(subset=["close"])
+    if sub.empty:
+        return None
+    sub.index = pd.to_datetime(pd.Index(sub.index).date)
+    return sub.sort_index()
 
-    if hist is None or hist.empty:
-        return pd.DataFrame(columns=["date","equity"])
-
-    px = hist[["Close"]].rename(columns={"Close":"close"}).dropna()
-    px.index = pd.to_datetime(px.index.date)
-
-    mask = (px.index >= pd.to_datetime(start_dt)) & (px.index <= pd.to_datetime(end_dt))
-    px = px.loc[mask].copy()
-    if px.empty:
-        return pd.DataFrame(columns=["date","equity"])
-
-    base = float(px["close"].iloc[0])
-    if not np.isfinite(base) or base == 0:
-        return pd.DataFrame(columns=["date","equity"])
-
-    px["equity"] = (px["close"]/base)*100.0
-    out = pd.DataFrame({"date": px.index.astype("datetime64[ns]"), "equity": px["equity"].astype(float).values})
-    return out
-
-def prefetch_prices(tickers, start_date, end_date, batch_size=BATCH_SIZE):
-    all_px = {}
-    symbols = list(dict.fromkeys([str(t) for t in tickers if pd.notna(t) and str(t).strip() != ""]))
-    if MAX_TICKERS is not None:
-        symbols = symbols[:MAX_TICKERS]
+def prefetch_ohlc(tickers, start, end, batch_size=BATCH_SIZE) -> dict:
+    """Télécharge l'OHLC ajusté (open..volume) par batches, avec retry/backoff."""
+    out = {}
+    symbols = list(dict.fromkeys([str(t) for t in tickers if str(t).strip() not in ("", "nan")]))
     if not symbols:
-        return all_px
-    start_pad = (pd.to_datetime(start_date) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
-    end_pad   = (pd.to_datetime(end_date)   + pd.Timedelta(days=40)).strftime("%Y-%m-%d")
+        return out
+    s = pd.to_datetime(start).strftime("%Y-%m-%d")
+    e = (pd.to_datetime(end) + pd.Timedelta(days=3)).strftime("%Y-%m-%d")
     for i in range(0, len(symbols), batch_size):
-        chunk = symbols[i:i+batch_size]
+        chunk = symbols[i:i + batch_size]
         df = None
-        for attempt in range(1, MAX_RETRIES+1):
+        for attempt in range(1, MAX_RETRIES + 1):
             try:
-                df = yf.download(tickers=chunk, start=start_pad, end=end_pad, interval="1d",
+                df = yf.download(tickers=chunk, start=s, end=e, interval="1d",
                                  auto_adjust=True, progress=False, group_by="ticker", threads=True)
                 if df is not None and not df.empty:
                     break
-            except Exception as e:
-                print(f"[WARN] batch {i//batch_size+1}: exception {e}")
-            sleep_s = RETRY_BACKOFF_BASE*attempt + uniform(0.0, RETRY_JITTER_MAX)
-            time.sleep(sleep_s)
+            except Exception as ex:
+                print(f"[WARN] batch {i//batch_size+1}: {ex}")
+            time.sleep(RETRY_BACKOFF_BASE * attempt + uniform(0.0, RETRY_JITTER_MAX))
         if df is None or df.empty:
-            print(f"[WARN] chunk vide/échec pour {len(chunk)} tickers.")
-        else:
-            if isinstance(df.columns, pd.MultiIndex):
-                for t in chunk:
-                    try:
-                        sub = df[t][["Close"]].rename(columns={"Close":"close"}).dropna()
-                        sub.index = pd.to_datetime(sub.index.date)
-                        if not sub.empty:
-                            all_px[t] = sub
-                    except Exception:
-                        pass
-            else:
-                try:
-                    sub = df[["Close"]].rename(columns={"Close":"close"}).dropna()
-                    sub.index = pd.to_datetime(sub.index.date)
-                    if not sub.empty and len(chunk) == 1:
-                        all_px[chunk[0]] = sub
-                except Exception:
-                    pass
+            print(f"[WARN] batch vide pour {len(chunk)} tickers.")
+        elif isinstance(df.columns, pd.MultiIndex):
+            for t in chunk:
+                sub = _ohlc_from_multi(df, t)
+                if sub is not None:
+                    out[t] = sub
+        elif len(chunk) == 1:
+            sub = df[["Open", "High", "Low", "Close", "Volume"]].copy()
+            sub.columns = ["open", "high", "low", "close", "volume"]
+            sub = sub.dropna(subset=["close"])
+            if not sub.empty:
+                sub.index = pd.to_datetime(pd.Index(sub.index).date)
+                out[chunk[0]] = sub.sort_index()
         time.sleep(uniform(*CHUNK_SLEEP_RANGE))
-    print(f"[INFO] Prefetch terminé: {len(all_px)}/{len(symbols)} tickers avec historique.")
-    return all_px
+    print(f"[PREFETCH] {len(out)}/{len(symbols)} tickers avec OHLC.")
+    return out
 
-def equity_from_daily_returns(daily_ret_pct: pd.Series) -> pd.DataFrame:
-    if daily_ret_pct is None or daily_ret_pct.empty:
-        return pd.DataFrame(columns=["date","equity"])
-    daily_ret = daily_ret_pct.sort_index() / 100.0
-    equity = (1.0 + daily_ret).cumprod() * 100.0
-    return pd.DataFrame({"date": pd.to_datetime(equity.index), "equity": equity.values})
+def spy_equity(spy_df, start, end) -> pd.DataFrame:
+    """Equity SPY buy&hold base 100 sur [start,end]."""
+    if spy_df is None or spy_df.empty or pd.isna(start) or pd.isna(end):
+        return pd.DataFrame(columns=["date", "equity"])
+    px = spy_df.loc[(spy_df.index >= pd.to_datetime(start)) & (spy_df.index <= pd.to_datetime(end)), "close"].dropna()
+    if px.empty:
+        return pd.DataFrame(columns=["date", "equity"])
+    base = float(px.iloc[0])
+    if not np.isfinite(base) or base == 0:
+        return pd.DataFrame(columns=["date", "equity"])
+    return pd.DataFrame({"date": pd.to_datetime(px.index), "equity": (px / base * 100.0).astype(float).values})
 
-def load_curated_picks() -> pd.DataFrame:
-    cols = ["date_signal","ticker","cohort","bucket","horizons","notes"]
-    for p in CURATION_FILES:
+# ============================ MODES ============================
+
+SCORE_WINDOW = int(os.getenv("SCORE_WINDOW", "260"))  # fenêtre glissante ~ prod (OHLCV_WINDOW_DAYS)
+
+def gen_signals_replay(price_map, spy_df) -> pd.DataFrame:
+    """Régénère les signaux point-in-time avec le screener CORRIGÉ (injection de dépendance)."""
+    import mix_ab_screen_indices as M
+
+    def score_fn(df_slice, mkt_slice):
+        try:
+            mkt = mkt_slice.tail(SCORE_WINDOW) if mkt_slice is not None else None
+            feats = M.compute_advanced_score(df_slice.tail(SCORE_WINDOW), mkt=mkt, adv_dv=None)
+            return feats.get("score")
+        except Exception:
+            return None
+
+    def regime_fn(mkt_slice):  # même fenêtre glissante que la prod
+        return M._market_regime_factor(mkt_slice.tail(SCORE_WINDOW) if mkt_slice is not None else None)
+
+    # Grille de dates (jours de bourse SPY) sur la fenêtre de test.
+    cal = spy_df.index
+    end = cal[-1]
+    start_test = end - pd.DateOffset(months=REPLAY_MONTHS)
+    test_days = cal[cal >= start_test]
+    dates = list(test_days[::REPLAY_STEP])
+    print(f"[REPLAY] {len(dates)} dates ({REPLAY_MONTHS}m, pas {REPLAY_STEP}j) x {len(price_map)} tickers")
+    t0 = time.time()
+    sig = E.generate_pointintime_signals(
+        price_map, spy_df, dates, score_fn, regime_fn=regime_fn,
+        target_confirmed=TARGET_CONFIRMED, target_presignal=TARGET_PRESIGNAL, min_history=MIN_HISTORY)
+    print(f"[REPLAY] {len(sig)} signaux générés en {time.time()-t0:.1f}s")
+    sig["sector"] = "Unknown"
+    sig["source"] = "replay"
+    sig["votes"] = 0
+    return sig
+
+def load_signals_forward() -> pd.DataFrame:
+    """Legacy : signals_history.csv (auto) — évalué tel quel (fenêtres écoulées)."""
+    for p in ["signals_history.csv", str(PUBLIC_DIR / "signals_history.csv")]:
         if os.path.exists(p):
             try:
                 df = pd.read_csv(p)
-                df = df.rename(columns={"symbol":"ticker","ticker_yf":"ticker","date":"date_signal"})
-                for c in cols:
-                    if c not in df.columns:
-                        df[c] = ""
-                df["ticker"] = df["ticker"].astype(str).str.strip().str.upper()
-                df["date_signal"] = pd.to_datetime(df["date_signal"], errors="coerce").dt.normalize()
-                df["cohort"] = df["cohort"].fillna("").astype(str)
-                df["bucket"] = df["bucket"].fillna("").astype(str)
-                df["horizons"] = df["horizons"].fillna("").astype(str)
-                df["notes"] = df["notes"].fillna("").astype(str)
-                df = df[cols]
-                df["source"] = "manual"
-                print(f"[CURATE] loaded {len(df)} picks from {p}")
-                return df
-            except Exception as e:
-                print(f"[CURATE][WARN] failed to read {p}: {e}")
-    print("[CURATE] no user_trades.csv found")
-    return pd.DataFrame(columns=["date_signal","ticker","cohort","bucket","horizons","notes","source"])
+            except Exception:
+                continue
+            if {"date", "ticker_yf"}.issubset(df.columns):
+                df = df.rename(columns={"date": "date_signal", "ticker_yf": "ticker"})
+                df["ticker"] = df["ticker"].astype(str).str.upper()
+                if "bucket" not in df.columns:
+                    df["bucket"] = ""
+                df["cohort"] = df.get("cohort", "P0_other")
+                df["source"] = "auto"
+                df["votes"] = 0
+                return df[["date_signal", "ticker", "bucket", "cohort", "source", "votes"]]
+    return pd.DataFrame(columns=["date_signal", "ticker", "bucket", "cohort", "source", "votes"])
 
-def _is_strong(s):
-    if not isinstance(s, str):
-        return False
-    v = s.strip().upper()
-    return v in {"STRONG BUY","STRONGBUY","STRONG_BUY"}
+# ============================ OUTPUTS ============================
 
-def add_pillars_and_cohorts(sig: pd.DataFrame) -> pd.DataFrame:
-    s = sig.copy()
-    tech_col = "technical_local"
-    tv_col   = "tv_reco"
-    an_col   = "analyst_bucket"
-    votes_col = None
-    for cand in ["votes","analyst_votes","rank_votes"]:
-        if cand in s.columns:
-            votes_col = cand; break
-    s["p_tech"] = s.get(tech_col, pd.Series("", index=s.index)).apply(_is_strong)
-    s["p_tv"]   = s.get(tv_col,   pd.Series("", index=s.index)).apply(_is_strong)
-    s["p_an"]   = s.get(an_col,   pd.Series("", index=s.index)).astype(str).str.strip().str.upper().eq("BUY")
-    s["pillars_met"] = (s[["p_tech","p_tv","p_an"]].fillna(False)).sum(axis=1)
-    if votes_col is None:
-        s["votes"] = 0
-    else:
-        s["votes"] = pd.to_numeric(s[votes_col], errors="coerce").fillna(0).astype(int)
-    s["votes_bin"] = pd.cut(s["votes"], bins=[-1,9,14,19,999], labels=["≤9","10–14","15–19","20+"])
-    s["cohort"] = np.select(
-        [s["pillars_met"] >= 3, (s["pillars_met"] == 2) & (s["votes"] >= 15), (s["pillars_met"] == 1) & (s["votes"] >= 20)],
-        ["P3_confirmed","P2_highconv","P1_explore"], default="P0_other"
-    )
-    return s
+def write_all_outputs(trades: pd.DataFrame, spy_df: pd.DataFrame):
+    cal = spy_df.index  # calendrier de bourse pour l'equity marquée au jour le jour
+    save_csv(trades, "backtest_trades.csv", headers=E.TRADE_COLS)
 
-def _ensure_backtest_cols(df: pd.DataFrame) -> pd.DataFrame:
-    if df is None: df = pd.DataFrame()
-    must_str   = ["date_signal","ticker","sector","bucket","cohort","status","date_exit","notes","source"]
-    must_int   = ["horizon_days","days_elapsed","votes"]
-    must_float = ["entry","exit","ret_pct"]
-    for c in must_str:
-        if c not in df.columns: df[c] = ""
-    for c in must_int:
-        if c not in df.columns: df[c] = pd.Series(dtype="Int64")
-    for c in must_float:
-        if c not in df.columns: df[c] = pd.Series(dtype="float")
-    df["status"] = df["status"].replace("", "closed").fillna("closed")
-    for c in must_int:
-        df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
-    for c in must_float:
-        df[c] = pd.to_numeric(df[c], errors="coerce")
-    if "date_signal" in df.columns:
-        df["date_signal"] = pd.to_datetime(df["date_signal"], errors="coerce").dt.strftime("%Y-%m-%d")
-    if "date_exit" in df.columns:
-        df["date_exit"] = pd.to_datetime(df["date_exit"], errors="coerce").dt.strftime("%Y-%m-%d")
-    return df
+    summary = E.summarize(trades, by=("horizon_days", "bucket", "cohort"), ret_col="ret_pct")
+    save_csv(summary, "backtest_summary.csv", headers=E.SUMMARY_COLS)
+
+    verdicts = {}
+    for h in HORIZONS:
+        eq = E.equity_curve(trades, horizon=h, calendar=cal, ret_col="ret_pct")
+        save_csv(eq, f"backtest_equity_{h}d.csv", headers=["date", "equity"])
+        spy = spy_equity(spy_df, eq["date"].min() if not eq.empty else None,
+                         eq["date"].max() if not eq.empty else None)
+        save_csv(spy, f"backtest_benchmark_spy_{h}d.csv", headers=["date", "equity"])
+        combo = (eq.rename(columns={"equity": "model"})
+                 .merge(spy.rename(columns={"equity": "spy"}), on="date", how="inner")) if not eq.empty else pd.DataFrame(columns=["date", "model", "spy"])
+        save_csv(combo, f"backtest_equity_{h}d_combo.csv", headers=["date", "model", "spy"])
+        verdicts[f"{h}d"] = E.verdict_vs_spy(eq, spy)
+
+    # Copie 10j + cohortes (contrat dashboard)
+    prefer = 10 if 10 in HORIZONS else max(HORIZONS)
+    eq10 = E.equity_curve(trades, horizon=prefer, calendar=cal, ret_col="ret_pct")
+    save_csv(eq10, "backtest_equity_10d.csv", headers=["date", "equity"])
+    for cohort in ["P3_confirmed", "P2_highconv", "P1_explore"]:
+        sub = trades[(trades["cohort"] == cohort)]
+        eqc = E.equity_curve(sub, horizon=prefer, calendar=cal, ret_col="ret_pct")
+        save_csv(eqc, f"backtest_equity_10d_{cohort}.csv", headers=["date", "equity"])
+
+    # Courbe "Mes Picks" (curation manuelle)
+    user = trades[trades["source"] == "manual"]
+    equ = E.equity_curve(user, horizon=prefer, calendar=cal, ret_col="ret_pct")
+    save_csv(equ, "backtest_equity_10d_user.csv", headers=["date", "equity"])
+
+    closed = trades[trades["status"] == "closed"]
+    stats = {
+        "mode": BACKTEST_MODE,
+        "entry_mode": ENTRY_MODE,
+        "fee_bps": COSTS.fee_bps, "slippage_bps": COSTS.slippage_bps,
+        "n_trades": int(len(trades)),
+        "n_closed": int(len(closed)),
+        "n_open": int((trades["status"] == "open").sum()),
+        "tickers_unique": int(trades["ticker"].nunique()) if not trades.empty else 0,
+        "verdict_10d": verdicts.get("10d", {}),
+        "verdicts": verdicts,
+    }
+    with open("backtest_stats.json", "w") as f:
+        json.dump(stats, f, indent=2, default=float)
+    with open(PUBLIC_DIR / "backtest_stats.json", "w") as f:
+        json.dump(stats, f, indent=2, default=float)
+
+    # Verdict lisible
+    v = verdicts.get("10d", {})
+    print("\n================= VERDICT (10j, net de frais) =================")
+    print(f"  Modèle : {v.get('model_total_ret_pct', float('nan')):+.2f}%   "
+          f"SPY : {v.get('spy_total_ret_pct', float('nan')):+.2f}%   "
+          f"Excès : {v.get('excess_pct', float('nan')):+.2f}%   "
+          f"-> BAT SPY : {'OUI' if v.get('beats_spy') else 'NON'}")
+    if not summary.empty:
+        cf = summary[(summary["bucket"] == "confirmed")]
+        if not cf.empty:
+            print("\n  Par horizon (bucket=confirmed) : winrate / avg_ret net")
+            for _, r in cf.iterrows():
+                print(f"    h={int(r['horizon_days']):>2}j  n={int(r['n_trades']):>4}  "
+                      f"winrate={r['winrate']:.1f}%  avg={r['avg_ret']:+.2f}%  med={r['median_ret']:+.2f}%")
+    print("===============================================================\n")
 
 def main():
-    # 1) Signaux auto
-    sig, used = read_csv_first_available(["signals_history.csv", PUBLIC_DIR / "signals_history.csv"])
-    auto_ok = not sig.empty and all(c in sig.columns for c in ["date","ticker_yf"])
-    if auto_ok:
-        sig = sig.copy()
-        sig["date"] = pd.to_datetime(sig["date"]).dt.normalize()
-        sig["ticker_yf"] = sig["ticker_yf"].astype(str).str.upper()
-        if "sector" not in sig.columns: sig["sector"] = "Unknown"
-        if "bucket" not in sig.columns: sig["bucket"] = ""
-        sig = add_pillars_and_cohorts(sig)
-        if FILTER_BUCKET:
-            sig = sig[sig["bucket"].astype(str).str.lower() == str(FILTER_BUCKET).lower()]
-        sig["source"] = "auto"
+    tickers = load_universe()
+    if not tickers:
+        print("⚠️ Univers vide."); return
 
-    # 2) Curation manuelle
-    cur = load_curated_picks()  # date_signal,ticker,cohort,bucket,horizons,notes,source=manual
+    end = pd.Timestamp.today().normalize()
+    start = end - pd.DateOffset(years=WARMUP_YEARS + 1)
+    all_syms = list(dict.fromkeys(tickers + [MARKET_TICKER]))
+    price_map = prefetch_ohlc(all_syms, start, end)
+    spy_df = price_map.get(MARKET_TICKER)
+    if spy_df is None or spy_df.empty:
+        print("⚠️ Pas de données SPY -> impossible de calculer régime/benchmark."); return
 
-    # 3) Seeds
-    seeds_auto = pd.DataFrame(columns=["date_signal","ticker","cohort","bucket","horizons","source"])
-    if auto_ok and not sig.empty:
-        s = sig.rename(columns={"date":"date_signal","ticker_yf":"ticker"})
-        s["horizons"] = ""
-        seeds_auto = s[["date_signal","ticker","cohort","bucket","horizons","source"]].copy()
-
-    seeds_user = pd.DataFrame(columns=["date_signal","ticker","cohort","bucket","horizons","notes","source"])
-    if not cur.empty:
-        seeds_user = cur.copy()
-
-    if seeds_auto.empty and seeds_user.empty:
-        print("⚠️ Aucun seed (ni auto ni manuel).")
-        placeholder_outputs_when_empty(); return
-
-    seeds_all = pd.concat([seeds_auto, seeds_user], ignore_index=True) if not seeds_user.empty else seeds_auto.copy()
-    seeds_all = seeds_all.dropna(subset=["ticker"])
-    seeds_all["ticker"] = seeds_all["ticker"].astype(str).str.upper()
-
-    dmin = seeds_all["date_signal"].dropna().min()
-    if pd.isna(dmin): dmin = (pd.Timestamp.today().normalize() - pd.Timedelta(days=40))
-    dmax = (seeds_all["date_signal"].dropna().max() if seeds_all["date_signal"].notna().any() else pd.Timestamp.today().normalize()) + pd.Timedelta(days=max(HORIZONS) + 5)
-
-    tickers_unique = seeds_all["ticker"].unique().tolist()
-    px_map = prefetch_prices(tickers_unique, dmin.strftime("%Y-%m-%d"), dmax.strftime("%Y-%m-%d"))
-
-    # 4) Trades builder
-    def build_trades(seeds):
-        out = []
-        for ticker, g in seeds.groupby("ticker"):
-            prices = px_map.get(ticker)
-            if prices is None or prices.empty: continue
-            for _, row in g.iterrows():
-                d0 = row["date_signal"]
-                idx = 0 if pd.isna(d0) else prices.index.searchsorted(d0)
-                if idx >= len(prices.index): continue
-                d_entry = prices.index[idx]
-                entry = float(prices.iloc[idx]["close"])
-                if not np.isfinite(entry): continue
-                last_idx = len(prices.index) - 1
-
-                # horizons personnalisés ?
-                hlist = HORIZONS
-                if row.get("horizons"):
-                    try:
-                        hlist = [int(x) for x in str(row["horizons"]).replace(",", "|").split("|") if x.strip().isdigit()]
-                    except Exception:
-                        hlist = HORIZONS
-
-                for h in hlist:
-                    exit_idx = idx + h
-                    if exit_idx <= last_idx:
-                        d_exit = prices.index[exit_idx]; exit_price = float(prices.iloc[exit_idx]["close"])
-                        ret_pct = (exit_price/entry - 1.0) * 100.0
-                        status = "closed"; days_elapsed = h
-                    else:
-                        d_exit = prices.index[last_idx]; exit_price = float(prices.iloc[last_idx]["close"])
-                        ret_pct = (exit_price/entry - 1.0) * 100.0
-                        status = "open"; days_elapsed = int(last_idx - idx)
-                    out.append({
-                        "date_signal": pd.to_datetime(d_entry).strftime("%Y-%m-%d"),
-                        "ticker": ticker,
-                        "sector": row.get("sector","Unknown"),
-                        "bucket": row.get("bucket",""),
-                        "cohort": row.get("cohort","P0_other"),
-                        "votes": 0,
-                        "horizon_days": int(h),
-                        "status": status,
-                        "days_elapsed": int(days_elapsed),
-                        "entry": float(entry),
-                        "exit": float(exit_price),
-                        "date_exit": pd.to_datetime(d_exit).strftime("%Y-%m-%d"),
-                        "ret_pct": float(ret_pct),
-                        "notes": row.get("notes",""),
-                        "source": row.get("source","auto"),
-                    })
-        return pd.DataFrame(out)
-
-    auto_trades = build_trades(seeds_auto) if not seeds_auto.empty else pd.DataFrame()
-    user_trades = build_trades(seeds_user) if not seeds_user.empty else pd.DataFrame()
-
-    if not user_trades.empty:
-        user_trades = (
-            user_trades.sort_values(["date_signal","ticker","horizon_days","days_elapsed"], ascending=[True,True,True,False])
-            .drop_duplicates(subset=["date_signal","ticker","horizon_days"], keep="first").reset_index(drop=True)
-        )
-
-    trades_df = pd.concat([auto_trades, user_trades], ignore_index=True)
-    if trades_df.empty:
-        print("⚠️ Aucun trade généré.")
-        placeholder_outputs_when_empty(); return
-
-    auto_trades = _ensure_backtest_cols(auto_trades)
-    user_trades = _ensure_backtest_cols(user_trades)
-    save_csv(trades_df, "backtest_trades.csv")
-
-    # 5) Résumé (AUTO only, CLOSED)
-    auto_closed = auto_trades[auto_trades["status"]=="closed"].copy()
-    summary = (
-        auto_closed.groupby(["horizon_days","bucket","cohort"], dropna=False)
-        .agg(n_trades=("ret_pct","count"),
-             winrate=("ret_pct", lambda s: float((s>0).mean()*100.0) if len(s) else 0.0),
-             avg_ret=("ret_pct", lambda s: float(s.mean()) if len(s) else 0.0),
-             median_ret=("ret_pct", lambda s: float(s.median()) if len(s) else 0.0),
-             p95_ret=("ret_pct", lambda s: float(s.quantile(0.95)) if len(s) else 0.0),
-             p05_ret=("ret_pct", lambda s: float(s.quantile(0.05)) if len(s) else 0.0))
-        .reset_index().sort_values(["horizon_days","cohort","bucket"])
-    )
-    save_csv(summary, "backtest_summary.csv")
-
-    # 6) Equity model vs SPY
-    for h in HORIZONS:
-        sub = auto_closed[auto_closed["horizon_days"]==h]
-        if sub.empty:
-            save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_{h}d.csv")
-            save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_benchmark_spy_{h}d.csv")
-            save_csv(pd.DataFrame(columns=["date","model","spy"]), f"backtest_equity_{h}d_combo.csv")
-            continue
-        daily_ret = sub.groupby("date_exit")["ret_pct"].mean().sort_index()
-        eq = equity_from_daily_returns(daily_ret)
-        save_csv(eq, f"backtest_equity_{h}d.csv")
-
-        spy = compute_spy_benchmark(eq["date"].min(), eq["date"].max())
-        save_csv(spy, f"backtest_benchmark_spy_{h}d.csv")
-
-        combo = eq.rename(columns={"equity":"model"}).merge(spy.rename(columns={"equity":"spy"}), on="date", how="inner")
-        save_csv(combo, f"backtest_equity_{h}d_combo.csv")
-
-    # 7) Equity AUTO par COHORTE (10j)
-    if 10 in HORIZONS:
-        for cohort in ["P3_confirmed","P2_highconv","P1_explore"]:
-            subc = auto_closed[(auto_closed["horizon_days"]==10)&(auto_closed["cohort"]==cohort)]
-            if subc.empty:
-                save_csv(pd.DataFrame(columns=["date","equity"]), f"backtest_equity_10d_{cohort}.csv")
-                continue
-            daily_ret = subc.groupby("date_exit")["ret_pct"].mean().sort_index()
-            eqc = equity_from_daily_returns(daily_ret)
-            save_csv(eqc, f"backtest_equity_10d_{cohort}.csv")
-
-    # 8) Copie 10j
-    prefer = 10
-    fallback = max(HORIZONS)
-    src = f"backtest_equity_{prefer}d.csv" if prefer in HORIZONS else f"backtest_equity_{fallback}d.csv"
-    eq10, _ = read_csv_first_available([src, PUBLIC_DIR / src])
-    save_csv(eq10, "backtest_equity_10d.csv")
-
-    # 9) Courbe "Mes Picks" (10j)
-    if 10 in HORIZONS:
-        user_closed = user_trades[user_trades["status"]=="closed"].copy()
-        user10 = user_closed[user_closed["horizon_days"]==10]
-        if user10.empty:
-            save_csv(pd.DataFrame(columns=["date","equity"]), "backtest_equity_10d_user.csv")
-        else:
-            daily_ret_user = user10.groupby("date_exit")["ret_pct"].mean().sort_index()
-            eq_user = equity_from_daily_returns(daily_ret_user)
-            save_csv(eq_user, "backtest_equity_10d_user.csv")
+    if BACKTEST_MODE == "replay":
+        signals = gen_signals_replay({t: price_map[t] for t in tickers if t in price_map}, spy_df)
     else:
-        save_csv(pd.DataFrame(columns=["date","equity"]), "backtest_equity_10d_user.csv")
+        signals = load_signals_forward()
+        signals["date_signal"] = pd.to_datetime(signals["date_signal"], errors="coerce")
 
-    stats = {
-        "auto_trades": int(len(auto_trades)),
-        "user_trades": int(len(user_trades)),
-        "auto_closed": int((auto_trades["status"]=="closed").sum()),
-        "user_closed": int((user_trades["status"]=="closed").sum()),
-        "tickers_unique": int(len(set(seeds_all["ticker"].tolist()))),
-    }
-    print("[STATS] backtest:", stats)
-    with open("backtest_stats.json","w") as f: json.dump(stats,f)
-    with open(PUBLIC_DIR / "backtest_stats.json","w") as f: json.dump(stats,f)
-    print("[OK] Backtest écrit : auto (trades/summary/equity) + courbe Mes Picks 10j.")
+    if signals is None or signals.empty:
+        print("⚠️ Aucun signal généré."); return
+
+    trades = E.build_trades(signals, price_map, HORIZONS, entry_mode=ENTRY_MODE, costs=COSTS)
+    if trades.empty:
+        print("⚠️ Aucun trade généré."); return
+
+    write_all_outputs(trades, spy_df)
+    print("[DONE] Backtest honnête écrit.")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,60 @@
+{
+  "_note": "Univers thématique curé (seed). Multi-thème autorisé (un ticker peut appartenir à plusieurs). Validé/nettoyé par build_thematic_universe.py contre yfinance. À enrichir au fil du temps.",
+  "themes": {
+    "semiconducteurs": {
+      "label": "Semi-conducteurs / Fabrication de puces",
+      "tickers": ["NVDA","AMD","INTC","TSM","AVGO","QCOM","MU","TXN","AMAT","LRCX","KLAC","ASML","ADI","MRVL","MCHP","ON","NXPI","STM","SWKS","QRVO","MPWR","ARM","SMCI","WOLF","ACLS","AMKR","ONTO","UCTT","COHU","FORM","LSCC","RMBS","SITM","ALGM","INDI","NVTS","POWI","DIOD","SLAB","CRUS","AOSL","GFS","AEHR","KLIC","PLAB","VECO","ICHR","CAMT","AXT"]
+    },
+    "quantique": {
+      "label": "Informatique quantique",
+      "tickers": ["IONQ","RGTI","QBTS","QUBT","ARQQ","LAES","QMCO","QTUM"]
+    },
+    "ia": {
+      "label": "Intelligence artificielle",
+      "tickers": ["NVDA","PLTR","AI","BBAI","SOUN","PATH","SNOW","AMD","MSFT","GOOGL","META","AVGO","MRVL","SMCI","SERV","GFAI","VRT","CRWV","NBIS","APLD","IREN","CRDO","ALAB"]
+    },
+    "laser_photonique": {
+      "label": "Laser / Photonique",
+      "tickers": ["LITE","COHR","IPGP","MKSI","AAOI","FN","VIAV","POET","LWLG","MVIS","LAZR","OUST","INVZ","AEVA","NLST"]
+    },
+    "robotique": {
+      "label": "Robotique",
+      "tickers": ["ISRG","TER","ROK","SYM","SERV","RR","KSCP","IRBT","NNDM","ZBRA","OMCL","AVAV","PATH","NVDA"]
+    },
+    "equipement_electrique": {
+      "label": "Équipement électrique lourd",
+      "tickers": ["ETN","EMR","GEV","HUBB","POWL","NVT","VRT","GNRC","SPXC","ATKR","PWR","AYI","BE","ENS","AEIS"]
+    },
+    "production_energie": {
+      "label": "Production d'énergie (dont nucléaire)",
+      "tickers": ["CEG","VST","TLN","NRG","OKLO","SMR","NNE","LEU","CCJ","UEC","UUUU","BWXT","FSLR","ENPH","BE","GEV","PLUG"]
+    },
+    "gestion_thermique": {
+      "label": "Gestion thermique / Cooling",
+      "tickers": ["VRT","MOD","AAON","TT","CARR","LII","SMCI","NVT","BWXT"]
+    },
+    "espace": {
+      "label": "Espace",
+      "tickers": ["RKLB","LUNR","ASTS","RDW","PL","BKSY","SPCE","GSAT","IRDM","VSAT","KTOS","RDW","SIDU","MNTS"]
+    },
+    "defense": {
+      "label": "Défense",
+      "tickers": ["LMT","RTX","NOC","GD","LHX","HII","AVAV","KTOS","LDOS","CW","HEI","TDG","AXON","RCAT","DRS","MRCY","BWXT","BAH","ATRO","PLTR","UMAC","ONDS"]
+    },
+    "new_tech": {
+      "label": "New tech (à préciser)",
+      "tickers": ["PLTR","TSLA","IONQ","RKLB","SOUN","BBAI"]
+    }
+  },
+  "industry_map": {
+    "Semiconductors": "semiconducteurs",
+    "Semiconductor Equipment & Materials": "semiconducteurs",
+    "Aerospace & Defense": "defense",
+    "Electrical Equipment & Parts": "equipement_electrique",
+    "Specialty Industrial Machinery": "equipement_electrique",
+    "Utilities - Independent Power Producers": "production_energie",
+    "Utilities - Renewable": "production_energie",
+    "Uranium": "production_energie",
+    "Solar": "production_energie"
+  }
+}
