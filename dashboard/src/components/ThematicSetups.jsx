@@ -2,7 +2,7 @@
 // Setups thématiques de pré-explosion, score /100. Lit thematic_setups.csv (local-first).
 import { useEffect, useMemo, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { fetchCSVLocalFirst, toNumber } from "../lib/csv.js";
+import { fetchCSVFresh, toNumber } from "../lib/csv.js";
 
 const THEME_LABELS = {
   semiconducteurs: "🔲 Semi-conducteurs",
@@ -48,7 +48,7 @@ export default function ThematicSetups() {
 
   useEffect(() => {
     let alive = true;
-    fetchCSVLocalFirst("thematic_setups.csv").then((r) => {
+    fetchCSVFresh("thematic_setups.csv").then((r) => {
       if (!alive) return;
       setRows(Array.isArray(r) ? r : []);
       setLoading(false);

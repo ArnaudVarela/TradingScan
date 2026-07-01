@@ -1,0 +1,71 @@
+name: Thematic scan (pré-explosion) — daily EOD
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "30 21 * * 1-5"   # ~après clôture US (21:30 UTC), lun→ven
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thematic-scan-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DEFAULT_BRANCH: main
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure clean working tree
+        run: |
+          set -euo pipefail
+          git fetch origin "$DEFAULT_BRANCH"
+          git reset --hard "origin/$DEFAULT_BRANCH"
+          git clean -fd
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install yfinance   # sécurité si absent de requirements.txt
+
+      - name: Build thematic universe
+        run: python build_thematic_universe.py
+
+      - name: Scan pré-explosion (score /100)
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          set -euo pipefail
+          python scan_thematic.py
+          test -f dashboard/public/thematic_setups.csv || (echo "Missing thematic_setups.csv"; exit 1)
+          echo "--- head thematic_setups.csv ---"; head -n 8 thematic_setups.csv || true
+
+      - name: Commit & push outputs
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add thematic_setups.csv thematic_universe.csv \
+                  dashboard/public/thematic_setups.csv dashboard/public/thematic_universe.csv
+          if git diff --cached --quiet; then
+            echo "Aucun changement à committer."; exit 0
+          fi
+          git commit -m "auto: thematic setups ($(date -u +'%Y-%m-%dT%H:%M:%SZ'))"
+          git pull --rebase origin "$DEFAULT_BRANCH"
+          git push origin "HEAD:$DEFAULT_BRANCH"
