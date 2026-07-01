@@ -46,9 +46,9 @@ export default function TopBar({ lastRefreshed, onRefresh, fear }) {
       <div className="flex items-center gap-3 min-w-0">
         <LogoRadar dark={darkMode} size={38} className="flex-shrink-0" />
         <div className="min-w-0">
-          <h1 className="text-2xl font-bold truncate">Signal Intelligence Dashboard</h1>
+          <h1 className="text-2xl font-bold truncate">TradingScan — Setups thématiques</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            Confirmed / Anticipative / Event-driven signals — powered by cross-analysis
+            Screener hard-tech · setups de pré-explosion scorés /100 (EOD)
           </p>
         </div>
       </div>
