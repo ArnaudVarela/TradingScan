@@ -11,6 +11,7 @@ import EquityCurve from "./components/EquityCurve.jsx";
 import BacktestSummary from "./components/BacktestSummary.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import CurationPanel from "./components/CurationPanel.jsx";
+import ThematicSetups from "./components/ThematicSetups.jsx";
 
 // ---------- Déploiement : on consomme les fichiers du /public du site
 const isBrowser = typeof window !== "undefined";
@@ -255,6 +256,11 @@ export default function App() {
         <MetricCard label="Event-driven" value={totals.events} />
         <MetricCard label="Universe"     value={totals.universe} />
       </div>
+
+      {/* Setups thématiques (nouveau — hero) */}
+      <ErrorBoundary fallback="La vue Setups thématiques n'a pas pu s'afficher.">
+        <ThematicSetups />
+      </ErrorBoundary>
 
       {/* Heatmap pliable */}
       <div className="mb-4 bg-white dark:bg-slate-900 rounded shadow p-4">

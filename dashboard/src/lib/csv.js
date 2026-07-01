@@ -114,6 +114,28 @@ export async function fetchJSON(file) {
   return await fetchJSONInternal(rawUrl(file));
 }
 
+// ---- Local-first : lit /public via Vite (dev ET GitHub Pages), fallback GitHub raw ----
+// Corrige le fetch qui pointait toujours vers raw main. Utilisé pour les nouveaux fichiers
+// (ex: thematic_setups.csv) qui vivent dans dashboard/public.
+export const localUrl = (file) => `${import.meta.env.BASE_URL || "/"}${file}?v=${bust()}`;
+
+export async function fetchCSVLocalFirst(file) {
+  try {
+    const res = await fetch(localUrl(file), { cache: "no-store" });
+    if (res.ok) {
+      const txt = await res.text();
+      // évite de parser une page index.html (fallback SPA) comme du CSV
+      if (txt && !txt.trim().startsWith("<")) return toObjects(parseCSV(txt));
+    }
+  } catch (_) { /* on tente le fallback */ }
+  try {
+    return toObjects(parseCSV(await fetchText(rawUrl(file))));
+  } catch (e) {
+    console.warn(`[WARN] ${file} indisponible (local + raw): ${e.message}`);
+    return [];
+  }
+}
+
 // ======================= LISTE DES CSV =====================
 export const FILES = {
   // Fear & Greed (root)
