@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-import backtest_signals as BS   # réutilise prefetch_ohlc
+import data_fetch as DF   # prefetch_ohlc
 import pattern_score as P
 
 ROOT = Path(__file__).parent
@@ -22,7 +22,7 @@ def main():
 
     end = pd.Timestamp.today().normalize()
     start = end - pd.DateOffset(years=LOOKBACK_YEARS + 1)
-    pm = BS.prefetch_ohlc(tickers + [MARKET], start, end)
+    pm = DF.prefetch_ohlc(tickers + [MARKET], start, end)
     spy = pm.get(MARKET)
 
     rows = []

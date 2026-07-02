@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 import backtest_engine as E
-import backtest_signals as BS
+import data_fetch as DF
 import pattern_score as P
 
 ROOT = Path(__file__).parent
@@ -30,7 +30,7 @@ def main():
 
     end = pd.Timestamp.today().normalize()
     start = end - pd.DateOffset(years=6)
-    pm = BS.prefetch_ohlc(tickers + [MARKET], start, end)
+    pm = DF.prefetch_ohlc(tickers + [MARKET], start, end)
     spy = pm.get(MARKET)
     if spy is None or spy.empty:
         print("⚠️ pas de SPY"); return
