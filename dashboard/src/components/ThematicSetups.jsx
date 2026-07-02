@@ -53,6 +53,7 @@ export default function ThematicSetups() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("all");
+  const [size, setSize] = useState("all"); // all | nanomicro (<=2B) | small (2-10B) | midlarge (>10B)
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
@@ -71,13 +72,24 @@ export default function ThematicSetups() {
     return Array.from(set).sort();
   }, [rows]);
 
+  const inSize = (mc) => {
+    if (size === "all") return true;
+    const n = Number(mc);
+    if (!Number.isFinite(n) || n <= 0) return false; // mcap inconnu exclu des filtres taille
+    if (size === "nanomicro") return n < 2e9;
+    if (size === "small") return n >= 2e9 && n < 10e9;
+    if (size === "midlarge") return n >= 10e9;
+    return true;
+  };
+
   const filtered = useMemo(
     () =>
       rows
-        .map((r) => ({ ...r, _score: toNumber(r.score) ?? 0 }))
+        .map((r) => ({ ...r, _score: toNumber(r.score) ?? 0, _mc: toNumber(r.mcap_usd) }))
         .filter((r) => theme === "all" || (r.themes || "").split("|").includes(theme))
+        .filter((r) => inSize(r._mc))
         .sort((a, b) => b._score - a._score),
-    [rows, theme]
+    [rows, theme, size]
   );
 
   return (
@@ -112,6 +124,14 @@ export default function ThematicSetups() {
                 {THEME_LABELS[t] || t}
               </Chip>
             ))}
+          </div>
+
+          <div className="flex flex-wrap gap-1 mb-3 items-center">
+            <span className="text-xs text-slate-500 mr-1">Taille :</span>
+            <Chip active={size === "all"} onClick={() => setSize("all")}>Toutes</Chip>
+            <Chip active={size === "nanomicro"} onClick={() => setSize("nanomicro")}>Nano+Micro ≤ $2B</Chip>
+            <Chip active={size === "small"} onClick={() => setSize("small")}>Small $2–10B</Chip>
+            <Chip active={size === "midlarge"} onClick={() => setSize("midlarge")}>Mid/Large &gt; $10B</Chip>
           </div>
 
           {loading ? (
