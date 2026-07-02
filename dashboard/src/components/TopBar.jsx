@@ -1,96 +1,92 @@
 // dashboard/src/components/TopBar.jsx
 import { useEffect, useState } from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, RefreshCw } from "lucide-react";
 import FearGreedGauge from "./FearGreedGauge.jsx";
 import LogoRadar from "./LogoRadar.jsx";
-import { fetchFearGreedLive } from "../lib/fng.js"; // ⬅️ chemin corrigé
+import { fetchFearGreedLive } from "../lib/fng.js";
 
-export default function TopBar({ lastRefreshed, onRefresh, fear }) {
-  // thème
+export default function TopBar({ lastRefreshed, onRefresh, fear, loading }) {
   const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window === "undefined") return false;
+    if (typeof window === "undefined") return true;
     const saved = localStorage.getItem("darkMode");
     if (saved === "1") return true;
     if (saved === "0") return false;
-    return window.matchMedia?.("(prefers-color-scheme: dark)")?.matches ?? false;
+    return true; // dark par défaut (dashboard "lux")
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    if (darkMode) root.classList.add("dark");
-    else root.classList.remove("dark");
-    if (typeof window !== "undefined") {
-      localStorage.setItem("darkMode", darkMode ? "1" : "0");
-    }
+    root.classList.toggle("dark", darkMode);
+    if (typeof window !== "undefined") localStorage.setItem("darkMode", darkMode ? "1" : "0");
   }, [darkMode]);
 
-  // Fear & Greed (live si non passé en prop)
   const [fearLive, setFearLive] = useState(null);
   useEffect(() => {
     let stop = false;
-    if (!fear) {
-      fetchFearGreedLive().then((v) => {
-        if (!stop) setFearLive(v);
-      });
-    } else {
-      setFearLive(null); // on respecte la prop si fournie
-    }
+    if (!fear) fetchFearGreedLive().then((v) => { if (!stop) setFearLive(v); });
+    else setFearLive(null);
     return () => { stop = true; };
   }, [fear]);
 
-  const fearData = fear || fearLive; // priorité à la prop (ex: historique + streak)
+  const fearData = fear || fearLive;
 
   return (
-    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
-      {/* Logo + titre */}
+    <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
       <div className="flex items-center gap-3 min-w-0">
-        <LogoRadar dark={darkMode} size={38} className="flex-shrink-0" />
+        <div className="relative flex-shrink-0">
+          <div className="absolute inset-0 blur-xl bg-cyan-500/20 rounded-full" aria-hidden />
+          <LogoRadar dark={darkMode} size={42} className="relative" />
+        </div>
         <div className="min-w-0">
-          <h1 className="text-2xl font-bold truncate">TradingScan — Setups thématiques</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Screener hard-tech · setups de pré-explosion scorés /100 (EOD)
+          <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight leading-none">
+            <span className="brand-grad">TradingScan</span>
+            <span className="text-slate-400 font-semibold"> · Setups thématiques</span>
+          </h1>
+          <p className="mt-1 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            Screener hard-tech · pré-explosion scorée <span className="font-semibold text-slate-600 dark:text-slate-300">/100</span> · MAJ quotidienne (EOD)
           </p>
         </div>
       </div>
 
-      {/* Fear & Greed Gauge */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         {fearData ? (
           <FearGreedGauge
             score={Number(fearData.score)}
             label={String(fearData.label || "")}
-            // l’API alt.me ne donne pas de streak → 0 par défaut si non fourni
             streak={Number(fearData.streak_days ?? fearData.streak ?? 0)}
             asof={fearData.asof}
           />
         ) : (
-          <div className="text-xs text-slate-400">Fear &amp; Greed: N/A</div>
+          <div className="text-xs text-slate-400">Fear &amp; Greed: —</div>
         )}
-      </div>
 
-      {/* Boutons à droite */}
-      <div className="flex gap-2 items-center">
-        <span className="text-xs text-slate-500 dark:text-slate-400">
-          Last refresh: {lastRefreshed || "-"}
-        </span>
-        <button
-          type="button"
-          className="px-3 py-1 rounded bg-slate-800 text-white text-sm dark:bg-slate-200 dark:text-black"
-          onClick={onRefresh}
-          aria-label="Refresh data"
-        >
-          Refresh
-        </button>
-        <button
-          type="button"
-          onClick={() => setDarkMode((v) => !v)}
-          className="p-2 rounded bg-slate-200 dark:bg-slate-700"
-          aria-label={darkMode ? "Activer le thème clair" : "Activer le thème sombre"}
-          title={darkMode ? "Light mode" : "Dark mode"}
-        >
-          {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <span className="hidden lg:inline text-[11px] text-slate-500 dark:text-slate-500">
+            MAJ&nbsp;{lastRefreshed || "—"}
+          </span>
+          <button
+            type="button"
+            onClick={onRefresh}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium
+                       bg-slate-900 text-white hover:bg-slate-800
+                       dark:bg-white/10 dark:hover:bg-white/15 dark:ring-1 dark:ring-white/10 transition"
+            aria-label="Rafraîchir"
+          >
+            <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
+            <span className="hidden sm:inline">Refresh</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setDarkMode((v) => !v)}
+            className="p-2 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300
+                       dark:bg-white/10 dark:text-slate-200 dark:hover:bg-white/15 dark:ring-1 dark:ring-white/10 transition"
+            aria-label={darkMode ? "Thème clair" : "Thème sombre"}
+            title={darkMode ? "Light mode" : "Dark mode"}
+          >
+            {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+        </div>
       </div>
-    </div>
+    </header>
   );
 }
