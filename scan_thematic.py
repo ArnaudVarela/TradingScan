@@ -43,13 +43,16 @@ def main():
             **{f"c_{k}": v for k, v in r["components"].items()},
         })
     out = pd.DataFrame(rows).sort_values("score", ascending=False).reset_index(drop=True)
+    print(f"[MCAP] récupération market cap pour {len(out)} titres...")
+    mcaps = DF.fetch_mcaps(out["ticker"].tolist())
+    out["mcap_usd"] = out["ticker"].map(mcaps)
     out.to_csv(ROOT / "thematic_setups.csv", index=False)
     pub = ROOT / "dashboard" / "public"
     if pub.exists():
         out.to_csv(pub / "thematic_setups.csv", index=False)
 
     print(f"[OK] {len(out)} setups scorés -> thematic_setups.csv")
-    cols = ["ticker", "themes", "score", "setup", "price", "rsi", "dist_to_high_pct", "base_depth_pct", "vol_dryup"]
+    cols = ["ticker", "themes", "score", "setup", "price", "mcap_usd", "rsi", "dist_to_high_pct", "base_depth_pct", "vol_dryup"]
     print("\n=== TOP 25 SETUPS PRÉ-EXPLOSION (aujourd'hui) ===")
     print(out[cols].head(25).to_string(index=False))
     print("\n=== Répartition des scores ===")

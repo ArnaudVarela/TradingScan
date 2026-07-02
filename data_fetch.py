@@ -64,6 +64,40 @@ def prefetch_ohlc(tickers, start, end, batch_size=BATCH_SIZE) -> dict:
     print(f"[PREFETCH] {len(out)}/{len(symbols)} tickers avec OHLC.")
     return out
 
+def _mcap_one(ticker: str):
+    """Market cap USD d'un ticker via yfinance fast_info (best-effort, multi-clés)."""
+    try:
+        fi = yf.Ticker(ticker).fast_info
+    except Exception:
+        return None
+    for k in ("market_cap", "marketCap"):
+        try:
+            v = fi[k]
+            if v and float(v) > 0:
+                return float(v)
+        except Exception:
+            pass
+    # fallback: dernier prix * actions en circulation
+    try:
+        px = float(fi["last_price"]); sh = float(fi["shares"])
+        if px > 0 and sh > 0:
+            return px * sh
+    except Exception:
+        pass
+    return None
+
+def fetch_mcaps(tickers, pause: float = 0.0) -> dict:
+    """Retourne {ticker: market_cap_usd}. best-effort (ticker absent si indisponible)."""
+    out = {}
+    for t in tickers:
+        mc = _mcap_one(str(t))
+        if mc:
+            out[str(t)] = mc
+        if pause:
+            time.sleep(pause)
+    return out
+
+
 def spy_equity(spy_df, start, end) -> pd.DataFrame:
     """Equity SPY buy&hold base 100 sur [start,end] (utile pour la validation vs marché)."""
     if spy_df is None or spy_df.empty or pd.isna(start) or pd.isna(end):

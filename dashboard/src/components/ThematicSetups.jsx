@@ -18,6 +18,15 @@ const THEME_LABELS = {
   new_tech: "🆕 New tech",
 };
 
+function fmtMcap(v) {
+  const n = Number(v);
+  if (!Number.isFinite(n) || n <= 0) return "—";
+  if (n >= 1e12) return "$" + (n / 1e12).toFixed(2) + "T";
+  if (n >= 1e9) return "$" + (n / 1e9).toFixed(1) + "B";
+  if (n >= 1e6) return "$" + (n / 1e6).toFixed(0) + "M";
+  return "$" + n.toFixed(0);
+}
+
 function scoreClasses(s) {
   if (s >= 70) return "bg-emerald-500 text-white";
   if (s >= 60) return "bg-lime-500 text-white";
@@ -122,6 +131,7 @@ export default function ThematicSetups() {
                     <th className="pr-2">Score</th>
                     <th className="pr-2">Setup</th>
                     <th className="pr-2 text-right">Prix</th>
+                    <th className="pr-2 text-right">MCap</th>
                     <th className="pr-2 text-right">RSI</th>
                     <th className="pr-2 text-right">Dist. haut</th>
                     <th className="pr-2 text-right">Base</th>
@@ -143,6 +153,7 @@ export default function ThematicSetups() {
                       </td>
                       <td className="pr-2">{r.setup}</td>
                       <td className="pr-2 text-right">{r.price}</td>
+                      <td className="pr-2 text-right">{fmtMcap(r.mcap_usd)}</td>
                       <td className="pr-2 text-right">{r.rsi}</td>
                       <td className="pr-2 text-right">{r.dist_to_high_pct}%</td>
                       <td className="pr-2 text-right">{r.base_depth_pct}%</td>
