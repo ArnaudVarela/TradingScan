@@ -1,6 +1,7 @@
 # scan_thematic.py — Scanne l'univers thématique et sort le classement /100 des setups de pré-explosion.
 # Sortie : thematic_setups.csv (+ miroir dashboard), trié par score décroissant.
 import os
+import datetime
 from pathlib import Path
 
 import pandas as pd
@@ -11,6 +12,18 @@ import pattern_score as P
 ROOT = Path(__file__).parent
 LOOKBACK_YEARS = float(os.getenv("SCAN_YEARS", "2"))
 MARKET = os.getenv("MARKET_TICKER", "SPY")
+MIN_PRICE = float(os.getenv("MIN_PRICE", "1.0"))
+MIN_DOLLAR_VOL = float(os.getenv("MIN_DOLLAR_VOL", "1000000"))   # $1M/j min (liquidité)
+DROP_PARTIAL = int(os.getenv("SCAN_DROP_PARTIAL", "1"))          # exclure la bougie du jour en cours (mi-séance)
+
+def _drop_partial(df):
+    """Retire la bougie du jour EN COURS (partielle en mi-séance) -> score reproductible sur barres closes."""
+    if not DROP_PARTIAL or df is None or getattr(df, "empty", True):
+        return df
+    et_today = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=5)).date()
+    if pd.Timestamp(df.index[-1]).date() >= et_today:
+        return df.iloc[:-1]
+    return df
 
 def main():
     uni = pd.read_csv(ROOT / "thematic_universe.csv")
@@ -23,25 +36,32 @@ def main():
     end = pd.Timestamp.today().normalize()
     start = end - pd.DateOffset(years=LOOKBACK_YEARS + 1)
     pm = DF.prefetch_ohlc(tickers + [MARKET], start, end)
-    spy = pm.get(MARKET)
+    spy = _drop_partial(pm.get(MARKET))
 
     rows = []
+    n_illiquid = 0
     for t in tickers:
-        df = pm.get(t)
+        df = _drop_partial(pm.get(t))
         if df is None or df.empty:
             continue
         r = P.preexplosion_score(df, spy)
         if r is None:
             continue
         m = r["metrics"]
+        # Filtre liquidité : écarte shells morts / sub-penny / nano illiquides (non actionnables)
+        if (m.get("price") or 0) < MIN_PRICE or (m.get("avg_dollar_vol") or 0) < MIN_DOLLAR_VOL:
+            n_illiquid += 1
+            continue
         rows.append({
             "ticker": t, "themes": theme_map.get(t, ""),
             "score": r["score"], "setup": r["label"],
             "price": m["price"], "rsi": m["rsi"], "macd_hist": m["macd_hist"],
+            "avg_dollar_vol": m.get("avg_dollar_vol"),
             "dist_to_high_pct": m["dist_to_high_pct"], "base_depth_pct": m["base_depth_pct"],
             "bbwidth_pctile": m["bbwidth_pct"], "vol_dryup": m["vol_dryup"], "overext": m["overext"],
             **{f"c_{k}": v for k, v in r["components"].items()},
         })
+    print(f"[FILTRE] {n_illiquid} titres écartés (prix < ${MIN_PRICE:g} ou dollar-vol < ${MIN_DOLLAR_VOL:,.0f}/j)")
     out = pd.DataFrame(rows).sort_values("score", ascending=False).reset_index(drop=True)
     print(f"[MCAP] récupération market cap pour {len(out)} titres...")
     mcaps = DF.fetch_mcaps(out["ticker"].tolist())

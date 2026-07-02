@@ -95,11 +95,17 @@ def preexplosion_score(df: pd.DataFrame, mkt: pd.DataFrame | None = None, min_ba
     if last is None or last <= 0:
         return None
 
-    e20, e50, e200 = _ema(c, 20).iloc[-1], _ema(c, 50).iloc[-1], _ema(c, 200).iloc[-1]
-    slope50 = (_ema(c, 50).iloc[-1] - _ema(c, 50).iloc[-10]) / (abs(_ema(c, 50).iloc[-10]) + 1e-9)
-    above200 = last > (e200 or last)
-    up_align = (e20 or 0) > (e50 or 0) > (e200 or 0)
-    c_trend = 0.4 * float(up_align) + 0.3 * float(above200) + 0.3 * _ramp_up(slope50, 0.0, 0.05)
+    n = len(c)
+    ema50s = _ema(c, 50)
+    e20 = _ema(c, 20).iloc[-1]
+    e50 = ema50s.iloc[-1]
+    # Ancre de tendance longue : vraie EMA200 seulement si >=200 barres, sinon on retombe sur l'EMA50
+    # (une "MM200" calculée sur <200 barres est factice — fréquent en micro/nano à historique court).
+    e_long = _ema(c, 200).iloc[-1] if n >= 200 else e50
+    slope50 = (e50 - ema50s.iloc[-10]) / (abs(ema50s.iloc[-10]) + 1e-9)
+    above_long = bool(last > e_long)
+    up_align = bool(e20 > e50) and (n < 200 or bool(e50 > e_long))
+    c_trend = 0.4 * float(up_align) + 0.3 * float(above_long) + 0.3 * _ramp_up(slope50, 0.0, 0.05)
 
     # Base / pivot sur 50 séances
     L = 50
@@ -130,7 +136,9 @@ def preexplosion_score(df: pd.DataFrame, mkt: pd.DataFrame | None = None, min_ba
     c_rsi = _window(rsi, 42, 50, 65, 78)
     hist = _macd_hist(c)
     hist_now, hist_prev = _f(hist.iloc[-1]) or 0.0, _f(hist.iloc[-4]) or 0.0
-    c_macd = 0.5 * float(hist_now > hist_prev) + 0.5 * _ramp_up(hist_now - hist_prev, -0.05, 0.20)
+    atr_last = _f(atr14.iloc[-1]) or (last * 0.02)   # normalise le delta MACD par l'ATR (scale-free)
+    macd_delta = (hist_now - hist_prev) / (atr_last + 1e-9)
+    c_macd = 0.5 * float(hist_now > hist_prev) + 0.5 * _ramp_up(macd_delta, -0.10, 0.40)
     c_momentum = 0.5 * c_rsi + 0.5 * c_macd
 
     # Force relative vs marché
@@ -155,11 +163,12 @@ def preexplosion_score(df: pd.DataFrame, mkt: pd.DataFrame | None = None, min_ba
         overext = max(overext, 0.6)
     raw *= (1.0 - 0.5 * overext)
     # Gate : vraie tendance baissière -> ce n'est pas une base de pré-explosion
-    if (not above200) and slope50 < 0:
+    if (not above_long) and slope50 < 0:
         raw *= 0.30
 
+    advol = _f((c.tail(20) * v.tail(20)).mean()) or 0.0
     score = round(100.0 * max(0.0, min(1.0, raw)), 1)
-    label = _label(parts, dist_to_high, depth, bbw_pct, dryup, overext, above200, slope50)
+    label = _label(parts, dist_to_high, depth, bbw_pct, dryup, overext, above_long, slope50)
     return {
         "score": score,
         "label": label,
@@ -170,6 +179,7 @@ def preexplosion_score(df: pd.DataFrame, mkt: pd.DataFrame | None = None, min_ba
             "dist_to_high_pct": round(dist_to_high * 100, 1),
             "base_depth_pct": round(depth * 100, 1), "bbwidth_pct": round(bbw_pct * 100, 0),
             "overext": round(overext, 2),
+            "avg_dollar_vol": round(advol, 0), "n_bars": int(n),
         },
     }
 
