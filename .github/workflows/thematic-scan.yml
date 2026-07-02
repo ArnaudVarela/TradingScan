@@ -3,7 +3,8 @@ name: Thematic scan (pré-explosion) — daily EOD
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "30 21 * * 1-5"   # ~après clôture US (21:30 UTC), lun→ven
+    - cron: "17 22 * * 1-5"   # 22:17 UTC : minute décalée (crons GitHub moins retardés hors :00/:30),
+                              # après clôture US toute l'année (été ~00:17 Paris, hiver ~23:17 Paris)
 
 permissions:
   contents: write
