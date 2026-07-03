@@ -67,6 +67,16 @@ function CatalystBadge({ r }) {
     </span>
   );
 }
+function BuzzBadge({ r }) {
+  const b = toNumber(r.buzz);
+  if (!Number.isFinite(b) || b <= 0) return null;
+  return (
+    <span className="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-300 ring-1 ring-inset ring-sky-500/25"
+          title="Articles de presse récents (Finnhub, 7j)">
+      📰 {b}
+    </span>
+  );
+}
 
 const inSize = (mc, size) => {
   if (size === "all") return true;
@@ -243,7 +253,7 @@ export default function ThematicSetups({ rows = [], loading = false }) {
                     </td>
                     <td className="px-3 py-2"><span className={scoreCls(r._s)}>{r._s.toFixed(0)}</span></td>
                     <td className="px-3 py-2 text-slate-600 dark:text-slate-300 whitespace-nowrap">{r.setup}</td>
-                    <td className="px-3 py-2 whitespace-nowrap"><CatalystBadge r={r} /></td>
+                    <td className="px-3 py-2 whitespace-nowrap"><div className="flex items-center gap-1"><CatalystBadge r={r} /><BuzzBadge r={r} /></div></td>
                     <td className="px-3 py-2 text-right num font-medium">{fmtMcap(r._mc)}</td>
                     <td className="px-3 py-2 text-right num text-slate-600 dark:text-slate-300">{r.price}</td>
                     <td className={`px-3 py-2 text-right num ${rsiCls(r.rsi)}`}>{r.rsi}</td>
