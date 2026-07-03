@@ -3,9 +3,11 @@ name: Thematic scan (pré-explosion) — daily EOD
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "12 14 * * 1-5"   # 14:12 UTC ≈ 16:12 Paris (ÉTÉ) ≈ 10:12 ET, ~40 min après l'ouverture US.
-                              # ⚠️ HIVER : 14:12 UTC = 15:12 Paris = 09:12 ET (AVANT l'ouverture 9:30 ET)
-                              #    -> passer à "12 15 * * 1-5" fin octobre pour rester après l'ouverture.
+    # Cron GitHub = best-effort (retards 10-30 min / skips possibles). Minute décalée (:43, hors :00/:15/:30/:45)
+    # pour limiter les skips. Données EOD = clôture US de la veille (bar du jour partiel -> écarté), donc l'heure exacte
+    # de l'après-midi n'affecte pas la data.
+    - cron: "43 13 * * 1-5"   # 13:43 UTC = 15:43 Paris (ÉTÉ) / 14:43 Paris (HIVER).
+                              # DST : fin octobre, passer à "43 14 * * 1-5" pour rester ~15:43 Paris en hiver.
 
 permissions:
   contents: write
