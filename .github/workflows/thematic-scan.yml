@@ -7,7 +7,10 @@ on:
     # pour limiter les skips. Données EOD = clôture US de la veille (bar du jour partiel -> écarté), donc l'heure exacte
     # de l'après-midi n'affecte pas la data.
     - cron: "43 13 * * 1-5"   # 13:43 UTC = 15:43 Paris (ÉTÉ) / 14:43 Paris (HIVER).
-                              # DST : fin octobre, passer à "43 14 * * 1-5" pour rester ~15:43 Paris en hiver.
+    - cron: "56 13 * * 1-5"   # Filet de sécurité 15:56 Paris : rattrape si le run de 15:43 a été sauté par GitHub.
+                              # Sans risque : pipeline idempotent par jour (signals_log dédupliqué sur date+ticker,
+                              # tout le reste écrase ses CSV) -> si 15:43 a tourné, commit vide ou simple complément de secteurs.
+                              # DST : fin octobre, passer à "43 14" et "56 14" pour rester ~15:43/15:56 Paris en hiver.
 
 permissions:
   contents: write
