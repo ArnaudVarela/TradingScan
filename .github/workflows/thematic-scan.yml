@@ -68,6 +68,13 @@ jobs:
           set -euo pipefail
           python catalyst_fetch.py || echo "[WARN] catalyst non bloquant (SEC indisponible)"
 
+      - name: Overlay news (chaleur sectorielle Google News + buzz Finnhub — non bloquant)
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: |
+          set -euo pipefail
+          python news_fetch.py || echo "[WARN] news non bloquant"
+
       - name: Suivi d'outcome (résolution forward + rapport de fiabilité)
         env:
           PYTHONUNBUFFERED: "1"
@@ -80,9 +87,9 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in thematic_setups.csv thematic_universe.csv signals_log.csv score_reliability.csv \
+          for f in thematic_setups.csv thematic_universe.csv signals_log.csv score_reliability.csv sector_heat.csv \
                    dashboard/public/thematic_setups.csv dashboard/public/thematic_universe.csv \
-                   dashboard/public/signals_log.csv dashboard/public/score_reliability.csv; do
+                   dashboard/public/signals_log.csv dashboard/public/score_reliability.csv dashboard/public/sector_heat.csv; do
             [ -f "$f" ] && git add "$f" || true
           done
           if git diff --cached --quiet; then
