@@ -46,6 +46,9 @@ jobs:
           pip install -r requirements.txt
           pip install yfinance   # sécurité si absent de requirements.txt
 
+      - name: Tests intégrité du score (fail-fast avant tout scan/commit)
+        run: python test_pattern_score.py
+
       - name: Build thematic universe
         run: python build_thematic_universe.py
 

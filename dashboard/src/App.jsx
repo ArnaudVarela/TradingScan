@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Boxes, Flame, Gauge, Layers } from "lucide-react";
 import TopBar from "./components/TopBar.jsx";
 import ThematicSetups from "./components/ThematicSetups.jsx";
+import ScoreReliability from "./components/ScoreReliability.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import { fetchCSVFresh, toNumber } from "./lib/csv.js";
 
@@ -64,6 +65,12 @@ export default function App() {
         <ErrorBoundary fallback="La vue Setups thématiques n'a pas pu s'afficher.">
           <ThematicSetups rows={rows} loading={loading} />
         </ErrorBoundary>
+
+        <div className="mt-6">
+          <ErrorBoundary fallback="Le rapport de fiabilité n'a pas pu s'afficher.">
+            <ScoreReliability />
+          </ErrorBoundary>
+        </div>
 
         <footer className="mt-8 text-center text-[11px] leading-relaxed text-slate-500 dark:text-slate-500">
           Screener thématique hard-tech · données prix/volume via yfinance (EOD).<br />
