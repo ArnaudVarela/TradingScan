@@ -30,29 +30,57 @@ THEME_QUERIES = {
     "new_tech": "emerging deep tech stocks",
 }
 
+# Chaleur sur les 11 secteurs GICS (libellés EXACTS de sector_perf.py -> jointure directe avec la Rotation).
+GICS_QUERIES = {
+    "Information Technology": "technology software semiconductor stocks",
+    "Health Care": "healthcare biotech pharmaceutical stocks",
+    "Financials": "bank financial insurance stocks",
+    "Industrials": "industrial manufacturing aerospace defense stocks",
+    "Consumer Discretionary": "consumer retail discretionary stocks",
+    "Consumer Staples": "consumer staples food beverage stocks",
+    "Energy": "energy oil gas uranium stocks",
+    "Utilities": "utilities power electricity stocks",
+    "Materials": "materials mining chemicals stocks",
+    "Real Estate": "real estate REIT stocks",
+    "Communication Services": "media telecom communication stocks",
+}
+
+def _gn_count(q):
+    """Nombre d'articles Google News (48h) + 1er titre. ('', '') si échec (best-effort)."""
+    try:
+        url = ("https://news.google.com/rss/search?q="
+               + requests.utils.quote(q + " when:2d") + "&hl=en-US&gl=US&ceid=US:en")
+        r = requests.get(url, headers=UA, timeout=15)
+        r.raise_for_status()
+        items = ET.fromstring(r.content).findall(".//item")
+        return len(items), ((items[0].findtext("title") or "")[:150] if items else "")
+    except Exception:
+        return "", ""
+
+def _write_heat(rows, key_col, fname, tag):
+    df = pd.DataFrame(rows)
+    df.to_csv(ROOT / fname, index=False)
+    pub = ROOT / "dashboard" / "public"
+    if pub.exists():
+        df.to_csv(pub / fname, index=False)
+    tot = sum(x for x in df["heat"] if isinstance(x, (int, float)))
+    print(f"[NEWS] {tag} : {len(df)} {key_col}s, {tot} articles (2j)")
+
 def sector_heat():
     rows = []
     for key, q in THEME_QUERIES.items():
-        n, top = "", ""
-        try:
-            url = ("https://news.google.com/rss/search?q="
-                   + requests.utils.quote(q + " when:2d") + "&hl=en-US&gl=US&ceid=US:en")
-            r = requests.get(url, headers=UA, timeout=15)
-            r.raise_for_status()
-            items = ET.fromstring(r.content).findall(".//item")
-            n = len(items)
-            top = (items[0].findtext("title") or "")[:150] if items else ""
-        except Exception:
-            pass
+        n, top = _gn_count(q)
         rows.append({"theme": key, "heat": n, "top_headline": top})
         time.sleep(0.4)
-    df = pd.DataFrame(rows)
-    df.to_csv(ROOT / "sector_heat.csv", index=False)
-    pub = ROOT / "dashboard" / "public"
-    if pub.exists():
-        df.to_csv(pub / "sector_heat.csv", index=False)
-    tot = sum(x for x in df["heat"] if isinstance(x, (int, float)))
-    print(f"[NEWS] chaleur sectorielle : {len(df)} thèmes, {tot} articles (2j)")
+    _write_heat(rows, "thème", "sector_heat.csv", "chaleur thèmes")
+
+def gics_heat():
+    rows = []
+    for sector, q in GICS_QUERIES.items():
+        n, top = _gn_count(q)
+        rows.append({"sector": sector, "heat": n, "top_headline": top})
+        time.sleep(0.4)
+    _write_heat(rows, "secteur", "sector_heat_gics.csv", "chaleur GICS")
 
 def finnhub_buzz():
     if not FINNHUB_KEY:
@@ -92,7 +120,11 @@ def main():
     try:
         sector_heat()
     except Exception as e:
-        print(f"[NEWS] chaleur sectorielle KO ({e})")
+        print(f"[NEWS] chaleur thèmes KO ({e})")
+    try:
+        gics_heat()
+    except Exception as e:
+        print(f"[NEWS] chaleur GICS KO ({e})")
     try:
         finnhub_buzz()
     except Exception as e:
