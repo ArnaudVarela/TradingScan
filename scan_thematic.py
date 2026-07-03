@@ -15,6 +15,31 @@ MARKET = os.getenv("MARKET_TICKER", "SPY")
 MIN_PRICE = float(os.getenv("MIN_PRICE", "1.0"))
 MIN_DOLLAR_VOL = float(os.getenv("MIN_DOLLAR_VOL", "1000000"))   # $1M/j min (liquidité)
 DROP_PARTIAL = int(os.getenv("SCAN_DROP_PARTIAL", "1"))          # exclure la bougie du jour en cours (mi-séance)
+LOG_MIN_SCORE = float(os.getenv("LOG_MIN_SCORE", "50"))          # ne logge que les setups >= ce score
+SIGNALS_LOG = ROOT / "signals_log.csv"
+
+def append_signals_log(out, asof):
+    """Journal append-only des signaux (base du suivi d'outcome). 1 ligne par (date, ticker)."""
+    cols = ["date", "ticker", "score", "bucket", "themes", "price", "mcap_usd"]
+    snap = out[out["score"] >= LOG_MIN_SCORE].copy()
+    if snap.empty:
+        print("[LOG] aucun signal >= seuil à logger"); return
+    snap["date"] = pd.Timestamp(asof).strftime("%Y-%m-%d")
+    snap["bucket"] = pd.cut(snap["score"], [0, 50, 60, 70, 101], labels=["<50", "50-60", "60-70", "70+"], right=False)
+    snap = snap[cols]
+    if SIGNALS_LOG.exists():
+        try:
+            old = pd.read_csv(SIGNALS_LOG)
+            merged = pd.concat([old, snap], ignore_index=True).drop_duplicates(subset=["date", "ticker"], keep="last")
+        except Exception:
+            merged = snap
+    else:
+        merged = snap
+    merged.to_csv(SIGNALS_LOG, index=False)
+    pub = ROOT / "dashboard" / "public"
+    if pub.exists():
+        merged.to_csv(pub / "signals_log.csv", index=False)
+    print(f"[LOG] signals_log.csv : +{len(snap)} signaux du {snap['date'].iloc[0]} (total {len(merged)})")
 
 def _drop_partial(df):
     """Retire la bougie du jour EN COURS (partielle en mi-séance) -> score reproductible sur barres closes."""
@@ -66,6 +91,8 @@ def main():
     print(f"[MCAP] récupération market cap pour {len(out)} titres...")
     mcaps = DF.fetch_mcaps(out["ticker"].tolist())
     out["mcap_usd"] = out["ticker"].map(mcaps)
+    if spy is not None and not spy.empty:
+        append_signals_log(out, spy.index[-1])   # asof = dernière barre CLOSE (anti look-ahead)
     out.to_csv(ROOT / "thematic_setups.csv", index=False)
     pub = ROOT / "dashboard" / "public"
     if pub.exists():

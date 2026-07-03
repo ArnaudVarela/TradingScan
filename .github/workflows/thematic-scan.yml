@@ -58,13 +58,23 @@ jobs:
           test -f dashboard/public/thematic_setups.csv || (echo "Missing thematic_setups.csv"; exit 1)
           echo "--- head thematic_setups.csv ---"; head -n 8 thematic_setups.csv || true
 
+      - name: Suivi d'outcome (résolution forward + rapport de fiabilité)
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          set -euo pipefail
+          python track_outcomes.py || echo "[WARN] track_outcomes non bloquant (scan déjà produit)"
+
       - name: Commit & push outputs
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add thematic_setups.csv thematic_universe.csv \
-                  dashboard/public/thematic_setups.csv dashboard/public/thematic_universe.csv
+          for f in thematic_setups.csv thematic_universe.csv signals_log.csv score_reliability.csv \
+                   dashboard/public/thematic_setups.csv dashboard/public/thematic_universe.csv \
+                   dashboard/public/signals_log.csv dashboard/public/score_reliability.csv; do
+            [ -f "$f" ] && git add "$f" || true
+          done
           if git diff --cached --quiet; then
             echo "Aucun changement à committer."; exit 0
           fi
