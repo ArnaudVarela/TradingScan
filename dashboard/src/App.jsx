@@ -27,17 +27,19 @@ export default function App() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [last, setLast] = useState("—");
+  const [universe, setUniverse] = useState("themes"); // "themes" (hard-tech) | "market" (< $5B tous secteurs)
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const r = await fetchCSVFresh("thematic_setups.csv");
+      const file = universe === "market" ? "market_setups.csv" : "thematic_setups.csv";
+      const r = await fetchCSVFresh(file);
       setRows(Array.isArray(r) ? r : []);
       setLast(new Date().toLocaleString());
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [universe]);
 
   useEffect(() => { load(); }, [load]);
 
@@ -72,6 +74,26 @@ export default function App() {
           <SectorHeat />
         </ErrorBoundary>
 
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <span className="text-xs text-slate-500 dark:text-slate-400 mr-1">Univers :</span>
+          {[
+            { k: "themes", label: "🎯 Hard-tech (thèmes)" },
+            { k: "market", label: "🌐 Marché large · < $5B · tous secteurs" },
+          ].map((u) => (
+            <button
+              key={u.k}
+              onClick={() => setUniverse(u.k)}
+              className={`text-xs px-3 py-1.5 rounded-full ring-1 ring-inset transition ${
+                universe === u.k
+                  ? "bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 ring-cyan-500/40 font-semibold"
+                  : "bg-slate-500/5 text-slate-500 dark:text-slate-400 ring-white/10 hover:bg-slate-500/10"
+              }`}
+            >
+              {u.label}
+            </button>
+          ))}
+        </div>
+
         <ErrorBoundary fallback="La vue Setups thématiques n'a pas pu s'afficher.">
           <ThematicSetups rows={rows} loading={loading} />
         </ErrorBoundary>
@@ -83,7 +105,10 @@ export default function App() {
         </div>
 
         <footer className="mt-8 text-center text-[11px] leading-relaxed text-slate-500 dark:text-slate-500">
-          Screener thématique hard-tech · données prix/volume via yfinance (EOD).<br />
+          {universe === "market"
+            ? "Univers marché large · ~2 900 titres < $5B, tous secteurs GICS · yfinance (EOD)."
+            : "Screener thématique hard-tech · données prix/volume via yfinance (EOD)."}
+          <br />
           Le score /100 est un <span className="font-medium">filtre de timing/qualité</span>, pas un conseil d'investissement.
         </footer>
       </div>

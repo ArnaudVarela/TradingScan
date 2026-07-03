@@ -17,7 +17,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     env:
       DEFAULT_BRANCH: main
     steps:
@@ -52,6 +52,11 @@ jobs:
       - name: Build thematic universe
         run: python build_thematic_universe.py
 
+      - name: Build market universe (< $5B, tous secteurs — API Nasdaq, non bloquant)
+        run: |
+          set -euo pipefail
+          python build_market_universe.py || echo "[WARN] market universe non bloquant (Nasdaq indisponible)"
+
       - name: Scan pré-explosion (score /100)
         env:
           PYTHONUNBUFFERED: "1"
@@ -60,6 +65,17 @@ jobs:
           python scan_thematic.py
           test -f dashboard/public/thematic_setups.csv || (echo "Missing thematic_setups.csv"; exit 1)
           echo "--- head thematic_setups.csv ---"; head -n 8 thematic_setups.csv || true
+
+      - name: Scan marché large (< $5B, tous secteurs — non bloquant)
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          set -euo pipefail
+          if [ -f market_universe.csv ]; then
+            python scan_market.py || echo "[WARN] scan_market non bloquant"
+          else
+            echo "[SKIP] market_universe.csv absent."
+          fi
 
       - name: Overlay catalyseur (SEC EDGAR 8-K — colonnes séparées, non bloquant)
         env:
@@ -93,9 +109,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for f in thematic_setups.csv thematic_universe.csv signals_log.csv score_reliability.csv sector_heat.csv sector_perf.csv \
+                   market_universe.csv market_setups.csv \
                    dashboard/public/thematic_setups.csv dashboard/public/thematic_universe.csv \
                    dashboard/public/signals_log.csv dashboard/public/score_reliability.csv \
-                   dashboard/public/sector_heat.csv dashboard/public/sector_perf.csv; do
+                   dashboard/public/sector_heat.csv dashboard/public/sector_perf.csv \
+                   dashboard/public/market_setups.csv; do
             [ -f "$f" ] && git add "$f" || true
           done
           if git diff --cached --quiet; then
