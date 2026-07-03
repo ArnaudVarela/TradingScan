@@ -34,6 +34,11 @@ def main():
         if not (MCAP_MIN <= mc <= MCAP_MAX) or px < PRICE_MIN:
             continue
         out.append({"ticker": sym, "mcap_usd": mc, "price": round(px, 2), "name": str(x.get("name", ""))[:60]})
+    cols = ["ticker", "mcap_usd", "price", "name"]
+    if not out:
+        pd.DataFrame(columns=cols).to_csv(ROOT / "market_universe.csv", index=False)
+        print("[MARKET] 0 titre retenu (schéma Nasdaq changé ? filtre trop strict ?) -> market_universe.csv vide.")
+        return
     df = pd.DataFrame(out).drop_duplicates("ticker").sort_values("mcap_usd", ascending=False).reset_index(drop=True)
     df.to_csv(ROOT / "market_universe.csv", index=False)
     print(f"[MARKET] {len(df)} titres <= ${MCAP_MAX/1e9:g}B (>= ${MCAP_MIN/1e6:g}M, prix >= ${PRICE_MIN:g}) -> market_universe.csv")

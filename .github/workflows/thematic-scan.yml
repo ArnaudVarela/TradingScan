@@ -17,7 +17,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     env:
       DEFAULT_BRANCH: main
     steps:
@@ -67,14 +67,30 @@ jobs:
           echo "--- head thematic_setups.csv ---"; head -n 8 thematic_setups.csv || true
 
       - name: Scan marché large (< $5B, tous secteurs — non bloquant)
+        continue-on-error: true          # un stall réseau ne doit jamais empêcher le commit final
+        timeout-minutes: 15              # borne le hang; l'étape suivante réutilise l'ancien CSV si besoin
         env:
           PYTHONUNBUFFERED: "1"
         run: |
           set -euo pipefail
-          if [ -f market_universe.csv ]; then
+          if [ -s market_universe.csv ]; then
             python scan_market.py || echo "[WARN] scan_market non bloquant"
           else
-            echo "[SKIP] market_universe.csv absent."
+            echo "[SKIP] market_universe.csv absent/vide."
+          fi
+
+      - name: Tag secteur GICS des setups marché (yfinance + cache persistant — non bloquant)
+        continue-on-error: true
+        timeout-minutes: 15
+        env:
+          PYTHONUNBUFFERED: "1"
+          SECTOR_MAX_FETCH: "350"
+        run: |
+          set -euo pipefail
+          if [ -s market_setups.csv ]; then
+            python sector_tag.py || echo "[WARN] sector_tag non bloquant"
+          else
+            echo "[SKIP] market_setups.csv absent/vide."
           fi
 
       - name: Overlay catalyseur (SEC EDGAR 8-K — colonnes séparées, non bloquant)
@@ -109,7 +125,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for f in thematic_setups.csv thematic_universe.csv signals_log.csv score_reliability.csv sector_heat.csv sector_perf.csv \
-                   market_universe.csv market_setups.csv \
+                   market_universe.csv market_setups.csv sector_map.csv \
                    dashboard/public/thematic_setups.csv dashboard/public/thematic_universe.csv \
                    dashboard/public/signals_log.csv dashboard/public/score_reliability.csv \
                    dashboard/public/sector_heat.csv dashboard/public/sector_perf.csv \

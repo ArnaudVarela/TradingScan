@@ -34,8 +34,25 @@ def _drop_partial(df):
         return df.iloc[:-1]
     return df
 
+COLS = ["ticker", "themes", "score", "setup", "price", "mcap_usd", "rsi", "macd_hist",
+        "avg_dollar_vol", "dist_to_high_pct", "base_depth_pct", "bbwidth_pctile", "vol_dryup", "overext"]
+
+def _write(df):
+    df.to_csv(ROOT / "market_setups.csv", index=False)
+    pub = ROOT / "dashboard" / "public"
+    if pub.exists():
+        df.to_csv(pub / "market_setups.csv", index=False)
+
 def main():
-    uni = pd.read_csv(ROOT / "market_universe.csv")
+    uni_path = ROOT / "market_universe.csv"
+    if not uni_path.exists() or uni_path.stat().st_size == 0:
+        print("[MARKET SCAN] market_universe.csv absent/vide -> market_setups.csv vide.")
+        _write(pd.DataFrame(columns=COLS)); return
+    try:
+        uni = pd.read_csv(uni_path, keep_default_na=False)   # keep_default_na=False : tickers 'NA'/'NAN'/'NULL' littéraux
+    except pd.errors.EmptyDataError:
+        print("[MARKET SCAN] market_universe.csv illisible -> market_setups.csv vide.")
+        _write(pd.DataFrame(columns=COLS)); return
     uni["ticker"] = uni["ticker"].astype(str).str.upper()
     mcap_map = dict(zip(uni["ticker"], uni["mcap_usd"]))
     tickers = uni["ticker"].tolist()
@@ -69,13 +86,12 @@ def main():
             "bbwidth_pctile": m["bbwidth_pct"], "vol_dryup": m["vol_dryup"], "overext": m["overext"],
             **{f"c_{k}": v for k, v in r["components"].items()},
         })
-    out = pd.DataFrame(rows).sort_values("score", ascending=False).reset_index(drop=True)
-    out.to_csv(ROOT / "market_setups.csv", index=False)
-    pub = ROOT / "dashboard" / "public"
-    if pub.exists():
-        out.to_csv(pub / "market_setups.csv", index=False)
+    out = pd.DataFrame(rows)
+    out = out.sort_values("score", ascending=False).reset_index(drop=True) if not out.empty else pd.DataFrame(columns=COLS)
+    _write(out)
     print(f"[MARKET SCAN] {len(out)} setups (illiquides écartés: {n_illiquid}) -> market_setups.csv")
-    print(f"  >=70: {(out['score']>=70).sum()}  |  60-70: {((out['score']>=60)&(out['score']<70)).sum()}")
+    if not out.empty:
+        print(f"  >=70: {(out['score']>=70).sum()}  |  60-70: {((out['score']>=60)&(out['score']<70)).sum()}")
 
 if __name__ == "__main__":
     main()

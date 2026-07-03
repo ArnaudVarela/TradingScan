@@ -1,7 +1,7 @@
 // dashboard/src/components/ThematicSetups.jsx — tableau des setups (redesign "terminal lux").
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search, Info, ArrowUpDown, ChevronUp, ChevronDown } from "lucide-react";
-import { toNumber } from "../lib/csv.js";
+import { fetchCSVFresh, toNumber } from "../lib/csv.js";
 
 const THEME_META = {
   semiconducteurs:       { label: "Semis",     dot: "bg-cyan-400",    chip: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 ring-cyan-500/25" },
@@ -15,6 +15,15 @@ const THEME_META = {
   espace:                { label: "Espace",    dot: "bg-indigo-400",  chip: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 ring-indigo-500/25" },
   defense:               { label: "Défense",   dot: "bg-rose-400",    chip: "bg-rose-500/15 text-rose-600 dark:text-rose-300 ring-rose-500/25" },
   new_tech:              { label: "New tech",  dot: "bg-slate-400",   chip: "bg-slate-500/15 text-slate-600 dark:text-slate-300 ring-slate-500/25" },
+};
+
+// Rotation (panneau SectorRotation) : même taxonomie GICS que sector_tag.py -> croisement setup <-> rotation.
+const QUAD_EMOJI = { Leading: "🔵", Improving: "🟢", Weakening: "🟠", Lagging: "🔴" };
+const SECTOR_LABEL = {
+  "Information Technology": "Tech", "Health Care": "Santé", "Financials": "Finance",
+  "Industrials": "Industrie", "Consumer Discretionary": "Conso cyc.", "Consumer Staples": "Conso déf.",
+  "Energy": "Énergie", "Utilities": "Utilities", "Materials": "Matériaux",
+  "Real Estate": "Immo.", "Communication Services": "Comm.",
 };
 
 function fmtMcap(n) {
@@ -111,6 +120,20 @@ export default function ThematicSetups({ rows = [], loading = false }) {
   const [sort, setSort] = useState({ key: "score", dir: "desc" });
   const [showInfo, setShowInfo] = useState(false);
   const [onlyCatalyst, setOnlyCatalyst] = useState(false);
+  const [sector, setSector] = useState("all");
+  const [hotOnly, setHotOnly] = useState(false);
+  const [sectorQuad, setSectorQuad] = useState({});
+
+  useEffect(() => {
+    let a = true;
+    fetchCSVFresh("sector_perf.csv").then((rr) => {
+      if (!a) return;
+      const m = {};
+      (Array.isArray(rr) ? rr : []).forEach((x) => { if (x.sector) m[String(x.sector).trim()] = x.quadrant; });
+      setSectorQuad(m);
+    });
+    return () => { a = false; };
+  }, []);
 
   const onSort = (k) => setSort((s) => (s.key === k ? { key: k, dir: s.dir === "desc" ? "asc" : "desc" } : { key: k, dir: "desc" }));
 
@@ -120,9 +143,21 @@ export default function ThematicSetups({ rows = [], loading = false }) {
     return Array.from(s).sort();
   }, [rows]);
 
+  const hasSectors = useMemo(() => rows.some((r) => (r.sector || "").toString().trim()), [rows]);
+  const sectors = useMemo(() => {
+    const s = new Set();
+    rows.forEach((r) => { const x = (r.sector || "").toString().trim(); if (x) s.add(x); });
+    return Array.from(s).sort();
+  }, [rows]);
+
+  // Si l'univers courant n'a pas de secteur (vue thématique), on purge le filtre secteur pour ne pas vider la table.
+  useEffect(() => { if (!hasSectors) { setSector("all"); setHotOnly(false); } }, [hasSectors]);
+
   const view = useMemo(() => {
     let v = rows.map((r) => ({ ...r, _s: toNumber(r.score) ?? 0, _mc: toNumber(r.mcap_usd) }));
     if (theme !== "all") v = v.filter((r) => (r.themes || "").split("|").includes(theme));
+    if (hasSectors && sector !== "all") v = v.filter((r) => (r.sector || "").toString().trim() === sector);
+    if (hasSectors && hotOnly) v = v.filter((r) => { const qd = sectorQuad[(r.sector || "").toString().trim()]; return qd === "Leading" || qd === "Improving"; });
     v = v.filter((r) => inSize(r._mc, size));
     if (minScore > 0) v = v.filter((r) => r._s >= minScore);
     const q = query.trim().toUpperCase();
@@ -140,9 +175,9 @@ export default function ThematicSetups({ rows = [], loading = false }) {
       return (av - bv) * mul;
     });
     return v;
-  }, [rows, theme, size, minScore, query, sort, onlyCatalyst]);
+  }, [rows, hasSectors, theme, sector, hotOnly, sectorQuad, size, minScore, query, sort, onlyCatalyst]);
 
-  const active = theme !== "all" || size !== "all" || minScore > 0 || query.trim() || onlyCatalyst;
+  const active = theme !== "all" || (hasSectors && (sector !== "all" || hotOnly)) || size !== "all" || minScore > 0 || query.trim() || onlyCatalyst;
 
   return (
     <div className="panel overflow-hidden">
@@ -182,6 +217,20 @@ export default function ThematicSetups({ rows = [], loading = false }) {
             </button>
           ))}
         </div>
+        {hasSectors && (
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-[11px] uppercase tracking-wide text-slate-400 mr-0.5">Secteur</span>
+            <button className={`chip ${sector === "all" ? "chip-on" : ""}`} onClick={() => setSector("all")}>Tous</button>
+            {sectors.map((s) => (
+              <button key={s} className={`chip ${sector === s ? "chip-on" : ""}`} onClick={() => setSector(sector === s ? "all" : s)} title={s}>
+                {sectorQuad[s] ? QUAD_EMOJI[sectorQuad[s]] + " " : ""}{SECTOR_LABEL[s] || s}
+              </button>
+            ))}
+            <button className={`chip ${hotOnly ? "chip-on" : ""}`} onClick={() => setHotOnly((v) => !v)} title="Secteurs Leading/Improving du panneau Rotation">
+              🔥 En rotation
+            </button>
+          </div>
+        )}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-[11px] uppercase tracking-wide text-slate-400 mr-0.5">Taille</span>
@@ -199,7 +248,7 @@ export default function ThematicSetups({ rows = [], loading = false }) {
             🔥 Catalyseur
           </button>
           {active && (
-            <button className="text-xs text-cyan-600 dark:text-cyan-400 hover:underline ml-auto" onClick={() => { setTheme("all"); setSize("all"); setMinScore(0); setQuery(""); setOnlyCatalyst(false); }}>
+            <button className="text-xs text-cyan-600 dark:text-cyan-400 hover:underline ml-auto" onClick={() => { setTheme("all"); setSector("all"); setHotOnly(false); setSize("all"); setMinScore(0); setQuery(""); setOnlyCatalyst(false); }}>
               Réinitialiser
             </button>
           )}
@@ -219,6 +268,7 @@ export default function ThematicSetups({ rows = [], loading = false }) {
                 <th className="th w-10">#</th>
                 <SortHeader label="Ticker" k="ticker" sort={sort} onSort={onSort} />
                 <th className="th">Thèmes</th>
+                {hasSectors && <th className="th">Secteur</th>}
                 <SortHeader label="Score" k="score" sort={sort} onSort={onSort} />
                 <th className="th">Setup</th>
                 <th className="th">Catalyseur</th>
@@ -251,6 +301,18 @@ export default function ThematicSetups({ rows = [], loading = false }) {
                         {tl.length > 3 && <span className="text-[10px] text-slate-400 self-center">+{tl.length - 3}</span>}
                       </div>
                     </td>
+                    {hasSectors && (
+                      <td className="px-3 py-2 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400">
+                        {(r.sector || "").toString().trim() ? (
+                          <span title={r.sector}>
+                            {sectorQuad[(r.sector || "").toString().trim()] ? QUAD_EMOJI[sectorQuad[(r.sector || "").toString().trim()]] + " " : ""}
+                            {SECTOR_LABEL[r.sector] || r.sector}
+                          </span>
+                        ) : (
+                          <span className="text-slate-300 dark:text-slate-600">—</span>
+                        )}
+                      </td>
+                    )}
                     <td className="px-3 py-2"><span className={scoreCls(r._s)}>{r._s.toFixed(0)}</span></td>
                     <td className="px-3 py-2 text-slate-600 dark:text-slate-300 whitespace-nowrap">{r.setup}</td>
                     <td className="px-3 py-2 whitespace-nowrap"><div className="flex items-center gap-1"><CatalystBadge r={r} /><BuzzBadge r={r} /></div></td>
