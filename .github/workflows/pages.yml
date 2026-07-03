@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false   # recommandé GitHub Pages : laisser les déploiements se terminer (évite les annulations = "échecs" rouges)
 
 jobs:
   build:
