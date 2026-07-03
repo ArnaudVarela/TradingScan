@@ -5,6 +5,7 @@ import TopBar from "./components/TopBar.jsx";
 import ThematicSetups from "./components/ThematicSetups.jsx";
 import ScoreReliability from "./components/ScoreReliability.jsx";
 import SectorHeat from "./components/SectorHeat.jsx";
+import SectorRotation from "./components/SectorRotation.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import { fetchCSVFresh, toNumber } from "./lib/csv.js";
 
@@ -62,6 +63,10 @@ export default function App() {
           <StatCard icon={Gauge} label="Score ≥ 70" value={stats.hot} accent="bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 ring-emerald-500/25" />
           <StatCard icon={Layers} label="Thèmes couverts" value={stats.themes} accent="bg-sky-500/15 text-sky-600 dark:text-sky-300 ring-sky-500/25" />
         </div>
+
+        <ErrorBoundary fallback="La rotation sectorielle n'a pas pu s'afficher.">
+          <SectorRotation />
+        </ErrorBoundary>
 
         <ErrorBoundary fallback="La chaleur sectorielle n'a pas pu s'afficher.">
           <SectorHeat />
