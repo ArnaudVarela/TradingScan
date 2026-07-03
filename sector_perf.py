@@ -52,6 +52,22 @@ def main():
             "rs_mom": round(rm, 2) if rm == rm else "",
             "quadrant": _quad(rr, rm),
         })
+    # Filet anti rate-limit : un ETF refusé par yfinance ne doit pas FAIRE DISPARAÎTRE le secteur
+    # (sinon dashboard sans rotation ni confluence pour ce secteur). On reporte sa dernière valeur connue.
+    got = {r["sector"] for r in rows}
+    missing = [(etf, name) for etf, name in SECTORS.items() if name not in got]
+    if missing and (ROOT / "sector_perf.csv").exists():
+        try:
+            prev = pd.read_csv(ROOT / "sector_perf.csv", keep_default_na=False)
+            for etf, name in missing:
+                old = prev[prev["sector"].astype(str) == name]
+                if not old.empty:
+                    rows.append(old.iloc[0].to_dict())
+                    print(f"[SECTOR] {name} ({etf}) indisponible (yfinance) -> dernière valeur conservée")
+        except Exception as e:
+            print(f"[SECTOR] report précédent KO ({e})")
+    if not rows:
+        print("[SECTOR] aucune donnée exploitable -> sector_perf.csv inchangé"); return
     df = pd.DataFrame(rows).sort_values("chg_1m", ascending=False, na_position="last")
     df.to_csv(ROOT / "sector_perf.csv", index=False)
     pub = ROOT / "dashboard" / "public"

@@ -62,6 +62,11 @@ jobs:
           set -euo pipefail
           python build_market_universe.py || echo "[WARN] market universe non bloquant (Nasdaq indisponible)"
 
+      - name: Rotation sectorielle GICS (ETFs SPDR — TÔT, avant que les gros scans rate-limitent yfinance)
+        run: |
+          set -euo pipefail
+          python sector_perf.py || echo "[WARN] sector_perf non bloquant"
+
       - name: Scan pré-explosion (score /100)
         env:
           PYTHONUNBUFFERED: "1"
@@ -111,11 +116,6 @@ jobs:
         run: |
           set -euo pipefail
           python news_fetch.py || echo "[WARN] news non bloquant"
-
-      - name: Rotation sectorielle GICS (ETFs SPDR yfinance — non bloquant)
-        run: |
-          set -euo pipefail
-          python sector_perf.py || echo "[WARN] sector_perf non bloquant"
 
       - name: Suivi d'outcome (résolution forward + rapport de fiabilité)
         env:

@@ -1,4 +1,5 @@
 etf,sector,chg_1d,chg_5d,chg_1m,chg_3m,rs_ratio,rs_mom,quadrant
+XLV,Health Care,2.63,5.21,12.34,11.33,107.2,9.33,Leading
 XLF,Financials,1.53,4.06,8.46,12.89,104.1,3.03,Leading
 XLI,Industrials,0.3,-0.11,5.84,12.12,102.9,2.1,Leading
 XLU,Utilities,2.21,-0.2,4.9,-0.13,98.8,5.01,Improving
