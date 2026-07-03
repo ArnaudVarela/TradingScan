@@ -26,6 +26,9 @@ const SECTOR_LABEL = {
   "Real Estate": "Immo.", "Communication Services": "Comm.",
 };
 
+// Lien graphe TradingView. yfinance utilise 'BRK-B' ; TradingView attend 'BRK.B'.
+const tvUrl = (t) => `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(String(t).trim().replace(/-/g, "."))}`;
+
 function fmtMcap(n) {
   if (!Number.isFinite(n) || n <= 0) return "—";
   if (n >= 1e12) return "$" + (n / 1e12).toFixed(2) + "T";
@@ -287,7 +290,15 @@ export default function ThematicSetups({ rows = [], loading = false }) {
                     <td className="px-3 py-2 text-slate-400 num">{i + 1}</td>
                     <td className="px-3 py-2">
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold tracking-tight">{r.ticker}</span>
+                        <a
+                          href={tvUrl(r.ticker)}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-semibold tracking-tight hover:text-cyan-600 dark:hover:text-cyan-300 hover:underline decoration-dotted underline-offset-2"
+                          title={`Ouvrir ${r.ticker} sur TradingView`}
+                        >
+                          {r.ticker}
+                        </a>
                         {tb && <span className={`text-[10px] px-1.5 py-0.5 rounded ${tb.c}`}>{tb.t}</span>}
                       </div>
                     </td>
