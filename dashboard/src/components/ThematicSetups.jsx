@@ -49,6 +49,25 @@ function rsiCls(v) {
   return "text-slate-600 dark:text-slate-300";
 }
 
+function hasCatalyst(r) {
+  const c = (r.catalyst ?? "").toString().trim();
+  return c && c.toLowerCase() !== "nan";
+}
+function CatalystBadge({ r }) {
+  if (!hasCatalyst(r)) return <span className="text-slate-300 dark:text-slate-600">—</span>;
+  const c = r.catalyst.toString().trim();
+  const days = Number(r.catalyst_days);
+  const recent = Number.isFinite(days) && days <= 7;
+  const cls = recent
+    ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 ring-emerald-500/30"
+    : "bg-slate-500/10 text-slate-600 dark:text-slate-300 ring-white/10";
+  return (
+    <span className={`inline-flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded ring-1 ring-inset ${cls}`} title="Dépôt SEC 8-K récent">
+      {recent ? "🔥 " : ""}{c}{Number.isFinite(days) ? ` · ${days}j` : ""}
+    </span>
+  );
+}
+
 const inSize = (mc, size) => {
   if (size === "all") return true;
   const n = Number(mc);
@@ -81,6 +100,7 @@ export default function ThematicSetups({ rows = [], loading = false }) {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState({ key: "score", dir: "desc" });
   const [showInfo, setShowInfo] = useState(false);
+  const [onlyCatalyst, setOnlyCatalyst] = useState(false);
 
   const onSort = (k) => setSort((s) => (s.key === k ? { key: k, dir: s.dir === "desc" ? "asc" : "desc" } : { key: k, dir: "desc" }));
 
@@ -97,6 +117,7 @@ export default function ThematicSetups({ rows = [], loading = false }) {
     if (minScore > 0) v = v.filter((r) => r._s >= minScore);
     const q = query.trim().toUpperCase();
     if (q) v = v.filter((r) => String(r.ticker).toUpperCase().includes(q));
+    if (onlyCatalyst) v = v.filter((r) => hasCatalyst(r));
     const { key, dir } = sort;
     const mul = dir === "desc" ? -1 : 1;
     v.sort((a, b) => {
@@ -109,9 +130,9 @@ export default function ThematicSetups({ rows = [], loading = false }) {
       return (av - bv) * mul;
     });
     return v;
-  }, [rows, theme, size, minScore, query, sort]);
+  }, [rows, theme, size, minScore, query, sort, onlyCatalyst]);
 
-  const active = theme !== "all" || size !== "all" || minScore > 0 || query.trim();
+  const active = theme !== "all" || size !== "all" || minScore > 0 || query.trim() || onlyCatalyst;
 
   return (
     <div className="panel overflow-hidden">
@@ -164,8 +185,11 @@ export default function ThematicSetups({ rows = [], loading = false }) {
               <button key={k} className={`chip ${minScore === k ? "chip-on" : ""}`} onClick={() => setMinScore(k)}>{l}</button>
             ))}
           </div>
+          <button className={`chip ${onlyCatalyst ? "chip-on" : ""}`} onClick={() => setOnlyCatalyst((v) => !v)} title="Titres avec un dépôt SEC 8-K récent (< 30j)">
+            🔥 Catalyseur
+          </button>
           {active && (
-            <button className="text-xs text-cyan-600 dark:text-cyan-400 hover:underline ml-auto" onClick={() => { setTheme("all"); setSize("all"); setMinScore(0); setQuery(""); }}>
+            <button className="text-xs text-cyan-600 dark:text-cyan-400 hover:underline ml-auto" onClick={() => { setTheme("all"); setSize("all"); setMinScore(0); setQuery(""); setOnlyCatalyst(false); }}>
               Réinitialiser
             </button>
           )}
@@ -187,6 +211,7 @@ export default function ThematicSetups({ rows = [], loading = false }) {
                 <th className="th">Thèmes</th>
                 <SortHeader label="Score" k="score" sort={sort} onSort={onSort} />
                 <th className="th">Setup</th>
+                <th className="th">Catalyseur</th>
                 <SortHeader label="MCap" k="mcap_usd" sort={sort} onSort={onSort} align="right" />
                 <SortHeader label="Prix" k="price" sort={sort} onSort={onSort} align="right" />
                 <SortHeader label="RSI" k="rsi" sort={sort} onSort={onSort} align="right" />
@@ -218,6 +243,7 @@ export default function ThematicSetups({ rows = [], loading = false }) {
                     </td>
                     <td className="px-3 py-2"><span className={scoreCls(r._s)}>{r._s.toFixed(0)}</span></td>
                     <td className="px-3 py-2 text-slate-600 dark:text-slate-300 whitespace-nowrap">{r.setup}</td>
+                    <td className="px-3 py-2 whitespace-nowrap"><CatalystBadge r={r} /></td>
                     <td className="px-3 py-2 text-right num font-medium">{fmtMcap(r._mc)}</td>
                     <td className="px-3 py-2 text-right num text-slate-600 dark:text-slate-300">{r.price}</td>
                     <td className={`px-3 py-2 text-right num ${rsiCls(r.rsi)}`}>{r.rsi}</td>

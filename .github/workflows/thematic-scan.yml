@@ -61,6 +61,13 @@ jobs:
           test -f dashboard/public/thematic_setups.csv || (echo "Missing thematic_setups.csv"; exit 1)
           echo "--- head thematic_setups.csv ---"; head -n 8 thematic_setups.csv || true
 
+      - name: Overlay catalyseur (SEC EDGAR 8-K — colonnes séparées, non bloquant)
+        env:
+          SEC_USER_AGENT: "TradingScan research arnaud.varela@gmail.com"
+        run: |
+          set -euo pipefail
+          python catalyst_fetch.py || echo "[WARN] catalyst non bloquant (SEC indisponible)"
+
       - name: Suivi d'outcome (résolution forward + rapport de fiabilité)
         env:
           PYTHONUNBUFFERED: "1"
