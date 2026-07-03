@@ -107,14 +107,20 @@ def preexplosion_score(df: pd.DataFrame, mkt: pd.DataFrame | None = None, min_ba
     up_align = bool(e20 > e50) and (n < 200 or bool(e50 > e_long))
     c_trend = 0.4 * float(up_align) + 0.3 * float(above_long) + 0.3 * _ramp_up(slope50, 0.0, 0.05)
 
-    # Base / pivot sur 50 séances
+    # Base / pivot sur 50 séances — résistance formée par le PASSÉ (exclut la barre du jour)
     L = 50
-    base_high = _f(h.iloc[-L:].max()) or last
+    base_high = _f(h.iloc[-L:-1].max()) or last
     base_low = _f(l.iloc[-L:].min()) or last
     depth = (base_high - base_low) / (base_high + 1e-9)
-    dist_to_high = (base_high - last) / (base_high + 1e-9)          # 0 = au plus-haut
-    c_pivot = _ramp_down(dist_to_high, 0.0, 0.10)                    # proche du pivot = mieux
+    dist_to_high = (base_high - last) / (base_high + 1e-9)          # >0 = SOUS la résistance passée
+    # Réorienté "pré-cassure" : sweet spot quand on coile 0.5-6% SOUS la résistance (pas AU plus-haut, ni cassé)
+    c_pivot = _window(dist_to_high, -0.02, 0.005, 0.06, 0.14)
     c_base = _window(depth, 0.06, 0.12, 0.32, 0.50)                  # base ni trop plate ni cassée
+
+    # Proximité du plus-haut 52 semaines (qualité momentum à la Minervini : rester près du plus-haut)
+    hi252 = _f(h.iloc[-252:].max()) or last
+    dist52 = (hi252 - last) / (hi252 + 1e-9)
+    c_hi52 = _ramp_down(dist52, 0.0, 0.30)
 
     # VCP / squeeze
     bbw = _bb_width(c, 20)
@@ -151,9 +157,12 @@ def preexplosion_score(df: pd.DataFrame, mkt: pd.DataFrame | None = None, min_ba
 
     parts = {
         "trend": c_trend, "base": c_base, "vcp": c_vcp, "volume": c_volume,
-        "pivot": c_pivot, "momentum": c_momentum, "rs": c_rs,
+        "pivot": c_pivot, "momentum": c_momentum, "rs": c_rs, "hi52": c_hi52,
     }
-    w = {"trend": 0.18, "base": 0.15, "vcp": 0.15, "volume": 0.12, "pivot": 0.18, "momentum": 0.12, "rs": 0.10}
+    # Poids re-dérivés (Axe 3, itération 1) : ↑ rs/volume/momentum (généralisent), ↓ vcp/pivot/base,
+    # + nouveau hi52. Sera re-mesuré ; ajusté si pas d'amélioration out-of-sample.
+    w = {"trend": 0.10, "base": 0.08, "vcp": 0.06, "volume": 0.16,
+         "pivot": 0.10, "momentum": 0.16, "rs": 0.20, "hi52": 0.14}
     raw = sum(w[k] * parts[k] for k in w)
 
     # Pénalité : déjà étendu (post-explosion) -> on veut le PRÉ
