@@ -99,6 +99,13 @@ function SinceCell({ r }) {
   return <span className={`num ${cls}`} title={title}>{v > 0 ? "+" : ""}{v.toFixed(1)}%</span>;
 }
 
+function PctCell({ v }) {
+  const n = toNumber(v);
+  if (!Number.isFinite(n)) return <span className="text-slate-300 dark:text-slate-600">—</span>;
+  const cls = n > 0.05 ? "text-emerald-600 dark:text-emerald-400" : n < -0.05 ? "text-rose-600 dark:text-rose-400" : "text-slate-400";
+  return <span className={`num ${cls}`}>{n > 0 ? "+" : ""}{n.toFixed(1)}%</span>;
+}
+
 const inSize = (mc, size) => {
   if (size === "all") return true;
   const n = Number(mc);
@@ -286,7 +293,10 @@ export default function ThematicSetups({ rows = [], loading = false }) {
                 <th className="th">Catalyseur</th>
                 <SortHeader label="MCap" k="mcap_usd" sort={sort} onSort={onSort} align="right" />
                 <SortHeader label="Prix" k="price" sort={sort} onSort={onSort} align="right" />
-                <SortHeader label="Depuis 1er" k="pct_since_first" sort={sort} onSort={onSort} align="right" />
+                <SortHeader label="1J" k="chg_1d" sort={sort} onSort={onSort} align="right" />
+                <SortHeader label="7J" k="chg_7d" sort={sort} onSort={onSort} align="right" />
+                <SortHeader label="1M" k="chg_1m" sort={sort} onSort={onSort} align="right" />
+                <SortHeader label="Depuis détection" k="pct_since_first" sort={sort} onSort={onSort} align="right" />
                 <SortHeader label="RSI" k="rsi" sort={sort} onSort={onSort} align="right" />
                 <SortHeader label="Dist. haut" k="dist_to_high_pct" sort={sort} onSort={onSort} align="right" />
               </tr>
@@ -339,6 +349,9 @@ export default function ThematicSetups({ rows = [], loading = false }) {
                     <td className="px-3 py-2 whitespace-nowrap"><div className="flex items-center gap-1"><CatalystBadge r={r} /><BuzzBadge r={r} /></div></td>
                     <td className="px-3 py-2 text-right num font-medium">{fmtMcap(r._mc)}</td>
                     <td className="px-3 py-2 text-right num text-slate-600 dark:text-slate-300">{r.price}</td>
+                    <td className="px-3 py-2 text-right"><PctCell v={r.chg_1d} /></td>
+                    <td className="px-3 py-2 text-right"><PctCell v={r.chg_7d} /></td>
+                    <td className="px-3 py-2 text-right"><PctCell v={r.chg_1m} /></td>
                     <td className="px-3 py-2 text-right"><SinceCell r={r} /></td>
                     <td className={`px-3 py-2 text-right num ${rsiCls(r.rsi)}`}>{r.rsi}</td>
                     <td className="px-3 py-2 text-right num text-slate-500">{r.dist_to_high_pct}%</td>

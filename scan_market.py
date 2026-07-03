@@ -35,6 +35,7 @@ def _drop_partial(df):
     return df
 
 COLS = ["ticker", "themes", "score", "setup", "price", "mcap_usd", "rsi", "macd_hist",
+        "chg_1d", "chg_7d", "chg_1m",
         "avg_dollar_vol", "dist_to_high_pct", "base_depth_pct", "bbwidth_pctile", "vol_dryup", "overext"]
 
 def _write(df):
@@ -81,6 +82,7 @@ def main():
             "ticker": t, "themes": "|".join(sorted(THEMES.get(t, []))),
             "score": r["score"], "setup": r["label"], "price": m["price"],
             "mcap_usd": mcap_map.get(t), "rsi": m["rsi"], "macd_hist": m["macd_hist"],
+            "chg_1d": m.get("chg_1d"), "chg_7d": m.get("chg_7d"), "chg_1m": m.get("chg_1m"),
             "avg_dollar_vol": m.get("avg_dollar_vol"),
             "dist_to_high_pct": m["dist_to_high_pct"], "base_depth_pct": m["base_depth_pct"],
             "bbwidth_pctile": m["bbwidth_pct"], "vol_dryup": m["vol_dryup"], "overext": m["overext"],

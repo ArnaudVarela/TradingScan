@@ -178,6 +178,13 @@ def preexplosion_score(df: pd.DataFrame, mkt: pd.DataFrame | None = None, min_ba
     advol = _f((c.tail(20) * v.tail(20)).mean()) or 0.0
     score = round(100.0 * max(0.0, min(1.0, raw)), 1)
     label = _label(parts, dist_to_high, depth, bbw_pct, dryup, overext, above_long, slope50)
+    def _chg(k):  # variation % sur k barres closes (1=1J, 5=1sem, 21=1M) depuis les données déjà en main
+        if n > k:
+            base = _f(c.iloc[-1 - k])
+            if base and base > 0:
+                return round((last / base - 1) * 100, 2)
+        return None
+
     return {
         "score": score,
         "label": label,
@@ -189,6 +196,7 @@ def preexplosion_score(df: pd.DataFrame, mkt: pd.DataFrame | None = None, min_ba
             "base_depth_pct": round(depth * 100, 1), "bbwidth_pct": round(bbw_pct * 100, 0),
             "overext": round(overext, 2),
             "avg_dollar_vol": round(advol, 0), "n_bars": int(n),
+            "chg_1d": _chg(1), "chg_7d": _chg(5), "chg_1m": _chg(21),
         },
     }
 
