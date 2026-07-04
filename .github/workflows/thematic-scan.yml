@@ -135,11 +135,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for f in thematic_setups.csv thematic_universe.csv signals_log.csv score_reliability.csv sector_heat.csv sector_heat_gics.csv sector_perf.csv \
-                   market_universe.csv market_setups.csv sector_map.csv perf_tracker.csv \
+                   market_universe.csv market_setups.csv sector_map.csv perf_tracker.csv fallen_angel.csv \
                    dashboard/public/thematic_setups.csv dashboard/public/thematic_universe.csv \
                    dashboard/public/signals_log.csv dashboard/public/score_reliability.csv \
                    dashboard/public/sector_heat.csv dashboard/public/sector_heat_gics.csv dashboard/public/sector_perf.csv \
-                   dashboard/public/market_setups.csv dashboard/public/perf_tracker.csv; do
+                   dashboard/public/market_setups.csv dashboard/public/perf_tracker.csv dashboard/public/fallen_angel.csv; do
             [ -f "$f" ] && git add "$f" || true
           done
           if git diff --cached --quiet; then

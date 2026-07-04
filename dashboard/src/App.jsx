@@ -4,6 +4,7 @@ import { Boxes, Flame, Gauge, Layers } from "lucide-react";
 import TopBar from "./components/TopBar.jsx";
 import ThematicSetups from "./components/ThematicSetups.jsx";
 import ScoreReliability from "./components/ScoreReliability.jsx";
+import FallenAngel from "./components/FallenAngel.jsx";
 import SectorHeat from "./components/SectorHeat.jsx";
 import SectorRotation from "./components/SectorRotation.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
@@ -96,6 +97,10 @@ export default function App() {
 
         <ErrorBoundary fallback="La vue Setups thématiques n'a pas pu s'afficher.">
           <ThematicSetups rows={rows} loading={loading} />
+        </ErrorBoundary>
+
+        <ErrorBoundary fallback="Le module Fallen Angel n'a pas pu s'afficher.">
+          <FallenAngel />
         </ErrorBoundary>
 
         <div className="mt-6">

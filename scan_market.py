@@ -9,9 +9,10 @@ import pandas as pd
 
 import data_fetch as DF
 import pattern_score as P
+import fallen_angel as FA
 
 ROOT = Path(__file__).parent
-LOOKBACK_YEARS = float(os.getenv("SCAN_YEARS", "2"))
+LOOKBACK_YEARS = float(os.getenv("SCAN_YEARS", "2"))   # 3 ans fetchés : detect() utilise iloc[-756:] = pic 3 ans (fenêtre exacte du backtest)
 MARKET = os.getenv("MARKET_TICKER", "SPY")
 MIN_DOLLAR_VOL = float(os.getenv("MIN_DOLLAR_VOL", "1000000"))
 DROP_PARTIAL = int(os.getenv("SCAN_DROP_PARTIAL", "1"))
@@ -44,16 +45,25 @@ def _write(df):
     if pub.exists():
         df.to_csv(pub / "market_setups.csv", index=False)
 
+FA_COLS = ["ticker", "level", "price", "mcap_usd", "score", "setup",
+           "dd_from_hi_pct", "base_range_pct", "vol_growth_pct", "dist_resist_pct", "resistance", "stop_ref"]
+
+def _write_fa(df):
+    df.to_csv(ROOT / "fallen_angel.csv", index=False)
+    pub = ROOT / "dashboard" / "public"
+    if pub.exists():
+        df.to_csv(pub / "fallen_angel.csv", index=False)
+
 def main():
     uni_path = ROOT / "market_universe.csv"
     if not uni_path.exists() or uni_path.stat().st_size == 0:
         print("[MARKET SCAN] market_universe.csv absent/vide -> market_setups.csv vide.")
-        _write(pd.DataFrame(columns=COLS)); return
+        _write(pd.DataFrame(columns=COLS)); _write_fa(pd.DataFrame(columns=FA_COLS)); return
     try:
         uni = pd.read_csv(uni_path, keep_default_na=False)   # keep_default_na=False : tickers 'NA'/'NAN'/'NULL' littéraux
     except pd.errors.EmptyDataError:
         print("[MARKET SCAN] market_universe.csv illisible -> market_setups.csv vide.")
-        _write(pd.DataFrame(columns=COLS)); return
+        _write(pd.DataFrame(columns=COLS)); _write_fa(pd.DataFrame(columns=FA_COLS)); return
     uni["ticker"] = uni["ticker"].astype(str).str.upper()
     mcap_map = dict(zip(uni["ticker"], uni["mcap_usd"]))
     tickers = uni["ticker"].tolist()
@@ -66,7 +76,7 @@ def main():
     pm = DF.prefetch_ohlc(tickers + [MARKET], start, end)
     spy = _drop_partial(pm.get(MARKET))
 
-    rows, n_illiquid = [], 0
+    rows, fa_rows, n_illiquid = [], [], 0
     for t in tickers:
         df = _drop_partial(pm.get(t))
         if df is None or df.empty:
@@ -88,12 +98,32 @@ def main():
             "bbwidth_pctile": m["bbwidth_pct"], "vol_dryup": m["vol_dryup"], "overext": m["overext"],
             **{f"c_{k}": v for k, v in r["components"].items()},
         })
+        fa = FA.detect(df)   # structure "fallen angel" (défoncé + base tendue + volume + retest) sur l'historique complet
+        if fa:
+            fa_rows.append({
+                "ticker": t, "level": fa["level"], "price": m["price"], "mcap_usd": mcap_map.get(t),
+                "score": r["score"], "setup": r["label"],
+                "dd_from_hi_pct": fa["dd_from_hi_pct"], "base_range_pct": fa["base_range_pct"],
+                "vol_growth_pct": fa["vol_growth_pct"], "dist_resist_pct": fa["dist_resist_pct"],
+                "resistance": fa["resistance"], "stop_ref": fa["stop_ref"],
+            })
     out = pd.DataFrame(rows)
     out = out.sort_values("score", ascending=False).reset_index(drop=True) if not out.empty else pd.DataFrame(columns=COLS)
     _write(out)
     print(f"[MARKET SCAN] {len(out)} setups (illiquides écartés: {n_illiquid}) -> market_setups.csv")
     if not out.empty:
         print(f"  >=70: {(out['score']>=70).sum()}  |  60-70: {((out['score']>=60)&(out['score']<70)).sum()}")
+
+    # --- Module Fallen Angel (candidats haute-variance, edge dans les sorties — paper-first) ---
+    fa_df = pd.DataFrame(fa_rows, columns=FA_COLS)
+    if not fa_df.empty:
+        _lvl = {"strict": 0, "relax": 1}
+        fa_df = fa_df.sort_values(by=["level", "vol_growth_pct"],
+                                  key=lambda s: s.map(_lvl) if s.name == "level" else s,
+                                  ascending=[True, False]).reset_index(drop=True)
+    _write_fa(fa_df)
+    print(f"[FALLEN ANGEL] {len(fa_df)} candidats"
+          + (f" ({int((fa_df['level']=='strict').sum())} strict)" if not fa_df.empty else ""))
 
 if __name__ == "__main__":
     main()
