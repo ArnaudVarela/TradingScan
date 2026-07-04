@@ -17,6 +17,10 @@ dashboard/dist/
 # Artefacts de dev / expériences backtest (volumineux, régénérables)
 validate_score_obs.csv
 signals_resolved.csv
+feature_matrix.csv
+structure_matrix.csv
+compare_score_obs.csv
+*.pkl
 
 # OS / divers
 .DS_Store
