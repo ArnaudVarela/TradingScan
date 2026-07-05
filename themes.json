@@ -1,6 +1,17 @@
 {
   "_note": "Univers thématique curé (seed). Multi-thème autorisé (un ticker peut appartenir à plusieurs). Validé/nettoyé par build_thematic_universe.py contre yfinance. À enrichir au fil du temps.",
   "themes": {
+    "memoire": {
+      "label": "Mémoire / DRAM / HBM",
+      "tickers": [
+        "MRAM",
+        "GSIT",
+        "NLST",
+        "PENG",
+        "AEHR",
+        "UCTT"
+      ]
+    },
     "semiconducteurs": {
       "label": "Semi-conducteurs / Fabrication de puces",
       "tickers": [

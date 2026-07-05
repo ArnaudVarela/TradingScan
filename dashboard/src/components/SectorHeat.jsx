@@ -9,6 +9,7 @@ import { fetchCSVFresh, toNumber } from "../lib/csv.js";
 
 const TL = {
   semiconducteurs: ["Semi-conducteurs", "bg-cyan-500"],
+  memoire: ["Mémoire", "bg-purple-500"],
   quantique: ["Quantique", "bg-violet-500"],
   ia: ["IA", "bg-fuchsia-500"],
   laser_photonique: ["Laser/Photonique", "bg-sky-500"],
@@ -22,7 +23,7 @@ const TL = {
 };
 
 const THEME_GICS = {
-  semiconducteurs: "Information Technology", quantique: "Information Technology", ia: "Information Technology",
+  semiconducteurs: "Information Technology", memoire: "Information Technology", quantique: "Information Technology", ia: "Information Technology",
   laser_photonique: "Information Technology", new_tech: "Information Technology",
   robotique: "Industrials", equipement_electrique: "Industrials", gestion_thermique: "Industrials",
   espace: "Industrials", defense: "Industrials", production_energie: "Energy",

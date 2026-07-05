@@ -2,6 +2,7 @@ ticker,themes,n_themes,valid
 ONDS,defense|equipement_electrique|espace|laser_photonique|robotique,5,True
 POET,ia|laser_photonique|new_tech|quantique|semiconducteurs,5,True
 NVTS,equipement_electrique|new_tech|robotique|semiconducteurs,4,True
+AEHR,memoire|new_tech|semiconducteurs,3,True
 AOSL,equipement_electrique|gestion_thermique|semiconducteurs,3,True
 AVAV,defense|espace|robotique,3,True
 BBAI,defense|ia|new_tech,3,True
@@ -16,7 +17,6 @@ SMCI,gestion_thermique|ia|semiconducteurs,3,True
 VRT,equipement_electrique|gestion_thermique|ia,3,True
 WOLF,equipement_electrique|new_tech|semiconducteurs,3,True
 AAOI,laser_photonique|semiconducteurs,2,True
-AEHR,new_tech|semiconducteurs,2,True
 AEVA,ia|laser_photonique,2,True
 AMBA,ia|semiconducteurs,2,True
 AMD,ia|semiconducteurs,2,True
@@ -39,6 +39,7 @@ MRCY,defense|espace,2,True
 MRVL,ia|semiconducteurs,2,True
 MTSI,laser_photonique|semiconducteurs,2,True
 MVIS,laser_photonique|robotique,2,True
+NLST,laser_photonique|memoire,2,True
 NNDM,new_tech|robotique,2,True
 NNE,new_tech|production_energie,2,True
 NVT,equipement_electrique|gestion_thermique,2,True
@@ -47,6 +48,7 @@ OPXS,defense|laser_photonique,2,True
 OUST,laser_photonique|robotique,2,True
 PATH,ia|robotique,2,True
 PDYN,defense|robotique,2,True
+PENG,memoire|semiconducteurs,2,True
 PLUG,new_tech|production_energie,2,True
 POWI,equipement_electrique|semiconducteurs,2,True
 QBTS,new_tech|quantique,2,True
@@ -58,6 +60,7 @@ SERV,ia|robotique,2,True
 SMR,new_tech|production_energie,2,True
 SOUN,ia|new_tech,2,True
 SPXC,equipement_electrique|gestion_thermique,2,True
+UCTT,memoire|semiconducteurs,2,True
 ULBI,defense|equipement_electrique,2,True
 VOYG,defense|espace,2,True
 VUZI,ia|laser_photonique,2,True
@@ -158,6 +161,7 @@ GLATF,production_energie,1,True
 GNRC,equipement_electrique,1,True
 GOOGL,ia,1,True
 GSAT,espace,1,True
+GSIT,memoire,1,True
 HDRN,new_tech,1,True
 HEI,defense,1,True
 HII,defense,1,True
@@ -215,6 +219,7 @@ MLGO,quantique,1,True
 MNTS,espace,1,True
 MOD,gestion_thermique,1,True
 MPWR,semiconducteurs,1,True
+MRAM,memoire,1,True
 MSFT,ia,1,True
 MU,semiconducteurs,1,True
 MVST,new_tech,1,True
@@ -223,7 +228,6 @@ MYRG,equipement_electrique,1,True
 NAUT,robotique,1,True
 NBIS,ia,1,True
 NKLR,production_energie,1,True
-NLST,laser_photonique,1,True
 NNOX,defense,1,True
 NOC,defense,1,True
 NRDY,ia,1,True
@@ -240,7 +244,6 @@ ON,semiconducteurs,1,True
 ONTO,semiconducteurs,1,True
 OSIS,defense,1,True
 PDFS,semiconducteurs,1,True
-PENG,semiconducteurs,1,True
 PENMF,production_energie,1,True
 PL,espace,1,True
 PLAB,semiconducteurs,1,True
@@ -306,7 +309,6 @@ TSSI,gestion_thermique,1,True
 TT,gestion_thermique,1,True
 TXN,semiconducteurs,1,True
 UAVS,defense,1,True
-UCTT,semiconducteurs,1,True
 UEC,production_energie,1,True
 UMAC,defense,1,True
 URG,production_energie,1,True

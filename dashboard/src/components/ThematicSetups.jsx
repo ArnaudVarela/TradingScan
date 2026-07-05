@@ -5,6 +5,7 @@ import { fetchCSVFresh, toNumber } from "../lib/csv.js";
 
 const THEME_META = {
   semiconducteurs:       { label: "Semis",     dot: "bg-cyan-400",    chip: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 ring-cyan-500/25" },
+  memoire:               { label: "Mémoire",   dot: "bg-purple-400",  chip: "bg-purple-500/15 text-purple-600 dark:text-purple-300 ring-purple-500/25" },
   quantique:             { label: "Quantique", dot: "bg-violet-400",  chip: "bg-violet-500/15 text-violet-600 dark:text-violet-300 ring-violet-500/25" },
   ia:                    { label: "IA",        dot: "bg-fuchsia-400", chip: "bg-fuchsia-500/15 text-fuchsia-600 dark:text-fuchsia-300 ring-fuchsia-500/25" },
   laser_photonique:      { label: "Laser",     dot: "bg-sky-400",     chip: "bg-sky-500/15 text-sky-600 dark:text-sky-300 ring-sky-500/25" },

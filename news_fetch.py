@@ -18,6 +18,7 @@ UA = {"User-Agent": "Mozilla/5.0 (compatible; TradingScan/1.0; research)"}
 
 THEME_QUERIES = {
     "semiconducteurs": "semiconductor chip stocks",
+    "memoire": "DRAM HBM memory chip stocks",
     "quantique": "quantum computing stocks",
     "ia": "artificial intelligence AI stocks",
     "laser_photonique": "photonics laser lidar stocks",
