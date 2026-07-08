@@ -206,6 +206,7 @@ ATRC,Health Care
 ATRO,Industrials
 ATS,Industrials
 AUDC,Information Technology
+AUGO,Materials
 AUNA,Health Care
 AUPH,Health Care
 AURA,Health Care
@@ -348,6 +349,7 @@ BSVN,Financials
 BTBT,Financials
 BTDR,Information Technology
 BTE,Energy
+BTG,Materials
 BTQ,Information Technology
 BTU,Energy
 BTX,Financials
@@ -910,6 +912,7 @@ GNE,Utilities
 GNK,Industrials
 GNL,Real Estate
 GNT,Financials
+GNTX,Consumer Discretionary
 GNW,Financials
 GO,Consumer Staples
 GOGO,Communication Services
@@ -1247,6 +1250,7 @@ LPG,Energy
 LPL,Information Technology
 LPRO,Financials
 LPTH,Information Technology
+LPX,Industrials
 LQDT,Consumer Discretionary
 LRMR,Health Care
 LRN,Consumer Staples
@@ -1568,6 +1572,7 @@ OPY,Financials
 ORC,Real Estate
 ORGO,Health Care
 ORIC,Health Care
+ORKA,Health Care
 ORLA,Materials
 ORMP,Health Care
 ORN,Industrials
@@ -1877,6 +1882,7 @@ SGMT,Health Care
 SGRY,Health Care
 SHAK,Consumer Discretionary
 SHBI,Financials
+SHC,Health Care
 SHEN,Communication Services
 SHIP,Industrials
 SHLS,Information Technology

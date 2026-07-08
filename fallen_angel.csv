@@ -1,41 +1,41 @@
 ticker,level,price,mcap_usd,score,setup,dd_from_hi_pct,base_range_pct,vol_growth_pct,dist_resist_pct,resistance,stop_ref
-SEER,strict,2.22,119309966.0,41.8,Étendu (déjà parti),60.7,35.6,410.0,5.1,2.34,2.0
-TENX,strict,17.38,450927703.0,31.0,Étendu (déjà parti),71.6,46.8,404.0,5.4,18.38,15.64
+SEER,strict,2.22,118210335.0,41.8,Étendu (déjà parti),60.7,35.6,410.0,5.1,2.34,2.0
+TENX,strict,17.38,449070942.0,31.0,Étendu (déjà parti),71.6,46.8,404.0,5.4,18.38,15.64
 RNAC,strict,10.05,290142451.0,50.2,Setup en formation,76.4,53.7,108.0,8.6,11.0,9.05
-FIVN,strict,24.99,1829879313.0,64.5,Setup en formation,73.0,54.6,49.0,7.2,26.93,22.49
+FIVN,strict,24.99,1828348033.0,64.5,Setup en formation,73.0,54.6,49.0,7.2,26.93,22.49
 RPAY,strict,4.04,350173370.0,59.2,En base (loin du pivot),64.1,55.6,21.0,11.1,4.55,3.64
-VOR,strict,20.1,1054186237.0,36.1,Étendu (déjà parti),71.1,59.4,19.0,9.5,22.22,18.09
-RGP,strict,4.71,153280521.0,66.5,Momentum en formation,67.3,44.8,19.0,8.1,5.12,4.24
-NTLA,strict,17.43,2299800735.0,65.3,Cup & Handle probable,62.5,53.6,15.0,5.7,18.48,15.69
+VOR,strict,20.1,1052289731.0,36.1,Étendu (déjà parti),71.1,59.4,19.0,9.5,22.22,18.09
+RGP,strict,4.71,153108874.0,66.5,Momentum en formation,67.3,44.8,19.0,8.1,5.12,4.24
+NTLA,strict,17.43,2306814793.0,65.3,Cup & Handle probable,62.5,53.6,15.0,5.7,18.48,15.69
 LPRO,relax,3.13,370610552.0,61.0,Setup en formation,73.3,62.5,268.0,0.0,3.13,2.82
-ALXO,relax,2.36,315550040.0,36.0,Étendu (déjà parti),86.8,67.4,120.0,11.3,2.66,2.12
+ALXO,relax,2.36,316021011.0,36.0,Étendu (déjà parti),86.8,67.4,120.0,11.3,2.66,2.12
 HCAT,relax,2.27,157763733.0,35.7,Étendu (déjà parti),84.2,68.5,106.0,9.6,2.51,2.04
-SLN,relax,10.15,444600000.0,54.9,Setup en formation,63.4,67.7,99.0,8.2,11.06,9.13
-MRVI,relax,5.92,1475557244.0,60.6,Setup en formation,55.5,63.3,91.0,9.6,6.55,5.33
-LEG,relax,11.24,1485067284.0,64.4,Setup en formation,60.0,34.0,88.0,12.7,12.88,10.12
-DTIL,relax,9.25,231704178.0,40.6,Étendu (déjà parti),57.8,65.8,81.0,3.8,9.62,8.33
-VANI,relax,1.35,127627954.0,52.0,Setup en formation,82.7,47.9,65.0,14.0,1.57,1.22
-INGN,relax,6.54,171110941.0,42.8,Setup en formation,50.9,35.6,53.0,14.7,7.67,5.89
-TZOO,relax,11.42,110198480.0,75.2,Setup en formation,54.0,67.2,52.0,7.8,12.39,10.28
+SLN,relax,10.15,450684000.0,54.9,Setup en formation,63.4,67.7,99.0,8.2,11.06,9.13
+MRVI,relax,5.92,1474266293.0,60.6,Setup en formation,55.5,63.3,91.0,9.6,6.55,5.33
+LEG,relax,11.24,1485749446.0,64.4,Setup en formation,60.0,34.0,88.0,12.7,12.88,10.12
+DTIL,relax,9.25,234026380.0,40.6,Étendu (déjà parti),57.8,65.8,81.0,3.8,9.62,8.33
+VANI,relax,1.35,127783177.0,52.0,Setup en formation,82.7,47.9,65.0,14.0,1.57,1.22
+INGN,relax,6.54,170975569.0,42.8,Setup en formation,50.9,35.6,53.0,14.7,7.67,5.89
+TZOO,relax,11.42,109992886.0,75.2,Setup en formation,54.0,67.2,52.0,7.8,12.39,10.28
 ONL,relax,2.78,157703439.0,61.6,Setup en formation,51.9,41.8,50.0,7.9,3.02,2.5
-TBI,relax,8.0,239128176.0,58.6,Momentum en formation,58.0,64.6,49.0,4.2,8.35,7.2
-WNC,relax,12.29,497442616.0,51.7,En base (loin du pivot),56.5,62.2,40.0,13.7,14.23,11.06
-BWIN,relax,27.3,3927025231.0,46.3,Cup & Handle probable,51.1,46.1,37.0,4.1,28.46,24.57
-IMCR,relax,33.4,1578499957.0,55.1,Momentum en formation,56.6,25.1,37.0,7.1,35.95,30.06
-NSIT,relax,112.14,3351879689.0,59.9,En base (loin du pivot),50.8,54.7,32.0,10.3,125.0,100.93
-CCRN,relax,13.22,427437778.0,75.1,Squeeze / VCP prêt à casser,53.0,41.1,26.0,0.1,13.23,11.9
-LMNR,relax,13.44,239705133.0,50.5,Setup en formation,52.9,24.0,26.0,9.8,14.9,12.1
-TRIP,relax,13.72,1520840479.0,55.1,Cup & Handle probable,52.3,45.3,24.0,9.9,15.23,12.35
-VTEX,relax,4.12,759550987.0,53.5,Setup en formation,57.0,39.5,21.0,7.8,4.47,3.71
-EDIT,relax,3.75,358826524.0,46.6,Étendu (déjà parti),67.9,60.8,15.0,4.8,3.94,3.38
+TBI,relax,8.0,238976155.0,58.6,Momentum en formation,58.0,64.6,49.0,4.2,8.35,7.2
+WNC,relax,12.29,492155001.0,51.7,En base (loin du pivot),56.5,62.2,40.0,13.7,14.23,11.06
+BWIN,relax,27.3,3902788734.0,46.3,Cup & Handle probable,51.1,46.1,37.0,4.1,28.46,24.57
+IMCR,relax,33.4,1584511001.0,55.1,Momentum en formation,56.6,25.1,37.0,7.1,35.95,30.06
+NSIT,relax,112.14,3353616414.0,59.9,En base (loin du pivot),50.8,54.7,32.0,10.3,125.0,100.93
+CCRN,relax,13.22,427599442.0,75.1,Squeeze / VCP prêt à casser,53.0,41.1,26.0,0.1,13.23,11.9
+LMNR,relax,13.44,238617212.0,50.5,Setup en formation,52.9,24.0,26.0,9.8,14.9,12.1
+TRIP,relax,13.72,1521422285.0,55.1,Cup & Handle probable,52.3,45.3,24.0,9.9,15.23,12.35
+VTEX,relax,4.12,757647351.0,53.5,Setup en formation,57.0,39.5,21.0,7.8,4.47,3.71
+EDIT,relax,3.75,362742775.0,46.6,Étendu (déjà parti),67.9,60.8,15.0,4.8,3.94,3.38
 RPT,relax,14.41,110603586.0,46.9,Squeeze / VCP prêt à casser,52.6,26.3,15.0,10.2,16.05,12.97
 BRBS,relax,3.46,307947610.0,53.5,Setup en formation,54.7,17.9,14.0,9.8,3.84,3.11
-IKT,relax,2.05,263405109.0,68.7,Cup & Handle probable,51.2,37.6,11.0,9.3,2.26,1.84
+IKT,relax,2.05,264065272.0,68.7,Cup & Handle probable,51.2,37.6,11.0,9.3,2.26,1.84
 ENOV,relax,25.52,1381502472.0,11.9,Tendance baissière (pas un setup),61.4,42.1,10.0,14.6,29.89,22.97
-DV,relax,11.44,1727239447.0,60.4,Momentum en formation,73.4,30.6,7.0,5.5,12.1,10.3
-DSP,relax,12.68,835557506.0,60.6,En base (loin du pivot),51.8,42.9,7.0,10.5,14.16,11.41
-NGNE,relax,36.8,701906811.0,60.1,Cup & Handle probable,50.6,57.4,7.0,0.7,37.07,33.12
+DV,relax,11.44,1726472126.0,60.4,Momentum en formation,73.4,30.6,7.0,5.5,12.1,10.3
+DSP,relax,12.68,838834202.0,60.6,En base (loin du pivot),51.8,42.9,7.0,10.5,14.16,11.41
+NGNE,relax,36.8,692564927.0,60.1,Cup & Handle probable,50.6,57.4,7.0,0.7,37.07,33.12
 NKTX,relax,3.38,242538764.0,70.5,Cup & Handle probable,79.2,53.6,7.0,7.4,3.65,3.04
-TLX,relax,11.74,3838343965.0,62.0,Cup & Handle probable,61.3,50.7,6.0,4.0,12.23,10.57
-AMCX,relax,9.99,444768084.0,69.8,Setup en formation,52.4,41.8,5.0,6.2,10.65,8.99
-KPTI,relax,10.05,234674775.0,74.4,Squeeze / VCP prêt à casser,65.6,59.6,5.0,8.6,10.99,9.05
+TLX,relax,11.74,3846813391.0,62.0,Cup & Handle probable,61.3,50.7,6.0,4.0,12.23,10.57
+AMCX,relax,9.99,444328807.0,69.8,Setup en formation,52.4,41.8,5.0,6.2,10.65,8.99
+KPTI,relax,10.05,233881572.0,74.4,Squeeze / VCP prêt à casser,65.6,59.6,5.0,8.6,10.99,9.05
