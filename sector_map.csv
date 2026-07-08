@@ -251,6 +251,7 @@ BBSI,Industrials
 BBT,Financials
 BBW,Consumer Discretionary
 BBWI,Consumer Discretionary
+BC,Consumer Discretionary
 BCAL,Financials
 BCAT,Financials
 BCAX,Health Care
@@ -452,6 +453,7 @@ CHRS,Health Care
 CHSCL,Consumer Staples
 CHSCN,Consumer Staples
 CHSCO,Consumer Staples
+CIGI,Real Estate
 CII,Financials
 CIM,Real Estate
 CION,Financials
@@ -564,6 +566,7 @@ CUE,Health Care
 CURB,Real Estate
 CURI,Communication Services
 CURV,Consumer Discretionary
+CUZ,Real Estate
 CV,Health Care
 CVBF,Financials
 CVCO,Consumer Discretionary
@@ -888,6 +891,7 @@ GERN,Health Care
 GEVO,Materials
 GFF,Industrials
 GGT,Financials
+GHC,Industrials
 GHM,Industrials
 GHRS,Health Care
 GIC,Industrials
@@ -1757,6 +1761,7 @@ REAX,Real Estate
 REFI,Real Estate
 REI,Energy
 RELL,Information Technology
+RELY,Information Technology
 REPL,Health Care
 REPX,Energy
 RERE,Consumer Discretionary
@@ -1893,6 +1898,7 @@ SION,Health Care
 SITC,Real Estate
 SITE,Industrials
 SKE,Materials
+SKIN,Consumer Staples
 SKT,Real Estate
 SKWD,Financials
 SKY,Consumer Discretionary
@@ -2164,6 +2170,7 @@ UVSP,Financials
 UVV,Consumer Staples
 UWMC,Financials
 VAC,Consumer Discretionary
+VANI,Health Care
 VATE,Industrials
 VBNK,Financials
 VC,Consumer Discretionary
