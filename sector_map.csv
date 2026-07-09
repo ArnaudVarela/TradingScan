@@ -97,6 +97,7 @@ ALRM,Information Technology
 ALRS,Financials
 ALT,Health Care
 ALTG,Industrials
+ALTI,Financials
 ALTO,Materials
 ALVO,Health Care
 ALX,Real Estate
@@ -130,6 +131,7 @@ ANGX,Communication Services
 ANIK,Health Care
 ANIP,Health Care
 ANL,Health Care
+ANNA,Energy
 ANNX,Health Care
 ANRO,Health Care
 ANTX,Health Care
@@ -453,6 +455,7 @@ CHPT,Consumer Discretionary
 CHRN,Information Technology
 CHRS,Health Care
 CHSCL,Consumer Staples
+CHSCM,Consumer Staples
 CHSCN,Consumer Staples
 CHSCO,Consumer Staples
 CIGI,Real Estate
@@ -1004,6 +1007,7 @@ HPK,Energy
 HPP,Real Estate
 HQH,Financials
 HQL,Financials
+HRB,Consumer Discretionary
 HRI,Industrials
 HRMY,Health Care
 HROW,Health Care
@@ -1138,6 +1142,7 @@ JELD,Industrials
 JILL,Consumer Discretionary
 JJSF,Consumer Staples
 JKS,Information Technology
+JLHL,Industrials
 JMIA,Consumer Discretionary
 JMSB,Financials
 JOE,Real Estate
@@ -1451,6 +1456,7 @@ NKSH,Financials
 NKTR,Health Care
 NKTX,Health Care
 NLOP,Real Estate
+NMAD,Industrials
 NMAX,Communication Services
 NMCO,Financials
 NMFC,Financials
@@ -1756,6 +1762,7 @@ RCKY,Consumer Discretionary
 RCMT,Industrials
 RCUS,Health Care
 RDCM,Communication Services
+RDN,Financials
 RDNW,Consumer Discretionary
 RDVT,Information Technology
 RDW,Industrials
@@ -1944,6 +1951,7 @@ SND,Energy
 SNDA,Health Care
 SNDL,Consumer Staples
 SNDX,Health Care
+SNWV,Health Care
 SOC,Energy
 SONO,Information Technology
 SOPH,Health Care
@@ -1988,6 +1996,7 @@ STRT,Consumer Discretionary
 STRZ,Communication Services
 STTK,Health Care
 STUB,Communication Services
+STXS,Health Care
 SUNC,Energy
 SUNS,Real Estate
 SUPN,Health Care
@@ -2059,6 +2068,7 @@ TILE,Consumer Discretionary
 TIPT,Financials
 TITN,Industrials
 TK,Energy
+TKC,Communication Services
 TKNO,Health Care
 TLRY,Health Care
 TLS,Information Technology

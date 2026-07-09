@@ -1,41 +1,43 @@
 ticker,level,price,mcap_usd,score,setup,dd_from_hi_pct,base_range_pct,vol_growth_pct,dist_resist_pct,resistance,stop_ref
-SEER,strict,2.22,118210335.0,41.8,Étendu (déjà parti),60.7,35.6,410.0,5.1,2.34,2.0
-TENX,strict,17.38,449070942.0,31.0,Étendu (déjà parti),71.6,46.8,404.0,5.4,18.38,15.64
-RNAC,strict,10.05,290142451.0,50.2,Setup en formation,76.4,53.7,108.0,8.6,11.0,9.05
-FIVN,strict,24.99,1828348033.0,64.5,Setup en formation,73.0,54.6,49.0,7.2,26.93,22.49
-RPAY,strict,4.04,350173370.0,59.2,En base (loin du pivot),64.1,55.6,21.0,11.1,4.55,3.64
-VOR,strict,20.1,1052289731.0,36.1,Étendu (déjà parti),71.1,59.4,19.0,9.5,22.22,18.09
-RGP,strict,4.71,153108874.0,66.5,Momentum en formation,67.3,44.8,19.0,8.1,5.12,4.24
-NTLA,strict,17.43,2306814793.0,65.3,Cup & Handle probable,62.5,53.6,15.0,5.7,18.48,15.69
-LPRO,relax,3.13,370610552.0,61.0,Setup en formation,73.3,62.5,268.0,0.0,3.13,2.82
-ALXO,relax,2.36,316021011.0,36.0,Étendu (déjà parti),86.8,67.4,120.0,11.3,2.66,2.12
-HCAT,relax,2.27,157763733.0,35.7,Étendu (déjà parti),84.2,68.5,106.0,9.6,2.51,2.04
-SLN,relax,10.15,450684000.0,54.9,Setup en formation,63.4,67.7,99.0,8.2,11.06,9.13
-MRVI,relax,5.92,1474266293.0,60.6,Setup en formation,55.5,63.3,91.0,9.6,6.55,5.33
-LEG,relax,11.24,1485749446.0,64.4,Setup en formation,60.0,34.0,88.0,12.7,12.88,10.12
-DTIL,relax,9.25,234026380.0,40.6,Étendu (déjà parti),57.8,65.8,81.0,3.8,9.62,8.33
-VANI,relax,1.35,127783177.0,52.0,Setup en formation,82.7,47.9,65.0,14.0,1.57,1.22
-INGN,relax,6.54,170975569.0,42.8,Setup en formation,50.9,35.6,53.0,14.7,7.67,5.89
-TZOO,relax,11.42,109992886.0,75.2,Setup en formation,54.0,67.2,52.0,7.8,12.39,10.28
-ONL,relax,2.78,157703439.0,61.6,Setup en formation,51.9,41.8,50.0,7.9,3.02,2.5
-TBI,relax,8.0,238976155.0,58.6,Momentum en formation,58.0,64.6,49.0,4.2,8.35,7.2
-WNC,relax,12.29,492155001.0,51.7,En base (loin du pivot),56.5,62.2,40.0,13.7,14.23,11.06
-BWIN,relax,27.3,3902788734.0,46.3,Cup & Handle probable,51.1,46.1,37.0,4.1,28.46,24.57
-IMCR,relax,33.4,1584511001.0,55.1,Momentum en formation,56.6,25.1,37.0,7.1,35.95,30.06
-NSIT,relax,112.14,3353616414.0,59.9,En base (loin du pivot),50.8,54.7,32.0,10.3,125.0,100.93
-CCRN,relax,13.22,427599442.0,75.1,Squeeze / VCP prêt à casser,53.0,41.1,26.0,0.1,13.23,11.9
-LMNR,relax,13.44,238617212.0,50.5,Setup en formation,52.9,24.0,26.0,9.8,14.9,12.1
-TRIP,relax,13.72,1521422285.0,55.1,Cup & Handle probable,52.3,45.3,24.0,9.9,15.23,12.35
-VTEX,relax,4.12,757647351.0,53.5,Setup en formation,57.0,39.5,21.0,7.8,4.47,3.71
-EDIT,relax,3.75,362742775.0,46.6,Étendu (déjà parti),67.9,60.8,15.0,4.8,3.94,3.38
-RPT,relax,14.41,110603586.0,46.9,Squeeze / VCP prêt à casser,52.6,26.3,15.0,10.2,16.05,12.97
-BRBS,relax,3.46,307947610.0,53.5,Setup en formation,54.7,17.9,14.0,9.8,3.84,3.11
-IKT,relax,2.05,264065272.0,68.7,Cup & Handle probable,51.2,37.6,11.0,9.3,2.26,1.84
-ENOV,relax,25.52,1381502472.0,11.9,Tendance baissière (pas un setup),61.4,42.1,10.0,14.6,29.89,22.97
-DV,relax,11.44,1726472126.0,60.4,Momentum en formation,73.4,30.6,7.0,5.5,12.1,10.3
-DSP,relax,12.68,838834202.0,60.6,En base (loin du pivot),51.8,42.9,7.0,10.5,14.16,11.41
-NGNE,relax,36.8,692564927.0,60.1,Cup & Handle probable,50.6,57.4,7.0,0.7,37.07,33.12
-NKTX,relax,3.38,242538764.0,70.5,Cup & Handle probable,79.2,53.6,7.0,7.4,3.65,3.04
-TLX,relax,11.74,3846813391.0,62.0,Cup & Handle probable,61.3,50.7,6.0,4.0,12.23,10.57
-AMCX,relax,9.99,444328807.0,69.8,Setup en formation,52.4,41.8,5.0,6.2,10.65,8.99
-KPTI,relax,10.05,233881572.0,74.4,Squeeze / VCP prêt à casser,65.6,59.6,5.0,8.6,10.99,9.05
+SEER,strict,2.18,119859781.0,50.7,Setup en formation,61.4,36.2,422.0,6.8,2.34,1.96
+TENX,strict,17.73,490582816.0,34.9,Étendu (déjà parti),71.0,45.9,408.0,3.5,18.38,15.96
+RNAC,strict,10.25,293521325.0,53.4,Setup en formation,75.9,52.7,107.0,6.8,11.0,9.22
+VANI,strict,1.6,135440854.0,26.8,Étendu (déjà parti),79.5,43.3,79.0,0.9,1.62,1.44
+FIVN,strict,24.2,1904529202.0,70.4,En base (loin du pivot),73.8,56.4,50.0,10.1,26.93,21.78
+AKBA,strict,1.42,375588366.0,23.1,Étendu (déjà parti),65.2,54.7,35.0,11.3,1.6,1.28
+VOR,strict,20.31,1090653332.0,35.7,Setup en formation,70.8,58.7,19.0,8.6,22.22,18.28
+RGP,strict,4.61,159459803.0,63.7,Momentum en formation,68.0,45.2,19.0,9.5,5.09,4.15
+NTLA,strict,16.84,2202023086.0,61.6,Setup en formation,63.8,54.5,16.0,8.9,18.48,15.16
+LPRO,relax,3.14,370610552.0,62.1,Setup en formation,73.2,62.6,277.0,0.0,3.14,2.83
+ALXO,relax,2.33,294692788.0,48.9,Étendu (déjà parti),86.9,68.2,120.0,12.4,2.66,2.1
+SLN,relax,9.95,472212000.0,59.0,En base (loin du pivot),64.1,69.0,100.0,10.0,11.06,8.95
+EXFY,relax,1.88,184678998.0,39.1,Étendu (déjà parti),77.2,65.4,100.0,2.1,1.92,1.69
+MRVI,relax,5.76,1532359098.0,53.0,En base (loin du pivot),56.7,65.1,91.0,12.1,6.55,5.18
+LEG,relax,11.11,1537593779.0,59.8,Setup en formation,60.5,34.4,90.0,13.7,12.88,10.0
+DTIL,relax,9.28,231446156.0,50.0,Étendu (déjà parti),57.6,65.6,86.0,3.5,9.62,8.35
+TBI,relax,8.12,235327664.0,60.5,Cup & Handle probable,57.4,63.7,50.0,2.8,8.35,7.31
+ONL,relax,2.79,158840040.0,64.1,Setup en formation,51.8,41.6,50.0,7.6,3.02,2.51
+WNC,relax,12.27,503136972.0,51.6,En base (loin du pivot),56.6,62.3,41.0,13.8,14.23,11.04
+BWIN,relax,26.87,3684660268.0,51.6,Cup & Handle probable,51.9,46.8,37.0,5.6,28.46,24.18
+IMCR,relax,33.78,1592686020.0,55.1,Setup en formation,56.1,24.9,35.0,6.0,35.95,30.4
+NSIT,relax,112.53,3476168808.0,61.5,Setup en formation,50.7,54.5,32.0,10.0,125.0,101.28
+FLYW,relax,17.63,2171393564.0,74.0,Setup en formation,50.8,47.5,30.0,6.8,18.92,15.87
+KYTX,relax,9.91,594577173.0,53.2,En base (loin du pivot),67.6,44.5,30.0,14.7,11.62,8.92
+CCRN,relax,13.2,427114452.0,76.6,Squeeze / VCP prêt à casser,53.1,41.1,26.0,0.2,13.23,11.88
+LMNR,relax,13.32,234809491.0,46.7,Setup en formation,53.4,24.2,26.0,10.6,14.9,11.99
+TRIP,relax,13.21,1562730500.0,52.7,Setup en formation,54.1,46.1,24.0,12.5,15.1,11.89
+NRC,relax,21.87,493102908.0,73.3,Cup & Handle probable,50.0,52.4,22.0,4.9,23.0,19.68
+VTEX,relax,3.94,753840078.0,44.0,Setup en formation,58.9,41.3,21.0,11.9,4.47,3.55
+HPK,relax,7.44,886402100.0,50.3,En base (loin du pivot),58.4,63.3,16.0,13.1,8.56,6.7
+RPAY,relax,3.91,359589043.0,54.6,En base (loin du pivot),65.3,57.4,16.0,14.0,4.55,3.52
+EDIT,relax,3.67,336308079.0,54.5,Setup en formation,68.6,62.1,16.0,6.9,3.94,3.3
+RPT,relax,14.33,110525860.0,45.5,Momentum en formation,52.8,26.4,16.0,10.7,16.05,12.9
+ARDT,relax,10.15,1450702314.0,48.2,Setup en formation,51.0,32.7,12.0,8.0,11.03,9.13
+BRBS,relax,3.42,307947610.0,50.2,Setup en formation,55.2,18.2,11.0,10.9,3.84,3.08
+IKT,relax,2.07,259444130.0,68.9,Cup & Handle probable,50.7,37.2,11.0,8.4,2.26,1.86
+CRVL,relax,63.0,3137057129.0,53.8,Setup en formation,51.0,44.2,10.0,13.3,72.68,56.7
+DSP,relax,12.73,854890012.0,61.6,En base (loin du pivot),51.7,42.8,8.0,10.1,14.16,11.46
+NKTX,relax,3.67,258994196.0,46.6,Étendu (déjà parti),77.4,48.8,8.0,0.3,3.68,3.3
+DV,relax,11.2,1768674778.0,47.5,Setup en formation,74.0,31.3,7.0,7.4,12.1,10.08
+TLX,relax,11.55,4009087598.0,62.8,Cup & Handle probable,62.0,51.5,5.0,5.5,12.23,10.4
+AMCX,relax,10.07,446964470.0,71.7,Squeeze / VCP prêt à casser,52.0,41.5,5.0,5.4,10.65,9.06
