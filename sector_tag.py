@@ -86,5 +86,30 @@ def main():
     if not vc.empty:
         print(vc.to_string())
 
+    # --- Module Fallen Angel : petit set -> on fetche les secteurs manquants pour garantir la couverture ---
+    fa_path = ROOT / "fallen_angel.csv"
+    if fa_path.exists():
+        try:
+            fa = pd.read_csv(fa_path, keep_default_na=False)
+        except Exception:
+            fa = pd.DataFrame()
+        if not fa.empty and "ticker" in fa.columns:
+            fa["ticker"] = fa["ticker"].astype(str).str.upper()
+            fa_got = 0
+            for t in fa["ticker"].unique():
+                if t and t not in cache:
+                    s = _fetch_sector(t)
+                    if s is not None:
+                        cache[t] = s; fa_got += 1
+                    time.sleep(THROTTLE)
+            if fa_got:
+                pd.DataFrame(sorted(cache.items()), columns=["ticker", "sector"]).to_csv(CACHE, index=False)
+            fa["sector"] = fa["ticker"].map(cache).fillna("")
+            fa.to_csv(fa_path, index=False)
+            if pub.exists():
+                fa.to_csv(pub / "fallen_angel.csv", index=False)
+            print(f"[SECTOR TAG] fallen_angel : +{fa_got} fetchés · couverture "
+                  f"{int((fa['sector'].astype(str).str.len() > 0).sum())}/{len(fa)}")
+
 if __name__ == "__main__":
     main()

@@ -13,6 +13,13 @@ function fmtMcap(n) {
   return "$" + n.toFixed(0);
 }
 
+const SECTOR_LABEL = {
+  "Information Technology": "Tech", "Health Care": "Santé", "Financials": "Finance",
+  "Industrials": "Industrie", "Consumer Discretionary": "Conso cyc.", "Consumer Staples": "Conso déf.",
+  "Energy": "Énergie", "Utilities": "Utilities", "Materials": "Matériaux",
+  "Real Estate": "Immo.", "Communication Services": "Comm.",
+};
+
 export default function FallenAngel() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -83,6 +90,7 @@ export default function FallenAngel() {
                 <th className="th">Ticker</th>
                 <th className="th text-right">Prix</th>
                 <th className="th text-right">MCap</th>
+                <th className="th">Secteur</th>
                 <th className="th text-right" title="Baisse depuis le pic ~3 ans">Depuis pic</th>
                 <th className="th text-right" title="Croissance du volume récent vs base">Volume</th>
                 <th className="th text-right" title="Distance au re-test de la résistance de la base">Résistance</th>
@@ -108,6 +116,9 @@ export default function FallenAngel() {
                   </td>
                   <td className="px-3 py-2 text-right num text-slate-600 dark:text-slate-300">{r.price}</td>
                   <td className="px-3 py-2 text-right num text-slate-500">{fmtMcap(r._mc)}</td>
+                  <td className="px-3 py-2 whitespace-nowrap text-xs text-slate-500 dark:text-slate-400" title={r.sector}>
+                    {(r.sector || "").toString().trim() ? (SECTOR_LABEL[r.sector] || r.sector) : <span className="text-slate-300 dark:text-slate-600">—</span>}
+                  </td>
                   <td className="px-3 py-2 text-right num text-rose-600 dark:text-rose-400">−{r._dd}%</td>
                   <td className="px-3 py-2 text-right num text-emerald-600 dark:text-emerald-400">+{r._vg}%</td>
                   <td className="px-3 py-2 text-right num text-slate-600 dark:text-slate-300">{r._dr}%</td>
