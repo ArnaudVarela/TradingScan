@@ -907,6 +907,7 @@ GLAS,Health Care
 GLIBA,Communication Services
 GLIBK,Communication Services
 GLOB,Information Technology
+GLOO,Information Technology
 GLP,Energy
 GLRE,Financials
 GLSI,Health Care
@@ -1223,6 +1224,7 @@ LDI,Financials
 LE,Consumer Discretionary
 LEG,Consumer Discretionary
 LEGH,Consumer Discretionary
+LEGN,Health Care
 LENZ,Health Care
 LEO,Financials
 LEU,Energy
@@ -1369,6 +1371,7 @@ MPTI,Information Technology
 MQY,Financials
 MRAM,Information Technology
 MRBK,Financials
+MRDN,Consumer Discretionary
 MRLN,Industrials
 MRP,Real Estate
 MRTN,Industrials
@@ -1857,6 +1860,7 @@ SBGI,Communication Services
 SBH,Consumer Discretionary
 SBLK,Industrials
 SBR,Energy
+SBRA,Real Estate
 SBSI,Financials
 SCHL,Communication Services
 SCL,Materials
@@ -1899,6 +1903,7 @@ SHOE,Consumer Discretionary
 SHOO,Consumer Discretionary
 SI,
 SIBN,Health Care
+SID,Materials
 SIDU,Industrials
 SIF,Industrials
 SIFY,Communication Services
@@ -2280,6 +2285,7 @@ WOLF,Information Technology
 WOOF,Consumer Discretionary
 WOR,Industrials
 WPP,Communication Services
+WRAP,Information Technology
 WRBY,Health Care
 WRD,Information Technology
 WRLD,Financials
