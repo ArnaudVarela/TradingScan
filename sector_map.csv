@@ -296,6 +296,7 @@ BHRB,Financials
 BHVN,Health Care
 BILL,Information Technology
 BIOA,Health Care
+BIYA,Information Technology
 BJRI,Consumer Discretionary
 BKD,Health Care
 BKE,Consumer Discretionary
@@ -541,6 +542,7 @@ CRNC,Information Technology
 CRNT,Information Technology
 CRNX,Health Care
 CRON,Health Care
+CRSP,Health Care
 CRSR,Information Technology
 CRTO,Communication Services
 CRVL,Financials
@@ -594,6 +596,7 @@ CXW,Industrials
 CYD,Consumer Discretionary
 CYH,Health Care
 CYRX,Industrials
+CZFS,Financials
 CZNC,Financials
 CZWI,Financials
 DAC,Industrials
@@ -669,6 +672,7 @@ DSX,Industrials
 DTIL,Health Care
 DUOT,Information Technology
 DV,Communication Services
+DWSN,Energy
 DX,Real Estate
 DXC,Information Technology
 DXPE,Industrials
@@ -1303,6 +1307,7 @@ MBOT,Health Care
 MBUU,Consumer Discretionary
 MBWM,Financials
 MBX,Health Care
+MC,Financials
 MCB,Financials
 MCBS,Financials
 MCFT,Consumer Discretionary
@@ -1368,6 +1373,7 @@ MPB,Financials
 MPLT,Health Care
 MPT,Real Estate
 MPTI,Information Technology
+MQ,Information Technology
 MQY,Financials
 MRAM,Information Technology
 MRBK,Financials
@@ -1383,6 +1389,7 @@ MSEX,Utilities
 MSGE,Communication Services
 MSIF,Financials
 MTA,Materials
+MTH,Consumer Discretionary
 MTLS,Information Technology
 MTN,Consumer Discretionary
 MTRX,Industrials
@@ -1730,6 +1737,7 @@ PTON,Consumer Discretionary
 PTRN,Information Technology
 PUBM,Information Technology
 PUMP,Energy
+PURR,Financials
 PVH,Consumer Discretionary
 PVLA,Health Care
 PWP,Financials
@@ -2016,6 +2024,7 @@ SWBI,Industrials
 SWIM,Industrials
 SXC,Materials
 SXI,Industrials
+SXT,Materials
 SYBT,Financials
 SYNA,Information Technology
 TAC,Utilities

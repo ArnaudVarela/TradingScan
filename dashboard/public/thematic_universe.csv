@@ -156,6 +156,7 @@ GD,defense,1,True
 GDYN,ia,1,True
 GFAI,ia,1,True
 GFS,semiconducteurs,1,True
+GFUZ,new_tech,1,True
 GHM,gestion_thermique,1,True
 GLATF,production_energie,1,True
 GNRC,equipement_electrique,1,True
@@ -342,7 +343,6 @@ AXT,semiconducteurs,1,False
 CBAK,new_tech,1,False
 EKSO,robotique,1,False
 EMKR,laser_photonique,1,False
-GFUZ,new_tech,1,False
 HYZN,production_energie,1,False
 IRBT,robotique,1,False
 NFUNF,production_energie,1,False
