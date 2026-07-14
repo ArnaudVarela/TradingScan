@@ -818,6 +818,7 @@ FLWS,Consumer Discretionary
 FLXS,Consumer Discretionary
 FLY,Industrials
 FLYW,Information Technology
+FLZH,Communication Services
 FMAO,Financials
 FMBH,Financials
 FMC,Materials
@@ -899,6 +900,7 @@ GEO,Industrials
 GERN,Health Care
 GEVO,Materials
 GFF,Industrials
+GFUZ,Industrials
 GGT,Financials
 GHC,Industrials
 GHM,Industrials
@@ -1336,6 +1338,7 @@ MGNX,Health Care
 MGPI,Consumer Staples
 MGRC,Industrials
 MGRE,
+MGRT,Information Technology
 MGTX,Health Care
 MGY,Energy
 MH,Consumer Staples
@@ -1368,6 +1371,7 @@ MNTN,Information Technology
 MNTS,Industrials
 MOMO,Communication Services
 MOV,Consumer Discretionary
+MOVE,Information Technology
 MPAA,Consumer Discretionary
 MPB,Financials
 MPLT,Health Care
@@ -1774,6 +1778,7 @@ RCMT,Industrials
 RCUS,Health Care
 RDCM,Communication Services
 RDN,Financials
+RDNT,Health Care
 RDNW,Consumer Discretionary
 RDVT,Information Technology
 RDW,Industrials
@@ -1954,6 +1959,7 @@ SMBK,Financials
 SMC,Energy
 SMG,Materials
 SMHI,Industrials
+SMJF,Consumer Discretionary
 SMP,Consumer Discretionary
 SMPL,Consumer Staples
 SMR,Industrials
@@ -1973,6 +1979,7 @@ SPB,Consumer Staples
 SPCE,Industrials
 SPFI,Financials
 SPH,Utilities
+SPHR,Communication Services
 SPIR,Industrials
 SPNT,Financials
 SPOK,Health Care
