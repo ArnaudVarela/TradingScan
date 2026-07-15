@@ -122,6 +122,7 @@ AMSC,Industrials
 AMSF,Financials
 AMTB,Financials
 AMTX,Materials
+AMWL,Health Care
 ANAB,Health Care
 ANDE,Consumer Staples
 ANF,Consumer Discretionary
@@ -430,6 +431,7 @@ CDRE,Industrials
 CDXS,Health Care
 CDZI,Utilities
 CECO,Industrials
+CELC,Health Care
 CENT,Consumer Staples
 CENTA,Consumer Staples
 CENX,Materials
@@ -869,6 +871,7 @@ FVRR,Communication Services
 FWDI,Consumer Discretionary
 FWRD,Industrials
 FWRG,Consumer Discretionary
+FXHO,Information Technology
 FXNC,Financials
 G,Information Technology
 GAB,Financials
@@ -918,6 +921,7 @@ GLP,Energy
 GLRE,Financials
 GLSI,Health Care
 GLUE,Health Care
+GMAB,Health Care
 GNE,Utilities
 GNK,Industrials
 GNL,Real Estate
@@ -1746,6 +1750,7 @@ PVH,Consumer Discretionary
 PVLA,Health Care
 PWP,Financials
 PXED,Consumer Staples
+PYPD,Health Care
 PYXS,Health Care
 PZZA,Consumer Discretionary
 QCRH,Financials
@@ -1817,6 +1822,7 @@ RLMD,Health Care
 RLX,Consumer Staples
 RM,Financials
 RMAX,Real Estate
+RMBI,Financials
 RMNI,Information Technology
 RMR,Real Estate
 RMT,Financials
@@ -1838,6 +1844,7 @@ RR,Industrials
 RRBI,Financials
 RRGB,Consumer Discretionary
 RSKD,Information Technology
+RTB,Information Technology
 RUM,Communication Services
 RUN,Information Technology
 RVLV,Consumer Discretionary
@@ -2180,6 +2187,7 @@ UNCY,Health Care
 UNF,Industrials
 UNFI,Consumer Staples
 UNIT,Real Estate
+UNMA,
 UNTY,Financials
 UP,Industrials
 UPB,Health Care
@@ -2327,6 +2335,7 @@ WYY,Information Technology
 XERS,Health Care
 XFLT,Financials
 XFOR,Health Care
+XGN,Health Care
 XHR,Real Estate
 XIFR,Utilities
 XMAX,Consumer Discretionary
