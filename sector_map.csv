@@ -361,6 +361,7 @@ BTZ,Financials
 BULL,Information Technology
 BUR,Financials
 BUSE,Financials
+BUUU,Industrials
 BV,Industrials
 BVS,Health Care
 BW,Industrials
@@ -903,6 +904,7 @@ GEO,Industrials
 GERN,Health Care
 GEVO,Materials
 GFF,Industrials
+GFR,Energy
 GFUZ,Industrials
 GGT,Financials
 GHC,Industrials
@@ -1122,6 +1124,7 @@ IQ,Communication Services
 IQI,Financials
 IQMX,Information Technology
 IRD,Health Care
+IRDM,Communication Services
 IRMD,Health Care
 IRON,Health Care
 IRS,Real Estate
@@ -1543,6 +1546,7 @@ NXDR,Communication Services
 NXG,Financials
 NXP,Financials
 NXRT,Real Estate
+NYAX,Information Technology
 OABI,Health Care
 OBE,Energy
 OBIO,Health Care
@@ -1561,6 +1565,7 @@ OEC,Materials
 OFG,Financials
 OFIX,Health Care
 OFLX,Industrials
+OGC,Materials
 OGN,Health Care
 OGS,Utilities
 OI,Consumer Discretionary
@@ -1808,6 +1813,7 @@ RGC,Health Care
 RGNX,Health Care
 RGP,Industrials
 RGR,Industrials
+RGTI,Information Technology
 RH,Consumer Discretionary
 RHI,Industrials
 RHLD,Industrials
