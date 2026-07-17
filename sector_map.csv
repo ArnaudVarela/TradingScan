@@ -107,6 +107,7 @@ AMBA,Information Technology
 AMBP,Consumer Discretionary
 AMBQ,Information Technology
 AMC,Communication Services
+AMCI,Information Technology
 AMCX,Communication Services
 AMLX,Health Care
 AMN,Health Care
@@ -848,6 +849,7 @@ FRPT,Consumer Staples
 FRSH,Information Technology
 FRST,Financials
 FSBC,Financials
+FSBW,Financials
 FSCO,Financials
 FSK,Financials
 FSLY,Information Technology
@@ -974,6 +976,7 @@ HAFN,Industrials
 HAPN,Financials
 HASI,Financials
 HAYW,Industrials
+HBB,Consumer Discretionary
 HBCP,Financials
 HBNC,Financials
 HBT,Financials
@@ -1207,6 +1210,7 @@ KRT,Consumer Discretionary
 KRUS,Consumer Discretionary
 KSS,Consumer Discretionary
 KTB,Consumer Discretionary
+KTF,Financials
 KULR,Information Technology
 KURA,Health Care
 KVHI,Communication Services
@@ -1678,6 +1682,7 @@ PGY,Information Technology
 PHAT,Health Care
 PHI,Communication Services
 PHIN,Consumer Discretionary
+PHOE,Industrials
 PHR,Health Care
 PHVS,Health Care
 PI,Information Technology
@@ -2075,6 +2080,7 @@ TDAY,Communication Services
 TDC,Information Technology
 TDOC,Health Care
 TDS,Communication Services
+TDTH,Information Technology
 TDUP,Consumer Discretionary
 TDW,Energy
 TE,Industrials
