@@ -71,7 +71,6 @@ ACLS,semiconducteurs,1,True
 ADI,semiconducteurs,1,True
 AEIS,equipement_electrique,1,True
 AEYE,ia,1,True
-AI,ia,1,True
 AIRI,defense,1,True
 AIRJ,gestion_thermique,1,True
 AIRO,defense,1,True
@@ -336,6 +335,7 @@ ZBRA,robotique,1,True
 ZENA,defense,1,True
 ADN,production_energie,1,False
 AETI,equipement_electrique,1,False
+AI,ia,1,False
 AMBI,robotique,1,False
 AMOT,equipement_electrique,1,False
 ANLDF,production_energie,1,False
