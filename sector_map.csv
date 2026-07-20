@@ -432,6 +432,7 @@ CDP,Real Estate
 CDRE,Industrials
 CDXS,Health Care
 CDZI,Utilities
+CE,Materials
 CECO,Industrials
 CELC,Health Care
 CENT,Consumer Staples
@@ -628,6 +629,7 @@ DEI,Real Estate
 DERM,Health Care
 DFH,Consumer Discretionary
 DFIN,Information Technology
+DFNS,Industrials
 DFTX,Health Care
 DGICA,Financials
 DGII,Information Technology
@@ -1450,6 +1452,7 @@ NCMI,Communication Services
 NCNO,Information Technology
 NCSM,Energy
 NCV,Financials
+NCZ,Financials
 NDMO,Financials
 NECB,Financials
 NEGG,Consumer Discretionary
