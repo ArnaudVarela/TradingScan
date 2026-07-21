@@ -60,6 +60,7 @@ AGL,Health Care
 AGM,Financials
 AGNT,Real Estate
 AGO,Financials
+AGPU,Information Technology
 AGRO,Consumer Staples
 AGYS,Information Technology
 AHCO,Health Care
@@ -82,6 +83,7 @@ ALDX,Health Care
 ALEC,Health Care
 ALG,Industrials
 ALGT,Industrials
+ALH,Consumer Discretionary
 ALHC,Health Care
 ALIT,Information Technology
 ALKT,Information Technology
@@ -374,6 +376,7 @@ BWIN,Financials
 BWLP,Energy
 BWMN,Industrials
 BWMX,Consumer Discretionary
+BXBL,Consumer Discretionary
 BXC,Industrials
 BXMT,Real Estate
 BY,Financials
@@ -428,6 +431,7 @@ CCU,Consumer Staples
 CD,Financials
 CDLR,Industrials
 CDNA,Health Care
+CDNL,Industrials
 CDP,Real Estate
 CDRE,Industrials
 CDXS,Health Care
@@ -1015,6 +1019,7 @@ HNI,Consumer Discretionary
 HNRG,Utilities
 HNST,Consumer Staples
 HNVR,Financials
+HODO,
 HOFT,Consumer Discretionary
 HOG,Consumer Discretionary
 HOPE,Financials
@@ -1228,6 +1233,7 @@ LAKE,Consumer Discretionary
 LAND,Real Estate
 LAR,Materials
 LASR,Information Technology
+LAUR,Consumer Staples
 LAZ,Financials
 LBRDA,Communication Services
 LBRDK,Communication Services
@@ -1265,6 +1271,7 @@ LMAT,Health Care
 LMB,Industrials
 LMND,Financials
 LMNR,Consumer Staples
+LMRI,Health Care
 LNN,Industrials
 LOB,Financials
 LOCO,Consumer Discretionary
@@ -1574,6 +1581,7 @@ OFG,Financials
 OFIX,Health Care
 OFLX,Industrials
 OGC,Materials
+OGG,Materials
 OGN,Health Care
 OGS,Utilities
 OI,Consumer Discretionary
@@ -1586,6 +1594,7 @@ OLMA,Health Care
 OLN,Materials
 OLP,Real Estate
 OLPX,Consumer Discretionary
+OMAB,Industrials
 OMCL,Health Care
 OMDA,Health Care
 OMER,Health Care
@@ -1712,6 +1721,7 @@ PLTK,Communication Services
 PLUG,Industrials
 PLUS,Information Technology
 PLX,Health Care
+PMN,Health Care
 PMT,Real Estate
 PMTS,Financials
 PNBK,Financials
@@ -2134,6 +2144,7 @@ TNL,Consumer Discretionary
 TNXP,Health Care
 TOI,Health Care
 TONX,Information Technology
+TOP,Financials
 TOWN,Financials
 TOYO,Information Technology
 TPB,Consumer Staples
@@ -2169,6 +2180,7 @@ TTAM,Materials
 TTEC,Information Technology
 TTGT,Information Technology
 TTI,Industrials
+TTRX,Health Care
 TUSK,Industrials
 TUYA,Information Technology
 TWFG,Financials
@@ -2387,4 +2399,5 @@ ZUMZ,Consumer Discretionary
 ZURA,Health Care
 ZVIA,Consumer Staples
 ZVRA,Health Care
+ZYBT,Health Care
 ZYME,Health Care
