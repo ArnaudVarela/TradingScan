@@ -86,6 +86,7 @@ ALGT,Industrials
 ALH,Consumer Discretionary
 ALHC,Health Care
 ALIT,Information Technology
+ALK,Industrials
 ALKT,Information Technology
 ALLO,Health Care
 ALLT,Information Technology
@@ -1221,6 +1222,7 @@ KTF,Financials
 KULR,Information Technology
 KURA,Health Care
 KVHI,Communication Services
+KVYO,Information Technology
 KWR,Materials
 KYIV,Communication Services
 KYN,Financials
@@ -1678,6 +1680,7 @@ PEB,Real Estate
 PEBK,Financials
 PEBO,Financials
 PED,Energy
+PEGA,Information Technology
 PENG,Information Technology
 PENN,Consumer Discretionary
 PEPG,Health Care
@@ -1781,6 +1784,7 @@ QCRH,Financials
 QDEL,Health Care
 QFIN,Financials
 QH,Information Technology
+QLYS,Information Technology
 QMCO,Information Technology
 QNST,Communication Services
 QS,Consumer Discretionary
