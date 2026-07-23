@@ -135,6 +135,7 @@ ANGO,Health Care
 ANGX,Communication Services
 ANIK,Health Care
 ANIP,Health Care
+ANIX,Health Care
 ANL,Health Care
 ANNA,Energy
 ANNX,Health Care
@@ -248,6 +249,7 @@ BANF,Financials
 BANR,Financials
 BATRA,Communication Services
 BATRK,Communication Services
+BB,Information Technology
 BBAI,Information Technology
 BBAR,Financials
 BBBY,
@@ -851,6 +853,7 @@ FRBA,Financials
 FRD,Materials
 FRME,Financials
 FRMI,Real Estate
+FRNM,Health Care
 FRPH,Real Estate
 FRPT,Consumer Staples
 FRSH,Information Technology
@@ -863,6 +866,7 @@ FSLY,Information Technology
 FSM,Materials
 FSTR,Industrials
 FSUN,Financials
+FTDR,Consumer Discretionary
 FTF,Financials
 FTH,Health Care
 FTHY,Financials
@@ -1634,6 +1638,7 @@ OSUR,Health Care
 OSW,Consumer Discretionary
 OTF,Financials
 OTLK,Health Care
+OTLY,Consumer Staples
 OTTR,Industrials
 OUST,Information Technology
 OVBC,Financials
@@ -1727,6 +1732,7 @@ PLX,Health Care
 PMN,Health Care
 PMT,Real Estate
 PMTS,Financials
+PN,Information Technology
 PNBK,Financials
 PNNT,Financials
 PNRG,Energy
@@ -1802,6 +1808,7 @@ RARE,Health Care
 RBB,Financials
 RBBN,Information Technology
 RBCAA,Financials
+RBKB,Financials
 RC,Real Estate
 RCAT,Industrials
 RCEL,Health Care
@@ -2039,6 +2046,7 @@ SSYS,Information Technology
 STAA,Health Care
 STBA,Financials
 STC,Financials
+STEP,Financials
 STEX,Financials
 STGW,Communication Services
 STIM,Health Care
@@ -2334,6 +2342,7 @@ WK,Information Technology
 WKC,Energy
 WLDN,Industrials
 WLFC,Industrials
+WLTH,Information Technology
 WLY,Communication Services
 WMK,Consumer Staples
 WNC,Industrials
@@ -2393,6 +2402,7 @@ YRD,Financials
 ZBIO,Health Care
 ZD,Communication Services
 ZENA,Information Technology
+ZETA,Information Technology
 ZGN,Consumer Discretionary
 ZIM,Industrials
 ZIP,Communication Services
