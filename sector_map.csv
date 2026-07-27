@@ -32,6 +32,7 @@ ACNT,Materials
 ACRE,Real Estate
 ACRS,Health Care
 ACTG,Industrials
+ACU,Consumer Staples
 ACVA,Consumer Discretionary
 AD,Communication Services
 ADAG,Health Care
@@ -129,6 +130,7 @@ AMTX,Materials
 AMWL,Health Care
 ANAB,Health Care
 ANDE,Consumer Staples
+ANDG,Consumer Discretionary
 ANF,Consumer Discretionary
 ANGI,Communication Services
 ANGO,Health Care
@@ -413,6 +415,7 @@ CBIO,Health Care
 CBK,Financials
 CBL,Real Estate
 CBLL,Health Care
+CBNA,Financials
 CBNK,Financials
 CBRL,Consumer Discretionary
 CBT,Materials
@@ -1306,6 +1309,7 @@ LUCD,Health Care
 LUCK,Consumer Discretionary
 LUNR,Industrials
 LUXE,Consumer Discretionary
+LVWR,Consumer Discretionary
 LWAY,Consumer Staples
 LWLG,Materials
 LX,Financials
