@@ -1454,6 +1454,7 @@ MYE,Consumer Discretionary
 MYFW,Financials
 MYGN,Health Care
 MYI,Financials
+MYRG,Industrials
 MZTI,Consumer Staples
 NABL,Information Technology
 NAGE,Health Care
@@ -1781,6 +1782,7 @@ PRVA,Health Care
 PSEC,Financials
 PSFE,Information Technology
 PSIX,Industrials
+PSN,Information Technology
 PSNL,Health Care
 PSNY,Consumer Discretionary
 PSTL,Real Estate
@@ -2311,9 +2313,11 @@ VPG,Information Technology
 VRA,Consumer Discretionary
 VRDN,Health Care
 VREX,Health Care
+VRNS,Information Technology
 VRRM,Information Technology
 VRTS,Financials
 VRXA,Health Care
+VSH,Information Technology
 VSTM,Health Care
 VSTS,Industrials
 VTEX,Information Technology
