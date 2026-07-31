@@ -403,6 +403,7 @@ CALX,Information Technology
 CALY,Consumer Discretionary
 CAMP,Health Care
 CAPR,Health Care
+CAR,Industrials
 CARE,Financials
 CARG,Consumer Discretionary
 CARL,Health Care
@@ -547,6 +548,7 @@ CRBP,Health Care
 CRBU,Health Care
 CRC,Energy
 CRCT,Information Technology
+CRDL,Health Care
 CRESY,Industrials
 CRGY,Energy
 CRI,Consumer Discretionary
@@ -597,6 +599,7 @@ CVEO,Consumer Discretionary
 CVGI,Consumer Discretionary
 CVI,Energy
 CVLG,Industrials
+CVLT,Information Technology
 CVRX,Health Care
 CVSA,Consumer Staples
 CWBC,Financials
@@ -716,6 +719,7 @@ EFSI,Financials
 EFXT,Energy
 EGAN,Information Technology
 EGBN,Financials
+EGG,Industrials
 EGHT,Information Technology
 EGY,Energy
 EH,Industrials
@@ -733,6 +737,7 @@ EMBC,Health Care
 EML,Industrials
 EMPD,Consumer Discretionary
 ENGN,Health Care
+ENGS,Industrials
 ENOV,Health Care
 ENPH,Information Technology
 ENR,Industrials
@@ -1772,6 +1777,7 @@ PRK,Financials
 PRKS,Consumer Discretionary
 PRLB,Industrials
 PRLD,Health Care
+PRM,Materials
 PRME,Health Care
 PROK,Health Care
 PRQR,Health Care
@@ -2349,6 +2355,7 @@ WEAV,Health Care
 WEN,Consumer Discretionary
 WERN,Industrials
 WEST,Consumer Staples
+WFG,Materials
 WGO,Consumer Discretionary
 WGS,Health Care
 WHD,Energy
