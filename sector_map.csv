@@ -244,6 +244,7 @@ AYA,Materials
 AZ,Information Technology
 AZTA,Health Care
 AZZ,Industrials
+BAER,Industrials
 BAK,Materials
 BALY,Consumer Discretionary
 BANC,Financials
@@ -306,12 +307,14 @@ BHRB,Financials
 BHVN,Health Care
 BILL,Information Technology
 BIOA,Health Care
+BIPC,Utilities
 BIYA,Information Technology
 BJRI,Consumer Discretionary
 BKD,Health Care
 BKE,Consumer Discretionary
 BKKT,Information Technology
 BKSY,Industrials
+BKT,Financials
 BKTI,Information Technology
 BKU,Financials
 BKV,Energy
@@ -1266,6 +1269,7 @@ LBTYA,Communication Services
 LBTYK,Communication Services
 LCID,Consumer Discretionary
 LCII,Consumer Discretionary
+LCNB,Financials
 LCTX,Health Care
 LCUT,Consumer Discretionary
 LDI,Financials
@@ -1711,6 +1715,7 @@ PEGA,Information Technology
 PENG,Information Technology
 PENN,Consumer Discretionary
 PEPG,Health Care
+PERF,Information Technology
 PERI,Communication Services
 PESI,Industrials
 PFBC,Financials
@@ -2126,6 +2131,7 @@ TBRG,Health Care
 TCBI,Financials
 TCBK,Financials
 TCBX,Financials
+TCI,Real Estate
 TCMD,Health Care
 TCPC,Financials
 TCX,Information Technology
@@ -2426,6 +2432,7 @@ XRX,Industrials
 XXI,Financials
 XZO,Financials
 YALA,Information Technology
+YARW,Health Care
 YELP,Communication Services
 YETI,Consumer Discretionary
 YEXT,Information Technology
