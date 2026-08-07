@@ -56,6 +56,7 @@ AERO,Industrials
 AESI,Energy
 AEVA,Information Technology
 AFYA,Consumer Staples
+AGCC,Consumer Staples
 AGEN,Health Care
 AGIO,Health Care
 AGL,Health Care
@@ -323,6 +324,7 @@ BLBD,Industrials
 BLDP,Industrials
 BLFS,Health Care
 BLKB,Information Technology
+BLLN,Health Care
 BLMN,Consumer Discretionary
 BLND,Information Technology
 BLSH,Information Technology
@@ -458,6 +460,7 @@ CERS,Health Care
 CERT,Health Care
 CEVA,Information Technology
 CFBK,Financials
+CFFI,Financials
 CFFN,Financials
 CGAU,Materials
 CGBD,Financials
@@ -1195,6 +1198,7 @@ JOE,Real Estate
 JOUT,Consumer Discretionary
 JOYY,Communication Services
 JRVR,Financials
+JUNS,Health Care
 JYNT,Health Care
 KAI,Industrials
 KALU,Materials
@@ -1217,6 +1221,7 @@ KIDS,Health Care
 KINS,Financials
 KLC,Consumer Staples
 KLIC,Information Technology
+KLTR,Information Technology
 KMPR,Financials
 KMT,Industrials
 KMTS,Health Care
@@ -1639,6 +1644,7 @@ OOMA,Information Technology
 OPCH,Health Care
 OPEN,Real Estate
 OPFI,Financials
+OPHC,Financials
 OPK,Health Care
 OPLN,Consumer Discretionary
 OPRA,Communication Services
@@ -1803,6 +1809,7 @@ PSNY,Consumer Discretionary
 PSTL,Real Estate
 PTA,Financials
 PTEN,Energy
+PTHS,Health Care
 PTLO,Consumer Discretionary
 PTON,Consumer Discretionary
 PTRN,Information Technology
@@ -1841,6 +1848,7 @@ RBCAA,Financials
 RBKB,Financials
 RC,Real Estate
 RCAT,Industrials
+RCBC,Financials
 RCEL,Health Care
 RCKT,Health Care
 RCKY,Consumer Discretionary
@@ -1967,6 +1975,8 @@ SENS,Health Care
 SEPN,Health Care
 SERV,Industrials
 SEVN,Real Estate
+SEZL,Financials
+SFBC,Financials
 SFBS,Financials
 SFIX,Consumer Discretionary
 SFL,Industrials
@@ -1998,6 +2008,7 @@ SIGA,Health Care
 SIGIP,Financials
 SII,Financials
 SILC,Information Technology
+SIM,Materials
 SION,Health Care
 SITC,Real Estate
 SITE,Industrials
@@ -2216,6 +2227,7 @@ TRT,Information Technology
 TRTX,Real Estate
 TRUP,Financials
 TRVI,Health Care
+TRX,Materials
 TSAT,Information Technology
 TSBK,Financials
 TSHA,Health Care
@@ -2445,9 +2457,11 @@ ZETA,Information Technology
 ZGN,Consumer Discretionary
 ZIM,Industrials
 ZIP,Communication Services
+ZJYL,Health Care
 ZLAB,Health Care
 ZNTL,Health Care
 ZSQR,Information Technology
+ZTG,Industrials
 ZUMZ,Consumer Discretionary
 ZURA,Health Care
 ZVIA,Consumer Staples
