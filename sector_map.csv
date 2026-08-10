@@ -716,6 +716,7 @@ ECVT,Materials
 ECX,Consumer Discretionary
 EDIT,Health Care
 EDN,Utilities
+EDRY,Industrials
 EE,Energy
 EEFT,Information Technology
 EFC,Real Estate
@@ -736,6 +737,7 @@ ELE,Materials
 ELF,Consumer Staples
 ELMD,Health Care
 ELME,Real Estate
+ELPW,Industrials
 ELVA,Industrials
 ELVN,Health Care
 ELVR,Materials
@@ -1265,6 +1267,7 @@ LAND,Real Estate
 LAR,Materials
 LASR,Information Technology
 LAUR,Consumer Staples
+LAW,Information Technology
 LAZ,Financials
 LBRDA,Communication Services
 LBRDK,Communication Services
@@ -1356,6 +1359,7 @@ MATV,Materials
 MATW,Industrials
 MAX,Communication Services
 MAZE,Health Care
+MB,Consumer Discretionary
 MBC,Consumer Discretionary
 MBI,Financials
 MBIN,Financials
@@ -1701,6 +1705,7 @@ PBI,Industrials
 PBT,Energy
 PBYI,Health Care
 PCB,Financials
+PCLA,Communication Services
 PCRX,Health Care
 PCT,Industrials
 PD,Information Technology
