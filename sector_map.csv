@@ -294,6 +294,7 @@ BFH,Financials
 BFLY,Health Care
 BFS,Real Estate
 BFST,Financials
+BGC,Financials
 BGR,Financials
 BGS,Consumer Staples
 BGSI,Consumer Discretionary
@@ -464,6 +465,7 @@ CFFI,Financials
 CFFN,Financials
 CGAU,Materials
 CGBD,Financials
+CGC,Health Care
 CGEM,Health Care
 CGNT,Information Technology
 CGTL,Consumer Discretionary
@@ -475,6 +477,7 @@ CHEF,Consumer Staples
 CHGG,Consumer Staples
 CHH,Consumer Discretionary
 CHMG,Financials
+CHMI,Real Estate
 CHPT,Consumer Discretionary
 CHRN,Information Technology
 CHRS,Health Care
@@ -1330,6 +1333,7 @@ LTRX,Information Technology
 LU,Financials
 LUCD,Health Care
 LUCK,Consumer Discretionary
+LUNG,Health Care
 LUNR,Industrials
 LUXE,Consumer Discretionary
 LVWR,Consumer Discretionary
@@ -2097,6 +2101,7 @@ STEP,Financials
 STEX,Financials
 STGW,Communication Services
 STIM,Health Care
+STLN,Health Care
 STNE,Information Technology
 STNG,Energy
 STOK,Health Care
