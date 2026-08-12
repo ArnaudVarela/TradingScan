@@ -115,7 +115,6 @@ CCJ,production_energie,1,True
 CDRE,defense,1,True
 CEG,production_energie,1,True
 CEVA,semiconducteurs,1,True
-CGNX,robotique,1,True
 COHR,laser_photonique,1,True
 COHU,semiconducteurs,1,True
 CPST,equipement_electrique,1,True
@@ -341,6 +340,7 @@ AMOT,equipement_electrique,1,False
 ANLDF,production_energie,1,False
 AXT,semiconducteurs,1,False
 CBAK,new_tech,1,False
+CGNX,robotique,1,False
 EKSO,robotique,1,False
 EMKR,laser_photonique,1,False
 HYZN,production_energie,1,False
