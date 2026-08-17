@@ -81,6 +81,7 @@ AIRS,Health Care
 AIV,Real Estate
 AKBA,Health Care
 AKR,Real Estate
+AKTS,Health Care
 ALCO,Consumer Staples
 ALDX,Health Care
 ALEC,Health Care
@@ -349,6 +350,7 @@ BOOT,Consumer Discretionary
 BORR,Energy
 BOW,Financials
 BOX,Information Technology
+BPRN,Financials
 BRBR,Consumer Staples
 BRBS,Financials
 BRC,Industrials
@@ -392,6 +394,7 @@ BXBL,Consumer Discretionary
 BXC,Industrials
 BXMT,Real Estate
 BY,Financials
+BYND,Consumer Staples
 BYRN,Industrials
 BZAI,Information Technology
 BZFD,Communication Services
@@ -408,6 +411,7 @@ CALM,Consumer Staples
 CALX,Information Technology
 CALY,Consumer Discretionary
 CAMP,Health Care
+CAPL,Energy
 CAPR,Health Care
 CAR,Industrials
 CARE,Financials
@@ -744,6 +748,7 @@ ELPW,Industrials
 ELVA,Industrials
 ELVN,Health Care
 ELVR,Materials
+EMAT,Materials
 EMBC,Health Care
 EML,Industrials
 EMPD,Consumer Discretionary
@@ -768,6 +773,7 @@ EQ,Health Care
 EQBK,Financials
 ERII,Industrials
 ERO,Materials
+ESCA,Consumer Discretionary
 ESEA,Industrials
 ESOA,Industrials
 ESP,Industrials
@@ -1140,6 +1146,7 @@ INGN,Health Care
 INMD,Health Care
 INN,Real Estate
 INNV,Health Care
+INO,Health Care
 INOD,Information Technology
 INR,Energy
 INSE,Consumer Discretionary
@@ -1311,6 +1318,7 @@ LMND,Financials
 LMNR,Consumer Staples
 LMRI,Health Care
 LNN,Industrials
+LNSR,Health Care
 LOB,Financials
 LOCO,Consumer Discretionary
 LODE,Materials
@@ -1627,6 +1635,7 @@ OFIX,Health Care
 OFLX,Industrials
 OGC,Materials
 OGG,Materials
+OGI,Health Care
 OGN,Health Care
 OGS,Utilities
 OI,Consumer Discretionary
@@ -1704,6 +1713,7 @@ PAX,Financials
 PAY,Information Technology
 PAYO,Information Technology
 PAYS,Information Technology
+PBAM,Financials
 PBH,Health Care
 PBI,Industrials
 PBT,Energy
@@ -1825,6 +1835,7 @@ PTRN,Information Technology
 PUBM,Information Technology
 PUMP,Energy
 PURR,Financials
+PUSA,Consumer Discretionary
 PVH,Consumer Discretionary
 PVLA,Health Care
 PWP,Financials
@@ -2068,6 +2079,7 @@ SOC,Energy
 SONO,Information Technology
 SOPH,Health Care
 SOUN,Information Technology
+SPAI,Industrials
 SPB,Consumer Staples
 SPCE,Industrials
 SPFI,Financials
@@ -2311,6 +2323,7 @@ UVSP,Financials
 UVV,Consumer Staples
 UWMC,Financials
 VAC,Consumer Discretionary
+VALN,Health Care
 VANI,Health Care
 VATE,Industrials
 VBNK,Financials
@@ -2389,6 +2402,7 @@ WEN,Consumer Discretionary
 WERN,Industrials
 WEST,Consumer Staples
 WETO,Information Technology
+WEYS,Consumer Discretionary
 WFG,Materials
 WGO,Consumer Discretionary
 WGS,Health Care
@@ -2437,6 +2451,7 @@ XERS,Health Care
 XFLT,Financials
 XFOR,Health Care
 XGN,Health Care
+XHG,Financials
 XHR,Real Estate
 XIFR,Utilities
 XMAX,Consumer Discretionary
