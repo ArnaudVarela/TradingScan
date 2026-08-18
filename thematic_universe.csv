@@ -68,7 +68,6 @@ VVX,defense|laser_photonique,2,True
 AAON,gestion_thermique,1,True
 ABAT,new_tech,1,True
 ACLS,semiconducteurs,1,True
-ADI,semiconducteurs,1,True
 AEIS,equipement_electrique,1,True
 AEYE,ia,1,True
 AI,ia,1,True
@@ -334,6 +333,7 @@ YMAT,new_tech,1,True
 YSS,espace,1,True
 ZBRA,robotique,1,True
 ZENA,defense,1,True
+ADI,semiconducteurs,1,False
 ADN,production_energie,1,False
 AETI,equipement_electrique,1,False
 AMBI,robotique,1,False
