@@ -34,6 +34,7 @@ ACRE,Real Estate
 ACRS,Health Care
 ACTG,Industrials
 ACU,Consumer Staples
+ACV,Financials
 ACVA,Consumer Discretionary
 AD,Communication Services
 ADAG,Health Care
@@ -333,12 +334,14 @@ BLSH,Information Technology
 BLW,Financials
 BLX,Financials
 BLZE,Information Technology
+BMA,Financials
 BMBL,Communication Services
 BME,Financials
 BMEA,Health Care
 BMEZ,Financials
 BMI,Information Technology
 BMRC,Financials
+BNAI,Information Technology
 BNC,Industrials
 BNED,Consumer Discretionary
 BNL,Real Estate
@@ -493,6 +496,7 @@ CIGI,Real Estate
 CII,Financials
 CIM,Real Estate
 CION,Financials
+CISS,Industrials
 CIVB,Financials
 CLAR,Consumer Discretionary
 CLB,Energy
@@ -730,6 +734,7 @@ EFC,Real Estate
 EFOR,Information Technology
 EFSC,Financials
 EFSI,Financials
+EFT,Financials
 EFXT,Energy
 EGAN,Information Technology
 EGBN,Financials
@@ -773,6 +778,7 @@ EQ,Health Care
 EQBK,Financials
 ERII,Industrials
 ERO,Materials
+ESAB,Industrials
 ESCA,Consumer Discretionary
 ESEA,Industrials
 ESOA,Industrials
@@ -876,6 +882,7 @@ FORR,Industrials
 FOSL,Consumer Discretionary
 FOUR,Information Technology
 FOXF,Consumer Discretionary
+FPH,Real Estate
 FPI,Real Estate
 FRA,Financials
 FRAF,Financials
@@ -1248,6 +1255,7 @@ KOS,Energy
 KPTI,Health Care
 KRC,Real Estate
 KREF,Real Estate
+KRMD,Health Care
 KRNT,Industrials
 KRNY,Financials
 KRO,Materials
@@ -1510,6 +1518,7 @@ NCDL,Financials
 NCMI,Communication Services
 NCNO,Information Technology
 NCSM,Energy
+NCT,Industrials
 NCV,Financials
 NCZ,Financials
 NDLS,Consumer Discretionary
@@ -1559,6 +1568,7 @@ NNBR,Industrials
 NNDM,Information Technology
 NNE,Industrials
 NNI,Financials
+NNNN,Health Care
 NOA,Energy
 NOG,Energy
 NOMD,Consumer Staples
@@ -1813,6 +1823,7 @@ PRLB,Industrials
 PRLD,Health Care
 PRM,Materials
 PRME,Health Care
+PROF,Health Care
 PROK,Health Care
 PRQR,Health Care
 PRSU,Consumer Discretionary
@@ -2283,6 +2294,7 @@ UCTT,Information Technology
 UE,Real Estate
 UEC,Energy
 UFCS,Financials
+UFI,Consumer Discretionary
 UFPI,Materials
 UFPT,Health Care
 UHAL,Industrials
