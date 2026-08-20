@@ -631,6 +631,7 @@ CXT,Industrials
 CXW,Industrials
 CYD,Consumer Discretionary
 CYH,Health Care
+CYPH,Financials
 CYRX,Industrials
 CZFS,Financials
 CZNC,Financials
@@ -658,6 +659,7 @@ DEA,Real Estate
 DEC,Energy
 DEI,Real Estate
 DERM,Health Care
+DFDV,Financials
 DFH,Consumer Discretionary
 DFIN,Information Technology
 DFNS,Industrials
@@ -1016,6 +1018,7 @@ GT,Consumer Discretionary
 GTE,Energy
 GTM,Information Technology
 GTN,Communication Services
+GTX,Consumer Discretionary
 GTY,Real Estate
 GUT,Financials
 GWRS,Utilities
@@ -1500,6 +1503,7 @@ NABL,Information Technology
 NAGE,Health Care
 NAK,Materials
 NAMS,Health Care
+NAN,Financials
 NAT,Energy
 NATH,Consumer Discretionary
 NATL,Information Technology
@@ -1570,6 +1574,7 @@ NNE,Industrials
 NNI,Financials
 NNNN,Health Care
 NOA,Energy
+NOAH,Financials
 NOG,Energy
 NOMD,Consumer Staples
 NOVTU,Information Technology
@@ -1596,6 +1601,7 @@ NSSC,Industrials
 NTB,Financials
 NTCT,Information Technology
 NTGR,Information Technology
+NTHI,Health Care
 NTLA,Health Care
 NTRSO,Financials
 NTSK,Information Technology
@@ -1867,6 +1873,7 @@ QTTB,Health Care
 QTWO,Information Technology
 QUAD,Industrials
 QUBT,Information Technology
+QUCY,Health Care
 QUIK,Information Technology
 QURE,Health Care
 RAIL,Industrials
@@ -2215,6 +2222,7 @@ TKC,Communication Services
 TKNO,Health Care
 TLRY,Health Care
 TLS,Information Technology
+TLSA,Health Care
 TLSI,Health Care
 TLX,Health Care
 TLYS,Consumer Discretionary
