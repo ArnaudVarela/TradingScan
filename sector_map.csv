@@ -30,6 +30,7 @@ ACLS,Information Technology
 ACMR,Information Technology
 ACNB,Financials
 ACNT,Materials
+ACOG,Health Care
 ACRE,Real Estate
 ACRS,Health Care
 ACTG,Industrials
@@ -351,6 +352,7 @@ BOH,Financials
 BOOM,Industrials
 BOOT,Consumer Discretionary
 BORR,Energy
+BOTJ,Financials
 BOW,Financials
 BOX,Information Technology
 BPRN,Financials
@@ -442,6 +444,7 @@ CCB,Financials
 CCBG,Financials
 CCC,Information Technology
 CCCC,Health Care
+CCLD,Health Care
 CCNE,Financials
 CCO,Communication Services
 CCOI,Communication Services
@@ -879,6 +882,7 @@ FNLC,Financials
 FNRN,Financials
 FNWD,Financials
 FOA,Financials
+FOCL,Health Care
 FOR,Real Estate
 FORR,Industrials
 FOSL,Consumer Discretionary
@@ -951,6 +955,7 @@ GDYN,Information Technology
 GEF,Consumer Discretionary
 GEL,Energy
 GEMI,Financials
+GENC,Industrials
 GENI,Communication Services
 GEO,Industrials
 GERN,Health Care
@@ -1106,6 +1111,7 @@ HYLN,Consumer Discretionary
 HYMC,Materials
 HYPR,Health Care
 HZO,Consumer Discretionary
+IA,Industrials
 IART,Health Care
 IAUX,Materials
 IBCP,Financials
@@ -1244,6 +1250,7 @@ KINS,Financials
 KLC,Consumer Staples
 KLIC,Information Technology
 KLTR,Information Technology
+KMDA,Health Care
 KMPR,Financials
 KMT,Industrials
 KMTS,Health Care
@@ -1523,6 +1530,7 @@ NCMI,Communication Services
 NCNO,Information Technology
 NCSM,Energy
 NCT,Industrials
+NCTY,Financials
 NCV,Financials
 NCZ,Financials
 NDLS,Consumer Discretionary
@@ -1627,6 +1635,7 @@ NWN,Utilities
 NWPX,Materials
 NX,Industrials
 NXDR,Communication Services
+NXDT,Real Estate
 NXG,Financials
 NXP,Financials
 NXRT,Real Estate
@@ -2503,9 +2512,11 @@ ZGN,Consumer Discretionary
 ZIM,Industrials
 ZIP,Communication Services
 ZJYL,Health Care
+ZKH,Consumer Discretionary
 ZLAB,Health Care
 ZNTL,Health Care
 ZSQR,Information Technology
+ZSTK,Financials
 ZTG,Industrials
 ZUMZ,Consumer Discretionary
 ZURA,Health Care
