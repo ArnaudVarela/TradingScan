@@ -377,6 +377,7 @@ BTBT,Financials
 BTDR,Information Technology
 BTE,Energy
 BTG,Materials
+BTGO,Financials
 BTQ,Information Technology
 BTU,Energy
 BTX,Financials
@@ -532,6 +533,7 @@ CMTG,Real Estate
 CMTV,Financials
 CNDT,Information Technology
 CNK,Communication Services
+CNL,Materials
 CNMD,Health Care
 CNNE,Consumer Discretionary
 CNO,Financials
@@ -673,6 +675,7 @@ DGII,Information Technology
 DGXX,Utilities
 DHC,Real Estate
 DHT,Energy
+DHX,Information Technology
 DIBS,Communication Services
 DIN,Consumer Discretionary
 DIOD,Information Technology
@@ -1658,6 +1661,7 @@ ODC,Materials
 ODD,Consumer Staples
 ODV,Materials
 OEC,Materials
+OESX,Industrials
 OFG,Financials
 OFIX,Health Care
 OFLX,Industrials
@@ -1854,6 +1858,7 @@ PSIX,Industrials
 PSN,Information Technology
 PSNL,Health Care
 PSNY,Consumer Discretionary
+PSNYW,Consumer Discretionary
 PSTL,Real Estate
 PTA,Financials
 PTEN,Energy
@@ -2484,6 +2489,7 @@ XFLT,Financials
 XFOR,Health Care
 XGN,Health Care
 XHG,Financials
+XHLD,Communication Services
 XHR,Real Estate
 XIFR,Utilities
 XMAX,Consumer Discretionary
