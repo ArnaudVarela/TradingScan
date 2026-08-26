@@ -91,7 +91,6 @@ ARM,semiconducteurs,1,True
 ARQQ,quantique,1,True
 ASML,semiconducteurs,1,True
 ASPI,production_energie,1,True
-ASPN,robotique,1,True
 ASTS,espace,1,True
 ATKR,equipement_electrique,1,True
 ATRO,defense,1,True
@@ -339,6 +338,7 @@ AETI,equipement_electrique,1,False
 AMBI,robotique,1,False
 AMOT,equipement_electrique,1,False
 ANLDF,production_energie,1,False
+ASPN,robotique,1,False
 AXT,semiconducteurs,1,False
 CBAK,new_tech,1,False
 EKSO,robotique,1,False
