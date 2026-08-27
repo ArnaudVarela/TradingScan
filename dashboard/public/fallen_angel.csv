@@ -1,49 +1,45 @@
 ticker,level,price,mcap_usd,score,setup,dd_from_hi_pct,base_range_pct,vol_growth_pct,dist_resist_pct,resistance,stop_ref,sector
-ALVO,strict,5.05,1915066409.0,37.3,Étendu (déjà parti),71.9,48.5,91.0,6.3,5.39,4.55,Health Care
-RNAC,strict,10.38,312761676.0,75.4,Cup & Handle probable,75.6,52.0,63.0,5.6,11.0,9.34,Health Care
-FWDI,strict,6.05,441604360.0,24.9,Étendu (déjà parti),86.8,46.6,62.0,4.0,6.3,5.45,Consumer Discretionary
-COUR,strict,6.19,1607552000.0,58.9,Momentum en formation,70.9,30.6,57.0,10.2,6.89,5.57,Consumer Staples
-GDYN,strict,7.87,627110790.0,67.2,Cup & Handle probable,69.1,39.8,56.0,4.5,8.24,7.08,Information Technology
-SENS,strict,9.52,475866477.0,32.3,Étendu (déjà parti),66.0,54.6,34.0,4.7,9.99,8.57,Health Care
-DV,strict,13.32,2061325065.0,68.3,Cup & Handle probable,69.0,35.7,26.0,0.3,13.35,11.99,Communication Services
-ASAN,strict,9.44,2144893940.0,66.8,Cup & Handle probable,66.0,47.8,15.0,4.6,9.89,8.5,Information Technology
-PTHS,relax,27.2,101071582.0,53.1,Setup en formation,54.7,36.1,207.0,8.7,29.8,24.48,Health Care
-WEN,relax,9.12,1696962377.0,79.0,Cup & Handle probable,50.6,37.1,101.0,3.5,9.45,8.21,Consumer Discretionary
-DTIL,relax,8.55,236683326.0,71.3,En base (loin du pivot),56.0,67.6,100.0,11.1,9.62,7.7,Health Care
-GFR,relax,6.22,778911165.0,48.0,En base (loin du pivot),50.2,29.4,93.0,13.1,7.16,5.6,Energy
-WNC,relax,12.41,513288380.0,71.4,En base (loin du pivot),56.1,61.6,87.0,12.8,14.23,11.17,Industrials
-MNTN,relax,13.22,968700961.0,50.0,Cup & Handle probable,59.3,42.8,64.0,0.8,13.33,11.9,Information Technology
-COTY,relax,2.67,2386660317.0,43.5,Setup en formation,79.9,47.6,53.0,13.6,3.09,2.4,Consumer Staples
-CRBP,relax,11.31,220007208.0,46.0,Cup & Handle probable,81.7,50.9,52.0,12.2,12.88,10.18,Health Care
-IMCR,relax,37.4,1904676350.0,82.1,Cup & Handle probable,51.4,26.6,50.0,0.3,37.5,33.66,Health Care
-WEAV,relax,7.29,583193578.0,67.4,Momentum en formation,58.7,46.9,50.0,4.8,7.66,6.56,Health Care
-CERT,relax,8.14,1240902975.0,61.8,Setup en formation,59.0,54.5,48.0,8.4,8.89,7.33,Health Care
-LSPD,relax,10.64,1396469042.0,70.4,Squeeze / VCP prêt à casser,51.0,30.6,40.0,4.0,11.09,9.58,Information Technology
-SGMT,relax,10.29,636852584.0,60.5,Setup en formation,50.3,64.6,39.0,7.7,11.15,9.26,Health Care
-CTKB,relax,4.58,587524304.0,58.7,Setup en formation,53.6,36.7,36.0,8.2,4.99,4.12,Health Care
-OBIO,relax,5.36,316753608.0,63.2,Setup en formation,54.1,41.5,36.0,7.3,5.78,4.82,Health Care
-RGP,relax,4.26,145352102.0,13.6,Tendance baissière (pas un setup),68.5,43.6,35.0,12.5,4.87,3.83,Industrials
-PERI,relax,9.8,377964366.0,69.5,Squeeze / VCP prêt à casser,72.8,37.1,32.0,13.0,11.27,8.82,Communication Services
-NCNO,relax,20.81,2291847714.0,71.6,Cup & Handle probable,51.8,35.7,31.0,1.9,21.22,18.73,Information Technology
-CNMD,relax,51.13,1518079005.0,80.5,Cup & Handle probable,55.4,43.5,28.0,4.7,53.66,46.02,Health Care
-MAX,relax,12.85,763042846.0,53.6,En base (loin du pivot),50.2,52.8,27.0,12.6,14.7,11.57,Communication Services
-CXM,relax,7.47,1737977414.0,75.1,Cup & Handle probable,56.4,37.3,26.0,0.4,7.5,6.72,Information Technology
-FORR,relax,12.03,231704630.0,82.4,Fin d'accumulation,62.0,61.9,25.0,2.4,12.33,10.83,Industrials
-FIVN,relax,32.28,2369483168.0,59.5,Setup en formation,65.1,65.9,21.0,6.6,34.58,29.06,Information Technology
-VERX,relax,13.52,2185076191.0,50.9,Squeeze / VCP prêt à casser,77.7,41.3,21.0,14.4,15.8,12.17,Information Technology
-KD,relax,13.02,2769559214.0,46.9,Setup en formation,70.5,35.1,20.0,12.8,14.94,11.72,Information Technology
-FDMT,relax,15.72,840816891.0,49.2,Setup en formation,56.6,57.1,20.0,7.1,16.93,14.15,Health Care
-MXCT,relax,1.35,137780285.0,58.4,En base (loin du pivot),75.7,65.3,19.0,12.3,1.54,1.22,Health Care
-VSTM,relax,7.08,635755356.0,54.8,Setup en formation,50.2,62.6,18.0,9.9,7.86,6.37,Health Care
-XFOR,relax,4.16,408484581.0,44.0,Setup en formation,91.3,39.2,16.0,13.9,4.83,3.74,Health Care
-PRGO,relax,14.48,2019092515.0,53.3,Cup & Handle probable,56.0,39.0,14.0,1.1,14.64,13.03,Health Care
-BRSL,relax,11.61,2113447500.0,46.7,Setup en formation,51.4,29.4,12.0,11.4,13.11,10.45,Consumer Discretionary
-SPSC,relax,80.56,2871013877.0,63.2,Cup & Handle probable,63.2,41.5,10.0,2.4,82.5,72.5,Information Technology
-ASST,relax,21.39,1898598065.0,21.5,Étendu (déjà parti),92.0,68.7,9.0,3.5,22.16,19.25,Financials
-ACVA,relax,7.28,1248937693.0,40.3,Setup en formation,69.0,59.2,9.0,13.1,8.38,6.55,Consumer Discretionary
-BNED,relax,12.61,440591896.0,71.7,En base (loin du pivot),94.4,53.5,9.0,14.0,14.66,11.35,Consumer Discretionary
-NMAX,relax,10.91,1371686050.0,48.4,Setup en formation,95.9,61.1,8.0,7.4,11.78,9.82,Communication Services
-ICFI,relax,88.38,1602392535.0,67.7,Setup en formation,50.2,41.8,7.0,7.6,95.68,79.54,Industrials
-ALKT,relax,20.13,2139909020.0,69.8,Cup & Handle probable,52.4,35.1,6.0,4.4,21.05,18.12,Information Technology
-AMR,relax,215.63,2794081147.0,36.5,Étendu (déjà parti),52.3,45.4,5.0,6.9,231.63,194.07,Materials
-SLP,relax,18.39,372137019.0,81.3,Squeeze / VCP prêt à casser,64.0,41.3,5.0,1.6,18.68,16.55,Health Care
+ALVO,strict,4.91,1905305622.0,45.2,Setup en formation,72.7,49.9,93.0,8.9,5.39,4.42,Health Care
+FWDI,strict,5.93,491820241.0,35.3,Étendu (déjà parti),87.1,47.6,63.0,5.9,6.3,5.34,Consumer Discretionary
+RNAC,strict,10.19,301645859.0,79.4,Setup en formation,76.1,53.0,61.0,7.4,11.0,9.17,Health Care
+GDYN,strict,7.72,640091091.0,67.2,Setup en formation,69.7,40.5,55.0,6.3,8.24,6.95,Information Technology
+COTY,strict,2.74,2430694641.0,51.9,Setup en formation,79.4,46.4,54.0,11.3,3.09,2.47,Consumer Staples
+SENS,strict,9.34,497016098.0,38.9,Setup en formation,66.6,55.7,34.0,6.5,9.99,8.41,Health Care
+DV,strict,13.3,2067524539.0,69.1,Cup & Handle probable,69.1,35.8,26.0,0.4,13.35,11.97,Communication Services
+WEN,relax,9.04,1490085503.0,78.3,Cup & Handle probable,51.1,37.4,100.0,4.3,9.45,8.14,Consumer Discretionary
+GFR,relax,6.12,771385453.0,37.4,En base (loin du pivot),51.0,29.9,98.0,14.5,7.16,5.51,Energy
+DTIL,relax,8.49,231853054.0,68.6,En base (loin du pivot),56.3,68.1,91.0,11.7,9.62,7.64,Health Care
+WNC,relax,12.51,538545427.0,75.1,En base (loin du pivot),55.7,61.1,86.0,12.1,14.23,11.26,Industrials
+MNTN,relax,13.05,942519854.0,55.6,Cup & Handle probable,59.8,43.4,65.0,2.1,13.33,11.75,Information Technology
+COUR,relax,6.06,1689516000.0,59.9,Momentum en formation,71.5,31.3,55.0,12.1,6.89,5.45,Consumer Staples
+WEAV,relax,7.31,583993569.0,66.0,Cup & Handle probable,58.5,46.8,53.0,4.6,7.66,6.58,Health Care
+IMCR,relax,37.12,1892574175.0,78.5,Cup & Handle probable,51.8,26.8,48.0,1.0,37.5,33.41,Health Care
+CERT,relax,8.22,1282851140.0,64.2,Setup en formation,58.6,54.0,46.0,7.5,8.89,7.4,Health Care
+CRBP,relax,11.3,215268591.0,57.0,Cup & Handle probable,81.7,51.0,40.0,12.3,12.88,10.17,Health Care
+LSPD,relax,10.49,1438463099.0,71.5,Squeeze / VCP prêt à casser,51.7,31.0,38.0,5.4,11.09,9.44,Information Technology
+OBIO,relax,5.26,307136800.0,64.7,Setup en formation,55.0,42.3,37.0,9.0,5.78,4.73,Health Care
+CTKB,relax,4.57,600522629.0,58.0,Setup en formation,53.7,36.8,36.0,8.4,4.99,4.11,Health Care
+RGP,relax,4.2,146729847.0,11.0,Tendance baissière (pas un setup),68.9,44.2,34.0,13.8,4.87,3.78,Industrials
+NCNO,relax,21.51,2465767578.0,64.0,Cup & Handle probable,50.2,36.7,31.0,0.8,21.68,19.36,Information Technology
+MAX,relax,12.67,770088203.0,50.4,En base (loin du pivot),50.9,53.6,28.0,13.8,14.7,11.4,Communication Services
+CXM,relax,7.47,1859776370.0,77.6,Cup & Handle probable,56.4,37.8,26.0,0.9,7.54,6.72,Information Technology
+CNMD,relax,50.48,1507146799.0,77.4,Squeeze / VCP prêt à casser,55.9,44.0,26.0,5.9,53.66,45.43,Health Care
+FORR,relax,11.7,232466190.0,80.5,Fin d'accumulation,63.1,63.7,23.0,5.1,12.33,10.53,Industrials
+VERX,relax,13.56,2319717114.0,52.8,Squeeze / VCP prêt à casser,77.7,41.2,21.0,14.2,15.8,12.2,Information Technology
+FDMT,relax,15.56,823691186.0,53.4,Setup en formation,57.1,57.6,21.0,8.1,16.93,14.0,Health Care
+FIVN,relax,32.0,2583192467.0,58.1,Setup en formation,65.4,66.5,20.0,7.5,34.58,28.8,Information Technology
+VYX,relax,8.88,1267481664.0,60.9,Setup en formation,53.3,46.4,20.0,12.4,10.14,7.99,Information Technology
+XFOR,relax,4.17,419390723.0,50.0,Setup en formation,91.3,39.1,19.0,13.7,4.83,3.75,Health Care
+MXCT,relax,1.31,132103944.0,54.8,En base (loin du pivot),76.4,67.3,18.0,14.9,1.54,1.18,Health Care
+ASAN,relax,9.44,2344284941.0,66.5,Cup & Handle probable,66.0,47.8,14.0,4.6,9.89,8.5,Information Technology
+PRGO,relax,14.76,1994114051.0,49.4,Cup & Handle probable,55.2,39.3,13.0,0.3,14.8,13.28,Health Care
+BRSL,relax,11.47,2088540000.0,45.5,Setup en formation,52.0,29.7,12.0,12.5,13.11,10.32,Consumer Discretionary
+SPSC,relax,80.48,3031214651.0,63.5,Cup & Handle probable,63.2,41.6,10.0,2.4,82.5,72.43,Information Technology
+ASST,relax,21.5,2073480740.0,25.7,Étendu (déjà parti),92.0,67.4,10.0,3.0,22.16,19.35,Financials
+ACVA,relax,7.32,1226013616.0,41.8,Setup en formation,68.8,58.9,9.0,12.6,8.38,6.59,Consumer Discretionary
+BNED,relax,12.51,423952705.0,70.2,En base (loin du pivot),94.4,53.9,9.0,14.6,14.66,11.26,Consumer Discretionary
+BHVN,relax,16.95,2434825750.0,66.2,Cup & Handle probable,72.8,60.2,6.0,7.1,18.24,15.26,Health Care
+ALKT,relax,20.35,2176269293.0,72.3,Cup & Handle probable,51.9,34.7,6.0,3.3,21.05,18.32,Information Technology
+NMAX,relax,10.56,1353603560.0,47.1,Setup en formation,96.0,63.2,6.0,10.4,11.78,9.5,Communication Services
+AMR,relax,217.92,2882961252.0,38.9,Étendu (déjà parti),51.8,45.0,5.0,5.9,231.63,196.13,Materials
+SLP,relax,18.41,372541516.0,75.5,Squeeze / VCP prêt à casser,64.0,41.2,5.0,1.4,18.68,16.57,Health Care
