@@ -418,6 +418,7 @@ CALM,Consumer Staples
 CALX,Information Technology
 CALY,Consumer Discretionary
 CAMP,Health Care
+CANG,Financials
 CAPL,Energy
 CAPR,Health Care
 CAR,Industrials
@@ -725,6 +726,7 @@ DXPE,Industrials
 DYN,Health Care
 EAF,Industrials
 EARN,Financials
+EBC,Financials
 EBF,Industrials
 EBMT,Financials
 EBS,Health Care
@@ -785,6 +787,7 @@ EPRX,Health Care
 EPSN,Energy
 EQ,Health Care
 EQBK,Financials
+EQPT,Industrials
 ERII,Industrials
 ERO,Materials
 ESAB,Industrials
@@ -836,6 +839,7 @@ FBRT,Real Estate
 FBRX,Health Care
 FBYD,Industrials
 FC,Consumer Staples
+FCAP,Financials
 FCBC,Financials
 FCCO,Financials
 FCEL,Industrials
@@ -989,6 +993,7 @@ GMAB,Health Care
 GNE,Utilities
 GNK,Industrials
 GNL,Real Estate
+GNLX,Health Care
 GNT,Financials
 GNTX,Consumer Discretionary
 GNW,Financials
@@ -1439,6 +1444,7 @@ MH,Consumer Staples
 MHD,Financials
 MHO,Consumer Discretionary
 MIAX,Financials
+MIDD,Industrials
 MIR,Industrials
 MIST,Health Care
 MITK,Information Technology
@@ -1768,6 +1774,7 @@ PDYN,Information Technology
 PEB,Real Estate
 PEBK,Financials
 PEBO,Financials
+PECO,Real Estate
 PED,Energy
 PEGA,Information Technology
 PENG,Information Technology
@@ -1911,6 +1918,7 @@ RCKY,Consumer Discretionary
 RCMT,Industrials
 RCUS,Health Care
 RDCM,Communication Services
+RDIB,Communication Services
 RDN,Financials
 RDNT,Health Care
 RDNW,Consumer Discretionary
@@ -1929,6 +1937,7 @@ REPX,Energy
 RERE,Consumer Discretionary
 RES,Energy
 REX,Materials
+REYN,Consumer Discretionary
 REZI,Industrials
 RFI,Financials
 RFIL,Industrials
@@ -2020,6 +2029,7 @@ SCZM,Materials
 SD,Energy
 SDGR,Health Care
 SDHC,Real Estate
+SDHY,Financials
 SDRL,Energy
 SEB,Industrials
 SEDG,Information Technology
@@ -2235,6 +2245,7 @@ TII,Materials
 TILE,Consumer Discretionary
 TIPT,Financials
 TITN,Industrials
+TJGC,Communication Services
 TK,Energy
 TKC,Communication Services
 TKNO,Health Care
