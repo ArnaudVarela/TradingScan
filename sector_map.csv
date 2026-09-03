@@ -342,6 +342,7 @@ BME,Financials
 BMEA,Health Care
 BMEZ,Financials
 BMI,Information Technology
+BMM,Materials
 BMRC,Financials
 BNAI,Information Technology
 BNC,Industrials
@@ -614,6 +615,7 @@ CUBI,Financials
 CUE,Health Care
 CURB,Real Estate
 CURI,Communication Services
+CURR,Information Technology
 CURV,Consumer Discretionary
 CUZ,Real Estate
 CV,Health Care
@@ -821,6 +823,7 @@ EWTX,Health Care
 EXFY,Information Technology
 EXK,Materials
 EXLS,Information Technology
+EXOD,Information Technology
 EXPO,Industrials
 EXTR,Information Technology
 EYE,Consumer Discretionary
@@ -1012,6 +1015,7 @@ GPK,Consumer Discretionary
 GPOR,Energy
 GPRE,Materials
 GPRK,Energy
+GPRO,Information Technology
 GRAL,Health Care
 GRBK,Consumer Discretionary
 GRC,Industrials
@@ -1334,6 +1338,7 @@ LFST,Health Care
 LGCL,Information Technology
 LGIH,Consumer Discretionary
 LIF,Information Technology
+LIFE,Financials
 LILA,Communication Services
 LILAK,Communication Services
 LINC,Consumer Staples
@@ -1415,6 +1420,7 @@ MCB,Financials
 MCBS,Financials
 MCFT,Consumer Discretionary
 MCHB,Financials
+MCI,Financials
 MCRI,Consumer Discretionary
 MCS,Communication Services
 MD,Health Care
@@ -1523,6 +1529,7 @@ MZTI,Consumer Staples
 NABL,Information Technology
 NAGE,Health Care
 NAK,Materials
+NAKA,Financials
 NAMS,Health Care
 NAN,Financials
 NAT,Energy
@@ -1763,6 +1770,7 @@ PCB,Financials
 PCLA,Communication Services
 PCRX,Health Care
 PCT,Industrials
+PCYO,Utilities
 PD,Information Technology
 PDEX,Health Care
 PDFS,Information Technology
@@ -1838,6 +1846,7 @@ PONY,Information Technology
 POST,Consumer Staples
 POWI,Information Technology
 POWW,Industrials
+PPHC,Industrials
 PPIH,Industrials
 PPLI,Communication Services
 PPTA,Materials
@@ -1870,6 +1879,7 @@ PSN,Information Technology
 PSNL,Health Care
 PSNY,Consumer Discretionary
 PSNYW,Consumer Discretionary
+PSQL,Information Technology
 PSTL,Real Estate
 PTA,Financials
 PTEN,Energy
@@ -1887,6 +1897,7 @@ PWP,Financials
 PXED,Consumer Staples
 PYPD,Health Care
 PYXS,Health Care
+PZG,Materials
 PZZA,Consumer Discretionary
 QCRH,Financials
 QDEL,Health Care
@@ -1974,6 +1985,7 @@ RNGR,Energy
 RNP,Financials
 RNST,Financials
 RNW,Utilities
+RNXT,Health Care
 ROCK,Industrials
 ROG,Information Technology
 ROOT,Financials
@@ -2186,9 +2198,11 @@ SVRA,Health Care
 SVV,Consumer Discretionary
 SWBI,Industrials
 SWIM,Industrials
+SWVL,Industrials
 SXC,Materials
 SXI,Industrials
 SXT,Materials
+SY,Health Care
 SYBT,Financials
 SYNA,Information Technology
 TAC,Utilities
