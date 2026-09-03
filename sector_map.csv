@@ -1226,6 +1226,7 @@ JBLU,Industrials
 JBSS,Consumer Staples
 JCAP,Financials
 JELD,Industrials
+JFB,Real Estate
 JILL,Consumer Discretionary
 JJSF,Consumer Staples
 JKS,Information Technology
@@ -1800,6 +1801,7 @@ PHOE,Industrials
 PHR,Health Care
 PHVS,Health Care
 PI,Information Technology
+PICS,Information Technology
 PII,Consumer Discretionary
 PINE,Real Estate
 PK,Real Estate
@@ -2505,6 +2507,7 @@ XHG,Financials
 XHLD,Communication Services
 XHR,Real Estate
 XIFR,Utilities
+XLAB,Information Technology
 XMAX,Consumer Discretionary
 XMTR,Industrials
 XNCR,Health Care
@@ -2528,6 +2531,7 @@ YEXT,Information Technology
 YMT,Information Technology
 YORW,Utilities
 YRD,Financials
+YSS,Industrials
 ZBIO,Health Care
 ZD,Communication Services
 ZENA,Information Technology
