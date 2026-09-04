@@ -1055,6 +1055,7 @@ HCAT,Health Care
 HCC,Materials
 HCI,Financials
 HCKT,Information Technology
+HCM,Health Care
 HCSG,Health Care
 HDSN,Materials
 HE,Utilities
@@ -1489,6 +1490,7 @@ MQ,Information Technology
 MQY,Financials
 MRAM,Information Technology
 MRBK,Financials
+MRCY,Industrials
 MRDN,Consumer Discretionary
 MRLN,Industrials
 MRP,Real Estate
@@ -1659,6 +1661,7 @@ NX,Industrials
 NXDR,Communication Services
 NXDT,Real Estate
 NXG,Financials
+NXH,Consumer Discretionary
 NXP,Financials
 NXRT,Real Estate
 NYAX,Information Technology
@@ -2506,6 +2509,7 @@ WT,Financials
 WTBA,Financials
 WTFCN,Financials
 WTI,Energy
+WTM,Financials
 WTTR,Energy
 WU,Financials
 WVE,Health Care
