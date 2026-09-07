@@ -2,7 +2,6 @@ ticker,themes,n_themes,valid
 ONDS,defense|equipement_electrique|espace|laser_photonique|robotique,5,True
 POET,ia|laser_photonique|new_tech|quantique|semiconducteurs,5,True
 NVTS,equipement_electrique|new_tech|robotique|semiconducteurs,4,True
-AEHR,memoire|new_tech|semiconducteurs,3,True
 AOSL,equipement_electrique|gestion_thermique|semiconducteurs,3,True
 AVAV,defense|espace|robotique,3,True
 BBAI,defense|ia|new_tech,3,True
@@ -124,7 +123,6 @@ CRNC,ia,1,True
 CRUS,semiconducteurs,1,True
 CRWV,ia,1,True
 CTS,gestion_thermique,1,True
-CVU,defense,1,True
 CVV,new_tech,1,True
 CW,defense,1,True
 DCO,defense,1,True
@@ -334,6 +332,7 @@ YMAT,new_tech,1,True
 YSS,espace,1,True
 ZBRA,robotique,1,True
 ZENA,defense,1,True
+AEHR,memoire|new_tech|semiconducteurs,3,False
 ADN,production_energie,1,False
 AETI,equipement_electrique,1,False
 AMBI,robotique,1,False
@@ -341,6 +340,7 @@ AMOT,equipement_electrique,1,False
 ANLDF,production_energie,1,False
 AXT,semiconducteurs,1,False
 CBAK,new_tech,1,False
+CVU,defense,1,False
 EKSO,robotique,1,False
 EMKR,laser_photonique,1,False
 HYZN,production_energie,1,False
