@@ -278,7 +278,6 @@ SHLS,equipement_electrique,1,True
 SIDU,espace,1,True
 SIF,defense,1,True
 SITM,semiconducteurs,1,True
-SKYT,semiconducteurs,1,True
 SLAB,semiconducteurs,1,True
 SLDP,new_tech,1,True
 SMP,gestion_thermique,1,True
@@ -348,6 +347,7 @@ IRBT,robotique,1,False
 NFUNF,production_energie,1,False
 POAI,ia,1,False
 RWLK,robotique,1,False
+SKYT,semiconducteurs,1,False
 THRD,robotique,1,False
 URGE,production_energie,1,False
 VRNT,ia,1,False
