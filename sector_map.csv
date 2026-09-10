@@ -78,6 +78,7 @@ AIN,Consumer Discretionary
 AIO,Financials
 AIOT,Information Technology
 AIP,Information Technology
+AIR,Industrials
 AIRJ,Industrials
 AIRO,Industrials
 AIRS,Health Care
@@ -833,6 +834,7 @@ EZPW,Financials
 FA,Industrials
 FAC,Industrials
 FATE,Health Care
+FBIN,Industrials
 FBIO,Health Care
 FBIZ,Financials
 FBK,Financials
@@ -889,6 +891,7 @@ FMAO,Financials
 FMBH,Financials
 FMC,Materials
 FMNB,Financials
+FND,Consumer Discretionary
 FNKO,Consumer Discretionary
 FNLC,Financials
 FNRN,Financials
@@ -1284,6 +1287,7 @@ KPTI,Health Care
 KRC,Real Estate
 KREF,Real Estate
 KRMD,Health Care
+KRMN,Industrials
 KRNT,Industrials
 KRNY,Financials
 KRO,Materials
@@ -1402,6 +1406,7 @@ MAIN,Financials
 MAKO,Materials
 MAMA,Consumer Staples
 MAN,Industrials
+MANE,Health Care
 MANU,Communication Services
 MARA,Financials
 MASS,Health Care
@@ -1471,6 +1476,7 @@ MMI,Real Estate
 MMS,Industrials
 MMSI,Health Care
 MMT,Financials
+MMYT,Consumer Discretionary
 MNDY,Information Technology
 MNKD,Health Care
 MNPR,Health Care
@@ -1744,6 +1750,7 @@ OTLK,Health Care
 OTLY,Consumer Staples
 OTTR,Industrials
 OUST,Information Technology
+OUT,Real Estate
 OVBC,Financials
 OVID,Health Care
 OVLY,Financials
@@ -2143,6 +2150,7 @@ SNDL,Consumer Staples
 SNDX,Health Care
 SNWV,Health Care
 SOC,Energy
+SON,Consumer Discretionary
 SONO,Information Technology
 SOPH,Health Care
 SOUN,Information Technology
@@ -2412,6 +2420,7 @@ VERA,Health Care
 VERI,Information Technology
 VERX,Information Technology
 VET,Energy
+VFC,Consumer Discretionary
 VFF,Consumer Staples
 VGM,Financials
 VGZ,Materials
@@ -2519,6 +2528,7 @@ WVE,Health Care
 WW,Health Care
 WWW,Consumer Discretionary
 WYFI,Information Technology
+WYHG,Consumer Staples
 WYY,Information Technology
 XERS,Health Care
 XFLT,Financials
