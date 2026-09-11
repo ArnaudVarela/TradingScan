@@ -117,6 +117,7 @@ AMAL,Financials
 AMBA,Information Technology
 AMBP,Consumer Discretionary
 AMBQ,Information Technology
+AMBR,Financials
 AMC,Communication Services
 AMCI,Information Technology
 AMCX,Communication Services
@@ -351,6 +352,7 @@ BNC,Industrials
 BNED,Consumer Discretionary
 BNL,Real Estate
 BNTC,Health Care
+BOBS,Consumer Discretionary
 BOC,Industrials
 BOH,Financials
 BOOM,Industrials
@@ -758,6 +760,7 @@ EGHT,Information Technology
 EGY,Energy
 EH,Industrials
 EIG,Financials
+EIKN,Health Care
 ELA,Consumer Discretionary
 ELDN,Health Care
 ELE,Materials
@@ -953,6 +956,7 @@ GALT,Health Care
 GAM,Financials
 GASS,Industrials
 GAU,Materials
+GAUZ,Information Technology
 GBAB,Financials
 GBDC,Financials
 GBFH,Financials
@@ -2450,6 +2454,7 @@ VRNS,Information Technology
 VRRM,Information Technology
 VRTS,Financials
 VRXA,Health Care
+VSECU,Industrials
 VSH,Information Technology
 VSTM,Health Care
 VSTS,Industrials
@@ -2556,6 +2561,7 @@ XZO,Financials
 YALA,Information Technology
 YARW,Health Care
 YDDL,Industrials
+YDES,Health Care
 YELP,Communication Services
 YETI,Consumer Discretionary
 YEXT,Information Technology
