@@ -53,6 +53,7 @@ ADV,Communication Services
 AEBI,Industrials
 AEF,Financials
 AEHR,Information Technology
+AENT,Communication Services
 AEO,Consumer Discretionary
 AERO,Industrials
 AESI,Energy
@@ -63,6 +64,7 @@ AGEN,Health Care
 AGIO,Health Care
 AGL,Health Care
 AGM,Financials
+AGMB,Health Care
 AGNT,Real Estate
 AGO,Financials
 AGPU,Information Technology
@@ -1676,6 +1678,7 @@ NXG,Financials
 NXH,Consumer Discretionary
 NXP,Financials
 NXRT,Real Estate
+NXXT,Utilities
 NYAX,Information Technology
 OABI,Health Care
 OBE,Energy
@@ -1696,6 +1699,7 @@ OESX,Industrials
 OFG,Financials
 OFIX,Health Care
 OFLX,Industrials
+OFRM,Consumer Staples
 OGC,Materials
 OGG,Materials
 OGI,Health Care
@@ -2084,6 +2088,7 @@ SG,Consumer Discretionary
 SGHT,Health Care
 SGML,Materials
 SGMT,Health Care
+SGP,Health Care
 SGRY,Health Care
 SHAK,Consumer Discretionary
 SHBI,Financials
