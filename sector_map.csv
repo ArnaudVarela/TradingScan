@@ -784,6 +784,7 @@ ENPH,Information Technology
 ENR,Industrials
 ENTA,Health Care
 ENTX,Health Care
+ENVA,Financials
 ENVX,Industrials
 EOLS,Health Care
 EOSE,Industrials
@@ -1050,6 +1051,7 @@ GTN,Communication Services
 GTX,Consumer Discretionary
 GTY,Real Estate
 GUT,Financials
+GVA,Industrials
 GWRS,Utilities
 HAE,Health Care
 HAFC,Financials
@@ -1734,6 +1736,7 @@ OPLN,Consumer Discretionary
 OPRA,Communication Services
 OPRT,Financials
 OPRX,Health Care
+OPTT,Industrials
 OPTU,Communication Services
 OPTX,Information Technology
 OPY,Financials
@@ -1857,6 +1860,7 @@ PMI,Health Care
 PMN,Health Care
 PMT,Real Estate
 PMTS,Financials
+PMVP,Health Care
 PN,Information Technology
 PNBK,Financials
 PNNT,Financials
@@ -2445,6 +2449,7 @@ VLN,Information Technology
 VLRS,Industrials
 VMD,Health Care
 VMO,Financials
+VNCE,Consumer Discretionary
 VNDA,Health Care
 VNET,Information Technology
 VNT,Information Technology
