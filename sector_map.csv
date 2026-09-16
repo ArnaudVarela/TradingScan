@@ -1073,6 +1073,7 @@ HDSN,Materials
 HE,Utilities
 HELE,Consumer Staples
 HELP,Health Care
+HEPS,Consumer Discretionary
 HESM,Energy
 HFWA,Financials
 HG,Financials
@@ -1993,6 +1994,7 @@ RHLD,Industrials
 RICK,Consumer Discretionary
 RIGL,Health Care
 RILY,Financials
+RILYZ,
 RJET,Industrials
 RLAY,Health Care
 RLGT,Industrials
@@ -2164,6 +2166,7 @@ SNDL,Consumer Staples
 SNDX,Health Care
 SNWV,Health Care
 SOC,Energy
+SOHU,Communication Services
 SON,Consumer Discretionary
 SONO,Information Technology
 SOPH,Health Care
@@ -2585,6 +2588,7 @@ ZD,Communication Services
 ZENA,Information Technology
 ZETA,Information Technology
 ZGN,Consumer Discretionary
+ZH,Communication Services
 ZIM,Industrials
 ZIP,Communication Services
 ZJYL,Health Care
