@@ -52,6 +52,7 @@ ADUS,Health Care
 ADV,Communication Services
 AEBI,Industrials
 AEF,Financials
+AEHL,Industrials
 AEHR,Information Technology
 AENT,Communication Services
 AEO,Consumer Discretionary
@@ -59,6 +60,7 @@ AERO,Industrials
 AESI,Energy
 AEVA,Information Technology
 AFYA,Consumer Staples
+AGBK,Financials
 AGCC,Consumer Staples
 AGEN,Health Care
 AGIO,Health Care
@@ -579,6 +581,7 @@ CRBP,Health Care
 CRBU,Health Care
 CRC,Energy
 CRCT,Information Technology
+CRDF,Health Care
 CRDL,Health Care
 CRESY,Industrials
 CRGY,Energy
@@ -1292,6 +1295,7 @@ KODK,Industrials
 KOP,Materials
 KOPN,Information Technology
 KOS,Energy
+KPLT,Information Technology
 KPTI,Health Care
 KRC,Real Estate
 KREF,Real Estate
@@ -1474,6 +1478,7 @@ MIR,Industrials
 MIST,Health Care
 MITK,Information Technology
 MITT,Real Estate
+MKDW,Consumer Discretionary
 MKTX,Financials
 MLAB,Information Technology
 MLCO,Consumer Discretionary
@@ -1770,6 +1775,7 @@ OWLT,Health Care
 OXLC,Financials
 OXM,Consumer Discretionary
 OXSQ,Financials
+PAAI,Communication Services
 PACB,Health Care
 PACK,Consumer Discretionary
 PAGP,Energy
