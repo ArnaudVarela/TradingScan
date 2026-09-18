@@ -162,6 +162,7 @@ AOSL,Information Technology
 AOUT,Consumer Discretionary
 AP,Industrials
 APAM,Financials
+APC,Energy
 APEI,Consumer Staples
 API,Information Technology
 APLE,Real Estate
@@ -1493,6 +1494,7 @@ MMT,Financials
 MMYT,Consumer Discretionary
 MNDY,Information Technology
 MNKD,Health Care
+MNOV,Health Care
 MNPR,Health Care
 MNR,Energy
 MNRO,Consumer Discretionary
@@ -1593,6 +1595,7 @@ NEXA,Materials
 NEXN,Communication Services
 NEXT,Energy
 NFBK,Financials
+NFE,Energy
 NFGC,Materials
 NG,Materials
 NGEN,Health Care
@@ -1631,6 +1634,7 @@ NOA,Energy
 NOAH,Financials
 NOG,Energy
 NOMD,Consumer Staples
+NOVT,Information Technology
 NOVTU,Information Technology
 NP,Financials
 NPB,Financials
@@ -1686,6 +1690,7 @@ NXG,Financials
 NXH,Consumer Discretionary
 NXP,Financials
 NXRT,Real Estate
+NXST,Communication Services
 NXXT,Utilities
 NYAX,Information Technology
 OABI,Health Care
@@ -2350,6 +2355,7 @@ TRST,Financials
 TRT,Information Technology
 TRTX,Real Estate
 TRUP,Financials
+TRVG,Communication Services
 TRVI,Health Care
 TRX,Materials
 TSAT,Information Technology
@@ -2474,8 +2480,10 @@ VRNS,Information Technology
 VRRM,Information Technology
 VRTS,Financials
 VRXA,Health Care
+VSEC,Industrials
 VSECU,Industrials
 VSH,Information Technology
+VSNT,Communication Services
 VSTM,Health Care
 VSTS,Industrials
 VTEX,Information Technology
@@ -2503,6 +2511,7 @@ WBTN,Communication Services
 WBX,Information Technology
 WD,Financials
 WDFC,Materials
+WDH,Financials
 WEAV,Health Care
 WEN,Consumer Discretionary
 WERN,Industrials
@@ -2555,6 +2564,7 @@ WWW,Consumer Discretionary
 WYFI,Information Technology
 WYHG,Consumer Staples
 WYY,Information Technology
+XENE,Health Care
 XERS,Health Care
 XFLT,Financials
 XFOR,Health Care
