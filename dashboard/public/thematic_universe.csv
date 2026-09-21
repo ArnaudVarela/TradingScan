@@ -101,7 +101,6 @@ AYI,equipement_electrique,1,True
 AZZ,equipement_electrique,1,True
 BAH,defense,1,True
 BLDP,production_energie,1,True
-BNRG,new_tech,1,True
 BOTT,robotique,1,True
 BRKR,robotique,1,True
 BTQ,quantique,1,True
@@ -339,6 +338,7 @@ AMBI,robotique,1,False
 AMOT,equipement_electrique,1,False
 ANLDF,production_energie,1,False
 AXT,semiconducteurs,1,False
+BNRG,new_tech,1,False
 CBAK,new_tech,1,False
 EKSO,robotique,1,False
 EMKR,laser_photonique,1,False
