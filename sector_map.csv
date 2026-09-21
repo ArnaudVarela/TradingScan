@@ -258,6 +258,7 @@ AZ,Information Technology
 AZTA,Health Care
 AZZ,Industrials
 BAER,Industrials
+BAFN,Financials
 BAK,Materials
 BALY,Consumer Discretionary
 BANC,Financials
@@ -494,6 +495,7 @@ CGNT,Information Technology
 CGTL,Consumer Discretionary
 CGTX,Health Care
 CHA,Consumer Discretionary
+CHCI,Real Estate
 CHCO,Financials
 CHCT,Real Estate
 CHEF,Consumer Staples
@@ -864,6 +866,7 @@ FCN,Industrials
 FCPT,Real Estate
 FDMT,Health Care
 FDUS,Financials
+FEAM,Materials
 FEIM,Information Technology
 FELE,Industrials
 FENC,Health Care
@@ -1121,6 +1124,7 @@ HROW,Health Care
 HRTG,Financials
 HRZN,Financials
 HSAI,Consumer Discretionary
+HSDT,Financials
 HSHP,Industrials
 HSTM,Health Care
 HTB,Financials
@@ -2303,6 +2307,7 @@ TIGR,Financials
 TII,Materials
 TILE,Consumer Discretionary
 TIPT,Financials
+TISI,Industrials
 TITN,Industrials
 TJGC,Communication Services
 TK,Energy
@@ -2411,6 +2416,7 @@ UPB,Health Care
 UPBD,Information Technology
 UPST,Financials
 UPWK,Communication Services
+UPXI,Communication Services
 URG,Energy
 URGN,Health Care
 UROY,Energy
