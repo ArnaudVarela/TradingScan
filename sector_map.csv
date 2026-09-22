@@ -26,6 +26,7 @@ ACHC,Health Care
 ACHR,Industrials
 ACHV,Health Care
 ACIC,Financials
+ACIW,Information Technology
 ACLS,Information Technology
 ACMR,Information Technology
 ACNB,Financials
@@ -516,6 +517,7 @@ CIM,Real Estate
 CION,Financials
 CISS,Industrials
 CIVB,Financials
+CIX,Industrials
 CLAR,Consumer Discretionary
 CLB,Energy
 CLBK,Financials
@@ -1060,6 +1062,7 @@ GTY,Real Estate
 GUT,Financials
 GVA,Industrials
 GWRS,Utilities
+GYRE,Health Care
 HAE,Health Care
 HAFC,Financials
 HAFN,Industrials
@@ -1194,6 +1197,7 @@ INDB,Financials
 INDI,Information Technology
 INDP,Health Care
 INDV,Health Care
+INFQ,Information Technology
 INFU,Health Care
 INGN,Health Care
 INMD,Health Care
@@ -2232,6 +2236,7 @@ STRZ,Communication Services
 STTK,Health Care
 STUB,Communication Services
 STXS,Health Care
+SUIG,Financials
 SUNC,Energy
 SUNS,Real Estate
 SUPN,Health Care
