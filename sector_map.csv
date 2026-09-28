@@ -1139,6 +1139,7 @@ HTO,Utilities
 HTT,Financials
 HTZ,Industrials
 HUBG,Industrials
+HUCK,Information Technology
 HUN,Materials
 HURA,Health Care
 HURC,Industrials
@@ -1308,6 +1309,7 @@ KPLT,Information Technology
 KPTI,Health Care
 KRC,Real Estate
 KREF,Real Estate
+KRG,Real Estate
 KRMD,Health Care
 KRMN,Industrials
 KRNT,Industrials
@@ -1508,6 +1510,7 @@ MNR,Energy
 MNRO,Consumer Discretionary
 MNSB,Financials
 MNSO,Consumer Discretionary
+MNTK,Materials
 MNTN,Information Technology
 MNTS,Industrials
 MOMO,Communication Services
@@ -1686,6 +1689,7 @@ NVRI,Industrials
 NVST,Health Care
 NVTS,Information Technology
 NWBI,Financials
+NWCL,Industrials
 NWE,Utilities
 NWFL,Financials
 NWL,Consumer Staples
@@ -2044,6 +2048,7 @@ RQI,Financials
 RR,Industrials
 RRBI,Financials
 RRGB,Consumer Discretionary
+RSI,Consumer Discretionary
 RSKD,Information Technology
 RTB,Information Technology
 RUM,Communication Services
@@ -2207,6 +2212,7 @@ SPT,Information Technology
 SR,Utilities
 SRAD,Information Technology
 SRCE,Financials
+SRFM,Industrials
 SRI,Consumer Discretionary
 SRPT,Health Care
 SRTA,Health Care
@@ -2442,6 +2448,7 @@ UVE,Financials
 UVSP,Financials
 UVV,Consumer Staples
 UWMC,Financials
+UXIN,Consumer Discretionary
 VAC,Consumer Discretionary
 VALN,Health Care
 VANI,Health Care
@@ -2469,6 +2476,7 @@ VIR,Health Care
 VISN,Information Technology
 VITL,Consumer Staples
 VIVO,Information Technology
+VKI,Financials
 VKQ,Financials
 VKTX,Health Care
 VLGEA,Consumer Staples
