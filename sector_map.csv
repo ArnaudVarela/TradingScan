@@ -416,6 +416,7 @@ BXBL,Consumer Discretionary
 BXC,Industrials
 BXMT,Real Estate
 BY,Financials
+BYD,Consumer Discretionary
 BYND,Consumer Staples
 BYRN,Industrials
 BZAI,Information Technology
@@ -1872,6 +1873,7 @@ PI,Information Technology
 PICS,Information Technology
 PII,Consumer Discretionary
 PINE,Real Estate
+PIPR,Financials
 PK,Real Estate
 PKBK,Financials
 PKE,Industrials
@@ -2095,6 +2097,7 @@ SANA,Health Care
 SAR,Financials
 SATL,Industrials
 SB,Industrials
+SBC,Industrials
 SBCF,Financials
 SBET,Financials
 SBFG,Financials
