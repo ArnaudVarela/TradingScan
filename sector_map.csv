@@ -312,6 +312,7 @@ BFLY,Health Care
 BFS,Real Estate
 BFST,Financials
 BGC,Financials
+BGIN,Information Technology
 BGR,Financials
 BGS,Consumer Staples
 BGSI,Consumer Discretionary
@@ -839,6 +840,7 @@ EVH,Health Care
 EVI,Industrials
 EVLV,Industrials
 EVMN,Health Care
+EVN,Financials
 EVTC,Information Technology
 EVTL,Industrials
 EWTX,Health Care
@@ -871,6 +873,7 @@ FCCO,Financials
 FCEL,Industrials
 FCF,Financials
 FCN,Industrials
+FCNCN,
 FCPT,Real Estate
 FDMT,Health Care
 FDUS,Financials
@@ -1035,6 +1038,7 @@ GOOD,Real Estate
 GOOS,Consumer Discretionary
 GORO,Materials
 GOTU,Consumer Staples
+GOW,Energy
 GPCR,Health Care
 GPGI,Industrials
 GPI,Consumer Discretionary
@@ -1408,6 +1412,7 @@ LPL,Information Technology
 LPRO,Financials
 LPTH,Information Technology
 LPX,Industrials
+LQDA,Health Care
 LQDT,Consumer Discretionary
 LRMR,Health Care
 LRN,Consumer Staples
@@ -1689,6 +1694,7 @@ NTRSO,Financials
 NTSK,Information Technology
 NTST,Real Estate
 NUAI,Information Technology
+NUCL,Energy
 NUS,Consumer Staples
 NUTX,Health Care
 NUVB,Health Care
@@ -1744,6 +1750,7 @@ OGI,Health Care
 OGN,Health Care
 OGS,Utilities
 OI,Consumer Discretionary
+OIA,Financials
 OII,Energy
 OIS,Energy
 OKUR,Health Care
@@ -1896,6 +1903,7 @@ PLUS,Information Technology
 PLX,Health Care
 PMI,Health Care
 PMN,Health Care
+PMO,Financials
 PMT,Real Estate
 PMTS,Financials
 PMVP,Health Care
@@ -1972,6 +1980,7 @@ QMCO,Information Technology
 QNC,Information Technology
 QNST,Communication Services
 QS,Consumer Discretionary
+QSI,Health Care
 QTRX,Health Care
 QTTB,Health Care
 QTWO,Information Technology
@@ -2035,6 +2044,7 @@ RICK,Consumer Discretionary
 RIGL,Health Care
 RILY,Financials
 RILYZ,
+RITM,Real Estate
 RJET,Industrials
 RLAY,Health Care
 RLGT,Industrials
@@ -2044,6 +2054,7 @@ RLX,Consumer Staples
 RM,Financials
 RMAX,Real Estate
 RMBI,Financials
+RMM,Financials
 RMNI,Information Technology
 RMR,Real Estate
 RMT,Financials
@@ -2094,6 +2105,7 @@ SAIC,Information Technology
 SAM,Consumer Staples
 SAMG,Financials
 SANA,Health Care
+SANG,Information Technology
 SAR,Financials
 SATL,Industrials
 SB,Industrials
@@ -2113,6 +2125,7 @@ SCM,Financials
 SCSC,Information Technology
 SCZM,Materials
 SD,Energy
+SDEV,Financials
 SDGR,Health Care
 SDHC,Real Estate
 SDHY,Financials
@@ -2159,6 +2172,7 @@ SIF,Industrials
 SIFY,Communication Services
 SIG,Consumer Discretionary
 SIGA,Health Care
+SIGI,Financials
 SIGIP,Financials
 SII,Financials
 SILC,Information Technology
@@ -2262,6 +2276,7 @@ STRT,Consumer Discretionary
 STRZ,Communication Services
 STTK,Health Care
 STUB,Communication Services
+STWD,Real Estate
 STXS,Health Care
 SUIG,Financials
 SUNC,Energy
@@ -2438,6 +2453,7 @@ UIS,Information Technology
 ULCC,Industrials
 ULH,Industrials
 UMAC,Information Technology
+UMBFO,Financials
 UMH,Real Estate
 UNCY,Health Care
 UNF,Industrials
