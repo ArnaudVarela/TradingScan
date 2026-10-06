@@ -129,6 +129,7 @@ AMCI,Information Technology
 AMCX,Communication Services
 AMLX,Health Care
 AMN,Health Care
+AMOD,Information Technology
 AMPG,Information Technology
 AMPH,Health Care
 AMPL,Information Technology
@@ -802,6 +803,7 @@ ENVA,Financials
 ENVX,Industrials
 EOLS,Health Care
 EOSE,Industrials
+EOT,Financials
 EPAC,Industrials
 EPAM,Information Technology
 EPC,Consumer Staples
@@ -923,6 +925,7 @@ FNRN,Financials
 FNWD,Financials
 FOA,Financials
 FOCL,Health Care
+FOF,Financials
 FOR,Real Estate
 FORR,Industrials
 FOSL,Consumer Discretionary
@@ -996,6 +999,7 @@ GDYN,Information Technology
 GEF,Consumer Discretionary
 GEL,Energy
 GEMI,Financials
+GENB,Health Care
 GENC,Industrials
 GENI,Communication Services
 GEO,Industrials
@@ -1903,6 +1907,7 @@ PLUG,Industrials
 PLUS,Information Technology
 PLX,Health Care
 PMI,Health Care
+PMM,Financials
 PMN,Health Care
 PMO,Financials
 PMT,Real Estate
@@ -2104,6 +2109,7 @@ SAFE,Real Estate
 SAFT,Financials
 SAH,Consumer Discretionary
 SAIC,Information Technology
+SAIQ,Industrials
 SAM,Consumer Staples
 SAMG,Financials
 SANA,Health Care
@@ -2525,6 +2531,7 @@ VLGEA,Consumer Staples
 VLN,Information Technology
 VLRS,Industrials
 VMD,Health Care
+VMET,Materials
 VMO,Financials
 VNCE,Consumer Discretionary
 VNDA,Health Care
@@ -2570,6 +2577,7 @@ WB,Communication Services
 WBI,Energy
 WBTN,Communication Services
 WBX,Information Technology
+WCCB,Financials
 WD,Financials
 WDFC,Materials
 WDH,Financials
