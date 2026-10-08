@@ -177,6 +177,7 @@ INOD,ia,1,True
 INTC,semiconducteurs,1,True
 INVZ,laser_photonique,1,True
 IPGP,laser_photonique,1,True
+IPWR,equipement_electrique,1,True
 IRDM,espace,1,True
 IREN,ia,1,True
 IRIX,laser_photonique,1,True
@@ -340,7 +341,6 @@ CBAK,new_tech,1,False
 EKSO,robotique,1,False
 EMKR,laser_photonique,1,False
 HYZN,production_energie,1,False
-IPWR,equipement_electrique,1,False
 IRBT,robotique,1,False
 ISSC,defense,1,False
 LPSN,ia,1,False
