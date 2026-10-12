@@ -105,6 +105,7 @@ BOTT,robotique,1,True
 BRKR,robotique,1,True
 BTQ,quantique,1,True
 BWEN,equipement_electrique,1,True
+BWMN,gestion_thermique,1,True
 BYRN,defense,1,True
 CAMT,semiconducteurs,1,True
 CARR,gestion_thermique,1,True
@@ -336,7 +337,6 @@ AMOT,equipement_electrique,1,False
 ANLDF,production_energie,1,False
 AXT,semiconducteurs,1,False
 BNRG,new_tech,1,False
-BWMN,gestion_thermique,1,False
 CBAK,new_tech,1,False
 EKSO,robotique,1,False
 EMKR,laser_photonique,1,False
