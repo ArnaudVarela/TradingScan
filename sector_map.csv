@@ -1821,6 +1821,7 @@ OWLT,Health Care
 OXLC,Financials
 OXM,Consumer Discretionary
 OXSQ,Financials
+OZ,Real Estate
 OZK,Financials
 PAAI,Communication Services
 PACB,Health Care
@@ -1857,6 +1858,7 @@ PDLB,Financials
 PDM,Real Estate
 PDO,Financials
 PDS,Energy
+PDSB,Health Care
 PDX,Financials
 PDYN,Information Technology
 PEB,Real Estate
@@ -1992,6 +1994,7 @@ QNC,Information Technology
 QNST,Communication Services
 QS,Consumer Discretionary
 QSI,Health Care
+QTEX,Information Technology
 QTRX,Health Care
 QTTB,Health Care
 QTWO,Information Technology
@@ -2077,6 +2080,7 @@ RNP,Financials
 RNST,Financials
 RNW,Utilities
 RNXT,Health Care
+ROAD,Industrials
 ROCK,Industrials
 ROG,Information Technology
 ROOT,Financials
@@ -2593,6 +2597,7 @@ WERN,Industrials
 WEST,Consumer Staples
 WETO,Information Technology
 WEYS,Consumer Discretionary
+WFF,Industrials
 WFG,Materials
 WGO,Consumer Discretionary
 WGS,Health Care
