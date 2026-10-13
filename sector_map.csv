@@ -550,6 +550,7 @@ CMPS,Health Care
 CMPX,Health Care
 CMRC,Information Technology
 CMRE,Industrials
+CMT,Materials
 CMTG,Real Estate
 CMTV,Financials
 CNDT,Information Technology
@@ -1424,6 +1425,7 @@ LQDA,Health Care
 LQDT,Consumer Discretionary
 LRMR,Health Care
 LRN,Consumer Staples
+LSAK,Information Technology
 LSPD,Information Technology
 LTBR,Industrials
 LTC,Real Estate
@@ -1774,6 +1776,7 @@ OMCL,Health Care
 OMDA,Health Care
 OMER,Health Care
 ONDS,Information Technology
+ONEN,Utilities
 ONEW,Consumer Discretionary
 ONIT,Financials
 ONL,Real Estate
@@ -1990,6 +1993,7 @@ QFIN,Financials
 QH,Information Technology
 QLYS,Information Technology
 QMCO,Information Technology
+QNBC,Financials
 QNC,Information Technology
 QNST,Communication Services
 QS,Consumer Discretionary
@@ -2203,6 +2207,7 @@ SKIN,Consumer Staples
 SKT,Real Estate
 SKWD,Financials
 SKY,Consumer Discretionary
+SKYA,Information Technology
 SKYH,Real Estate
 SKYT,Information Technology
 SKYW,Industrials
