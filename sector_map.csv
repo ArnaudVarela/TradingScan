@@ -517,6 +517,7 @@ CHSCL,Consumer Staples
 CHSCM,Consumer Staples
 CHSCN,Consumer Staples
 CHSCO,Consumer Staples
+CIFR,Information Technology
 CIGI,Real Estate
 CII,Financials
 CIM,Real Estate
@@ -571,6 +572,7 @@ COCO,Consumer Staples
 CODA,Industrials
 CODI,Industrials
 COFS,Financials
+COGT,Health Care
 COHU,Information Technology
 COLD,Real Estate
 COLL,Health Care
@@ -1149,6 +1151,7 @@ HRZN,Financials
 HSAI,Consumer Discretionary
 HSDT,Financials
 HSHP,Industrials
+HSLV,Materials
 HSTM,Health Care
 HTB,Financials
 HTFL,Health Care
@@ -1251,6 +1254,7 @@ IQI,Financials
 IQMX,Information Technology
 IRD,Health Care
 IRDM,Communication Services
+IRLA,Health Care
 IRMD,Health Care
 IRON,Health Care
 IRS,Real Estate
@@ -1286,6 +1290,7 @@ JKS,Information Technology
 JLHL,Industrials
 JMIA,Consumer Discretionary
 JMSB,Financials
+JOBY,Industrials
 JOE,Real Estate
 JOUT,Consumer Discretionary
 JOYY,Communication Services
@@ -1391,6 +1396,7 @@ LFMD,Health Care
 LFST,Health Care
 LGCL,Information Technology
 LGIH,Consumer Discretionary
+LGN,Industrials
 LIF,Information Technology
 LIFE,Financials
 LILA,Communication Services
@@ -1433,6 +1439,7 @@ LTRX,Information Technology
 LU,Financials
 LUCD,Health Care
 LUCK,Consumer Discretionary
+LUMN,Communication Services
 LUNG,Health Care
 LUNR,Industrials
 LUXE,Consumer Discretionary
@@ -1481,6 +1488,7 @@ MCI,Financials
 MCRI,Consumer Discretionary
 MCS,Communication Services
 MD,Health Care
+MDA,Industrials
 MDU,Utilities
 MDV,Real Estate
 MDWD,Health Care
@@ -1523,6 +1531,7 @@ MLKN,Consumer Discretionary
 MLR,Consumer Discretionary
 MLTX,Health Care
 MLYS,Health Care
+MMED,Health Care
 MMI,Real Estate
 MMS,Industrials
 MMSI,Health Care
@@ -1970,6 +1979,7 @@ PSNYW,Consumer Discretionary
 PSQL,Information Technology
 PSTL,Real Estate
 PTA,Financials
+PTCT,Health Care
 PTEN,Energy
 PTHS,Health Care
 PTLO,Consumer Discretionary
@@ -1987,6 +1997,7 @@ PYPD,Health Care
 PYXS,Health Care
 PZG,Materials
 PZZA,Consumer Discretionary
+QBTS,Information Technology
 QCRH,Financials
 QDEL,Health Care
 QFIN,Financials
@@ -2272,6 +2283,7 @@ SRCE,Financials
 SRFM,Industrials
 SRI,Consumer Discretionary
 SRPT,Health Care
+SRRK,Health Care
 SRTA,Health Care
 SRXH,Consumer Staples
 SRZN,Health Care
