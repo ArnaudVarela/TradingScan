@@ -221,6 +221,7 @@ ATAT,Consumer Discretionary
 ATEC,Health Care
 ATEN,Information Technology
 ATEX,Communication Services
+ATGL,Information Technology
 ATHM,Communication Services
 ATHS,
 ATKR,Industrials
@@ -760,6 +761,7 @@ EBMT,Financials
 EBS,Health Care
 ECAT,Financials
 ECC,Financials
+ECG,Industrials
 ECO,Industrials
 ECPG,Financials
 ECVT,Materials
@@ -1027,6 +1029,7 @@ GLAD,Financials
 GLAS,Health Care
 GLIBA,Communication Services
 GLIBK,Communication Services
+GLND,Energy
 GLNG,Energy
 GLOB,Information Technology
 GLOO,Information Technology
@@ -1035,6 +1038,7 @@ GLRE,Financials
 GLSI,Health Care
 GLUE,Health Care
 GMAB,Health Care
+GMTL,Materials
 GNE,Utilities
 GNK,Industrials
 GNL,Real Estate
@@ -1143,6 +1147,7 @@ HOVR,Industrials
 HP,Energy
 HPK,Energy
 HPP,Real Estate
+HQ,Information Technology
 HQH,Financials
 HQL,Financials
 HRB,Consumer Discretionary
@@ -1411,6 +1416,7 @@ LIVN,Health Care
 LIXT,Health Care
 LKFN,Financials
 LKFT,Health Care
+LKQ,Consumer Discretionary
 LMAT,Health Care
 LMB,Industrials
 LMND,Financials
@@ -1608,6 +1614,7 @@ NAK,Materials
 NAKA,Financials
 NAMS,Health Care
 NAN,Financials
+NANO,Information Technology
 NAT,Energy
 NATH,Consumer Discretionary
 NATL,Information Technology
@@ -1776,6 +1783,7 @@ OI,Consumer Discretionary
 OIA,Financials
 OII,Energy
 OIS,Energy
+OKLO,Utilities
 OKUR,Health Care
 OLED,Information Technology
 OLLI,Consumer Staples
@@ -2077,6 +2085,7 @@ RICK,Consumer Discretionary
 RIGL,Health Care
 RILY,Financials
 RILYZ,
+RIOT,Financials
 RITM,Real Estate
 RJET,Industrials
 RLAY,Health Care
@@ -2680,6 +2689,7 @@ XLAB,Information Technology
 XMAX,Consumer Discretionary
 XMTR,Industrials
 XNCR,Health Care
+XNDU,Information Technology
 XNET,Information Technology
 XOMA,Health Care
 XPEL,Consumer Discretionary
