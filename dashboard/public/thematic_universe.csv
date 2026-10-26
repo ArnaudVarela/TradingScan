@@ -22,7 +22,6 @@ AMBA,ia|semiconducteurs,2,True
 AMD,ia|semiconducteurs,2,True
 AVGO,ia|semiconducteurs,2,True
 BE,equipement_electrique|production_energie,2,True
-BKSY,espace|robotique,2,True
 CMTL,defense|espace,2,True
 EOSE,equipement_electrique|new_tech,2,True
 FCEL,new_tech|production_energie,2,True
@@ -331,6 +330,7 @@ YMAT,new_tech,1,True
 YSS,espace,1,True
 ZBRA,robotique,1,True
 ZENA,defense,1,True
+BKSY,espace|robotique,2,False
 ADN,production_energie,1,False
 AETI,equipement_electrique,1,False
 AMBI,robotique,1,False
