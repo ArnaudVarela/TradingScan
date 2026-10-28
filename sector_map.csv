@@ -60,6 +60,7 @@ AEO,Consumer Discretionary
 AERO,Industrials
 AESI,Energy
 AEVA,Information Technology
+AEYE,Information Technology
 AFYA,Consumer Staples
 AGBK,Financials
 AGCC,Consumer Staples
@@ -375,6 +376,7 @@ BOTJ,Financials
 BOW,Financials
 BOX,Information Technology
 BPRN,Financials
+BRAI,Information Technology
 BRBR,Consumer Staples
 BRBS,Financials
 BRC,Industrials
@@ -733,6 +735,7 @@ DOLE,Consumer Staples
 DOMO,Information Technology
 DOO,Consumer Discretionary
 DORM,Consumer Discretionary
+DOUG,Real Estate
 DPRO,Information Technology
 DQ,Information Technology
 DRD,Materials
@@ -2063,6 +2066,7 @@ REFI,Real Estate
 REI,Energy
 RELL,Information Technology
 RELY,Information Technology
+RENT,Consumer Discretionary
 REPL,Health Care
 REPX,Energy
 RERE,Consumer Discretionary
@@ -2387,6 +2391,7 @@ TECX,Health Care
 TEN,Energy
 TENB,Information Technology
 TENX,Health Care
+TEO,Communication Services
 TFIN,Financials
 TFSL,Financials
 TG,Industrials
