@@ -1446,6 +1446,7 @@ LRMR,Health Care
 LRN,Consumer Staples
 LSAK,Information Technology
 LSPD,Information Technology
+LSTR,Industrials
 LTBR,Industrials
 LTC,Real Estate
 LTRX,Information Technology
@@ -1988,6 +1989,7 @@ PSEC,Financials
 PSF,Financials
 PSFE,Information Technology
 PSIX,Industrials
+PSMT,Consumer Staples
 PSN,Information Technology
 PSNL,Health Care
 PSNY,Consumer Discretionary
@@ -2131,6 +2133,7 @@ RSKD,Information Technology
 RTB,Information Technology
 RUM,Communication Services
 RUN,Information Technology
+RUSHA,Consumer Discretionary
 RVLV,Consumer Discretionary
 RVSB,Financials
 RVT,Financials
