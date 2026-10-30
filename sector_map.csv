@@ -300,6 +300,7 @@ BCX,Financials
 BCYC,Health Care
 BDC,Information Technology
 BDJ,Financials
+BDL,Consumer Discretionary
 BDN,Real Estate
 BDSX,Health Care
 BDTX,Health Care
@@ -2199,6 +2200,7 @@ SFBC,Financials
 SFBS,Financials
 SFIX,Consumer Discretionary
 SFL,Industrials
+SFM,Consumer Staples
 SFNC,Financials
 SFST,Financials
 SG,Consumer Discretionary
@@ -2509,6 +2511,7 @@ UFPT,Health Care
 UHAL,Industrials
 UHT,Real Estate
 UIS,Information Technology
+ULBI,Industrials
 ULCC,Industrials
 ULH,Industrials
 UMAC,Information Technology
@@ -2568,6 +2571,7 @@ VET,Energy
 VFC,Consumer Discretionary
 VFF,Consumer Staples
 VGM,Financials
+VGNT,Consumer Discretionary
 VGZ,Materials
 VIA,Information Technology
 VINP,Financials
