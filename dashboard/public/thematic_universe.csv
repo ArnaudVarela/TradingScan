@@ -87,6 +87,7 @@ AMRC,gestion_thermique,1,True
 AMSC,equipement_electrique,1,True
 AMST,ia,1,True
 APLD,ia,1,True
+ARM,semiconducteurs,1,True
 ARQQ,quantique,1,True
 ASML,semiconducteurs,1,True
 ASPI,production_energie,1,True
@@ -335,7 +336,6 @@ AETI,equipement_electrique,1,False
 AMBI,robotique,1,False
 AMOT,equipement_electrique,1,False
 ANLDF,production_energie,1,False
-ARM,semiconducteurs,1,False
 AXT,semiconducteurs,1,False
 BNRG,new_tech,1,False
 CBAK,new_tech,1,False
