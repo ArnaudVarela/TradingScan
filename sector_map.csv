@@ -169,6 +169,7 @@ APAM,Financials
 APC,Energy
 APEI,Consumer Staples
 API,Information Technology
+APLD,Information Technology
 APLE,Real Estate
 APOG,Industrials
 APPN,Information Technology
@@ -451,6 +452,7 @@ CARG,Consumer Discretionary
 CARL,Health Care
 CARS,Communication Services
 CASH,Financials
+CASK,
 CASS,Industrials
 CATX,Health Care
 CATY,Financials
@@ -1492,6 +1494,7 @@ MB,Consumer Discretionary
 MBC,Consumer Discretionary
 MBI,Financials
 MBIN,Financials
+MBLY,Consumer Discretionary
 MBOT,Health Care
 MBUU,Consumer Discretionary
 MBWM,Financials
