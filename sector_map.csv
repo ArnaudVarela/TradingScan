@@ -623,6 +623,7 @@ CRTO,Communication Services
 CRVL,Financials
 CRVS,Health Care
 CSAN,Energy
+CSHR,Financials
 CSIQ,Information Technology
 CSQ,Financials
 CSR,Real Estate
@@ -709,6 +710,7 @@ DGICA,Financials
 DGII,Information Technology
 DGXX,Utilities
 DHC,Real Estate
+DHCNI,
 DHT,Energy
 DHX,Information Technology
 DIBS,Communication Services
@@ -1140,6 +1142,7 @@ HLLY,Consumer Discretionary
 HLMN,Industrials
 HLNE,Financials
 HLX,Energy
+HMH,Energy
 HMN,Financials
 HNI,Consumer Discretionary
 HNRG,Utilities
@@ -2339,6 +2342,7 @@ STRT,Consumer Discretionary
 STRZ,Communication Services
 STTK,Health Care
 STUB,Communication Services
+STVN,Health Care
 STWD,Real Estate
 STXS,Health Care
 SUIG,Financials

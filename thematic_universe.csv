@@ -258,7 +258,6 @@ QCOM,semiconducteurs,1,True
 QMCO,quantique,1,True
 QNC,quantique,1,True
 QNT,quantique,1,True
-QRVO,semiconducteurs,1,True
 QS,new_tech,1,True
 QSI,quantique,1,True
 QTEX,quantique,1,True
@@ -346,6 +345,7 @@ IRBT,robotique,1,False
 LPSN,ia,1,False
 NFUNF,production_energie,1,False
 POAI,ia,1,False
+QRVO,semiconducteurs,1,False
 RWLK,robotique,1,False
 SKYT,semiconducteurs,1,False
 THRD,robotique,1,False

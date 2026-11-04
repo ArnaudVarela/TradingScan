@@ -1,23 +1,20 @@
 ticker,level,price,mcap_usd,score,setup,dd_from_hi_pct,base_range_pct,vol_growth_pct,dist_resist_pct,resistance,stop_ref,sector
-SBC,strict,5.31,546117267.0,79.1,Setup en formation,85.5,56.7,141.0,8.3,5.79,4.78,Industrials
-BMBL,strict,5.97,787850835.0,45.2,Étendu (déjà parti),62.5,59.6,72.0,0.5,6.0,5.37,Communication Services
-NABL,strict,5.06,955864613.0,69.5,Cup & Handle probable,67.3,51.8,59.0,8.7,5.54,4.55,Information Technology
-CPRI,strict,20.05,2072161585.0,32.7,Étendu (déjà parti),60.9,47.6,54.0,8.7,21.95,18.04,Consumer Discretionary
-PERI,strict,11.41,448758940.0,33.3,Étendu (déjà parti),65.4,33.3,34.0,0.2,11.43,10.27,Communication Services
-CHA,strict,12.66,2415063707.0,78.8,Momentum en formation,67.7,31.9,29.0,5.5,13.4,11.39,Consumer Discretionary
-DV,strict,13.56,2118222896.0,82.5,Squeeze / VCP prêt à casser,68.5,37.2,25.0,0.7,13.65,12.2,Communication Services
-WING,strict,163.04,4410742804.0,26.5,Étendu (déjà parti),62.0,51.1,20.0,9.0,179.21,146.74,Consumer Discretionary
-CHPT,relax,9.88,265281201.0,61.9,En base (loin du pivot),86.0,62.6,229.0,12.3,11.26,8.89,Consumer Discretionary
-EAF,relax,11.33,304748369.0,40.0,Setup en formation,64.5,67.0,76.0,10.7,12.69,10.2,Industrials
-DSP,relax,12.72,845864952.0,58.6,En base (loin du pivot),51.7,41.7,75.0,14.1,14.8,11.45,Information Technology
-MYGN,relax,5.85,559550423.0,39.8,En base (loin du pivot),80.0,68.9,45.0,13.6,6.77,5.26,Health Care
-AEYE,relax,13.35,169339103.0,28.9,Étendu (déjà parti),61.7,68.5,44.0,9.1,14.68,12.02,Information Technology
-OBIO,relax,5.69,341997729.0,64.4,En base (loin du pivot),51.3,51.8,32.0,12.5,6.5,5.12,Health Care
-FNKO,relax,6.41,358932860.0,68.2,En base (loin du pivot),56.2,47.9,28.0,12.8,7.35,5.77,Consumer Discretionary
-CMRC,relax,3.4,281720569.0,47.9,En base (loin du pivot),67.0,60.3,26.0,15.0,4.0,3.06,Information Technology
-JBI,relax,4.89,667171013.0,15.2,Tendance baissière (pas un setup),69.2,35.4,22.0,14.8,5.74,4.4,Industrials
-PLNT,relax,55.65,4185824102.0,55.0,Setup en formation,51.4,50.7,16.0,14.7,65.23,50.09,Consumer Discretionary
-WOOF,relax,2.74,784789038.0,44.1,Setup en formation,56.4,39.4,12.0,14.9,3.22,2.47,Consumer Discretionary
-BOOM,relax,9.24,189798369.0,32.2,Étendu (déjà parti),53.2,51.6,10.0,5.6,9.79,8.32,Industrials
-BBWI,relax,23.19,4676154808.0,57.3,Cup & Handle probable,52.7,35.6,7.0,2.0,23.66,20.87,Consumer Discretionary
-ASAN,relax,11.06,2532409494.0,63.7,Setup en formation,60.2,59.7,7.0,9.6,12.24,9.95,Information Technology
+CHPT,strict,10.79,289714996.0,52.1,Étendu (déjà parti),84.8,57.3,232.0,4.2,11.26,9.71,Consumer Discretionary
+BMBL,strict,5.98,789170518.0,44.7,Étendu (déjà parti),62.4,59.5,70.0,0.3,6.0,5.38,Communication Services
+NABL,strict,5.04,952086492.0,69.6,Cup & Handle probable,67.5,51.0,58.0,8.2,5.49,4.54,Information Technology
+CPRI,strict,20.06,2073195082.0,42.8,Étendu (déjà parti),60.8,47.6,51.0,8.6,21.95,18.05,Consumer Discretionary
+PERI,strict,11.42,449152243.0,43.9,Étendu (déjà parti),65.4,33.4,38.0,0.2,11.44,10.28,Communication Services
+CHA,strict,12.6,2403617908.0,78.5,Momentum en formation,67.8,32.1,30.0,6.0,13.4,11.34,Consumer Discretionary
+DV,strict,13.54,2115098673.0,76.0,Squeeze / VCP prêt à casser,68.5,37.3,26.0,0.8,13.65,12.19,Communication Services
+WING,strict,161.57,4370974699.0,36.0,Étendu (déjà parti),62.3,51.6,20.0,9.8,179.21,145.41,Consumer Discretionary
+ESRT,relax,5.05,869436497.0,47.9,Setup en formation,54.7,38.8,125.0,14.3,5.89,4.55,Real Estate
+EAF,relax,11.66,313624535.0,38.7,Setup en formation,60.9,65.1,76.0,8.1,12.69,10.49,Industrials
+DSP,relax,12.96,861824668.0,66.4,En base (loin du pivot),50.8,40.9,75.0,12.4,14.8,11.66,Information Technology
+AEYE,relax,13.59,172383401.0,29.1,Étendu (déjà parti),61.0,67.3,48.0,7.4,14.68,12.23,Information Technology
+MYGN,relax,6.04,577723856.0,44.4,En base (loin du pivot),79.4,66.7,42.0,10.8,6.77,5.44,Health Care
+OBIO,relax,5.56,334184072.0,51.9,En base (loin du pivot),52.4,53.0,33.0,14.5,6.5,5.0,Health Care
+FNKO,relax,6.28,351653410.0,55.7,En base (loin du pivot),57.1,48.1,27.0,14.6,7.35,5.65,Consumer Discretionary
+SGMT,relax,9.95,701802793.0,55.3,En base (loin du pivot),52.0,52.4,26.0,13.1,11.45,8.95,Health Care
+BOOM,relax,8.86,181992808.0,28.9,Étendu (déjà parti),55.1,53.8,12.0,9.5,9.79,7.97,Industrials
+BBWI,relax,22.61,4559200527.0,68.1,Cup & Handle probable,53.8,36.5,7.0,4.4,23.66,20.35,Consumer Discretionary
+ASAN,relax,11.15,2553016805.0,63.9,Setup en formation,59.8,59.2,7.0,8.9,12.24,10.03,Information Technology
