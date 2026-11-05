@@ -1,5 +1,6 @@
 ticker,sector
 AAMI,Financials
+AAON,Industrials
 AAP,Consumer Discretionary
 AARD,Health Care
 AAT,Real Estate
@@ -443,6 +444,7 @@ CALM,Consumer Staples
 CALX,Information Technology
 CALY,Consumer Discretionary
 CAMP,Health Care
+CAMT,Information Technology
 CANG,Financials
 CAPL,Energy
 CAPR,Health Care
@@ -742,6 +744,7 @@ DOMO,Information Technology
 DOO,Consumer Discretionary
 DORM,Consumer Discretionary
 DOUG,Real Estate
+DOX,Information Technology
 DPRO,Information Technology
 DQ,Information Technology
 DRD,Materials
@@ -1027,6 +1030,7 @@ GEVO,Materials
 GFF,Industrials
 GFR,Energy
 GFUZ,Industrials
+GGAL,Financials
 GGT,Financials
 GHC,Industrials
 GHM,Industrials
@@ -1141,6 +1145,7 @@ HLIT,Information Technology
 HLLY,Consumer Discretionary
 HLMN,Industrials
 HLNE,Financials
+HLP,Materials
 HLX,Energy
 HMH,Energy
 HMN,Financials
@@ -1510,6 +1515,7 @@ MCHB,Financials
 MCI,Financials
 MCRI,Consumer Discretionary
 MCS,Communication Services
+MCY,Financials
 MD,Health Care
 MDA,Industrials
 MDU,Utilities
@@ -1871,6 +1877,7 @@ PALI,Health Care
 PAM,Industrials
 PANL,Industrials
 PAR,Information Technology
+PARK,Health Care
 PARR,Energy
 PATK,Consumer Discretionary
 PAX,Financials
@@ -2113,6 +2120,7 @@ RLX,Consumer Staples
 RM,Financials
 RMAX,Real Estate
 RMBI,Financials
+RMIX,Materials
 RMM,Financials
 RMNI,Information Technology
 RMR,Real Estate
