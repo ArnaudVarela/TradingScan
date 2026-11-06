@@ -1,5 +1,6 @@
 ticker,sector
 AAMI,Financials
+AAOI,Information Technology
 AAON,Industrials
 AAP,Consumer Discretionary
 AARD,Health Care
@@ -22,6 +23,7 @@ ACB,Health Care
 ACCO,Industrials
 ACDC,Energy
 ACEL,Consumer Discretionary
+ACGLN,Financials
 ACH,Health Care
 ACHC,Health Care
 ACHR,Industrials
@@ -68,6 +70,7 @@ AGCC,Consumer Staples
 AGEN,Health Care
 AGIO,Health Care
 AGL,Health Care
+AGLT,Information Technology
 AGM,Financials
 AGMB,Health Care
 AGNT,Real Estate
@@ -98,6 +101,7 @@ ALCO,Consumer Staples
 ALDX,Health Care
 ALEC,Health Care
 ALG,Industrials
+ALGM,Information Technology
 ALGT,Industrials
 ALH,Consumer Discretionary
 ALHC,Health Care
@@ -191,7 +195,9 @@ ARKO,Consumer Discretionary
 ARLO,Industrials
 ARLP,Energy
 ARMP,Health Care
+AROC,Energy
 AROW,Financials
+ARQ,Industrials
 ARQQ,Information Technology
 ARQT,Health Care
 ARR,Real Estate
@@ -1397,6 +1403,7 @@ LASR,Information Technology
 LAUR,Consumer Staples
 LAW,Information Technology
 LAZ,Financials
+LB,Energy
 LBRDA,Communication Services
 LBRDK,Communication Services
 LBRT,Energy
@@ -1577,6 +1584,7 @@ MNSO,Consumer Discretionary
 MNTK,Materials
 MNTN,Information Technology
 MNTS,Industrials
+MOD,Industrials
 MOMO,Communication Services
 MOV,Consumer Discretionary
 MOVE,Information Technology
@@ -1622,6 +1630,7 @@ MWA,Industrials
 MWH,Utilities
 MX,Information Technology
 MXCT,Health Care
+MXL,Information Technology
 MYE,Consumer Discretionary
 MYFW,Financials
 MYGN,Health Care
@@ -1862,6 +1871,7 @@ OVID,Health Care
 OVLY,Financials
 OWLT,Health Care
 OXLC,Financials
+OXLCM,
 OXM,Consumer Discretionary
 OXSQ,Financials
 OZ,Real Estate
@@ -1974,6 +1984,7 @@ POET,Information Technology
 PONY,Information Technology
 POST,Consumer Staples
 POWI,Information Technology
+POWL,Industrials
 POWW,Industrials
 PPHC,Industrials
 PPIH,Industrials
@@ -2295,6 +2306,7 @@ SMWB,Information Technology
 SND,Energy
 SNDA,Health Care
 SNDL,Consumer Staples
+SNDR,Industrials
 SNDX,Health Care
 SNWV,Health Care
 SOC,Energy
@@ -2466,6 +2478,7 @@ TPB,Consumer Staples
 TPC,Industrials
 TPVG,Financials
 TR,Consumer Staples
+TRAX,Health Care
 TRC,Industrials
 TRDA,Health Care
 TREE,Financials
