@@ -902,6 +902,7 @@ FCF,Financials
 FCN,Industrials
 FCNCN,
 FCPT,Real Estate
+FDBC,Financials
 FDMT,Health Care
 FDUS,Financials
 FEAM,Materials
@@ -1140,6 +1141,7 @@ HGTY,Financials
 HGV,Consumer Discretionary
 HHH,Real Estate
 HIFS,Financials
+HIMS,Health Care
 HIMX,Information Technology
 HIPO,Financials
 HITI,Health Care
@@ -1273,6 +1275,7 @@ INTT,Information Technology
 INV,Financials
 INVA,Health Care
 INVX,Energy
+IONS,Health Care
 IOSP,Materials
 IOVA,Health Care
 IPAR,Consumer Staples
@@ -1535,6 +1538,7 @@ MEI,Information Technology
 MEOH,Materials
 MESO,Health Care
 METC,Materials
+MF,Communication Services
 MFA,Real Estate
 MFIC,Financials
 MFIN,Financials
@@ -2064,6 +2068,7 @@ QUAD,Industrials
 QUBT,Information Technology
 QUCY,Health Care
 QUIK,Information Technology
+QUIT,Health Care
 QURE,Health Care
 RAIL,Industrials
 RAMP,Information Technology
