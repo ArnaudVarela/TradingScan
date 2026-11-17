@@ -1,26 +1,18 @@
 ticker,level,price,mcap_usd,score,setup,dd_from_hi_pct,base_range_pct,vol_growth_pct,dist_resist_pct,resistance,stop_ref,sector
-ALEC,strict,2.54,378147768.0,66.5,En base (loin du pivot),71.5,57.9,255.0,10.6,2.84,2.29,Health Care
-PERI,strict,11.37,447185727.0,69.3,Cup & Handle probable,65.5,33.7,57.0,0.8,11.46,10.23,Communication Services
-CHA,strict,14.37,2741268995.0,62.0,Momentum en formation,63.3,36.2,41.0,1.3,14.56,12.93,Consumer Discretionary
-NABL,strict,4.87,859740455.0,64.8,Setup en formation,68.6,49.1,37.0,8.3,5.31,4.38,Information Technology
-WING,strict,158.86,4297660708.0,40.9,Setup en formation,62.9,52.4,19.0,11.2,178.84,142.97,Consumer Discretionary
-CHPT,relax,11.67,312806275.0,66.1,En base (loin du pivot),82.4,67.7,244.0,10.0,12.97,10.5,Consumer Discretionary
-SBC,relax,7.35,755925031.0,33.7,Étendu (déjà parti),79.9,62.7,153.0,0.5,7.39,6.61,Industrials
-ESRT,relax,5.3,840077296.0,60.0,Cup & Handle probable,52.4,37.0,134.0,10.0,5.89,4.77,Real Estate
-TTEC,relax,2.95,145679992.0,26.9,Étendu (déjà parti),86.9,67.8,68.0,7.2,3.18,2.66,Information Technology
-BMBL,relax,5.99,927599510.0,50.7,Étendu (déjà parti),62.3,60.1,65.0,0.8,6.04,5.39,Communication Services
-ENOV,relax,27.68,1596992230.0,53.1,Setup en formation,57.4,54.1,60.0,12.6,31.67,24.91,Health Care
-AEYE,relax,13.47,170861252.0,54.7,Setup en formation,61.3,67.9,46.0,8.2,14.68,12.12,Information Technology
-CPRI,relax,21.46,2217884669.0,55.7,Cup & Handle probable,58.1,44.5,41.0,2.2,21.95,19.31,Consumer Discretionary
-ONT,relax,23.23,817584046.0,32.4,Étendu (déjà parti),53.5,51.2,35.0,3.8,24.15,20.91,Industrials
-WOOF,relax,2.85,814863071.0,41.7,En base (loin du pivot),54.8,41.3,28.0,14.2,3.32,2.56,Consumer Discretionary
-BGS,relax,3.5,283587005.0,20.5,Étendu (déjà parti),59.0,59.4,17.0,14.0,4.07,3.15,Consumer Staples
-SGMT,relax,10.22,729379703.0,62.6,En base (loin du pivot),50.7,51.0,16.0,10.7,11.45,9.2,Health Care
-FNKO,relax,6.91,390012879.0,75.5,Setup en formation,52.8,42.9,16.0,7.6,7.47,6.22,Consumer Discretionary
-GPK,relax,10.87,3218498778.0,41.5,Setup en formation,62.5,36.7,12.0,10.5,12.14,9.78,Consumer Discretionary
-ENGN,relax,2.41,161509322.0,22.1,Étendu (déjà parti),86.9,44.0,11.0,4.0,2.51,2.17,Health Care
-BBWI,relax,21.39,4311176792.0,62.3,En base (loin du pivot),56.3,40.0,7.0,10.7,23.96,19.25,Consumer Discretionary
-GOTU,relax,2.48,593720187.0,59.0,En base (loin du pivot),70.6,59.3,7.0,13.6,2.87,2.23,Consumer Staples
-WGO,relax,30.96,881767453.0,45.3,En base (loin du pivot),54.6,42.5,6.0,11.8,35.12,27.86,Consumer Discretionary
-CRK,relax,15.18,4457055222.0,61.4,Momentum en formation,51.3,26.4,5.0,5.8,16.12,13.66,Energy
-PTLO,relax,6.79,517339497.0,45.6,Setup en formation,59.9,58.0,5.0,6.1,7.23,6.11,Consumer Discretionary
+ALEC,strict,2.57,382614080.0,68.7,Setup en formation,71.1,57.2,248.0,9.5,2.84,2.31,Health Care
+PERI,strict,11.11,436959844.0,72.7,Cup & Handle probable,66.3,34.5,66.0,3.1,11.46,10.0,Communication Services
+BMBL,strict,6.0,929148090.0,51.9,Étendu (déjà parti),62.3,60.0,64.0,0.7,6.04,5.4,Communication Services
+CHA,strict,13.93,2657333131.0,81.9,Momentum en formation,64.4,37.3,41.0,4.3,14.56,12.54,Consumer Discretionary
+NABL,strict,4.89,864158443.0,66.0,Setup en formation,68.4,48.9,35.0,7.9,5.31,4.4,Information Technology
+ESRT,relax,5.48,869373111.0,55.3,Cup & Handle probable,50.8,35.8,134.0,7.0,5.89,4.93,Real Estate
+TTEC,relax,3.07,151605957.0,27.2,Étendu (déjà parti),86.4,65.1,71.0,3.5,3.18,2.76,Information Technology
+ENOV,relax,27.92,1611415932.0,56.1,Setup en formation,57.1,53.6,61.0,11.8,31.67,25.13,Health Care
+CPRI,relax,20.55,2122802941.0,59.2,Cup & Handle probable,59.9,46.5,39.0,6.4,21.95,18.49,Consumer Discretionary
+ONT,relax,23.46,825492748.0,35.3,Étendu (déjà parti),53.1,50.7,32.0,2.9,24.15,21.11,Industrials
+BGS,relax,3.61,292512490.0,22.8,Étendu (déjà parti),57.7,57.6,18.0,11.3,4.07,3.25,Consumer Staples
+SGMT,relax,10.13,722956594.0,61.5,En base (loin du pivot),51.1,51.4,16.0,11.5,11.45,9.12,Health Care
+FNKO,relax,6.84,386061953.0,74.0,Setup en formation,53.3,43.3,15.0,8.5,7.47,6.16,Consumer Discretionary
+GPK,relax,11.0,3258470934.0,46.9,Setup en formation,62.0,36.3,13.0,9.4,12.14,9.9,Consumer Discretionary
+CRK,relax,14.51,4263270213.0,57.3,Setup en formation,53.4,27.6,6.0,10.0,16.12,13.06,Energy
+WGO,relax,31.28,890879857.0,50.1,En base (loin du pivot),54.1,42.1,6.0,10.9,35.12,28.15,Consumer Discretionary
+PTLO,relax,6.74,513529928.0,49.9,Setup en formation,60.2,58.4,6.0,6.8,7.23,6.07,Consumer Discretionary

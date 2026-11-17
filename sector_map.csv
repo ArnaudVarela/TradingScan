@@ -822,6 +822,7 @@ ENGS,Industrials
 ENOV,Health Care
 ENPH,Information Technology
 ENR,Industrials
+ENS,Industrials
 ENTA,Health Care
 ENTX,Health Care
 ENVA,Financials
@@ -1020,6 +1021,7 @@ GCMG,Financials
 GCO,Consumer Discretionary
 GCT,Information Technology
 GCTS,Information Technology
+GDHG,Consumer Discretionary
 GDOT,Financials
 GDRX,Health Care
 GDS,Information Technology
@@ -1059,6 +1061,7 @@ GLRE,Financials
 GLSI,Health Care
 GLUE,Health Care
 GMAB,Health Care
+GMM,Information Technology
 GMTL,Materials
 GNE,Utilities
 GNK,Industrials

@@ -1,12 +1,12 @@
 etf,sector,chg_1d,chg_5d,chg_1m,chg_3m,rs_ratio,rs_mom,quadrant
-XLV,Health Care,-0.51,-0.24,6.32,11.12,111.0,1.04,Leading
-XLP,Consumer Staples,0.27,1.88,5.68,8.91,111.6,1.93,Leading
-XLY,Consumer Discretionary,-1.53,-2.36,5.06,1.76,106.6,0.96,Leading
-XLRE,Real Estate,-0.27,-0.87,4.96,-0.02,106.5,2.62,Leading
-XLF,Financials,-0.85,0.33,4.79,0.94,106.7,2.17,Leading
-XLU,Utilities,0.18,0.75,4.52,0.96,108.3,2.16,Leading
-XLB,Materials,-1.46,-2.78,1.08,-0.14,103.6,-3.02,Weakening
-XLI,Industrials,-1.85,-1.91,-1.25,-9.51,100.4,0.38,Leading
-XLC,Communication Services,-1.72,-0.5,-3.17,-2.99,100.5,8.59,Leading
-XLE,Energy,-1.96,2.83,-6.67,0.61,101.8,-4.91,Weakening
-XLK,Information Technology,-3.24,-3.58,-10.2,-11.13,91.4,-2.85,Lagging
+XLV,Health Care,-1.41,-1.93,5.46,5.85,110.4,1.31,Leading
+XLU,Utilities,-1.59,-0.71,4.98,-0.64,107.6,2.42,Leading
+XLP,Consumer Staples,-1.23,0.47,4.87,6.38,111.2,4.09,Leading
+XLRE,Real Estate,-1.49,-2.22,4.61,-2.3,105.9,2.31,Leading
+XLF,Financials,-1.91,-2.09,3.65,-0.36,105.6,2.15,Leading
+XLY,Consumer Discretionary,-0.89,-3.26,2.31,-1.04,106.7,2.07,Leading
+XLB,Materials,-1.22,-3.8,-0.22,-2.75,103.4,-0.94,Weakening
+XLI,Industrials,-0.55,-2.36,-1.16,-9.21,100.9,0.18,Leading
+XLC,Communication Services,-1.46,-2.32,-4.39,-5.13,100.1,7.06,Leading
+XLE,Energy,-0.52,1.85,-6.55,0.25,102.3,-3.14,Weakening
+XLK,Information Technology,-0.91,-3.34,-12.21,-10.99,91.6,-3.66,Lagging
