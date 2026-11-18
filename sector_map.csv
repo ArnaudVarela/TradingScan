@@ -337,6 +337,7 @@ BHFAN,Financials
 BHR,Real Estate
 BHRB,Financials
 BHVN,Health Care
+BILI,Communication Services
 BILL,Information Technology
 BIOA,Health Care
 BIPC,Utilities
@@ -2089,6 +2090,7 @@ RCEL,Health Care
 RCKT,Health Care
 RCKY,Consumer Discretionary
 RCMT,Industrials
+RCT,Information Technology
 RCUS,Health Care
 RDCM,Communication Services
 RDIB,Communication Services
@@ -2166,6 +2168,7 @@ RQI,Financials
 RR,Industrials
 RRBI,Financials
 RRGB,Consumer Discretionary
+RRR,Consumer Discretionary
 RSI,Consumer Discretionary
 RSKD,Information Technology
 RTB,Information Technology
@@ -2644,6 +2647,7 @@ VRDN,Health Care
 VREX,Health Care
 VRNS,Information Technology
 VRRM,Information Technology
+VRSA,Financials
 VRTS,Financials
 VRXA,Health Care
 VSEC,Industrials
