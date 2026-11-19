@@ -111,6 +111,7 @@ ALKT,Information Technology
 ALLO,Health Care
 ALLT,Information Technology
 ALM,Materials
+ALMR,Health Care
 ALMS,Health Care
 ALMU,Information Technology
 ALNT,Information Technology
@@ -250,10 +251,12 @@ AURA,Health Care
 AUTL,Health Care
 AVA,Utilities
 AVAH,Health Care
+AVAL,Financials
 AVBC,Financials
 AVBH,Financials
 AVBP,Health Care
 AVD,Materials
+AVEX,Industrials
 AVIR,Health Care
 AVNS,Health Care
 AVNT,Materials
@@ -1206,6 +1209,7 @@ HURC,Industrials
 HURN,Industrials
 HUYA,Communication Services
 HVT,Consumer Discretionary
+HWC,Financials
 HWKN,Materials
 HY,Industrials
 HYLN,Consumer Discretionary
@@ -1356,6 +1360,7 @@ KIDS,Health Care
 KINS,Financials
 KLC,Consumer Staples
 KLIC,Information Technology
+KLRA,Health Care
 KLTR,Information Technology
 KLXE,Energy
 KMDA,Health Care
@@ -1365,6 +1370,7 @@ KMT,Industrials
 KMTS,Health Care
 KN,Information Technology
 KNF,Materials
+KNOP,Energy
 KNSA,Health Care
 KOD,Health Care
 KODK,Industrials
@@ -2354,6 +2360,7 @@ SRTA,Health Care
 SRXH,Consumer Staples
 SRZN,Health Care
 SSP,Communication Services
+SSRM,Materials
 SSTI,Information Technology
 SSTK,Communication Services
 SSYS,Information Technology
@@ -2535,6 +2542,7 @@ TWIN,Industrials
 TWO,Real Estate
 TXG,Health Care
 TXO,Energy
+TXR,Materials
 TY,Financials
 TYG,Financials
 TYGO,Information Technology
