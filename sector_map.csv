@@ -252,6 +252,7 @@ AUTL,Health Care
 AVA,Utilities
 AVAH,Health Care
 AVAL,Financials
+AVAV,Industrials
 AVBC,Financials
 AVBH,Financials
 AVBP,Health Care
@@ -1064,6 +1065,7 @@ GLP,Energy
 GLRE,Financials
 GLSI,Health Care
 GLUE,Health Care
+GLXY,Financials
 GMAB,Health Care
 GMM,Information Technology
 GMTL,Materials
@@ -1790,6 +1792,7 @@ NWPX,Materials
 NX,Industrials
 NXDR,Communication Services
 NXDT,Real Estate
+NXE,Energy
 NXG,Financials
 NXH,Consumer Discretionary
 NXP,Financials
@@ -2279,6 +2282,7 @@ SIGIP,Financials
 SII,Financials
 SILC,Information Technology
 SIM,Materials
+SIMO,Information Technology
 SION,Health Care
 SITC,Real Estate
 SITE,Industrials
@@ -2328,6 +2332,7 @@ SNDA,Health Care
 SNDL,Consumer Staples
 SNDR,Industrials
 SNDX,Health Care
+SNEX,Financials
 SNWV,Health Care
 SOC,Energy
 SOHU,Communication Services
