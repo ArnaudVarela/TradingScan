@@ -858,7 +858,10 @@ ESPR,Health Care
 ESQ,Financials
 ESRT,Real Estate
 ESTA,Health Care
+ETB,Financials
 ETD,Consumer Discretionary
+ETHA,
+ETHB,
 ETO,Financials
 ETON,Health Care
 ETOR,Financials
@@ -1056,6 +1059,7 @@ GIII,Consumer Discretionary
 GILT,Information Technology
 GLAD,Financials
 GLAS,Health Care
+GLDI,
 GLIBA,Communication Services
 GLIBK,Communication Services
 GLND,Energy
@@ -1711,6 +1715,7 @@ NGVC,Consumer Staples
 NGVT,Materials
 NHC,Health Care
 NHI,Real Estate
+NHP,Real Estate
 NHPAP,Real Estate
 NIC,Financials
 NIE,Financials
@@ -2182,6 +2187,7 @@ RRGB,Consumer Discretionary
 RRR,Consumer Discretionary
 RSI,Consumer Discretionary
 RSKD,Information Technology
+RSSS,Information Technology
 RTB,Information Technology
 RUM,Communication Services
 RUN,Information Technology
@@ -2316,6 +2322,7 @@ SLS,Health Care
 SLSN,Consumer Staples
 SLSR,Materials
 SLVM,Materials
+SLVO,
 SMA,Real Estate
 SMBC,Financials
 SMBK,Financials
@@ -2598,6 +2605,7 @@ USAU,Materials
 USCB,Financials
 USLM,Materials
 USNA,Consumer Staples
+USOI,
 USPH,Health Care
 UTI,Consumer Staples
 UTL,Utilities
@@ -2681,11 +2689,14 @@ VUZI,Information Technology
 VVV,Consumer Discretionary
 VVX,Industrials
 VWAV,Industrials
+VXX,
+VXZ,
 VYGR,Health Care
 VYX,Information Technology
 VZLA,Materials
 WABC,Financials
 WAFD,Financials
+WAFDP,Financials
 WALD,Consumer Staples
 WASH,Financials
 WATT,Information Technology
@@ -2775,6 +2786,7 @@ XPOF,Consumer Discretionary
 XPRO,Energy
 XRAY,Health Care
 XRN,Real Estate
+XRPC,
 XRX,Industrials
 XXI,Financials
 XZO,Financials
@@ -2789,6 +2801,7 @@ YMT,Information Technology
 YORW,Utilities
 YRD,Financials
 YSS,Industrials
+YSWY,Consumer Staples
 ZBIO,Health Care
 ZD,Communication Services
 ZENA,Information Technology
