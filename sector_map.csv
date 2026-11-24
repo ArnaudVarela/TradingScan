@@ -421,6 +421,7 @@ BUR,Financials
 BUSE,Financials
 BUUU,Industrials
 BV,Industrials
+BVN,Materials
 BVS,Health Care
 BW,Industrials
 BWAY,Health Care
@@ -1433,6 +1434,7 @@ LCTX,Health Care
 LCUT,Consumer Discretionary
 LDI,Financials
 LE,Consumer Discretionary
+LEA,Consumer Discretionary
 LEG,Consumer Discretionary
 LEGH,Consumer Discretionary
 LEGN,Health Care
@@ -2609,6 +2611,7 @@ UWMC,Financials
 UXIN,Consumer Discretionary
 VABK,Financials
 VAC,Consumer Discretionary
+VAL,Energy
 VALN,Health Care
 VANI,Health Care
 VATE,Industrials
@@ -2743,6 +2746,7 @@ WTI,Energy
 WTM,Financials
 WTTR,Energy
 WU,Financials
+WULF,Financials
 WVE,Health Care
 WW,Health Care
 WWW,Consumer Discretionary

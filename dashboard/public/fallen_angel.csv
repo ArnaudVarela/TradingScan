@@ -1,10 +1,9 @@
 ticker,level,price,mcap_usd,score,setup,dd_from_hi_pct,base_range_pct,vol_growth_pct,dist_resist_pct,resistance,stop_ref,sector
-PERI,strict,11.08,435779935.0,75.9,Cup & Handle probable,66.4,34.6,80.0,3.3,11.46,9.97,Communication Services
-CHA,strict,13.63,2600104133.0,72.2,Setup en formation,65.2,38.2,42.0,6.4,14.56,12.27,Consumer Discretionary
-NABL,strict,4.84,857089662.0,59.8,Setup en formation,68.7,49.4,31.0,8.9,5.31,4.36,Information Technology
-ESRT,relax,5.39,854329314.0,72.3,Cup & Handle probable,51.6,36.4,138.0,8.5,5.89,4.85,Real Estate
-BMBL,relax,5.99,927599510.0,56.3,Étendu (déjà parti),62.3,60.1,64.0,0.8,6.04,5.39,Communication Services
-ONT,relax,23.35,820396029.0,47.4,Setup en formation,53.3,52.1,26.0,4.4,24.43,21.02,Industrials
-FNKO,relax,6.73,379853354.0,67.6,Setup en formation,54.1,36.3,16.0,10.0,7.47,6.06,Consumer Discretionary
-WGO,relax,30.77,876214582.0,44.7,Setup en formation,54.8,42.8,11.0,12.4,35.12,27.69,Consumer Discretionary
-PTLO,relax,6.22,473910408.0,51.8,En base (loin du pivot),63.2,63.3,8.0,13.9,7.23,5.6,Consumer Discretionary
+PERI,strict,11.13,437746450.0,78.5,Cup & Handle probable,66.3,34.4,83.0,2.9,11.46,10.02,Communication Services
+CHA,strict,13.13,2504722470.0,63.1,Setup en formation,66.5,39.6,45.0,9.8,14.56,11.82,Consumer Discretionary
+ESRT,relax,5.27,834534845.0,68.7,Setup en formation,52.7,37.2,134.0,10.5,5.89,4.74,Real Estate
+BMBL,relax,5.97,924502350.0,54.5,Étendu (déjà parti),62.5,60.3,67.0,1.2,6.04,5.37,Communication Services
+NABL,relax,4.67,823512954.0,51.0,Setup en formation,69.8,51.2,30.0,12.1,5.31,4.2,Information Technology
+ONT,relax,21.69,762398880.0,50.5,En base (loin du pivot),56.6,56.1,25.0,11.2,24.43,19.52,Industrials
+BGS,relax,3.63,294135306.0,37.4,Étendu (déjà parti),57.4,56.0,18.0,9.8,4.02,3.27,Consumer Staples
+WGO,relax,30.36,863969789.0,42.9,Setup en formation,55.4,43.4,10.0,13.6,35.12,27.32,Consumer Discretionary
