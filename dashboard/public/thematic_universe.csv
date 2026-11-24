@@ -95,7 +95,6 @@ ASPN,robotique,1,True
 ASTS,espace,1,True
 ATRO,defense,1,True
 AXON,defense,1,True
-AXTI,semiconducteurs,1,True
 AYI,equipement_electrique,1,True
 AZZ,equipement_electrique,1,True
 BAH,defense,1,True
@@ -336,6 +335,7 @@ AMOT,equipement_electrique,1,False
 ANLDF,production_energie,1,False
 ATKR,equipement_electrique,1,False
 AXT,semiconducteurs,1,False
+AXTI,semiconducteurs,1,False
 BNRG,new_tech,1,False
 CBAK,new_tech,1,False
 EKSO,robotique,1,False
