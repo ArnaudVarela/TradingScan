@@ -815,6 +815,7 @@ ELE,Materials
 ELF,Consumer Staples
 ELMD,Health Care
 ELME,Real Estate
+ELMT,Industrials
 ELPW,Industrials
 ELVA,Industrials
 ELVN,Health Care
@@ -933,6 +934,7 @@ FHTX,Health Care
 FIBK,Financials
 FIGR,Financials
 FIGS,Consumer Discretionary
+FINS,Financials
 FINV,Financials
 FIP,Industrials
 FIRY,Communication Services
@@ -1532,6 +1534,7 @@ MBC,Consumer Discretionary
 MBI,Financials
 MBIN,Financials
 MBLY,Consumer Discretionary
+MBNKO,Financials
 MBOT,Health Care
 MBUU,Consumer Discretionary
 MBWM,Financials
@@ -1636,6 +1639,7 @@ MTA,Materials
 MTH,Consumer Discretionary
 MTLS,Information Technology
 MTN,Consumer Discretionary
+MTRI,Health Care
 MTRN,Materials
 MTRX,Industrials
 MTUS,Materials
@@ -1994,6 +1998,7 @@ PLTK,Communication Services
 PLUG,Industrials
 PLUS,Information Technology
 PLX,Health Care
+PLXS,Information Technology
 PMI,Health Care
 PMM,Financials
 PMN,Health Care
