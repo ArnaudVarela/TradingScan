@@ -394,7 +394,7 @@ KSS,3031686139.0,26.74,Kohl's Corporation Common Stock
 KBH,3031452899.0,49.89,KB Home Common Stock
 DTG,3026691198.0,14.54,DTE Energy Company 2021 Series E 4.375% Junior Subordinated 
 MGEE,3026259435.0,80.01,MGE Energy Inc
-TLX,3018503507.0,8.91,Telix Pharmaceuticals Limited American Depositary Shares
+TLX,3023865384.0,8.91,Telix Pharmaceuticals Limited American Depositary Shares
 DAVE,3012255320.0,235.46,Dave Inc. Class A Common Stock
 HTGC,3010982624.0,15.88,Hercules Capital Inc. Common Stock
 FG,3006479291.0,22.96,F&G Annuities & Life Inc. Common Stock
@@ -556,9 +556,9 @@ BLKB,2398723404.0,53.33,Blackbaud Inc. Common Stock
 WLYB,2397056720.0,47.22,John Wiley & Sons Inc. Common Stock
 ATHM,2393251531.0,20.78,Autohome Inc. American Depositary Shares each representing f
 BHF,2391934644.0,41.59,Brighthouse Financial Inc. Common Stock
+CENT,2390830135.0,38.12,Central Garden & Pet Company Common Stock
 DNOW,2388621676.0,13.25,DNOW Inc. Common Stock
 CLMT,2387305124.0,27.1,Calumet Inc. Common Stock
-CENT,2386029836.0,38.12,Central Garden & Pet Company Common Stock
 WLY,2384873458.0,46.98,John Wiley & Sons Inc. Common Stock
 MD,2381241344.0,30.48,Pediatrix Medical Group Inc. Common Stock
 LPL,2380000000.0,2.38,LG Display Co Ltd AMERICAN DEPOSITORY SHARES
@@ -771,9 +771,9 @@ TRNZ,1781057673.0,25.33,Trinity Capital Inc. 7.875% Notes due 2029
 AMR,1778384361.0,140.45,Alpha Metallurgical Resources Inc. Common Stock
 BLX,1777676890.0,47.28,Bladex Inc. Class E Common Stock
 ADAML,1776294354.0,19.67,Adamas Trust Inc. 6.875% Series F Fixed-to-Floating Rate Cum
-JJSF,1776060473.0,95.07,J & J Snack Foods Corp. Common Stock
 SFB,1775773796.0,17.38,Stifel Financial Corporation 5.20% Senior Notes due 2047
 BLBD,1774557236.0,56.61,Blue Bird Corporation Common Stock
+JJSF,1773145436.0,95.07,J & J Snack Foods Corp. Common Stock
 DHC,1770462846.0,7.3,Diversified Healthcare Trust Common Shares of Beneficial Int
 INTR,1769699869.0,4.01,Inter & Co. Inc. Class A Common Shares
 ARR,1769111806.0,11.92,ARMOUR Residential REIT Inc.
@@ -1146,6 +1146,7 @@ SGP,1129323938.0,33.75,SpyGlass Pharma Inc. Common Stock
 WBTN,1127005382.0,8.3,WEBTOON Entertainment Inc. Common stock
 BOW,1126394952.0,34.19,Bowhead Specialty Holdings Inc. Common Stock
 MLTX,1125110376.0,13.22,MoonLake Immunotherapeutics Class A Ordinary Shares
+SPH,1123555130.0,16.57,Suburban Propane Partners L.P. Common Stock
 ATEC,1123212326.0,7.24,Alphatec Holdings Inc. Common Stock
 NHP,1122159620.0,15.38,National Healthcare Properties Inc. Common Stock
 SECZ,1120222840.0,6.85,Securitize Corp. Common Stock
@@ -1159,7 +1160,6 @@ MSEX,1113729911.0,58.22,Middlesex Water Company Common Stock
 RDVT,1110417658.0,69.18,Red Violet Inc. Common Stock 
 CCEC,1109331915.0,18.4,Capital Clean Energy Carriers Corp. Common Share
 LADR,1106839746.0,8.79,Ladder Capital Corp Class A Common Stock
-SPH,1105424253.0,16.57,Suburban Propane Partners L.P. Common Stock
 HFWA,1103691000.0,27.2,Heritage Financial Corporation Common Stock
 AMRC,1097546564.0,20.66,Ameresco Inc. Class A Common Stock
 INOD,1097420748.0,31.89,Innodata Inc. Common Stock
@@ -1216,7 +1216,6 @@ AHCO,1021209603.0,7.48,AdaptHealth Corp. Common Stock
 DJT,1016263156.0,3.65,Trump Media & Technology Group Corp. Common Stock
 LCID,1014407245.0,2.56,Lucid Group Inc. Common Stock
 CODI,1014180822.0,13.48,D/B/A Compass Diversified Holdings Shares of Beneficial Inte
-CFFN,1013128161.0,8.06,Capitol Federal Financial Inc. Common Stock
 SVRA,1012661915.0,4.59,Savara Inc. Common Stock
 LGIH,1012027869.0,43.49,LGI Homes Inc. Common Stock
 VZLA,1011912085.0,2.85,Vizsla Silver Corp. Common Shares
@@ -1240,6 +1239,7 @@ SMP,996444771.0,44.6,Standard Motor Products Inc. Common Stock
 HQH,993744809.0,20.99,abrdn Healthcare Investors Shares of Beneficial Interest
 FOIL,992612150.0,12.7,Londian Wason New Energy Tech Inc. American Depositary Share
 APOG,991705129.0,47.46,Apogee Enterprises Inc. Common Stock
+CFFN,988692498.0,8.06,Capitol Federal Financial Inc. Common Stock
 WRD,987330319.0,2.94,WeRide Inc. American Depositary Shares
 CPAC,984222541.0,11.61,Cementos Pacasmayo S.A.A. American Depositary Shares (Each r
 RJET,981756657.0,21.0,Republic Airways Holdings Inc. Common Stock
@@ -1281,10 +1281,10 @@ WINA,936175061.0,263.03,Winmark Corporation Common Stock
 TDAY,934335623.0,6.32,USA TODAY Co. Inc. Common Stock
 HRTG,933421104.0,31.5,Heritage Insurance Holdings Inc. Common Stock
 COUR,933410500.0,3.69,Coursera Inc. Common Stock
+CMP,931701215.0,22.1,Compass Minerals Intl Inc Common Stock
 IRS,930727512.0,11.0,IRSA Inversiones Y Representaciones S.A. Global Depositary S
 ODTX,929632741.0,19.34,Odyssey Therapeutics Inc. Common Stock
 PTA,928041343.0,16.79,Cohen & Steers Tax-Advantaged Preferred Securities and Incom
-CMP,927777315.0,22.1,Compass Minerals Intl Inc Common Stock
 TRNS,926847573.0,98.55,Transcat Inc. Common Stock
 BMBL,926050930.0,5.98,Bumble Inc. Class A Common Stock
 BST,925532559.0,41.77,BlackRock Science and Technology Trust Common Shares of Bene
@@ -1615,7 +1615,7 @@ MTA,620991081.0,6.59,Metalla Royalty & Streaming Ltd. Common Shares
 BWMX,620705033.0,15.72,Betterware de Mexico S.A.P.I. de C.V. Ordinary Shares
 TCMD,618277895.0,27.6,Tactile Systems Technology Inc. Common Stock
 MOV,618112592.0,27.7,Movado Group Inc. Common Stock
-GDOT,617692201.0,10.84,Green Dot Corporation Class A Common Stock $0.001 par value
+GDOT,617753419.0,10.84,Green Dot Corporation Class A Common Stock $0.001 par value
 NIE,616247382.0,22.24,Virtus Equity & Convertible Income Fund Common Shares of Ben
 BME,615718771.0,46.18,Blackrock Health Sciences Trust
 GROY,615641555.0,2.65,Gold Royalty Corp. Common Shares
@@ -1643,6 +1643,7 @@ CIM,595195832.0,7.11,Chimera Investment Corporation Common Stock
 BGIN,595095050.0,5.26,Bgin Blockchain Limited Class A Ordinary Shares
 FCEL,594859218.0,7.44,FuelCell Energy Inc. Common Stock
 CGNT,594159063.0,8.04,Cognyte Software Ltd. Ordinary Shares
+DMAC,593340027.0,9.17,DiaMedica Therapeutics Inc. Common Stock
 VMO,592803621.0,8.79,Invesco Municipal Opportunity Trust Common Stock
 ACRS,592416377.0,3.73,Aclaris Therapeutics Inc. Common Stock
 WHFCL,590374435.0,25.4,WhiteHorse Finance Inc. 7.875% Notes due 2028
@@ -1781,7 +1782,6 @@ HMH,496047971.0,11.25,HMH Holding Inc. Class A Common Stock
 VGM,495951347.0,9.14,Invesco Trust for Investment Grade Municipals Common Stock (
 RXT,495847094.0,1.89,Rackspace Technology Inc. Common Stock
 LYEL,495603268.0,15.48,Lyell Immunopharma Inc. Common Stock
-DMAC,494790037.0,9.17,DiaMedica Therapeutics Inc. Common Stock
 FOSL,494603650.0,8.27,Fossil Group Inc. Common Stock
 PSNYW,494483188.0,3.01,Polestar Automotive Holding UK PLC Class C-1 ADS (ADW)
 OPRT,494436458.0,10.73,Oportun Financial Corporation Common Stock
@@ -1789,9 +1789,10 @@ PACB,494424233.0,1.58,Pacific Biosciences of California Inc. Common Stock
 NFGC,493991379.0,1.28,New Found Gold Corp Common Shares
 GAU,493972601.0,1.89,Galiano Gold Inc.
 CBIO,493972113.0,12.7,Crescent Biopharma Inc. Common Stock
+MAGN,492907000.0,13.73,Magnera Corporation Common Stock
+FVR,492557683.0,18.21,FrontView REIT Inc. Common Stock
 CZNC,492204355.0,27.42,Citizens & Northern Corp Common Stock
 KOPN,491984849.0,2.65,Kopin Corporation Common Stock
-MAGN,491534000.0,13.73,Magnera Corporation Common Stock
 BDN,491431738.0,2.89,Brandywine Realty Trust Common Stock
 GORO,490936645.0,2.9,Goldgroup Mining Inc. Common Shares
 VKQ,490826018.0,8.87,Invesco Municipal Trust Common Stock
@@ -1804,7 +1805,6 @@ OVID,488815657.0,2.59,Ovid Therapeutics Inc. Common Stock
 CTMX,488331021.0,2.24,CytomX Therapeutics Inc. Common Stock
 HNST,487608685.0,4.47,The Honest Company Inc. Common Stock
 OOMA,486726000.0,17.64,Ooma Inc. Common Stock
-FVR,486642856.0,18.21,FrontView REIT Inc. Common Stock
 FMAO,485484411.0,35.28,Farmers & Merchants Bancorp Inc. Common Stock
 DC,483783001.0,3.6,Dakota Gold Corp. Common Stock
 SENS,482068470.0,8.8,Senseonics Holdings Inc. Common Stock
@@ -2195,6 +2195,7 @@ LCNB,280823264.0,19.7,LCNB Corporation Common Stock
 FLXS,280766699.0,67.46,Flexsteel Industries Inc. Common Stock
 TBCH,280765241.0,15.65,Turtle Beach Corporation Common Stock
 CMRC,280064975.0,3.36,Commerce.com Inc. Series 1 Common Stock
+EVI,280029584.0,19.07,EVI Industries Inc.  Common Stock
 ISBA,279645695.0,36.55,Isabella Bank Corporation Common stock
 EBS,279441514.0,5.43,Emergent BioSolutions Inc. Common Stock
 FWDI,279337118.0,3.43,Forward Industries Inc. Common Stock
@@ -2285,7 +2286,6 @@ SSII,248716711.0,1.24,SS Innovations International Inc. Common Stock
 NAUT,248376229.0,1.95,Nautilus Biotechnology Inc. Common Stock
 TTRX,248250356.0,8.12,Turn Therapeutics Inc. Common Stock
 FTH,247584993.0,9.58,Faeth Therapeutics Inc. Common Stock
-EVI,247425278.0,19.07,EVI Industries Inc.  Common Stock
 NUAIW,247402258.0,1.76,New Era Energy & Digital Inc. Warrants
 RDIB,247213372.0,10.8,Reading International Inc Class B Common Stock
 FIRY,244975556.0,14.55,Firy Inc. Class A Common Stock
@@ -2436,7 +2436,6 @@ VRXA,192314626.0,1.36,Veraxa Biotech AG Ordinary Shares
 FINW,191251578.0,14.0,FinWise Bancorp Common Stock
 ASYS,191188463.0,10.92,Amtech Systems Inc. Common Stock
 RILYP,190948836.0,4.75,BRC Group Holdings Inc. Depositary Shares each representing 
-FNUC,190775260.0,5.28,Frontier Nuclear and Minerals Inc. Common Shares
 DGXX,190625775.0,1.88,Digi Power X Inc. Subordinate Voting Shares
 IFRX,190105005.0,1.29,InflaRx N.V. Common Stock
 CMT,189189332.0,21.4,Core Molding Technologies Inc Common Stock
@@ -2482,7 +2481,7 @@ WHF,175892297.0,8.19,WhiteHorse Finance Inc. Common Stock
 TAYD,174961787.0,54.17,Taylor Devices Inc. Common Stock
 SVIA,174933556.0,2.32,Silvia Inc. Common Stock
 OEC,174655140.0,3.09,Orion S.A. Common Shares
-PRQR,174285023.0,1.24,ProQR Therapeutics N.V. Ordinary Shares
+PRQR,174542065.0,1.24,ProQR Therapeutics N.V. Ordinary Shares
 SCM,173866738.0,6.17,Stellus Capital Investment Corporation Common Stock
 LTRX,172754689.0,3.68,Lantronix Inc. Common Stock
 SY,172519734.0,1.72,So-Young International Inc. American Depository Shares
@@ -2533,6 +2532,7 @@ SANG,157229431.0,4.69,Sangoma Technologies Corporation Common Shares
 VRA,157213879.0,5.48,Vera Bradley Inc. Common Stock
 ASBH,157196752.0,19.51,American Savings Bank N.A. Common Stock
 AEYE,156781372.0,12.36,AudioEye Inc. Common Stock
+OBMT,156680028.0,19.67,Opportunity Bancorp Inc. Common Stock
 ONEW,156656819.0,9.4,OneWater Marine Inc. Class A Common Stock
 RAIL,156103200.0,4.76,FreightCar America Inc. Common Stock
 ICG,155809944.0,1.29,Intchains Group Limited American Depositary Shares
@@ -2628,12 +2628,12 @@ USAU,128758285.0,7.79,U.S. Gold Corp. Common Stock
 PDYN,128452793.0,2.5,Palladyne AI Corp. Common Stock
 SWMR,128055008.0,6.6,Swarmer Inc Common Stock
 VANI,127638835.0,1.34,Vivani Medical Inc. Common Stock (DE)
-AIBZ,127219434.0,2.04,Bitzero Holdings Inc. Common Shares
 JRVR,127184855.0,2.75,James River Group Holdings Inc. Common Stock
 RVSB,127025385.0,6.52,Riverview Bancorp Inc Common Stock
 CVGI,126301221.0,3.11,Commercial Vehicle Group Inc. Common Stock
 AP,126018088.0,6.1,Ampco-Pittsburgh Corporation Common Stock
 OPHC,126016789.0,8.09,OptimumBank Holdings Inc. Common Stock
+AIBZ,125649827.0,2.04,Bitzero Holdings Inc. Common Shares
 TONX,125640982.0,2.26,TON Strategy Company Common Stock
 MOVE,125637330.0,3.21,Corvex Inc. Common Stock
 ANNA,125573767.0,1.87,AleAnna Inc. Class A Common Stock

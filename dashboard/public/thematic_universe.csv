@@ -111,7 +111,6 @@ CARR,gestion_thermique,1,True
 CBRS,ia,1,True
 CCJ,production_energie,1,True
 CDRE,defense,1,True
-CEG,production_energie,1,True
 CEVA,semiconducteurs,1,True
 CGNX,robotique,1,True
 COHR,laser_photonique,1,True
@@ -338,6 +337,7 @@ ATKR,equipement_electrique,1,False
 AXT,semiconducteurs,1,False
 BNRG,new_tech,1,False
 CBAK,new_tech,1,False
+CEG,production_energie,1,False
 EKSO,robotique,1,False
 EMKR,laser_photonique,1,False
 HYZN,production_energie,1,False
