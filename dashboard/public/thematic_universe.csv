@@ -85,7 +85,6 @@ AMPG,quantique,1,True
 AMPX,new_tech,1,True
 AMRC,gestion_thermique,1,True
 AMSC,equipement_electrique,1,True
-AMST,ia,1,True
 APLD,ia,1,True
 ARM,semiconducteurs,1,True
 ARQQ,quantique,1,True
@@ -111,6 +110,7 @@ CARR,gestion_thermique,1,True
 CBRS,ia,1,True
 CCJ,production_energie,1,True
 CDRE,defense,1,True
+CEG,production_energie,1,True
 CEVA,semiconducteurs,1,True
 CGNX,robotique,1,True
 COHR,laser_photonique,1,True
@@ -332,12 +332,12 @@ ADN,production_energie,1,False
 AETI,equipement_electrique,1,False
 AMBI,robotique,1,False
 AMOT,equipement_electrique,1,False
+AMST,ia,1,False
 ANLDF,production_energie,1,False
 ATKR,equipement_electrique,1,False
 AXT,semiconducteurs,1,False
 BNRG,new_tech,1,False
 CBAK,new_tech,1,False
-CEG,production_energie,1,False
 EKSO,robotique,1,False
 EMKR,laser_photonique,1,False
 HYZN,production_energie,1,False
